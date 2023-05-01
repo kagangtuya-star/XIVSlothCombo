@@ -1,11 +1,10 @@
 ### 群名称：XIVSlothCombo汉化
 ### 群   号：544685806
 ### 来点好兄弟一起汉化(用爱发电全靠自觉)
-翻译相关：
-https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothCombo/Translatezh-CN.cs
+翻译相关(在main分支)：
+https://github.com/44451516/XIVSlothCombo/tree/main
 
-部分UI：(替换文本)
-https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothCombo/Window/Functions/UserConfig.cs
+cn分支用于当插件库更新和旧版本存档
 
 如果有更好的方案欢迎提意见。
 ### 使用：
