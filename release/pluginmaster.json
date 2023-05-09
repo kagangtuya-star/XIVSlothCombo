@@ -1,19 +1,19 @@
 [
     {
-        "Author": "attick, Kami, Daemitus, Grammernatzi, Aki, Iaotle, Codemned, PrincessRTFM, damolitionn, ele-starshade, k-kz, Taurenkey, Augporto, grimgal",
+        "Author": "Aki, k-kz, ele-starshade, damolitionn, Taurenkey, Augporto, grimgal, Genesis-Nova, Tartarga",
         "Name": "XIVSlothCombo",
         "Punchline": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
         "Description": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
-        "Changelog": "cn6.2_2023_01_16",
+        "Changelog": "3.0.18.1",
         "InternalName": "XIVSlothCombo",
-        "AssemblyVersion": "3.0.17.10",
-        "RepoUrl": "https://github.com/Nik-Potokar/XIVSlothCombo",
+        "AssemblyVersion": "3.0.18.1",
+        "RepoUrl": "https://github.com/44451516/XIVSlothCombo/",
         "ApplicableVersion": "any",
-        "DalamudApiLevel": 7,
+        "DalamudApiLevel": 8,
         "LoadPriority": 0,
-        "IconUrl": "https://i.imgur.com/UeRukF8.png",
+        "IconUrl": "https://i.imgur.com/iEcxM81.png",
         "ImageUrls": [
-            "https://i.imgur.com/UeRukF8.png"
+            "https://i.imgur.com/iEcxM81.png"
         ],
         "DownloadLinkInstall": "https://github.com/44451516/XIVSlothCombo/raw/CN/release/latest.zip",
         "IsHide": false,
@@ -21,6 +21,6 @@
         "DownloadLinkTesting": "https://github.com/44451516/XIVSlothCombo/raw/CN/release/latest.zip",
         "DownloadLinkUpdate": "https://github.com/44451516/XIVSlothCombo/raw/CN/release/latest.zip",
         "DownloadCount": 0,
-        "LastUpdated": "1649530804"
+        "LastUpdated": "1683650935"
     }
 ]
