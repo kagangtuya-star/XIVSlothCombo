@@ -5,9 +5,12 @@
 https://github.com/44451516/XIVSlothCombo/tree/main
 
 cn分支用于当插件库更新和旧版本存档
+### 手动安装（推荐）
+https://github.com/44451516/XIVSlothCombo/releases/
 
 如果有更好的方案欢迎提意见。
-### 使用：
+
+### 使用（有点bug）：
 ##  https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/pluginmaster.json
 ##  https://raw.fastgit.org/44451516/XIVSlothCombo/CN/release/pluginmaster.json
 ---
