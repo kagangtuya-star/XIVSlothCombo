@@ -51,7 +51,6 @@ namespace XIVSlothCombo.Window.Tabs
                 });
                 ImGuiEx.ImGuiLineCentered("AboutTeamMembers", delegate
                 {
-                    ImGui.Image(Images["aki"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -59,7 +58,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["augporto"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -67,7 +65,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["genesis"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -75,7 +72,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["tartarga"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -83,7 +79,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["taurenkey"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -91,7 +86,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["damo"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -99,7 +93,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["ele"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -107,7 +100,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["grimgal"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -115,7 +107,6 @@ namespace XIVSlothCombo.Window.Tabs
                         ImGui.EndTooltip();
                     }
                     ImGui.SameLine();
-                    ImGui.Image(Images["kkz"].ImGuiHandle, new(50, 50));
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.BeginTooltip();
@@ -133,7 +124,7 @@ namespace XIVSlothCombo.Window.Tabs
                     ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 6);
                     var x = ImGui.GetCursorPosX();
                     var textSize = ImGui.CalcTextSize("our contributors!");
-                    if (ImGui.InvisibleButton("contributors", new Vector2(textSize.X,textSize.Y)))
+                    if (ImGui.InvisibleButton("contributors", new Vector2(textSize.X, textSize.Y)))
                     {
                         Util.OpenLink("https://github.com/Nik-Potokar/XIVSlothCombo/graphs/contributors");
                     }
@@ -162,7 +153,18 @@ namespace XIVSlothCombo.Window.Tabs
                         Util.OpenLink("https://github.com/Nik-Potokar/XIVSlothCombo/issues");
                     }
                 });
+                if (ImGui.Button("Got an issue? Click this button and report it!"))
+                {
+                    Util.OpenLink("https://github.com/Nik-Potokar/XIVSlothCombo/issues");
+                }
+                if (ImGui.Button("想来汉化？点击这里"))
+                {
+                    Util.OpenLink("https://github.com/44451516/XIVSlothCombo");
+                }
 
+                ImGui.TextColored(ImGuiColors.ParsedGreen, $"由于写的汉化脚本不算智能，部分区域未匹配到而没有汉化。");
+                ImGui.TextColored(ImGuiColors.ParsedGreen, $"如果你要是从某个咸鱼小铺买的，恭喜你，上大当了，请立刻退款差评免得被人嘲笑。");
+                ImGui.TextColored(ImGuiColors.ParsedGreen, $"温馨提醒：怂就别开，但开别怂，少开点挂。");
                 ImGui.EndChild();
             }
             else
