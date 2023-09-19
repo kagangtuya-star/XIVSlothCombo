@@ -24,12 +24,12 @@ namespace XIVSlothCombo.Window.Tabs
 #if !DEBUG
             if (Service.ClassLocked)
             {
-                ImGui.Text("Equip your job stone to re-unlock features.");
+                ImGui.Text("Equip your job stone to re-unlock features.装备你的职业水晶来重新解锁功能。");
                 return;
             }
 #endif
 
-            ImGui.Text("This tab allows you to select which PvE combos and features you wish to enable.");
+            ImGui.Text("此选项卡允许您选择要启用的PvE连击和功能");
             ImGui.BeginChild("scrolling", new Vector2(ImGui.GetContentRegionAvail().X, ImGui.GetContentRegionAvail().Y), true);
 
             ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
