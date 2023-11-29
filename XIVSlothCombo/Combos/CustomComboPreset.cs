@@ -380,11 +380,11 @@ namespace XIVSlothCombo.Combos
         BLM_Simple_XenoPooling = 2017,
 
         [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("火起手", "Adds the 火起手 to Simple BLM.", BLM.JobID, 0, "", "")]
+        [CustomComboInfo("火起手", "使用火起手。", BLM.JobID, 0, "", "")]
         BLM_Simple_Opener = 2018,
 
         [ParentCombo(BLM_Simple_Opener)]
-        [CustomComboInfo("火起手+单三连咏唱", "Modifies the Simple 火起手 to only use 1 Triplecast.", BLM.JobID, 0, "", "")]
+        [CustomComboInfo("火起手+单三连咏唱", "在火起手中只使用一层三连咏唱.", BLM.JobID, 0, "", "")]
         BLM_Simple_OpenerAlternate = 2019,
 
         [ParentCombo(BLM_AoE_SimpleMode)]
@@ -1026,7 +1026,7 @@ namespace XIVSlothCombo.Combos
         DRK_oGCD = 5006,
 
         [ParentCombo(DRK_oGCD)]
-        [CustomComboInfo("暗影使者 设置", "Adds Shadowbringer to 能力技特性 ", DRK.JobID, 0, "", "")]
+        [CustomComboInfo("暗影使者 设置", "将暗影使者整合到能力技特性", DRK.JobID, 0, "", "")]
         DRK_Shadowbringer_oGCD = 5007,
 
         [ParentCombo(DRK_MainComboCDs_Group)]
@@ -1547,7 +1547,7 @@ namespace XIVSlothCombo.Combos
 
         [ReplaceSkill(MCH.SplitShot, MCH.HeatedSplitShot)]
         [ConflictingCombos(MCH_ST_MainCombo, MCH_HeatblastGaussRicochet)]
-        [CustomComboInfo("一键简单机工循环", "Single button, single target machinist, including buffs and overcap protections.\\nConflicts with other single target toggles!\\nMade to work optimally with 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 2.5 GCD.\\nThe use of latency mitigation tools is recommended due to XIV's network handling.", MCH.JobID, 0, "", "")]
+        [CustomComboInfo("一键简单机工循环", "Single button, single target machinist, including buffs and overcap protections.\nConflicts with other single target toggles!\nMade to work optimally with a 2.5 GCD.\nThe use of latency mitigation tools is recommended due to XIV's network handling.", MCH.JobID, 0, "", "")]
         MCH_ST_SimpleMode = 8020,
 
         [ParentCombo(MCH_ST_SimpleMode)]
@@ -1709,7 +1709,7 @@ namespace XIVSlothCombo.Combos
         MNK_ST_Simple_Meditation = 9017,
 
         [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo("阴阳开场", "Start with the 阴阳开场 on the main combo. Requires level 68 for Riddle of Fire.\\nA 1.93/1.94 GCD is highly recommended.", MNK.JobID, 0, "", "")]
+        [CustomComboInfo("阴阳开场", "Start with the Lunar Solar Opener on the main combo. Requires level 68 for Riddle of Fire.\nA 1.93/1.94 GCD is highly recommended.", MNK.JobID, 0, "", "")]
         MNK_ST_Simple_LunarSolarOpener = 9018,
 
         [ParentCombo(MNK_AoE_SimpleMode)]
@@ -2107,31 +2107,31 @@ namespace XIVSlothCombo.Combos
         PLD_ST_AdvancedMode_ShieldLob = 11004,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("厄运流转 Option", "Adds 厄运流转 to Advanced Mode.", PLD.JobID)]
+        [CustomComboInfo("厄运流转选项", "添加 厄运流转 到自定义循环.", PLD.JobID)]
         PLD_ST_AdvancedMode_CircleOfScorn = 11005,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("深奥之灵 / 偿赎剑 Option", "Adds 深奥之灵 / 偿赎剑 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("深奥之灵 / 偿赎剑选项", "添加 深奥之灵 / 偿赎剑 到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_SpiritsWithin = 11006,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("盾阵 / 圣盾阵 Option", "Adds 盾阵 / 圣盾阵 Sheltron to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("盾阵 / 圣盾阵选项", "添加 盾阵 / 圣盾阵到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Sheltron = 11007,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("沥血剑 Option", "Adds 沥血剑 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("沥血剑选项", "添加 沥血剑 到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_GoringBlade = 11008,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("圣灵 Option", "Adds 圣灵 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("圣灵选项", "添加 圣灵到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_HolySpirit = 11009,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("安魂祈祷 Option", "Adds 安魂祈祷 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("安魂祈祷Option", "添加 安魂祈祷到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Requiescat = 11010,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("调停 Option", "Adds 调停 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("调停选项", "添加 调停 到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Intervene = 11011,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
@@ -2139,11 +2139,11 @@ namespace XIVSlothCombo.Combos
         PLD_ST_AdvancedMode_Atonement = 11012,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("悔罪 Option", "Adds 悔罪 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("悔罪选项", "添加 悔罪 到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Confiteor = 11013,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("Blades of 信仰/真理/英勇 Option", "Adds Blades of 信仰/真理/英勇 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("信仰/真理/英勇之剑选项", "添加 信仰/真理/英勇之剑 到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Blades = 11014,
 
         [ConflictingCombos(PLD_AoE_SimpleMode)]
@@ -2152,44 +2152,44 @@ namespace XIVSlothCombo.Combos
         PLD_AoE_AdvancedMode = 11015,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("战逃反应 AOE Option", "Adds 战逃反应 to Advanced Mode.", PLD.JobID)]
+        [CustomComboInfo("战逃反应选项", "添加 战逃反应 到自定义循环.", PLD.JobID)]
         PLD_AoE_AdvancedMode_FoF = 11016,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("Spirits 深奥之灵 AOE Option", "Adds 深奥之灵 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("深奥之灵 / 偿赎剑选项", "添加 深奥之灵 / 偿赎剑到自定义循环", PLD.JobID)]
         PLD_AoE_AdvancedMode_SpiritsWithin = 11017,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("厄运流转 AOE Option", "Adds 厄运流转 to Advanced Mode.", PLD.JobID)]
+        [CustomComboInfo("厄运流转选项", "添加 厄运流转 到自定义循环.", PLD.JobID)]
         PLD_AoE_AdvancedMode_CircleOfScorn = 11018,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("安魂祈祷 AOE Option", "Adds 安魂祈祷 to Advanced Mode.", PLD.JobID)]
+        [CustomComboInfo("安魂祈祷选项", "添加 安魂祈祷 到自定义循环.", PLD.JobID)]
         PLD_AoE_AdvancedMode_Requiescat = 11019,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("圣环 AOE Option", "Adds 圣环 to Advanced Mode.", PLD.JobID)]
+        [CustomComboInfo("圣环选项", "添加 圣环到自定义循环.", PLD.JobID)]
         PLD_AoE_AdvancedMode_HolyCircle = 11020,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("悔罪 AOE Option", "Adds 悔罪 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("悔罪Option", "添加 悔罪到自定义循环", PLD.JobID)]
         PLD_AoE_AdvancedMode_Confiteor = 11021,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("Blades of 信仰/真理/英勇 AOE Option", "Adds Blades of 信仰/真理/英勇 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("信仰/真理/英勇之剑选项", "添加 信仰/真理/英勇之剑 到自定义循环", PLD.JobID)]
         PLD_AoE_AdvancedMode_Blades = 11022,
 
         [ParentCombo(PLD_AoE_AdvancedMode)]
-        [CustomComboInfo("盾阵 / 圣盾阵 AOE Option", "Adds 盾阵 / 圣盾阵 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("盾阵 / 圣盾阵选项", "添加 盾阵 / 圣盾阵 到自定义循环", PLD.JobID)]
         PLD_AoE_AdvancedMode_Sheltron = 11023,
 
 
-        [ReplaceSkill(PLD.安魂祈祷Requiescat)]
-        [CustomComboInfo("安魂祈祷 Spender Option", "当安魂祈祷状态下用下面的技能替换", PLD.JobID)]
+        [ReplaceSkill(PLD.Requiescat)]
+        [CustomComboInfo("安魂祈祷替换选项", "当安魂祈祷状态下用下面的技能替换 \"Requiescat\"", PLD.JobID)]
         PLD_Requiescat_Options = 11024,
 
-        [ReplaceSkill(PLD.深奥之灵SpiritsWithin, PLD.偿赎剑Expiacion)]
-        [CustomComboInfo("深奥之灵/偿赎剑  Feature", "当厄运流转冷却用(深奥之灵/偿赎剑)代替", PLD.JobID)]
+        [ReplaceSkill(PLD.SpiritsWithin, PLD.Expiacion)]
+        [CustomComboInfo("深奥之灵/偿赎剑/厄运流转替换选项", "当厄运流转冷却用(深奥之灵/偿赎剑)代替(好像有bug).", PLD.JobID)]
         PLD_SpiritsWithin = 11025,
         
         
@@ -3187,16 +3187,16 @@ namespace XIVSlothCombo.Combos
         SCH_Raise = 16400,
 
         [ReplaceSkill(SCH.WhisperingDawn, SCH.FeyBlessing, SCH.FeyBlessing, SCH.Aetherpact, SCH.Dissipation)]
-        [CustomComboInfo("小仙女", "Change all fairy actions into Fairy Summons if you do not have 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 fairy summoned.", SCH.JobID, 11)]
+        [CustomComboInfo("小仙女", "Change all fairy actions into Summon Eos when the Fairy is not summoned.", SCH.JobID, 11)]
         SCH_FairyReminder = 16500,
 
         [ReplaceSkill(SCH.DeploymentTactics)]
-        [CustomComboInfo("展开战术", "Changes Deployment Tactics to Adloquium until 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 party member has the Galvanize buff.", SCH.JobID, 12)]
+        [CustomComboInfo("展开战术", "队友没有 鼓舞 状态时，将 展开战术 替换为 鼓舞激励之策。", SCH.JobID, 12)]
         SCH_DeploymentTactics = 16600,
 
-        [ParentCombo(SCH_DeploymentTactics)]
-        [CustomComboInfo("秘策", "Adds Recitation when off cooldown to force 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 critical Galvanize buff on 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 party member.", SCH.JobID)]
-        SCH_DeploymentTactics_Recitation = 16610,
+            [ParentCombo(SCH_DeploymentTactics)]
+            [CustomComboInfo("秘策", "当 秘策 冷却完毕且队友没有鼓舞状态时将 鼓舞激励之策 替换为 秘策。", SCH.JobID)]
+            SCH_DeploymentTactics_Recitation = 16610,
 
         [Variant]
         [VariantParent(SCH_DPS_Bio, SCH_AoE)]
@@ -3218,7 +3218,7 @@ namespace XIVSlothCombo.Combos
 
         [ReplaceSkill(SMN.Ruin, SMN.Ruin2, SMN.Outburst, SMN.Tridisaster)]
         [ConflictingCombos(SMN_Simple_Combo)]
-        [CustomComboInfo("高级自定义循环开关", "Advanced combo features for 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 greater degree of customisation.\\nAccommodates SpS builds.\\nRuin III is left unchanged for mobility purposes.", SMN.JobID, 0, "", "")]
+        [CustomComboInfo("高级自定义循环开关", "Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes.", SMN.JobID, 0, "", "")]
         SMN_Advanced_Combo = 17000,
 
 
@@ -3312,7 +3312,7 @@ namespace XIVSlothCombo.Combos
         [CustomComboInfo("循环加入醒梦", "当MP低于设定值时，将醒梦加入到循环中", SMN.JobID, 2, "", "")]
         SMN_Lucid = 17031,
 
-        [CustomComboInfo("三神星极超流技替换", "Adds Egi Abilities (Astral Flow) to Egi summons when ready.\\nEgi abilities will appear on their respective Egi summon ability, as well as Titan.", SMN.JobID, 12, "", "")]
+        [CustomComboInfo("三神星极超流技替换", "三神星极超流技可用时 替换 三神召唤技能", SMN.JobID, 12, "", "")]
         SMN_Egi_AstralFlow = 17034,
 
         [ParentCombo(SMN_SearingLight)]
@@ -3341,7 +3341,7 @@ namespace XIVSlothCombo.Combos
 
         [ConflictingCombos(SMN_Advanced_Combo)]
         [ReplaceSkill(SMN.Ruin, SMN.Ruin2, SMN.Outburst, SMN.Tridisaster)]
-        [CustomComboInfo("简易召唤", "General purpose one-button combo.\\nBursts on Bahamut phase.\\nSummons Titan, Garuda, then Ifrit.\\nSwiftcasts on Slipstream unless drifted.", SMN.JobID, -1, "", "")]
+        [CustomComboInfo("简易召唤", "General purpose one-button combo.\nBursts on Bahamut phase.\nSummons Titan, Garuda, then Ifrit.\nSwiftcasts on Slipstream unless drifted.", SMN.JobID, -1, "", "")]
         SMN_Simple_Combo = 17041,
 
         [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)]
@@ -3375,7 +3375,7 @@ namespace XIVSlothCombo.Combos
         #region WARRIOR
 
         [ReplaceSkill(WAR.StormsPath)]
-        [CustomComboInfo("暴风斩连击", "All in one main combo feature, adds Storm's Eye/Path.\\nIf all sub-options and Fell Cleave/Decimate Options are toggled, will turn into 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 full one button rotation (Advanced Warrior).", WAR.JobID, 0, "", "")]
+        [CustomComboInfo("暴风斩连击", "战士主连击整合，加入暴风斩/碎.\n如果下面的所有子选项和裂石飞环/地毁人亡都被打开并加以设定，会形成一个完整的一键连击（高级战士，有一定智力的战士0.0）.", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath = 18000,
 
         [ReplaceSkill(WAR.StormsEye)]
@@ -3387,7 +3387,7 @@ namespace XIVSlothCombo.Combos
         WAR_AoE_Overpower = 18002,
 
         [ParentCombo(WAR_ST_StormsPath)]
-        [CustomComboInfo("兽魂监控", "Replace Single target or AoE combo with gauge spender if you are about to overcap and are before 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 step of 当 深谋远虑之策 冷却完毕时，将 生命活性法 替换为 深谋远虑之策。 combo that would generate Beast gauge.", WAR.JobID, 0, "", "")]
+        [CustomComboInfo("兽魂监控", "如果兽魂快溢出了，将消耗兽魂的技能加入到暴风斩连击和AOE连击", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath_OvercapProtection = 18003,
 
         [ReplaceSkill(WAR.NascentFlash)]
@@ -3423,7 +3423,7 @@ namespace XIVSlothCombo.Combos
         WAR_AoE_Overpower_InnerRelease = 18014,
 
         [ParentCombo(WAR_ST_StormsPath)]
-        [CustomComboInfo("飞斧", "Replace 暴风斩连击 with Tomahawk when you are out of range.", WAR.JobID, 0, "", "")]
+        [CustomComboInfo("飞斧", "在如果离boss太远，将飞斧加入到暴风斩连击.", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath_RangedUptime = 18016,
 
         [ReplaceSkill(WAR.FellCleave, WAR.Decimate)]
@@ -3551,8 +3551,7 @@ namespace XIVSlothCombo.Combos
         #region Afflatus Feature
 
         [ReplaceSkill(WHM.Cure2)]
-        [CustomComboInfo("治疗百合状态", "当有治疗百合时将 救疗 替换为 安慰之心。" +
-        "\\nChanges Medica into Afflatus Rapture when Lilies are up.", WHM.JobID, 50, "", "")]
+        [CustomComboInfo("治疗百合状态", "当有治疗百合时将 救疗 替换为 安慰之心。", WHM.JobID, 50, "", "")]
         WHM_Afflatus = 19003,
 
         [ParentCombo(WHM_Afflatus)]
