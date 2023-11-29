@@ -68,6 +68,8 @@ namespace XIVSlothCombo.Data
 
             return statusCache[key] = null;
         }
+        
+        
 
         /// <summary> Gets the cooldown data for an action. </summary>
         /// <param name="actionID"> Action ID to check. </param>

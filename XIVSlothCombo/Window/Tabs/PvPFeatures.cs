@@ -12,13 +12,13 @@ namespace XIVSlothCombo.Window.Tabs
     {
         internal static new void Draw()
         {
-            ImGui.Text("这个选项卡可以启用 PvP 连击和功能。");
+            ImGui.Text("此选项卡允许您选择要启用的PvP连击和功能。");
 
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.Text($"{FontAwesomeIcon.SkullCrossbones.ToIconString()}");
             ImGui.PopFont();
             ImGui.SameLine();
-            ImGui.TextUnformatted("这些是 PvP 功能，只会在 PvP 区域生效。");
+            ImGui.TextUnformatted("These are PvP features. They will only work in PvP-enabled zones.");
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.Text($"{FontAwesomeIcon.SkullCrossbones.ToIconString()}");
@@ -33,8 +33,12 @@ namespace XIVSlothCombo.Window.Tabs
             foreach (string? jobName in groupedPresets.Keys)
             {
                 if (!groupedPresets[jobName].Any(x => PluginConfiguration.IsSecret(x.Preset))) continue;
-
-                if (ImGui.CollapsingHeader(jobName))
+                string header = jobName;
+                if (jobName == groupedPresets.First().Key)
+                {
+                    header = "All Jobs";
+                }
+                if (ImGui.CollapsingHeader(header))
                 {
                     foreach (var otherJob in groupedPresets.Keys.Where(x => x != jobName))
                     {

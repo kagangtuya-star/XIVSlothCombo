@@ -1,4 +1,5 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
+using XIVSlothCombo.Combos.PvE.Content;
 using XIVSlothCombo.Core;
 using XIVSlothCombo.CustomComboNS;
 using System;
@@ -14,14 +15,28 @@ namespace XIVSlothCombo.Combos.PvE
 
         public const uint
             // Summons
-            SummonRuby = 25802,
-            SummonTopaz = 25803,
-            SummonEmerald = 25804,
+            // SummonRuby = 25802,
+            // SummonTopaz = 25803,
+            // SummonEmerald = 25804,
+            
+            
+            SummonRuby_红宝石召唤 = 25802,
+            SummonTopaz_黄宝石召唤 = 25803,
+            SummonEmerald_绿宝石召唤 = 25804,
 
+            // SummonIfrit = 25805,
+            // SummonTitan = 25806,
+            // SummonGaruda = 25807,
+            
+            // SummonIfrit2 = 25838,
+            // SummonTitan2 = 25839,
+            // SummonGaruda2 = 25840,
+            
             SummonIfrit = 25805,
             SummonTitan = 25806,
             SummonGaruda = 25807,
-
+            
+            
             SummonIfrit2 = 25838,
             SummonTitan2 = 25839,
             SummonGaruda2 = 25840,
@@ -73,16 +88,18 @@ namespace XIVSlothCombo.Combos.PvE
             // Demi summon abilities
             AstralImpulse = 25820,      // Single target Bahamut GCD
             AstralFlare = 25821,        // AoE Bahamut GCD
-            Deathflare = 3582,          // Damage oGCD Bahamut
-            EnkindleBahamut = 7429,
+            //死星核爆 Deathflare
+            死星核爆 = 3582,          // Damage oGCD Bahamut
+            //龙神迸发 EnkindleBahamut
+            龙神迸发 = 7429,
 
             FountainOfFire = 16514,     // Single target Phoenix GCD
             BrandOfPurgatory = 16515,   // AoE Phoenix GCD
             Rekindle = 25830,           // Healing oGCD Phoenix
             EnkindlePhoenix = 16516,
 
-            // Shared summon abilities
-            AstralFlow = 25822,
+            // Shared summon abilities  星极超流 AstralFlow
+            死星核爆2 = 25822,
 
             // Summoner GCDs
             Ruin = 163,
@@ -108,6 +125,7 @@ namespace XIVSlothCombo.Combos.PvE
             // Buff 
             RadiantAegis = 25799,
             Aethercharge = 25800,
+            //灼热之光 SearingLight
             SearingLight = 25801;
 
 
@@ -127,7 +145,8 @@ namespace XIVSlothCombo.Combos.PvE
             public const string
                 SMN_Lucid = "SMN_Lucid",
                 SMN_BurstPhase = "SMN_BurstPhase",
-                SMN_PrimalChoice = "SMN_PrimalChoice",
+                召唤顺序 = "SMN_PrimalChoice",
+                // SMN_PrimalChoice = "SMN_PrimalChoice",
                 SMN_SwiftcastPhase = "SMN_SwiftcastPhase",
                 SMN_Burst_Delay = "SMN_Burst_Delay",
                 SMN_VariantCure = "SMN_VariantCure";
@@ -177,8 +196,8 @@ namespace XIVSlothCombo.Combos.PvE
                 if (actionID == Fester)
                 {
                     var gauge = GetJobGauge<SMNGauge>();
-                    if (HasEffect(Buffs.FurtherRuin) && IsOnCooldown(EnergyDrain) && !gauge.HasAetherflowStacks && IsEnabled(CustomComboPreset.SMN_EDFester_Ruin4))
-                        return Ruin4;
+                    // if (HasEffect(Buffs.FurtherRuin) && IsOnCooldown(EnergyDrain) && !gauge.HasAetherflowStacks && IsEnabled(CustomComboPreset.SMN_EDFester_Ruin4))
+                    //     return Ruin4;
 
                     if (LevelChecked(EnergyDrain) && !gauge.HasAetherflowStacks)
                         return EnergyDrain;
@@ -233,7 +252,7 @@ namespace XIVSlothCombo.Combos.PvE
                         CanSpellWeave(actionID))
                         return Variant.VariantRampart;
 
-                    if (CanSpellWeave(actionID))
+                    if (CanSpellWeavePlus(actionID))
                     {
                         if (IsOffCooldown(SearingLight) && LevelChecked(SearingLight) && OriginalHook(Ruin) == AstralImpulse)
                             return SearingLight;
@@ -249,17 +268,17 @@ namespace XIVSlothCombo.Combos.PvE
                         
                         if (OriginalHook(Ruin) is AstralImpulse or FountainOfFire)
                         {
-                            if (IsOffCooldown(OriginalHook(EnkindleBahamut)) && LevelChecked(SummonBahamut))
-                                return OriginalHook(EnkindleBahamut);
+                            if (IsOffCooldown(OriginalHook(龙神迸发)) && LevelChecked(SummonBahamut))
+                                return OriginalHook(龙神迸发);
 
-                            if (IsOffCooldown(Deathflare) && LevelChecked(Deathflare) && OriginalHook(Ruin) is AstralImpulse)
-                                return OriginalHook(AstralFlow);
+                            if (IsOffCooldown(死星核爆) && LevelChecked(死星核爆) && OriginalHook(Ruin) is AstralImpulse)
+                                return OriginalHook(死星核爆2);
                             
                             if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is FountainOfFire)
-                                return OriginalHook(AstralFlow);
+                                return OriginalHook(死星核爆2);
                         }
                         
-                        if (gauge.HasAetherflowStacks)
+                        if (gauge.HasAetherflowStacks && CanSpellWeave(actionID))
                         {
                             if (!LevelChecked(SearingLight))
                             {
@@ -298,7 +317,7 @@ namespace XIVSlothCombo.Combos.PvE
                                 return All.Swiftcast;
 
                             if (HasEffect(Buffs.GarudasFavor) && HasEffect(All.Buffs.Swiftcast))
-                                return OriginalHook(AstralFlow);
+                                return OriginalHook(死星核爆2);
                         }
                         
                         if (gauge.IsIfritAttuned && gauge.Attunement >= 1 && IsOffCooldown(All.Swiftcast))
@@ -317,7 +336,7 @@ namespace XIVSlothCombo.Combos.PvE
                     if (HasEffect(Buffs.GarudasFavor) && gauge.Attunement is 0 ||
                         HasEffect(Buffs.TitansFavor) && lastComboMove is TopazRite or TopazCata && CanSpellWeave(actionID) ||
                         HasEffect(Buffs.IfritsFavor) && (IsMoving || gauge.Attunement is 0) || lastComboMove == CrimsonCyclone)
-                        return OriginalHook(AstralFlow);
+                        return OriginalHook(死星核爆2);
 
                     if (HasEffect(Buffs.FurtherRuin) && ((!HasEffect(All.Buffs.Swiftcast) && gauge.IsIfritAttuned && IsMoving) || (GetCooldownRemainingTime(OriginalHook(Aethercharge)) is < 2.5f and > 0)))
                         return Ruin4;
@@ -333,14 +352,14 @@ namespace XIVSlothCombo.Combos.PvE
                     
                     if (gauge.SummonTimerRemaining == 0 && IsOnCooldown(SummonPhoenix) && IsOnCooldown(SummonBahamut))
                     {
-                        if (gauge.IsIfritReady && !gauge.IsTitanReady && !gauge.IsGarudaReady && LevelChecked(SummonRuby))
-                            return OriginalHook(SummonRuby);
+                        if (gauge.IsIfritReady && !gauge.IsTitanReady && !gauge.IsGarudaReady && LevelChecked(SummonRuby_红宝石召唤))
+                            return OriginalHook(SummonRuby_红宝石召唤);
 
-                        if (gauge.IsTitanReady && LevelChecked(SummonTopaz))
-                            return OriginalHook(SummonTopaz);
+                        if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                            return OriginalHook(SummonTopaz_黄宝石召唤);
 
-                        if (gauge.IsGarudaReady && LevelChecked(SummonEmerald))
-                            return OriginalHook(SummonEmerald);
+                        if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                            return OriginalHook(SummonEmerald_绿宝石召唤);
                     }
                     
                     if (LevelChecked(Ruin4) && gauge.SummonTimerRemaining == 0 && gauge.AttunmentTimerRemaining == 0 && HasEffect(Buffs.FurtherRuin))
@@ -359,7 +378,8 @@ namespace XIVSlothCombo.Combos.PvE
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 var gauge = GetJobGauge<SMNGauge>();
-                var summonerPrimalChoice = PluginConfiguration.GetCustomIntValue(Config.SMN_PrimalChoice);
+                // var summonerPrimalChoice = PluginConfiguration.GetCustomIntValue(Config.召唤顺序);
+                var 召唤顺序 = PluginConfiguration.GetCustomIntValue(Config.召唤顺序);
                 var SummonerBurstPhase = PluginConfiguration.GetCustomIntValue(Config.SMN_BurstPhase);
                 var lucidThreshold = PluginConfiguration.GetCustomIntValue(Config.SMN_Lucid);
                 var swiftcastPhase = PluginConfiguration.GetCustomIntValue(Config.SMN_SwiftcastPhase);
@@ -397,7 +417,8 @@ namespace XIVSlothCombo.Combos.PvE
                         CanSpellWeave(actionID))
                         return Variant.VariantRampart;
 
-                    if (CanSpellWeave(actionID))
+
+                    if (CanSpellWeavePlus(actionID))
                     {
                         // Searing Light
                         if (IsEnabled(CustomComboPreset.SMN_SearingLight) && CanDelayedWeave(actionID) && IsOffCooldown(SearingLight) && LevelChecked(SearingLight))
@@ -415,25 +436,28 @@ namespace XIVSlothCombo.Combos.PvE
                             }
 
                             else return SearingLight;
-                        }
-                        
+                        }  
+                    }
+                    // if (CanSpellWeave(actionID))
+                    if (CanSpellWeavePlus(actionID))
+                    {
                         // Emergency priority Demi Nuke to prevent waste if you can't get demi attacks out to satisfy the slider check.
                         if (OriginalHook(Ruin) is AstralImpulse or FountainOfFire && GetCooldown(OriginalHook(Aethercharge)).CooldownElapsed >= 12.5)
                         {
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Attacks))
                             {
-                                if (IsOffCooldown(OriginalHook(EnkindleBahamut)) && LevelChecked(SummonBahamut))
-                                    return OriginalHook(EnkindleBahamut);
+                                if (IsOffCooldown(OriginalHook(龙神迸发)) && GetCooldownRemainingTime(SearingLight) is >= 10 && LevelChecked(SummonBahamut))
+                                    return OriginalHook(龙神迸发);
                                 
-                                if (IsOffCooldown(Deathflare) && LevelChecked(Deathflare) && OriginalHook(Ruin) is AstralImpulse)
-                                    return OriginalHook(AstralFlow);
+                                if (IsOffCooldown(死星核爆) && GetCooldownRemainingTime(SearingLight) is >= 10 && LevelChecked(死星核爆) && OriginalHook(Ruin) is AstralImpulse)
+                                    return OriginalHook(死星核爆2);
                             }
 
                             // Demi Nuke 2: Electric Boogaloo
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Rekindle))
                             {
                                 if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is FountainOfFire)
-                                    return OriginalHook(AstralFlow);
+                                    return OriginalHook(死星核爆2);
                             }
                         }
                         
@@ -470,25 +494,25 @@ namespace XIVSlothCombo.Combos.PvE
                         {
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Attacks) && DemiAttackCount >= burstDelay)
                             {
-                                if (IsOffCooldown(OriginalHook(EnkindleBahamut)) && LevelChecked(SummonBahamut))
-                                    return OriginalHook(EnkindleBahamut);
+                                if (IsOffCooldown(OriginalHook(龙神迸发)) && GetCooldownRemainingTime(SearingLight) is >= 10 && LevelChecked(SummonBahamut))
+                                    return OriginalHook(龙神迸发);
                                 
-                                if (IsOffCooldown(Deathflare) && LevelChecked(Deathflare) && OriginalHook(Ruin) is AstralImpulse)
-                                    return OriginalHook(AstralFlow);
+                                if (IsOffCooldown(死星核爆) && LevelChecked(死星核爆) && GetCooldownRemainingTime(SearingLight) is >= 10 && OriginalHook(Ruin) is AstralImpulse)
+                                    return OriginalHook(死星核爆2);
                             }
 
                             // Demi Nuke 2: Electric Boogaloo
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Rekindle))
                             {
                                 if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is FountainOfFire)
-                                    return OriginalHook(AstralFlow);
+                                    return OriginalHook(死星核爆2);
                             }
                         }
                         
                         // Fester/Painflare
                         if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_EDFester))
                         {
-                            if (gauge.HasAetherflowStacks)
+                            if (gauge.HasAetherflowStacks && CanSpellWeave(actionID))
                             {
                                 if (IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling))
                                 {
@@ -559,7 +583,7 @@ namespace XIVSlothCombo.Combos.PvE
                             
                             if (IsEnabled(CustomComboPreset.SMN_Garuda_Slipstream) &&
                                 ((HasEffect(Buffs.GarudasFavor) && HasEffect(All.Buffs.Swiftcast)) || (gauge.Attunement == 0)))     // Astral Flow if Swiftcast is not ready throughout Garuda
-                                return OriginalHook(AstralFlow);
+                                return OriginalHook(死星核爆2);
                         }
 
                         // Swiftcast Ifrit Feature (Conditions to allow for SpS Ruins to still be under the effect of Swiftcast)
@@ -589,7 +613,7 @@ namespace XIVSlothCombo.Combos.PvE
 
                                 if (IsEnabled(CustomComboPreset.SMN_Garuda_Slipstream) &&
                                     ((HasEffect(Buffs.GarudasFavor) && HasEffect(All.Buffs.Swiftcast)) || (gauge.Attunement == 0)))     // Astral Flow if Swiftcast is not ready throughout Garuda
-                                    return OriginalHook(AstralFlow);
+                                    return OriginalHook(死星核爆2);
                             }
 
                             // Swiftcast Ifrit Feature (Conditions to allow for SpS Ruins to still be under the effect of Swiftcast)
@@ -620,7 +644,7 @@ namespace XIVSlothCombo.Combos.PvE
                         IsEnabled(CustomComboPreset.SMN_Titan_MountainBuster) && HasEffect(Buffs.TitansFavor) && lastComboMove is TopazRite or TopazCata && CanSpellWeave(actionID) ||                                  // Titan
                         IsEnabled(CustomComboPreset.SMN_Ifrit_Cyclone) &&
                         ((HasEffect(Buffs.IfritsFavor) && (IsNotEnabled(CustomComboPreset.SMN_Ifrit_Cyclone_Option) || (IsMoving || gauge.Attunement == 0))) || (lastComboMove == CrimsonCyclone && InMeleeRange())))   // Ifrit
-                        return OriginalHook(AstralFlow);
+                        return OriginalHook(死星核爆2);
 
                     // Gemshine/Precious Brilliance
                     if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_EgiSummons_Attacks) && (gauge.IsGarudaAttuned || gauge.IsTitanAttuned || gauge.IsIfritAttuned))
@@ -635,25 +659,106 @@ namespace XIVSlothCombo.Combos.PvE
                     // Egi Order
                     if (IsEnabled(CustomComboPreset.SMN_DemiEgiMenu_EgiOrder) && gauge.SummonTimerRemaining == 0 && IsOnCooldown(SummonPhoenix) && IsOnCooldown(SummonBahamut))
                     {
-                        if (gauge.IsIfritReady && !gauge.IsTitanReady && !gauge.IsGarudaReady && LevelChecked(SummonRuby))
-                            return OriginalHook(SummonRuby);
-
-                        if (summonerPrimalChoice is 0 or 1)
+                        switch (召唤顺序)
                         {
-                            if (gauge.IsTitanReady && LevelChecked(SummonTopaz))
-                                return OriginalHook(SummonTopaz);
+                            case 1:
+                            {
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
 
-                            if (gauge.IsGarudaReady && LevelChecked(SummonEmerald))
-                                return OriginalHook(SummonEmerald);
-                        }
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
+                                
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
+                                
+                                break;
+                            }
+                            
+                            case 2:
+                            {
+                                
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
+                                
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
 
-                        if (summonerPrimalChoice == 2)
-                        {
-                            if (gauge.IsGarudaReady && LevelChecked(SummonEmerald))
-                                return OriginalHook(SummonEmerald);
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
 
-                            if (gauge.IsTitanReady && LevelChecked(SummonTopaz))
-                                return OriginalHook(SummonTopaz);
+                                break;
+                            }
+                            
+                            case 3:
+                            {
+                                
+                                
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
+                                
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
+                                
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
+
+
+                                break;
+                            }
+                            case 4:
+                            {
+                                
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
+                                
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
+                                
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
+                                break;
+                            }
+                            
+                            case 5:
+                            {
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
+                                
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
+                                
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
+                                
+                                break;
+                            }
+                            case 6:
+                            {
+                                
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
+                                
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
+                                
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
+                                break;
+                            }
+                            
+                            default:
+                            {
+                                if (gauge.IsTitanReady && LevelChecked(SummonTopaz_黄宝石召唤))
+                                    return OriginalHook(SummonTopaz_黄宝石召唤);
+
+                                if (gauge.IsGarudaReady && LevelChecked(SummonEmerald_绿宝石召唤))
+                                    return OriginalHook(SummonEmerald_绿宝石召唤);
+                                
+                                if (gauge.IsIfritReady && LevelChecked(SummonRuby_红宝石召唤))
+                                    return OriginalHook(SummonRuby_红宝石召唤);
+                                break;
+                            }
                         }
                     }
 
@@ -675,7 +780,7 @@ namespace XIVSlothCombo.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {                            
-                if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or AstralFlow or EnkindleBahamut or SearingLight or RadiantAegis or Outburst or Tridisaster or PreciousBrilliance or Gemshine)
+                if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or 死星核爆2 or 龙神迸发 or SearingLight or RadiantAegis or Outburst or Tridisaster or PreciousBrilliance or Gemshine)
                 {
                     presentTime = DateTime.Now;
                     int deltaTime = (presentTime - noPetTime).Milliseconds;
@@ -705,10 +810,10 @@ namespace XIVSlothCombo.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if ((actionID is SummonTopaz or SummonTitan or SummonTitan2 or SummonEmerald or SummonGaruda or SummonGaruda2 or SummonRuby or SummonIfrit or SummonIfrit2 && HasEffect(Buffs.TitansFavor)) ||
-                    (actionID is SummonTopaz or SummonTitan or SummonTitan2 or SummonEmerald or SummonGaruda or SummonGaruda2 && HasEffect(Buffs.GarudasFavor)) ||
-                    (actionID is SummonTopaz or SummonTitan or SummonTitan2 or SummonRuby or SummonIfrit or SummonIfrit2 && (HasEffect(Buffs.IfritsFavor) || (lastComboMove == CrimsonCyclone && InMeleeRange()))))
-                    return OriginalHook(AstralFlow);
+                if ((actionID is SummonTopaz_黄宝石召唤 or SummonTitan or SummonTitan2 or SummonEmerald_绿宝石召唤 or SummonGaruda or SummonGaruda2 or SummonRuby_红宝石召唤 or SummonIfrit or SummonIfrit2 && HasEffect(Buffs.TitansFavor)) ||
+                    (actionID is SummonTopaz_黄宝石召唤 or SummonTitan or SummonTitan2 or SummonEmerald_绿宝石召唤 or SummonGaruda or SummonGaruda2 && HasEffect(Buffs.GarudasFavor)) ||
+                    (actionID is SummonTopaz_黄宝石召唤 or SummonTitan or SummonTitan2 or SummonRuby_红宝石召唤 or SummonIfrit or SummonIfrit2 && (HasEffect(Buffs.IfritsFavor) || (lastComboMove == CrimsonCyclone && InMeleeRange()))))
+                    return OriginalHook(死星核爆2);
 
                 return actionID;
             }
@@ -722,14 +827,20 @@ namespace XIVSlothCombo.Combos.PvE
             {
                 if (actionID is Aethercharge or DreadwyrmTrance or SummonBahamut or SummonPhoenix)
                 {
-                    if (IsOffCooldown(EnkindleBahamut) && OriginalHook(Ruin) is AstralImpulse)
-                        return OriginalHook(EnkindleBahamut);
-
-                    if (IsOffCooldown(EnkindlePhoenix) && OriginalHook(Ruin) is FountainOfFire)
-                        return OriginalHook(EnkindlePhoenix);
-
-                    if ((OriginalHook(AstralFlow) is Deathflare && IsOffCooldown(Deathflare)) || (OriginalHook(AstralFlow) is Rekindle && IsOffCooldown(Rekindle)))
-                        return OriginalHook(AstralFlow);
+                    if (CanSpellWeavePlus(actionID))
+                    {
+                         if (IsOffCooldown(龙神迸发) && GetCooldownRemainingTime(SearingLight) is >= 10 && OriginalHook(Ruin) is AstralImpulse)
+                            return OriginalHook(龙神迸发);
+                        
+                        if (IsOffCooldown(EnkindlePhoenix) && OriginalHook(Ruin) is FountainOfFire)
+                            return OriginalHook(EnkindlePhoenix);
+                        
+                        if ((OriginalHook(死星核爆2) is 死星核爆 && GetCooldownRemainingTime(SearingLight) is >= 10 && 
+                             IsOffCooldown(死星核爆)) || 
+                            (OriginalHook(死星核爆2) is Rekindle && IsOffCooldown(Rekindle)))
+                            return OriginalHook(死星核爆2);
+                    }
+                   
                 }
 
                 return actionID;
