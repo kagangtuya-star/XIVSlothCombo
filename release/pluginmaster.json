@@ -2,10 +2,10 @@
   {
     "Author": "Aki, k-kz, ele-starshade, damolitionn, Taurenkey, Augporto, grimgal, Genesis-Nova, Tartarga",
     "Name": "XIVSlothCombo",
-    "Punchline": "Condenses combos and mutually exclusive abilities onto a single button - and then some.6.4汉化",
-    "Description": "Condenses combos and mutually exclusive abilities onto a single button - and then some.6.4汉化",
+    "Punchline": "CN6.4 update DK PLD DNC SMN GNG",
+    "Description": "CN6.4 update DK PLD DNC SMN GNG",
     "InternalName": "XIVSlothCombo",
-    "AssemblyVersion": "3.0.18.9",
+    "AssemblyVersion": "3.0.18.10",
     "RepoUrl": "https://github.com/44451516/XIVSlothCombo/",
     "ApplicableVersion": "any",
     "DalamudApiLevel": 8,
