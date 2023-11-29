@@ -2184,11 +2184,11 @@ namespace XIVSlothCombo.Combos
         PLD_AoE_AdvancedMode_Sheltron = 11023,
 
 
-        [ReplaceSkill(PLD.Requiescat)]
+        [ReplaceSkill(PLD.安魂祈祷Requiescat)]
         [CustomComboInfo("安魂祈祷替换选项", "当安魂祈祷状态下用下面的技能替换 \"Requiescat\"", PLD.JobID)]
         PLD_Requiescat_Options = 11024,
 
-        [ReplaceSkill(PLD.SpiritsWithin, PLD.Expiacion)]
+        [ReplaceSkill(PLD.深奥之灵SpiritsWithin, PLD.偿赎剑Expiacion)]
         [CustomComboInfo("深奥之灵/偿赎剑/厄运流转替换选项", "当厄运流转冷却用(深奥之灵/偿赎剑)代替(好像有bug).", PLD.JobID)]
         PLD_SpiritsWithin = 11025,
         
