@@ -12,7 +12,6 @@ https://github.com/44451516/XIVSlothCombo/releases/
 
 ### 使用（有点bug）：
 ##  https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/pluginmaster.json
-##  https://raw.fastgit.org/44451516/XIVSlothCombo/CN/release/pluginmaster.json
 ---
 ## 快捷指令 [参考](https://docs.qq.com/doc/DT0tjZm9JTFlqUGJY)
 ~~~
