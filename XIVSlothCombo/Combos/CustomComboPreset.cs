@@ -2800,15 +2800,12 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SGE_ST_Heal)]
         [CustomComboInfo("心关", "如果心关从未使用过，则对选中目标使用心关。", SGE.JobID, 305, "", "")]
         SGE_ST_Heal_Kardia = 14310,
-
+        
         [ParentCombo(SGE_ST_Heal)]
-        [CustomComboInfo("均衡诊断选项", "当所选目标没有盾值时，替换诊断为均衡诊断。", SGE.JobID, 313, "", "")]
-        SGE_ST_Heal_Diagnosis = 14320,
+        [CustomComboInfo("Eukrasian Diagnosis Option", "Diagnosis becomes Eukrasian Diagnosis if the shield is not applied to the target.", SGE.JobID, 313, "", "")]
+        SGE_ST_Heal_EDiagnosis = 14320,
 
 
-        [ParentCombo(SGE_ST_Heal_Diagnosis)]
-        [CustomComboInfo("忽略护盾检查，强制整合", "Warning, will force the use of Eukrasia Diagnosis, and normal Diagnosis will be unavailable.", SGE.JobID)]
-        SGE_ST_Heal_Diagnosis_IgnoreShield = 14321,
 
         [ParentCombo(SGE_ST_Heal)]
         [CustomComboInfo("拯救选项", "插入拯救.", SGE.JobID, 306, "", "")]
@@ -3565,7 +3562,7 @@ namespace XIVSlothCombo.Combos
 
         [ParentCombo(WAR_ST_StormsPath)]
         [CustomComboInfo("裂石飞环/地毁人亡", "当兽魂高于50及以上时，将 裂石飞环 加入主连击，地毁人亡 加入AoE连击。\\n战嚎时将使用 狂魂/混沌旋风，原初的解放时将使用 裂石飞环/钢铁旋风。\\n当 原初的解放 小于30秒时开始留资源。", WAR.JobID, 0, "", "")]
-        WAR_ST_StormsPath_Spender = 18011,
+        WAR_ST_StormsPath_FellCleave = 18011,
 
         [ParentCombo(WAR_ST_StormsPath)]
         [CustomComboInfo("猛攻", "在有暴风碎BUFF时，将猛攻加入到暴风斩连击", WAR.JobID, 0, "", "")]
@@ -3582,7 +3579,8 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(WAR_ST_StormsPath)]
         [CustomComboInfo("飞斧", "在如果离boss太远，将飞斧加入到暴风斩连击.", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath_RangedUptime = 18016,
-
+        
+        
         [ReplaceSkill(WAR.FellCleave, WAR.Decimate)]
         [CustomComboInfo("战壕与裂石飞环/地毁人亡整合", "小于等于设置距离时，将裂石飞环/地毁人亡整合到战壕", WAR.JobID, 0, "", "")]
         WAR_InfuriateFellCleave = 18018,
@@ -3625,45 +3623,49 @@ namespace XIVSlothCombo.Combos
         [VariantParent(WAR_ST_StormsPath, WAR_AoE_Overpower)]
         [CustomComboInfo("最后通牒 选项", "冷却结束时使用多变最后通牒", WAR.JobID)]
         WAR_Variant_Ultimatum = 18027,
+        
+        [ParentCombo(WAR_AoE_Overpower)]
+        [CustomComboInfo("Steel Cyclone / Decimate Option", "Adds Steel Cyclone / Decimate to Advanced Mode.", WAR.JobID)]
+        WAR_AoE_Overpower_Decimate = 18028,
 
         // Last value = 18027
 
         #endregion
 
-        #region WHITE MAGE
+         #region WHITE MAGE
 
         #region Single Target DPS Feature
 
         [ReplaceSkill(WHM.Stone1, WHM.Stone2, WHM.Stone3, WHM.Stone4, WHM.Glare1, WHM.Glare3)]
-        [CustomComboInfo("整合单体输出技能", "咏唱闪耀/飞石后插入能力技.", WHM.JobID, 10, "", "")]
+        [CustomComboInfo("Single Target DPS Feature", "Collection of cooldowns and spell features on Glare/Stone.", WHM.JobID, 1, "", "")]
         WHM_ST_MainCombo = 19099,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("开场技能整合至闪灼 设置", "将所有的能力技延迟到第三发闪灼释放之后，仅当闪灼可用时生效" + "\\nOnly works with Glare III.", WHM.JobID, 11, "", "")]
-        WHM_ST_MainCombo_NoSwiftOpener = 19023,
+        [CustomComboInfo("Opener Option", "Use the Balance opener from level 56+.", WHM.JobID, 11, "", "")]
+        WHM_ST_MainCombo_Opener = 19023,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("保持dot不断 设置", "Adds Aero/Dia to the single target combo if the debuff is not present on current target, or is about to expire.", WHM.JobID, 12, "", "")]
+        [CustomComboInfo("Aero/Dia Uptime Option", "Adds Aero/Dia to the single target combo if the debuff is not present on current target, or is about to expire.", WHM.JobID, 12, "", "")]
         WHM_ST_MainCombo_DoT = 19013,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("法令 设置", "将法令插入单目标输出循环中.", WHM.JobID, 13, "", "")]
+        [CustomComboInfo("Assize Option", "Adds Assize to the single target combo.", WHM.JobID, 13, "", "")]
         WHM_ST_MainCombo_Assize = 19009,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("苦难之心 设置", "当苦难之心可用时将其插入单目标输出循环中.", WHM.JobID, 14, "", "")]
+        [CustomComboInfo("Afflatus Misery Option", "Adds Afflatus Misery to the single target combo when it is ready to be used.", WHM.JobID, 14, "", "")]
         WHM_ST_MainCombo_Misery_oGCD = 19017,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("百合保护", "当有三档治疗百合时在单目标输出循环中插入苦难之心.", WHM.JobID, 15, "", "")]
+        [CustomComboInfo("Lily Overcap Protection Option", "Adds Afflatus Rapture to the single target combo when at three Lilies.", WHM.JobID, 15, "", "")]
         WHM_ST_MainCombo_LilyOvercap = 19016,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("神速咏唱 设置", "将神速咏唱插入单目标输出循环中.", WHM.JobID, 16, "", "")]
+        [CustomComboInfo("Presence of Mind Option", "Adds Presence of Mind to the single target combo.", WHM.JobID, 16, "", "")]
         WHM_ST_MainCombo_PresenceOfMind = 19008,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("循环加入醒梦", "当MP低于设定值时将醒梦插入单目标输出循环中.", WHM.JobID, 17, "", "")]
+        [CustomComboInfo("Lucid Dreaming Option", "Adds Lucid Dreaming to the single target combo when below set MP value.", WHM.JobID, 17, "", "")]
         WHM_ST_MainCombo_Lucid = 19006,
 
         #endregion
@@ -3671,128 +3673,143 @@ namespace XIVSlothCombo.Combos
         #region AoE DPS Feature
 
         [ReplaceSkill(WHM.Holy, WHM.Holy3)]
-        [CustomComboInfo("AoE DPS连击", "整合AoE技能到神圣/豪圣.", WHM.JobID, 20, "", "")]
+        [CustomComboInfo("AoE DPS Feature", "Collection of cooldowns and spell features on Holy/Holy III.", WHM.JobID, 2, "", "")]
         WHM_AoE_DPS = 19190,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo("法令 设置", "将法令整合AoE循环中.", WHM.JobID, 21, "", "")]
+        [CustomComboInfo("Assize Option", "Adds Assize to the AoE combo.", WHM.JobID, 21, "", "")]
         WHM_AoE_DPS_Assize = 19192,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo("苦难之心 设置", "当苦难之心可用时将其插入AoE循环中.", WHM.JobID, 22, "", "")]
+        [CustomComboInfo("Afflatus Misery Option", "Adds Afflatus Misery to the AoE combo when it is ready to be used.", WHM.JobID, 22, "", "")]
         WHM_AoE_DPS_Misery = 19194,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo("百合保护", "当有三档治疗百合时在AoE循环中插入苦难之心.", WHM.JobID, 23, "", "")]
+        [CustomComboInfo("Lily Overcap Protection Option", "Adds Afflatus Rapture to the AoE combo when at three Lilies.", WHM.JobID, 23, "", "")]
         WHM_AoE_DPS_LilyOvercap = 19193,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo("神速咏唱 设置", "在移动时或不损失gcd的情况下将 神速咏唱 插入AoE输出循环中。", WHM.JobID, 24, "", "")]
+        [CustomComboInfo("Presence of Mind Option", "Adds Presence of Mind to the AoE combo if you are moving or it can be weaved without GCD delay.", WHM.JobID, 24, "", "")]
         WHM_AoE_DPS_PresenceOfMind = 19195,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo("循环加入醒梦", "当MP低于设定值，在移动中或不损失gcd的情况下将 醒梦 插入AoE输出循环中。", WHM.JobID, 25, "", "")]
+        [CustomComboInfo("Lucid Dreaming Option", "Adds Lucid Dreaming to the AoE combo when below the set MP value if you are moving or it can be weaved without GCD delay.", WHM.JobID, 25, "", "")]
         WHM_AoE_DPS_Lucid = 19191,
 
         #endregion
 
         [ReplaceSkill(WHM.AfflatusSolace)]
-        [CustomComboInfo("安慰之心与苦难之心整合 设置", "当苦难之心可用时，替换安慰之心为苦难之心.", WHM.JobID, 30, "", "")]
+        [CustomComboInfo("Solace into Misery Feature", "Replaces Afflatus Solace with Afflatus Misery when it is ready to be used.", WHM.JobID, 30, "", "")]
         WHM_SolaceMisery = 19000,
 
         [ReplaceSkill(WHM.AfflatusRapture)]
-        [CustomComboInfo("狂喜之心与苦难之心整合 设置", "当苦难之心可用时，替换狂喜之心为苦难之心.", WHM.JobID, 40, "", "")]
+        [CustomComboInfo("Rapture into Misery Feature", "Replaces Afflatus Rapture with Afflatus Misery when it is ready to be used.", WHM.JobID, 40, "", "")]
         WHM_RaptureMisery = 19001,
 
-        #region Afflatus Feature
+        #region AoE Heals Feature
 
-        [ReplaceSkill(WHM.Cure2)]
-        [CustomComboInfo("治疗百合状态", "当有治疗百合时将 救疗 替换为 安慰之心。", WHM.JobID, 50, "", "")]
-        WHM_Afflatus = 19003,
+        [ReplaceSkill(WHM.Medica)]
+        [CustomComboInfo("Simple Heals (AoE)", "Replaces Medica with a one button AoE healing setup.", WHM.JobID, 4, "", "")]
+        WHM_AoEHeals = 19007,
 
-        [ParentCombo(WHM_Afflatus)]
-        [ReplaceSkill(WHM.Cure2)]
-        [CustomComboInfo("治疗时使用苦难之心 设置", "当苦难之心可用时，替换救疗为苦难之心.", WHM.JobID, 51, "", "")]
-        WHM_Cure2_Misery = 19012,
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Afflatus Rapture Option", "Uses Afflatus Rapture when available.", WHM.JobID, 61, "", "")]
+        WHM_AoEHeals_Rapture = 19011,
 
-        [ParentCombo(WHM_Afflatus)]
-        [CustomComboInfo("康复 选项", "当你的目标有一个可清除的debuff时则使用 康复。", WHM.JobID)]
-        WHM_Cure2_Esuna = 19027,
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Afflatus Misery Option", "Uses Afflatus Misery when available.", WHM.JobID, 62, "", "")]
+        WHM_AoEHeals_Misery = 19010,
 
-        #region oGCD Heals/Shields Option
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Thin Air Option", "Uses Thin Air when available.", WHM.JobID, 63, "", "")]
+        WHM_AoeHeals_ThinAir = 19200,
 
-        [ParentCombo(WHM_Afflatus)]
-        [CustomComboInfo("瞬发治疗/护盾", "整合治疗和减伤能力技至救疗", WHM.JobID, 52, "", "")]
-        WHM_Afflatus_oGCDHeals = 19018,
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Cure III Option", "Replaces Medica with Cure III when available.", WHM.JobID)]
+        WHM_AoEHeals_Cure3 = 19201,
 
-        [ParentCombo(WHM_Afflatus_oGCDHeals)]
-        [CustomComboInfo("插入神名 设置.", "等待校对 满足 HP 条件时在能力技窗口重点显示神名", WHM.JobID, 53, "", "")]
-        WHM_Afflatus_oGCDHeals_TetraWeave = 19019,
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Assize Option", "Uses Assize when available.", WHM.JobID)]
+        WHM_AoEHeals_Assize = 19202,
 
-        [ParentCombo(WHM_Afflatus_oGCDHeals)]
-        [CustomComboInfo("优先使用神名 设置", "等待校对 满足 HP 条件时优先显示神名", WHM.JobID, 54, "", "")]
-        WHM_Afflatus_oGCDHeals_Tetra = 19020,
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Plenary Indulgence Option", "Uses Plenary Indulgence when available.", WHM.JobID)]
+        WHM_AoEHeals_Plenary = 19203,
 
-        [ParentCombo(WHM_Afflatus_oGCDHeals)]
-        [CustomComboInfo("插入神祝祷 设置", "仅在目标身上没有防护罩效果时在治疗魔法GCD窗口中插入神祝祷.", WHM.JobID, 55, "", "")]
-        WHM_Afflatus_oGCDHeals_BenisonWeave = 19021,
-
-        [ParentCombo(WHM_Afflatus_oGCDHeals)]
-        [CustomComboInfo("优先使用神祝祷 设置", "当目标身上没有防护罩效果时替换救疗为神祝祷.", WHM.JobID, 56, "", "")]
-        WHM_Afflatus_oGCDHeals_Benison = 19022,
-
-        [ParentCombo(WHM_Afflatus_oGCDHeals)]
-        [CustomComboInfo("神名与神祝祷排序使用 设置", "Displays oGCD Heals/Shields over Afflatus" + "\\n(only applies to GCD options for Tetragrammaton and Divine Benison).", WHM.JobID, 57, "", "")]
-        WHM_Afflatus_oGCDHeals_Prio = 19024,
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Lucid Dreaming Option", "Uses Lucid Dreaming when available.", WHM.JobID)]
+        WHM_AoEHeals_Lucid = 19204,
 
         #endregion
 
-        #endregion
+        #region Single Target Heals
 
-        #region Medica Feature
+        [ReplaceSkill(WHM.Cure)]
+        [CustomComboInfo("Simple Heals (Single Target)", "Replaces Cure with a one button single target healing setup.", WHM.JobID, 3)]
+        WHM_STHeals = 19300,
 
-        [ReplaceSkill(WHM.Medica2)]
-        [CustomComboInfo("Medica II Feature", "Replaces Medica II with Medica whenever you are under Medica II's regen effect or below Lv.50.", WHM.JobID, 60, "", "")]
-        WHM_Medica = 19007,
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Regen Option", "Applies Regen to the target if missing.", WHM.JobID)]
+        WHM_STHeals_Regen = 19301,
 
-        [ParentCombo(WHM_Medica)]
-        [CustomComboInfo("Afflatus Rapture Option", "Adds Afflatus Rapture when available.", WHM.JobID, 61, "", "")]
-        WHM_Medica_Rapture = 19011,
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Benediction Option", "Uses Benediction when target is below HP threshold.", WHM.JobID)]
+        WHM_STHeals_Benediction = 19302,
 
-        [ParentCombo(WHM_Medica)]
-        [CustomComboInfo("苦难之心 设置", "Adds Afflatus Misery when available.", WHM.JobID, 62, "", "")]
-        WHM_Medica_Misery = 19010,
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Afflatus Solace Option", "Uses Afflatus Solace when available.", WHM.JobID)]
+        WHM_STHeals_Solace = 19303,
 
-        [ParentCombo(WHM_Medica)]
-        [CustomComboInfo("Thin Air Option", "Adds Thin Air when available.", WHM.JobID, 63, "", "")]
-        WHM_Medica_ThinAir = 19200,
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Thin Air Option", "Uses Thin Air when available.", WHM.JobID)]
+        WHM_STHeals_ThinAir = 19304,
+
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Tetragrammaton Option", "Uses Tetragrammaton when available.", WHM.JobID)]
+        WHM_STHeals_Tetragrammaton = 19305,
+
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Divine Benison Option", "Uses Divine Benison when available.", WHM.JobID)]
+        WHM_STHeals_Benison = 19306,
+
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Aqualveil Option", "Uses Aquaveil when available.", WHM.JobID)]
+        WHM_STHeals_Aquaveil = 19307,
+
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Lucid Dreaming Option", "Uses Lucid Dreaming when available.", WHM.JobID)]
+        WHM_STHeals_Lucid = 19308,
+
+        [ParentCombo(WHM_STHeals)]
+        [CustomComboInfo("Esuna Option", "Applies Esuna to your target if there is a cleansable debuff.", WHM.JobID)]
+        WHM_STHeals_Esuna = 19309,
 
         #endregion
 
         [ReplaceSkill(WHM.Cure2)]
-        [CustomComboInfo("救疗同步 设置", "当等级同步至30级以下时替换救疗为治疗.", WHM.JobID, 70, "", "")]
+        [CustomComboInfo("Cure II Sync Feature", "Changes Cure II to Cure when synced below Lv.30.", WHM.JobID, 70, "", "")]
         WHM_CureSync = 19002,
 
         [ReplaceSkill(All.Swiftcast)]
         [ConflictingCombos(ALL_Healer_Raise)]
-        [CustomComboInfo("替代性的复活功能", "整合即刻咏唱至复活.", WHM.JobID, 80, "", "")]
+        [CustomComboInfo("Alternative Raise Feature", "Changes Swiftcast to Raise.", WHM.JobID, 80, "", "")]
         WHM_Raise = 19004,
 
         [ReplaceSkill(WHM.Raise)]
-        [CustomComboInfo("无中生有-复活特性", "在即刻复活前插入无中生有.", WHM.JobID, 90, "", "")]
+        [CustomComboInfo("Thin Air Raise Feature", "Adds Thin Air to the Global Raise Feature/Alternative Raise Feature.", WHM.JobID, 90, "", "")]
         WHM_ThinAirRaise = 19014,
 
         [Variant]
         [VariantParent(WHM_ST_MainCombo_DoT, WHM_AoE_DPS)]
-        [CustomComboInfo("精神镖选项", "当没有dot或dot剩余时间少于3s时，使用多变精神镖", WHM.JobID)]
+        [CustomComboInfo("Spirit Dart Option", "Use Variant Spirit Dart whenever the debuff is not present or less than 3s.", WHM.JobID)]
         WHM_DPS_Variant_SpiritDart = 19025,
 
         [Variant]
         [VariantParent(WHM_ST_MainCombo, WHM_AoE_DPS)]
-        [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", WHM.JobID)]
+        [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", WHM.JobID)]
         WHM_DPS_Variant_Rampart = 19026,
 
-        // Last value = 19026
+        // Last value = 19027
 
         #endregion
 

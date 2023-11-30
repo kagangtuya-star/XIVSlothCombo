@@ -28,6 +28,7 @@ namespace XIVSlothCombo.Window.Functions
         /// <param name="additonalChoiceCondition">What the condition is to convey to the user what triggers it.</param>
         public static void DrawSliderInt(int minValue, int maxValue, string config, string sliderDescription, float itemWidth = 150, uint sliderIncrement = SliderIncrements.Ones, bool hasAdditionalChoice = false, string additonalChoiceCondition = "")
         {
+            ImGui.Indent();
             int output = PluginConfiguration.GetCustomIntValue(config, minValue);
             if (output < minValue)
             {
@@ -41,81 +42,82 @@ namespace XIVSlothCombo.Window.Functions
             float wrapPos = ImGui.GetContentRegionMax().X - 35f;
 
             InfoBox box = new()
-            {
-                Color = Colors.White,
-                BorderThickness = 1f,
-                CurveRadius = 3f,
-                AutoResize = true,
-                HasMaxWidth = true,
-                IsSubBox = true,
-                ContentsAction = () =>
-                {
-                    bool inputChanged = false;
-                    Vector2 currentPos = ImGui.GetCursorPos();
-                    ImGui.SetCursorPosX(currentPos.X + itemWidth);
-                    ImGui.PushTextWrapPos(wrapPos);
-                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite);
-                    ImGui.Text($"{sliderDescription}");
-                    Vector2 height = ImGui.GetItemRectSize();
-                    float lines = (height.Y / ImGui.GetFontSize());
-                    Vector2 textLength = ImGui.CalcTextSize(sliderDescription);
-                    string newLines = "";
-                    for (int i = 1; i < lines; i++)
-                    {
-                        if (i % 2 == 0)
-                        {
-                            newLines += "\n";
-                        }
-                        else
-                        {
-                            newLines += "\n\n";
-                        }
+                          {
+                              Color = Colors.White,
+                              BorderThickness = 1f,
+                              CurveRadius = 3f,
+                              AutoResize = true,
+                              HasMaxWidth = true,
+                              IsSubBox = true,
+                              ContentsAction = () =>
+                              {
+                                  bool inputChanged = false;
+                                  Vector2 currentPos = ImGui.GetCursorPos();
+                                  ImGui.SetCursorPosX(currentPos.X + itemWidth);
+                                  ImGui.PushTextWrapPos(wrapPos);
+                                  ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite);
+                                  ImGui.Text($"{sliderDescription}");
+                                  Vector2 height = ImGui.GetItemRectSize();
+                                  float lines = height.Y / ImGui.GetFontSize();
+                                  Vector2 textLength = ImGui.CalcTextSize(sliderDescription);
+                                  string newLines = "";
+                                  for (int i = 1; i < lines; i++)
+                                  {
+                                      if (i % 2 == 0)
+                                      {
+                                          newLines += "\n";
+                                      }
+                                      else
+                                      {
+                                          newLines += "\n\n";
+                                      }
 
-                    }
+                                  }
 
-                    if (hasAdditionalChoice)
-                    {
-                        ImGui.SameLine();
-                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-                        ImGui.PushFont(UiBuilder.IconFont);
-                        ImGui.Dummy(new Vector2(5, 0));
-                        ImGui.SameLine();
-                        ImGui.TextWrapped($"{FontAwesomeIcon.Search.ToIconString()}");
-                        ImGui.PopFont();
-                        ImGui.PopStyleColor();
+                                  if (hasAdditionalChoice)
+                                  {
+                                      ImGui.SameLine();
+                                      ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
+                                      ImGui.PushFont(UiBuilder.IconFont);
+                                      ImGui.Dummy(new Vector2(5, 0));
+                                      ImGui.SameLine();
+                                      ImGui.TextWrapped($"{FontAwesomeIcon.Search.ToIconString()}");
+                                      ImGui.PopFont();
+                                      ImGui.PopStyleColor();
 
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted($"This setting has additional options depending on its value.{(string.IsNullOrEmpty(additonalChoiceCondition) ? "" : $"\nCondition: {additonalChoiceCondition}")}");
-                            ImGui.EndTooltip();
-                        }
-                    }
+                                      if (ImGui.IsItemHovered())
+                                      {
+                                          ImGui.BeginTooltip();
+                                          ImGui.TextUnformatted($"This setting has additional options depending on its value.{(string.IsNullOrEmpty(additonalChoiceCondition) ? "" : $"\nCondition: {additonalChoiceCondition}")}");
+                                          ImGui.EndTooltip();
+                                      }
+                                  }
 
-                    ImGui.PopStyleColor();
-                    ImGui.PopTextWrapPos();
-                    ImGui.SameLine();
-                    ImGui.SetCursorPosX(currentPos.X);
-                    ImGui.PushItemWidth(itemWidth);
-                    inputChanged |= ImGui.SliderInt($"{newLines}###{config}", ref output, minValue, maxValue);
+                                  ImGui.PopStyleColor();
+                                  ImGui.PopTextWrapPos();
+                                  ImGui.SameLine();
+                                  ImGui.SetCursorPosX(currentPos.X);
+                                  ImGui.PushItemWidth(itemWidth);
+                                  inputChanged |= ImGui.SliderInt($"{newLines}###{config}", ref output, minValue, maxValue);
 
-                    if (inputChanged)
-                    {
-                        if (output % sliderIncrement != 0)
-                        {
-                            output = output.RoundOff(sliderIncrement);
-                            if (output < minValue) output = minValue;
-                            if (output > maxValue) output = maxValue;
-                        }
+                                  if (inputChanged)
+                                  {
+                                      if (output % sliderIncrement != 0)
+                                      {
+                                          output = output.RoundOff(sliderIncrement);
+                                          if (output < minValue) output = minValue;
+                                          if (output > maxValue) output = maxValue;
+                                      }
 
-                        PluginConfiguration.SetCustomIntValue(config, output);
-                        Service.Configuration.Save();
-                    }
-                }
-            };
+                                      PluginConfiguration.SetCustomIntValue(config, output);
+                                      Service.Configuration.Save();
+                                  }
+                              }
+                          };
 
             box.Draw();
             ImGui.Spacing();
+            ImGui.Unindent();
         }
 
         /// <summary> Draws a slider that lets the user set a given value for their feature. </summary>
@@ -142,71 +144,71 @@ namespace XIVSlothCombo.Window.Functions
 
 
             InfoBox box = new()
-            {
-                Color = Colors.White,
-                BorderThickness = 1f,
-                CurveRadius = 3f,
-                AutoResize = true,
-                HasMaxWidth = true,
-                IsSubBox = true,
-                ContentsAction = () =>
-                {
-                    bool inputChanged = false;
-                    Vector2 currentPos = ImGui.GetCursorPos();
-                    ImGui.SetCursorPosX(currentPos.X + itemWidth);
-                    ImGui.PushTextWrapPos(wrapPos);
-                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite);
-                    ImGui.Text($"{sliderDescription}");
-                    Vector2 height = ImGui.GetItemRectSize();
-                    float lines = (height.Y / ImGui.GetFontSize());
-                    Vector2 textLength = ImGui.CalcTextSize(sliderDescription);
-                    string newLines = "";
-                    for (int i = 1; i < lines; i++)
-                    {
-                        if (i % 2 == 0)
-                        {
-                            newLines += "\n";
-                        }
-                        else
-                        {
-                            newLines += "\n\n";
-                        }
+                          {
+                              Color = Colors.White,
+                              BorderThickness = 1f,
+                              CurveRadius = 3f,
+                              AutoResize = true,
+                              HasMaxWidth = true,
+                              IsSubBox = true,
+                              ContentsAction = () =>
+                              {
+                                  bool inputChanged = false;
+                                  Vector2 currentPos = ImGui.GetCursorPos();
+                                  ImGui.SetCursorPosX(currentPos.X + itemWidth);
+                                  ImGui.PushTextWrapPos(wrapPos);
+                                  ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite);
+                                  ImGui.Text($"{sliderDescription}");
+                                  Vector2 height = ImGui.GetItemRectSize();
+                                  float lines = (height.Y / ImGui.GetFontSize());
+                                  Vector2 textLength = ImGui.CalcTextSize(sliderDescription);
+                                  string newLines = "";
+                                  for (int i = 1; i < lines; i++)
+                                  {
+                                      if (i % 2 == 0)
+                                      {
+                                          newLines += "\n";
+                                      }
+                                      else
+                                      {
+                                          newLines += "\n\n";
+                                      }
 
-                    }
+                                  }
 
-                    if (hasAdditionalChoice)
-                    {
-                        ImGui.SameLine();
-                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-                        ImGui.PushFont(UiBuilder.IconFont);
-                        ImGui.Dummy(new Vector2(5, 0));
-                        ImGui.SameLine();
-                        ImGui.TextWrapped($"{FontAwesomeIcon.Search.ToIconString()}");
-                        ImGui.PopFont();
-                        ImGui.PopStyleColor();
+                                  if (hasAdditionalChoice)
+                                  {
+                                      ImGui.SameLine();
+                                      ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
+                                      ImGui.PushFont(UiBuilder.IconFont);
+                                      ImGui.Dummy(new Vector2(5, 0));
+                                      ImGui.SameLine();
+                                      ImGui.TextWrapped($"{FontAwesomeIcon.Search.ToIconString()}");
+                                      ImGui.PopFont();
+                                      ImGui.PopStyleColor();
 
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted($"This setting has additional options depending on its value.{(string.IsNullOrEmpty(additonalChoiceCondition) ? "" : $"\nCondition: {additonalChoiceCondition}")}");
-                            ImGui.EndTooltip();
-                        }
-                    }
+                                      if (ImGui.IsItemHovered())
+                                      {
+                                          ImGui.BeginTooltip();
+                                          ImGui.TextUnformatted($"This setting has additional options depending on its value.{(string.IsNullOrEmpty(additonalChoiceCondition) ? "" : $"\nCondition: {additonalChoiceCondition}")}");
+                                          ImGui.EndTooltip();
+                                      }
+                                  }
 
-                    ImGui.PopStyleColor();
-                    ImGui.PopTextWrapPos();
-                    ImGui.SameLine();
-                    ImGui.SetCursorPosX(currentPos.X);
-                    ImGui.PushItemWidth(itemWidth);
-                    inputChanged |= ImGui.SliderFloat($"{newLines}###{config}", ref output, minValue, maxValue);
+                                  ImGui.PopStyleColor();
+                                  ImGui.PopTextWrapPos();
+                                  ImGui.SameLine();
+                                  ImGui.SetCursorPosX(currentPos.X);
+                                  ImGui.PushItemWidth(itemWidth);
+                                  inputChanged |= ImGui.SliderFloat($"{newLines}###{config}", ref output, minValue, maxValue);
 
-                    if (inputChanged)
-                    {
-                        PluginConfiguration.SetCustomFloatValue(config, output);
-                        Service.Configuration.Save();
-                    }
-                }
-            };
+                                  if (inputChanged)
+                                  {
+                                      PluginConfiguration.SetCustomFloatValue(config, output);
+                                      Service.Configuration.Save();
+                                  }
+                              }
+                          };
 
             box.Draw();
             ImGui.Spacing();
@@ -237,71 +239,71 @@ namespace XIVSlothCombo.Window.Functions
 
 
             InfoBox box = new()
-            {
-                Color = Colors.White,
-                BorderThickness = 1f,
-                CurveRadius = 3f,
-                AutoResize = true,
-                HasMaxWidth = true,
-                IsSubBox = true,
-                ContentsAction = () =>
-                {
-                    bool inputChanged = false;
-                    Vector2 currentPos = ImGui.GetCursorPos();
-                    ImGui.SetCursorPosX(currentPos.X + itemWidth);
-                    ImGui.PushTextWrapPos(wrapPos);
-                    ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite);
-                    ImGui.Text($"{sliderDescription}");
-                    Vector2 height = ImGui.GetItemRectSize();
-                    float lines = (height.Y / ImGui.GetFontSize());
-                    Vector2 textLength = ImGui.CalcTextSize(sliderDescription);
-                    string newLines = "";
-                    for (int i = 1; i < lines; i++)
-                    {
-                        if (i % 2 == 0)
-                        {
-                            newLines += "\n";
-                        }
-                        else
-                        {
-                            newLines += "\n\n";
-                        }
+                          {
+                              Color = Colors.White,
+                              BorderThickness = 1f,
+                              CurveRadius = 3f,
+                              AutoResize = true,
+                              HasMaxWidth = true,
+                              IsSubBox = true,
+                              ContentsAction = () =>
+                              {
+                                  bool inputChanged = false;
+                                  Vector2 currentPos = ImGui.GetCursorPos();
+                                  ImGui.SetCursorPosX(currentPos.X + itemWidth);
+                                  ImGui.PushTextWrapPos(wrapPos);
+                                  ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudWhite);
+                                  ImGui.Text($"{sliderDescription}");
+                                  Vector2 height = ImGui.GetItemRectSize();
+                                  float lines = (height.Y / ImGui.GetFontSize());
+                                  Vector2 textLength = ImGui.CalcTextSize(sliderDescription);
+                                  string newLines = "";
+                                  for (int i = 1; i < lines; i++)
+                                  {
+                                      if (i % 2 == 0)
+                                      {
+                                          newLines += "\n";
+                                      }
+                                      else
+                                      {
+                                          newLines += "\n\n";
+                                      }
 
-                    }
+                                  }
 
-                    if (hasAdditionalChoice)
-                    {
-                        ImGui.SameLine();
-                        ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-                        ImGui.PushFont(UiBuilder.IconFont);
-                        ImGui.Dummy(new Vector2(5, 0));
-                        ImGui.SameLine();
-                        ImGui.TextWrapped($"{FontAwesomeIcon.Search.ToIconString()}");
-                        ImGui.PopFont();
-                        ImGui.PopStyleColor();
+                                  if (hasAdditionalChoice)
+                                  {
+                                      ImGui.SameLine();
+                                      ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
+                                      ImGui.PushFont(UiBuilder.IconFont);
+                                      ImGui.Dummy(new Vector2(5, 0));
+                                      ImGui.SameLine();
+                                      ImGui.TextWrapped($"{FontAwesomeIcon.Search.ToIconString()}");
+                                      ImGui.PopFont();
+                                      ImGui.PopStyleColor();
 
-                        if (ImGui.IsItemHovered())
-                        {
-                            ImGui.BeginTooltip();
-                            ImGui.TextUnformatted($"This setting has additional options depending on its value.{(string.IsNullOrEmpty(additonalChoiceCondition) ? "" : $"\nCondition: {additonalChoiceCondition}")}");
-                            ImGui.EndTooltip();
-                        }
-                    }
+                                      if (ImGui.IsItemHovered())
+                                      {
+                                          ImGui.BeginTooltip();
+                                          ImGui.TextUnformatted($"This setting has additional options depending on its value.{(string.IsNullOrEmpty(additonalChoiceCondition) ? "" : $"\nCondition: {additonalChoiceCondition}")}");
+                                          ImGui.EndTooltip();
+                                      }
+                                  }
 
-                    ImGui.PopStyleColor();
-                    ImGui.PopTextWrapPos();
-                    ImGui.SameLine();
-                    ImGui.SetCursorPosX(currentPos.X);
-                    ImGui.PushItemWidth(itemWidth);
-                    inputChanged |= ImGui.SliderFloat($"{newLines}###{config}", ref output, minValue, maxValue, $"%.{digits}f");
+                                  ImGui.PopStyleColor();
+                                  ImGui.PopTextWrapPos();
+                                  ImGui.SameLine();
+                                  ImGui.SetCursorPosX(currentPos.X);
+                                  ImGui.PushItemWidth(itemWidth);
+                                  inputChanged |= ImGui.SliderFloat($"{newLines}###{config}", ref output, minValue, maxValue, $"%.{digits}f");
 
-                    if (inputChanged)
-                    {
-                        PluginConfiguration.SetCustomFloatValue(config, output);
-                        Service.Configuration.Save();
-                    }
-                }
-            };
+                                  if (inputChanged)
+                                  {
+                                      PluginConfiguration.SetCustomFloatValue(config, output);
+                                      Service.Configuration.Save();
+                                  }
+                              }
+                          };
 
             box.Draw();
             ImGui.Spacing();
@@ -476,6 +478,61 @@ namespace XIVSlothCombo.Window.Functions
             ImGui.PopStyleColor();
             ImGui.Unindent();
         }
+
+        public static void DrawGridMultiChoice(string config, byte columns, string[,] nameAndDesc, float itemWidth = 150, Vector4 descriptionColor = new Vector4())
+        {
+            int totalChoices = nameAndDesc.GetLength(0);
+            if (totalChoices > 0)
+            {
+                ImGui.Indent();
+                if (descriptionColor == new Vector4()) descriptionColor = ImGuiColors.DalamudWhite;
+                //ImGui.PushItemWidth(itemWidth);
+                //ImGui.SameLine();
+                //ImGui.Dummy(new Vector2(21, 0));
+                //ImGui.SameLine();
+                bool[]? values = PluginConfiguration.GetCustomBoolArrayValue(config);
+
+                //If new saved options or amount of choices changed, resize and save
+                if (values.Length == 0 || values.Length != totalChoices)
+                {
+                    Array.Resize(ref values, totalChoices);
+                    PluginConfiguration.SetCustomBoolArrayValue(config, values);
+                    Service.Configuration.Save();
+                }
+
+                ImGui.BeginTable($"Grid###{config}", columns);
+                ImGui.TableNextRow();
+                //Convert the 2D array of names and descriptions into radio buttons
+                for (int idx = 0; idx < totalChoices; idx++)
+                {
+                    ImGui.TableNextColumn();
+                    string checkBoxName = nameAndDesc[idx, 0];
+                    string checkboxDescription = nameAndDesc[idx, 1];
+
+                    ImGui.PushStyleColor(ImGuiCol.Text, descriptionColor);
+                    if (ImGui.Checkbox($"{checkBoxName}###{config}{idx}", ref values[idx]))
+                    {
+                        PluginConfiguration.SetCustomBoolArrayValue(config, values);
+                        Service.Configuration.Save();
+                    }
+
+                    if (!checkboxDescription.IsNullOrEmpty() && ImGui.IsItemHovered())
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.TextUnformatted(checkboxDescription);
+                        ImGui.EndTooltip();
+                    }
+
+                    ImGui.PopStyleColor();
+
+                    if (((idx + 1) % columns) == 0)
+                        ImGui.TableNextRow();
+                }
+                ImGui.EndTable();
+                ImGui.Unindent();
+            }
+        }
+
 
         public static void DrawPvPStatusMultiChoice(string config)
         {
@@ -1121,15 +1178,19 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_Adv, "高级选项", "", isConditionalChoice: true);
                 if (AST.Config.AST_ST_SimpleHeals_Adv)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
-                    UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_UIMouseOver,
-                        "队伍UI鼠标悬停检测",
-                        "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" +
-                        "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
+                    ImGui.Indent();
+                    ImGui.Spacing();
+                    UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_UIMouseOver, "队伍UI鼠标悬停检测", "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" + "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
                     ImGui.Unindent();
                 }
             }
 
+            if (preset is CustomComboPreset.AST_ST_SimpleHeals_Esuna)
+            {
+                UserConfig.DrawSliderInt(0, 100, AST.Config.AST_ST_SimpleHeals_Esuna, "Stop using when below HP %. Set to Zero to disable this check");
+            }
+
+            
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_EssentialDignity)
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_EssentialDignity, "设置百分比数值");
 
@@ -1154,7 +1215,7 @@ namespace XIVSlothCombo.Window.Functions
 
             #endregion
             // ====================================================================================
-           #region BLACK MAGE
+            #region BLACK MAGE
 
             if (preset is CustomComboPreset.BLM_ST_AdvancedMode)
             {
@@ -1191,37 +1252,46 @@ namespace XIVSlothCombo.Window.Functions
 
             if (preset is CustomComboPreset.BLM_Adv_Cooldowns)
             {
-                // UserConfig.DrawGridMultiChoice(BLM.Config.BLM_Adv_Cooldowns_Choice, 4, new string[,]{
-                //     {"Manafont", "Add Manafont to the rotation." },
-                //     {"Sharpcast", "Add Sharpcast to the rotation." },
-                //     {"Amplifier", "Add Amplifier to the rotation." },
-                //     {"Ley Lines", "Add Ley Lines to the rotation." },
-                // });
+                UserConfig.DrawGridMultiChoice(BLM.Config.BLM_Adv_Cooldowns_Choice,
+                    4,
+                    new string[,]
+                    {
+                        { "Manafont", "Add Manafont to the rotation." },
+                        { "Sharpcast", "Add Sharpcast to the rotation." },
+                        { "Amplifier", "Add Amplifier to the rotation." },
+                        { "Ley Lines", "Add Ley Lines to the rotation." },
+                    });
             }
 
             if (preset is CustomComboPreset.BLM_AoE_Adv_Cooldowns)
             {
-                // UserConfig.DrawGridMultiChoice(BLM.Config.BLM_AoE_Adv_Cooldowns_Choice, 5, new string[,]{
-                //     {$"Manafont", "Add Manafont to the rotation." },
-                //     {"Sharpcast", "Add Sharpcast to the rotation." },
-                //     {"Amplifier", "Add Amplifier to the rotation." },
-                //     {"Ley Lines", "Add Ley Lines to the rotation." },
-                //     {"Triplecast", "Add Triplecast to the rotation" }
-                // });
+                UserConfig.DrawGridMultiChoice(BLM.Config.BLM_AoE_Adv_Cooldowns_Choice,
+                    5,
+                    new string[,]
+                    {
+                        { $"Manafont", "Add Manafont to the rotation." },
+                        { "Sharpcast", "Add Sharpcast to the rotation." },
+                        { "Amplifier", "Add Amplifier to the rotation." },
+                        { "Ley Lines", "Add Ley Lines to the rotation." },
+                        { "Triplecast", "Add Triplecast to the rotation" }
+                    });
             }
 
             if (preset is CustomComboPreset.BLM_Adv_Movement)
             {
-                // UserConfig.DrawGridMultiChoice(BLM.Config.BLM_Adv_Movement_Choice, 4, new string[,]{
-                //     {"Sharpcast", "Add Sharpcast." },
-                //     {"Thunder", "Add Thunder I/Thunder III." },
-                //     {"Firestarter", "Add Firestarter when in Astral Fire." },
-                //     {"Paradox", "Add Paradox when in Umbral Ice." },
-                //     {"Xenoglossy", "Add Xenoglossy.\nOne charge will be held for rotation." },
-                //     {"Swiftcast", "Add Swiftcast." },
-                //     {"Triplecast", "Add (pooled) Triplecast." },
-                //     {"Scathe", "Add Scathe." }
-                // });
+                UserConfig.DrawGridMultiChoice(BLM.Config.BLM_Adv_Movement_Choice,
+                    4,
+                    new string[,]
+                    {
+                        { "Sharpcast", "Add Sharpcast." },
+                        { "Thunder", "Add Thunder I/Thunder III." },
+                        { "Firestarter", "Add Firestarter when in Astral Fire." },
+                        { "Paradox", "Add Paradox when in Umbral Ice." },
+                        { "Xenoglossy", "Add Xenoglossy.\nOne charge will be held for rotation." },
+                        { "Swiftcast", "Add Swiftcast." },
+                        { "Triplecast", "Add (pooled) Triplecast." },
+                        { "Scathe", "Add Scathe." }
+                    });
             }
 
             if (preset is CustomComboPreset.BLM_ST_Adv_Thunder)
@@ -1267,7 +1337,7 @@ namespace XIVSlothCombo.Window.Functions
 
             #endregion
             // ====================================================================================
-                    #region DANCER
+            #region DANCER
 
             if (preset == CustomComboPreset.DNC_DanceComboReplacer)
             {
@@ -1294,8 +1364,7 @@ namespace XIVSlothCombo.Window.Functions
             if (preset == CustomComboPreset.DNC_AoE_EspritOvercap)
                 UserConfig.DrawSliderInt(50, 100, DNC.Config.DNCEspritThreshold_AoE, "伶俐", 150, SliderIncrements.Fives);
 
-            // if (preset == CustomComboPreset.DNC_Variant_Cure)
-            //     UserConfig.DrawSliderInt(1, 100, DNC.Config.DNCVariantCurePercent, "HP% to be at or under", 200);
+
 
             #region Simple ST Sliders
 
@@ -1308,8 +1377,6 @@ namespace XIVSlothCombo.Window.Functions
             if (preset == CustomComboPreset.DNC_ST_Simple_Feathers)
                 UserConfig.DrawSliderInt(0, 5, DNC.Config.DNCSimpleFeatherBurstPercent, "目标生命值百分比低于此值打出全部下面囤积的技能", 75, SliderIncrements.Ones);
 
-            // if (preset == CustomComboPreset.DNC_ST_Simple_SaberDance)
-            //     UserConfig.DrawSliderInt(50, 100, DNC.Config.DNCSimpleSaberThreshold, "Esprit", 150, SliderIncrements.Fives);
 
             if (preset == CustomComboPreset.DNC_ST_Simple_PanicHeals)
                 UserConfig.DrawSliderInt(0, 100, DNC.Config.DNCSimplePanicHealWaltzPercent, "使用治疗华尔兹的生命值百分比临界点", 200, SliderIncrements.Ones);
@@ -1364,40 +1431,40 @@ namespace XIVSlothCombo.Window.Functions
             #endregion
             // ====================================================================================
             #region DRAGOON
-            
+
             if (preset == CustomComboPreset.DRG_ST_Dives_Dragonfire)
             {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under Lance Charge", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under Dragon Sight", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under Battle Litany", "", 3, 2);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under 猛枪", "", 3, 0);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under 巨龙右眼", "", 3, 1);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under 战斗连倒", "", 3, 2);
             }
 
             if (preset == CustomComboPreset.DRG_ST_Dives_Spineshatter)
             {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under Lance Charge", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under Dragon Sight", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under Battle Litany", "", 3, 2);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under 猛枪", "", 3, 0);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under 巨龙右眼", "", 3, 1);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under 战斗连倒", "", 3, 2);
             }
 
             if (preset == CustomComboPreset.DRG_AoE_Dragonfire_Dive)
             {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under Lance Charge", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under Dragon Sight", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under Battle Litany", "", 3, 2);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under 猛枪", "", 3, 0);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under 巨龙右眼", "", 3, 1);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under 战斗连倒", "", 3, 2);
             }
 
             if (preset == CustomComboPreset.DRG_AoE_Spineshatter_Dive)
             {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under Lance Charge", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under Dragon Sight", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under Battle Litany", "", 3, 2);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under 猛枪", "", 3, 0);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under 巨龙右眼", "", 3, 1);
+                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under 战斗连倒", "", 3, 2);
             }
 
             if (preset == CustomComboPreset.DRG_ST_Opener && enabled)
             {
-                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_Opener_Choice, "2.5 Skill Speed Opener","", 0);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_Opener_Choice, "2.5 Skill Speed Opener", "", 0);
                 UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_Opener_Choice, "2.46 Skill Speed Opener", "", 1);
-                
+
             }
 
             if (preset == CustomComboPreset.DRG_ST_ComboHeals)
@@ -1411,7 +1478,7 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoE_SecondWind_Threshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
                 UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoEBloodbath_Threshold, "使用浴血的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
             }
-            
+
             if (preset == CustomComboPreset.DRG_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, DRG.Config.DRG_Variant_Cure, "HP% to be at or under", 200);
 
@@ -1423,11 +1490,11 @@ namespace XIVSlothCombo.Window.Functions
 
             if (preset == CustomComboPreset.DRG_ST_Litany)
                 UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_LitanyHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-            
+
 
             if (preset == CustomComboPreset.DRG_ST_DragonSight)
                 UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_SightHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-            
+
 
             if (preset == CustomComboPreset.DRG_ST_Lance)
                 UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_LanceChargeHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
@@ -1443,8 +1510,9 @@ namespace XIVSlothCombo.Window.Functions
             if (preset == CustomComboPreset.DRG_AoE_Lance)
                 UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoE_LanceChargeHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
 
- 
+
             #region Dragoon PvP
+
             if (preset is CustomComboPreset.DRGPvP_Nastrond)
                 UserConfig.DrawSliderInt(0, 100, DRGPvP.Config.DRGPvP_LOTD_HPValue, "Ends Life of the Dragon if HP falls below the set percentage", 150, SliderIncrements.Ones);
 
@@ -1456,28 +1524,28 @@ namespace XIVSlothCombo.Window.Functions
 
             if (preset is CustomComboPreset.DRGPvP_WyrmwindThrust)
                 UserConfig.DrawSliderInt(0, 20, DRGPvP.Config.DRGPvP_Distance_Threshold, "Distance Treshold for Wyrmwind Thrust", 150, SliderIncrements.Ones);
+
             #endregion
 
             #endregion
             // ====================================================================================
             #region GUNBREAKER
 
-            
             if (preset == CustomComboPreset.GNB_START_GCD)
             {
                 UserConfig.DrawHorizontalRadioButton(GNB.Config.GNB_START_GCD, "1GCD", "", 1);
                 UserConfig.DrawHorizontalRadioButton(GNB.Config.GNB_START_GCD, "2GCD", "", 2);
                 UserConfig.DrawHorizontalRadioButton(GNB.Config.GNB_START_GCD, "3GCD", "", 3);
             }
-            
+
             if (preset == CustomComboPreset.GNB_ST_SkSSupport && enabled)
             {
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "子弹连-倍攻-音速破", "", 1);
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "子弹连-音速破-倍攻", "", 2);
-                
+
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "音速破-子弹连-倍攻", "", 3);
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "音速破-倍攻-子弹连", "", 4);
-                
+
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "倍攻-音速破-子弹连", "", 5);
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "倍攻-子弹连-音速破", "", 6);
             }
@@ -1491,6 +1559,7 @@ namespace XIVSlothCombo.Window.Functions
             #endregion
             // ====================================================================================
             #region MACHINIST
+
             //
             // if (preset == CustomComboPreset.MCH_ST_SecondWind)
             //     UserConfig.DrawSliderInt(0, 100, MCH.Config.MCH_ST_SecondWindThreshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
@@ -1616,15 +1685,15 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "圣灵", "", 4);
                 UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "圣环", "", 5);
             }
-            
-    
-            
+
+
+
             if (preset == CustomComboPreset.PLD_ST_AdvancedMode_Open)
             {
                 UserConfig.DrawRadioButton(PLD.Config.PLD_FOF_GCD, "2GCD", "", 1);
                 UserConfig.DrawRadioButton(PLD.Config.PLD_FOF_GCD, "3GCD", "", 2);
             }
-            
+
 
             if (preset == CustomComboPreset.PLD_SpiritsWithin)
             {
@@ -1646,7 +1715,6 @@ namespace XIVSlothCombo.Window.Functions
             if (preset == CustomComboPreset.PLD_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, PLD.Config.PLD_VariantCure, "HP% to be at or under", 200);
 
-            
             #endregion
             // ====================================================================================
             #region REAPER
@@ -1699,7 +1767,8 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_OnAction_Adv, "Advanced Action Options.", "Changes which action this option will replace.", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_oGCD_OnAction_Adv)
                 {
-                    ImGui.Indent();ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, "Jolts", "", 3, 0, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, "Fleche", "", 3, 1, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, "Riposte", "", 3, 2, descriptionColor: ImGuiColors.DalamudYellow);
@@ -1711,14 +1780,16 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Engagement, "Engagement", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_oGCD_Engagement)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Engagement_Pooling, "Pool one charge for manual use.", "");
                     ImGui.Unindent();
                 }
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps, "Corp-a-Corps", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_oGCD_CorpACorps)
                 {
-                    ImGui.Indent();ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps_Melee, "Use only in melee range.", "");
                     UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps_Pooling, "Pool one charge for manual use.", "");
                     ImGui.Unindent();
@@ -1730,7 +1801,8 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_MeleeCombo_Adv, "Advanced Action Options", "Changes which action this option will replace.", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_MeleeCombo_Adv)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_MeleeCombo_OnAction, "Jolts", "", 2, 0, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_MeleeCombo_OnAction, "Riposte", "", 2, 1, descriptionColor: ImGuiColors.DalamudYellow);
                     ImGui.Unindent();
@@ -1742,7 +1814,8 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_MeleeFinisher_Adv, "Advanced Action Options", "Changes which action this option will replace.", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_MeleeFinisher_Adv)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_MeleeFinisher_OnAction, "Jolts", "", 3, 0, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_MeleeFinisher_OnAction, "Riposte", "", 3, 1, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_MeleeFinisher_OnAction, "VerAero & VerThunder", "", 3, 2, descriptionColor: ImGuiColors.DalamudYellow);
@@ -1761,14 +1834,16 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Engagement, "Engagement", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_oGCD_Engagement)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Engagement_Pooling, "Pool one charge for manual use.", "");
                     ImGui.Unindent();
                 }
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps, "Corp-a-Corps", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_oGCD_CorpACorps)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps_Melee, "Use only in melee range.", "");
                     UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps_Pooling, "Pool one charge for manual use.", "");
                     ImGui.Unindent();
@@ -1781,7 +1856,8 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_MeleeCombo_Adv, "Advanced Action Options", "Changes which action this option will replace.", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_MeleeCombo_Adv)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeCombo_OnAction, "Scatter/Impact", "", 2, 0, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeCombo_OnAction, "Moulinet", "", 2, 1, descriptionColor: ImGuiColors.DalamudYellow);
                     ImGui.Unindent();
@@ -1793,7 +1869,8 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_MeleeFinisher_Adv, "Advanced Action Options", "Changes which action this option will replace.", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_MeleeFinisher_Adv)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeFinisher_OnAction, "Scatter/Impact", "", 3, 0, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeFinisher_OnAction, "Moulinet", "", 3, 1, descriptionColor: ImGuiColors.DalamudYellow);
                     UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeFinisher_OnAction, "VerAero II & VerThunder II", "", 3, 2, descriptionColor: ImGuiColors.DalamudYellow);
@@ -1809,7 +1886,7 @@ namespace XIVSlothCombo.Window.Functions
 
             #endregion
             // ====================================================================================
-            #region SAGE
+           #region SAGE
 
             if (preset is CustomComboPreset.SGE_ST_DPS)
             {
@@ -1837,11 +1914,11 @@ namespace XIVSlothCombo.Window.Functions
             {
                 UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_DPS_EDosisHPPer, "Stop using at Enemy HP %. Set to Zero to disable this check");
 
-                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_DPS_EDosis_Adv, "高级选项", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_DPS_EDosis_Adv, "Advanced Options", "", isConditionalChoice: true);
                 if (SGE.Config.SGE_ST_DPS_EDosis_Adv)
                 {
                     ImGui.Indent();
-                    UserConfig.DrawRoundedSliderFloat(0, 4, SGE.Config.SGE_ST_DPS_EDosisThreshold, "续 DoT 前的剩余秒数，设置为零可禁用", digits: 1);
+                    UserConfig.DrawRoundedSliderFloat(0, 4, SGE.Config.SGE_ST_DPS_EDosisThreshold, "Seconds remaining before reapplying the DoT. Set to Zero to disable this check.", digits: 1);
                     ImGui.Unindent();
                 }
             }
@@ -1868,17 +1945,19 @@ namespace XIVSlothCombo.Window.Functions
 
             if (preset is CustomComboPreset.SGE_ST_Heal)
             {
-                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_Adv, "高级选项", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_Adv, "Advanced Options", "", isConditionalChoice: true);
                 if (SGE.Config.SGE_ST_Heal_Adv)
                 {
                     ImGui.Indent();
                     UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_UIMouseOver,
                         "队伍UI鼠标悬停检测",
-                        "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" +
-                        "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
+                        "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" + "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
                     ImGui.Unindent();
                 }
             }
+
+            if (preset is CustomComboPreset.SGE_ST_Heal_Esuna)
+                UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_Heal_Esuna, "Stop using when below HP %. Set to Zero to disable this check");
 
             if (preset is CustomComboPreset.SGE_ST_Heal_Soteria)
                 UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_Heal_Soteria, "Use Soteria when Target HP is at or below set percentage");
@@ -1901,12 +1980,16 @@ namespace XIVSlothCombo.Window.Functions
             if (preset is CustomComboPreset.SGE_ST_Heal_Druochole)
                 UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_Heal_Druochole, "Use Druochole when Target HP is at or below set percentage");
 
-            if (preset is CustomComboPreset.SGE_ST_Heal_Diagnosis)
-                UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_Heal_Diagnosis, "Use Diagnosis when Target HP is at or below set percentage");
+            if (preset is CustomComboPreset.SGE_ST_Heal_EDiagnosis)
+            {
+                UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_Heal_EDiagnosisHP, "Use Eukrasian Diagnosis when Target HP is at or below set percentage");
+                UserConfig.DrawHorizontalMultiChoice(SGE.Config.SGE_ST_Heal_EDiagnosisOpts, "Ignore Shield Check", "Warning, will force the use of Eukrasia Diagnosis, and normal Diagnosis will be unavailable.", 2, 0);
+                UserConfig.DrawHorizontalMultiChoice(SGE.Config.SGE_ST_Heal_EDiagnosisOpts, "Check for Scholar Galvenize", "Enable to not override an existing Scholar's shield.", 2, 1);
+            }
 
             if (preset is CustomComboPreset.SGE_AoE_Heal_Kerachole)
                 UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_AoE_Heal_KeracholeTrait,
-                    "Check for Enhanced Kerachole Trait (Heal over Time)", 
+                    "Check for Enhanced Kerachole Trait (Heal over Time)",
                     "Enabling this will prevent Kerachole from being used when the Heal over Time trait is unavailable.");
 
             if (preset is CustomComboPreset.SGE_Eukrasia)
@@ -1980,7 +2063,8 @@ namespace XIVSlothCombo.Window.Functions
 
                 if (SCH.Config.SCH_ST_DPS_Adv)
                 {
-                    ImGui.Indent();ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice(SCH.Config.SCH_ST_DPS_Adv_Actions, "On Ruin/Broils", "Apply options to Ruin and all Broils.", 3, 0);
                     UserConfig.DrawHorizontalMultiChoice(SCH.Config.SCH_ST_DPS_Adv_Actions, "On Bio/Bio II/Biolysis", "Apply options to Bio and Biolysis.", 3, 1);
                     UserConfig.DrawHorizontalMultiChoice(SCH.Config.SCH_ST_DPS_Adv_Actions, "On Ruin II", "Apply options to Ruin II.", 3, 2);
@@ -2009,7 +2093,7 @@ namespace XIVSlothCombo.Window.Functions
 
             if (preset is CustomComboPreset.SCH_DPS_EnergyDrain)
             {
-                UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_ST_DPS_EnergyDrain_Adv, "高级选项","", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_ST_DPS_EnergyDrain_Adv, "高级选项", "", isConditionalChoice: true);
                 if (SCH.Config.SCH_ST_DPS_EnergyDrain_Adv)
                 {
                     ImGui.Indent();
@@ -2027,20 +2111,17 @@ namespace XIVSlothCombo.Window.Functions
                 if (SCH.Config.SCH_ST_Heal_Adv)
                 {
                     ImGui.Indent();
-                    UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_ST_Heal_UIMouseOver,
-                        "Party UI Mouseover Checking",
-                        "Check party member's HP & Debuffs by using mouseover on the party list.\n" +
-                        "To be used in conjunction with Redirect/Reaction/etc");
+                    UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_ST_Heal_UIMouseOver, "Party UI Mouseover Checking", "Check party member's HP & Debuffs by using mouseover on the party list.\n" + "To be used in conjunction with Redirect/Reaction/etc");
                     ImGui.Unindent();
                 }
             }
 
             if (preset is CustomComboPreset.SCH_ST_Heal_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, SCH.Config.SCH_ST_Heal_LucidOption, "MP Threshold", 150, SliderIncrements.Hundreds);
-            
+
             if (preset is CustomComboPreset.SCH_ST_Heal_Adloquium)
                 UserConfig.DrawSliderInt(0, 100, SCH.Config.SCH_ST_Heal_AdloquiumOption, "Use Adloquium on targets at or below HP % even if they have Galvanize\n0 = Only ever use Adloquium on targets without Galvanize\n100 = Always use Adloquium");
-            
+
             if (preset is CustomComboPreset.SCH_ST_Heal_Lustrate)
                 UserConfig.DrawSliderInt(0, 100, SCH.Config.SCH_ST_Heal_LustrateOption, "Start using when below HP %. Set to 100 to disable this check");
 
@@ -2050,10 +2131,7 @@ namespace XIVSlothCombo.Window.Functions
                 if (SCH.Config.SCH_DeploymentTactics_Adv)
                 {
                     ImGui.Indent();
-                    UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_DeploymentTactics_UIMouseOver,
-                        "Party UI Mouseover Checking",
-                        "Check party member's HP & Debuffs by using mouseover on the party list.\n" +
-                        "To be used in conjunction with Redirect/Reaction/etc");
+                    UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_DeploymentTactics_UIMouseOver, "Party UI Mouseover Checking", "Check party member's HP & Debuffs by using mouseover on the party list.\n" + "To be used in conjunction with Redirect/Reaction/etc");
                     ImGui.Unindent();
                 }
             }
@@ -2075,16 +2153,18 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_Aetherflow_Recite_Excog, "On Excogitation", "", isConditionalChoice: true);
                 if (SCH.Config.SCH_Aetherflow_Recite_Excog)
                 {
-                    ImGui.Indent();ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawRadioButton(SCH.Config.SCH_Aetherflow_Recite_ExcogMode, "仅当以太溢出时", "", 0);
                     UserConfig.DrawRadioButton(SCH.Config.SCH_Aetherflow_Recite_ExcogMode, "总是应用", "", 1);
                     ImGui.Unindent();
                 }
-                
+
                 UserConfig.DrawAdditionalBoolChoice(SCH.Config.SCH_Aetherflow_Recite_Indom, "On Indominability", "", isConditionalChoice: true);
                 if (SCH.Config.SCH_Aetherflow_Recite_Indom)
                 {
-                    ImGui.Indent(); ImGui.Spacing();
+                    ImGui.Indent();
+                    ImGui.Spacing();
                     UserConfig.DrawRadioButton(SCH.Config.SCH_Aetherflow_Recite_IndomMode, "仅当以太溢出时", "", 0);
                     UserConfig.DrawRadioButton(SCH.Config.SCH_Aetherflow_Recite_IndomMode, "总是应用", "", 1);
                     ImGui.Unindent();
@@ -2104,14 +2184,15 @@ namespace XIVSlothCombo.Window.Functions
             #region SUMMONER
 
             #region PvE
+
             if (preset == CustomComboPreset.SMN_DemiEgiMenu_EgiOrder)
             {
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "土风火", "按泰坦，迦楼罗，伊芙利特的顺序召唤", 1);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "土火风", "按迦楼罗，泰坦，伊芙利特的顺序召唤.", 2);
-                
+
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "风土火", "按迦楼罗，泰坦，伊芙利特的顺序召唤.", 3);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "风火土", "按迦楼罗，泰坦，伊芙利特的顺序召唤.", 4);
-                
+
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "火风土", "按迦楼罗，泰坦，伊芙利特的顺序召唤.", 5);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "火土风", "按迦楼罗，泰坦，伊芙利特的顺序召唤.", 6);
             }
@@ -2131,14 +2212,16 @@ namespace XIVSlothCombo.Window.Functions
             {
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "迦楼罗", "即刻用来使用螺旋气流", 1);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "伊芙利特", "即刻用来使用红宝石之仪", 2);
-                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "灵活 (SpS) ", "当即刻可用，用来使用第一个能用的灵攻技能.", 3); } 
-            
+                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "灵活 (SpS) ", "当即刻可用，用来使用第一个能用的灵攻技能.", 3);
+            }
+
 
             if (preset == CustomComboPreset.SMN_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, SMN.Config.SMN_Lucid, "MP小于等于此值时使用.", 150, SliderIncrements.Hundreds);
 
             if (preset == CustomComboPreset.SMN_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, SMN.Config.SMN_VariantCure, "HP% to be at or under", 200);
+
             #endregion
 
             #region PvP
@@ -2171,12 +2254,27 @@ namespace XIVSlothCombo.Window.Functions
             // ====================================================================================
             #region WHITE MAGE
 
+            if (preset is CustomComboPreset.WHM_ST_MainCombo)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_ST_MainCombo_Adv, "高级选项", "Change how actions are handled", isConditionalChoice: true);
+
+                if (WHM.Config.WHM_ST_MainCombo_Adv)
+                {
+                    ImGui.Indent();
+                    ImGui.Spacing();
+                    UserConfig.DrawHorizontalMultiChoice(WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On Stone/Glare", "Apply options to all Stones and Glares.", 3, 0);
+                    UserConfig.DrawHorizontalMultiChoice(WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On Aero/Dia", "Apply options to Aeros and Dia.", 3, 1);
+                    UserConfig.DrawHorizontalMultiChoice(WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On Stone II", "Apply options to Stone II.", 3, 2);
+                    ImGui.Unindent();
+                }
+            }
+
             if (preset == CustomComboPreset.WHM_ST_MainCombo_Lucid)
-                UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_ST_Lucid, "Set value for your MP to be at or under for this feature to work.", 150, SliderIncrements.Hundreds);
+                UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_STDPS_Lucid, "Set value for your MP to be at or under for this feature to work.", 150, SliderIncrements.Hundreds);
 
             if (preset is CustomComboPreset.WHM_ST_MainCombo_DoT)
             {
-                UserConfig.DrawSliderInt(0, 100, WHM.Config.WHM_ST_MainCombo_DoT, "Stop using at Enemy HP %. Set to Zero to disable this check.");
+                UserConfig.DrawSliderInt(0, 100, WHM.Config.WHM_STDPS_MainCombo_DoT, "Stop using at Enemy HP %. Set to Zero to disable this check.");
 
                 UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_ST_MainCombo_DoT_Adv, "高级选项", "", isConditionalChoice: true);
                 if (PluginConfiguration.GetCustomBoolValue(WHM.Config.WHM_ST_MainCombo_DoT_Adv))
@@ -2188,29 +2286,71 @@ namespace XIVSlothCombo.Window.Functions
             }
 
             if (preset == CustomComboPreset.WHM_AoE_DPS_Lucid)
-                UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_AoE_Lucid, "Set value for your MP to be at or under for this feature to work", 150, SliderIncrements.Hundreds);
+                UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_AoEDPS_Lucid, "Set value for your MP to be at or under for this feature to work", 150, SliderIncrements.Hundreds);
 
-            if (preset is CustomComboPreset.WHM_Afflatus)
+            if (preset == CustomComboPreset.WHM_AoEHeals_Lucid)
+                UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_AoEHeals_Lucid, "Set value for your MP to be at or under for this feature to work", 150, SliderIncrements.Hundreds);
+
+            if (preset == CustomComboPreset.WHM_STHeals_Lucid)
+                UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_STHeals_Lucid, "Set value for your MP to be at or under for this feature to work", 150, SliderIncrements.Hundreds);
+
+            if (preset is CustomComboPreset.WHM_STHeals_Esuna)
+                UserConfig.DrawSliderInt(0, 100, WHM.Config.WHM_STHeals_Esuna, "Stop using when below HP %. Set to Zero to disable this check");
+
+            if (preset == CustomComboPreset.WHM_AoeHeals_ThinAir)
+                UserConfig.DrawSliderInt(0, 1, WHM.Config.WHM_AoEHeals_ThinAir, "存几层充能？（0 = 用光，一层不留）");
+
+            if (preset == CustomComboPreset.WHM_AoEHeals_Cure3)
+                UserConfig.DrawSliderInt(0, 10000, WHM.Config.WHM_AoEHeals_Cure3MP, "当HP低于多少", sliderIncrement: 100);
+
+            if (preset == CustomComboPreset.WHM_STHeals)
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_UIMouseOver, "队伍UI鼠标悬停检测", "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" + "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
+
+            if (preset == CustomComboPreset.WHM_STHeals_ThinAir)
+                UserConfig.DrawSliderInt(0, 1, WHM.Config.WHM_STHeals_ThinAir, "How many charges to keep ready? (0 = Use all)");
+
+            if (preset == CustomComboPreset.WHM_STHeals_Regen)
+                UserConfig.DrawRoundedSliderFloat(0f, 6f, WHM.Config.WHM_STHeals_RegenTimer, "Time Remaining Before Refreshing");
+
+            if (preset == CustomComboPreset.WHM_ST_MainCombo_Opener)
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_ST_MainCombo_Opener_Swiftcast, "Swiftcast Option", "Adds Swiftcast to the opener.");
+
+            if (preset == CustomComboPreset.WHM_STHeals_Benediction)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_Afflatus_Adv, "高级选项", "", isConditionalChoice: true);
-                if (WHM.Config.WHM_Afflatus_Adv)
-                {
-                    ImGui.Indent(); ImGui.Spacing();
-                    UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_Afflatus_UIMouseOver,
-                        "Party UI Mouseover Checking",
-                        "Check party member's HP & Debuffs by using mouseover on the party list.\n" +
-                        "To be used in conjunction with Redirect/Reaction/etc");
-                    ImGui.Unindent();
-                }
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_BenedictionWeave, "Only Weave", "");
+                UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_BenedictionHP, "Use when target HP% is at or below.");
             }
 
-            if (preset == CustomComboPreset.WHM_Afflatus_oGCDHeals)
-                UserConfig.DrawSliderInt(0, 100, WHM.Config.WHM_oGCDHeals, "Set HP% to use Tetragrammaton on target at:");
+            if (preset == CustomComboPreset.WHM_STHeals_Tetragrammaton)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_TetraWeave, "Only Weave", "");
+                UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_TetraHP, "Use when target HP% is at or below.");
+            }
 
-            if (preset == CustomComboPreset.WHM_Medica_ThinAir)
-                UserConfig.DrawSliderInt(0, 1, WHM.Config.WHM_Medica_ThinAir, "存几层充能？（0 = 用光，一层不留）");
+            if (preset == CustomComboPreset.WHM_STHeals_Benison)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_BenisonWeave, "Only Weave", "");
+                UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_BenisonHP, "Use when target HP% is at or below.");
+            }
+
+            if (preset == CustomComboPreset.WHM_STHeals_Aquaveil)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_AquaveilWeave, "Only Weave", "");
+                UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_AquaveilHP, "Use when target HP% is at or below.");
+            }
+
+            if (preset == CustomComboPreset.WHM_AoEHeals_Assize)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_AssizeWeave, "Only Weave", "");
+            }
+
+            if (preset == CustomComboPreset.WHM_AoEHeals_Plenary)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_PlenaryWeave, "Only Weave", "");
+            }
 
             #endregion
+
             // ====================================================================================
             #region DOH
 
@@ -2222,7 +2362,7 @@ namespace XIVSlothCombo.Window.Functions
             // ====================================================================================
             #region PvP VALUES
 
-             PlayerCharacter? pc = Service.ClientState.LocalPlayer;
+            PlayerCharacter? pc = Service.ClientState.LocalPlayer;
 
             if (preset == CustomComboPreset.PvP_EmergencyHeals)
             {
@@ -2294,15 +2434,13 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawSliderInt(1, 100, NINPvP.Config.NINPvP_Meisui_AoE, description);
             }
 
-
             #endregion
         }
     }
 
     public static class SliderIncrements
     {
-        public const uint
-            Ones = 1,
+        public const uint Ones = 1,
             Fives = 5,
             Tens = 10,
             Hundreds = 100,
