@@ -76,7 +76,11 @@ namespace XIVSlothCombo
                 });
 
             Service.ClientState.Login += PrintLoginMessage;
-            if (Service.ClientState.IsLoggedIn) ResetFeatures();
+
+            if (Service.ClientState.IsLoggedIn)
+            {
+                ResetFeatures();
+            }
 
             // Service.Framework.Update += OnFramework;
 
@@ -138,16 +142,16 @@ namespace XIVSlothCombo
         {
             // Enumerable.Range is a start and count, not a start and end.
             // Enumerable.Range(Start, Count)
-            Service.Configuration.ResetFeatures("v3.0.17.0_NINRework", Enumerable.Range(10000, 100).ToArray());
-            Service.Configuration.ResetFeatures("v3.0.17.0_DRGCleanup", Enumerable.Range(6100, 400).ToArray());
-            Service.Configuration.ResetFeatures("v3.0.18.0_GNBCleanup", Enumerable.Range(7000, 700).ToArray());
+            // Service.Configuration.ResetFeatures("v3.0.17.0_NINRework", Enumerable.Range(10000, 100).ToArray());
+            // Service.Configuration.ResetFeatures("v3.0.17.0_DRGCleanup", Enumerable.Range(6100, 400).ToArray());
+            // Service.Configuration.ResetFeatures("v3.0.18.0_GNBCleanup", Enumerable.Range(7000, 700).ToArray());
         }
 
         private void DrawUI() => configWindow.Draw();
 
         private void PrintLoginMessage(object? sender, EventArgs e)
         {
-            Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(task => ResetFeatures());
+            // Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(task => ResetFeatures());
 
             if (!Service.Configuration.HideMessageOfTheDay)
                 Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task => PrintMotD());
@@ -155,7 +159,7 @@ namespace XIVSlothCombo
 
         private void PrintMotD()
         {
-            Service.ChatGui.Print(AboutUs.Ban);
+            Service.ChatGui.PrintError(AboutUs.Ban);
             
             // List<Payload>? payloads = new()
             // {

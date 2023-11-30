@@ -11,13 +11,13 @@ namespace XIVSlothCombo.Window.Tabs
         internal static new void Draw()
         {
             ImGui.BeginChild("main", new Vector2(0, 0), true);
-            ImGui.Text("此选项卡允许您在启用功能时自定义选项 This tab allows you to customise your options when enabling features.");
+            ImGui.Text("此选项卡允许您在启用功能时自定义选项");
 
             #region SubCombos
 
             bool hideChildren = Service.Configuration.HideChildren;
 
-            if (ImGui.Checkbox("隐藏子连击选项 Hide SubCombo Options", ref hideChildren))
+            if (ImGui.Checkbox("隐藏子连击选项[可能有BUG]", ref hideChildren))
             {
                 Service.Configuration.HideChildren = hideChildren;
                 Service.Configuration.Save();
@@ -26,7 +26,7 @@ namespace XIVSlothCombo.Window.Tabs
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("隐藏已禁用功能的子选项 Hides the sub-options of disabled features.");
+                ImGui.TextUnformatted("隐藏已禁用功能的子选项[可能有BUG]");
                 ImGui.EndTooltip();
             }
             ImGui.NextColumn();
@@ -36,7 +36,7 @@ namespace XIVSlothCombo.Window.Tabs
             #region Conflicting
 
             bool hideConflicting = Service.Configuration.HideConflictedCombos;
-            if (ImGui.Checkbox("隐藏冲突的连击。Hide Conflicted Combos", ref hideConflicting))
+            if (ImGui.Checkbox("隐藏冲突的连击[可能有BUG]", ref hideConflicting))
             {
                 Service.Configuration.HideConflictedCombos = hideConflicting;
                 Service.Configuration.Save();
@@ -45,7 +45,7 @@ namespace XIVSlothCombo.Window.Tabs
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("隐藏与您选择的其他连击冲突的任何连击 Hides any combos that conflict with others you have selected.");
+                ImGui.TextUnformatted("隐藏与您选择的其他连击冲突的任何连击");
                 ImGui.EndTooltip();
             }
 
@@ -71,31 +71,12 @@ namespace XIVSlothCombo.Window.Tabs
 
             #region SpecialEvent
 
-            // bool isSpecialEvent = DateTime.Now.Day == 1 && DateTime.Now.Month == 4;
-            // bool isSpecialEvent = DateTime.Now.Day == 1 && DateTime.Now.Month == 4;
-            bool slothIrl =  Service.Configuration.SpecialEvent;
-
-            // if (slothIrl)
-            // {
-            //
-            if (ImGui.Checkbox("懒惰模式 Sloth Mode!?", ref slothIrl))
-            {
-                Service.Configuration.SpecialEvent = slothIrl;
-                Service.Configuration.Save();
-            }
-            // }
-
-            // else
-            // {
-            //     Service.Configuration.SpecialEvent = false;
-            //     Service.Configuration.Save();
-            // }
-
+     
             float offset = (float)Service.Configuration.MeleeOffset;
             ImGui.PushItemWidth(75);
 
             bool inputChangedeth = false;
-            inputChangedeth |= ImGui.InputFloat("近战距离偏移量 Melee Distance Offset", ref offset);
+            inputChangedeth |= ImGui.InputFloat("近战距离偏移量", ref offset);
 
             if (inputChangedeth)
             {

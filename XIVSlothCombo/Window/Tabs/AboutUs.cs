@@ -11,7 +11,7 @@ namespace XIVSlothCombo.Window.Tabs
     {
         public static Version version = null!;
 
-        public const string Ban = "请不要去卫月频道交流此插件,包括提BUG";
+        public const string Ban = "[XIVSlothComboX]请不要去卫月频道交流此插件,包括提BUG";
         
         internal static new void Draw()
         {

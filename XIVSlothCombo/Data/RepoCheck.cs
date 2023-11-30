@@ -20,7 +20,7 @@ namespace XIVSlothCombo.Data
         {
             FileInfo? f = Service.Interface.AssemblyLocation;
             var manifest = Path.Join(f.DirectoryName, "XIVSlothCombo.json");
-
+            
             if (File.Exists(manifest))
             {
                 RepoCheck? repo = JsonConvert.DeserializeObject<RepoCheck>(File.ReadAllText(manifest));
