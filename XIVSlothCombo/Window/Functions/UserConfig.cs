@@ -1219,10 +1219,10 @@ namespace XIVSlothCombo.Window.Functions
 
             if (preset is CustomComboPreset.BLM_ST_AdvancedMode)
             {
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_InitialCast, "Fire 3 Initial Cast", "", 0);
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_InitialCast, "Blizzard 3 Initial Cast", "", 1);
+                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_InitialCast, "火 3 Initial Cast", "", 0);
+                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_InitialCast, "冰结 3 Initial Cast", "", 1);
                 ImGui.Indent();
-                UserConfig.DrawRoundedSliderFloat(3.0f, 8.0f, BLM.Config.BLM_AstralFire_Refresh, "Seconds before refreshing Astral Fire");
+                UserConfig.DrawRoundedSliderFloat(3.0f, 8.0f, BLM.Config.BLM_AstralFire_Refresh, "Seconds before refreshing 星极火");
                 ImGui.Unindent();
             }
 
@@ -1232,18 +1232,18 @@ namespace XIVSlothCombo.Window.Functions
             if (preset is CustomComboPreset.BLM_Adv_Opener)
             {
                 UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Advanced_OpenerSelection, "Standard Opener", "Uses Standard Opener.", 0);
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Advanced_OpenerSelection, "Double Transpose Opener", "Uses Fire III opener - Double Transpose variation.", 1);
+                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Advanced_OpenerSelection, "Double 星灵移位 Opener", "Uses Fire III opener - Double Transpose variation.", 1);
             }
 
             if (preset is CustomComboPreset.BLM_Adv_Rotation)
             {
                 UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_Rotation_Options, "Standard Rotation", "Uses Standard Rotation.", 0);
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_Rotation_Options, "Double Transpose Rotation", "Uses Double Transpose rotation.\nOnly works at Lv.90.", 1);
+                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_Rotation_Options, "Double 星灵移位 Rotation", "Uses Double Transpose rotation.\nOnly works at Lv.90.", 1);
 
                 if (BLM.Config.BLM_Adv_Rotation_Options == 0)
                 {
                     ImGui.Indent();
-                    UserConfig.DrawAdditionalBoolChoice(BLM.Config.BLM_Adv_Xeno_Burst, "Use Xenoglossy for burst", "Will save Xenoglossy for every minute burst window.");
+                    UserConfig.DrawAdditionalBoolChoice(BLM.Config.BLM_Adv_Xeno_Burst, "Use 异言 for burst", "Will save Xenoglossy for every minute burst window.");
                     ImGui.Unindent();
                     ImGui.Spacing();
                 }
@@ -1256,10 +1256,10 @@ namespace XIVSlothCombo.Window.Functions
                     4,
                     new string[,]
                     {
-                        { "Manafont", "Add Manafont to the rotation." },
-                        { "Sharpcast", "Add Sharpcast to the rotation." },
-                        { "Amplifier", "Add Amplifier to the rotation." },
-                        { "Ley Lines", "Add Ley Lines to the rotation." },
+                        { "魔泉", "Add Manafont to the rotation." },
+                        { "激情咏唱", "Add Sharpcast to the rotation." },
+                        { "详述", "Add Amplifier to the rotation." },
+                        { "黑魔纹", "Add Ley Lines to the rotation." },
                     });
             }
 
@@ -1269,11 +1269,11 @@ namespace XIVSlothCombo.Window.Functions
                     5,
                     new string[,]
                     {
-                        { $"Manafont", "Add Manafont to the rotation." },
-                        { "Sharpcast", "Add Sharpcast to the rotation." },
-                        { "Amplifier", "Add Amplifier to the rotation." },
-                        { "Ley Lines", "Add Ley Lines to the rotation." },
-                        { "Triplecast", "Add Triplecast to the rotation" }
+                        { "魔泉", "Add Manafont to the rotation." },
+                        { "激情咏唱", "Add Sharpcast to the rotation." },
+                        { "详述", "Add Amplifier to the rotation." },
+                        { "黑魔纹", "Add Ley Lines to the rotation." },
+                        { "三连咏唱", "Add Triplecast to the rotation" }
                     });
             }
 
@@ -1283,14 +1283,14 @@ namespace XIVSlothCombo.Window.Functions
                     4,
                     new string[,]
                     {
-                        { "Sharpcast", "Add Sharpcast." },
-                        { "Thunder", "Add Thunder I/Thunder III." },
-                        { "Firestarter", "Add Firestarter when in Astral Fire." },
-                        { "Paradox", "Add Paradox when in Umbral Ice." },
-                        { "Xenoglossy", "Add Xenoglossy.\nOne charge will be held for rotation." },
-                        { "Swiftcast", "Add Swiftcast." },
-                        { "Triplecast", "Add (pooled) Triplecast." },
-                        { "Scathe", "Add Scathe." }
+                        { "激情咏唱", "Add Sharpcast." },
+                        { "雷1/雷3", "Add Thunder I/Thunder III." },
+                        { "星极火", "Add 星极火 when in Astral 火炎." },
+                        { "悖论", "Add Paradox when in Umbral Ice." },
+                        { "异言", "Add Xenoglossy.\nOne charge will be held for rotation." },
+                        { "即刻咏唱", "Add Swiftcast." },
+                        { "三连咏唱", "Add (pooled) Triplecast." },
+                        { "崩溃", "Add Scathe." }
                     });
             }
 
@@ -1408,7 +1408,7 @@ namespace XIVSlothCombo.Window.Functions
             #region PvP Sliders
 
             if (preset == CustomComboPreset.DNCPvP_BurstMode_CuringWaltz)
-                UserConfig.DrawSliderInt(0, 90, DNCPvP.Config.DNCPvP_WaltzThreshold, "Curing Waltz HP% - caps at 90 to prevent waste.", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 90, DNCPvP.Config.DNCPvP_WaltzThreshold, "治疗之华尔兹 HP% - caps at 90 to prevent waste.", 150, SliderIncrements.Ones);
 
             #endregion
 

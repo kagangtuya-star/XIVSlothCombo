@@ -20,7 +20,7 @@ public class RaidBuff
         
         技巧舞步结束TechnicalFinish = 1822,
         
-        留空 = 10024;
+        留空 = 0;
 
 
     public static bool 爆发期()

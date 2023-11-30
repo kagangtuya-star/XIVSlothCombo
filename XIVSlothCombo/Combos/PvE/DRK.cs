@@ -207,18 +207,7 @@ namespace XIVSlothCombo.Combos.PvE
                                     }
                                 }
                             }
-
-
-
-                            // if (GetCooldownRemainingTime(血乱) >= 40 && GetCooldownRemainingTime(LivingShadow) is >= 40)
-                            // {
-                            //     if (gauge.Blood >= 50 || GetBuffStacks(Buffs.Delirium) > 0)
-                            //     {
-                            //         // Dalamud.Logging.PluginLog.Error("1");
-                            //         return 血溅;
-                            //     }
-                            // }
-
+                            
 
                             // 不用对团辅直接放
                             if (GetCooldownRemainingTime(血乱) >= 40 && GetCooldownRemainingTime(LivingShadow) is >= 40 and <= 70)
