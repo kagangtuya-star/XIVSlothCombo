@@ -46,6 +46,11 @@ public class RaidBuff
             return true;
         }
         
+        if (CustomComboFunctions.FindTargetEffectAny(连环计) is not null)
+        {
+            return true;
+        }
+        
         return false;
     }
 }

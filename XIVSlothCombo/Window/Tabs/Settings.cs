@@ -87,7 +87,7 @@ namespace XIVSlothCombo.Window.Tabs
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("检查近战距离的偏移量，对于有偏移量的功能。对于那些不希望在Boss稍微超出射程时立即使用远程攻击的人来说，这非常有用。 Offset of melee check distance for features that use it. For those who don't want to immediately use their ranged attack if the boss walks slightly out of range.");
+                ImGui.TextUnformatted("检查近战距离的偏移量，对于有偏移量的功能。对于那些不希望在Boss稍微超出射程时立即使用远程攻击的人来说，这非常有用。 ");
                 ImGui.EndTooltip();
             }
 
@@ -97,7 +97,7 @@ namespace XIVSlothCombo.Window.Tabs
 
             bool motd = Service.Configuration.HideMessageOfTheDay;
 
-            if (ImGui.Checkbox("隐藏每日资讯", ref motd))
+            if (ImGui.Checkbox("隐藏登录资讯", ref motd))
             {
                 Service.Configuration.HideMessageOfTheDay = motd;
                 Service.Configuration.Save();
@@ -106,7 +106,7 @@ namespace XIVSlothCombo.Window.Tabs
             if (ImGui.IsItemHovered())
             {
                 ImGui.BeginTooltip();
-                ImGui.TextUnformatted("当您登录时，禁用聊天中的系统提醒。Disables the Message of the Day message in your chat when you login.");
+                ImGui.TextUnformatted("当您登录时，禁用聊天中的系统提醒。");
                 ImGui.EndTooltip();
             }
             ImGui.NextColumn();
