@@ -160,6 +160,7 @@ namespace XIVSlothCombo
         private void PrintMotD()
         {
             Service.ChatGui.PrintError(AboutUs.Ban);
+            Service.ChatGui.PrintError($"[XIVSlothComboX] 和 [XIVSlothCombo]冲突，请关闭或者删掉一个");
             
             // List<Payload>? payloads = new()
             // {
