@@ -1190,7 +1190,7 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_ST_SimpleHeals_Esuna, "Stop using when below HP %. Set to Zero to disable this check");
             }
 
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_EssentialDignity)
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_EssentialDignity, "设置百分比数值");
 
@@ -1558,7 +1558,7 @@ namespace XIVSlothCombo.Window.Functions
 
             #endregion
             // ====================================================================================
-            
+
             #region MACHINIST
 
             if (preset is CustomComboPreset.MCH_ST_AdvancedMode)
@@ -1916,7 +1916,7 @@ namespace XIVSlothCombo.Window.Functions
 
             #endregion
             // ====================================================================================
-           #region SAGE
+            #region SAGE
 
             if (preset is CustomComboPreset.SGE_ST_DPS)
             {
@@ -1931,7 +1931,7 @@ namespace XIVSlothCombo.Window.Functions
                     if (SGE.Config.SGE_ST_DPS_Adv_GroupInstants)
                     {
                         ImGui.Indent();
-                        ImGui.Spacing();//Not sure why I need this, indenting did not work without it
+                        ImGui.Spacing(); //Not sure why I need this, indenting did not work without it
                         UserConfig.DrawHorizontalMultiChoice(SGE.Config.SGE_ST_DPS_Adv_GroupInstants_Addl, "Add Toxikon", "Use Toxikon when Addersting is available.", 2, 0);
                         UserConfig.DrawHorizontalMultiChoice(SGE.Config.SGE_ST_DPS_Adv_GroupInstants_Addl, "Add Dyskrasia", "Use Dyskrasia when in range of a selected enemy target.", 2, 1);
                         ImGui.Unindent();
@@ -1979,9 +1979,7 @@ namespace XIVSlothCombo.Window.Functions
                 if (SGE.Config.SGE_ST_Heal_Adv)
                 {
                     ImGui.Indent();
-                    UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_UIMouseOver,
-                        "队伍UI鼠标悬停检测",
-                        "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" + "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
+                    UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_UIMouseOver, "队伍UI鼠标悬停检测", "检测团队成员生命值和Buff，通过将鼠标悬停于小队列表.\n" + "这个功能是用来和Redirect/Reaction/etc结合使用的.（译者注：这三个好像是鼠标悬停施法插件。）");
                     ImGui.Unindent();
                 }
             }
@@ -2018,9 +2016,7 @@ namespace XIVSlothCombo.Window.Functions
             }
 
             if (preset is CustomComboPreset.SGE_AoE_Heal_Kerachole)
-                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_AoE_Heal_KeracholeTrait,
-                    "Check for Enhanced Kerachole Trait (Heal over Time)",
-                    "Enabling this will prevent Kerachole from being used when the Heal over Time trait is unavailable.");
+                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_AoE_Heal_KeracholeTrait, "Check for Enhanced Kerachole Trait (Heal over Time)", "Enabling this will prevent Kerachole from being used when the Heal over Time trait is unavailable.");
 
             if (preset is CustomComboPreset.SGE_Eukrasia)
             {
@@ -2275,10 +2271,28 @@ namespace XIVSlothCombo.Window.Functions
                 UserConfig.DrawSliderInt(0, 30, WAR.Config.WAR_SurgingRefreshRange, "Seconds remaining before refreshing Surging Tempest.");
 
             if (preset == CustomComboPreset.WAR_ST_StormsPath_Onslaught && enabled)
-                UserConfig.DrawSliderInt(0, 2, WAR.Config.WAR_KeepOnslaughtCharges, "存几层充能？（0 = 用光，一层不留）");
+                UserConfig.DrawSliderInt(0, 2, WAR.Config.WAR_KeepOnslaughtCharges, "How many charges to keep ready? (0 = Use All)");
 
             if (preset == CustomComboPreset.WAR_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, WAR.Config.WAR_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, WAR.Config.WAR_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
+
+            if (preset == CustomComboPreset.WAR_ST_StormsPath_FellCleave)
+                UserConfig.DrawSliderInt(50, 100, WAR.Config.WAR_FellCleaveGauge, "Minimum gauge to spend");
+
+            if (preset == CustomComboPreset.WAR_AoE_Overpower_Decimate)
+                UserConfig.DrawSliderInt(50, 100, WAR.Config.WAR_DecimateGauge, "Minimum gauge to spend");
+
+            if (preset == CustomComboPreset.WAR_ST_StormsPath_Infuriate)
+                UserConfig.DrawSliderInt(0, 50, WAR.Config.WAR_InfuriateSTGauge, "Use when gauge is under or equal to");
+
+            if (preset == CustomComboPreset.WAR_AoE_Overpower_Infuriate)
+                UserConfig.DrawSliderInt(0, 50, WAR.Config.WAR_InfuriateAoEGauge, "Use when gauge is under or equal to");
+
+            if (preset == CustomComboPreset.WARPvP_BurstMode_Blota)
+            {
+                UserConfig.DrawHorizontalRadioButton(WARPvP.Config.WARPVP_BlotaTiming, "Before Primal Rend", "", 0);
+                UserConfig.DrawHorizontalRadioButton(WARPvP.Config.WARPVP_BlotaTiming, "After Primal Rend", "", 1);
+            }
 
             #endregion
             // ====================================================================================

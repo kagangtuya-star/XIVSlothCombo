@@ -1,4 +1,5 @@
-﻿using XIVSlothCombo.Combos.JobHelpers.Enums;
+﻿using Dalamud.Game.ClientState.JobGauge.Types;
+using XIVSlothCombo.Combos.JobHelpers.Enums;
 using XIVSlothCombo.Combos.PvE;
 using XIVSlothCombo.CustomComboNS.Functions;
 using XIVSlothCombo.Data;
@@ -69,9 +70,8 @@ namespace XIVSlothCombo.Combos.JobHelpers
                     }
                     if (value == OpenerState.OpenerFinished)
                     {
-                        // Svc.Log.Information("Opener Finished");
+                    // Svc.Log.Information("Opener Finished");
                     }
-                    
 
                     currentState = value;
                 }

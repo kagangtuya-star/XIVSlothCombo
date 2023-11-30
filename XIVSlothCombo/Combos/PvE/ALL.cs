@@ -158,7 +158,7 @@ namespace XIVSlothCombo.Combos.PvE
                 if (actionID is Addle)
                 {
                     if (TargetHasEffectAny(Debuffs.Addle) && IsOffCooldown(Addle))
-                        return WAR.FellCleave;
+                        return WAR.裂石飞环FellCleave;
                 }
 
                 return actionID;

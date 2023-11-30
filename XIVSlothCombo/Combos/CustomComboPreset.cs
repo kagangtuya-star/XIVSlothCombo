@@ -1556,7 +1556,8 @@ namespace XIVSlothCombo.Combos
         // Last value = 7600
 
         #endregion
-
+         #region MACHINIST
+          
         #region Simple ST
 
         [ReplaceSkill(MCH.SplitShot)]
@@ -1628,6 +1629,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(MCH_ST_AdvancedMode)]
         [CustomComboInfo("Second Wind Option", "Use Second Wind when below the set HP percentage.", MCH.JobID)]
         MCH_ST_Adv_SecondWind = 8114,
+
 
         #endregion
 
@@ -1734,11 +1736,10 @@ namespace XIVSlothCombo.Combos
         [ReplaceSkill(MCH.Dismantle)]
         [CustomComboInfo("Dismantle - Tactician", "Swap dismantle with tactician when dismantle is on cooldown.", MCH.JobID)]
         MCH_DismantleTactician = 8058,
-
+        #endregion
         // Last value = 8058
 
-        #endregion
-
+      
 
         #region MONK
 
@@ -3581,7 +3582,7 @@ namespace XIVSlothCombo.Combos
         WAR_ST_StormsPath_RangedUptime = 18016,
         
         
-        [ReplaceSkill(WAR.FellCleave, WAR.Decimate)]
+        [ReplaceSkill(WAR.裂石飞环FellCleave, WAR.Decimate)]
         [CustomComboInfo("战壕与裂石飞环/地毁人亡整合", "小于等于设置距离时，将裂石飞环/地毁人亡整合到战壕", WAR.JobID, 0, "", "")]
         WAR_InfuriateFellCleave = 18018,
 
@@ -3883,7 +3884,8 @@ namespace XIVSlothCombo.Combos
 
         #endregion
 
-
+        #endregion
+        
         #region PvP Combos
 
         #region PvP GLOBAL FEATURES
@@ -4351,6 +4353,13 @@ namespace XIVSlothCombo.Combos
         [CustomComboInfo("献身选项", "Removes Blota from 爆发模式 if Primal Rend has 5 seconds or less on its cooldown.", WARPvP.JobID)]
         WARPvP_BurstMode_Blota = 128002,
 
+        
+        [SecretCustomCombo]
+        [ParentCombo(WARPvP_BurstMode)]
+        [CustomComboInfo("Primal Rend Option", "Adds Primal Rend to Burst Mode.", WARPvP.JobID)]
+        WARPvP_BurstMode_PrimalRend = 128004,
+
+        
         // Last value = 128002
 
         #endregion

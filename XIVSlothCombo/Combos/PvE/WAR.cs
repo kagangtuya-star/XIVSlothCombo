@@ -19,10 +19,10 @@ namespace XIVSlothCombo.Combos.PvE
             StormsPath = 42,
             StormsEye = 45,
             Tomahawk = 46,
-            InnerBeast = 49,
+            原初之魂InnerBeast = 49,
             SteelCyclone = 51,
             Infuriate = 52,
-            FellCleave = 3549,
+            裂石飞环FellCleave = 3549,
             Decimate = 3550,
             Upheaval = 7387,
             InnerRelease = 7389,
@@ -38,7 +38,7 @@ namespace XIVSlothCombo.Combos.PvE
         public static class Buffs
         {
             public const ushort
-                InnerRelease = 1177,
+                原初的解放InnerRelease = 1177,
                 SurgingTempest = 2677,
                 NascentChaos = 1897,
                 PrimalRendReady = 2624,
@@ -125,12 +125,12 @@ namespace XIVSlothCombo.Combos.PvE
                             if (IsNotEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange))
                                 return PrimalRend;
                         }
-
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(InnerBeast))
+                        
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(原初之魂InnerBeast))
                         {
-                            if (HasEffect(Buffs.InnerRelease) || (HasEffect(Buffs.NascentChaos) && InnerChaos.LevelChecked()))
-                                return OriginalHook(InnerBeast);
-
+                            if (HasEffect(Buffs.原初的解放InnerRelease) || (HasEffect(Buffs.NascentChaos) && InnerChaos.LevelChecked()))
+                                return OriginalHook(原初之魂InnerBeast);
+                        
                             if (HasEffect(Buffs.NascentChaos) && !InnerChaos.LevelChecked())
                                 return OriginalHook(Decimate);
                         }
@@ -139,8 +139,8 @@ namespace XIVSlothCombo.Combos.PvE
 
                     if (comboTime > 0)
                     {
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(InnerBeast) && (!LevelChecked(StormsEye) || HasEffectAny(Buffs.SurgingTempest)) && gauge >= fellCleaveGaugeSpend)
-                            return OriginalHook(InnerBeast);
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(原初之魂InnerBeast) && (!LevelChecked(StormsEye) || HasEffectAny(Buffs.SurgingTempest)) && gauge >= fellCleaveGaugeSpend)
+                            return OriginalHook(原初之魂InnerBeast);
 
                         if (lastComboMove == HeavySwing && LevelChecked(Maim))
                         {
@@ -235,7 +235,7 @@ namespace XIVSlothCombo.Combos.PvE
                                 return PrimalRend;
                         }
 
-                        if (IsEnabled(CustomComboPreset.WAR_AoE_Overpower_Decimate) && LevelChecked(SteelCyclone) && (gauge >= decimateGaugeSpend || HasEffect(Buffs.InnerRelease) || HasEffect(Buffs.NascentChaos)))
+                        if (IsEnabled(CustomComboPreset.WAR_AoE_Overpower_Decimate) && LevelChecked(SteelCyclone) && (gauge >= decimateGaugeSpend || HasEffect(Buffs.原初的解放InnerRelease) || HasEffect(Buffs.NascentChaos)))
                             return OriginalHook(SteelCyclone);
                     }
 
@@ -278,7 +278,7 @@ namespace XIVSlothCombo.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID == InnerBeast || actionID == SteelCyclone)
+                if (actionID == 原初之魂InnerBeast || actionID == SteelCyclone)
                 {
 
                     if (LevelChecked(PrimalRend) && HasEffect(Buffs.PrimalRendReady))
@@ -300,12 +300,12 @@ namespace XIVSlothCombo.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
             {
-                if (actionID is InnerBeast or FellCleave or SteelCyclone or Decimate)
+                if (actionID is 原初之魂InnerBeast or 裂石飞环FellCleave or SteelCyclone or Decimate)
                 {
                     var rageGauge = GetJobGauge<WARGauge>();
                     var rageThreshold = PluginConfiguration.GetCustomIntValue(Config.WAR_InfuriateRange);
                     var hasNascent = HasEffect(Buffs.NascentChaos);
-                    var hasInnerRelease = HasEffect(Buffs.InnerRelease);
+                    var hasInnerRelease = HasEffect(Buffs.原初的解放InnerRelease);
 
                     if (InCombat() && rageGauge.BeastGauge <= rageThreshold && ActionReady(Infuriate) && !hasNascent
                     && ((!hasInnerRelease) || IsNotEnabled(CustomComboPreset.WAR_InfuriateFellCleave_IRFirst)))
