@@ -2,8 +2,7 @@
 ### 群   号：544685806
 ### 来点好兄弟一起汉化(用爱发电全靠自觉)
 翻译相关：
-[UserConfig](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothCombo/Window/Functions/UserConfig.cs)
-Translatezh_CN.cs?(摸鱼中暂时没时间整理)
+[UserConfig](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothCombo/Window/Functions/UserConfig.cs)、Translatezh_CN.cs?(摸鱼中暂时没时间整理)
 
 ### 手动安装（推荐）
 [下载](https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/XIVSlothCombo/latest.zip)
