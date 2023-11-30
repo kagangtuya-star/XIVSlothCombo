@@ -238,10 +238,10 @@ namespace XIVSlothCombo.Core
         /// <summary> Gets or sets an array of 4 ability IDs to interact with the <see cref="CustomComboPreset.DNC_DanceComboReplacer"/> combo. </summary>
         public uint[] DancerDanceCompatActionIDs { get; set; } = new uint[]
         {
-            DNC.ÆÙĞºCascade,
-            DNC.°Ù»¨ÕùÑŞFlourish,
-            DNC.ÉÈÎèĞòFanDance1,
-            DNC.ÉÈÎèÆÆFanDance2,
+            DNC.ç€‘æ³»Cascade,
+            DNC.ç™¾èŠ±äº‰è‰³Flourish,
+            DNC.æ‰‡èˆåºFanDance1,
+            DNC.æ‰‡èˆç ´FanDance2,
         };
 
         #endregion

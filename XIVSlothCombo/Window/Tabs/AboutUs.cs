@@ -1,17 +1,24 @@
-﻿using Dalamud.Interface.Colors;
+﻿using System;
+using Dalamud.Interface.Colors;
 using Dalamud.Utility;
 using ImGuiNET;
 using System.Numerics;
+using System.Reflection;
 
 namespace XIVSlothCombo.Window.Tabs
 {
     internal class AboutUs : ConfigWindow
     {
+        public static Version version = null!;
         internal static new void Draw()
         {
+            version ??= Assembly.GetExecutingAssembly().GetName().Version!;
+            
+            PvEFeatures.HasToOpenJob = true;
+
             ImGui.BeginChild("About", new Vector2(0, 0), true);
 
-            // ImGui.TextColored(ImGuiColors.ParsedGreen, $"v3.0.18.1\n- with love from Team Sloth.");
+            ImGui.TextColored(ImGuiColors.ParsedGreen, $"XIVSlothCombo - v{version}");
             // ImGui.Spacing();
             // ImGui.Spacing();
             // ImGui.Spacing();

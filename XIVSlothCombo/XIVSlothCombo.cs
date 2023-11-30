@@ -61,7 +61,8 @@ namespace XIVSlothCombo
             Service.ComboCache = new CustomComboCache();
             Service.IconReplacer = new IconReplacer();
             ActionWatching.Enable();
-
+            Combos.JobHelpers.AST.Init();
+            
             configWindow = new();
 
             Service.Interface.UiBuilder.Draw += DrawUI;
@@ -202,7 +203,10 @@ namespace XIVSlothCombo
             Service.IconReplacer?.Dispose();
             Service.ComboCache?.Dispose();
             ActionWatching.Dispose();
-
+            
+          
+            Combos.JobHelpers.AST.Dispose();
+            
             // Service.Framework.Update -= OnFramework;
 
             Service.ClientState.Login -= PrintLoginMessage;

@@ -45,6 +45,11 @@ namespace XIVSlothCombo.Window.Tabs
                     {
                         ImGui.GetStateStorage().SetInt(ImGui.GetID(otherJob), 0);
                     }
+                    
+                    if (jobName != groupedPresets.First().Key)
+                    {
+                        ImGui.GetStateStorage().SetInt(ImGui.GetID("All Jobs"), 0);
+                    }
 
                     DrawHeadingContents(jobName, i);
                 }
