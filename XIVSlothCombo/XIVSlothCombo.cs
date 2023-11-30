@@ -155,6 +155,22 @@ namespace XIVSlothCombo
 
         private void PrintMotD()
         {
+            Service.ChatGui.Print(AboutUs.Ban);
+            
+            // List<Payload>? payloads = new()
+            // {
+            //     starterMotd,
+            //     EmphasisItalicPayload.ItalicsOn,
+            //     new TextPayload(AboutUs.Ban),
+            //     EmphasisItalicPayload.ItalicsOff
+            // };
+            //
+            // Service.ChatGui.PrintChat(new XivChatEntry
+            // {
+            // Message = new SeString(payloads),
+            // Type = XivChatType.Echo
+            // });
+            
             // try
             // {
             //     using HttpResponseMessage? motd = Dalamud.Utility.Util.HttpClient.GetAsync("https://raw.githubusercontent.com/Nik-Potokar/XIVSlothCombo/main/res/motd.txt").Result;
