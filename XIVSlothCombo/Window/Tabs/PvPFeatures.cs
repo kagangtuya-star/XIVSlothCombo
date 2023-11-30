@@ -18,7 +18,7 @@ namespace XIVSlothCombo.Window.Tabs
             ImGui.Text($"{FontAwesomeIcon.SkullCrossbones.ToIconString()}");
             ImGui.PopFont();
             ImGui.SameLine();
-            ImGui.TextUnformatted("These are PvP features. They will only work in PvP-enabled zones.");
+            ImGui.TextUnformatted("PVP功能只能在PVP用");
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
             ImGui.Text($"{FontAwesomeIcon.SkullCrossbones.ToIconString()}");
@@ -32,7 +32,8 @@ namespace XIVSlothCombo.Window.Tabs
 
             foreach (string? jobName in groupedPresets.Keys)
             {
-                if (!groupedPresets[jobName].Any(x => PluginConfiguration.IsSecret(x.Preset))) continue;
+                if (!groupedPresets[jobName].Any(x => PluginConfiguration.IsSecret(x.Preset))) 
+                    continue;
                 string header = jobName;
                 if (jobName == groupedPresets.First().Key)
                 {

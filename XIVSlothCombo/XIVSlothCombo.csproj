@@ -31,7 +31,7 @@
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<OutputPath>bin\Release</OutputPath>
+		<OutputPath>..\release</OutputPath>
 		<NoWarn>CS1591</NoWarn>
 	</PropertyGroup>
 
