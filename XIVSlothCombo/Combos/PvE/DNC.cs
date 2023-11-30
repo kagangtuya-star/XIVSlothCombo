@@ -599,7 +599,13 @@ namespace XIVSlothCombo.Combos.PvE
 
                     if (canWeave)
                     {
-                        // Feathers
+                        // 低等级循环
+                        if (!LevelChecked(扇舞急FanDance3)&& gauge.Feathers > 0)
+                        {
+                            return 扇舞序FanDance1;
+                        }
+
+
                         if (LevelChecked(扇舞破FanDance2))
                         {
                             int minFeathers = LevelChecked(技巧舞步TechnicalStep)
@@ -607,33 +613,35 @@ namespace XIVSlothCombo.Combos.PvE
                                 : 0;
 
 
-                            if (!WasLastAction(四色技巧舞步结束TechnicalFinish4) && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && GetCooldownRemainingTime(进攻之探戈Devilment) < 118)
-                                // if (!WasLastAction(四色技巧舞步结束TechnicalFinish4) )
+                            if (LevelChecked(技巧舞步TechnicalStep))
                             {
-                                if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && GetCooldownRemainingTime(技巧舞步TechnicalStep) > 3 )
+                                if (!WasLastAction(四色技巧舞步结束TechnicalFinish4) && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && GetCooldownRemainingTime(进攻之探戈Devilment) < 118)
                                 {
-                                    if ( HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) )
-                                        return 扇舞急FanDance3; 
-                                    
-                                    if (HasEffect(Buffs.扇舞_终FourFoldFanDance))
-                                        return 扇舞终FanDance4;
-                                    
-                                    if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !WasLastAction(提拉纳Tillana))
+                                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && GetCooldownRemainingTime(技巧舞步TechnicalStep) > 3 )
                                     {
-                                        if (gauge.Feathers > minFeathers ||
-                                            (HasEffect(Buffs.技巧舞步结束TechnicalFinish) && gauge.Feathers > 0)) 
-                                            return 扇舞破FanDance2;
+                                        if ( HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) )
+                                            return 扇舞急FanDance3; 
+                                    
+                                        if (HasEffect(Buffs.扇舞_终FourFoldFanDance))
+                                            return 扇舞终FanDance4;
+                                    
+                                        if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !WasLastAction(提拉纳Tillana))
+                                        {
+                                            if (gauge.Feathers > minFeathers ||
+                                                (HasEffect(Buffs.技巧舞步结束TechnicalFinish) && gauge.Feathers > 0)) 
+                                                return 扇舞序FanDance1;
                             
-                                        if (RaidBuff.爆发期() && gauge.Feathers > 0)
-                                            return 扇舞破FanDance2;
+                                            if (RaidBuff.爆发期() && gauge.Feathers > 0)
+                                                return 扇舞序FanDance1;
+                                        }
                                     }
+                                    if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
+                                        return 扇舞急FanDance3;
                                 }
-
-
-                                if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
-                                    return 扇舞急FanDance3;
-                                
                             }
+                            
+                            
+                         
                             
                         }
                         
@@ -676,8 +684,7 @@ namespace XIVSlothCombo.Combos.PvE
                         ? (GetCooldownRemainingTime(百花争艳Flourish) > 4) 
                         : true;
                     
-                    if (standardStepReady && 
-                        IsEnabled(CustomComboPreset.DNC_DT_Simple_SS) && burstProtected && flourishProtected)
+                    if (standardStepReady && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS) && burstProtected && flourishProtected)
                         return 标准舞步StandardStep;
                     
                     if (LevelChecked(坠喷泉Fountainfall) && flow)

@@ -597,6 +597,12 @@ namespace XIVSlothCombo
                             autoActionId = DNC.瀑泻Cascade;
                             break;
                         }
+                        
+                        case MCH.JobID:
+                        {
+                            autoActionId = MCH.SplitShot;
+                            break;
+                        }
 
                     }
 

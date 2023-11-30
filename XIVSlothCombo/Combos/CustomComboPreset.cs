@@ -733,7 +733,7 @@ namespace XIVSlothCombo.Combos
         #region Simple Dancer (Double Targets)
 
         [ReplaceSkill(DNC.瀑泻Cascade)]
-        [ConflictingCombos(DNC_ST_MultiButton, DNC_AoE_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment, DNC_ST_SimpleMode)]
+        [ConflictingCombos(DNC_ST_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment, DNC_ST_SimpleMode)]
         [CustomComboInfo("舞者单体无脑模式[推荐]", "Single button, double targets. Includes songs, flourishes and overprotections.\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 0, "", "")]
         DNC_DT_SimpleMode = 4065,
 
