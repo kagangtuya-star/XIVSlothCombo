@@ -2,10 +2,10 @@
   {
     "Author": "Aki, k-kz, ele-starshade, damolitionn, Taurenkey, Augporto, grimgal, Genesis-Nova, Tartarga",
     "Name": "XIVSlothCombo",
-    "Punchline": "CN6.4 update PLD DNC",
-    "Description": "CN6.4 update  PLD DNC",
+    "Punchline": "update  BLM DRG MCH AST",
+    "Description": "update  BLM DRG MCH AST",
     "InternalName": "XIVSlothCombo",
-    "AssemblyVersion": "3.0.18.13",
+    "AssemblyVersion": "3.0.18.14",
     "RepoUrl": "https://github.com/44451516/XIVSlothCombo/",
     "ApplicableVersion": "any",
     "DalamudApiLevel": 8,

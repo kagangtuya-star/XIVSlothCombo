@@ -91,6 +91,7 @@ namespace XIVSlothCombo.Combos
         ALL_IslandSanctuary_Sprint = 100093,
 
         #region Global Tank Features
+
         [CustomComboInfo("全局防护职业功能", "防护职业的通用功能和选项\\n取消勾选这个选项不会禁用里面的功能。", ADV.JobID)]
         ALL_Tank_Menu = 100099,
 
@@ -103,9 +104,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(ALL_Tank_Menu)]
         [CustomComboInfo("防护：血仇防顶", "当目标已被赋予雪仇效果时，将雪仇替换为飞石", ADV.JobID)]
         ALL_Tank_Reprisal = 100001,
+
         #endregion
 
         #region Global Healer Features
+
         [CustomComboInfo("全局治疗职业功能", "治疗职业的通用功能和选项\\n取消勾选这个选项不会禁用里面的功能。", ADV.JobID)]
         ALL_Healer_Menu = 100098,
 
@@ -114,9 +117,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(ALL_Healer_Menu)]
         [CustomComboInfo("治疗：复活功能", "将复活替换为即刻咏唱", ADV.JobID)]
         ALL_Healer_Raise = 100010,
+
         #endregion
 
         #region Global Magical Ranged Features
+
         [CustomComboInfo("全局远程魔法进攻职业功能", "远程魔法进攻职业的通用功能和选项\\n取消勾选这个选项不会禁用里面的功能。", ADV.JobID)]
         ALL_Caster_Menu = 100097,
 
@@ -130,9 +135,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(ALL_Caster_Menu)]
         [CustomComboInfo("远程魔法进攻：复活功能", "将复活替换为即刻咏唱（赤复活替换为连续咏唱）", ADV.JobID)]
         ALL_Caster_Raise = 100021,
+
         #endregion
 
         #region Global Melee Features
+
         [CustomComboInfo("全局近战进攻职业功能", "近战进攻职业功能的通用功能和选项\\n取消勾选这个选项不会禁用里面的功能。", ADV.JobID)]
         ALL_Melee_Menu = 100096,
 
@@ -149,6 +156,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region Global Ranged Physical Features
+
         [CustomComboInfo("全局物理远程职业功能", "物理远程职业功能的通用功能和选项\\n取消勾选这个选项不会禁用里面的功能。", ADV.JobID)]
         ALL_Ranged_Menu = 100095,
 
@@ -161,7 +169,6 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(ALL_Ranged_Menu)]
         [CustomComboInfo("物理远程进攻：打断选项", "当目标可被打断时，使用伤头代替伤足", ADV.JobID)]
         ALL_Ranged_Interrupt = 100041,
-
 
         #endregion
 
@@ -178,6 +185,7 @@ namespace XIVSlothCombo.Combos
         #region ASTROLOGIAN
 
         #region DPS
+
         [ReplaceSkill(AST.Malefic, AST.Malefic2, AST.Malefic3, AST.Malefic4, AST.FallMalefic, AST.Combust, AST.Combust2, AST.Combust3, AST.Gravity, AST.Gravity2)]
         [CustomComboInfo("续dot", "用以下选项替换煞星或烧灼", AST.JobID, 0, "", "")]
         AST_ST_DPS = 1004,
@@ -226,9 +234,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(AST_ST_DPS)]
         [CustomComboInfo("王冠之领主选项", "循环加入王冠之领主", AST.JobID, 10, "", "")]
         AST_DPS_LazyLord = 1014,
+
         #endregion
 
         #region Healing
+
         [ReplaceSkill(AST.Benefic2)]
         [CustomComboInfo("简易治疗（单目标）", "", AST.JobID, 2)]
         AST_ST_SimpleHeals = 1023,
@@ -272,9 +282,11 @@ namespace XIVSlothCombo.Combos
         [ReplaceSkill(AST.Benefic2)]
         [CustomComboInfo("福星降级", "如果福星还没学会或用不了，将福星替换为吉星", AST.JobID, 4, "", "")]
         AST_Benefic = 1002,
+
         #endregion
 
         #region Utility
+
         [ReplaceSkill(All.Swiftcast)]
         [ConflictingCombos(ALL_Healer_Raise)]
         [CustomComboInfo("替代性的复活功能", "自动把即刻咏唱改为生辰", AST.JobID, 5, "", "")]
@@ -293,6 +305,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region Cards
+
         [ReplaceSkill(AST.Play)]
         [CustomComboInfo("用出卡替换抽卡", "当没有抽取到奥秘卡时，自动将出卡替换为抽卡。", AST.JobID, 6, "", "")]
         AST_Cards_DrawOnPlay = 1000,
@@ -300,7 +313,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(AST_Cards_DrawOnPlay)]
         [CustomComboInfo("重抽功能", "当你抽到星标重复的卡且重抽技能可用时，将抽卡替换为重抽", AST.JobID)]
         AST_Cards_Redraw = 1032,
-        
+
         [ReplaceSkill(AST.Draw)]
         [CustomComboInfo("Redraw on Draw", "如果你有重抽BUFF,抽卡变成重抽", AST.JobID)]
         AST_Cards_RedrawStandalone = 1040,
@@ -317,6 +330,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(AST_Cards_QuickTargetCards)]
         [CustomComboInfo("将坦克和奶妈加入自动发牌目标选择", "如果没有 DPS 可选时选择坦克和奶妈", AST.JobID)]
         AST_Cards_QuickTargetCards_TargetExtra = 1031,
+
         #endregion
 
         // Last value = 1039
@@ -324,28 +338,59 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region BLACK MAGE
-        [ReplaceSkill(BLM.Transpose)]
-        [CustomComboInfo("灵极魂/星灵移位功能", "当灵极魂可用时将星灵移位替换为灵极魂。", BLM.JobID, 0, "", "")]
-        BLM_Mana = 2001,
-
-        [ReplaceSkill(BLM.LeyLines)]
-        [CustomComboInfo("魔纹步功能", "使用黑魔纹后将其替换为魔纹步。", BLM.JobID, 0, "", "")]
-        BLM_LeyLines = 2002,
-
-        [ReplaceSkill(BLM.Blizzard, BLM.Freeze)]
-        [CustomComboInfo("冰1/2/3", "当自身没有灵极冰状态时替换冰结为冰封，根据自身等级自动替换玄冰为冰冻。", BLM.JobID, 0, "", "")]
-        BLM_Blizzard = 2003,
 
         [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_SimpleMode, BLM_Simple_Transpose, BLM_Paradox)]
-        [CustomComboInfo("异言功能", "当异言可用时替换崩溃为异言。", BLM.JobID, 0, "", "")]
-        BLM_ScatheXeno = 2004,
+        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_AdvancedMode, BLM_ST_AdvancedMode)]
+        [CustomComboInfo("标准循环", "将崩溃整合为一键单体标准循环。", BLM.JobID, -3, "", "")]
+        BLM_ST_SimpleMode = 2012,
+
+        #region Advanced ST
 
         [ReplaceSkill(BLM.Fire)]
-        [CustomComboInfo("火炎/爆炎功能", "当自身没有星极火状态或使用火起手时，用爆炎替换火炎。", BLM.JobID, 0, "", "")]
-        BLM_Fire_1to3 = 2005,
+        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID, -9, "", "")]
+        BLM_ST_AdvancedMode = 2021,
 
-        [ParentCombo(BLM_SimpleMode)]
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Thunder I/III Option", "Adds Thunder I/Thunder III when the debuff isn't present or is expiring.", BLM.JobID)]
+        BLM_ST_Adv_Thunder = 2029,
+
+        [ParentCombo(BLM_ST_Adv_Thunder)]
+        [CustomComboInfo("Thundercloud Spender Option", "Spends Thundercloud as soon as possible rather than waiting until Thunder is expiring.", BLM.JobID)]
+        BLM_ST_Adv_Thunder_ThunderCloud = 2030,
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Umbral Soul Option", "Uses Transpose/Umbral Soul when no target is selected.", BLM.JobID, 10, "", "")]
+        BLM_Adv_UmbralSoul = 2035,
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Movement Options", "Choose options to be used during movement.", BLM.JobID)]
+        BLM_Adv_Movement = 2036,
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Triplecast/Swiftcast Option", "Adds Triplecast/Swiftcast to the rotation.", BLM.JobID, -8, "", "")]
+        BLM_Adv_Casts = 2039,
+
+        [ParentCombo(BLM_Adv_Casts)]
+        [CustomComboInfo("Pool Triplecast Option", "Keep one Triplecast charge for movement.", BLM.JobID)]
+        BLM_Adv_Triplecast_Pooling = 2040,
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Cooldown Options", "Select which cooldowns to add to the rotation.", BLM.JobID, -8, "", "")]
+        BLM_Adv_Cooldowns = 2042,
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Opener Option", "Adds the Lv.90 opener." + "\nWill default to the Standard opener when nothing is selected.", BLM.JobID, -10, "", "")]
+        BLM_Adv_Opener = 2043,
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Rotation Option", "Choose which rotation to use." + "\nWill default to the Standard rotation when nothing is selected.", BLM.JobID, -9, "", "")]
+        BLM_Adv_Rotation = 2045,
+
+        #endregion
+
+
+        [ParentCombo(BLM_ST_SimpleMode)]
         [CustomComboInfo("雷云功能", "当自身存在雷云状态且目标身上没有dot存在或dot即将结束时，自动插入闪雷/暴雷.", BLM.JobID, 0, "", "")]
         BLM_Thunder = 2006,
 
@@ -353,95 +398,44 @@ namespace XIVSlothCombo.Combos
         [CustomComboInfo("简易 AoE 功能", "将核爆整合为一键AoE循环。", BLM.JobID, -1, "", "")]
         BLM_AoE_SimpleMode = 2008,
 
-        [ParentCombo(BLM_Thunder)]
-        [CustomComboInfo("闪雷/暴雷功能", "当目标身上没有dot存在或dot即将结束时，自动插入闪雷/暴雷.", BLM.JobID, 0, "", "")]
-        BLM_ThunderUptime = 2011,
+        #region Advanced AoE
 
-        [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_ScatheXeno, BLM_Simple_Transpose, BLM_Paradox)]
-        [CustomComboInfo("标准循环", "将崩溃整合为一键单体标准循环。", BLM.JobID, -3, "", "")]
-        BLM_SimpleMode = 2012,
+        [ReplaceSkill(BLM.Blizzard2, BLM.HighBlizzard2)]
+        [ConflictingCombos(BLM_AoE_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - AoE", "Replaces Blizzard II with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID, -8, "", "")]
+        BLM_AoE_AdvancedMode = 2054,
 
-        [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("冷却选项", "Adds Manafont, Sharpcast, Amplifier onto the Simple BLM feature.", BLM.JobID, 0, "", "")]
-        BLM_Simple_Buffs = 2013,
+        [ParentCombo(BLM_AoE_AdvancedMode)]
+        [CustomComboInfo("Thunder Uptime Option", "Adds Thunder II/Thunder IV during Umbral Ice.", BLM.JobID, 1, "", "")]
+        BLM_AoE_Adv_ThunderUptime = 2055,
 
-        [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("黑魔纹选项", "加入黑魔纹至一键循环.", BLM.JobID, 0, "", "")]
-        BLM_Simple_Buffs_LeyLines = 2014,
+        [ParentCombo(BLM_AoE_Adv_ThunderUptime)]
+        [CustomComboInfo("Uptime in Astral Fire", "Maintains uptime during Astral Fire.", BLM.JobID, 1, "", "")]
+        BLM_AoE_Adv_ThunderUptime_AstralFire = 2056,
 
-        [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("瞬发选项", "加入三连咏唱至一键循环.", BLM.JobID, 0, "", "")]
-        BLM_Simple_Casts = 2015,
+        [ParentCombo(BLM_AoE_AdvancedMode)]
+        [CustomComboInfo("Foul Option", "Adds Foul when available during Astral Fire.", BLM.JobID, 2, "", "")]
+        BLM_AoE_Adv_Foul = 2044,
 
-        [ParentCombo(BLM_Simple_Casts)]
-        [CustomComboInfo("保留瞬发选项", "保留即刻咏唱和一层三连咏唱，用于在移动时瞬发技能。", BLM.JobID, 0, "", "")]
-        BLM_Simple_Casts_Pooling = 2016,
+        [ParentCombo(BLM_AoE_AdvancedMode)]
+        [CustomComboInfo("Umbral Soul Option", "Use Transpose/Umbral Soul when no target is selected.", BLM.JobID, 99, "", "")]
+        BLM_AoE_Adv_UmbralSoul = 2049,
 
-        [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("保留异言选项", "一键循环保留一个异言便于走位", BLM.JobID, 0, "", "")]
-        BLM_Simple_XenoPooling = 2017,
-
-        [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("火起手", "使用火起手。", BLM.JobID, 0, "", "")]
-        BLM_Simple_Opener = 2018,
-
-        [ParentCombo(BLM_Simple_Opener)]
-        [CustomComboInfo("火起手+单三连咏唱", "在火起手中只使用一层三连咏唱.", BLM.JobID, 0, "", "")]
-        BLM_Simple_OpenerAlternate = 2019,
+        [ParentCombo(BLM_AoE_AdvancedMode)]
+        [CustomComboInfo("Cooldown Options", "Select which cooldowns to add to the rotation.", BLM.JobID, 1, "", "")]
+        BLM_AoE_Adv_Cooldowns = 2052,
 
         [ParentCombo(BLM_AoE_SimpleMode)]
         [CustomComboInfo("秽浊/魔泉 核爆 功能", "当自身处于星极火状态且秽浊可用时插入秽浊，在秽浊后插入魔泉以便再使用一次核爆。", BLM.JobID, 0, "", "")]
         BLM_AoE_Simple_Foul = 2020,
 
-        [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_ScatheXeno, BLM_SimpleMode, BLM_Paradox)]
-        [CustomComboInfo("星灵循环", "将崩溃整合为一键星灵循环（需要90级）。", BLM.JobID, -2, "", "")]
-        BLM_Simple_Transpose = 2021,
+        #endregion
 
-        [ParentCombo(BLM_Simple_Transpose)]
-        [CustomComboInfo("保留三连咏唱选项", "保留一层三连咏唱用于移动时瞬发技能.", BLM.JobID, 0, "", "")]
-        BLM_Simple_Transpose_Pooling = 2022,
 
-        [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_ScatheXeno, BLM_SimpleMode, BLM_Simple_Transpose)]
-        [CustomComboInfo("悖论循环", "将崩溃整合为悖论循环（需要90级）。\\n它的读条数很少，但比标准循环的伤害低 9-13%%。", BLM.JobID, -2, "", "")]
-        BLM_Paradox = 2023,
-
-        [ParentCombo(BLM_Simple_Transpose)]
-        [CustomComboInfo("黑魔纹选项", "在星灵循环中插入黑魔纹。", BLM.JobID, 0, "", "")]
-        BLM_Simple_Transpose_LeyLines = 2024,
-
-        [ParentCombo(BLM_Paradox)]
-        [CustomComboInfo("黑魔纹选项", "在悖论循环中插入黑魔纹。", BLM.JobID, 0, "", "")]
-        BLM_Paradox_LeyLines = 2025,
-
-        [ParentCombo(BLM_SimpleMode)]
-        [CustomComboInfo("瞬发走位选项", "移动时自动插入即刻咏唱/三连咏唱瞬发技能。", BLM.JobID, 0, "", "")]
-        BLM_Simple_CastMovement = 2026,
-
-        [ParentCombo(BLM_Simple_CastMovement)]
-        [CustomComboInfo("异言走位选项", "移动时自动插入异言。", BLM.JobID, 0, "", "")]
-        BLM_Simple_CastMovement_Xeno = 2027,
-
-        [ParentCombo(BLM_Simple_CastMovement)]
-        [CustomComboInfo("崩溃走位选项", "移动时自动插入崩溃。", BLM.JobID, 0, "", "")]
-        BLM_Simple_CastMovement_Scathe = 2028,
-
-        [ParentCombo(BLM_Simple_Transpose)]
-        [CustomComboInfo("雷云功能", "当自身存在雷云状态且目标身上没有dot存在或dot即将结束时，自动插入闪雷/暴雷.", BLM.JobID, 0, "", "")]
-        BLM_TransposeThunder = 2029,
-
-        [ParentCombo(BLM_TransposeThunder)]
-        [CustomComboInfo("闪雷/暴雷功能", "当目标身上没有dot存在或dot即将结束时，自动插入闪雷/暴雷.", BLM.JobID, 0, "", "")]
-        BLM_TransposeThunderUptime = 2030,
-
-        [ReplaceSkill(BLM.AetherialManipulation)]
-        [CustomComboInfo("以太步特性", "当自身不在魔纹步范围内且站立不动时，把以太步替换为魔纹步", BLM.JobID, 0, "", "")]
-        BLM_AetherialManipulation = 2031,
+        #region Variant
 
         [Variant]
-        [VariantParent(BLM_SimpleMode, BLM_AoE_SimpleMode)]
+        [VariantParent(BLM_ST_SimpleMode, BLM_AoE_SimpleMode)]
         [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", BLM.JobID)]
         BLM_Variant_Rampart = 2032,
 
@@ -450,14 +444,42 @@ namespace XIVSlothCombo.Combos
         BLM_Variant_Raise = 2033,
 
         [Variant]
-        [VariantParent(BLM_SimpleMode, BLM_AoE_SimpleMode)]
+        [VariantParent(BLM_ST_SimpleMode, BLM_AoE_SimpleMode)]
         [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", BLM.JobID)]
         BLM_Variant_Cure = 2034,
 
+        #endregion
+
+        #region Miscellaneous
+
+        [ReplaceSkill(BLM.Transpose)]
+        [CustomComboInfo("灵极魂/星灵移位功能", "当灵极魂可用时将星灵移位替换为灵极魂。", BLM.JobID, 0, "", "")]
+        BLM_UmbralSoul = 2001,
+
+        [ReplaceSkill(BLM.LeyLines)]
+        [CustomComboInfo("魔纹步功能", "使用黑魔纹后将其替换为魔纹步。", BLM.JobID, 0, "", "")]
+        BLM_Between_The_LeyLines = 2002,
+
+        [ReplaceSkill(BLM.Blizzard, BLM.Freeze)]
+        [CustomComboInfo("冰1/2/3", "当自身没有灵极冰状态时替换冰结为冰封，根据自身等级自动替换玄冰为冰冻。", BLM.JobID, 0, "", "")]
+        BLM_Blizzard_1to3 = 2003,
+
+
         [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_SimpleMode, BLM_Simple_Transpose, BLM_Paradox)]
-        [CustomComboInfo("自定义循环", "将崩溃整合为单体自定义循环。", BLM.JobID, -3, "", "")]
-        BLM_Zimo = 2500,
+        [ConflictingCombos(BLM_ST_SimpleMode, BLM_ST_AdvancedMode)]
+        [CustomComboInfo("异言功能", "当异言可用时替换崩溃为异言。", BLM.JobID, 0, "", "")]
+        BLM_Scathe_Xeno = 2004,
+
+        [ReplaceSkill(BLM.Fire)]
+        [CustomComboInfo("火炎/爆炎功能", "当自身没有星极火状态或使用火起手时，用爆炎替换火炎。", BLM.JobID, 0, "", "")]
+        BLM_Fire_1to3 = 2005,
+
+
+        [ReplaceSkill(BLM.AetherialManipulation)]
+        [CustomComboInfo("Aetherial Manipulation Feature", "Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still.", BLM.JobID)]
+        BLM_Aetherial_Manipulation = 2046,
+
+        #endregion
         // Last value = 2034
 
         #endregion
@@ -706,145 +728,148 @@ namespace XIVSlothCombo.Combos
 
         #endregion
 
-         #region DANCER
+        #region DANCER
 
-         #region Simple Dancer (Double Targets)
+        #region Simple Dancer (Double Targets)
 
-         [ReplaceSkill(DNC.瀑泻Cascade)]
-         [ConflictingCombos(DNC_ST_MultiButton, DNC_AoE_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment, DNC_ST_SimpleMode)]
-         [CustomComboInfo("舞者单体无脑模式[推荐]", "Single button, double targets. Includes songs, flourishes and overprotections.\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 0, "", "")]
-         DNC_DT_SimpleMode = 4065,
+        [ReplaceSkill(DNC.瀑泻Cascade)]
+        [ConflictingCombos(DNC_ST_MultiButton, DNC_AoE_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment, DNC_ST_SimpleMode)]
+        [CustomComboInfo("舞者单体无脑模式[推荐]", "Single button, double targets. Includes songs, flourishes and overprotections.\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 0, "", "")]
+        DNC_DT_SimpleMode = 4065,
 
-         [ParentCombo(DNC_DT_SimpleMode)]
-         [CustomComboInfo("无脑模式_标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 0, "", "")]
-         DNC_DT_Simple_SS = 4066,
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("无脑模式_标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 0, "", "")]
+        DNC_DT_Simple_SS = 4066,
 
-         [ParentCombo(DNC_DT_SimpleMode)]
-         [CustomComboInfo("无脑模式_技巧舞步", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 1, "", "")]
-         DNC_DT_Simple_TS = 4067,
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("无脑模式_技巧舞步", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 1, "", "")]
+        DNC_DT_Simple_TS = 4067,
 
-         [ParentCombo(DNC_DT_SimpleMode)]
-         [CustomComboInfo("无脑模式_简易百花争艳", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
-         DNC_DT_Simple_Flourish = 4068,
-         
-         [ParentCombo(DNC_DT_SimpleMode)]
-         [CustomComboInfo("无脑模式_剑舞", "剑舞加入循环", DNC.JobID, 2, "", "")]
-         DNC_DT_Simple_SaberDance = 4069,
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("无脑模式_简易百花争艳", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
+        DNC_DT_Simple_Flourish = 4068,
 
-         #endregion
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("无脑模式_剑舞", "剑舞加入循环", DNC.JobID, 2, "", "")]
+        DNC_DT_Simple_SaberDance = 4069,
+
+        #endregion
 
         #region Single Target Multibutton
+
         [ReplaceSkill(DNC.瀑泻Cascade)]
         [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
         [CustomComboInfo("Single Target Multibutton Feature", "Single target combo with Fan Dances and Esprit use.", DNC.JobID, 3, "", "")]
         DNC_ST_MultiButton = 4000,
 
-            [ParentCombo(DNC_ST_MultiButton)]
-            [CustomComboInfo("ST Esprit Overcap Option", "Adds Saber Dance above the set Esprit threshold.", DNC.JobID, 0, "", "")]
-            DNC_ST_EspritOvercap = 4001,
+        [ParentCombo(DNC_ST_MultiButton)]
+        [CustomComboInfo("ST Esprit Overcap Option", "Adds Saber Dance above the set Esprit threshold.", DNC.JobID, 0, "", "")]
+        DNC_ST_EspritOvercap = 4001,
 
-            [ParentCombo(DNC_ST_MultiButton)]
-            [CustomComboInfo("Fan Dance Overcap Protection Option", "Adds Fan Dance 1 when Fourfold Feathers are full.", DNC.JobID, 0, "", "")]
-            DNC_ST_FanDanceOvercap = 4003,
+        [ParentCombo(DNC_ST_MultiButton)]
+        [CustomComboInfo("Fan Dance Overcap Protection Option", "Adds Fan Dance 1 when Fourfold Feathers are full.", DNC.JobID, 0, "", "")]
+        DNC_ST_FanDanceOvercap = 4003,
 
-            [ParentCombo(DNC_ST_MultiButton)]
-            [CustomComboInfo("Fan Dance Option", "Adds Fan Dance 3/4 when available.", DNC.JobID, 0, "", "")]
-            DNC_ST_FanDance34 = 4004,
-            #endregion
+        [ParentCombo(DNC_ST_MultiButton)]
+        [CustomComboInfo("Fan Dance Option", "Adds Fan Dance 3/4 when available.", DNC.JobID, 0, "", "")]
+        DNC_ST_FanDance34 = 4004,
+
+        #endregion
 
         #region AoE Multibutton
+
         [ReplaceSkill(DNC.风车Windmill)]
         [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
         [CustomComboInfo("AoE Multibutton Feature", "AoE combo with Fan Dances and Esprit use.", DNC.JobID, 4, "", "")]
         DNC_AoE_MultiButton = 4010,
 
-            [ParentCombo(DNC_AoE_MultiButton)]
-            [CustomComboInfo("AoE Esprit Overcap Option", "Adds Saber Dance above the set Esprit threshold.", DNC.JobID, 0, "", "")]
-            DNC_AoE_EspritOvercap = 4011,
+        [ParentCombo(DNC_AoE_MultiButton)]
+        [CustomComboInfo("AoE Esprit Overcap Option", "Adds Saber Dance above the set Esprit threshold.", DNC.JobID, 0, "", "")]
+        DNC_AoE_EspritOvercap = 4011,
 
-            [ParentCombo(DNC_AoE_MultiButton)]
-            [CustomComboInfo("AoE Fan Dance Overcap Protection Option", "Adds Fan Dance 2 when Fourfold Feathers are full.", DNC.JobID, 0, "", "")]
-            DNC_AoE_FanDanceOvercap = 4013,
+        [ParentCombo(DNC_AoE_MultiButton)]
+        [CustomComboInfo("AoE Fan Dance Overcap Protection Option", "Adds Fan Dance 2 when Fourfold Feathers are full.", DNC.JobID, 0, "", "")]
+        DNC_AoE_FanDanceOvercap = 4013,
 
-            [ParentCombo(DNC_AoE_MultiButton)]
-            [CustomComboInfo("AoE Fan Dance Option", "Adds Fan Dance 3/4 when available.", DNC.JobID, 0, "", "")]
-            DNC_AoE_FanDance34 = 4014,
-            #endregion
+        [ParentCombo(DNC_AoE_MultiButton)]
+        [CustomComboInfo("AoE Fan Dance Option", "Adds Fan Dance 3/4 when available.", DNC.JobID, 0, "", "")]
+        DNC_AoE_FanDance34 = 4014,
+
+        #endregion
 
         #region Dance Features
+
         [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
         [CustomComboInfo("Dance Features", "Features and options involving Standard Step and Technical Step.\nCollapsing this category does NOT disable the features inside.", DNC.JobID, 20, "", "")]
         DNC_Dance_Menu = 4020,
 
-            #region Combined Dance Feature
-            [ReplaceSkill(DNC.标准舞步StandardStep)]
-            [ParentCombo(DNC_Dance_Menu)]
-            [ConflictingCombos(DNC_DanceStepCombo, DNC_DanceComboReplacer, DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Combined Dance Feature", "Standard And Technical Dance on one button (SS)." +
-            "\nStandard > Technical." +
-            "\nThis combos out into Tillana and Starfall Dance.", DNC.JobID, 0, "", "")]
-            DNC_CombinedDances = 4022,
+        #region Combined Dance Feature
 
-                [ParentCombo(DNC_CombinedDances)]
-                [CustomComboInfo("Devilment Plus Option", "Adds Devilment right after Technical finish.", DNC.JobID, 0, "", "")]
-                DNC_CombinedDances_Devilment = 4023,
+        [ReplaceSkill(DNC.标准舞步StandardStep)]
+        [ParentCombo(DNC_Dance_Menu)]
+        [ConflictingCombos(DNC_DanceStepCombo, DNC_DanceComboReplacer, DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Combined Dance Feature", "Standard And Technical Dance on one button (SS)." + "\nStandard > Technical." + "\nThis combos out into Tillana and Starfall Dance.", DNC.JobID, 0, "", "")]
+        DNC_CombinedDances = 4022,
 
-                [ParentCombo(DNC_CombinedDances)]
-                [CustomComboInfo("Flourish Plus Option", "Adds Flourish to the Combined Dance Feature.", DNC.JobID, 0, "", "")]
-                DNC_CombinedDances_Flourish = 4024,
-                #endregion
+        [ParentCombo(DNC_CombinedDances)]
+        [CustomComboInfo("Devilment Plus Option", "Adds Devilment right after Technical finish.", DNC.JobID, 0, "", "")]
+        DNC_CombinedDances_Devilment = 4023,
 
-            [ParentCombo(DNC_Dance_Menu)]
-            [ConflictingCombos(DNC_DanceStepCombo, DNC_CombinedDances, DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Custom Dance Step Feature",
-            "Change custom actions into dance steps while dancing." +
-            "\nThis helps ensure you can still dance with combos on, without using auto dance." +
-            "\nYou can change the respective actions by inputting action IDs below for each dance step." +
-            "\nThe defaults are Cascade, Flourish, Fan Dance and Fan Dance II. If set to 0, they will reset to these actions." +
-            "\nYou can get Action IDs with Garland Tools by searching for the action and clicking the cog.", DNC.JobID, 0, "", "")]
-            DNC_DanceComboReplacer = 4025,
-            #endregion
+        [ParentCombo(DNC_CombinedDances)]
+        [CustomComboInfo("Flourish Plus Option", "Adds Flourish to the Combined Dance Feature.", DNC.JobID, 0, "", "")]
+        DNC_CombinedDances_Flourish = 4024,
+
+        #endregion
+
+        [ParentCombo(DNC_Dance_Menu)]
+        [ConflictingCombos(DNC_DanceStepCombo, DNC_CombinedDances, DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Custom Dance Step Feature", "Change custom actions into dance steps while dancing." + "\nThis helps ensure you can still dance with combos on, without using auto dance." + "\nYou can change the respective actions by inputting action IDs below for each dance step." + "\nThe defaults are Cascade, Flourish, Fan Dance and Fan Dance II. If set to 0, they will reset to these actions." + "\nYou can get Action IDs with Garland Tools by searching for the action and clicking the cog.", DNC.JobID, 0, "", "")]
+        DNC_DanceComboReplacer = 4025,
+
+        #endregion
 
         #region Flourishing Features
+
         [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
-        [CustomComboInfo("Flourishing Features", "Features and options involving Fourfold Feathers and Flourish." +
-        "\nCollapsing this category does NOT disable the features inside.", DNC.JobID, 14, "", "")]
+        [CustomComboInfo("Flourishing Features", "Features and options involving Fourfold Feathers and Flourish." + "\nCollapsing this category does NOT disable the features inside.", DNC.JobID, 14, "", "")]
         DNC_FlourishingFeatures_Menu = 4030,
 
-            [ReplaceSkill(DNC.百花争艳Flourish)]
-            [ParentCombo(DNC_FlourishingFeatures_Menu)]
-            [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Flourishing Fan Dance Feature", "Replace Flourish with Fan Dance 3 & 4 during weave-windows, when Flourish is on cooldown.", DNC.JobID, 0, "", "")]
-            DNC_FlourishingFanDances = 4032,
-            #endregion
-
-        #region Fan Dance Combo Features
+        [ReplaceSkill(DNC.百花争艳Flourish)]
         [ParentCombo(DNC_FlourishingFeatures_Menu)]
         [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
-        [CustomComboInfo("Fan Dance Combo Feature", "Options for Fan Dance combos." +
-        "\nFan Dance 3 takes priority over Fan Dance 4.", DNC.JobID, 5, "", "")]
+        [CustomComboInfo("Flourishing Fan Dance Feature", "Replace Flourish with Fan Dance 3 & 4 during weave-windows, when Flourish is on cooldown.", DNC.JobID, 0, "", "")]
+        DNC_FlourishingFanDances = 4032,
+
+        #endregion
+
+        #region Fan Dance Combo Features
+
+        [ParentCombo(DNC_FlourishingFeatures_Menu)]
+        [ConflictingCombos(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Fan Dance Combo Feature", "Options for Fan Dance combos." + "\nFan Dance 3 takes priority over Fan Dance 4.", DNC.JobID, 5, "", "")]
         DNC_FanDanceCombos = 4033,
 
-            [ReplaceSkill(DNC.扇舞序FanDance1)]
-            [ParentCombo(DNC_FanDanceCombos)]
-            [CustomComboInfo("Fan Dance 1 -> 3 Option", "Changes Fan Dance 1 to Fan Dance 3 when available.", DNC.JobID, 0, "", "")]
-            DNC_FanDance_1to3_Combo = 4034,
+        [ReplaceSkill(DNC.扇舞序FanDance1)]
+        [ParentCombo(DNC_FanDanceCombos)]
+        [CustomComboInfo("Fan Dance 1 -> 3 Option", "Changes Fan Dance 1 to Fan Dance 3 when available.", DNC.JobID, 0, "", "")]
+        DNC_FanDance_1to3_Combo = 4034,
 
-            [ReplaceSkill(DNC.扇舞序FanDance1)]
-            [ParentCombo(DNC_FanDanceCombos)]
-            [CustomComboInfo("Fan Dance 1 -> 4 Option", "Changes Fan Dance 1 to Fan Dance 4 when available.", DNC.JobID, 0, "", "")]
-            DNC_FanDance_1to4_Combo = 4035,
+        [ReplaceSkill(DNC.扇舞序FanDance1)]
+        [ParentCombo(DNC_FanDanceCombos)]
+        [CustomComboInfo("Fan Dance 1 -> 4 Option", "Changes Fan Dance 1 to Fan Dance 4 when available.", DNC.JobID, 0, "", "")]
+        DNC_FanDance_1to4_Combo = 4035,
 
-            [ReplaceSkill(DNC.扇舞破FanDance2)]
-            [ParentCombo(DNC_FanDanceCombos)]
-            [CustomComboInfo("Fan Dance 2 -> 3 Option", "Changes Fan Dance 2 to Fan Dance 3 when available.", DNC.JobID, 0, "", "")]
-            DNC_FanDance_2to3_Combo = 4036,
+        [ReplaceSkill(DNC.扇舞破FanDance2)]
+        [ParentCombo(DNC_FanDanceCombos)]
+        [CustomComboInfo("Fan Dance 2 -> 3 Option", "Changes Fan Dance 2 to Fan Dance 3 when available.", DNC.JobID, 0, "", "")]
+        DNC_FanDance_2to3_Combo = 4036,
 
-            [ReplaceSkill(DNC.扇舞破FanDance2)]
-            [ParentCombo(DNC_FanDanceCombos)]
-            [CustomComboInfo("Fan Dance 2 -> 4 Option", "Changes Fan Dance 2 to Fan Dance 4 when available.", DNC.JobID, 0, "", "")]
-            DNC_FanDance_2to4_Combo = 4037,
-            #endregion
+        [ReplaceSkill(DNC.扇舞破FanDance2)]
+        [ParentCombo(DNC_FanDanceCombos)]
+        [CustomComboInfo("Fan Dance 2 -> 4 Option", "Changes Fan Dance 2 to Fan Dance 4 when available.", DNC.JobID, 0, "", "")]
+        DNC_FanDance_2to4_Combo = 4037,
+
+        #endregion
 
         // Devilment --> Starfall
         [ReplaceSkill(DNC.进攻之探戈Devilment)]
@@ -854,136 +879,128 @@ namespace XIVSlothCombo.Combos
 
         [ReplaceSkill(DNC.标准舞步StandardStep, DNC.技巧舞步TechnicalStep)]
         [ConflictingCombos(DNC_CombinedDances, DNC_DanceComboReplacer)]
-        [CustomComboInfo("Dance Step Combo Feature", "Change Standard Step and Technical Step into each dance step while dancing." +
-        "\nWorks with Simple Dancer and Simple Dancer AoE.", DNC.JobID, 1, "", "")]
+        [CustomComboInfo("Dance Step Combo Feature", "Change Standard Step and Technical Step into each dance step while dancing." + "\nWorks with Simple Dancer and Simple Dancer AoE.", DNC.JobID, 1, "", "")]
         DNC_DanceStepCombo = 4039,
 
-            #region Simple Dancer (Single Target)
-            [ReplaceSkill(DNC.瀑泻Cascade)]
-            [ConflictingCombos(DNC_ST_MultiButton, DNC_AoE_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment, DNC_DT_SimpleMode)]
-            [CustomComboInfo("Simple Dancer (Single Target) Feature", "Single button, single target. Includes songs, flourishes and overprotections." +
-                                                                      "\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 3, "", "")]
-            DNC_ST_SimpleMode = 4050,
+        #region Simple Dancer (Single Target)
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Interrupt Option", "Includes an interrupt in the rotation (if applicable to your current target).", DNC.JobID, 5, "", "")]
-            DNC_ST_Simple_Interrupt = 4051,
+        [ReplaceSkill(DNC.瀑泻Cascade)]
+        [ConflictingCombos(DNC_ST_MultiButton, DNC_AoE_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment, DNC_DT_SimpleMode)]
+        [CustomComboInfo("Simple Dancer (Single Target) Feature", "Single button, single target. Includes songs, flourishes and overprotections." + "\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 3, "", "")]
+        DNC_ST_SimpleMode = 4050,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [ConflictingCombos(DNC_ST_Simple_StandardFill)]
-            [CustomComboInfo("Simple Standard Dance Option", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 1, "", "")]
-            DNC_ST_Simple_SS = 4052,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Interrupt Option", "Includes an interrupt in the rotation (if applicable to your current target).", DNC.JobID, 5, "", "")]
+        DNC_ST_Simple_Interrupt = 4051,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [ConflictingCombos(DNC_ST_Simple_SS)]
-            [CustomComboInfo("Simple Standard Fill Option", "Adds ONLY Standard dance steps and Standard Finish to the rotation." +
-            "\nStandard Step itself must be initiated manually when using this option.", DNC.JobID, 1, "", "")]
-            DNC_ST_Simple_StandardFill = 4061,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [ConflictingCombos(DNC_ST_Simple_StandardFill)]
+        [CustomComboInfo("Simple Standard Dance Option", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 1, "", "")]
+        DNC_ST_Simple_SS = 4052,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [ConflictingCombos(DNC_ST_Simple_TechFill)]
-            [CustomComboInfo("Simple Technical Dance Option", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 2, "", "")]
-            DNC_ST_Simple_TS = 4053,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [ConflictingCombos(DNC_ST_Simple_SS)]
+        [CustomComboInfo("Simple Standard Fill Option", "Adds ONLY Standard dance steps and Standard Finish to the rotation." + "\nStandard Step itself must be initiated manually when using this option.", DNC.JobID, 1, "", "")]
+        DNC_ST_Simple_StandardFill = 4061,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [ConflictingCombos(DNC_ST_Simple_TS)]
-            [CustomComboInfo("Simple Tech Fill Option", "Adds ONLY Technical dance steps and Technical Finish to the rotation." +
-            "\nTechnical Step itself must be initiated manually when using this option.", DNC.JobID, 2, "", "")]
-            DNC_ST_Simple_TechFill = 4054,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [ConflictingCombos(DNC_ST_Simple_TechFill)]
+        [CustomComboInfo("Simple Technical Dance Option", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 2, "", "")]
+        DNC_ST_Simple_TS = 4053,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Tech Devilment Option", "Includes Devilment in the rotation." +
-            "\nWill activate only during Technical Finish if you are Lv70 or above.", DNC.JobID, 2, "", "")]
-            DNC_ST_Simple_Devilment = 4055,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [ConflictingCombos(DNC_ST_Simple_TS)]
+        [CustomComboInfo("Simple Tech Fill Option", "Adds ONLY Technical dance steps and Technical Finish to the rotation." + "\nTechnical Step itself must be initiated manually when using this option.", DNC.JobID, 2, "", "")]
+        DNC_ST_Simple_TechFill = 4054,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Flourish Option", "Includes Flourish in the rotation.", DNC.JobID, 3, "", "")]
-            DNC_ST_Simple_Flourish = 4056,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Tech Devilment Option", "Includes Devilment in the rotation." + "\nWill activate only during Technical Finish if you are Lv70 or above.", DNC.JobID, 2, "", "")]
+        DNC_ST_Simple_Devilment = 4055,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Feathers Option", "Includes Feather usage in the rotation.", DNC.JobID, 4, "", "")]
-            DNC_ST_Simple_Feathers = 4057,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Flourish Option", "Includes Flourish in the rotation.", DNC.JobID, 3, "", "")]
+        DNC_ST_Simple_Flourish = 4056,
 
-            [ParentCombo(DNC_ST_Simple_Feathers)]
-            [CustomComboInfo("Simple Feather Pooling Option", "Expends a feather in the next available weave window when capped." +
-            "\nWeaves feathers where possible during Technical Finish." +
-            "\nWeaves feathers outside of burst when target is below set HP percentage.", DNC.JobID, 4, "", "")]
-            DNC_ST_Simple_FeatherPooling = 4058,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Feathers Option", "Includes Feather usage in the rotation.", DNC.JobID, 4, "", "")]
+        DNC_ST_Simple_Feathers = 4057,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Panic Heals Option", "Includes Curing Waltz and Second Wind in the rotation when available and your HP is below the set percentages.", DNC.JobID, 5, "", "")]
-            DNC_ST_Simple_PanicHeals = 4059,
+        [ParentCombo(DNC_ST_Simple_Feathers)]
+        [CustomComboInfo("Simple Feather Pooling Option", "Expends a feather in the next available weave window when capped." + "\nWeaves feathers where possible during Technical Finish." + "\nWeaves feathers outside of burst when target is below set HP percentage.", DNC.JobID, 4, "", "")]
+        DNC_ST_Simple_FeatherPooling = 4058,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Improvisation Option", "Includes Improvisation in the rotation when available.", DNC.JobID, 5, "", "")]
-            DNC_ST_Simple_Improvisation = 4060,
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Panic Heals Option", "Includes Curing Waltz and Second Wind in the rotation when available and your HP is below the set percentages.", DNC.JobID, 5, "", "")]
+        DNC_ST_Simple_PanicHeals = 4059,
 
-            [ParentCombo(DNC_ST_SimpleMode)]
-            [CustomComboInfo("Simple Peloton Opener Option", "Uses Peloton when you are out of combat, do not already have the Peloton buff and are performing Standard Step with greater than 5s remaining of your dance." +
-            "\nWill not override Dance Step Combo Feature.", DNC.JobID, 5, "", "")]
-            DNC_ST_Simple_Peloton = 4062,
-            #endregion
-            
-            
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Improvisation Option", "Includes Improvisation in the rotation when available.", DNC.JobID, 5, "", "")]
+        DNC_ST_Simple_Improvisation = 4060,
+
+        [ParentCombo(DNC_ST_SimpleMode)]
+        [CustomComboInfo("Simple Peloton Opener Option", "Uses Peloton when you are out of combat, do not already have the Peloton buff and are performing Standard Step with greater than 5s remaining of your dance." + "\nWill not override Dance Step Combo Feature.", DNC.JobID, 5, "", "")]
+        DNC_ST_Simple_Peloton = 4062,
+
+        #endregion
+
+
 
         #region Simple Dancer (AoE)
+
         [ReplaceSkill(DNC.风车Windmill)]
         [ConflictingCombos(DNC_ST_MultiButton, DNC_AoE_MultiButton, DNC_CombinedDances, DNC_DanceComboReplacer, DNC_FlourishingFeatures_Menu, DNC_Starfall_Devilment)]
-        [CustomComboInfo("Simple Dancer (AoE) Feature", "Single button, AoE. Includes songs, flourishes and overprotections." +
-        "\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 4, "", "")]
+        [CustomComboInfo("Simple Dancer (AoE) Feature", "Single button, AoE. Includes songs, flourishes and overprotections." + "\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 4, "", "")]
         DNC_AoE_SimpleMode = 4070,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Simple AoE Interrupt Option", "Includes an interrupt in the AoE rotation (if your current target can be interrupted).", DNC.JobID, 0, "", "")]
-            DNC_AoE_Simple_Interrupt = 4071,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE Interrupt Option", "Includes an interrupt in the AoE rotation (if your current target can be interrupted).", DNC.JobID, 0, "", "")]
+        DNC_AoE_Simple_Interrupt = 4071,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [ConflictingCombos(DNC_AoE_Simple_StandardFill)]
-            [CustomComboInfo("Simple AoE Standard Dance Option", "Includes Standard Step (and all steps) in the AoE rotation.", DNC.JobID, 1, "", "")]
-            DNC_AoE_Simple_SS = 4072,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [ConflictingCombos(DNC_AoE_Simple_StandardFill)]
+        [CustomComboInfo("Simple AoE Standard Dance Option", "Includes Standard Step (and all steps) in the AoE rotation.", DNC.JobID, 1, "", "")]
+        DNC_AoE_Simple_SS = 4072,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [ConflictingCombos(DNC_AoE_Simple_SS)]
-            [CustomComboInfo("Simple AoE Standard Fill Option", "Adds ONLY Standard dance steps and Standard Finish to the AoE rotation." +
-            "\nStandard Step itself must be initiated manually when using this option.", DNC.JobID, 2, "", "")]
-            DNC_AoE_Simple_StandardFill = 4081,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [ConflictingCombos(DNC_AoE_Simple_SS)]
+        [CustomComboInfo("Simple AoE Standard Fill Option", "Adds ONLY Standard dance steps and Standard Finish to the AoE rotation." + "\nStandard Step itself must be initiated manually when using this option.", DNC.JobID, 2, "", "")]
+        DNC_AoE_Simple_StandardFill = 4081,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [ConflictingCombos(DNC_AoE_Simple_TechFill)]
-            [CustomComboInfo("Simple AoE Technical Dance Option", "Includes Technical Step, all dance steps and Technical Finish in the AoE rotation.", DNC.JobID, 3, "", "")]
-            DNC_AoE_Simple_TS = 4073,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [ConflictingCombos(DNC_AoE_Simple_TechFill)]
+        [CustomComboInfo("Simple AoE Technical Dance Option", "Includes Technical Step, all dance steps and Technical Finish in the AoE rotation.", DNC.JobID, 3, "", "")]
+        DNC_AoE_Simple_TS = 4073,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [ConflictingCombos(DNC_AoE_Simple_TS)]
-            [CustomComboInfo("Simple AoE Tech Fill Option", "Adds ONLY Technical dance steps and Technical Finish to the AoE rotation." +
-            "\nTechnical Step itself must be initiated manually when using this option.", DNC.JobID, 4, "", "")]
-            DNC_AoE_Simple_TechFill = 4074,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [ConflictingCombos(DNC_AoE_Simple_TS)]
+        [CustomComboInfo("Simple AoE Tech Fill Option", "Adds ONLY Technical dance steps and Technical Finish to the AoE rotation." + "\nTechnical Step itself must be initiated manually when using this option.", DNC.JobID, 4, "", "")]
+        DNC_AoE_Simple_TechFill = 4074,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Simple AoE Tech Devilment Option", "Includes Devilment in the AoE rotation." +
-            "\nWill activate only during Technical Finish if you Lv70 or above.", DNC.JobID, 5, "", "")]
-            DNC_AoE_Simple_Devilment = 4075,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE Tech Devilment Option", "Includes Devilment in the AoE rotation." + "\nWill activate only during Technical Finish if you Lv70 or above.", DNC.JobID, 5, "", "")]
+        DNC_AoE_Simple_Devilment = 4075,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Simple AoE Flourish Option", "Includes Flourish in the AoE rotation.", DNC.JobID, 6, "", "")]
-            DNC_AoE_Simple_Flourish = 4076,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE Flourish Option", "Includes Flourish in the AoE rotation.", DNC.JobID, 6, "", "")]
+        DNC_AoE_Simple_Flourish = 4076,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Simple AoE Feathers Option", "Includes feather usage in the AoE rotation.", DNC.JobID, 7, "", "")]
-            DNC_AoE_Simple_Feathers = 4077,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE Feathers Option", "Includes feather usage in the AoE rotation.", DNC.JobID, 7, "", "")]
+        DNC_AoE_Simple_Feathers = 4077,
 
-            [ParentCombo(DNC_AoE_Simple_Feathers)]
-            [CustomComboInfo("Simple AoE Feather Pooling Option", "Expends a feather in the next available weave window when capped.", DNC.JobID, 8, "", "")]
-            DNC_AoE_Simple_FeatherPooling = 4078,
+        [ParentCombo(DNC_AoE_Simple_Feathers)]
+        [CustomComboInfo("Simple AoE Feather Pooling Option", "Expends a feather in the next available weave window when capped.", DNC.JobID, 8, "", "")]
+        DNC_AoE_Simple_FeatherPooling = 4078,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Simple AoE Panic Heals Option", "Includes Curing Waltz and Second Wind in the AoE rotation when available and your HP is below the set percentages.", DNC.JobID, 9, "", "")]
-            DNC_AoE_Simple_PanicHeals = 4079,
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE Panic Heals Option", "Includes Curing Waltz and Second Wind in the AoE rotation when available and your HP is below the set percentages.", DNC.JobID, 9, "", "")]
+        DNC_AoE_Simple_PanicHeals = 4079,
 
-            [ParentCombo(DNC_AoE_SimpleMode)]
-            [CustomComboInfo("Simple AoE Improvisation Option", "Includes Improvisation in the AoE rotation when available.", DNC.JobID, 10, "", "")]
-            DNC_AoE_Simple_Improvisation = 4080,
-            #endregion
+        [ParentCombo(DNC_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE Improvisation Option", "Includes Improvisation in the AoE rotation when available.", DNC.JobID, 10, "", "")]
+        DNC_AoE_Simple_Improvisation = 4080,
+
+        #endregion
 
         #endregion
         #region DARK KNIGHT
@@ -1127,186 +1144,249 @@ namespace XIVSlothCombo.Combos
 
         #endregion
 
-        #region DRAGOON
+         #region DRAGOON
 
-        [ReplaceSkill(DRG.Jump, DRG.HighJump)]
-        [CustomComboInfo("跳跃 替换 幻象冲", "幻象冲准备就绪时，用幻象冲 替换 （高）跳跃。", DRG.JobID, 0)]
-        DRG_Jump = 6000,
-
-        #region Advanced Dragoon
         [ReplaceSkill(DRG.TrueThrust)]
-        [CustomComboInfo("高级龙骑", "将 精准刺 设为单体连招的起始。", DRG.JobID, 1, "", "")]
-        DRG_STCombo = 6100,
+        [ConflictingCombos(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Simple Mode - Single Target", "Replaces True Thrust with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job.", DRG.JobID)]
+        DRG_ST_SimpleMode = 6001,
 
-        [ParentCombo(DRG_STCombo)]
-        [CustomComboInfo("88级起手", "将开场技能添加到战斗循环中。当战斗连祷和猛枪技能冷却后，并且在战斗外使用真北或在战斗开始时使用回避跳跃技能时激活。可选项：使用操作或鼠标以获得最佳目标选定", DRG.JobID, 0, "", "")]
+        #region Advanced ST Dragoon
+
+        [ReplaceSkill(DRG.TrueThrust)]
+        [ConflictingCombos(DRG_ST_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - Single Target", "Replaces True Thrust with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", DRG.JobID, 1, "", "")]
+        DRG_ST_AdvancedMode = 6100,
+
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Level 88+ Opener", "Adds the Balance opener to the rotation.\nOPTIONAL: USE REACTION OR MOACTION FOR OPTIMAL TARGETING.", DRG.JobID, 1, "", "")]
         DRG_ST_Opener = 6101,
 
-        [ParentCombo(DRG_STCombo)]
-        [CustomComboInfo("主连击CD整合", "cd技能循环整合", DRG.JobID, 0, "", "")]
-        DRG_ST_CDs = 6199,
+        #region Buffs ST
 
-        [ParentCombo(DRG_STCombo)]
-        [CustomComboInfo("主连击Buff整合", "buff技能循环整合", DRG.JobID, 0, "", "")]
-        DRG_ST_Buffs = 6198,
-
-        [ParentCombo(DRG_ST_CDs)]
-        [CustomComboInfo("天龙点睛选项", "将天龙点睛加入循环", DRG.JobID, 13, "", "")]
-        DRG_ST_Wyrmwind = 6102,
-
-        [ParentCombo(DRG_ST_CDs)]
-        [CustomComboInfo("武神枪和死者之岸选项", "将武神枪和死者之岸加入循环", DRG.JobID, 18, "", "")]
-        DRG_ST_GeirskogulNastrond = 6103,
-
-        [ParentCombo(DRG_ST_CDs)]
-        [CustomComboInfo("跳跃选项", "Adds Spineshatter Dive, Dragonfire Dive, and Stardiver to the rotation.\\n Select options below for when to use dives.", DRG.JobID, 14, "", "")]
-        DRG_ST_Dives = 6104,
-
-
-        [ParentCombo(DRG_ST_CDs)]
-        [CustomComboInfo("高跳选项", "将高跳/跳跃加入循环", DRG.JobID, 19, "", "")]
-        DRG_ST_HighJump = 6105,
-
-        [ParentCombo(DRG_ST_CDs)]
-        [CustomComboInfo("幻象冲选项", "将幻象冲加入循环", DRG.JobID, 20, "", "")]
-        DRG_ST_Mirage = 6106,
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Buffs Option", "Adds various buffs to the rotation.", DRG.JobID, 2, "", "")]
+        DRG_ST_Buffs = 6102,
 
         [ParentCombo(DRG_ST_Buffs)]
-        [CustomComboInfo("猛枪选项", "猛枪加入循环", DRG.JobID, 21, "", "")]
-        DRG_ST_Lance = 6107,
+        [CustomComboInfo("Battle Litany Option", "Adds Battle Litany to the rotation.", DRG.JobID)]
+        DRG_ST_Litany = 6103,
 
         [ParentCombo(DRG_ST_Buffs)]
-        [CustomComboInfo("巨龙视线选项", "巨龙视线设置。注意：需要自行选择最优目标", DRG.JobID, 22, "", "")]
-        DRG_ST_DragonSight = 6108,
+        [CustomComboInfo("Lance Charge Option", "Adds Lance Charge to the rotation.", DRG.JobID)]
+        DRG_ST_Lance = 6104,
 
         [ParentCombo(DRG_ST_Buffs)]
-        [CustomComboInfo("战斗连祷选项", "将战斗连祷加入循环", DRG.JobID, 23, "", "")]
-        DRG_ST_Litany = 6109,
-
-        [ParentCombo(DRG_ST_CDs)]
-        [CustomComboInfo("龙剑选项", "Includes Life Surge, while under proper buffs, onto proper GCDs, to the rotation.", DRG.JobID, 24, "", "")]
-        DRG_ST_LifeSurge = 6110,
-
-        [ParentCombo(DRG_STCombo)]
-        [CustomComboInfo("超出近战范围选项", "超出近战范围时，将主要AOE连击替换为贯穿尖", DRG.JobID, 25, "", "")]
-        DRG_ST_RangedUptime = 6111,
-
-        [ParentCombo(DRG_ST_Dives)]
-        [CustomComboInfo("冲冲冲设置", "Uses Spineshatter Dive, Dragonfire Dive, and Stardiver when in the target's target ring (1 yalm) and closer.", DRG.JobID, 14, "", "")]
-        DRG_ST_Dives_Melee = 6112,
-
-        [ParentCombo(DRG_STCombo)]
-        [CustomComboInfo("回复设置", "Adds Bloodbath and Second Wind to the combo, using them when below the HP Percentage threshold.", DRG.JobID, 0, "", "")]
-        DRG_ST_ComboHeals = 6113,
+        [CustomComboInfo("Dragon Sight Option", "Adds Dragon Sight to the rotation.\nOPTIONAL: USE REACTION OR MOACTION FOR OPTIMAL TARGETING.", DRG.JobID)]
+        DRG_ST_DragonSight = 6105,
 
         #endregion
 
-        #region 高级龙骑 AoE
+        #region Cooldowns ST
+
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Cooldowns Option", "Adds various cooldowns to the rotation.", DRG.JobID, 3, "", "")]
+        DRG_ST_CDs = 6106,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("Life Surge Option", "Adds Life Surge, while under Dragon Sight and Lance Charge buffs, to the rotation.", DRG.JobID, -8, "", "")]
+        DRG_ST_LifeSurge = 6107,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("Dragonfire Dive Option", "Adds Dragonfire Dive to the rotation.", DRG.JobID, -7, "", "")]
+        DRG_ST_Dives_Dragonfire = 6108,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("Spineshatter Dive Option", "Adds Spineshatter Dive to the rotation.", DRG.JobID, -7, "", "")]
+        DRG_ST_Dives_Spineshatter = 6109,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("Stardiver Option", "Adds Stardiver to the rotation.", DRG.JobID, -7, "", "")]
+        DRG_ST_Stardiver = 6110,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("High Jump Option", "Adds High Jump/Jump to the rotation.", DRG.JobID, -6, "", "")]
+        DRG_ST_HighJump = 6111,
+
+        [ParentCombo(DRG_ST_HighJump)]
+        [CustomComboInfo("Mirage Dive Option", "Adds Mirage Dive to the rotation.", DRG.JobID)]
+        DRG_ST_Mirage = 6112,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("Geirskogul and Nastrond Option", "Adds Geirskogul and Nastrond to the rotation.", DRG.JobID, -5, "", "")]
+        DRG_ST_GeirskogulNastrond = 6113,
+
+        [ParentCombo(DRG_ST_CDs)]
+        [CustomComboInfo("Wyrmwind Thrust Option", "Adds Wyrmwind Thrust to the rotation.", DRG.JobID, -4, "", "")]
+        DRG_ST_Wyrmwind = 6114,
+
+        #endregion
+
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Optimized Rotation Option", "Uses optimzed use of Geirskogul and (High) Jump/Mirage Dive", DRG.JobID, 4, "", "")]
+        DRG_ST_Optimized_Rotation = 6115,
+
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Ranged Uptime Option", "Adds Piercing Talon to the rotation when you are out of melee range.", DRG.JobID, 5, "", "")]
+        DRG_ST_RangedUptime = 6116,
+
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Combo Heals Option", "Adds Bloodbath and Second Wind to the rotation.", DRG.JobID, 6, "", "")]
+        DRG_ST_ComboHeals = 6117,
+
+        [ParentCombo(DRG_ST_AdvancedMode)]
+        [CustomComboInfo("Dynamic True North Option", "Adds True North before Chaos Thrust/Chaotic Spring, Fang And Claw and Wheeling Thrust when you are not in the correct position for the enhanced potency bonus.", DRG.JobID, 7, "", "")]
+        DRG_TrueNorthDynamic = 6118,
+
+        #endregion
+
         [ReplaceSkill(DRG.DoomSpike)]
-        [CustomComboInfo("高级龙骑AOE", "死天枪连击", DRG.JobID, 26, "", "")]
-        DRG_AoECombo = 6200,
+        [ConflictingCombos(DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Simple Mode - AoE", "Replaces Doom Spike with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job.", DRG.JobID, 3, "", "")]
+        DRG_AOE_SimpleMode = 6200,
 
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("天龙点睛设置", "将天龙点睛插入AOE循环", DRG.JobID, 27, "", "")]
-        DRG_AoE_WyrmwindFeature = 6201,
+        #region Advanced AoE Dragoon
 
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("武神枪与死者之岸设置", "将武神枪与死者之岸插入AOE循环", DRG.JobID, 28, "", "")]
-        DRG_AoE_GeirskogulNastrond = 6202,
+        [ReplaceSkill(DRG.DoomSpike)]
+        [ConflictingCombos(DRG_AOE_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - AoE", "Replaces Doom Spike with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", DRG.JobID, 4, "", "")]
+        DRG_AOE_AdvancedMode = 6201,
 
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("跳跃类能力技设置", "Includes Spineshatter Dive, Dragonfire Dive and Stardiver to the AoE rotation.", DRG.JobID, 29, "", "")]
-        DRG_AoE_Dives = 6203,
+        #region Buffs AoE
 
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("高跳设置", "在连击中插入高跳。", DRG.JobID, 33, "", "")]
-        DRG_AoE_HighJump = 6204,
-
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("幻象冲设置", "在AOE连击中插入幻象冲", DRG.JobID, 34, "", "")]
-        DRG_AoE_Mirage = 6205,
-
-        #region Buffs AoE Feature
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("buff设置", "在连击中插入猛枪和战斗连祷。", DRG.JobID, 35, "", "")]
-        DRG_AoE_Buffs = 6206,
-
+        [ParentCombo(DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Buffs AoE Option", "Adds Lance Charge and Battle Litany to the rotation.", DRG.JobID, -2, "", "")]
+        DRG_AoE_Buffs = 6202,
 
         [ParentCombo(DRG_AoE_Buffs)]
-        [CustomComboInfo("巨龙视线设置Aoe", "在连击中插入巨龙视线。需要自行选择最优目标。", DRG.JobID, 36, "", "")]
-        DRG_AoE_DragonSight = 6207,
-        #endregion
+        [CustomComboInfo("Battle Litany AoE Option", "Adds Battle Litany to the rotation.", DRG.JobID, 36, "", "")]
+        DRG_AoE_Litany = 6203,
 
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("龙剑设置 AoE Feature", "Includes Life Surge, while under proper buffs, onto proper GCDs, to the AoE rotation.", DRG.JobID, 37, "", "")]
-        DRG_AoE_LifeSurge = 6208,
+        [ParentCombo(DRG_AoE_Buffs)]
+        [CustomComboInfo("Lance Charge AoE Option", "Adds Lance Charge to the rotation.", DRG.JobID, 36, "", "")]
+        DRG_AoE_Lance = 6204,
 
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("超出近战范围选项", "超出近战范围时，将主要AOE连击替换为贯穿尖", DRG.JobID, 40, "", "")]
-        DRG_AoE_RangedUptime = 6209,
-
-        [ParentCombo(DRG_AoE_Dives)]
-        [CustomComboInfo("冲冲冲设置", "Uses Spineshatter Dive, Dragonfire Dive, and Stardiver when in the target's target ring (1 yalm) and closer.", DRG.JobID, 29, "", "")]
-        DRG_AoE_Dives_Melee = 6210,
-
-        [ParentCombo(DRG_AoECombo)]
-        [CustomComboInfo("回复设置", "Adds Bloodbath and Second Wind to the combo, using them when below the HP Percentage threshold.", DRG.JobID, 0, "", "")]
-        DRG_AoE_ComboHeals = 6211,
+        [ParentCombo(DRG_AoE_Buffs)]
+        [CustomComboInfo("Dragon Sight AoE Option", "Adds Dragon Sight to the rotation.\nOPTIONAL: USE REACTION OR MOACTION FOR OPTIMAL TARGETING.", DRG.JobID)]
+        DRG_AoE_DragonSight = 6205,
 
         #endregion
+
+        #region CDs AoE
+
+        [ParentCombo(DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Cooldowns Option", "Adds various cooldowns to the rotation.", DRG.JobID, -1, "", "")]
+        DRG_AoE_CDs = 6206,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("Life Surge Option", "Adds Life Surge, while under proper buffs, onto proper GCDs, to the rotation.", DRG.JobID)]
+        DRG_AoE_LifeSurge = 6207,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("Spineshatter Dive Option", "Adds Spineshatter Dive to the rotation.", DRG.JobID)]
+        DRG_AoE_Spineshatter_Dive = 6208,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("Dragonfire Dive Option", "Adds Dragonfire Dive to the rotation.", DRG.JobID)]
+        DRG_AoE_Dragonfire_Dive = 6209,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("Stardiver Option", "Adds Stardiver to the rotation when under at least 1 buff", DRG.JobID, -7, "", "")]
+        DRG_AoE_Stardiver = 6210,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("High Jump Option", "Adds High Jump to the rotation.", DRG.JobID)]
+        DRG_AoE_HighJump = 6211,
+
+        [ParentCombo(DRG_AoE_HighJump)]
+        [CustomComboInfo("Mirage Dive Option", "Adds Mirage Dive to the rotation.", DRG.JobID)]
+        DRG_AoE_Mirage = 6212,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("Geirskogul and Nastrond Option", "Adds Geirskogul and Nastrond to the rotation.", DRG.JobID)]
+        DRG_AoE_GeirskogulNastrond = 6213,
+
+        [ParentCombo(DRG_AoE_CDs)]
+        [CustomComboInfo("Wyrmwind Option", "Adds Wyrmwind Thrust to the rotation.", DRG.JobID)]
+        DRG_AoE_Wyrmwind = 6214,
+
+        #endregion
+
+        [ParentCombo(DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Optimized Rotation Option", "Uses optimzed use of Geirskogul and (High) Jump/Mirage Dive", DRG.JobID)]
+        DRG_AoE_Optimized_Rotation = 6215,
+
+        [ParentCombo(DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Ranged Uptime Option", "Adds Piercing Talon to the rotation when you are out of melee range.", DRG.JobID, 98, "", "")]
+        DRG_AoE_RangedUptime = 6216,
+
+        [ParentCombo(DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Combo Heals Option", "Adds Bloodbath and Second Wind to the rotation.", DRG.JobID, 99, "", "")]
+        DRG_AoE_ComboHeals = 6217,
+
+        #endregion
+
+        [ReplaceSkill(DRG.Jump, DRG.HighJump)]
+        [CustomComboInfo("Jump to Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready.", DRG.JobID, 5)]
+        DRG_Jump = 6300,
 
         [ReplaceSkill(DRG.Stardiver)]
-        [CustomComboInfo("坠星冲设置", "Turns Stardiver into Nastrond during Life of the Dragon, and Geirskogul outside of Life of the Dragon.", DRG.JobID, 26, "", "")]
-        DRG_StardiverFeature = 6300,
+        [CustomComboInfo("Stardiver Feature", "Turns Stardiver into Nastrond during Life of the Dragon, and Geirskogul outside of Life of the Dragon.", DRG.JobID, 6, "", "")]
+        DRG_StardiverFeature = 6301,
 
         [ReplaceSkill(DRG.LanceCharge)]
-        [CustomComboInfo("猛枪整合到战斗连祷", "猛枪冷却完毕后整合至战斗连祷", DRG.JobID, 26, "", "")]
-        DRG_BurstCDFeature = 6400,
+        [CustomComboInfo("Lance Charge to Battle Litany Feature", "Turns Lance Charge into Battle Litany when the former is on cooldown.", DRG.JobID, 7, "", "")]
+        DRG_BurstCDFeature = 6302,
 
         [ParentCombo(DRG_BurstCDFeature)]
-        [CustomComboInfo("巨龙视线选项", "Adds Dragon Sight to Lance Charge, will take precedence over Battle Litany.", DRG.JobID, 26, "", "")]
-        DRG_BurstCDFeature_DragonSight = 6401,
+        [CustomComboInfo("Dragon Sight Option", "Adds Dragon Sight to Lance Charge, will take precedence over Battle Litany.", DRG.JobID, 8, "", "")]
+        DRG_BurstCDFeature_DragonSight = 6303,
 
         [Variant]
-        [VariantParent(DRG_STCombo, DRG_AoECombo)]
-        [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", DRG.JobID)]
-        DRG_Variant_Cure = 6500,
+        [VariantParent(DRG_ST_AdvancedMode, DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Cure Option", "Use Variant Cure when HP is below set threshold.", DRG.JobID)]
+        DRG_Variant_Cure = 6304,
 
         [Variant]
-        [VariantParent(DRG_STCombo, DRG_AoECombo)]
-        [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", DRG.JobID)]
-        DRG_Variant_Rampart = 6600,
+        [VariantParent(DRG_ST_AdvancedMode, DRG_AOE_AdvancedMode)]
+        [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", DRG.JobID)]
+        DRG_Variant_Rampart = 6305,
 
-        // Last value = 6600
+
+        // Last value = 6117 - 6215 - 6305
 
         #endregion
 
         #region GUNBREAKER
+
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("起手设置", "设置多少GCD起手", GNB.JobID, 0)]
         GNB_START_GCD = 6999,
-        
+
         [ParentCombo(GNB_START_GCD)]
         [CustomComboInfo("直接爆发", "起手快速卸掉资源", GNB.JobID, 0, "", "")]
         GNB_START_GCD_直接爆发 = 7036,
-        
+
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("先打什么", "尽可能按照下面的循环打", GNB.JobID, 0)]
         GNB_ST_SkSSupport = 7000,
 
         #region ST
+
         [ReplaceSkill(GNB.利刃斩KeenEdge)]
         [CustomComboInfo("绝枪战士一键连击", "替换利刃斩和爆发击防止子弹溢出", GNB.JobID, 0, "", "")]
         GNB_ST_MainCombo = 7001,
 
         #region Gnashing Fang
+
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("烈牙与续剑整合到主连击", "将烈牙与续剑整合到主连击。烈牙必须被手动激活，之后会被替换到主连击。", GNB.JobID, 0, "", "")]
         GNB_ST_Gnashing = 7002,
-        
+
         #endregion
 
         #region Cooldowns
+
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("绝枪战士能力技整合 设置", "选择是否在无情状态下将各种能力技整合至主连击中", GNB.JobID, 0, "", "")]
         GNB_ST_MainCombo_CooldownsGroup = 7004,
@@ -1339,9 +1419,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(GNB_ST_MainCombo_CooldownsGroup)]
         [CustomComboInfo("爆发击整合到主连击", "在主连击中插入爆发击和超高速(若可用).", GNB.JobID, 0, "", "")]
         GNB_ST_BurstStrike = 7011,
+
         #endregion
 
         #region Rough Divide
+
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("粗分斩设置", "当可用时在主连击中插入粗分斩.", GNB.JobID, 0, "", "")]
         GNB_ST_RoughDivide = 7012,
@@ -1349,14 +1431,17 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(GNB_ST_RoughDivide)]
         [CustomComboInfo("近战时插入粗分斩 设置", "Uses Rough Divide when under No Mercy, burst cooldowns when available, not moving, and in the target ring (1 yalm).\\nWill use as many stacks as selected in the above slider.", GNB.JobID, 0, "", "")]
         GNB_ST_MeleeRoughDivide = 7013,
+
         #endregion
 
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("闪雷弹激活", "当自身与所选目标在近战距离外时，插入闪雷弹.", GNB.JobID, 0, "", "")]
         GNB_ST_RangedUptime = 7014,
+
         #endregion
 
         #region Gnashing Fang
+
         [ReplaceSkill(GNB.烈牙GnashingFang)]
         [CustomComboInfo("烈牙连击", "将续剑添加到烈牙.", GNB.JobID, 0, "", "")]
         GNB_GF_Continuation = 7200,
@@ -1372,9 +1457,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(GNB_GF_Continuation)]
         [CustomComboInfo("烈牙CD选项", "添加  血壤Bloodfest/音速破SSonic Break/弓形冲波Bow Shock/Blasting Zone on Gnashing Fang, order dependent on No Mercy buff.\\nBurst Strike and Hypervelocity added if there's charges while No Mercy buff is up.", GNB.JobID, 0, "", "")]
         GNB_GF_Cooldowns = 7203,
+
         #endregion
 
         #region AoE
+
         [ReplaceSkill(GNB.恶魔切DemonSlice)]
         [CustomComboInfo("绝枪战士AOE功能", "将恶魔杀替换为恶魔杀连击。", GNB.JobID, 0, "", "")]
         GNB_AoE_MainCombo = 7300,
@@ -1407,9 +1494,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(GNB_AoE_MainCombo)]
         [CustomComboInfo("晶壤溢出特性", "当晶壤将要溢出时使用命运之环替换掉AOE连击。", GNB.JobID, 0, "", "")]
         GNB_AOE_Overcap = 7307,
+
         #endregion
 
         #region Burst Strike
+
         [ReplaceSkill(GNB.爆发击BurstStrike)]
         [CustomComboInfo("爆发击 Feature", "爆发击 相关功能", GNB.JobID, 0, "", "")]
         GNB_BS = 7400,
@@ -1426,9 +1515,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(GNB_BS)]
         [CustomComboInfo("爆发击整合 设置", "无情状态下且有三颗晶壤时，用倍攻代替爆发击", GNB.JobID, 0, "", "")]
         GNB_BS_DoubleDown = 7403,
+
         #endregion
 
         #region No Mercy
+
         [ConflictingCombos(GNB_ST_NoMercy, GNB_AoE_NoMercy)]
         [ReplaceSkill(GNB.无情NoMercy)]
         [CustomComboInfo("无情", "无情冷却替换无情", GNB.JobID, 0, "", "")]
@@ -1441,6 +1532,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(GNB_NoMercy_Cooldowns)]
         [CustomComboInfo("音速破/弓形冲波", "无情状态下，用音速破/弓形冲波代替无情", GNB.JobID, 0, "", "")]
         GNB_NoMercy_Cooldowns_SonicBreakBowShock = 7502,
+
         #endregion
 
         [CustomComboInfo("极光保护机制", "自身身上有极光，将极光变为原初的勇猛", GNB.JobID, 0, "", "")]
@@ -1465,179 +1557,188 @@ namespace XIVSlothCombo.Combos
 
         #endregion
 
-        #region MACHINIST
+        #region Simple ST
 
-        [ReplaceSkill(MCH.CleanShot, MCH.HeatedCleanShot, MCH.SplitShot, MCH.HeatedSplitShot)]
+        [ReplaceSkill(MCH.SplitShot)]
+        [ConflictingCombos(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Simple Mode - Single Target", "Replaces Split Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MCH.JobID)]
+        MCH_ST_SimpleMode = 8000,
+
+        #endregion
+
+        #region Advanced ST
+
+        [ReplaceSkill(MCH.SplitShot)]
         [ConflictingCombos(MCH_ST_SimpleMode)]
-        [CustomComboInfo("(热)狙击弹连击一键整合", "替换热弹为连击循环中的任一技能", MCH.JobID, 0, "", "")]
-        MCH_ST_MainCombo = 8000,
+        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MCH.JobID)]
+        MCH_ST_AdvancedMode = 8100,
 
-        [ReplaceSkill(MCH.RookAutoturret, MCH.AutomatonQueen)]
-        [CustomComboInfo("超档炮塔/人偶替换设置", "在技能可用时，将车式浮空炮塔和后式自走人偶转换为超档车式炮塔和超档自走人偶", MCH.JobID, 0, "", "")]
-        MCH_Overdrive = 8002,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Level 90 Opener Option", "Uses the Balance opener depending on which rotation is selected above.", MCH.JobID)]
+        MCH_ST_Adv_Opener = 8101,
 
-        [ReplaceSkill(MCH.GaussRound, MCH.Ricochet)]
-        [CustomComboInfo("虹吸弹 / 弹射设置", "将虹吸弹和弹射替换为一个或其他需要更多充电电能的技能.", MCH.JobID, 0, "", "")]
-        MCH_GaussRoundRicochet = 8003,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Hot Shot / Air Anchor option", "Adds Hot Shot/Air Anchor to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_AirAnchor = 8102,
 
-        [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot)]
-        [CustomComboInfo("钻头/空气锚（热弹）选项", "钻头、空气锚 (热弹)、回转飞锯根据cd时间互相替换.", MCH.JobID, 0, "", "")]
-        MCH_HotShotDrillChainSaw = 8004,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Reassemble Option", "Adds Reassemble to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_Reassembled = 8103,
 
-        [ParentCombo(MCH_ST_MainCombo)]
-        [ConflictingCombos(MCH_ST_MainComboAlternate)]
-        [CustomComboInfo("钻头/空气锚/回转飞锯整合 设置", "Air Anchor followed by Drill is added onto main combo if you use Reassemble.\\nIf Air Anchor is on cooldown and you use Reassemble, Chain Saw will be added to main combo instead.", MCH.JobID, 0, "", "")]
-        MCH_ST_MainCombo_Cooldowns = 8005,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Gauss Round / Ricochet Option", "Adds Gauss Round and Ricochet to the rotation.\nWill prevent overcapping.", MCH.JobID)]
+        MCH_ST_Adv_GaussRicochet = 8104,
 
-        [ReplaceSkill(MCH.HeatBlast)]
-        [ConflictingCombos(MCH_ST_SimpleMode)]
-        [CustomComboInfo("热冲击一键整合", "整合超荷至热冲击.", MCH.JobID, 0, "", "")]
-        MCH_HeatblastGaussRicochet = 8006,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Hypercharge Option", "Adds Hypercharge to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_Hypercharge = 8105,
 
-        [ReplaceSkill(MCH.AutoCrossbow)]
-        [CustomComboInfo("自动弩一键整合", "将自动弩切换为超荷，并插入虹吸弹/弹射。", MCH.JobID, 0, "", "")]
-        MCH_AutoCrossbowGaussRicochet = 8018,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Heat Blast Option", "Adds Heat Blast to the rotation", MCH.JobID)]
+        MCH_ST_Adv_HeatBlast = 8106,
 
-        [ParentCombo(MCH_ST_MainCombo)]
-        [ConflictingCombos(MCH_ST_MainCombo_Cooldowns)]
-        [CustomComboInfo("交替插入钻头/空气锚/热弹被添加到连击循环中", "将钻头/空气锚/热弹插入主连击循环中(注意:只有当你在整备Buff中\\n或整备正在冷却中该选项才会生效。(若整备可用但却没有使用时则不会插入这些技能)", MCH.JobID, 0, "", "")]
-        MCH_ST_MainComboAlternate = 8007,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Rook Autoturret/Automaton Queen Option", "Adds Rook Autoturret/Automaton Queen to the rotation.", MCH.JobID)]
+        MCH_Adv_TurretQueen = 8107,
 
-        [ParentCombo(MCH_ST_MainCombo)]
-        [CustomComboInfo("一键热冲击 添加到主循环选项", "当选项被启用时，在主循环中添加一键热冲击。", MCH.JobID, 0, "", "")]
-        MCH_ST_MainCombo_HeatBlast = 8008,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Wildfire Option", "Adds Wildfire to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_WildFire = 8108,
 
-        [ParentCombo(MCH_ST_MainCombo)]
-        [CustomComboInfo("电量溢出后自动替换炮台/人偶", "Overcharge protection for your Battery, If you are at 100 battery charge Rook Autoturret/Automaton Queen will be added to your (Heated) Shot Combo.", MCH.JobID, 0, "", "")]
-        MCH_ST_MainCombo_OverCharge = 8009,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Drill option", "Adds Drill to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_Drill = 8109,
 
-        [ParentCombo(MCH_AoE_SimpleMode)]
-        [CustomComboInfo("电量溢出后自动替换炮台/人偶", "为散射/霰弹枪增加了过电量保护。.", MCH.JobID, 0, "", "")]
-        MCH_AoE_OverCharge = 8010,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Barrel Stabilizer Option", "Adds Barrel Stabilizer to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_Stabilizer = 8110,
 
-        [ParentCombo(MCH_AoE_SimpleMode)]
-        [CustomComboInfo("虹吸弹/弹射整合 设置", "在超荷过程中为AOE连击循环增加虹吸弹/弹射", MCH.JobID, 0, "", "")]
-        MCH_AoE_GaussRicochet = 8011,
+        [ParentCombo(MCH_ST_Adv_Stabilizer)]
+        [CustomComboInfo("Wildfire Only Option", "Only use Barrel Stabilizer to prepare for Wildfire.", MCH.JobID)]
+        MCH_ST_Adv_Stabilizer_Wildfire_Only = 8111,
 
-        [ParentCombo(MCH_AoE_GaussRicochet)]
-        [CustomComboInfo("不限制虹吸弹/弹射的插入时机", "在超荷窗口之外的AOE连击循环中也会插入可用的虹吸弹/弹射.", MCH.JobID, 0, "", "")]
-        MCH_AoE_Gauss = 8012,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Chain Saw option", "Adds Chain Saw to the rotation.", MCH.JobID)]
+        MCH_ST_Adv_ChainSaw = 8112,
 
-        [ConflictingCombos(MCH_ST_MainCombo_RicochetGauss)]
-        [ParentCombo(MCH_ST_MainCombo)]
-        [CustomComboInfo("弹射 & 虹吸弹 设置", "将弹射和虹吸弹添加到主连击循环中.这将使用所有电能.", MCH.JobID, 0, "", "")]
-        MCH_ST_MainCombo_RicochetGaussCharges = 8017,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Head Graze Option", "Uses Head Graze to interrupt during the rotation, where applicable.", MCH.JobID)]
+        MCH_ST_Adv_Interrupt = 8113,
 
-        [ConflictingCombos(MCH_ST_MainCombo_RicochetGaussCharges)]
-        [ParentCombo(MCH_ST_MainCombo)]
-        [CustomComboInfo("Ricochet & Gauss Round Overcap Protection Option", "将弹射和虹吸弹添加到主连击循环中.将各留下一个电能.", MCH.JobID, 0, "", "")]
-        MCH_ST_MainCombo_RicochetGauss = 8013,
+        [ParentCombo(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("Second Wind Option", "Use Second Wind when below the set HP percentage.", MCH.JobID)]
+        MCH_ST_Adv_SecondWind = 8114,
 
-        [ParentCombo(MCH_ST_MainCombo)]
-        [CustomComboInfo("枪管加热避免延后浪费 设置", "如果热量在5-20之间，则将枪管加热添加到主连击循环中。", MCH.JobID, 0, "", "")]
-        MCH_ST_BarrelStabilizer_DriftProtection = 8014,
+        #endregion
 
-        [ParentCombo(MCH_HeatblastGaussRicochet)]
-        [CustomComboInfo("野火 设置", "Adds Wildfire to the 热冲击一键整合 if Wildfire is off cooldown and you have enough Heat Gauge for Hypercharge then Hypercharge will be replaced with Wildfire.\\nAlso weaves Ricochet/Gauss Round on Heat Blast when necessary.", MCH.JobID, 0, "", "")]
-        MCH_ST_Wildfire = 8015,
-
-        [ParentCombo(MCH_AoE_SimpleMode)]
-        [CustomComboInfo("毒菌冲击整合 设置", "在散射的功能中添加毒菌冲击", MCH.JobID, 0, "", "")]
-        MCH_AoE_Simple_Bioblaster = 8016,
-
-        [CustomComboInfo("枪管加热 设置", "当低于50热度且冷却完毕时，在一键热冲击循环和一键自动弩循环中插入枪管加热", MCH.JobID, 0, "", "")]
-        MCH_ST_AutoBarrel = 8019,
-
-        [ReplaceSkill(MCH.SplitShot, MCH.HeatedSplitShot)]
-        [ConflictingCombos(MCH_ST_MainCombo, MCH_HeatblastGaussRicochet)]
-        [CustomComboInfo("一键简单机工循环", "Single button, single target machinist, including buffs and overcap protections.\nConflicts with other single target toggles!\nMade to work optimally with a 2.5 GCD.\nThe use of latency mitigation tools is recommended due to XIV's network handling.", MCH.JobID, 0, "", "")]
-        MCH_ST_SimpleMode = 8020,
-
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("单体连击打断技能设置", "Uses interrupt during the rotation, if applicable.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Interrupt = 8021,
-
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("简单的机工召唤", "Adds Automaton Queen or Rook Autoturret uses to the feature, based on your current level.\\nAttempts to use Automaton Queen at optimal intervals between :55 to :05 windows.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Gadget = 8022,
-
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("简单的组装", "整备将与下面的技能一起使用.\\n在获得钻头之前，它将使用与狙击弹共用.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling = 8023,
-
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("简单的虹吸弹和弹射", "将虹吸弹和弹射加入到循环中.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_GaussRicochet = 8024,
-
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("简单的野火和超荷", "Adds Hypercharge and Wildfire uses to the feature.\\nIt respects the 8 second rule of Drill, Air Anchor and Chain Saw.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_WildCharge = 8025,
-
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("枪管加热", "添加 枪管加热 到循环。\\n当热量表<50，且野火已过冷却时间或即将过冷却时间。", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Stabilizer = 8026,
-
-        [ParentCombo(MCH_AoE_SimpleMode)]
-        [CustomComboInfo("超荷", "Adds Hypercharge to the AoE.", MCH.JobID, 0, "", "")]
-        MCH_AoE_Simple_Hypercharge = 8027,
+        #region Simple AoE
 
         [ReplaceSkill(MCH.SpreadShot)]
-        [CustomComboInfo("机工简易AoE一键连击", "当机工士等级达到82级以上时，散射技能会升级为霰弹枪。当超荷时，散射和霰弹枪技能会转化为自动弩技能。毒菌冲击技能在CD结束后优先使用", MCH.JobID, 0, "", "")]
-        MCH_AoE_SimpleMode = 8028,
+        [ConflictingCombos(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Simple Mode - AoE", "Replaces Spread Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MCH.JobID)]
+        MCH_AoE_SimpleMode = 8200,
 
-        [ParentCombo(MCH_ST_Simple_Assembling)]
-        [CustomComboInfo("钻头", "当可以的时候整备与钻头一起使用.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling_Drill = 8029,
+        #endregion
 
-        [ParentCombo(MCH_ST_Simple_Assembling)]
-        [CustomComboInfo("空气锚", "当可以的时候整备与空气锚一起使用.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling_AirAnchor = 8030,
+        #region Advanced AoE
 
-        [ParentCombo(MCH_ST_Simple_Assembling)]
-        [CustomComboInfo("回转飞锯", "当可以的时候整备与回转飞锯一起使用.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling_ChainSaw = 8031,
+        [ReplaceSkill(MCH.SpreadShot)]
+        [ConflictingCombos(MCH_AoE_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - AoE", "Replaces Spread Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MCH.JobID)]
+        MCH_AoE_AdvancedMode = 8300,
 
-        [ParentCombo(MCH_ST_Simple_Assembling_Drill)]
-        [CustomComboInfo("只使用钻头", "仅在 整备 达到最大积蓄次数时才使用 钻头", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling_Drill_MaxCharges = 8032,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Reassemble Option", "Adds Reassemble to the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_Reassemble = 8301,
 
-        [ParentCombo(MCH_ST_Simple_Assembling_AirAnchor)]
-        [CustomComboInfo("只使用空气锚", "仅在 整备 达到最大积蓄次数时才使用 空气锚", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling_AirAnchor_MaxCharges = 8033,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Gauss Round / Ricochet Option", "Adds Gauss Round/Ricochet to the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_GaussRicochet = 8302,
 
-        [ParentCombo(MCH_ST_Simple_Assembling_ChainSaw)]
-        [CustomComboInfo("只使用回转飞锯", "仅在 整备 达到最大积蓄次数时才使用 回转飞锯", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Assembling_ChainSaw_MaxCharges = 8034,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Hypercharge Option", "Adds Hypercharge to the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_Hypercharge = 8303,
 
-        [ParentCombo(MCH_ST_Simple_Stabilizer)]
-        [CustomComboInfo("在特定时机插入", "仅为野火使用枪管加热.", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_Stabilizer_Wildfire_Only = 8035,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Rook Autoturret/Automaton Queen Option", "Adds Rook Autoturret/Automaton Queen to the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_Queen = 8304,
 
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("高延迟模式", "高ping友好模式 \\n它限制了在 超荷 持续时间内使用 虹吸弹/弹射 以防止漂移。\\n使用此功能时预计会有少量 DPS 损失。", MCH.JobID, 0, "", "")]
-        MCH_ST_Simple_High_Latency_Mode = 8036,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Flamethrower Option", "Adds Flamethrower to the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_FlameThrower = 8305,
 
-        [ParentCombo(MCH_ST_SimpleMode)]
-        [CustomComboInfo("内丹选项", "当低于此生命值百分比时，使用 内丹", MCH.JobID, 0, "", "")]
-        MCH_ST_SecondWind = 8037,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Bioblaster Option", "Adds Bioblaster to the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_Bioblaster = 8306,
 
-        [ParentCombo(MCH_AoE_SimpleMode)]
-        [CustomComboInfo("内丹选项", "当低于此生命值百分比时，使用 内丹", MCH.JobID, 0, "", "")]
-        MCH_AoE_SecondWind = 8038,
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Chain Saw Option", "Adds Chain Saw to the the rotation.", MCH.JobID)]
+        MCH_AoE_Adv_Chainsaw = 8307,
+
+        [ParentCombo(MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Second Wind Option", "Use Second Wind when below the set HP percentage.", MCH.JobID)]
+        MCH_AoE_Adv_SecondWind = 8308,
+
+        #endregion
+
+        #region Variant
 
         [Variant]
-        [VariantParent(MCH_ST_SimpleMode, MCH_AoE_SimpleMode)]
-        [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", MCH.JobID)]
+        [VariantParent(MCH_ST_AdvancedMode, MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", MCH.JobID)]
         MCH_Variant_Rampart = 8039,
 
         [Variant]
-        [VariantParent(MCH_ST_SimpleMode, MCH_AoE_SimpleMode)]
-        [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", MCH.JobID)]
+        [VariantParent(MCH_ST_AdvancedMode, MCH_AoE_AdvancedMode)]
+        [CustomComboInfo("Cure Option", "Use Variant Cure when HP is below set threshold.", MCH.JobID)]
         MCH_Variant_Cure = 8040,
 
-        // Last value = 8040
+        #endregion
+
+        [ReplaceSkill(MCH.RookAutoturret, MCH.AutomatonQueen)]
+        [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID)]
+        MCH_Overdrive = 8002,
+
+        [ReplaceSkill(MCH.GaussRound, MCH.Ricochet)]
+        [CustomComboInfo("Gauss Round/Ricochet Feature", "Replace Gauss Round and Ricochet with one or the other depending on which has more charges.", MCH.JobID)]
+        MCH_GaussRoundRicochet = 8003,
+
+        [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot)]
+        [CustomComboInfo("Drill/Air Anchor (Hot Shot) Feature", "Replace Drill and Air Anchor (Hot Shot) with one or the other (or Chain Saw) depending on which is on cooldown.", MCH.JobID)]
+        MCH_HotShotDrillChainSaw = 8004,
+
+        [ReplaceSkill(MCH.HeatBlast)]
+        [CustomComboInfo("Single Button Heat Blast Feature", "Switches Heat Blast to Hypercharge.", MCH.JobID)]
+        MCH_HeatblastGaussRicochet = 8006,
+
+        [ParentCombo(MCH_HeatblastGaussRicochet)]
+        [CustomComboInfo("Barrel Feature", "Adds Barrel Stabilizer to Single Button Heat Blast Feature when below 50 Heat Gauge and it is off cooldown", MCH.JobID)]
+        MCH_HeatblastGaussRicochet_AutoBarrel = 8052,
+
+        [ParentCombo(MCH_HeatblastGaussRicochet)]
+        [CustomComboInfo("Wildfire Option", "Adds Wildfire to the Single Button Heat Blast Feature if Wildfire is off cooldown and you have enough Heat Gauge for Hypercharge then Hypercharge will be replaced with Wildfire.\nAlso weaves Ricochet/Gauss Round on Heat Blast when necessary.", MCH.JobID)]
+        MCH_ST_Wildfire = 8015,
+
+        [ReplaceSkill(MCH.AutoCrossbow)]
+        [CustomComboInfo("Single Button Auto Crossbow Feature", "Switches Auto Crossbow to Hypercharge and weaves Gauss Round/Ricochet.", MCH.JobID)]
+        MCH_AutoCrossbowGaussRicochet = 8018,
+
+        [ParentCombo(MCH_AutoCrossbowGaussRicochet)]
+        [CustomComboInfo("Barrel Feature", "Adds Barrel Stabilizer to Single Button Auto Crossbow Feature when below 50 Heat Gauge and it is off cooldown", MCH.JobID)]
+        MCH_AutoCrossbowGaussRicochet_AutoBarrel = 8019,
+
+        [ReplaceSkill(MCH.Dismantle)]
+        [CustomComboInfo("Physical Ranged DPS: Double Dismantle Protection", "Prevents the use of Dismantle when target already has the effect by replacing it with Fire.", MCH.JobID)]
+        All_PRanged_Dismantle = 8042,
+
+        [ReplaceSkill(MCH.Dismantle)]
+        [CustomComboInfo("Dismantle - Tactician", "Swap dismantle with tactician when dismantle is on cooldown.", MCH.JobID)]
+        MCH_DismantleTactician = 8058,
+
+        // Last value = 8058
 
         #endregion
+
 
         #region MONK
 
@@ -2194,9 +2295,9 @@ namespace XIVSlothCombo.Combos
         [ReplaceSkill(PLD.深奥之灵SpiritsWithin, PLD.偿赎剑Expiacion)]
         [CustomComboInfo("深奥之灵/偿赎剑/厄运流转替换选项", "当厄运流转冷却用(深奥之灵/偿赎剑)代替(好像有bug).", PLD.JobID)]
         PLD_SpiritsWithin = 11025,
-        
-        
-       
+
+
+
 
         [Variant]
         [VariantParent(PLD_ST_SimpleMode, PLD_ST_AdvancedMode, PLD_AoE_SimpleMode, PLD_AoE_AdvancedMode)]
@@ -2223,6 +2324,7 @@ namespace XIVSlothCombo.Combos
         ReaperPositionalConfig = 12000,
 
         #region Single Target (Slice) Combo Section
+
         [ReplaceSkill(RPR.Slice)]
         [CustomComboInfo("切割连击", "将切割替换为切割连击。如果启用了所有子选项将变为一键循环(Advanced 镰刀)", RPR.JobID, 0, "", "")]
         RPR_ST_SliceCombo = 12001,
@@ -2299,9 +2401,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(RPR_ST_SliceCombo)]
         [CustomComboInfo("90级起手选项", "将90级起手加入主连击，在下面选用哪个起手.", RPR.JobID, -1, "", "")]
         RPR_ST_SliceCombo_Opener = 12018,
+
         #endregion
 
         #region AoE (Scythe) Combo Section
+
         [ReplaceSkill(RPR.SpinningScythe)]
         [CustomComboInfo("旋转钐割连击", "旋转钐割加入循环。\\n如果启用所有子选项则变为一键循环（简单AOE）", RPR.JobID, 0, "", "")]
         RPR_AoE_ScytheCombo = 12020,
@@ -2345,9 +2449,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(RPR_AoE_ScytheCombo)]
         [CustomComboInfo("暴食与束缚挥割设置", "当目标有死亡烙印Debuff并且灵魂小于50时将暴食与束缚挥割加入AOE连击。", RPR.JobID, 0, "", "")]
         RPR_AoE_ScytheCombo_GluttonyGrimSwathe = 12029,
+
         #endregion
 
         #region Blood Stalk/Grim Swathe Combo Section
+
         [ReplaceSkill(RPR.BloodStalk, RPR.GrimSwathe)]
         [CustomComboInfo("暴食替换隐匿挥割/束缚挥割功能", "当暴食可用时将其替换到隐匿挥割/束缚挥割上。", RPR.JobID, 0, "", "")]
         RPR_GluttonyBloodSwathe = 12041,
@@ -2359,9 +2465,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(RPR_GluttonyBloodSwathe)]
         [CustomComboInfo("夜游魂衣连击设置", "Adds Enshroud combo (Void/Cross Reaping, Communio, and Lemure's Slice) on Blood Stalk and Grim Swathe.", RPR.JobID, 0, "", "")]
         RPR_GluttonyBloodSwathe_Enshroud = 12042,
+
         #endregion
 
         #region Miscellaneous
+
         [ReplaceSkill(RPR.ArcaneCircle)]
         [CustomComboInfo("神秘环大丰收特性。", "当你拥有死亡祭品层数时，使用大丰收替换神秘环。", RPR.JobID, 0, "", "")]
         RPR_ArcaneCirclePlentifulHarvest = 12051,
@@ -2431,6 +2539,7 @@ namespace XIVSlothCombo.Combos
         [VariantParent(RPR_ST_SliceCombo, RPR_AoE_ScytheCombo)]
         [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", RPR.JobID)]
         RPR_Variant_Rampart = 12068,
+
         #endregion
 
         // Last value = 12068
@@ -2447,6 +2556,7 @@ namespace XIVSlothCombo.Combos
         The three digets after RDM.JobID can be used to reorder items in the list
         */
         #region Single Target DPS
+
         [ReplaceSkill(RDM.Jolt, RDM.Jolt2)]
         [CustomComboInfo("赤魔简单模式 - 单目标", "启用以下所有选项.", RDM.JobID, 1)]
         RDM_ST_DPS = 13000,
@@ -2506,9 +2616,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(RDM_ST_DPS)]
         [CustomComboInfo("在循环使用 醒梦", "当MP小于指定值时，使用【醒梦】", RDM.JobID, 610)]
         RDM_ST_Lucid = 13610,
+
         #endregion
 
         #region AoE DPS
+
         [ReplaceSkill(RDM.Scatter, RDM.Impact)]
         [CustomComboInfo("赤魔简单模式 - AOE", "启用以下所有选项", RDM.JobID, 310)]
         RDM_AoE_DPS = 13310,
@@ -2553,16 +2665,20 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(RDM_AoE_DPS)]
         [CustomComboInfo("在循环使用 醒梦", "当MP小于指定值时，使用【醒梦】", RDM.JobID, 610)]
         RDM_AoE_Lucid = 13425,
+
         #endregion
 
         #region QoL
+
         [ReplaceSkill(All.Swiftcast)]
         [ConflictingCombos(ALL_Caster_Raise)]
         [CustomComboInfo("赤复活 设置", "当存在连续咏唱状态或使用即刻咏唱后，将即刻咏唱替换为赤复活.", RDM.JobID, 620)]
         RDM_Raise = 13620,
+
         #endregion
 
         #region Sections 8 to 9 - Miscellaneous
+
         [ReplaceSkill(RDM.Displacement)]
         [CustomComboInfo("移转与短兵相接替换 设置", "当距离过远时替换移转为短兵相接.", RDM.JobID, 810)]
         RDM_CorpsDisplacement = 13810,
@@ -2593,6 +2709,7 @@ namespace XIVSlothCombo.Combos
         [Variant]
         [CustomComboInfo("Cure on Vercure Option", "Replaces Vercure with Variant Cure.", RDM.JobID)]
         RDM_Variant_Cure2 = 13833,
+
         #endregion
 
         #endregion
@@ -2606,6 +2723,7 @@ namespace XIVSlothCombo.Combos
         */
 
         #region Single Target DPS Feature
+
         [ReplaceSkill(SGE.Dosis, SGE.Dosis2, SGE.Dosis3)]
         [CustomComboInfo("整合单体输出技能", "注药I/II/III 各种选项", SGE.JobID, 100, "", "")]
         SGE_ST_DPS = 14100,
@@ -2634,9 +2752,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SGE_ST_DPS)]
         [CustomComboInfo("根素选项", "当蛇胆少于指定值时插入 根素。", SGE.JobID, 121, "", "")]
         SGE_ST_DPS_Rhizo = 14160,
+
         #endregion
 
         #region AoE DPS Feature
+
         [ReplaceSkill(SGE.Phlegma, SGE.Phlegma2, SGE.Phlegma3)]
         [CustomComboInfo("AoE DPS连击", "", SGE.JobID, 200, "", "")]
         SGE_AoE_DPS = 14200,
@@ -2664,9 +2784,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SGE_AoE_DPS)]
         [CustomComboInfo("根素选项", "当蛇胆少于指定值时插入 根素。", SGE.JobID, 121, "", "")]
         SGE_AoE_DPS_Rhizo = 14260,
+
         #endregion
 
         #region Diagnosis Simple Single Target Heal
+
         [ReplaceSkill(SGE.Diagnosis)]
         [CustomComboInfo("单目标治疗功能", "支持软目标。\\n以下选项按优先顺序排列。", SGE.JobID, 300, "", "")]
         SGE_ST_Heal = 14300,
@@ -2719,9 +2841,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SGE_ST_Heal)]
         [CustomComboInfo("灵橡清汁选项", "插入灵橡清汁.", SGE.JobID, 302, "", "")]
         SGE_ST_Heal_Druochole = 14400,
+
         #endregion
 
         #region Sage Simple AoE Heal
+
         [ReplaceSkill(SGE.Prognosis)]
         [CustomComboInfo("群体治疗技能一键整合至预后", "按照个人喜好制定群体治疗技能一键整合方式.", SGE.JobID, 500, "", "")]
         SGE_AoE_Heal = 14500,
@@ -2762,9 +2886,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SGE_AoE_Heal)]
         [CustomComboInfo("根素选项", "当没有蛇胆时插入根素.", SGE.JobID, 501, "", "")]
         SGE_AoE_Heal_Rhizomata = 14580,
+
         #endregion
 
         #region Misc Healing
+
         [ReplaceSkill(SGE.Taurochole, SGE.Druochole, SGE.Ixochole, SGE.Kerachole)]
         [CustomComboInfo("根素 设置", "蛇胆不满时插入根素", SGE.JobID, 600, "", "")]
         SGE_Rhizo = 14600,
@@ -2776,9 +2902,11 @@ namespace XIVSlothCombo.Combos
         [ReplaceSkill(SGE.Pneuma)]
         [CustomComboInfo("将活化整合至魂灵风息 设置", "魂灵风息变为活化，使用后变回魂灵风息.", SGE.JobID, 701, "", "")] //Temporary to keep the order
         SGE_ZoePneuma = 141000,
+
         #endregion
 
         #region Utility
+
         [ReplaceSkill(All.Swiftcast)]
         [ConflictingCombos(ALL_Healer_Raise)]
         [CustomComboInfo("即刻复活 设置", "整合即可咏唱至复苏", SGE.JobID, 800, "", "")]
@@ -2801,6 +2929,7 @@ namespace XIVSlothCombo.Combos
         [VariantParent(SGE_ST_DPS, SGE_AoE_DPS)]
         [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", SGE.JobID)]
         SGE_DPS_Variant_Rampart = 14930,
+
         #endregion
 
         // Last value = 14930
@@ -2810,6 +2939,7 @@ namespace XIVSlothCombo.Combos
         #region SAMURAI
 
         #region Overcap Features
+
         [ReplaceSkill(SAM.Kasha, SAM.Gekko, SAM.Yukikaze)]
         [CustomComboInfo("武士单体技能替代选项", "当剑气达到或超过所选数量时，将必杀剑·震天添加到单体连击中。", SAM.JobID, 0, "", "")]
         SAM_ST_Overcap = 15001,
@@ -2817,9 +2947,11 @@ namespace XIVSlothCombo.Combos
         [ReplaceSkill(SAM.Mangetsu, SAM.Oka)]
         [CustomComboInfo("武士AOE技能替代选项", "当剑气达到或超过所选数量时，将必杀剑·九天添加到主要AOE连击中。", SAM.JobID, 0, "", "")]
         SAM_AoE_Overcap = 15002,
+
         #endregion
 
         #region Main Combo (Gekko) Features
+
         [ReplaceSkill(SAM.Gekko)]
         [CustomComboInfo("月光连", "替换 月光 技能为它的连击链。\\n如果下面的全部子选项都有相应选择会形成一个一键连击循环 （高级武士）", SAM.JobID, 0, "", "")]
         SAM_ST_GekkoCombo = 15003,
@@ -2847,6 +2979,7 @@ namespace XIVSlothCombo.Combos
         SAM_ST_GekkoCombo_FillerCombos = 15008,
 
         #region CDs on Main Combo
+
         [ParentCombo(SAM_ST_GekkoCombo)]
         [CustomComboInfo("主连击CD整合", "将CD技能加入循环", SAM.JobID, 0, "", "")]
         SAM_ST_GekkoCombo_CDs = 15099,
@@ -2860,6 +2993,7 @@ namespace XIVSlothCombo.Combos
         SAM_ST_GekkoCombo_CDs_Iaijutsu = 15010,
 
         #region Ogi Namikiri on Main Combo
+
         [ParentCombo(SAM_ST_GekkoCombo_CDs)]
         [CustomComboInfo("将奥义斩浪加入循环", "在未移动和技能冷却完毕的情况下，将奥义斩浪和回返斩浪加入循环。", SAM.JobID, 0, "", "")]
         SAM_ST_GekkoCombo_CDs_OgiNamikiri = 15011,
@@ -2867,6 +3001,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAM_ST_GekkoCombo_CDs_OgiNamikiri)]
         [CustomComboInfo("奥义斩浪爆发选项", "Saves Ogi Namikiri for even minute burst windows.\\nIf you don't activate the opener or die, Ogi Namikiri will instead be used on CD.", SAM.JobID, 0, "", "")]
         SAM_ST_GekkoCombo_CDs_OgiNamikiri_Burst = 15012,
+
         #endregion
 
         [ParentCombo(SAM_ST_GekkoCombo_CDs)]
@@ -2874,9 +3009,11 @@ namespace XIVSlothCombo.Combos
         SAM_ST_GekkoCombo_CDs_MeikyoShisui = 15013,
 
         #region Meikyo Shisui on Main Combo
+
         [ParentCombo(SAM_ST_GekkoCombo_CDs_MeikyoShisui)]
         [CustomComboInfo("明镜止水爆发选项", "Saves Meikyo Shisui for burst windows.\\nIf you don't activate the opener or die, Meikyo Shisui will instead be used on CD.", SAM.JobID, 0, "", "")]
         SAM_ST_GekkoCombo_CDs_MeikyoShisui_Burst = 15014,
+
         #endregion
 
         [ParentCombo(SAM_ST_GekkoCombo_CDs)]
@@ -2895,11 +3032,13 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAM_ST_Overcap)]
         [CustomComboInfo("震天 选项", "当目标血量小于此百分比时，只要有25点剑气就将震天加入循环.", SAM.JobID, 0, "", "")]
         SAM_ST_Execute = 15046,
+
         #endregion
 
         #endregion
 
         #region Yukikaze/Kasha Combos
+
         [ReplaceSkill(SAM.Yukikaze)]
         [CustomComboInfo("雪风连", "替换雪风为相应连击。", SAM.JobID, 0, "", "")]
         SAM_ST_YukikazeCombo = 15018,
@@ -2907,9 +3046,11 @@ namespace XIVSlothCombo.Combos
         [ReplaceSkill(SAM.Kasha)]
         [CustomComboInfo("花车连", "替换花车为相应连击。", SAM.JobID, 0, "", "")]
         SAM_ST_KashaCombo = 15019,
+
         #endregion
 
         #region AoE Combos
+
         [ReplaceSkill(SAM.Mangetsu)]
         [CustomComboInfo("满月连", "用满月连击的组合代替满月。\\n如果所有子选项都被选中，将变成一个完整的一键AOE循环（高级武士）。", SAM.JobID, 0, "", "")]
         SAM_AoE_MangetsuCombo = 15020,
@@ -2956,15 +3097,19 @@ namespace XIVSlothCombo.Combos
         [ConflictingCombos(SAM_AoE_MangetsuCombo_Oka)]
         [CustomComboInfo("樱花双目标功能", "Adds the Yukikaze combo, Mangetsu combo, Senei, Shinten, and Shoha to Oka combo.\\nUsed for two targets only and when Lv86 and above.", SAM.JobID, 0, "", "")]
         SAM_AoE_OkaCombo_TwoTarget = 150261,
+
         #endregion
 
         #region Cooldown Features
+
         [ReplaceSkill(SAM.MeikyoShisui)]
         [CustomComboInfo("明镜止水", "Replace Meikyo Shisui with Jinpu, Shifu, and Yukikaze depending on what is needed.", SAM.JobID, 0, "", "")]
         SAM_JinpuShifu = 15027,
+
         #endregion
 
         #region Iaijutsu Features
+
         [ReplaceSkill(SAM.Iaijutsu)]
         [CustomComboInfo("居合术功能", "居合术整合", SAM.JobID, 0, "", "")]
         SAM_Iaijutsu = 15028,
@@ -2980,9 +3125,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAM_Iaijutsu)]
         [CustomComboInfo("使用奥义斩浪代替居合术", "处于奥义斩浪预备的时候，使用回奥义斩浪和返斩浪代替居合术。", SAM.JobID, 0, "", "")]
         SAM_Iaijutsu_OgiNamikiri = 15031,
+
         #endregion
 
         #region Shinten Features
+
         [ReplaceSkill(SAM.Shinten)]
         [CustomComboInfo("照破 替换 必杀剑·震天", "当剑压积累到3档时，替换必杀剑·震天为照破。", SAM.JobID, 0, "", "")]
         SAM_Shinten_Shoha = 15032,
@@ -2991,9 +3138,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAM_Shinten_Shoha)]
         [CustomComboInfo("必杀剑·闪影 替换 必杀剑·震天", "当必杀剑·闪影冷却结束后，替换必杀剑·震天为必杀剑·闪影。", SAM.JobID, 0, "", "")]
         SAM_Shinten_Shoha_Senei = 15033,
+
         #endregion
 
         #region Kyuten Features
+
         [ReplaceSkill(SAM.Kyuten)]
         [CustomComboInfo("无名照破 替换 必杀剑·九天", "当剑压积累到3档时，替换必杀剑·九天为无名照破。", SAM.JobID, 0, "", "")]
         SAM_Kyuten_Shoha2 = 15034,
@@ -3002,9 +3151,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAM_Kyuten_Shoha2)]
         [CustomComboInfo("必杀剑·红莲 替换 必杀剑·九天", "当必杀剑·红莲冷却结束后，替换必杀剑·九天为必杀剑·红莲。", SAM.JobID, 0, "", "")]
         SAM_Kyuten_Shoha2_Guren = 15035,
+
         #endregion
 
         #region Other
+
         [ConflictingCombos(SAM_ST_GekkoCombo_Opener, SAM_ST_GekkoCombo_FillerCombos)]
         [ReplaceSkill(SAM.Gyoten)]
         [CustomComboInfo("必杀剑·晓天 特性", "根据与目标的距离自动将必杀剑·晓天变为必杀剑·夜天/晓天。", SAM.JobID, 0, "", "")]
@@ -3035,6 +3186,7 @@ namespace XIVSlothCombo.Combos
         [VariantParent(SAM_ST_GekkoCombo, SAM_AoE_MangetsuCombo)]
         [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", SAM.JobID)]
         SAM_Variant_Rampart = 15048,
+
         #endregion
 
         // Last value = 15048
@@ -3050,6 +3202,7 @@ namespace XIVSlothCombo.Combos
         */
 
         #region DPS
+
         [ReplaceSkill(SCH.Ruin, SCH.Broil, SCH.Broil2, SCH.Broil3, SCH.Broil4, SCH.Bio, SCH.Bio2, SCH.Biolysis)]
         [CustomComboInfo("整合单体输出技能", "Replaces Ruin I / Broils with options below", SCH.JobID, 1)]
         SCH_DPS = 16100,
@@ -3102,6 +3255,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region Healing
+
         [ReplaceSkill(SCH.FeyBlessing)]
         [CustomComboInfo("异想的祥光 替换 慰藉", "炽天使同行状态下，将 异想的祥光 变为 慰藉.", SCH.JobID, 9)]
         SCH_Consolation = 16210,
@@ -3168,10 +3322,10 @@ namespace XIVSlothCombo.Combos
         [CustomComboInfo("生命活性法 选项", "当目标生命值低于指定值时插入 生命活性法：", SCH.JobID, 5)]
         SCH_ST_Heal_Lustrate = 16264,
 
-
         #endregion
 
         #region Utilities
+
         [ReplaceSkill(SCH.EnergyDrain, SCH.Lustrate, SCH.SacredSoil, SCH.Indomitability, SCH.Excogitation)]
         [CustomComboInfo("以太超流", "Change Aetherflow-using skills to Aetherflow, Recitation, or Dissipation as selected.", SCH.JobID, 9)]
         SCH_Aetherflow = 16300,
@@ -3197,9 +3351,9 @@ namespace XIVSlothCombo.Combos
         [CustomComboInfo("展开战术", "队友没有 鼓舞 状态时，将 展开战术 替换为 鼓舞激励之策。", SCH.JobID, 12)]
         SCH_DeploymentTactics = 16600,
 
-            [ParentCombo(SCH_DeploymentTactics)]
-            [CustomComboInfo("秘策", "当 秘策 冷却完毕且队友没有鼓舞状态时将 鼓舞激励之策 替换为 秘策。", SCH.JobID)]
-            SCH_DeploymentTactics_Recitation = 16610,
+        [ParentCombo(SCH_DeploymentTactics)]
+        [CustomComboInfo("秘策", "当 秘策 冷却完毕且队友没有鼓舞状态时将 鼓舞激励之策 替换为 秘策。", SCH.JobID)]
+        SCH_DeploymentTactics_Recitation = 16610,
 
         [Variant]
         [VariantParent(SCH_DPS_Bio, SCH_AoE)]
@@ -3485,8 +3639,7 @@ namespace XIVSlothCombo.Combos
         WHM_ST_MainCombo = 19099,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("开场技能整合至闪灼 设置", "将所有的能力技延迟到第三发闪灼释放之后，仅当闪灼可用时生效" +
-        "\\nOnly works with Glare III.", WHM.JobID, 11, "", "")]
+        [CustomComboInfo("开场技能整合至闪灼 设置", "将所有的能力技延迟到第三发闪灼释放之后，仅当闪灼可用时生效" + "\\nOnly works with Glare III.", WHM.JobID, 11, "", "")]
         WHM_ST_MainCombo_NoSwiftOpener = 19023,
 
         [ParentCombo(WHM_ST_MainCombo)]
@@ -3589,8 +3742,7 @@ namespace XIVSlothCombo.Combos
         WHM_Afflatus_oGCDHeals_Benison = 19022,
 
         [ParentCombo(WHM_Afflatus_oGCDHeals)]
-        [CustomComboInfo("神名与神祝祷排序使用 设置", "Displays oGCD Heals/Shields over Afflatus" +
-        "\\n(only applies to GCD options for Tetragrammaton and Divine Benison).", WHM.JobID, 57, "", "")]
+        [CustomComboInfo("神名与神祝祷排序使用 设置", "Displays oGCD Heals/Shields over Afflatus" + "\\n(only applies to GCD options for Tetragrammaton and Divine Benison).", WHM.JobID, 57, "", "")]
         WHM_Afflatus_oGCDHeals_Prio = 19024,
 
         #endregion
@@ -3714,11 +3866,11 @@ namespace XIVSlothCombo.Combos
 
         #endregion
 
-        #endregion
 
         #region PvP Combos
 
         #region PvP GLOBAL FEATURES
+
         [SecretCustomCombo]
         [CustomComboInfo("Emergency Heals Feature", "Uses Recuperate when your HP is under the set threshold and you have sufficient MP.", ADV.JobID, 1)]
         PvP_EmergencyHeals = 1100000,
@@ -3741,6 +3893,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region ASTROLOGIAN
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Turns Fall Malefic into an all-in-one damage button.", AST.JobID)]
         ASTPvP_Burst = 111000,
@@ -3758,9 +3911,11 @@ namespace XIVSlothCombo.Combos
         ASTPvP_Heal = 111003,
 
         // Last value = 111003
+
         #endregion
 
         #region BLACK MAGE
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把火炎和冰结改为伤害combo按键", BLM.JobID)]
         BLMPvP_BurstMode = 112000,
@@ -3780,6 +3935,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region BARD
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把强劲射击改为伤害combo按键", BRDPvP.JobID)]
         BRDPvP_BurstMode = 113000,
@@ -3789,6 +3945,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region DANCER
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把喷泉连改成伤害combo按键", DNC.JobID)]
         DNCPvP_BurstMode = 114000,
@@ -3808,6 +3965,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region DARK KNIGHT
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Turns 噬魂斩连击 into an all-in-one damage button.", DRK.JobID)]
         DRKPvP_Burst = 115000,
@@ -3827,6 +3985,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region DRAGOON
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Using Elusive Jump turns Wheeling Thrust Combo into all-in-one burst damage button.", DRG.JobID)]
         DRGPvP_Burst = 116000,
@@ -3910,6 +4069,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region MACHINIST
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把蓄力冲击改为伤害combo按键", MCHPvP.JobID)]
         MCHPvP_BurstMode = 118000,
@@ -3929,6 +4089,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region MONK
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Turns Phantom Rush Combo into an all-in-one damage button.", MNK.JobID)]
         MNKPvP_Burst = 119000,
@@ -3948,6 +4109,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region NINJA
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把旋风刃连击改为伤害combo按键", NINPvP.JobID)]
         NINPvP_ST_BurstMode = 120000,
@@ -3971,6 +4133,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region PALADIN
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Turns 王权剑 Combo into an all-in-one damage button.", PLD.JobID)]
         PLDPvP_Burst = 121000,
@@ -3988,6 +4151,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region REAPER
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把切割改为伤害combo按键 \\n添加灵魂切割到主连击", RPR.JobID)]
         RPRPvP_Burst = 122000,
@@ -4013,6 +4177,7 @@ namespace XIVSlothCombo.Combos
         RPRPvP_Burst_Enshrouded = 122004,
 
         #region RPR Enshrouded Option
+
         [SecretCustomCombo]
         [ParentCombo(RPRPvP_Burst_Enshrouded)]
         [CustomComboInfo("夜游魂斩首令选项", "在夜游魂衣爆发期间，如果有机会，将死亡授权书添加到主要组合中。", RPR.JobID)]
@@ -4022,6 +4187,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(RPRPvP_Burst_Enshrouded)]
         [CustomComboInfo("团契设置", "当你有一个夜游魂衣剩余时，将团契加入主组合。", RPR.JobID)]
         RPRPvP_Burst_Enshrouded_Communio = 122006,
+
         #endregion
 
         [SecretCustomCombo]
@@ -4039,6 +4205,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region RED MAGE
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "赤飞石/赤火炎改为伤害combo按键", RDMPvP.JobID)]
         RDMPvP_BurstMode = 123000,
@@ -4054,6 +4221,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region SAGE
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把注药 III 改成伤害combo按键", SGE.JobID)]
         SGEPvP_BurstMode = 124000,
@@ -4069,6 +4237,7 @@ namespace XIVSlothCombo.Combos
         #region SAMURAI
 
         #region Burst Mode
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Adds Meikyo Shisui, Midare: Setsugekka, Ogi Namikiri, Kaeshi: Namikiri and Soten to Meikyo Shisui.\\nWill only cast Midare: Setsugekka and Ogi Namikiri when you're not moving.\\nWill not use if target is guarding.", SAM.JobID)]
         SAMPvP_BurstMode = 125000,
@@ -4087,9 +4256,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAMPvP_BurstMode)]
         [CustomComboInfo("Burst Mode on 花车连 Option", "Adds 爆发模式 to 花车连 instead.", SAM.JobID, 1)]
         SAMPvP_BurstMode_MainCombo = 125003,
+
         #endregion
 
         #region Kasha Features
+
         [SecretCustomCombo]
         [CustomComboInfo("Kasha Combo Features", "花车连的功能集合", SAM.JobID)]
         SAMPvP_KashaFeatures = 125004,
@@ -4103,6 +4274,7 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(SAMPvP_KashaFeatures)]
         [CustomComboInfo("AoE Melee Protection Option", "在超出近战范围时，将AOE连击变成不可用状态", SAM.JobID)]
         SAMPvP_KashaFeatures_AoEMeleeProtection = 125006,
+
         #endregion
 
         // Last value = 125006
@@ -4110,6 +4282,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region SCHOLAR
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Turns Broil IV into all-in-one damage button.", SCH.JobID)]
         SCHPvP_Burst = 126000,
@@ -4131,6 +4304,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region SUMMONER
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "将毁灭三号变成一个多合一的伤害按钮。只有在近战范围内才会使用深红旋风。", SMNPvP.JobID)]
         SMNPvP_BurstMode = 127000,
@@ -4145,6 +4319,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region WARRIOR
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "把重劈改为伤害combo按键", WARPvP.JobID)]
         WARPvP_BurstMode = 128000,
@@ -4164,6 +4339,7 @@ namespace XIVSlothCombo.Combos
         #endregion
 
         #region WHITE MAGE
+
         [SecretCustomCombo]
         [CustomComboInfo("爆发模式", "Turns Glare into an all-in-one damage button.", WHM.JobID)]
         WHMPvP_Burst = 129000,
