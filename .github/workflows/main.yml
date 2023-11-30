@@ -25,7 +25,7 @@ jobs:
           const { data } = await github.repos.getContent({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            path: 'release/latest.zip',
+            path: 'release/XIVSlothCombo/latest.zip',
             ref: context.sha
           });
           return {time: data.last_modified};
@@ -37,7 +37,7 @@ jobs:
         tag_name: v${{ github.run_number }}
         release_name: "XIVSlothCombo_$(date +'%Y%m%d')_CN.zip"
         body: |
-          Changes to /release/latest.zip:
+          Changes to /release/XIVSlothCombo/latest.zip:
           Last modified: ${{ steps.file_time.outputs.time }}
         draft: false
         prerelease: false
