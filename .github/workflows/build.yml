@@ -36,9 +36,13 @@ jobs:
         dotnet build --configuration Release
       env: 
         DOTNET_CLI_TELEMETRY_OPTOUT: true
+    - name: Set Timestamp
+      id: timestamp
+      run: |
+        echo "::set-output name=timestamp::$(date +'%Y-%m-%d-%H-%M-%S')"
     - uses: actions/upload-artifact@v2
       with:
-        name: "XIVSlothCombo-${{ format('now', 'yyyy-MM-dd') }}"
+        name: "XIVSlothCombo-${{ steps.timestamp.outputs.timestamp }}"
         path: ${{ env.RELEASE_DIR }}
         if-no-files-found: error
 
@@ -53,7 +57,7 @@ jobs:
         token: ${{ secrets.XIVCOMBO_TOKEN }}
     - uses: actions/download-artifact@v2
       with:
-        name: "XIVSlothCombo-${{ format('now', 'yyyy-MM-dd') }}"
+        name: "XIVSlothCombo-${{ steps.timestamp.outputs.timestamp }}"
         path: plugins/${{ env.INTERNAL_NAME }}
     - uses: EndBug/add-and-commit@v7
       with:
