@@ -13,8 +13,8 @@ env:
   SOLUTION_NAME: XIVSlothCombo
   INTERNAL_NAME: XIVSlothCombo
   RELEASE_DIR: XIVSlothCombo\bin\Release\XIVSlothCombo
-  PERSONAL_PLUGIN_REPO: Nik-Potokar/MyDalamudPlugins
-  PR_PLUGIN_REPO: Nik-Potokar/MyDalamudPlugins
+  PERSONAL_PLUGIN_REPO: kagangtuya-star/MyDalamudPlugins
+  PR_PLUGIN_REPO: kagangtuya-star/MyDalamudPlugins
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     - name: Download Dalamud
       run: |
-        Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/latest.zip -OutFile latest.zip
+        Invoke-WebRequest -Uri https://github.com/ottercorp/dalamud-distrib/raw/main/stg/latest.zip -OutFile latest.zip
         Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"   
     - name: Build
       run: |
