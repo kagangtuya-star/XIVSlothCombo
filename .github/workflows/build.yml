@@ -53,7 +53,7 @@ jobs:
         token: ${{ secrets.XIVCOMBO_TOKEN }}
     - uses: actions/download-artifact@v2
       with:
-        name: PluginRepoZip
+        name: "XIVSlothCombo-$(date +%Y-%m-%d)"
         path: plugins/${{ env.INTERNAL_NAME }}
     - uses: EndBug/add-and-commit@v7
       with:
