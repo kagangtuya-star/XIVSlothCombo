@@ -35,8 +35,6 @@ namespace XIVSlothCombo
 
         private readonly TextPayload starterMotd = new("[Sloth Message of the Day] ");
 
-        private DateTime lastAutoActionTime;
-
         private uint autoActionId = 0;
 
         // private bool isAuto = false;
