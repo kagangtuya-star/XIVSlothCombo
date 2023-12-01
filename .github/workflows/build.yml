@@ -12,7 +12,7 @@ env:
   PUBLIC_NAME: XIVSlothCombo
   SOLUTION_NAME: XIVSlothCombo
   INTERNAL_NAME: XIVSlothCombo
-  RELEASE_DIR: XIVSlothCombo\release\XIVSlothCombo
+  RELEASE_DIR: XIVSlothCombo\XIVSlothCombo\release\XIVSlothCombo
   PERSONAL_PLUGIN_REPO: kagangtuya-star/MyDalamudPlugins
   PR_PLUGIN_REPO: kagangtuya-star/MyDalamudPlugins
 
