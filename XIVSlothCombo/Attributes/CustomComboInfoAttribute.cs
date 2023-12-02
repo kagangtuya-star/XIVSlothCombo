@@ -22,12 +22,13 @@ namespace XIVSlothCombo.Attributes
         /// <param name="memeDescription"> Meme description. </param>
         internal CustomComboInfoAttribute(string fancyName, string description, byte jobID, [CallerLineNumber] int order = 0, string memeName = "", string memeDescription = "")
         {
-            var Ô­Ê¼fancyName = fancyName;
-            var Ô­Ê¼description = description;
-            var Ôö¼ÓËÑË÷ = true;
-            var fancyName¼¼ÄÜ·­Òë = true;
-            var description¼¼ÄÜ·­Òë = true;
-            var saveWord = "µÈ´ı·­Òë";
+
+            var åŸå§‹fancyName = fancyName;
+            var åŸå§‹description = description;
+            var å¢åŠ æœç´¢ = true;
+            var fancyNameæŠ€èƒ½ç¿»è¯‘ = true;
+            var descriptionæŠ€èƒ½ç¿»è¯‘ = true;
+            var saveWord = "ç­‰å¾…ç¿»è¯‘";
 
 
             // if (Service.Configuration != null)
@@ -37,52 +38,52 @@ namespace XIVSlothCombo.Attributes
                     Dictionary<string, string> db = Translatezh_CN.db;
                     Dictionary<string, string> dbActionName = Translatezh_CN_DBActionName.dbActionName;
 
-                    if (db.ContainsKey(Ô­Ê¼fancyName))
+                    if (db.ContainsKey(åŸå§‹fancyName))
                     {
-                        if (db[Ô­Ê¼fancyName] != saveWord)
+                        if (db[åŸå§‹fancyName] != saveWord)
                         {
-                            fancyName = db[Ô­Ê¼fancyName];
-                            Ôö¼ÓËÑË÷ = false;
-                            fancyName¼¼ÄÜ·­Òë = false;
+                            fancyName = db[åŸå§‹fancyName];
+                            å¢åŠ æœç´¢ = false;
+                            fancyNameæŠ€èƒ½ç¿»è¯‘ = false;
                         }
                     }
 
-                    if (fancyName¼¼ÄÜ·­Òë)
+                    if (fancyNameæŠ€èƒ½ç¿»è¯‘)
                     {
-                        ProcessingActionName(Ô­Ê¼fancyName, dbActionName, out fancyName);
-                        if (fancyName != Ô­Ê¼fancyName)
+                        ProcessingActionName(åŸå§‹fancyName, dbActionName, out fancyName);
+                        if (fancyName != åŸå§‹fancyName)
                         {
-                            db[Ô­Ê¼fancyName] = fancyName;
-                            Ôö¼ÓËÑË÷ = false;
-                        }
-                    }
-
-                    
-
-                    if (db.ContainsKey(Ô­Ê¼description))
-                    {
-                        if (db[Ô­Ê¼description]!= saveWord)
-                        {
-                            description = db[Ô­Ê¼description];
-                            description¼¼ÄÜ·­Òë = false;
-                            Ôö¼ÓËÑË÷ = false;
-                        }
-                    }
-
-                    if (description¼¼ÄÜ·­Òë)
-                    {
-                        ProcessingActionName(Ô­Ê¼description, dbActionName, out description);
-
-                        if (description != Ô­Ê¼description)
-                        {
-                            db[Ô­Ê¼description] = description;
-                            Ôö¼ÓËÑË÷ = false;
-                            
+                            db[åŸå§‹fancyName] = fancyName;
+                            å¢åŠ æœç´¢ = false;
                         }
                     }
 
 
-                    if (Ôö¼ÓËÑË÷)
+
+                    if (db.ContainsKey(åŸå§‹description))
+                    {
+                        if (db[åŸå§‹description] != saveWord)
+                        {
+                            description = db[åŸå§‹description];
+                            descriptionæŠ€èƒ½ç¿»è¯‘ = false;
+                            å¢åŠ æœç´¢ = false;
+                        }
+                    }
+
+                    if (descriptionæŠ€èƒ½ç¿»è¯‘)
+                    {
+                        ProcessingActionName(åŸå§‹description, dbActionName, out description);
+
+                        if (description != åŸå§‹description)
+                        {
+                            db[åŸå§‹description] = description;
+                            å¢åŠ æœç´¢ = false;
+
+                        }
+                    }
+
+
+                    if (å¢åŠ æœç´¢)
                     {
                         try
                         {
@@ -109,23 +110,19 @@ namespace XIVSlothCombo.Attributes
                 }
             }
 
-            // if (fancyName .Equals("No Mercy AOE Option.") )
-            // {
-            //     fancyName = "adsadas";
-            // }
-            if (Ôö¼ÓËÑË÷)
+
+            if (å¢åŠ æœç´¢)
             {
                 if (fancyName == saveWord)
                 {
-                    fancyName = Ô­Ê¼fancyName;
+                    fancyName = åŸå§‹fancyName;
                 }
 
                 if (description == saveWord)
                 {
-                    description = Ô­Ê¼description;
+                    description = åŸå§‹description;
                 }
             }
-
 
             FancyName = fancyName;
             Description = description;
@@ -134,7 +131,123 @@ namespace XIVSlothCombo.Attributes
             MemeName = memeName;
             MemeDescription = memeDescription;
         }
-        
+
+        /// <summary> Gets the display name. </summary>
+        public string FancyName { get; }
+
+        ///<summary> Gets the meme name. </summary>
+        public string MemeName { get; }
+
+        /// <summary> Gets the description. </summary>
+        public string Description { get; }
+
+        /// <summary> Gets the meme description. </summary>
+        public string MemeDescription { get; }
+
+        /// <summary> Gets the job ID. </summary>
+        public byte JobID { get; }
+
+        /// <summary> Gets the display order. </summary>
+        public int Order { get; }
+
+        /// <summary> Gets the job name. </summary>
+        public string JobName => JobIDToName(JobID);
+
+        public string JobShorthand => JobIDToShorthand(JobID);
+
+        private string JobIDToShorthand(byte key)
+        {
+            if (ClassJobs.TryGetValue(key, out var job))
+            {
+                return job.Abbreviation.RawString;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
+        private static readonly Dictionary<uint, ClassJob> ClassJobs = Service.DataManager.GetExcelSheet<ClassJob>()!.ToDictionary(i => i.RowId, i => i);
+
+        public static string JobIDToName(byte key)
+        {
+            //Override DOH/DOL
+            if (key is DOH.JobID) key = 08; //Set to Carpenter
+            if (key is DOL.JobID) key = 16; //Set to Miner
+            if (ClassJobs.TryGetValue(key, out ClassJob? job))
+            {
+                //Grab Category name for DOH/DOL, else the normal Name for the rest
+                string jobname = key is 08 or 16 ? job.ClassJobCategory.Value.Name : job.Name;
+                //Job names are all lowercase by default. This capitalizes based on regional rules
+                string cultureID = Service.ClientState.ClientLanguage switch
+                {
+                    Dalamud.ClientLanguage.French => "fr-FR",
+                    Dalamud.ClientLanguage.Japanese => "ja-JP",
+                    Dalamud.ClientLanguage.German => "de-DE",
+                    _ => "en-us",
+                };
+                TextInfo textInfo = new CultureInfo(cultureID, false).TextInfo;
+                jobname = textInfo.ToTitleCase(jobname);
+                //if (key is 0) jobname = " " + jobname; //Adding space to the front of Global moves it to the top. Shit hack but works
+                return jobname;
+
+            } //Misc or unknown
+            else return key == 99 ? "Global" : "Unknown";
+        }
+
+        /// <summary> Gets the meme job name. </summary>
+        public string MemeJobName => MemeJobIDToName(JobID);
+
+        private static string MemeJobIDToName(byte key) => key switch
+        {
+            0 => "Adventurer",
+            1 => "Gladiator",
+            2 => "Pugilist",
+            3 => "Marauder",
+            4 => "Lancer",
+            5 => "Archer",
+            6 => "Conjurer",
+            7 => "Thaumaturge",
+            8 => "Carpenter",
+            9 => "Blacksmith",
+            10 => "Armorer",
+            11 => "Goldsmith",
+            12 => "Leatherworker",
+            13 => "Weaver",
+            14 => "Alchemist",
+            15 => "Culinarian",
+            16 => "Miner",
+            17 => "Botanist",
+            18 => "Fisher",
+            19 => "Paladin",
+            20 => "Monk",
+            21 => "Warrior",
+            22 => "Dragoon",
+            23 => "Bard",
+            24 => "White Mage",
+            25 => "Black Mage",
+            26 => "Arcanist",
+            27 => "Summoner",
+            28 => "Scholar",
+            29 => "Rogue",
+            30 => "Ninja",
+            31 => "Machinist",
+            32 => "Dark Knight",
+            33 => "Astrologian",
+            34 => "Samurai",
+            35 => "Red Mage",
+            36 => "Blue Mage",
+            37 => "Gunbreaker",
+            38 => "Dancer",
+            39 => "Reaper",
+            40 => "Sage",
+            99 => "Global",
+            DOH.JobID => "Disciples of the Hand",
+            DOL.JobID => "Disciples of the Land",
+            _ => "Unknown",
+        };
+
         public static void ProcessingActionName(string sentence, Dictionary<string, string> dbActionName, out string output)
         {
             output = sentence;
@@ -175,127 +288,5 @@ namespace XIVSlothCombo.Attributes
                 }
             }
         }
-        /// <summary> Gets the display name. </summary>
-        public string FancyName { get; }
-
-        ///<summary> Gets the meme name. </summary>
-        public string MemeName { get; }
-
-        /// <summary> Gets the description. </summary>
-        public string Description { get; }
-
-        /// <summary> Gets the meme description. </summary>
-        public string MemeDescription { get; }
-
-        /// <summary> Gets the job ID. </summary>
-        public byte JobID { get; }
-
-        /// <summary> Gets the display order. </summary>
-        public int Order { get; }
-
-        /// <summary> Gets the job name. </summary>
-        public string JobName => JobIDToName(JobID);
-
-        private static readonly Dictionary<uint, ClassJob> ClassJobs = Service.DataManager.GetExcelSheet<ClassJob>()!.ToDictionary(i => i.RowId, i => i);
-
-        public static string JobIDToName(byte key) =>
-            key switch
-            {
-                0 => "Ã°ÏÕÕß(Í¨ÓÃÉèÖÃ)",
-                1 => "Gladiator",
-                2 => "Pugilist",
-                3 => "Marauder",
-                4 => "Lancer",
-                5 => "Archer",
-                6 => "Conjurer",
-                7 => "Thaumaturge",
-                8 => "Carpenter",
-                9 => "Blacksmith",
-                10 => "Armorer",
-                11 => "Goldsmith",
-                12 => "Leatherworker",
-                13 => "Weaver",
-                14 => "Alchemist",
-                15 => "Culinarian",
-                16 => "Miner",
-                17 => "Botanist",
-                18 => "²¶ÓãÈË",
-                19 => "ÆïÊ¿",
-                20 => "ÎäÉ®",
-                21 => "Õ½Ê¿",
-                22 => "ÁúÆïÊ¿",
-                23 => "Ê«ÈË",
-                24 => "°×Ä§·¨Ê¦",
-                25 => "ºÚÄ§·¨Ê¦",
-                26 => "ÃØÊõÊ¦",
-                27 => "ÕÙ»½Ê¦",
-                28 => "Ñ§Õß",
-                29 => "Ë«½£Ê¦",
-                30 => "ÈÌÕß",
-                31 => "»ú¹¤Ê¿",
-                32 => "°µºÚÆïÊ¿",
-                33 => "Õ¼ĞÇÊõÊ¿",
-                34 => "ÎäÊ¿",
-                35 => "³àÄ§·¨Ê¦",
-                36 => "ÇàÄ§·¨Ê¦",
-                37 => "¾øÇ¹Õ½Ê¿",
-                38 => "ÎèÕß",
-                39 => "îÌÁ­¿Í",
-                40 => "ÏÍÕß",
-                99 => "Global",
-                DOH.JobID => "Disciples of the Hand",
-                DOL.JobID => "´óµØÊ¹Õß",
-                _ => "Unknown",
-            };
-
-        private static string MemeJobIDToName(byte key) =>
-            key switch
-            {
-                0 => "Adventurer",
-                1 => "Gladiator",
-                2 => "Pugilist",
-                3 => "Marauder",
-                4 => "Lancer",
-                5 => "Archer",
-                6 => "Conjurer",
-                7 => "Thaumaturge",
-                8 => "Carpenter",
-                9 => "Blacksmith",
-                10 => "Armorer",
-                11 => "Goldsmith",
-                12 => "Leatherworker",
-                13 => "Weaver",
-                14 => "Alchemist",
-                15 => "Culinarian",
-                16 => "Miner",
-                17 => "Botanist",
-                18 => "²¶ÓãÈË",
-                19 => "ÆïÊ¿",
-                20 => "ÎäÉ®",
-                21 => "Õ½Ê¿",
-                22 => "ÁúÆïÊ¿",
-                23 => "Ê«ÈË",
-                24 => "°×Ä§·¨Ê¦",
-                25 => "ºÚÄ§·¨Ê¦",
-                26 => "ÃØÊõÊ¦",
-                27 => "ÕÙ»½Ê¦",
-                28 => "Ñ§Õß",
-                29 => "Ë«½£Ê¦",
-                30 => "ÈÌÕß",
-                31 => "»ú¹¤Ê¿",
-                32 => "°µºÚÆïÊ¿",
-                33 => "Õ¼ĞÇÊõÊ¿",
-                34 => "ÎäÊ¿",
-                35 => "³àÄ§·¨Ê¦",
-                36 => "ÇàÄ§·¨Ê¦",
-                37 => "¾øÇ¹Õ½Ê¿",
-                38 => "ÎèÕß",
-                39 => "îÌÁ­¿Í",
-                40 => "ÏÍÕß",
-                99 => "Global",
-                DOH.JobID => "Disciples of the Hand",
-                DOL.JobID => "´óµØÊ¹Õß",
-                _ => "Unknown",
-            };
     }
 }

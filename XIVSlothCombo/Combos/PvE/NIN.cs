@@ -1,5 +1,6 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Statuses;
+using XIVSlothCombo.Combos.PvE.Content;
 using XIVSlothCombo.Core;
 using XIVSlothCombo.CustomComboNS;
 using XIVSlothCombo.Data;
@@ -161,9 +162,9 @@ namespace XIVSlothCombo.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.NIN_ST_AdvancedMode;
 
-            protected internal MudraCasting mudraState = new MudraCasting();
+            protected internal MudraCasting mudraState = new();
 
-            protected internal NINOpenerLogic openerLogic = new NINOpenerLogic();
+            protected internal static NINOpenerLogic NINOpener = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -206,7 +207,7 @@ namespace XIVSlothCombo.Combos.PvE
                     if (OriginalHook(Ninjutsu) is Rabbit)
                         return OriginalHook(Ninjutsu);
 
-                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_BalanceOpener) && NINOpenerLogic.LevelChecked && openerLogic.DoFullOpener(ref actionID, mudraState))
+                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_BalanceOpener) && NINOpenerLogic.LevelChecked && NINOpener.DoFullOpener(ref actionID, mudraState))
                         return actionID;
 
                     if (HasEffect(Buffs.TenChiJin))
@@ -433,7 +434,7 @@ namespace XIVSlothCombo.Combos.PvE
                         if (lastComboMove == SpinningEdge && GustSlash.LevelChecked())
                             return OriginalHook(GustSlash);
 
-                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrueNorth) &&
+                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrueNorth) && TargetNeedsPositionals() &&
                             IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrueNorth_ArmorCrush) &&
                             lastComboMove == GustSlash && GetRemainingCharges(All.TrueNorth) > 0 &&
                             All.TrueNorth.LevelChecked() && !HasEffect(All.Buffs.TrueNorth) &&
@@ -454,7 +455,7 @@ namespace XIVSlothCombo.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.NIN_AoE_AdvancedMode;
 
-            protected internal MudraCasting mudraState = new MudraCasting();
+            protected internal MudraCasting mudraState = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -628,9 +629,9 @@ namespace XIVSlothCombo.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.NIN_ST_SimpleMode;
 
-            protected internal MudraCasting mudraState = new MudraCasting();
+            protected internal MudraCasting mudraState = new();
 
-            protected internal NINOpenerLogic openerLogic = new NINOpenerLogic();
+            protected internal static NINOpenerLogic NINOpener = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -645,7 +646,7 @@ namespace XIVSlothCombo.Combos.PvE
                     if (OriginalHook(Ninjutsu) is Rabbit)
                         return OriginalHook(Ninjutsu);
 
-                    if (IsEnabled(CustomComboPreset.NIN_ST_SimpleMode_BalanceOpener) && NINOpenerLogic.LevelChecked && openerLogic.DoFullOpener(ref actionID, mudraState))
+                    if (IsEnabled(CustomComboPreset.NIN_ST_SimpleMode_BalanceOpener) && NINOpenerLogic.LevelChecked && NINOpener.DoFullOpener(ref actionID, mudraState))
                         return actionID;
 
                     if (HasEffect(Buffs.TenChiJin))
@@ -696,10 +697,10 @@ namespace XIVSlothCombo.Combos.PvE
                         if (HasEffect(Buffs.Suiton) && IsOffCooldown(TrickAttack))
                             return OriginalHook(TrickAttack);
 
-                        if ((TargetHasEffect(Debuffs.TrickAttack) && gauge.Ninki >= 50) || useBhakaBeforeTrickWindow && gauge.Ninki == 100 && Bhavacakra.LevelChecked())
+                        if (Bhavacakra.LevelChecked() && ((TargetHasEffect(Debuffs.TrickAttack) && gauge.Ninki >= 50) || useBhakaBeforeTrickWindow && gauge.Ninki == 100))
                             return OriginalHook(Bhavacakra);
 
-                        if ((TargetHasEffect(Debuffs.TrickAttack) && gauge.Ninki >= 50) || useBhakaBeforeTrickWindow && gauge.Ninki == 100 && !Bhavacakra.LevelChecked() && Hellfrog.LevelChecked())
+                        if ((TargetHasEffect(Debuffs.TrickAttack) && gauge.Ninki >= 50) || (useBhakaBeforeTrickWindow && gauge.Ninki == 100) && !Bhavacakra.LevelChecked() && Hellfrog.LevelChecked())
                             return OriginalHook(Hellfrog);
 
                         if (!inTrickBurstSaveWindow)
@@ -740,7 +741,7 @@ namespace XIVSlothCombo.Combos.PvE
                         if (lastComboMove == GustSlash && gauge.HutonTimer <= 30000 && ArmorCrush.LevelChecked())
                             return OriginalHook(ArmorCrush);
 
-                        if (lastComboMove == GustSlash && GetRemainingCharges(All.TrueNorth) > 0 && All.TrueNorth.LevelChecked() && !HasEffect(All.Buffs.TrueNorth) && canWeave)
+                        if (lastComboMove == GustSlash && TargetNeedsPositionals() && GetRemainingCharges(All.TrueNorth) > 0 && All.TrueNorth.LevelChecked() && !HasEffect(All.Buffs.TrueNorth) && canWeave)
                             return OriginalHook(All.TrueNorth);
 
                         if (lastComboMove == GustSlash && AeolianEdge.LevelChecked())
@@ -757,7 +758,7 @@ namespace XIVSlothCombo.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.NIN_AoE_SimpleMode;
 
-            protected internal MudraCasting mudraState = new MudraCasting();
+            protected internal MudraCasting mudraState = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {

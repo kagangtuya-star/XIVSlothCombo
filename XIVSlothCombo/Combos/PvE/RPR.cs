@@ -1,6 +1,8 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
+using XIVSlothCombo.Combos.PvE.Content;
 using XIVSlothCombo.Core;
 using XIVSlothCombo.CustomComboNS;
+using XIVSlothCombo.CustomComboNS.Functions;
 
 namespace XIVSlothCombo.Combos.PvE
 {
@@ -82,6 +84,8 @@ namespace XIVSlothCombo.Combos.PvE
                 RPR_OpenerChoice = "RPR_OpenerChoice",
                 RPR_SoulsowOptions = "RPRSoulsowOptions",
                 RPR_VariantCure = "RPRVariantCure";
+            public static UserInt
+                RPR_Slice_AltMode = new("RPR_Slice_AltMode");
         }
 
         internal class RPR_ST_SliceCombo : CustomCombo
@@ -100,7 +104,7 @@ namespace XIVSlothCombo.Combos.PvE
                 int openerChoice = PluginConfiguration.GetCustomIntValue(Config.RPR_OpenerChoice);
                 int sodThreshold = PluginConfiguration.GetCustomIntValue(Config.RPR_SoDThreshold);
                 int sodRefreshRange = PluginConfiguration.GetCustomIntValue(Config.RPR_SoDRefreshRange);
-                bool trueNorthReady = GetRemainingCharges(All.TrueNorth) > 0 && !HasEffect(All.Buffs.TrueNorth);
+                bool trueNorthReady = TargetNeedsPositionals() && GetRemainingCharges(All.TrueNorth) > 0 && !HasEffect(All.Buffs.TrueNorth);
                 bool trueNorthReadyDyn = trueNorthReady;
                 bool opener = IsEnabled(CustomComboPreset.RPR_ST_SliceCombo_Opener) && CombatEngageDuration().TotalSeconds < 30 && LevelChecked(Communio);
 
@@ -138,7 +142,7 @@ namespace XIVSlothCombo.Combos.PvE
                     }
                 }
 
-                if (actionID is Slice)
+                if (actionID is Slice && Config.RPR_Slice_AltMode == 0 || actionID is Harpe && Config.RPR_Slice_AltMode == 1)
                 {
                     bool interruptReady = LevelChecked(All.LegSweep) && CanInterruptEnemy() && IsOffCooldown(All.LegSweep);
 
@@ -435,7 +439,7 @@ namespace XIVSlothCombo.Combos.PvE
 
                 if (actionID is BloodStalk)
                 {
-                    bool trueNorthReady = GetRemainingCharges(All.TrueNorth) > 0 && !HasEffect(All.Buffs.TrueNorth);
+                    bool trueNorthReady = TargetNeedsPositionals() && GetRemainingCharges(All.TrueNorth) > 0 && !HasEffect(All.Buffs.TrueNorth);
 
                     if (IsEnabled(CustomComboPreset.RPR_TrueNorth) && GetBuffStacks(Buffs.SoulReaver) is 2 && trueNorthReady && CanWeave(Slice))
                         return All.TrueNorth;
@@ -553,7 +557,7 @@ namespace XIVSlothCombo.Combos.PvE
                 int positionalChoice = PluginConfiguration.GetCustomIntValue(Config.RPR_PositionalChoice);
                 if (actionID is Enshroud)
                 {
-                    bool trueNorthReady = GetRemainingCharges(All.TrueNorth) > 0 && !HasEffect(All.Buffs.TrueNorth);
+                    bool trueNorthReady = TargetNeedsPositionals() && GetRemainingCharges(All.TrueNorth) > 0 && !HasEffect(All.Buffs.TrueNorth);
 
                     if (IsEnabled(CustomComboPreset.RPR_TrueNorth) && GetBuffStacks(Buffs.SoulReaver) is 2 && trueNorthReady && CanWeave(Slice))
                         return All.TrueNorth;

@@ -8,7 +8,7 @@ using XIVSlothCombo.Services;
 
 namespace XIVSlothCombo.Combos.JobHelpers
 {
-    internal class NIN
+    internal class  NIN
     {
         internal class MudraCasting : PvE.NIN
         {

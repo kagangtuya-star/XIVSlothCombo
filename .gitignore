@@ -1,10 +1,15 @@
-.histpry/
+
 .vs/
 
 XIVSlothCombo/obj/
 
 XIVSlothCombo/bin/Debug/
-XIVSlothCombo/bin/
+
 *.v2
+*.csproj
+
+XIVSlothCombo/bin/Release/
+
 
 .idea
+*.user

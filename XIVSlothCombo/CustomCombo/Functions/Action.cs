@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using XIVSlothCombo.Combos.PvE;
 using XIVSlothCombo.Data;
 using XIVSlothCombo.Services;
 
@@ -19,7 +20,7 @@ namespace XIVSlothCombo.CustomComboNS.Functions
         /// <summary> Checks if the player is high enough level to use the passed Action ID. </summary>
         /// <param name="actionid"> ID of the action. </param>
         /// <returns></returns>
-        public static bool LevelChecked(uint actionid) => LocalPlayer.Level >= GetLevel(actionid);
+        public static bool LevelChecked(uint actionid) => LocalPlayer.Level >= GetLevel(actionid) && NoBlockingStatuses(actionid);
 
         /// <summary> Checks if the player is high enough level to use the passed Trait ID. </summary>
         /// <param name="traitid"> ID of the action. </param>
@@ -197,11 +198,143 @@ namespace XIVSlothCombo.CustomComboNS.Functions
             return false;
         }
 
+        //添加只双插
+        public static bool CanSpellWeavePlus(uint actionID, double weaveTime = 0.6)
+        {
+            if (ActionWatching.CombatActions.Count > 2)
+            {
+                var 能力技数量 = 0;
+                
+                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions.Last(), out var Last);
+                if (Last != null)
+                {
+                    switch (Last.ActionCategory.Value.RowId)
+                    {
+                        case 2: //Spell
+                            break;
+                        case 3: //Weaponskill
+                            break;
+                        case 4: //Ability
+                            //能力技
+                            能力技数量++;
+                            break;
+                    }
+                }
+                if (Last.RowId is DNC.四色技巧舞步结束TechnicalFinish4_0)
+                {
+                    return false;
+                }
+
+
+
+
+                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[ActionWatching.CombatActions.Count - 2], out var Last_2);
+                if (Last_2 != null)
+                {
+                    switch (Last_2.ActionCategory.Value.RowId)
+                    {
+                        case 2: //Spell
+                            break;
+                        case 3: //Weaponskill
+                            break;
+                        case 4: //Ability
+                            //能力技
+                            能力技数量++;
+                            break;
+                    }
+                    
+                }
+                
+                if (Last_2.RowId is DNC.双色标准舞步结束StandardFinish2 or DNC.四色技巧舞步结束TechnicalFinish4 or DNC.提拉纳Tillana)
+                {
+                    
+                    if (能力技数量 >= 1)
+                    {
+                        return false;
+                    }
+                }
+
+
+
+                if (能力技数量 >= 2)
+                {
+                    return false;
+                }
+                
+            }
+
+
+            float castTimeRemaining = LocalPlayer.TotalCastTime - LocalPlayer.CurrentCastTime;
+
+            if (GetCooldown(actionID).CooldownRemaining > weaveTime &&                          // Prevent GCD delay
+                castTimeRemaining <= 0.5 &&                                                     // Show in last 0.5sec of cast so game can queue ability
+                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime >= 0)   // Don't show if spell is still casting in weave window
+                return true;
+            return false;
+        }
+
         /// <summary> Checks if the provided actionID has enough cooldown remaining to weave against it in the later portion of the GCD without causing clipping. </summary>
         /// <param name="actionID"> Action ID to check. </param>
         /// <param name="start"> Time (in seconds) to start to check for the weave window. </param>
         /// <param name="end"> Time (in seconds) to end the check for the weave window. </param>
         /// <returns> True or false. </returns>
         public static bool CanDelayedWeave(uint actionID, double start = 1.25, double end = 0.6) => GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end;
+
+
+        public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25,double end = 0.6)
+        {
+            if (ActionWatching.CombatActions.Count > 2)
+            {
+                var 能力技数量 = 0;
+
+                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions.Last(), out var Last);
+                if (Last != null)
+                {
+                    switch (Last.ActionCategory.Value.RowId)
+                    {
+                        case 2: //Spell
+                            break;
+                        case 3: //Weaponskill
+                            break;
+                        case 4: //Ability
+                            //能力技
+                            能力技数量++;
+                            break;
+                    }
+                }
+                
+                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2], out var last2);
+                if (last2 != null)
+                {
+                    switch (last2.ActionCategory.Value.RowId)
+                    {
+                        case 2: //Spell
+                            break;
+                        case 3: //Weaponskill
+                            break;
+                        case 4: //Ability
+                            //能力技
+                            能力技数量++;
+                            break;
+                    }
+
+                }
+
+
+                if (能力技数量 >= 2)
+                {
+                    return false;
+                }
+
+            }
+
+            if (GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end)
+            {
+                return true;
+            }
+
+            return false;
+            
+        }
     }
 }

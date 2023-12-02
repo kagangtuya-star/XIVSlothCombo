@@ -1,6 +1,7 @@
 using System;
 using Dalamud.Game;
 using Dalamud.Logging;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace XIVSlothCombo.Core
 {
@@ -22,17 +23,25 @@ namespace XIVSlothCombo.Core
         /// <inheritdoc/>
         protected override void Setup64Bit(SigScanner scanner)
         {
-            ComboTimer = scanner.GetStaticAddressFromSig("F3 0F 11 05 ?? ?? ?? ?? F3 0F 10 45 ?? E8");
+            unsafe
+            {
+                ComboTimer = new IntPtr(&ActionManager.Instance()->Combo.Timer);
 
-            GetAdjustedActionId = scanner.ScanText("E8 ?? ?? ?? ?? 8B F8 3B DF");  // Client::Game::ActionManager.GetAdjustedActionId
+                GetAdjustedActionId = scanner.ScanText("E8 ?? ?? ?? ?? 8B F8 3B DF");
+                
+                IsActionIdReplaceable = scanner.ScanText("E8 ?? ?? ?? ?? 84 C0 74 4C 8B D3");
 
-            IsActionIdReplaceable = scanner.ScanText("E8 ?? ?? ?? ?? 84 C0 74 4C 8B D3");
-
-            PluginLog.Verbose("===== X I V S L O T H C O M B O =====");
-            PluginLog.Verbose($"{nameof(GetAdjustedActionId)}   0x{GetAdjustedActionId:X}");
-            PluginLog.Verbose($"{nameof(IsActionIdReplaceable)} 0x{IsActionIdReplaceable:X}");
-            PluginLog.Verbose($"{nameof(ComboTimer)}            0x{ComboTimer:X}");
-            PluginLog.Verbose($"{nameof(LastComboMove)}         0x{LastComboMove:X}");
+                PluginLog.Verbose("===== X I V S L O T H C O M B O =====");
+                PluginLog.Verbose($"{nameof(GetAdjustedActionId)}   0x{GetAdjustedActionId:X}");
+                PluginLog.Verbose($"{nameof(IsActionIdReplaceable)} 0x{IsActionIdReplaceable:X}");
+                PluginLog.Verbose($"{nameof(ComboTimer)}            0x{ComboTimer:X}");
+                PluginLog.Verbose($"{nameof(LastComboMove)}         0x{LastComboMove:X}");
+                PluginLog.Verbose("===== X I V S L O T H C O M B O =====");
+                PluginLog.Verbose($"{nameof(GetAdjustedActionId)}   0x{GetAdjustedActionId:X}");
+                PluginLog.Verbose($"{nameof(IsActionIdReplaceable)} 0x{IsActionIdReplaceable:X}");
+                PluginLog.Verbose($"{nameof(ComboTimer)}            0x{ComboTimer:X}");
+                PluginLog.Verbose($"{nameof(LastComboMove)}         0x{LastComboMove:X}");
+            }
         }
     }
 }
