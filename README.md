@@ -4,12 +4,12 @@
 翻译相关：
 [UserConfig](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothComboX/Window/Functions/UserConfig.cs)、[Translatezh_CN.cs](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothComboX/Translatezh/Translatezh_CN.cs)
 ### 手动安装（推荐）
-[下载](https://raw.githubusercontent.com/44451516/XIVSlothComboX/CN/release/XIVSlothComboX/latest.zip)
+[下载](https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/XIVSlothComboX/latest.zip)
 
 如果有更好的方案欢迎提意见。
 
 ### 使用（有点bug）：
-##  https://raw.githubusercontent.com/44451516/XIVSlothComboX/CN/release/pluginmaster.json
+##  https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/pluginmaster.json
 ---
 ## 快捷指令 [参考](https://docs.qq.com/doc/DT0tjZm9JTFlqUGJY)
 ~~~
