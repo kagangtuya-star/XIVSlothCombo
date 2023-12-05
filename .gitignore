@@ -1,14 +1,14 @@
 
 .vs/
 
-XIVSlothCombo/obj/
+XIVSlothComboX/obj/
 
-XIVSlothCombo/bin/Debug/
+XIVSlothComboX/bin/Debug/
 
 *.v2
 *.csproj
 
-XIVSlothCombo/bin/Release/
+XIVSlothComboX/bin/Release/
 
 
 .idea

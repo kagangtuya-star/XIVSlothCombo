@@ -1,15 +1,15 @@
-### 群名称：XIVSlothCombo汉化
+### 群名称：XIVSlothComboX汉化
 ### 群   号：544685806
 ### 来点好兄弟一起汉化(用爱发电全靠自觉)
 翻译相关：
-[UserConfig](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothCombo/Window/Functions/UserConfig.cs)、[Translatezh_CN.cs](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothCombo/Translatezh/Translatezh_CN.cs)
+[UserConfig](https://github.com/44451516/XIVSlothComboX/blob/CN/XIVSlothComboX/Window/Functions/UserConfig.cs)、[Translatezh_CN.cs](https://github.com/44451516/XIVSlothComboX/blob/CN/XIVSlothComboX/Translatezh/Translatezh_CN.cs)
 ### 手动安装（推荐）
-[下载](https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/XIVSlothCombo/latest.zip)
+[下载](https://raw.githubusercontent.com/44451516/XIVSlothComboX/CN/release/XIVSlothComboX/latest.zip)
 
 如果有更好的方案欢迎提意见。
 
 ### 使用（有点bug）：
-##  https://raw.githubusercontent.com/44451516/XIVSlothCombo/CN/release/pluginmaster.json
+##  https://raw.githubusercontent.com/44451516/XIVSlothComboX/CN/release/pluginmaster.json
 ---
 ## 快捷指令 [参考](https://docs.qq.com/doc/DT0tjZm9JTFlqUGJY)
 ~~~

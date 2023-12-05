@@ -9,10 +9,10 @@ on:
     - CN
 
 env:
-  PUBLIC_NAME: XIVSlothCombo
-  SOLUTION_NAME: XIVSlothCombo
-  INTERNAL_NAME: XIVSlothCombo
-  RELEASE_DIR: release\XIVSlothCombo
+  PUBLIC_NAME: XIVSlothComboX
+  SOLUTION_NAME: XIVSlothComboX
+  INTERNAL_NAME: XIVSlothComboX
+  RELEASE_DIR: release\XIVSlothComboX
   PERSONAL_PLUGIN_REPO: 44451516/MyDalamudPlugins
   PR_PLUGIN_REPO: 44451516/MyDalamudPlugins
 
@@ -42,7 +42,7 @@ jobs:
         echo "::set-output name=timestamp::$(date +'%Y-%m-%d-%H-%M-%S')"
     - uses: actions/upload-artifact@v2
       with:
-        name: "XIVSlothCombo-${{ steps.timestamp.outputs.timestamp }}"
+        name: "XIVSlothComboX-${{ steps.timestamp.outputs.timestamp }}"
         path: ${{ env.RELEASE_DIR }}
         if-no-files-found: error
 
@@ -57,7 +57,7 @@ jobs:
         token: ${{ secrets.XIVCOMBO_TOKEN }}
     - uses: actions/download-artifact@v2
       with:
-        name: "XIVSlothCombo-${{ steps.timestamp.outputs.timestamp }}"
+        name: "XIVSlothComboX-${{ steps.timestamp.outputs.timestamp }}"
         path: plugins/${{ env.INTERNAL_NAME }}
     - uses: EndBug/add-and-commit@v7
       with:
