@@ -13,12 +13,14 @@ using Dalamud.Game.Command;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
+using Dalamud.Memory;
 using Dalamud.Plugin;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 using XIVSlothComboX.Window;
 using XIVSlothComboX.Window.Tabs;
@@ -656,6 +658,23 @@ namespace XIVSlothComboX
                     autoActionId = 0;
                     autoTokenSource.Cancel();
 
+                    break;
+                }
+
+                case "fakename":
+                {
+                    if (argumentsParts.Length > 1)
+                    {
+                        if (localPlayer != null)
+                        {
+                            unsafe
+                            {
+                                FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* Struct = (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*) localPlayer.Address;
+                                MemoryHelper.WriteSeString((IntPtr)Struct->Name, SeStringUtils.Text(argumentsParts[1]));
+                            }
+                        }
+
+                    }
                     break;
                 }
 

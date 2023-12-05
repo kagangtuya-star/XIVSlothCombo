@@ -2,7 +2,7 @@
 ### 群   号：544685806
 ### 来点好兄弟一起汉化(用爱发电全靠自觉)
 翻译相关：
-[UserConfig](https://github.com/44451516/XIVSlothComboX/blob/CN/XIVSlothComboX/Window/Functions/UserConfig.cs)、[Translatezh_CN.cs](https://github.com/44451516/XIVSlothComboX/blob/CN/XIVSlothComboX/Translatezh/Translatezh_CN.cs)
+[UserConfig](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothComboX/Window/Functions/UserConfig.cs)、[Translatezh_CN.cs](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothComboX/Translatezh/Translatezh_CN.cs)
 ### 手动安装（推荐）
 [下载](https://raw.githubusercontent.com/44451516/XIVSlothComboX/CN/release/XIVSlothComboX/latest.zip)
 

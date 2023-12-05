@@ -109,7 +109,7 @@ namespace XIVSlothComboX.Combos.PvE
                 float wildfireCDTime = GetCooldownRemainingTime(Wildfire);
                 bool interruptReady = ActionReady(All.HeadGraze) && CanInterruptEnemy();
 
-                if (actionID is SplitShot or HeatedSplitShot)
+                if (actionID is SplitShot )
                 {
                     
                     if (IsEnabled(CustomComboPreset.MCH_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
@@ -307,7 +307,7 @@ namespace XIVSlothComboX.Combos.PvE
                 int rotationSelection = Config.MCH_ST_RotationSelection;
                 bool interruptReady = ActionReady(All.HeadGraze) && CanInterruptEnemy();
 
-                if (actionID is SplitShot or HeatedSplitShot)
+                if (actionID is SplitShot)
                 {
                     if (IsEnabled(CustomComboPreset.MCH_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
                         return Variant.VariantCure;

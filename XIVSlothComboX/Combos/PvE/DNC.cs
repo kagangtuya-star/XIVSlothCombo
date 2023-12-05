@@ -608,7 +608,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
                             else
                             {
-                                if ( HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) )
+                                if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) )
                                     return 扇舞急FanDance3; 
                             }
 

@@ -34,7 +34,7 @@ namespace XIVSlothComboX.Window.Tabs
 
             if (ImGui.Button("有问题来这里提"))
             {
-                Util.OpenLink("https://github.com/44451516/XIVSlothComboX/issues");
+                Util.OpenLink("https://github.com/44451516/XIVSlothCombo/issues");
             }
 
             // ImGui.PopStyleColor();
@@ -43,7 +43,7 @@ namespace XIVSlothComboX.Window.Tabs
        
             if (ImGui.Button("想来汉化？点击这里"))
             {
-                Util.OpenLink("https://github.com/44451516/XIVSlothComboX");
+                Util.OpenLink("https://github.com/44451516/XIVSlothCombo");
             }
 
             ImGui.Spacing();

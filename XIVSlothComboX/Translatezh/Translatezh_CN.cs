@@ -312,10 +312,10 @@ public class Translatezh_CN
         #endregion
          #region MACHINIST
         #region Simple ST
-        {"Replaces Split Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "用一个按钮完整的单目标循环替换分列弹。这对于新手来说是理想的职业选择。"  },
+        {"Replaces Split Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "用一个按钮完整的单目标循环替换分裂弹。这对于新手来说是理想的职业选择。\n注意是分裂弹不是热分裂弹"  },
         #endregion
         #region Advanced ST
-        {"Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "[AI]用一个按钮的完整单目标旋转替换分裂射击。\n如果您想自定义旋转，则这些功能非常理想。"  },
+        {"Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "[AI]用一个按钮的完整单目标旋转替换分裂弹。\n如果您想自定义旋转，则这些功能非常理想。\n注意是分裂弹不是热分裂弹"  },
         {"Level 90 Opener Option" , "[AI]90级起手选项"  },
         {"Uses the Balance opener depending on which rotation is selected above." , "[AI]根据上面选择的旋转使用平衡器。"  },
         {"Hot Shot / Air Anchor option" , "[AI]热火/空中锚选项"  },
@@ -346,10 +346,10 @@ public class Translatezh_CN
         {"Use Second Wind when below the set HP percentage." , "[AI]当低于设置的HP百分比时使用第二个风。"  },
         #endregion
         #region Simple AoE
-        {"Replaces Spread Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "用一个按钮的完整单目标旋转替换分裂射击。\n如果您是新手，则这非常理想。"  },
+        {"Replaces Spread Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "用一个按钮的完整单目标旋转替换分裂弹。\n如果您是新手，则这非常理想。"  },
         #endregion
         #region Advanced AoE
-        {"Replaces Spread Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "[AI]用一个按钮的完整单目标旋转替换分裂射击。\n如果您想自定义旋转，则这些功能非常理想。"  },
+        {"Replaces Spread Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "[AI]用一个按钮的完整单目标旋转替换分裂弹。\n如果您想自定义旋转，则这些功能非常理想。"  },
         {"Adds Gauss Round/Ricochet to the rotation." , "[AI]将高斯圆和跳弹添加到旋转中。\n将防止过度堆积。"  },
         {"Flamethrower Option" , "[AI]将火焰喷射器添加到旋转中。"  },
         {"Adds Flamethrower to the rotation." , "[AI]将火焰喷射器添加到旋转中。"  },
