@@ -521,11 +521,11 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (HasEffect(Buffs.NoMercy)  && LevelChecked(爆发击BurstStrike))
                         {
+                            if (LevelChecked(超高速Hypervelocity) && HasEffect(Buffs.ReadyToBlast))
+                                return 超高速Hypervelocity;
+                            
                             if (gauge.AmmoComboStep == 0)
                             {
-                                if (LevelChecked(超高速Hypervelocity) && HasEffect(Buffs.ReadyToBlast))
-                                    return 超高速Hypervelocity;
-                                
                                 if (gauge.Ammo != 0 && LevelChecked(倍攻DoubleDown) && GetCooldownRemainingTime(倍攻DoubleDown) > 20 && GetCooldownRemainingTime(烈牙GnashingFang) > 10)
                                     return 爆发击BurstStrike;
                             
