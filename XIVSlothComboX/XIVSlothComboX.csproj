@@ -13,7 +13,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\7.11.0.0\</DalamudLibPath>
+		<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
 <!--		<DalamudPluginPath>$(appdata)\XIVLauncher\installedPlugins\XIVSlothComboX\$(version)</DalamudPluginPath>-->
 <!--		<DalamudDevPlugins>$(appdata)\XIVLauncher\devPlugins\XIVSlothComboX\</DalamudDevPlugins>-->
 		<AssemblyName>XIVSlothComboX</AssemblyName>
