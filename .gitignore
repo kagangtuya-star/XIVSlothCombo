@@ -1,12 +1,11 @@
 
 .vs/
-
+XIVSlothComboX/
 XIVSlothComboX/obj/
 
 XIVSlothComboX/bin/Debug/
 
 *.v2
-*.csproj
 
 XIVSlothComboX/bin/Release/
 
