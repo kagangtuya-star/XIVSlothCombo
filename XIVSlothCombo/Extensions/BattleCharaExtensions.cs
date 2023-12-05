@@ -12,7 +12,7 @@ namespace XIVSlothCombo.Extensions
         public unsafe static uint RawShieldValue(this BattleChara chara)
         {
             FFXIVClientStructs.FFXIV.Client.Game.Character.BattleChara* baseVal = (FFXIVClientStructs.FFXIV.Client.Game.Character.BattleChara*)chara.Address;
-            var value = baseVal->Character.ShieldValue;
+            var value = baseVal->Character.CharacterData.ShieldValue;
             var rawValue = chara.MaxHp / 100 * value;
 
             return rawValue;
@@ -21,8 +21,7 @@ namespace XIVSlothCombo.Extensions
         public unsafe static byte ShieldPercentage(this BattleChara chara)
         {
             FFXIVClientStructs.FFXIV.Client.Game.Character.BattleChara* baseVal = (FFXIVClientStructs.FFXIV.Client.Game.Character.BattleChara*)chara.Address;
-            var value = baseVal->Character.ShieldValue;
-
+            var value = baseVal->Character.CharacterData.ShieldValue;
             return value;
         }
 

@@ -748,6 +748,11 @@ namespace XIVSlothCombo.Combos
         [ParentCombo(DNC_DT_SimpleMode)]
         [CustomComboInfo("无脑模式_简易百花争艳", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_Flourish = 4068,
+        
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("无脑模式_进攻之探戈", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
+        DNC_DT_Simple_Devilment = 4068,
+        
 
         [ParentCombo(DNC_DT_SimpleMode)]
         [CustomComboInfo("无脑模式_剑舞", "剑舞加入循环", DNC.JobID, 2, "", "")]

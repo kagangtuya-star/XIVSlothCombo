@@ -577,14 +577,13 @@ namespace XIVSlothCombo.Combos.PvE
                     // Devilment & Flourish
                     if (canWeave)
                     {
-                        bool flourishReady = LevelChecked(百花争艳Flourish) 
-                                             && IsOffCooldown(百花争艳Flourish) 
+                        bool flourishReady = 百花争艳Flourish.ActionReady()
                                              && !HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) 
                                              && !HasEffect(Buffs.扇舞_终FourFoldFanDance) 
                                              && !HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry) 
                                              && !HasEffect(Buffs.非对称投掷_百花争艳FlourishingFlow);
 
-                        bool devilmentReady = 进攻之探戈Devilment.ActionReady();
+                        bool devilmentReady = 进攻之探戈Devilment.ActionReady() && IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment);
 
                         if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
                             return 进攻之探戈Devilment;
@@ -593,7 +592,7 @@ namespace XIVSlothCombo.Combos.PvE
                             return 进攻之探戈Devilment;
                         
                         
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady)
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && CanDelayedWeavePlus(actionID,1.5,0.5f))
                             return 百花争艳Flourish;
                     }
 
