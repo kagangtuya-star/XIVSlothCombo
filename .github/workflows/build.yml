@@ -9,8 +9,8 @@ on:
     - CN
 
 env:
-  PUBLIC_NAME: XIVSlothComboX
-  SOLUTION_NAME: XIVSlothComboX
+#  PUBLIC_NAME: XIVSlothComboX
+  SOLUTION_NAME: XIVSlothCombo
   INTERNAL_NAME: XIVSlothComboX
   RELEASE_DIR: release\XIVSlothComboX
   PERSONAL_PLUGIN_REPO: 44451516/MyDalamudPlugins
