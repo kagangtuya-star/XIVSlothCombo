@@ -373,7 +373,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Standard Rotation
-                    if (rotationSelection is 0)
+                    // if (rotationSelection is 0)
                     {
                         // Interrupt 自动伤头
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Interrupt) && interruptReady)
@@ -410,38 +410,39 @@ namespace XIVSlothComboX.Combos.PvE
                         //queen 优雅的使用机器人
                         if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen)
                             && Config.MCH_ST_TurretUsage == 1
-                            && CanWeave(actionID)
+                            && CanDelayedWeavePlus(actionID)
                             && !gauge.IsOverheated
                             && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
                             && !gauge.IsRobotActive)
                         {
-                            // First condition
-                            if (gauge.Battery is 50
-                                && CombatEngageDuration().TotalSeconds > 59
-                                && CombatEngageDuration().TotalSeconds < 68)
-                                return OriginalHook(车式浮空炮塔RookAutoturret);
+                            if (gauge.Battery >= 80 )
+                            {
+                                var 空气锚快好了 = GetCooldownRemainingTime(OriginalHook(空气锚AirAnchor)) <= 3
+                                             || ActionReady(OriginalHook(空气锚AirAnchor));
+                                
+                                if(空气锚快好了)
+                                    return OriginalHook(车式浮空炮塔RookAutoturret);
+                                
+                                var 回转飞锯ChainSaw快好了 = GetCooldownRemainingTime(回转飞锯ChainSaw) <= 3
+                                                      || ActionReady(OriginalHook(回转飞锯ChainSaw));
+                                
+                                if(回转飞锯ChainSaw快好了)
+                                    return OriginalHook(车式浮空炮塔RookAutoturret);
+                                
+                            }
+                            
+                            if (gauge.Battery >= 90 )
+                            {
+                                if (lastComboMove is 独头弹SlugShot or 热独头弹HeatedSlugshot)
+                                {
+                                    return OriginalHook(车式浮空炮塔RookAutoturret);
+                                }
+                            }
 
-                            // Second condition
-                            if (gauge.Battery is 100
-                                && gauge.LastSummonBatteryPower == 50
-                                && (GetCooldownRemainingTime(空气锚AirAnchor) <= 3 || ActionReady(空气锚AirAnchor)))
+                            if (gauge.Battery >= 90)
+                            {
                                 return OriginalHook(车式浮空炮塔RookAutoturret);
-
-                            // Third condition
-                            if (gauge.LastSummonBatteryPower == 100 && gauge.Battery >= 90)
-                                return OriginalHook(车式浮空炮塔RookAutoturret);
-
-                            // Fourth condition
-                            else if (gauge.LastSummonBatteryPower == 90
-                                     && wildfireCDTime < 70
-                                     && wildfireCDTime > 45
-                                     && gauge.Battery >= 90)
-                                return OriginalHook(车式浮空炮塔RookAutoturret);
-
-                            // Fifth condition
-                            else if (gauge.LastSummonBatteryPower != 50
-                                     && (wildfireCDTime <= 4 || (ActionReady(空气锚AirAnchor) && ActionReady(野火Wildfire))))
-                                return OriginalHook(车式浮空炮塔RookAutoturret);
+                            }
                         }
 
                         //机器人好了就用

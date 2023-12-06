@@ -99,10 +99,10 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
                     
-                    ImGui.TextUnformatted($"ActionReady:{CustomComboFunctions.ActionReady(MCH.弹射Ricochet)} GetCooldownRemainingTime:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
+                    // ImGui.TextUnformatted($"ActionReady:{CustomComboFunctions.ActionReady(MCH.弹射Ricochet)} GetCooldownRemainingTime:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
                     
                     
-                    // ImGui.TextUnformatted($"Enum.IsDefined(typeof(All),id)1 : {isDefined} ");
+                    ImGui.TextUnformatted($"MCHOpenerLogic {MCHOpenerLogic.CanOpener} {MCHOpenerLogic.currentState}");
                     // ImGui.TextUnformatted($"Enum.IsDefined(typeof(All),id)2 : {Enum.IsDefined(typeof(All),9999)} ");
                     
                     

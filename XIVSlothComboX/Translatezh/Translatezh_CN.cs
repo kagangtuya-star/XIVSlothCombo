@@ -315,9 +315,9 @@ public class Translatezh_CN
         {"Replaces Split Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "用一个按钮完整的单目标循环替换分裂弹。这对于新手来说是理想的职业选择。\n注意是分裂弹不是热分裂弹"  },
         #endregion
         #region Advanced ST
-        {"Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "[AI]用一个按钮的完整单目标旋转替换分裂弹。\n如果您想自定义旋转，则这些功能非常理想。\n注意是[分裂弹]不是[热分裂弹]"  },
+        {"Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "一键输出。\n注意是[分裂弹]不是[热分裂弹]"  },
         {"Level 90 Opener Option" , "90级起手[推荐]"  },
-        {"Uses the Balance opener depending on which rotation is selected above." , "开局的循环是不一样的"  },
+        {"Uses the Balance opener depending on which rotation is selected above." , "开局的循环期间不要干涉[除减伤自爆类技能]，否则会卡住。\n等他放完高达，循环结束"  },
         {"Hot Shot / Air Anchor option" , "热弹/空中锚选项"  },
         {"Adds Hot Shot/Air Anchor to the rotation." , "将热弹/空中锚添加到循环中。"  },
         {"Reassemble Option" , "重新整备选项"  },

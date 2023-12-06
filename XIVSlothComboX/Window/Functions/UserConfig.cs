@@ -1563,15 +1563,17 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.MCH_ST_AdvancedMode)
             {
+                //哥们一套循环都写不好 还要写3套？？
                 UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "标准循环", "", 0);
+                
                 UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "标准循环", "", 1);
                 // UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "Early Tools", "", 2);
             }
 
             if (preset is CustomComboPreset.MCH_Adv_TurretQueen)
             {
-                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_TurretUsage, "能用就用", "使用 50 或以上电池", 0);
-                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_TurretUsage, "动态调整", "根据当前状态，按不同的值使用，符合余额指导原则。", 1);
+                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_TurretUsage, "能用就用", "使用 50 或以上电池。", 0);
+                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_TurretUsage, "快溢出用", "尽可能多的电量。", 1);
             }
 
             if (preset is CustomComboPreset.MCH_ST_Adv_Reassembled)
