@@ -20,7 +20,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <summary> Checks if the player is high enough level to use the passed Action ID. </summary>
         /// <param name="actionid"> ID of the action. </param>
         /// <returns></returns>
-        public static bool LevelChecked(uint actionid) => LocalPlayer.Level >= GetLevel(actionid) && NoBlockingStatuses(actionid);
+        public static bool LevelChecked(uint actionid)
+            => LocalPlayer.Level >= GetLevel(actionid) && NoBlockingStatuses(actionid);
 
         /// <summary> Checks if the player is high enough level to use the passed Trait ID. </summary>
         /// <param name="traitid"> ID of the action. </param>
@@ -48,27 +49,29 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 case -2:
                     return false; //Error catch, Doesn't exist in ActionWatching
                 case -1:
-                    return InMeleeRange();//In the Sheet, all Melee skills appear to be -1
+                    return InMeleeRange(); //In the Sheet, all Melee skills appear to be -1
                 case 0: //Self Use Skills (Second Wind) or attacks (Art of War, Dyskrasia)
-                    {
-                        //NOTES: HOUSING DUMMIES ARE FUCKING CURSED BASTARDS THAT DON'T REGISTER ATTACKS CORRECTLY WITH SELF RADIUS ATTACKS
-                        //Use Explorer Mode dungeon, field map dummies, or let Thancred tank.
+                {
+                    //NOTES: HOUSING DUMMIES ARE FUCKING CURSED BASTARDS THAT DON'T REGISTER ATTACKS CORRECTLY WITH SELF RADIUS ATTACKS
+                    //Use Explorer Mode dungeon, field map dummies, or let Thancred tank.
 
-                        //Check if there is a radius
-                        float radius = ActionWatching.GetActionEffectRange(id);
-                        //Player has a 0.5y radius inside hitbox.
-                        //GetTargetDistance measures hitbox to hitbox (correct usage for ranged abilities so far)
-                        //But attacks from player must include personal space (0.5y).
-                        if (radius > 0)
-                        {   //Do not nest with above
-                            if (HasTarget()) return GetTargetDistance() <= (radius - 0.5f); else return false;
-                        }
-                        else return true; //Self use targets (Second Wind) have no radius
+                    //Check if there is a radius
+                    float radius = ActionWatching.GetActionEffectRange(id);
+                    //Player has a 0.5y radius inside hitbox.
+                    //GetTargetDistance measures hitbox to hitbox (correct usage for ranged abilities so far)
+                    //But attacks from player must include personal space (0.5y).
+                    if (radius > 0)
+                    {
+                        //Do not nest with above
+                        if (HasTarget()) return GetTargetDistance() <= (radius - 0.5f);
+                        else return false;
                     }
+                    else return true; //Self use targets (Second Wind) have no radius
+                }
                 default:
                     return GetTargetDistance() <= range;
             }
-        } 
+        }
 
         /// <summary> Returns the level of a trait. </summary>
         /// <param name="id"> ID of the action. </param>
@@ -132,12 +135,10 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     {
                         if (a1.Data.RemainingCharges == a2.Data.RemainingCharges)
                         {
-                            return a1.Data.ChargeCooldownRemaining < a2.Data.ChargeCooldownRemaining
-                                ? a1 : a2;
+                            return a1.Data.ChargeCooldownRemaining < a2.Data.ChargeCooldownRemaining ? a1 : a2;
                         }
 
-                        return a1.Data.RemainingCharges > a2.Data.RemainingCharges
-                            ? a1 : a2;
+                        return a1.Data.RemainingCharges > a2.Data.RemainingCharges ? a1 : a2;
                     }
 
                     else if (a1.Data.HasCharges)
@@ -145,8 +146,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                         if (a1.Data.RemainingCharges > 0)
                             return a1;
 
-                        return a1.Data.ChargeCooldownRemaining < a2.Data.CooldownRemaining
-                            ? a1 : a2;
+                        return a1.Data.ChargeCooldownRemaining < a2.Data.CooldownRemaining ? a1 : a2;
                     }
 
                     else if (a2.Data.HasCharges)
@@ -154,14 +154,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                         if (a2.Data.RemainingCharges > 0)
                             return a2;
 
-                        return a2.Data.ChargeCooldownRemaining < a1.Data.CooldownRemaining
-                            ? a2 : a1;
+                        return a2.Data.ChargeCooldownRemaining < a1.Data.CooldownRemaining ? a2 : a1;
                     }
 
                     else
                     {
-                        return a1.Data.CooldownRemaining < a2.Data.CooldownRemaining
-                            ? a1 : a2;
+                        return a1.Data.CooldownRemaining < a2.Data.CooldownRemaining ? a1 : a2;
                     }
                 }
 
@@ -171,17 +169,15 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
             static (uint ActionID, CooldownData Data) Selector(uint actionID) => (actionID, GetCooldown(actionID));
 
-            return actions
-                .Select(Selector)
-                .Aggregate((a1, a2) => Compare(original, a1, a2))
-                .ActionID;
+            return actions.Select(Selector).Aggregate((a1, a2) => Compare(original, a1, a2)).ActionID;
         }
 
         /// <summary> Checks if the provided actionID has enough cooldown remaining to weave against it without causing clipping.</summary>
         /// <param name="actionID"> Action ID to check. </param>
         /// <param name="weaveTime"> Time when weaving window is over. Defaults to 0.7. </param>
         /// <returns> True or false. </returns>
-        public static bool CanWeave(uint actionID, double weaveTime = 0.7) => (GetCooldown(actionID).CooldownRemaining > weaveTime) || (HasSilence() && HasPacification());
+        public static bool CanWeave(uint actionID, double weaveTime = 0.7)
+            => (GetCooldown(actionID).CooldownRemaining > weaveTime) || (HasSilence() && HasPacification());
 
         /// <summary> Checks if the provided actionID has enough cooldown remaining to weave against it without causing clipping and checks if you're casting a spell. </summary>
         /// <param name="actionID"> Action ID to check. </param>
@@ -191,9 +187,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         {
             float castTimeRemaining = LocalPlayer.TotalCastTime - LocalPlayer.CurrentCastTime;
 
-            if (GetCooldown(actionID).CooldownRemaining > weaveTime &&                          // Prevent GCD delay
-                castTimeRemaining <= 0.5 &&                                                     // Show in last 0.5sec of cast so game can queue ability
-                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime >= 0)   // Don't show if spell is still casting in weave window
+            if (GetCooldown(actionID).CooldownRemaining > weaveTime
+                && // Prevent GCD delay
+                castTimeRemaining <= 0.5
+                && // Show in last 0.5sec of cast so game can queue ability
+                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime
+                >= 0) // Don't show if spell is still casting in weave window
                 return true;
             return false;
         }
@@ -204,7 +203,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             if (ActionWatching.CombatActions.Count > 2)
             {
                 var 能力技数量 = 0;
-                
+
                 ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions.Last(), out var Last);
                 if (Last != null)
                 {
@@ -228,7 +227,9 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
 
 
-                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[ActionWatching.CombatActions.Count - 2], out var Last_2);
+                ActionWatching.ActionSheet.TryGetValue(
+                    ActionWatching.CombatActions[ActionWatching.CombatActions.Count - 2],
+                    out var Last_2);
                 if (Last_2 != null)
                 {
                     switch (Last_2.ActionCategory.Value.RowId)
@@ -242,12 +243,16 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                             能力技数量++;
                             break;
                     }
-                    
+
                 }
-                
-                if (Last_2.RowId is DNC.双色标准舞步结束StandardFinish2 or DNC.四色技巧舞步结束TechnicalFinish4 or DNC.提拉纳Tillana)
+
+                if (Last_2.RowId is DNC.双色标准舞步结束StandardFinish2
+                    or DNC.四色技巧舞步结束TechnicalFinish4
+                    or DNC.提拉纳Tillana
+                    or MCH.热冲击HeatBlast
+                    or MCH.自动弩AutoCrossbow)
                 {
-                    
+
                     if (能力技数量 >= 1)
                     {
                         return false;
@@ -260,15 +265,18 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 {
                     return false;
                 }
-                
+
             }
 
 
             float castTimeRemaining = LocalPlayer.TotalCastTime - LocalPlayer.CurrentCastTime;
 
-            if (GetCooldown(actionID).CooldownRemaining > weaveTime &&                          // Prevent GCD delay
-                castTimeRemaining <= 0.5 &&                                                     // Show in last 0.5sec of cast so game can queue ability
-                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime >= 0)   // Don't show if spell is still casting in weave window
+            if (GetCooldown(actionID).CooldownRemaining > weaveTime
+                && // Prevent GCD delay
+                castTimeRemaining <= 0.5
+                && // Show in last 0.5sec of cast so game can queue ability
+                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime
+                >= 0) // Don't show if spell is still casting in weave window
                 return true;
             return false;
         }
@@ -278,10 +286,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <param name="start"> Time (in seconds) to start to check for the weave window. </param>
         /// <param name="end"> Time (in seconds) to end the check for the weave window. </param>
         /// <returns> True or false. </returns>
-        public static bool CanDelayedWeave(uint actionID, double start = 1.25, double end = 0.6) => GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end;
+        public static bool CanDelayedWeave(uint actionID, double start = 1.25, double end = 0.6)
+            => GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end;
 
 
-        public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25,double end = 0.6)
+        public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25, double end = 0.6)
         {
             if (ActionWatching.CombatActions.Count > 2)
             {
@@ -302,7 +311,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                             break;
                     }
                 }
-                
+
                 ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2], out var last2);
                 if (last2 != null)
                 {
@@ -334,7 +343,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             }
 
             return false;
-            
+
         }
     }
 }

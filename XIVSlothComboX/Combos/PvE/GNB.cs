@@ -635,6 +635,11 @@ namespace XIVSlothComboX.Combos.PvE
 
         private static bool 使用子弹连(GNBGauge gauge, byte level, uint lastComboMove)
         {
+            if (CustomComboFunctions.IsNotEnabled(CustomComboPreset.GNB_ST_Gnashing))
+            {
+                return false;
+            }
+
             if (CustomComboFunctions.HasEffect((ushort)Buffs.NoMercy))
             {
                 //70级循环

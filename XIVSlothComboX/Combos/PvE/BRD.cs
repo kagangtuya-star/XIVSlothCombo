@@ -374,8 +374,8 @@ namespace XIVSlothComboX.Combos.PvE
                         // healing - please move if not appropriate priority
                         if (IsEnabled(CustomComboPreset.BRD_AoE_SecondWind))
                         {
-                            if (PlayerHealthPercentageHp() <= PluginConfiguration.GetCustomIntValue(Config.BRD_AoESecondWindThreshold) && ActionReady(All.SecondWind))
-                                return All.SecondWind;
+                            if (PlayerHealthPercentageHp() <= PluginConfiguration.GetCustomIntValue(Config.BRD_AoESecondWindThreshold) && ActionReady(All.内丹SecondWind))
+                                return All.内丹SecondWind;
                         }
                     }
 
@@ -487,7 +487,7 @@ namespace XIVSlothComboX.Combos.PvE
                     bool songWanderer = gauge.Song == Song.WANDERER;
                     bool songMage = gauge.Song == Song.MAGE;
                     bool songArmy = gauge.Song == Song.ARMY;
-                    bool canInterrupt = CanInterruptEnemy() && IsOffCooldown(All.HeadGraze);
+                    bool canInterrupt = CanInterruptEnemy() && IsOffCooldown(All.伤头HeadGraze);
                     int targetHPThreshold = PluginConfiguration.GetCustomIntValue(Config.BRD_NoWasteHPPercentage);
                     bool isEnemyHealthHigh = IsEnabled(CustomComboPreset.BRD_Simple_NoWaste)
                         ? GetTargetHPPercent() > targetHPThreshold
@@ -499,7 +499,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     if (IsEnabled(CustomComboPreset.BRD_Simple_Interrupt) && canInterrupt)
-                        return All.HeadGraze;
+                        return All.伤头HeadGraze;
 
                     if (IsEnabled(CustomComboPreset.BRD_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= GetOptionValue(Config.BRD_VariantCure))
                         return Variant.VariantCure;
@@ -682,8 +682,8 @@ namespace XIVSlothComboX.Combos.PvE
                         // healing - please move if not appropriate priority
                         if (IsEnabled(CustomComboPreset.BRD_ST_SecondWind))
                         {
-                            if (PlayerHealthPercentageHp() <= PluginConfiguration.GetCustomIntValue(Config.BRD_STSecondWindThreshold) && ActionReady(All.SecondWind))
-                                return All.SecondWind;
+                            if (PlayerHealthPercentageHp() <= PluginConfiguration.GetCustomIntValue(Config.BRD_STSecondWindThreshold) && ActionReady(All.内丹SecondWind))
+                                return All.内丹SecondWind;
                         }
                     }
 

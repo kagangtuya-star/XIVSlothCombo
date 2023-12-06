@@ -373,8 +373,8 @@ namespace XIVSlothComboX.Combos.PvE
                     // healing
                     if (IsEnabled(CustomComboPreset.DRG_ST_ComboHeals))
                     {
-                        if (PlayerHealthPercentageHp() <= Config.DRG_ST_SecondWind_Threshold && ActionReady(All.SecondWind))
-                            return All.SecondWind;
+                        if (PlayerHealthPercentageHp() <= Config.DRG_ST_SecondWind_Threshold && ActionReady(All.内丹SecondWind))
+                            return All.内丹SecondWind;
 
                         if (PlayerHealthPercentageHp() <= Config.DRG_ST_Bloodbath_Threshold && ActionReady(All.Bloodbath))
                             return All.Bloodbath;
@@ -659,8 +659,8 @@ namespace XIVSlothComboX.Combos.PvE
                     // healing
                     if (IsEnabled(CustomComboPreset.DRG_AoE_ComboHeals))
                     {
-                        if (PlayerHealthPercentageHp() <= Config.DRG_AoE_SecondWind_Threshold && ActionReady(All.SecondWind))
-                            return All.SecondWind;
+                        if (PlayerHealthPercentageHp() <= Config.DRG_AoE_SecondWind_Threshold && ActionReady(All.内丹SecondWind))
+                            return All.内丹SecondWind;
 
                         if (PlayerHealthPercentageHp() <= Config.DRG_AoEBloodbath_Threshold && ActionReady(All.Bloodbath))
                             return All.Bloodbath;

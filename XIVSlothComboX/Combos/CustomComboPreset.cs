@@ -160,7 +160,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("全局物理远程职业功能", "物理远程职业功能的通用功能和选项\n取消勾选这个选项不会禁用里面的功能。", ADV.JobID)]
         ALL_Ranged_Menu = 100095,
 
-        [ReplaceSkill(MCH.Tactician, BRD.Troubadour, DNC.防守之桑巴ShieldSamba)]
+        [ReplaceSkill(MCH.策动Tactician, BRD.Troubadour, DNC.防守之桑巴ShieldSamba)]
         [ParentCombo(ALL_Ranged_Menu)]
         [CustomComboInfo("物理远程进攻：减伤防顶", "当目标已被赋予行吟/策动/防守之桑巴其中之一效果时，将自己的对应技能变为坠星冲。", ADV.JobID)]
         ALL_Ranged_Mitigation = 100040,
@@ -1567,7 +1567,7 @@ namespace XIVSlothComboX.Combos
           
         #region Simple ST
 
-        [ReplaceSkill(MCH.SplitShot)]
+        [ReplaceSkill(MCH.分裂弹SplitShot)]
         [ConflictingCombos(MCH_ST_AdvancedMode)]
         [CustomComboInfo("Simple Mode - Single Target", "Replaces Split Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MCH.JobID)]
         MCH_ST_SimpleMode = 8000,
@@ -1576,7 +1576,7 @@ namespace XIVSlothComboX.Combos
 
         #region Advanced ST
 
-        [ReplaceSkill(MCH.SplitShot)]
+        [ReplaceSkill(MCH.分裂弹SplitShot)]
         [ConflictingCombos(MCH_ST_SimpleMode)]
         [CustomComboInfo("Advanced Mode - Single Target", "Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MCH.JobID)]
         MCH_ST_AdvancedMode = 8100,
@@ -1621,9 +1621,9 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Barrel Stabilizer Option", "Adds Barrel Stabilizer to the rotation.", MCH.JobID)]
         MCH_ST_Adv_Stabilizer = 8110,
 
-        [ParentCombo(MCH_ST_Adv_Stabilizer)]
-        [CustomComboInfo("Wildfire Only Option", "Only use Barrel Stabilizer to prepare for Wildfire.", MCH.JobID)]
-        MCH_ST_Adv_Stabilizer_Wildfire_Only = 8111,
+        // [ParentCombo(MCH_ST_Adv_Stabilizer)]
+        // [CustomComboInfo("Wildfire Only Option", "Only use Barrel Stabilizer to prepare for Wildfire.", MCH.JobID)]
+        // MCH_ST_Adv_Stabilizer_Wildfire_Only = 8111,
 
         [ParentCombo(MCH_ST_AdvancedMode)]
         [CustomComboInfo("Chain Saw option", "Adds Chain Saw to the rotation.", MCH.JobID)]
@@ -1642,7 +1642,7 @@ namespace XIVSlothComboX.Combos
 
         #region Simple AoE
 
-        [ReplaceSkill(MCH.SpreadShot)]
+        [ReplaceSkill(MCH.散射SpreadShot)]
         [ConflictingCombos(MCH_AoE_AdvancedMode)]
         [CustomComboInfo("Simple Mode - AoE", "Replaces Spread Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MCH.JobID)]
         MCH_AoE_SimpleMode = 8200,
@@ -1651,7 +1651,7 @@ namespace XIVSlothComboX.Combos
 
         #region Advanced AoE
 
-        [ReplaceSkill(MCH.SpreadShot)]
+        [ReplaceSkill(MCH.散射SpreadShot)]
         [ConflictingCombos(MCH_AoE_SimpleMode)]
         [CustomComboInfo("Advanced Mode - AoE", "Replaces Spread Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MCH.JobID)]
         MCH_AoE_AdvancedMode = 8300,
@@ -1704,19 +1704,19 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        [ReplaceSkill(MCH.RookAutoturret, MCH.AutomatonQueen)]
+        [ReplaceSkill(MCH.车式浮空炮塔RookAutoturret, MCH.后式自走人偶AutomatonQueen)]
         [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID)]
         MCH_Overdrive = 8002,
 
-        [ReplaceSkill(MCH.GaussRound, MCH.Ricochet)]
+        [ReplaceSkill(MCH.虹吸弹GaussRound, MCH.弹射Ricochet)]
         [CustomComboInfo("Gauss Round/Ricochet Feature", "Replace Gauss Round and Ricochet with one or the other depending on which has more charges.", MCH.JobID)]
         MCH_GaussRoundRicochet = 8003,
 
-        [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot)]
+        [ReplaceSkill(MCH.钻头Drill, MCH.空气锚AirAnchor, MCH.热弹HotShot)]
         [CustomComboInfo("Drill/Air Anchor (Hot Shot) Feature", "Replace Drill and Air Anchor (Hot Shot) with one or the other (or Chain Saw) depending on which is on cooldown.", MCH.JobID)]
         MCH_HotShotDrillChainSaw = 8004,
 
-        [ReplaceSkill(MCH.HeatBlast)]
+        [ReplaceSkill(MCH.热冲击HeatBlast)]
         [CustomComboInfo("Single Button Heat Blast Feature", "Switches Heat Blast to Hypercharge.", MCH.JobID)]
         MCH_HeatblastGaussRicochet = 8006,
 
@@ -1728,7 +1728,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Wildfire Option", "Adds Wildfire to the Single Button Heat Blast Feature if Wildfire is off cooldown and you have enough Heat Gauge for Hypercharge then Hypercharge will be replaced with Wildfire.\nAlso weaves Ricochet/Gauss Round on Heat Blast when necessary.", MCH.JobID)]
         MCH_ST_Wildfire = 8015,
 
-        [ReplaceSkill(MCH.AutoCrossbow)]
+        [ReplaceSkill(MCH.自动弩AutoCrossbow)]
         [CustomComboInfo("Single Button Auto Crossbow Feature", "Switches Auto Crossbow to Hypercharge and weaves Gauss Round/Ricochet.", MCH.JobID)]
         MCH_AutoCrossbowGaussRicochet = 8018,
 
@@ -1736,11 +1736,11 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Barrel Feature", "Adds Barrel Stabilizer to Single Button Auto Crossbow Feature when below 50 Heat Gauge and it is off cooldown", MCH.JobID)]
         MCH_AutoCrossbowGaussRicochet_AutoBarrel = 8019,
 
-        [ReplaceSkill(MCH.Dismantle)]
+        [ReplaceSkill(MCH.武装解除Dismantle)]
         [CustomComboInfo("Physical Ranged DPS: Double Dismantle Protection", "Prevents the use of Dismantle when target already has the effect by replacing it with Fire.", MCH.JobID)]
         All_PRanged_Dismantle = 8042,
 
-        [ReplaceSkill(MCH.Dismantle)]
+        [ReplaceSkill(MCH.武装解除Dismantle)]
         [CustomComboInfo("Dismantle - Tactician", "Swap dismantle with tactician when dismantle is on cooldown.", MCH.JobID)]
         MCH_DismantleTactician = 8058,
         #endregion

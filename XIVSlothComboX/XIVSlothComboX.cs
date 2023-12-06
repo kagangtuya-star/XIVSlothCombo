@@ -601,7 +601,7 @@ namespace XIVSlothComboX
                         
                         case MCH.JobID:
                         {
-                            autoActionId = MCH.SplitShot;
+                            autoActionId = MCH.分裂弹SplitShot;
                             break;
                         }
 

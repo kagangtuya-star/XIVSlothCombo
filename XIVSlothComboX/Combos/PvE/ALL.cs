@@ -10,7 +10,7 @@ namespace XIVSlothComboX.Combos.PvE
 
         public const uint
             Rampart = 7531,
-            SecondWind = 7541,
+            内丹SecondWind = 7541,
             TrueNorth = 7546,
             Addle = 7560,
             Swiftcast = 7561,
@@ -29,7 +29,7 @@ namespace XIVSlothComboX.Combos.PvE
             WiseToTheWorldBTN = 26522,
             LowBlow = 7540,
             Bloodbath = 7542,
-            HeadGraze = 7551,
+            伤头HeadGraze = 7551,
             FootGraze = 7553,
             LegGraze = 7554,
             Feint = 7549,
@@ -224,9 +224,9 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is BRD.Troubadour or MCH.Tactician or DNC.防守之桑巴ShieldSamba)
+                if (actionID is BRD.Troubadour or MCH.策动Tactician or DNC.防守之桑巴ShieldSamba)
                 {
-                    if ((HasEffectAny(BRD.Buffs.Troubadour) || HasEffectAny(MCH.Buffs.Tactician) || HasEffectAny(DNC.Buffs.防守之桑巴ShieldSamba)) && IsOffCooldown(actionID))
+                    if ((HasEffectAny(BRD.Buffs.Troubadour) || HasEffectAny(MCH.Buffs.策动Tactician) || HasEffectAny(DNC.Buffs.防守之桑巴ShieldSamba)) && IsOffCooldown(actionID))
                         return DRG.Stardiver;
                 }
 
@@ -240,7 +240,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                return (actionID is FootGraze && CanInterruptEnemy() && ActionReady(HeadGraze) ) ? HeadGraze : actionID;
+                return (actionID is FootGraze && CanInterruptEnemy() && ActionReady(伤头HeadGraze) ) ? 伤头HeadGraze : actionID;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Numerics;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.SubKinds;
@@ -6,7 +7,9 @@ using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
 using ImGuiNET;
 using XIVSlothComboX.Combos;
+using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE;
+using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
@@ -64,41 +67,54 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"LAST SPELL: {ActionWatching.GetActionName(ActionWatching.LastSpell)}");
                     ImGui.TextUnformatted($"LAST ABILITY: {ActionWatching.GetActionName(ActionWatching.LastAbility)}");
                     ImGui.TextUnformatted($"ZONE: {Service.ClientState.TerritoryType}");
-                
-                    ImGui.TextUnformatted($"buff : {CustomComboFunctions.GetBuffRemainingTime(PLD.Buffs.DivineMight)}");
-                
-                    float comboTime = *(float*)Service.Address.ComboTimer;
-                    
-                    uint LastComboMove = *(uint*)Service.Address.LastComboMove;
-                
-                    ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");
-                    ImGui.TextUnformatted($"comboTime : {comboTime}");
-                    ImGui.TextUnformatted($"LastComboMove : {LastComboMove}");
-                    
-                    
-                    ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) && CustomComboFunctions.IsOnCooldown(DNC.进攻之探戈Devilment)} ");
-                    ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
-                
-                
-                    ImGui.TextUnformatted($"战逃倒计时 : {CustomComboFunctions.GetCooldownRemainingTime(PLD.战逃反应FightOrFlight)}");
-                
-                    ImGui.TextUnformatted($"战逃个数 : {ActionWatching.CombatActions.FindAll(actionId => actionId ==PLD. 战逃反应FightOrFlight).Count}");
-                
-                    ImGui.TextUnformatted($"DK血乱 : {CustomComboFunctions.GetBuffStacks(DRK.Buffs.BloodWeapon)}");
+
+                    // ImGui.TextUnformatted($"buff : {CustomComboFunctions.GetBuffRemainingTime(PLD.Buffs.DivineMight)}");
+                    // ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");
+
+
+                    // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) && CustomComboFunctions.IsOnCooldown(DNC.进攻之探戈Devilment)} ");
+                    // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
+
+
+                    // ImGui.TextUnformatted($"战逃倒计时 : {CustomComboFunctions.GetCooldownRemainingTime(PLD.战逃反应FightOrFlight)}");
+                    // ImGui.TextUnformatted($"战逃个数 : {ActionWatching.CombatActions.FindAll(actionId => actionId ==PLD. 战逃反应FightOrFlight).Count}");
+
+                    // ImGui.TextUnformatted($"DK血乱 : {CustomComboFunctions.GetBuffStacks(DRK.Buffs.BloodWeapon)}");
                     // var gauge = GetJobGauge<DRKGauge>();
-                    ImGui.TextUnformatted($"DK2 : {CustomComboFunctions.GetJobGauge<DRKGauge>().Blood}");
-                    ImGui.TextUnformatted($"DK3 : 血乱CD{CustomComboFunctions.GetCooldownRemainingTime(DRK.血乱)},弗雷CD{CustomComboFunctions.GetCooldownRemainingTime(DRK.LivingShadow)}");
+                    // ImGui.TextUnformatted($"DK2 : {CustomComboFunctions.GetJobGauge<DRKGauge>().Blood}");
+                    // ImGui.TextUnformatted($"DK3 : 血乱CD{CustomComboFunctions.GetCooldownRemainingTime(DRK.血乱)},弗雷CD{CustomComboFunctions.GetCooldownRemainingTime(DRK.LivingShadow)}");
                     // ImGui.TextUnformatted($"DK4 : {CustomComboFunctions.FindTargetEffect(RaidBuff.连环计) is not null}");
                     // ImGui.TextUnformatted($"DK5 : {CustomComboFunctions.FindTargetEffectAny(RaidBuff.连环计) is not null}");    
-                
-                
+
+
                     // ImGui.TextUnformatted($"gun1 : {CustomComboFunctions.ActionReady(GNB.倍攻DoubleDown)}");
                     // ImGui.TextUnformatted($"gun2 : {CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
-                    ImGui.TextUnformatted($"烈牙GnashingFang : {CustomComboFunctions.GetCooldownRemainingTime(GNB.烈牙GnashingFang)}");
-                    ImGui.TextUnformatted($"利刃斩KeenEdge : {CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
-                    ImGui.TextUnformatted($"倍攻DoubleDown : {CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
-                
-                
+                    // ImGui.TextUnformatted($"烈牙GnashingFang : {CustomComboFunctions.GetCooldownRemainingTime(GNB.烈牙GnashingFang)}");
+                    // ImGui.TextUnformatted($"利刃斩KeenEdge : {CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
+                    // ImGui.TextUnformatted($"倍攻DoubleDown : {CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
+
+
+                    //机工 start
+                    // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
+                    // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
+                    // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
+                    
+                    ImGui.TextUnformatted($"ActionReady:{CustomComboFunctions.ActionReady(MCH.弹射Ricochet)} GetCooldownRemainingTime:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
+                    
+                    
+                    // ImGui.TextUnformatted($"Enum.IsDefined(typeof(All),id)1 : {isDefined} ");
+                    // ImGui.TextUnformatted($"Enum.IsDefined(typeof(All),id)2 : {Enum.IsDefined(typeof(All),9999)} ");
+                    
+                    
+                    // ImGui.TextUnformatted($"CanOpener : {MCHOpenerLogic.CanOpener}  currentState{MCHOpenerLogic.currentState.ToString()}");
+                    // ImGui.TextUnformatted($"整备Reassemble倒计时1 : {CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) }");
+                    // ImGui.TextUnformatted($"整备Reassemble倒计时2 : {CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) == 0 }");
+                    // ImGui.TextUnformatted($"整备Reassemble倒计时3 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.整备Reassemble) == 0}");
+                    // ImGui.TextUnformatted($"整备Reassemble倒计时 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.整备Reassemble) }");
+
+                    //机工 end
+                    
+                    
                 
                 
                 
@@ -115,7 +131,7 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"CooldownRemaining1 : {Service.ComboCache.GetCooldown(DRK.血溅).CooldownRemaining}");
                     // ImGui.TextUnformatted($"CooldownRemaining2 : {CustomComboFunctions.GetCooldownRemainingTime(DRK.血溅)}");
                     // ImGui.TextUnformatted($"CooldownElapsed : {Service.ComboCache.GetCooldown(DRK.血溅).CooldownElapsed}");
-                    ImGui.TextUnformatted($"CooldownElapsed : {CustomComboFunctions.GetBuffRemainingTime(DRK.Buffs.Delirium)}");
+                    // ImGui.TextUnformatted($"CooldownElapsed : {CustomComboFunctions.GetBuffRemainingTime(DRK.Buffs.Delirium)}");
                 
                 
                     // if (ActionWatching.CombatActions.Count > 2)
@@ -128,8 +144,8 @@ namespace XIVSlothComboX.Window.Tabs
 
                     // ImGui.TextUnformatted($"战逃个数 : {ActionWatching.CombatActions.Count}");
                 
-                    ImGui.BeginChild("BLUSPELLS", new Vector2(250, 100), false);
-                    ImGui.TextUnformatted($"SELECTED BLU SPELLS:\n{string.Join("\n", Service.Configuration.ActiveBLUSpells.Select(x => ActionWatching.GetActionName(x)).OrderBy(x => x))}");
+                    // ImGui.BeginChild("BLUSPELLS", new Vector2(250, 100), false);
+                    // ImGui.TextUnformatted($"SELECTED BLU SPELLS:\n{string.Join("\n", Service.Configuration.ActiveBLUSpells.Select(x => ActionWatching.GetActionName(x)).OrderBy(x => x))}");
                     ImGui.EndChild();
                 }
             }

@@ -1,3 +1,4 @@
+using System;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
@@ -10,46 +11,46 @@ using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.PvE
 {
-    internal  class MCH
+    internal class MCH
     {
         public const byte JobID = 31;
 
-        internal const uint CleanShot = 2873,
-            HeatedCleanShot = 7413,
-            SplitShot = 2866,
-            HeatedSplitShot = 7411,
-            SlugShot = 2868,
-            GaussRound = 2874,
-            Ricochet = 2890,
-            HeatedSlugshot = 7412,
-            Drill = 16498,
-            HotShot = 2872,
-            Reassemble = 2876,
-            AirAnchor = 16500,
-            Hypercharge = 17209,
-            HeatBlast = 7410,
-            SpreadShot = 2870,
-            Scattergun = 25786,
-            AutoCrossbow = 16497,
-            RookAutoturret = 2864,
-            RookOverdrive = 7415,
-            AutomatonQueen = 16501,
-            QueenOverdrive = 16502,
-            Tactician = 16889,
-            ChainSaw = 25788,
+        internal const uint 狙击弹CleanShot = 2873,
+            热狙击弹HeatedCleanShot = 7413,
+            分裂弹SplitShot = 2866,
+            热分裂弹HeatedSplitShot = 7411,
+            独头弹SlugShot = 2868,
+            虹吸弹GaussRound = 2874,
+            弹射Ricochet = 2890,
+            热独头弹HeatedSlugshot = 7412,
+            钻头Drill = 16498,
+            热弹HotShot = 2872,
+            整备Reassemble = 2876,
+            空气锚AirAnchor = 16500,
+            超荷Hypercharge = 17209,
+            热冲击HeatBlast = 7410,
+            散射SpreadShot = 2870,
+            霰弹枪Scattergun = 25786,
+            自动弩AutoCrossbow = 16497,
+            车式浮空炮塔RookAutoturret = 2864,
+            超档车式炮塔RookOverdrive = 7415,
+            后式自走人偶AutomatonQueen = 16501,
+            超档后式人偶QueenOverdrive = 16502,
+            策动Tactician = 16889,
+            回转飞锯ChainSaw = 25788,
             BioBlaster = 16499,
-            BarrelStabilizer = 7414,
-            Wildfire = 2878,
-            Dismantle = 2887,
-            Flamethrower = 7418;
+            枪管加热BarrelStabilizer = 7414,
+            野火Wildfire = 2878,
+            武装解除Dismantle = 2887,
+            火焰喷射器Flamethrower = 7418;
 
         internal static class Buffs
         {
-            internal const ushort Reassembled = 851,
-                Tactician = 1951,
-                Wildfire = 1946,
-                Overheated = 2688,
-                Flamethrower = 1205;
+            internal const ushort 整备Reassembled = 851,
+                策动Tactician = 1951,
+                野火Wildfire = 1946,
+                过热Overheated = 2688,
+                火焰喷射器Flamethrower = 1205;
         }
 
         internal static class Debuffs
@@ -100,177 +101,218 @@ namespace XIVSlothComboX.Combos.PvE
         internal class MCH_ST_SimpleMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_ST_SimpleMode;
-            
+
             internal static MCHOpenerLogic MCHOpener = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 MCHGauge? gauge = GetJobGauge<MCHGauge>();
-                float wildfireCDTime = GetCooldownRemainingTime(Wildfire);
-                bool interruptReady = ActionReady(All.HeadGraze) && CanInterruptEnemy();
+                float wildfireCDTime = GetCooldownRemainingTime(野火Wildfire);
+                bool interruptReady = ActionReady(All.伤头HeadGraze) && CanInterruptEnemy();
 
-                if (actionID is SplitShot )
+                // if (actionID is 分裂弹SplitShot or 热分裂弹HeatedSplitShot )
+                if (actionID is 分裂弹SplitShot)
                 {
-                    
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
+
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
+                        && IsEnabled(Variant.VariantCure)
+                        && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
                         return Variant.VariantCure;
 
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart)
+                        && IsEnabled(Variant.VariantRampart)
+                        && IsOffCooldown(Variant.VariantRampart)
+                        && CanWeave(actionID))
                         return Variant.VariantRampart;
 
-                    
+
                     // Opener for MCH
                     if (MCHOpener.DoFullOpener(ref actionID, false))
-                    {   
+                    {
                         return OriginalHook(actionID);
                     }
-                    
-                    
+
+
                     // Service.ChatGui.Print($"{actionID}");
-                 
+
 
                     // Interrupt
                     if (interruptReady)
-                        return All.HeadGraze;
+                        return All.伤头HeadGraze;
 
                     // Wildfire
-                    if ((gauge.Heat >= 50 || WasLastAbility(Hypercharge)) && ActionReady(Wildfire)) //these try to ensure the correct loops
+                    if ((gauge.Heat >= 50 || WasLastAbility(超荷Hypercharge))
+                        && ActionReady(野火Wildfire)) //these try to ensure the correct loops
                     {
                         if (CanDelayedWeave(actionID))
                         {
-                            if (!gauge.IsOverheated && WasLastWeaponskill(AirAnchor)) //WF EVEN BURST
-                                return Wildfire;
+                            if (!gauge.IsOverheated && WasLastWeaponskill(空气锚AirAnchor)) //WF EVEN BURST
+                                return 野火Wildfire;
 
-                            else if (gauge.IsOverheated && WasLastWeaponskill(HeatBlast))
-                                return Wildfire;
+                            else if (gauge.IsOverheated && WasLastWeaponskill(热冲击HeatBlast))
+                                return 野火Wildfire;
                         }
                     }
 
                     // BarrelStabilizer use
-                    if (CanWeave(actionID) && gauge.Heat <= 55 && ActionReady(BarrelStabilizer))
-                        return BarrelStabilizer;
+                    if (CanWeave(actionID) && gauge.Heat <= 55 && ActionReady(枪管加热BarrelStabilizer))
+                        return 枪管加热BarrelStabilizer;
 
                     //queen
-                    if (CanWeave(actionID) && !gauge.IsOverheated && LevelChecked(OriginalHook(RookAutoturret)) && !gauge.IsRobotActive)
+                    if (CanWeave(actionID)
+                        && !gauge.IsOverheated
+                        && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
+                        && !gauge.IsRobotActive)
                     {
                         if (level >= 90)
                         {
                             // First condition
-                            if (gauge.Battery is 50 && CombatEngageDuration().TotalSeconds > 61 && CombatEngageDuration().TotalSeconds < 68)
-                                return OriginalHook(RookAutoturret);
+                            if (gauge.Battery is 50
+                                && CombatEngageDuration().TotalSeconds > 61
+                                && CombatEngageDuration().TotalSeconds < 68)
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Second condition
-                            if (gauge.Battery is 100 && gauge.LastSummonBatteryPower == 50 && (GetCooldownRemainingTime(AirAnchor) <= 3 || ActionReady(AirAnchor)))
-                                return OriginalHook(RookAutoturret);
+                            if (gauge.Battery is 100
+                                && gauge.LastSummonBatteryPower == 50
+                                && (GetCooldownRemainingTime(空气锚AirAnchor) <= 3 || ActionReady(空气锚AirAnchor)))
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Third condition
                             if (gauge.LastSummonBatteryPower == 100 && gauge.Battery >= 90)
-                                return OriginalHook(RookAutoturret);
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Fourth condition
-                            else if (gauge.LastSummonBatteryPower == 90 && wildfireCDTime < 70 && wildfireCDTime > 45 && gauge.Battery >= 90)
-                                return OriginalHook(RookAutoturret);
+                            else if (gauge.LastSummonBatteryPower == 90
+                                     && wildfireCDTime < 70
+                                     && wildfireCDTime > 45
+                                     && gauge.Battery >= 90)
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Fifth condition
-                            else if (gauge.LastSummonBatteryPower != 50 && (wildfireCDTime <= 4 || (ActionReady(AirAnchor) && ActionReady(Wildfire))))
-                                return OriginalHook(RookAutoturret);
+                            else if (gauge.LastSummonBatteryPower != 50
+                                     && (wildfireCDTime <= 4 || (ActionReady(空气锚AirAnchor) && ActionReady(野火Wildfire))))
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
                         }
-                        else if (LevelChecked(RookOverdrive) && gauge.Battery >= 50)
-                            return OriginalHook(RookAutoturret);
+                        else if (LevelChecked(超档车式炮塔RookOverdrive) && gauge.Battery >= 50)
+                            return OriginalHook(车式浮空炮塔RookAutoturret);
                     }
 
-                    if (CanWeave(actionID) && gauge.Heat >= 50 && LevelChecked(Hypercharge) && !gauge.IsOverheated)
+                    if (CanWeave(actionID) && gauge.Heat >= 50 && LevelChecked(超荷Hypercharge) && !gauge.IsOverheated)
                     {
                         //Protection & ensures Hyper charged is double weaved with WF during reopener
-                        if (HasEffect(Buffs.Wildfire) || !LevelChecked(Wildfire))
-                            return Hypercharge;
+                        if (HasEffect(Buffs.野火Wildfire) || !LevelChecked(野火Wildfire))
+                            return 超荷Hypercharge;
 
-                        if (LevelChecked(Drill) && GetCooldownRemainingTime(Drill) >= 8)
+                        if (LevelChecked(钻头Drill) && GetCooldownRemainingTime(钻头Drill) >= 8)
                         {
-                            if (LevelChecked(AirAnchor) && GetCooldownRemainingTime(AirAnchor) >= 8)
+                            if (LevelChecked(空气锚AirAnchor) && GetCooldownRemainingTime(空气锚AirAnchor) >= 8)
                             {
-                                if (LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) >= 8)
+                                if (LevelChecked(回转飞锯ChainSaw) && GetCooldownRemainingTime(回转飞锯ChainSaw) >= 8)
                                 {
                                     if (UseHyperchargeStandard(gauge, wildfireCDTime))
-                                        return Hypercharge;
+                                        return 超荷Hypercharge;
                                 }
 
-                                else if (!LevelChecked(ChainSaw))
+                                else if (!LevelChecked(回转飞锯ChainSaw))
                                 {
                                     if (UseHyperchargeStandard(gauge, wildfireCDTime))
-                                        return Hypercharge;
+                                        return 超荷Hypercharge;
                                 }
                             }
 
-                            else if (!LevelChecked(AirAnchor))
+                            else if (!LevelChecked(空气锚AirAnchor))
                             {
                                 if (UseHyperchargeStandard(gauge, wildfireCDTime))
-                                    return Hypercharge;
+                                    return 超荷Hypercharge;
                             }
                         }
 
-                        else if (!LevelChecked(Drill))
+                        else if (!LevelChecked(钻头Drill))
                         {
                             if (UseHyperchargeStandard(gauge, wildfireCDTime))
-                                return Hypercharge;
+                                return 超荷Hypercharge;
                         }
                     }
 
                     //Heatblast, Gauss, Rico
-                    if (gauge.IsOverheated && LevelChecked(HeatBlast))
+                    if (gauge.IsOverheated && LevelChecked(热冲击HeatBlast))
                     {
-                        if (WasLastAction(HeatBlast) && CanWeave(actionID))
+                        if (WasLastAction(热冲击HeatBlast) && CanWeave(actionID))
                         {
-                            if (ActionReady(GaussRound) && GetRemainingCharges(GaussRound) >= GetRemainingCharges(Ricochet))
-                                return GaussRound;
+                            if (ActionReady(虹吸弹GaussRound)
+                                && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
+                                return 虹吸弹GaussRound;
 
-                            if (ActionReady(Ricochet) && GetRemainingCharges(Ricochet) >= GetRemainingCharges(GaussRound))
-                                return Ricochet;
+                            if (ActionReady(弹射Ricochet)
+                                && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
+                                return 弹射Ricochet;
                         }
-                        return HeatBlast;
+                        return 热冲击HeatBlast;
                     }
 
                     // OGCD's
-                    if (CanWeave(actionID) && !HasEffect(Buffs.Wildfire) && !HasEffect(Buffs.Reassembled) && HasCharges(Reassemble) && ((LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) < 1) || ActionReady(ChainSaw) || (LevelChecked(AirAnchor) && GetCooldownRemainingTime(AirAnchor) < 1) || ActionReady(AirAnchor) || (!LevelChecked(AirAnchor) && LevelChecked(Drill) && (GetCooldownRemainingTime(Drill) < 1)) || ActionReady(Drill)))
-                        return Reassemble;
+                    if (CanWeave(actionID)
+                        && !HasEffect(Buffs.野火Wildfire)
+                        && !HasEffect(Buffs.整备Reassembled)
+                        && HasCharges(整备Reassemble)
+                        && ((LevelChecked(回转飞锯ChainSaw) && GetCooldownRemainingTime(回转飞锯ChainSaw) < 1)
+                            || ActionReady(回转飞锯ChainSaw)
+                            || (LevelChecked(空气锚AirAnchor) && GetCooldownRemainingTime(空气锚AirAnchor) < 1)
+                            || ActionReady(空气锚AirAnchor)
+                            || (!LevelChecked(空气锚AirAnchor)
+                                && LevelChecked(钻头Drill)
+                                && (GetCooldownRemainingTime(钻头Drill) < 1))
+                            || ActionReady(钻头Drill)))
+                        return 整备Reassemble;
 
-                    if (!HasEffect(Buffs.Wildfire) && ((LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) < 1.2) || ActionReady(ChainSaw)) && !HasEffect(Buffs.Reassembled) && HasCharges(Reassemble))
-                        return Reassemble;
+                    if (!HasEffect(Buffs.野火Wildfire)
+                        && ((LevelChecked(回转飞锯ChainSaw) && GetCooldownRemainingTime(回转飞锯ChainSaw) < 1.2)
+                            || ActionReady(回转飞锯ChainSaw))
+                        && !HasEffect(Buffs.整备Reassembled)
+                        && HasCharges(整备Reassemble))
+                        return 整备Reassemble;
 
-                    if ((LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) < 1) || ActionReady(ChainSaw))
-                        return ChainSaw;
+                    if ((LevelChecked(回转飞锯ChainSaw) && GetCooldownRemainingTime(回转飞锯ChainSaw) < 1)
+                        || ActionReady(回转飞锯ChainSaw))
+                        return 回转飞锯ChainSaw;
 
-                    if ((LevelChecked(AirAnchor) && GetCooldownRemainingTime(AirAnchor) < 1) || (!LevelChecked(AirAnchor) && ActionReady(HotShot)) || ActionReady(AirAnchor))
-                        return OriginalHook(AirAnchor);
+                    if ((LevelChecked(空气锚AirAnchor) && GetCooldownRemainingTime(空气锚AirAnchor) < 1)
+                        || (!LevelChecked(空气锚AirAnchor) && ActionReady(热弹HotShot))
+                        || ActionReady(空气锚AirAnchor))
+                        return OriginalHook(空气锚AirAnchor);
 
-                    if ((LevelChecked(Drill) && GetCooldownRemainingTime(Drill) < 1) || ActionReady(Drill))
-                        return Drill;
+                    if ((LevelChecked(钻头Drill) && GetCooldownRemainingTime(钻头Drill) < 1) || ActionReady(钻头Drill))
+                        return 钻头Drill;
 
                     //gauss and ricochet overcap protection
-                    if (CanWeave(actionID) && !gauge.IsOverheated && !HasEffect(Buffs.Wildfire))
+                    if (CanWeave(actionID) && !gauge.IsOverheated && !HasEffect(Buffs.野火Wildfire))
                     {
-                        if (ActionReady(GaussRound) && GetRemainingCharges(GaussRound) >= GetMaxCharges(GaussRound))
-                            return GaussRound;
+                        if (ActionReady(虹吸弹GaussRound)
+                            && GetRemainingCharges(虹吸弹GaussRound) >= GetMaxCharges(虹吸弹GaussRound))
+                            return 虹吸弹GaussRound;
 
-                        if (ActionReady(Ricochet) && GetRemainingCharges(Ricochet) >= GetMaxCharges(Ricochet))
-                            return Ricochet;
+                        if (ActionReady(弹射Ricochet) && GetRemainingCharges(弹射Ricochet) >= GetMaxCharges(弹射Ricochet))
+                            return 弹射Ricochet;
                     }
 
 
                     // healing
-                    if (CanWeave(actionID) && PlayerHealthPercentageHp() <= 20 && ActionReady(All.SecondWind))
-                        return All.SecondWind;
+                    if (CanWeave(actionID) && PlayerHealthPercentageHp() <= 20 && ActionReady(All.内丹SecondWind))
+                        return All.内丹SecondWind;
 
                     //1-2-3 Combo
                     if (comboTime > 0)
                     {
-                        if (lastComboMove is SplitShot && LevelChecked(OriginalHook(SlugShot)))
-                            return OriginalHook(SlugShot);
+                        if (lastComboMove is 分裂弹SplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
+                            return OriginalHook(独头弹SlugShot);
 
-                        if (lastComboMove is SlugShot && LevelChecked(OriginalHook(CleanShot)))
-                            return (!LevelChecked(Drill) && !HasEffect(Buffs.Reassembled) && HasCharges(Reassemble)) ? Reassemble : OriginalHook(CleanShot);
+                        if (lastComboMove is 独头弹SlugShot && LevelChecked(OriginalHook(狙击弹CleanShot)))
+                            return (!LevelChecked(钻头Drill)
+                                    && !HasEffect(Buffs.整备Reassembled)
+                                    && HasCharges(整备Reassemble)) ? 整备Reassemble : OriginalHook(狙击弹CleanShot);
                     }
-                    return OriginalHook(SplitShot);
+                    return OriginalHook(分裂弹SplitShot);
 
                 }
                 return actionID;
@@ -279,7 +321,9 @@ namespace XIVSlothComboX.Combos.PvE
             private bool UseHyperchargeStandard(MCHGauge gauge, float wildfireCDTime)
             {
                 // i really do not remember why i put > 70 here for heat, and im afraid if i remove it itll break it lol
-                if (CombatEngageDuration().Minutes == 0 && (gauge.Heat > 70 || CombatEngageDuration().Seconds <= 30) && !WasLastWeaponskill(OriginalHook(CleanShot)))
+                if (CombatEngageDuration().Minutes == 0
+                    && (gauge.Heat > 70 || CombatEngageDuration().Seconds <= 30)
+                    && !WasLastWeaponskill(OriginalHook(狙击弹CleanShot)))
                     return true;
 
                 if (CombatEngageDuration().Minutes > 0)
@@ -302,20 +346,26 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                float wildfireCDTime = GetCooldownRemainingTime(Wildfire);
+                float wildfireCDTime = GetCooldownRemainingTime(野火Wildfire);
                 MCHGauge? gauge = GetJobGauge<MCHGauge>();
                 int rotationSelection = Config.MCH_ST_RotationSelection;
-                bool interruptReady = ActionReady(All.HeadGraze) && CanInterruptEnemy();
+                bool interruptReady = ActionReady(All.伤头HeadGraze) && CanInterruptEnemy();
 
-                if (actionID is SplitShot)
+
+                if (actionID is 分裂弹SplitShot)
                 {
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
+                        && IsEnabled(Variant.VariantCure)
+                        && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
                         return Variant.VariantCure;
 
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart)
+                        && IsEnabled(Variant.VariantRampart)
+                        && IsOffCooldown(Variant.VariantRampart)
+                        && CanWeave(actionID))
                         return Variant.VariantRampart;
 
-                    // Opener for MCH
+                    // Opener for MCH 90级起手
                     if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener))
                     {
                         if (MCHOpener.DoFullOpener(ref actionID, false))
@@ -325,401 +375,296 @@ namespace XIVSlothComboX.Combos.PvE
                     //Standard Rotation
                     if (rotationSelection is 0)
                     {
-                        // Interrupt
+                        // Interrupt 自动伤头
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Interrupt) && interruptReady)
-                            return All.HeadGraze;
+                            return All.伤头HeadGraze;
 
                         // Wildfire
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
                         {
-                            if ((gauge.Heat >= 50 || WasLastAbility(Hypercharge)) && ActionReady(Wildfire) && level >= 90) //these try to ensure the correct loops
+                            if (gauge.Heat >= 50 && ActionReady(野火Wildfire) && CanDelayedWeave(actionID))
                             {
-                                if (CanDelayedWeave(actionID))
+                                if (level >= 90)
                                 {
-                                    if (!gauge.IsOverheated && WasLastWeaponskill(AirAnchor)) //WF EVEN BURST
-                                        return Wildfire;
-
-                                    else if (gauge.IsOverheated && WasLastWeaponskill(HeatBlast))
-                                        return Wildfire;
+                                    //90级 野火好了就用
+                                    return 野火Wildfire;
+                                }
+                                else
+                                {
+                                    return 野火Wildfire;
                                 }
                             }
-                            else if (gauge.Heat >= 50 && ActionReady(Wildfire))
-                                return Wildfire;
+
                         }
 
                         // BarrelStabilizer use
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer) && CanWeave(actionID) && gauge.Heat <= 55 && ActionReady(BarrelStabilizer) && ((((wildfireCDTime <= 25 && wildfireCDTime >= 100) || HasEffect(Buffs.Wildfire)) && IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer_Wildfire_Only)) || (wildfireCDTime >= 110 && !IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer_Wildfire_Only))))
-                            return BarrelStabilizer;
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer)
+                            && CanDelayedWeave(actionID)
+                            && gauge.Heat <= 55
+                            && ActionReady(枪管加热BarrelStabilizer))
+                        {
+                            return 枪管加热BarrelStabilizer;
+                        }
 
-                        //queen
-                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen) && Config.MCH_ST_TurretUsage == 1 && CanWeave(actionID) && !gauge.IsOverheated && LevelChecked(OriginalHook(RookAutoturret)) && !gauge.IsRobotActive)
+
+                        //queen 优雅的使用机器人
+                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen)
+                            && Config.MCH_ST_TurretUsage == 1
+                            && CanWeave(actionID)
+                            && !gauge.IsOverheated
+                            && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
+                            && !gauge.IsRobotActive)
                         {
                             // First condition
-                            if (gauge.Battery is 50 && CombatEngageDuration().TotalSeconds > 59 && CombatEngageDuration().TotalSeconds < 68)
-                                return OriginalHook(RookAutoturret);
+                            if (gauge.Battery is 50
+                                && CombatEngageDuration().TotalSeconds > 59
+                                && CombatEngageDuration().TotalSeconds < 68)
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Second condition
-                            if (gauge.Battery is 100 && gauge.LastSummonBatteryPower == 50 && (GetCooldownRemainingTime(AirAnchor) <= 3 || ActionReady(AirAnchor)))
-                                return OriginalHook(RookAutoturret);
+                            if (gauge.Battery is 100
+                                && gauge.LastSummonBatteryPower == 50
+                                && (GetCooldownRemainingTime(空气锚AirAnchor) <= 3 || ActionReady(空气锚AirAnchor)))
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Third condition
                             if (gauge.LastSummonBatteryPower == 100 && gauge.Battery >= 90)
-                                return OriginalHook(RookAutoturret);
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Fourth condition
-                            else if (gauge.LastSummonBatteryPower == 90 && wildfireCDTime < 70 && wildfireCDTime > 45 && gauge.Battery >= 90)
-                                return OriginalHook(RookAutoturret);
+                            else if (gauge.LastSummonBatteryPower == 90
+                                     && wildfireCDTime < 70
+                                     && wildfireCDTime > 45
+                                     && gauge.Battery >= 90)
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
 
                             // Fifth condition
-                            else if (gauge.LastSummonBatteryPower != 50 && (wildfireCDTime <= 4 || (ActionReady(AirAnchor) && ActionReady(Wildfire))))
-                                return OriginalHook(RookAutoturret);
+                            else if (gauge.LastSummonBatteryPower != 50
+                                     && (wildfireCDTime <= 4 || (ActionReady(空气锚AirAnchor) && ActionReady(野火Wildfire))))
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
                         }
 
-                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen) && Config.MCH_ST_TurretUsage == 0 && CanWeave(actionID) && LevelChecked(OriginalHook(RookAutoturret)) && gauge.Battery >= 50)
-                            return OriginalHook(RookAutoturret);
-
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Hypercharge) && CanWeave(actionID) && gauge.Heat >= 50 && LevelChecked(Hypercharge) && !gauge.IsOverheated)
+                        //机器人好了就用
+                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen)
+                            && Config.MCH_ST_TurretUsage == 0
+                            && CanSpellWeavePlus(actionID)
+                            && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
+                            && gauge.Battery >= 50)
                         {
-                            //Protection & ensures Hyper charged is double weaved with WF during reopener
-                            if (HasEffect(Buffs.Wildfire) || !LevelChecked(Wildfire))
-                                return Hypercharge;
-
-                            if (LevelChecked(Drill) && GetCooldownRemainingTime(Drill) >= 8)
+                            if (HasEffect(Buffs.野火Wildfire) && gauge.Heat < 50)
                             {
-                                if (LevelChecked(AirAnchor) && GetCooldownRemainingTime(AirAnchor) >= 8)
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
+                            }
+
+                            if (!HasEffect(Buffs.野火Wildfire) && gauge.Battery >= 50)
+                            {
+                                return OriginalHook(车式浮空炮塔RookAutoturret);
+                            }
+
+                        }
+
+                        //超荷判断
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Hypercharge)
+                            && CanSpellWeavePlus(actionID)
+                            && gauge.Heat >= 50
+                            && LevelChecked(超荷Hypercharge)
+                            && !gauge.IsOverheated)
+                        {
+                            if (HasEffect(Buffs.野火Wildfire) || !LevelChecked(野火Wildfire))
+                            {
+                                return 超荷Hypercharge;
+                            }
+
+                            if (LevelChecked(钻头Drill)
+                                && GetCooldownRemainingTime(钻头Drill) + GetCooldownRemainingTime(狙击弹CleanShot) >= 7.51)
+                            {
+                                if (LevelChecked(空气锚AirAnchor)
+                                    && GetCooldownRemainingTime(空气锚AirAnchor) + GetCooldownRemainingTime(狙击弹CleanShot)
+                                    >= 7.51)
                                 {
-                                    if (LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) >= 8)
+                                    if (LevelChecked(回转飞锯ChainSaw)
+                                        && GetCooldownRemainingTime(回转飞锯ChainSaw)
+                                        + GetCooldownRemainingTime(狙击弹CleanShot)
+                                        >= 7.51)
                                     {
                                         if (UseHyperchargeDelayedTools(gauge, wildfireCDTime))
-                                            return Hypercharge;
+                                            return 超荷Hypercharge;
                                     }
 
-                                    else if (!LevelChecked(ChainSaw))
+                                    else if (!LevelChecked(回转飞锯ChainSaw))
                                     {
                                         if (UseHyperchargeDelayedTools(gauge, wildfireCDTime))
-                                            return Hypercharge;
+                                            return 超荷Hypercharge;
                                     }
                                 }
 
-                                else if (!LevelChecked(AirAnchor))
+                                else if (!LevelChecked(空气锚AirAnchor))
                                 {
                                     if (UseHyperchargeDelayedTools(gauge, wildfireCDTime))
-                                        return Hypercharge;
+                                        return 超荷Hypercharge;
                                 }
                             }
 
-                            else if (!LevelChecked(Drill))
+                            else if (!LevelChecked(钻头Drill))
                             {
                                 if (UseHyperchargeDelayedTools(gauge, wildfireCDTime))
-                                    return Hypercharge;
+                                    return 超荷Hypercharge;
                             }
                         }
 
-                        //Heatblast, Gauss, Rico
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && gauge.IsOverheated && LevelChecked(HeatBlast))
+
+
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && LevelChecked(热冲击HeatBlast))
                         {
-                            if (CanWeave(actionID))
+                            if (CanSpellWeavePlus(actionID))
                             {
-                                if (GetRemainingCharges(GaussRound) >= GetRemainingCharges(Ricochet) && WasLastAction(HeatBlast))
-                                    return GaussRound;
+                                //超荷状态下
+                                if (gauge.IsOverheated)
+                                {
+                                    if (GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet)
+                                        && WasLastAction(热冲击HeatBlast))
+                                        return 虹吸弹GaussRound;
 
-                                if (GetRemainingCharges(Ricochet) >= GetRemainingCharges(GaussRound) && WasLastAction(HeatBlast))
-                                    return Ricochet;
+                                    if (GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound)
+                                        && WasLastAction(热冲击HeatBlast))
+                                        return 弹射Ricochet;
+                                }
+
+                                if (!gauge.IsOverheated && !HasEffect(Buffs.野火Wildfire))
+                                {
+
+                                    if (LevelChecked(虹吸弹GaussRound)
+                                        && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) >= 0
+                                        && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) <= 20)
+                                    {
+                                        return 虹吸弹GaussRound;
+                                    }
+
+                                    if (LevelChecked(弹射Ricochet)
+                                        && GetCooldownRemainingTime(MCH.弹射Ricochet) >= 0
+                                        && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 20)
+                                        return 弹射Ricochet;
+
+                                }
+
+                                if (RaidBuff.爆发期())
+                                {
+                                    if (虹吸弹GaussRound.ActionReady())
+                                    {
+                                        return 虹吸弹GaussRound;
+                                    }
+
+                                    if (弹射Ricochet.ActionReady())
+                                    {
+                                        return 弹射Ricochet;
+                                    }
+                                }
+
                             }
 
-                            if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
-                                return HeatBlast;
+                            if (gauge.IsOverheated)
+                            {
+                                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
+                                    return 热冲击HeatBlast;
+                            }
+
                         }
 
+                        //整备 三大件
                         if (ReassembledTools(ref actionID))
                             return actionID;
 
-                        //gauss and ricochet overcap protection
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && CanWeave(actionID) && !gauge.IsOverheated && !HasEffect(Buffs.Wildfire))
-                        {
-                            if (HasCharges(GaussRound) && (!LevelChecked(Ricochet) || GetCooldownRemainingTime(GaussRound) < GetCooldownRemainingTime(Ricochet)))
-                                return GaussRound;
-
-                            else if (ActionReady(Ricochet))
-                                return Ricochet;
-                        }
-                    }
-
-                    //123Tools Rotation
-                    if (rotationSelection is 1)
-                    {
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Interrupt) && interruptReady)
-                            return All.HeadGraze;
-
-                        // BarrelStabilizer use
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer) && CanWeave(actionID) && gauge.Heat <= 55 && ActionReady(BarrelStabilizer) && ((((wildfireCDTime <= 25 && wildfireCDTime >= 100) || HasEffect(Buffs.Wildfire)) && IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer_Wildfire_Only)) || (wildfireCDTime >= 110 && !IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer_Wildfire_Only))))
-                            return BarrelStabilizer;
-
-                        //Wildfire stuff
-                        //these TRY to ensure the correct loop, HC > CS > WF
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire) && ActionReady(Wildfire))
-                        {
-                            if (CanDelayedWeave(actionID, 0.8) && gauge.IsOverheated && WasLastWeaponskill(ChainSaw))
-                                return Wildfire;
-
-                            else if (CanWeave(actionID) && gauge.IsOverheated)
-                                return Wildfire;
-                        }
-
-                        //Queen aka Robot
-                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen) && Config.MCH_ST_TurretUsage == 1 && CanWeave(actionID) && !gauge.IsRobotActive && (!WasLastAbility(Wildfire)) && LevelChecked(OriginalHook(RookAutoturret)))
-                        {
-                            // First condition
-                            if (gauge.Battery == 50 && CombatEngageDuration().TotalSeconds > 61 && CombatEngageDuration().TotalSeconds < 68)
-                                return OriginalHook(RookAutoturret);
-
-                            // Second condition
-                            if (!WasLastAction(OriginalHook(CleanShot)) && gauge.Battery == 100 && gauge.LastSummonBatteryPower == 50 && (GetCooldownRemainingTime(AirAnchor) <= 3 || ActionReady(AirAnchor)) && AirAnchor.LevelChecked())
-                                return OriginalHook(RookAutoturret);
-
-                            // Third condition
-                            while (gauge.LastSummonBatteryPower == 100 && gauge.Battery >= 90) //was previously 80 with 30 overcap for 10mins
-                                return OriginalHook(RookAutoturret);
-
-                            // Fourth condition
-                            while (gauge.LastSummonBatteryPower != 50 && gauge.Battery == 100 && (GetCooldownRemainingTime(AirAnchor) <= 3 || ActionReady(AirAnchor)) && AirAnchor.LevelChecked())
-                                return OriginalHook(RookAutoturret);
-                        }
-
-                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen) && Config.MCH_ST_TurretUsage == 0 && LevelChecked(OriginalHook(RookAutoturret)) && gauge.Battery >= 50 && !gauge.IsRobotActive)
-                            return OriginalHook(RookAutoturret);
-
-                        //Overheated Reassemble & Heatblast & GaussRico featuring a small ChainSaw addendum
-                        if (gauge.IsOverheated && LevelChecked(HeatBlast) && IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
-                        {
-                            if (CanWeave(actionID, 0.6) && wildfireCDTime > 2 && IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet)) //check to see if this prevents Gauss/Rico from weaving on reopener deaths later
-                            {
-                                if (HasCharges(GaussRound) && (!LevelChecked(Ricochet) || GetCooldownRemainingTime(GaussRound) < GetCooldownRemainingTime(Ricochet)))
-                                    return GaussRound;
-
-                                else if (ActionReady(Ricochet))
-                                    return Ricochet;
-                            }
-
-                            if ((GetCooldownRemainingTime(ChainSaw) <= 1 || IsOffCooldown(ChainSaw)) && (wildfireCDTime < 3 || IsOffCooldown(Wildfire)) && ChainSaw.LevelChecked() && IsEnabled(CustomComboPreset.MCH_ST_Adv_ChainSaw))
-                                return ChainSaw;
-
-                            return HeatBlast;
-                        }
-
-                        //HYPERCHARGE!!
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Hypercharge) && gauge.Heat >= 50 && LevelChecked(Hypercharge) && !gauge.IsOverheated)
-                        {
-                            //Tries to ensure the HC > CS > WF loop for the back-to-back HC loops in full uptime fights.
-
-                            if (LevelChecked(Drill) && GetCooldownRemainingTime(Drill) >= 8)
-                            {
-                                if (LevelChecked(AirAnchor) && GetCooldownRemainingTime(AirAnchor) >= 8)
-                                {
-                                    if (LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) <= 2 && (wildfireCDTime <= 4 || IsOffCooldown(Wildfire)))
-                                    {
-                                        if (CanDelayedWeave(actionID) && UseHypercharge123Tools(gauge, wildfireCDTime))
-                                            return Hypercharge;
-                                    }
-                                    else if (LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) >= 8)
-                                    {
-                                        if (CanWeave(actionID) && UseHypercharge123Tools(gauge, wildfireCDTime))
-                                            return Hypercharge;
-                                    }
-                                    else if (!LevelChecked(ChainSaw))
-                                    {
-                                        if (CanWeave(actionID) && UseHypercharge123Tools(gauge, wildfireCDTime))
-                                            return Hypercharge;
-                                    }
-                                }
-                                else if (!LevelChecked(AirAnchor))
-                                {
-                                    if (CanWeave(actionID) && UseHypercharge123Tools(gauge, wildfireCDTime))
-                                        return Hypercharge;
-                                }
-                            }
-                            else if (!LevelChecked(Drill))
-                            {
-                                if (CanWeave(actionID) && UseHypercharge123Tools(gauge, wildfireCDTime))
-                                    return Hypercharge;
-                            }
-                        }
-
-
-                        if (ReassembledTools(ref actionID))
-                            return actionID;
-
-                        //gauss and ricochet overcap protection
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && CanWeave(actionID) && !gauge.IsOverheated && !HasEffect(Buffs.Wildfire))
-                        {
-                            if (HasCharges(GaussRound) && (!LevelChecked(Ricochet) || GetCooldownRemainingTime(GaussRound) < GetCooldownRemainingTime(Ricochet)))
-                                return GaussRound;
-
-                            else if (ActionReady(Ricochet))
-                                return Ricochet;
-                        }
-                    }
-
-                    //Early Tools Rotation
-                    if (rotationSelection is 2)
-                    {
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Interrupt) && interruptReady)
-                            return All.HeadGraze;
-
-                        // BarrelStabilizer use
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer) && CanWeave(actionID) && gauge.Heat <= 55 && ActionReady(BarrelStabilizer) && ((((wildfireCDTime <= 25 && wildfireCDTime >= 100) || HasEffect(Buffs.Wildfire)) && IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer_Wildfire_Only)) || (wildfireCDTime >= 110 && !IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer_Wildfire_Only))))
-                            return BarrelStabilizer;
-
-                        //Wildfire stuff
-                        //these try to ensure the correct loop, 1/2/3 > HC > WF
-                        if (ActionReady(Wildfire) && IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
-                        {
-                            if (CanDelayedWeave(actionID, 0.8) && (WasLastWeaponskill(HeatedSplitShot) || WasLastWeaponskill(HeatedSlugshot) || WasLastWeaponskill(HeatedCleanShot)))
-                                return Wildfire;
-
-                            else if (CanWeave(actionID) && gauge.IsOverheated)
-                                return Wildfire;
-                        }
-
-                        //Queen aka Robot
-                        if (CanWeave(actionID) && IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen) && Config.MCH_ST_TurretUsage == 1 && !gauge.IsRobotActive && !WasLastAbility(Wildfire) && OriginalHook(RookAutoturret).LevelChecked())
-                        {
-                            // First condition
-                            if (gauge.Battery == 70 && CombatEngageDuration().TotalSeconds > 61 && CombatEngageDuration().TotalSeconds < 68)
-                                return OriginalHook(RookAutoturret);
-
-                            // Second condition
-                            if (!WasLastAction(OriginalHook(CleanShot)) && gauge.Battery >= 90 && gauge.LastSummonBatteryPower == 70)
-                                return OriginalHook(RookAutoturret);
-
-                            // Third condition
-                            if (gauge.LastSummonBatteryPower >= 90 && gauge.Battery >= 90)
-                                return OriginalHook(RookAutoturret);
-
-                            // Fourth condition
-                            while (gauge.LastSummonBatteryPower != 50 && gauge.Battery == 100)
-                                return OriginalHook(RookAutoturret);
-
-                            // Fifth condition
-                            while (gauge.LastSummonBatteryPower == 100 && gauge.Battery >= 90) //was previously 80 with 30 overcap for 10mins
-                                return OriginalHook(RookAutoturret);
-                        }
-
-                        if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen) && Config.MCH_ST_TurretUsage == 0 && LevelChecked(OriginalHook(RookAutoturret)) && gauge.Battery >= 50 && !gauge.IsRobotActive)
-                            return OriginalHook(RookAutoturret);
-
-                        //Overheated Reassemble & Heatblast & GaussRico featuring a small ChainSaw addendum
-                        if (gauge.IsOverheated && LevelChecked(HeatBlast))
-                        {
-                            if (CanWeave(actionID, 0.6) && IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet))
-                            {
-                                if (ActionReady(GaussRound) && (!LevelChecked(Ricochet) || GetCooldownRemainingTime(GaussRound) < GetCooldownRemainingTime(Ricochet)))
-                                    return GaussRound;
-
-                                else if (ActionReady(Ricochet))
-                                    return Ricochet;
-                            }
-                            if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
-                                return HeatBlast;
-                        }
-
-                        //HYPERCHARGE!!
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Hypercharge) && gauge.Heat >= 50 && ActionReady(Hypercharge) && !gauge.IsOverheated && CanWeave(actionID))
-                        {
-                            //Protection & ensures Hyper charged is double weaved with WF during reopener
-                            //if (HasEffect(Buffs.Wildfire) || level < Levels.Wildfire) return Hypercharge;
-
-                            if (LevelChecked(Drill) && GetCooldownRemainingTime(Drill) >= 8)
-                            {
-                                if (LevelChecked(AirAnchor) && GetCooldownRemainingTime(AirAnchor) >= 8)
-                                {
-                                    if (LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) >= 8)
-                                    {
-                                        if (UseHyperchargeEarlyRotation(gauge, wildfireCDTime))
-                                            return Hypercharge;
-                                    }
-
-                                    else if (!LevelChecked(ChainSaw))
-                                    {
-                                        if (UseHyperchargeEarlyRotation(gauge, wildfireCDTime))
-                                            return Hypercharge;
-                                    }
-                                }
-
-                                else if (!LevelChecked(AirAnchor))
-                                {
-                                    if (UseHyperchargeEarlyRotation(gauge, wildfireCDTime))
-                                        return Hypercharge;
-                                }
-                            }
-
-                            else if (!LevelChecked(Drill))
-                            {
-                                if (UseHyperchargeEarlyRotation(gauge, wildfireCDTime))
-                                    return Hypercharge;
-                            }
-                        }
-
-                        if (ReassembledTools(ref actionID))
-                            return actionID;
-
-                        //gauss and ricochet overcap protection
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && CanWeave(actionID) && !gauge.IsOverheated && !HasEffect(Buffs.Wildfire))
-                        {
-                            if (HasCharges(GaussRound) && (level < Levels.Ricochet || GetCooldownRemainingTime(GaussRound) < GetCooldownRemainingTime(Ricochet)))
-                                return GaussRound;
-                            else if (HasCharges(Ricochet) && level >= Levels.Ricochet)
-                                return Ricochet;
-                        }
                     }
 
                     // healing
-                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_SecondWind) && CanWeave(actionID, 0.6) && PlayerHealthPercentageHp() <= Config.MCH_ST_SecondWindThreshold && ActionReady(All.SecondWind))
-                        return All.SecondWind;
+                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_SecondWind)
+                        && CanWeave(actionID, 0.6)
+                        && PlayerHealthPercentageHp() <= Config.MCH_ST_SecondWindThreshold
+                        && ActionReady(All.内丹SecondWind))
+                        return All.内丹SecondWind;
 
                     //1-2-3 Combo
                     if (comboTime > 0)
                     {
-                        if (lastComboMove is SplitShot && LevelChecked(OriginalHook(SlugShot)))
-                            return OriginalHook(SlugShot);
+                        if (lastComboMove is 分裂弹SplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
+                            return OriginalHook(独头弹SlugShot);
 
-                        if (lastComboMove is SlugShot && LevelChecked(OriginalHook(CleanShot)))
-                            return OriginalHook(CleanShot);
+                        if (lastComboMove is 独头弹SlugShot && LevelChecked(OriginalHook(狙击弹CleanShot)))
+                            return OriginalHook(狙击弹CleanShot);
                     }
 
-                    return OriginalHook(SplitShot);
+                    return 分裂弹SplitShot;
                 }
 
                 return actionID;
             }
 
+
+            private float 三件套最小冷却Time()
+            {
+                var GCDCooldownRemainingTime = GetCooldownRemainingTime(狙击弹CleanShot);
+
+                var 钻头DrillCooldownRemainingTime = GetCooldownRemainingTime(钻头Drill) + GCDCooldownRemainingTime;
+                var 空气锚AirAnchorCooldownRemainingTime =
+                    GetCooldownRemainingTime(空气锚AirAnchor) + GCDCooldownRemainingTime;
+                var 回转飞锯ChainSawDrillCooldownRemainingTime =
+                    GetCooldownRemainingTime(钻头Drill) + GCDCooldownRemainingTime;
+
+
+                return Math.Min(Math.Min(钻头DrillCooldownRemainingTime, 空气锚AirAnchorCooldownRemainingTime),
+                    回转飞锯ChainSawDrillCooldownRemainingTime);
+            }
+
             private bool ReassembledTools(ref uint actionId)
             {
-                bool reassembledAnchor = (Config.MCH_ST_Reassembled[0] && HasEffect(Buffs.Reassembled)) || (!Config.MCH_ST_Reassembled[0] && !HasEffect(Buffs.Reassembled)) || (!HasEffect(Buffs.Reassembled) && GetRemainingCharges(Reassemble) == 0);
-                bool reassembledDrill = (Config.MCH_ST_Reassembled[1] && HasEffect(Buffs.Reassembled)) || (!Config.MCH_ST_Reassembled[1] && !HasEffect(Buffs.Reassembled)) || (!HasEffect(Buffs.Reassembled) && GetRemainingCharges(Reassemble) == 0);
-                bool reassembledChainsaw = (Config.MCH_ST_Reassembled[2] && HasEffect(Buffs.Reassembled)) || (!Config.MCH_ST_Reassembled[2] && !HasEffect(Buffs.Reassembled)) || (!HasEffect(Buffs.Reassembled) && GetRemainingCharges(Reassemble) == 0);
+                // bool reassembledAnchor = (Config.MCH_ST_Reassembled[0] && HasEffect(Buffs.整备Reassembled))
+                //                          || (!Config.MCH_ST_Reassembled[0] && !HasEffect(Buffs.整备Reassembled))
+                //                          || (!HasEffect(Buffs.整备Reassembled) && GetRemainingCharges(整备Reassemble) == 0);
+                //
+                // bool reassembledDrill = (Config.MCH_ST_Reassembled[1] && HasEffect(Buffs.整备Reassembled))
+                //                         || (!Config.MCH_ST_Reassembled[1] && !HasEffect(Buffs.整备Reassembled))
+                //                         || (!HasEffect(Buffs.整备Reassembled) && GetRemainingCharges(整备Reassemble) == 0);
+                //
+                // bool reassembledChainsaw = (Config.MCH_ST_Reassembled[2] && HasEffect(Buffs.整备Reassembled))
+                //                            || (!Config.MCH_ST_Reassembled[2] && !HasEffect(Buffs.整备Reassembled))
+                //                            || (!HasEffect(Buffs.整备Reassembled)
+                //                                && GetRemainingCharges(整备Reassemble) == 0);
+
+
+                bool reassembledAnchor = (Config.MCH_ST_Reassembled[0])
+                                         && OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot);
+
+                bool reassembledDrill = (Config.MCH_ST_Reassembled[1]) && 钻头Drill.GCDActionReady(狙击弹CleanShot);
+
+                bool reassembledChainsaw = (Config.MCH_ST_Reassembled[2]) && 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot);
 
                 // TOOLS!! ChainSaw Drill Air Anchor
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled) && !HasEffect(Buffs.Wildfire) && !HasEffect(Buffs.Reassembled) && HasCharges(Reassemble) && ((GetCooldownRemainingTime(OriginalHook(HotShot)) < 1 && Config.MCH_ST_Reassembled[0] && AirAnchor.LevelChecked()) || (GetCooldownRemainingTime(OriginalHook(Drill)) < 1 && Config.MCH_ST_Reassembled[1] && Drill.LevelChecked()) || (GetCooldownRemainingTime(OriginalHook(ChainSaw)) < 1 && Config.MCH_ST_Reassembled[2]) && ChainSaw.LevelChecked()))
+                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
+                    && CanSpellWeavePlus(狙击弹CleanShot)
+                    && !HasEffect(Buffs.野火Wildfire)
+                    && !HasEffect(Buffs.整备Reassembled)
+                    && HasCharges(整备Reassemble)
+                    && (reassembledAnchor || reassembledDrill || reassembledChainsaw))
                 {
-                    actionId = Reassemble;
+                    actionId = 整备Reassemble;
                     return true;
                 }
 
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_ChainSaw) && reassembledChainsaw && ChainSaw.LevelChecked() && (GetCooldownRemainingTime(ChainSaw) < 1 || ActionReady(ChainSaw)))
+                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_ChainSaw) && reassembledChainsaw)
                 {
-                    actionId = ChainSaw;
+                    actionId = 回转飞锯ChainSaw;
                     return true;
                 }
 
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Drill) && reassembledDrill && Drill.LevelChecked() && (GetCooldownRemainingTime(Drill) < 1 || ActionReady(Drill)))
+                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Drill) && reassembledDrill)
                 {
-                    actionId = Drill;
+                    actionId = 钻头Drill;
                     return true;
                 }
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_AirAnchor) && reassembledAnchor && OriginalHook(AirAnchor).LevelChecked() && (GetCooldownRemainingTime(OriginalHook(AirAnchor)) < 1 || ActionReady(OriginalHook(AirAnchor))))
+
+                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_AirAnchor) && reassembledAnchor)
                 {
-                    actionId = OriginalHook(AirAnchor);
+                    actionId = OriginalHook(空气锚AirAnchor);
                     return true;
                 }
 
@@ -728,31 +673,44 @@ namespace XIVSlothComboX.Combos.PvE
 
             private bool UseHyperchargeDelayedTools(MCHGauge gauge, float wildfireCDTime)
             {
-                if (CombatEngageDuration().Minutes == 0 && (gauge.Heat == 60 || CombatEngageDuration().Seconds <= 33))
-                    return true;
-
-                if (CombatEngageDuration().Minutes > 0)
+                if (!LevelChecked(超荷Hypercharge))
                 {
-                    if (gauge.Heat >= 50 && wildfireCDTime >= 104)
-                        return true;
-
-                    if (gauge.Heat >= 50 && wildfireCDTime <= 33 && wildfireCDTime >= 1)
-                        return false;
-
-                    if (gauge.Heat >= 55)
-                        return true;
+                    return false;
                 }
+                if (wildfireCDTime is >= 1 and <= 33)
+                {
+                    return false;
+                }
+                
+                
+                if (gauge.Heat >= 50)
+                {
+                    if (wildfireCDTime >= 60)
+                    {
+                        return true;
+                    }
+                    
+                    if (gauge.Heat >= 50)
+                    {
+                        return true;
+                    }
+                }
+                
                 return false;
             }
 
             private bool UseHypercharge123Tools(MCHGauge gauge, float wildfireCDTime)
             {
-                if (CombatEngageDuration().Minutes == 0 && (gauge.Heat >= 60 || CombatEngageDuration().Seconds <= 30) && !WasLastWeaponskill(OriginalHook(CleanShot)))
+                if (CombatEngageDuration().Minutes == 0
+                    && (gauge.Heat >= 60 || CombatEngageDuration().Seconds <= 30)
+                    && !WasLastWeaponskill(OriginalHook(狙击弹CleanShot)))
                     return true;
 
                 if (CombatEngageDuration().Minutes > 0)
                 {
-                    if (gauge.Heat >= 50 && GetCooldownRemainingTime(ChainSaw) <= 1 && (wildfireCDTime <= 4 || IsOffCooldown(Wildfire)))
+                    if (gauge.Heat >= 50
+                        && GetCooldownRemainingTime(回转飞锯ChainSaw) <= 1
+                        && (wildfireCDTime <= 4 || IsOffCooldown(野火Wildfire)))
                         return true;
 
                     if (gauge.Heat >= 50 && wildfireCDTime <= 38 && wildfireCDTime >= 4)
@@ -770,7 +728,10 @@ namespace XIVSlothComboX.Combos.PvE
 
             private bool UseHyperchargeEarlyRotation(MCHGauge gauge, float wildfireCDTime)
             {
-                if (CombatEngageDuration().Minutes == 0 && (gauge.Heat >= 50 || CombatEngageDuration().Seconds <= 30) && WasLastWeaponskill(HeatedSplitShot))
+                //起手超荷
+                if (CombatEngageDuration().Minutes == 0
+                    && (gauge.Heat >= 50 || CombatEngageDuration().Seconds <= 30)
+                    && WasLastWeaponskill(热分裂弹HeatedSplitShot))
                     return true;
 
                 if (CombatEngageDuration().Minutes > 0)
@@ -795,55 +756,65 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is SpreadShot)
+                if (actionID is 散射SpreadShot)
                 {
                     MCHGauge? gauge = GetJobGauge<MCHGauge>();
 
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= GetOptionValue(Config.MCH_VariantCure))
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
+                        && IsEnabled(Variant.VariantCure)
+                        && PlayerHealthPercentageHp() <= GetOptionValue(Config.MCH_VariantCure))
                         return Variant.VariantCure;
 
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart)
+                        && IsEnabled(Variant.VariantRampart)
+                        && IsOffCooldown(Variant.VariantRampart)
+                        && CanWeave(actionID))
                         return Variant.VariantRampart;
 
                     if (!gauge.IsOverheated)
                     {
                         if (gauge.Battery == 100)
-                            return OriginalHook(RookAutoturret);
+                            return OriginalHook(车式浮空炮塔RookAutoturret);
                     }
 
                     //gauss and ricochet overcap protection
                     if (CanWeave(actionID) && !gauge.IsOverheated)
                     {
-                        if (ActionReady(GaussRound) && GetRemainingCharges(GaussRound) >= GetMaxCharges(GaussRound))
-                            return GaussRound;
+                        if (ActionReady(虹吸弹GaussRound)
+                            && GetRemainingCharges(虹吸弹GaussRound) >= GetMaxCharges(虹吸弹GaussRound))
+                            return 虹吸弹GaussRound;
 
-                        if (ActionReady(Ricochet) && GetRemainingCharges(Ricochet) >= GetMaxCharges(Ricochet))
-                            return Ricochet;
+                        if (ActionReady(弹射Ricochet) && GetRemainingCharges(弹射Ricochet) >= GetMaxCharges(弹射Ricochet))
+                            return 弹射Ricochet;
                     }
 
                     // Hypercharge        
-                    if (gauge.Heat >= 50 && LevelChecked(Hypercharge) && !gauge.IsOverheated)
-                        return Hypercharge;
+                    if (gauge.Heat >= 50 && LevelChecked(超荷Hypercharge) && !gauge.IsOverheated)
+                        return 超荷Hypercharge;
 
                     //Heatblast, Gauss, Rico
-                    if (gauge.IsOverheated && LevelChecked(AutoCrossbow))
+                    if (gauge.IsOverheated && LevelChecked(自动弩AutoCrossbow))
                     {
-                        if (WasLastAction(AutoCrossbow) && CanWeave(actionID))
+                        if (WasLastAction(自动弩AutoCrossbow) && CanWeave(actionID))
                         {
-                            if (ActionReady(GaussRound) && GetRemainingCharges(GaussRound) >= GetRemainingCharges(Ricochet))
-                                return GaussRound;
+                            if (ActionReady(虹吸弹GaussRound)
+                                && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
+                                return 虹吸弹GaussRound;
 
-                            if (ActionReady(Ricochet) && GetRemainingCharges(Ricochet) >= GetRemainingCharges(GaussRound))
-                                return Ricochet;
+                            if (ActionReady(弹射Ricochet)
+                                && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
+                                return 弹射Ricochet;
                         }
-                        return AutoCrossbow;
+                        return 自动弩AutoCrossbow;
                     }
 
-                    if (ActionReady(BioBlaster) && !HasEffect(Buffs.Overheated) && IsEnabled(CustomComboPreset.MCH_AoE_Adv_Bioblaster))
+                    if (ActionReady(BioBlaster)
+                        && !HasEffect(Buffs.过热Overheated)
+                        && IsEnabled(CustomComboPreset.MCH_AoE_Adv_Bioblaster))
                         return BioBlaster;
 
-                    if (CanWeave(actionID, 0.6) && PlayerHealthPercentageHp() <= 20 && ActionReady(All.SecondWind))
-                        return All.SecondWind;
+                    if (CanWeave(actionID, 0.6) && PlayerHealthPercentageHp() <= 20 && ActionReady(All.内丹SecondWind))
+                        return All.内丹SecondWind;
                 }
 
                 return actionID;
@@ -856,72 +827,111 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is SpreadShot)
+                if (actionID is 散射SpreadShot)
                 {
                     MCHGauge? gauge = GetJobGauge<MCHGauge>();
-                    bool reassembledScattergun = (Config.MCH_AoE_Reassembled[0] && HasEffect(Buffs.Reassembled));
-                    bool reassembledCrossbow = (Config.MCH_AoE_Reassembled[1] && HasEffect(Buffs.Reassembled)) || (!Config.MCH_AoE_Reassembled[1] && !HasEffect(Buffs.Reassembled));
-                    bool reassembledChainsaw = (Config.MCH_AoE_Reassembled[2] && HasEffect(Buffs.Reassembled)) || (!Config.MCH_AoE_Reassembled[2] && !HasEffect(Buffs.Reassembled)) || (!HasEffect(Buffs.Reassembled) && GetRemainingCharges(Reassemble) == 0);
+                    bool reassembledScattergun = (Config.MCH_AoE_Reassembled[0] && HasEffect(Buffs.整备Reassembled));
+                    bool reassembledCrossbow = (Config.MCH_AoE_Reassembled[1] && HasEffect(Buffs.整备Reassembled))
+                                               || (!Config.MCH_AoE_Reassembled[1] && !HasEffect(Buffs.整备Reassembled));
+                    bool reassembledChainsaw = (Config.MCH_AoE_Reassembled[2] && HasEffect(Buffs.整备Reassembled))
+                                               || (!Config.MCH_AoE_Reassembled[2] && !HasEffect(Buffs.整备Reassembled))
+                                               || (!HasEffect(Buffs.整备Reassembled)
+                                                   && GetRemainingCharges(整备Reassemble) == 0);
 
 
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= GetOptionValue(Config.MCH_VariantCure))
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
+                        && IsEnabled(Variant.VariantCure)
+                        && PlayerHealthPercentageHp() <= GetOptionValue(Config.MCH_VariantCure))
                         return Variant.VariantCure;
 
-                    if (HasEffect(Buffs.Flamethrower) || JustUsed(Flamethrower))
+                    if (HasEffect(Buffs.火焰喷射器Flamethrower) || JustUsed(火焰喷射器Flamethrower))
                         return OriginalHook(11);
 
-                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
+                    if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart)
+                        && IsEnabled(Variant.VariantRampart)
+                        && IsOffCooldown(Variant.VariantRampart)
+                        && CanWeave(actionID))
                         return Variant.VariantRampart;
 
-                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Reassemble) && !HasEffect(Buffs.Wildfire) && !HasEffect(Buffs.Reassembled) && HasCharges(Reassemble) && ((Config.MCH_AoE_Reassembled[0] && Scattergun.LevelChecked()) || (gauge.IsOverheated && Config.MCH_AoE_Reassembled[1] && AutoCrossbow.LevelChecked()) || (GetCooldownRemainingTime(OriginalHook(ChainSaw)) < 1 && Config.MCH_AoE_Reassembled[2] && ChainSaw.LevelChecked())))
-                        return Reassemble;
+                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Reassemble)
+                        && !HasEffect(Buffs.野火Wildfire)
+                        && !HasEffect(Buffs.整备Reassembled)
+                        && HasCharges(整备Reassemble)
+                        && ((Config.MCH_AoE_Reassembled[0] && 霰弹枪Scattergun.LevelChecked())
+                            || (gauge.IsOverheated && Config.MCH_AoE_Reassembled[1] && 自动弩AutoCrossbow.LevelChecked())
+                            || (GetCooldownRemainingTime(OriginalHook(回转飞锯ChainSaw)) < 1
+                                && Config.MCH_AoE_Reassembled[2]
+                                && 回转飞锯ChainSaw.LevelChecked())))
+                        return 整备Reassemble;
 
-                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Chainsaw) && reassembledChainsaw && ((LevelChecked(ChainSaw) && GetCooldownRemainingTime(ChainSaw) < 1) || ActionReady(ChainSaw)))
-                        return ChainSaw;
+                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Chainsaw)
+                        && reassembledChainsaw
+                        && ((LevelChecked(回转飞锯ChainSaw) && GetCooldownRemainingTime(回转飞锯ChainSaw) < 1)
+                            || ActionReady(回转飞锯ChainSaw)))
+                        return 回转飞锯ChainSaw;
 
                     if (reassembledScattergun)
-                        return OriginalHook(Scattergun);
+                        return OriginalHook(霰弹枪Scattergun);
 
-                    if (reassembledCrossbow && LevelChecked(AutoCrossbow) && gauge.IsOverheated)
-                        return AutoCrossbow;
+                    if (reassembledCrossbow && LevelChecked(自动弩AutoCrossbow) && gauge.IsOverheated)
+                        return 自动弩AutoCrossbow;
 
                     if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Bioblaster) && ActionReady(BioBlaster))
                         return OriginalHook(BioBlaster);
 
-                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_FlameThrower) && ActionReady(Flamethrower) && !IsMoving)
-                        return OriginalHook(Flamethrower);
+                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_FlameThrower)
+                        && ActionReady(火焰喷射器Flamethrower)
+                        && !IsMoving)
+                        return OriginalHook(火焰喷射器Flamethrower);
 
                     if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Queen) && !gauge.IsOverheated)
                     {
                         if (gauge.Battery >= Config.MCH_AoE_TurretUsage)
-                            return OriginalHook(RookAutoturret);
+                            return OriginalHook(车式浮空炮塔RookAutoturret);
                     }
 
                     // Hypercharge        
-                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Hypercharge) && gauge.Heat >= 50 && LevelChecked(Hypercharge) && LevelChecked(AutoCrossbow) && !gauge.IsOverheated && ((BioBlaster.LevelChecked() && GetCooldownRemainingTime(BioBlaster) > 10) || !BioBlaster.LevelChecked() || IsNotEnabled(CustomComboPreset.MCH_AoE_Adv_Bioblaster)) && ((Flamethrower.LevelChecked() && GetCooldownRemainingTime(Flamethrower) > 10) || !Flamethrower.LevelChecked() || IsNotEnabled(CustomComboPreset.MCH_AoE_Adv_FlameThrower)))
-                        return Hypercharge;
+                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_Hypercharge)
+                        && gauge.Heat >= 50
+                        && LevelChecked(超荷Hypercharge)
+                        && LevelChecked(自动弩AutoCrossbow)
+                        && !gauge.IsOverheated
+                        && ((BioBlaster.LevelChecked() && GetCooldownRemainingTime(BioBlaster) > 10)
+                            || !BioBlaster.LevelChecked()
+                            || IsNotEnabled(CustomComboPreset.MCH_AoE_Adv_Bioblaster))
+                        && ((火焰喷射器Flamethrower.LevelChecked() && GetCooldownRemainingTime(火焰喷射器Flamethrower) > 10)
+                            || !火焰喷射器Flamethrower.LevelChecked()
+                            || IsNotEnabled(CustomComboPreset.MCH_AoE_Adv_FlameThrower)))
+                        return 超荷Hypercharge;
 
                     //Heatblast, Gauss, Rico
-                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_GaussRicochet) && CanWeave(actionID) && (Config.MCH_AoE_Hypercharge || (!Config.MCH_AoE_Hypercharge && gauge.IsOverheated)))
+                    if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_GaussRicochet)
+                        && CanWeave(actionID)
+                        && (Config.MCH_AoE_Hypercharge || (!Config.MCH_AoE_Hypercharge && gauge.IsOverheated)))
                     {
-                        if ((WasLastAction(SpreadShot) || WasLastAction(AutoCrossbow) || Config.MCH_AoE_Hypercharge) && ActionWatching.GetAttackType(ActionWatching.LastAction) != ActionWatching.ActionAttackType.Ability)
+                        if ((WasLastAction(散射SpreadShot)
+                             || WasLastAction(自动弩AutoCrossbow)
+                             || Config.MCH_AoE_Hypercharge)
+                            && ActionWatching.GetAttackType(ActionWatching.LastAction)
+                            != ActionWatching.ActionAttackType.Ability)
                         {
-                            if (GetRemainingCharges(Ricochet) > 0)
-                                return Ricochet;
+                            if (GetRemainingCharges(弹射Ricochet) > 0)
+                                return 弹射Ricochet;
 
-                            if (GetRemainingCharges(GaussRound) > 0)
-                                return GaussRound;
+                            if (GetRemainingCharges(虹吸弹GaussRound) > 0)
+                                return 虹吸弹GaussRound;
 
                         }
                     }
 
-                    if (gauge.IsOverheated && AutoCrossbow.LevelChecked())
-                        return OriginalHook(AutoCrossbow);
+                    if (gauge.IsOverheated && 自动弩AutoCrossbow.LevelChecked())
+                        return OriginalHook(自动弩AutoCrossbow);
 
                     if (IsEnabled(CustomComboPreset.MCH_AoE_Adv_SecondWind) && CanWeave(actionID, 0.6))
                     {
-                        if (PlayerHealthPercentageHp() <= Config.MCH_AoE_SecondWindThreshold && ActionReady(All.SecondWind))
-                            return All.SecondWind;
+                        if (PlayerHealthPercentageHp() <= Config.MCH_AoE_SecondWindThreshold
+                            && ActionReady(All.内丹SecondWind))
+                            return All.内丹SecondWind;
                     }
                 }
 
@@ -931,31 +941,39 @@ namespace XIVSlothComboX.Combos.PvE
 
         internal class MCH_HeatblastGaussRicochet : CustomCombo
         {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_HeatblastGaussRicochet;
+            protected internal override CustomComboPreset Preset { get; } =
+                CustomComboPreset.MCH_HeatblastGaussRicochet;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 MCHGauge? gauge = GetJobGauge<MCHGauge>();
-                if (actionID is HeatBlast)
+                if (actionID is 热冲击HeatBlast)
                 {
-                    if (IsEnabled(CustomComboPreset.MCH_AutoCrossbowGaussRicochet_AutoBarrel) && ActionReady(BarrelStabilizer) && gauge.Heat < 50 && !HasEffect(Buffs.Overheated))
-                        return BarrelStabilizer;
+                    if (IsEnabled(CustomComboPreset.MCH_AutoCrossbowGaussRicochet_AutoBarrel)
+                        && ActionReady(枪管加热BarrelStabilizer)
+                        && gauge.Heat < 50
+                        && !HasEffect(Buffs.过热Overheated))
+                        return 枪管加热BarrelStabilizer;
 
-                    if (IsEnabled(CustomComboPreset.MCH_ST_Wildfire) && ActionReady(Hypercharge) && ActionReady(Wildfire) && gauge.Heat >= 50)
-                        return Wildfire;
+                    if (IsEnabled(CustomComboPreset.MCH_ST_Wildfire)
+                        && ActionReady(超荷Hypercharge)
+                        && ActionReady(野火Wildfire)
+                        && gauge.Heat >= 50)
+                        return 野火Wildfire;
 
-                    if (!HasEffect(Buffs.Overheated) && LevelChecked(Hypercharge))
-                        return Hypercharge;
+                    if (!HasEffect(Buffs.过热Overheated) && LevelChecked(超荷Hypercharge))
+                        return 超荷Hypercharge;
 
-                    if (GetCooldownRemainingTime(HeatBlast) < 0.7 && LevelChecked(HeatBlast)) // Prioritize Heat Blast
-                        return HeatBlast;
+                    if (GetCooldownRemainingTime(热冲击HeatBlast) < 0.7
+                        && LevelChecked(热冲击HeatBlast)) // Prioritize Heat Blast
+                        return 热冲击HeatBlast;
 
-                    if (!LevelChecked(Ricochet))
-                        return GaussRound;
+                    if (!LevelChecked(弹射Ricochet))
+                        return 虹吸弹GaussRound;
 
-                    if (GetCooldownRemainingTime(GaussRound) < GetCooldownRemainingTime(Ricochet))
-                        return GaussRound;
-                    return Ricochet;
+                    if (GetCooldownRemainingTime(虹吸弹GaussRound) < GetCooldownRemainingTime(弹射Ricochet))
+                        return 虹吸弹GaussRound;
+                    return 弹射Ricochet;
                 }
                 return actionID;
             }
@@ -968,24 +986,24 @@ namespace XIVSlothComboX.Combos.PvE
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
 
-                if (actionID is GaussRound or Ricochet)
+                if (actionID is 虹吸弹GaussRound or 弹射Ricochet)
 
                 {
-                    var gaussCharges = GetRemainingCharges(GaussRound);
-                    var ricochetCharges = GetRemainingCharges(Ricochet);
+                    var gaussCharges = GetRemainingCharges(虹吸弹GaussRound);
+                    var ricochetCharges = GetRemainingCharges(弹射Ricochet);
 
                     // Prioritize the original if both are off cooldown
 
-                    if (!LevelChecked(Ricochet))
-                        return GaussRound;
+                    if (!LevelChecked(弹射Ricochet))
+                        return 虹吸弹GaussRound;
 
-                    if (IsOffCooldown(GaussRound) && IsOffCooldown(Ricochet))
+                    if (IsOffCooldown(虹吸弹GaussRound) && IsOffCooldown(弹射Ricochet))
                         return actionID;
 
                     if ((gaussCharges >= ricochetCharges || level < Levels.Ricochet) && level >= Levels.GaussRound)
-                        return GaussRound;
+                        return 虹吸弹GaussRound;
                     else if (ricochetCharges > 0 && level >= Levels.Ricochet)
-                        return Ricochet;
+                        return 弹射Ricochet;
                 }
 
                 return actionID;
@@ -998,11 +1016,11 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is RookAutoturret or AutomatonQueen)
+                if (actionID is 车式浮空炮塔RookAutoturret or 后式自走人偶AutomatonQueen)
                 {
                     MCHGauge? gauge = GetJobGauge<MCHGauge>();
                     if (gauge.IsRobotActive)
-                        return OriginalHook(QueenOverdrive);
+                        return OriginalHook(超档后式人偶QueenOverdrive);
                 }
 
                 return actionID;
@@ -1015,18 +1033,18 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID == Drill || actionID == HotShot || actionID == AirAnchor)
+                if (actionID == 钻头Drill || actionID == 热弹HotShot || actionID == 空气锚AirAnchor)
                 {
-                    if (LevelChecked(ChainSaw))
-                        return CalcBestAction(actionID, ChainSaw, AirAnchor, Drill);
+                    if (LevelChecked(回转飞锯ChainSaw))
+                        return CalcBestAction(actionID, 回转飞锯ChainSaw, 空气锚AirAnchor, 钻头Drill);
 
-                    if (LevelChecked(AirAnchor))
-                        return CalcBestAction(actionID, AirAnchor, Drill);
+                    if (LevelChecked(空气锚AirAnchor))
+                        return CalcBestAction(actionID, 空气锚AirAnchor, 钻头Drill);
 
-                    if (LevelChecked(Drill))
-                        return CalcBestAction(actionID, Drill, HotShot);
+                    if (LevelChecked(钻头Drill))
+                        return CalcBestAction(actionID, 钻头Drill, 热弹HotShot);
 
-                    return HotShot;
+                    return 热弹HotShot;
                 }
 
                 return actionID;
@@ -1038,8 +1056,11 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_DismantleTactician;
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is Dismantle && (IsOnCooldown(Dismantle) || !LevelChecked(Dismantle)) && ActionReady(Tactician) && !HasEffect(Buffs.Tactician))
-                    return Tactician;
+                if (actionID is 武装解除Dismantle
+                    && (IsOnCooldown(武装解除Dismantle) || !LevelChecked(武装解除Dismantle))
+                    && ActionReady(策动Tactician)
+                    && !HasEffect(Buffs.策动Tactician))
+                    return 策动Tactician;
 
                 return actionID;
             }
@@ -1047,29 +1068,33 @@ namespace XIVSlothComboX.Combos.PvE
 
         internal class MCH_AutoCrossbowGaussRicochet : CustomCombo
         {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_AutoCrossbowGaussRicochet;
+            protected internal override CustomComboPreset Preset { get; } =
+                CustomComboPreset.MCH_AutoCrossbowGaussRicochet;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is AutoCrossbow)
+                if (actionID is 自动弩AutoCrossbow)
                 {
-                    var heatBlastCD = GetCooldown(HeatBlast);
-                    var gaussCD = GetCooldown(GaussRound);
-                    var ricochetCD = GetCooldown(Ricochet);
+                    var heatBlastCD = GetCooldown(热冲击HeatBlast);
+                    var gaussCD = GetCooldown(虹吸弹GaussRound);
+                    var ricochetCD = GetCooldown(弹射Ricochet);
                     MCHGauge? gauge = GetJobGauge<MCHGauge>();
 
-                    if (IsEnabled(CustomComboPreset.MCH_AutoCrossbowGaussRicochet_AutoBarrel) && ActionReady(BarrelStabilizer) && gauge.Heat < 50 && !HasEffect(Buffs.Overheated)) return BarrelStabilizer;
+                    if (IsEnabled(CustomComboPreset.MCH_AutoCrossbowGaussRicochet_AutoBarrel)
+                        && ActionReady(枪管加热BarrelStabilizer)
+                        && gauge.Heat < 50
+                        && !HasEffect(Buffs.过热Overheated)) return 枪管加热BarrelStabilizer;
 
-                    if (!HasEffect(Buffs.Overheated) && ActionReady(Hypercharge))
-                        return Hypercharge;
-                    if (heatBlastCD.CooldownRemaining < 0.7 && LevelChecked(AutoCrossbow)) // prioritize autocrossbow
-                        return AutoCrossbow;
-                    if (!LevelChecked(Ricochet))
-                        return GaussRound;
+                    if (!HasEffect(Buffs.过热Overheated) && ActionReady(超荷Hypercharge))
+                        return 超荷Hypercharge;
+                    if (heatBlastCD.CooldownRemaining < 0.7 && LevelChecked(自动弩AutoCrossbow)) // prioritize autocrossbow
+                        return 自动弩AutoCrossbow;
+                    if (!LevelChecked(弹射Ricochet))
+                        return 虹吸弹GaussRound;
                     if (gaussCD.CooldownRemaining < ricochetCD.CooldownRemaining)
-                        return GaussRound;
+                        return 虹吸弹GaussRound;
                     else
-                        return Ricochet;
+                        return 弹射Ricochet;
                 }
 
                 return actionID;
@@ -1084,8 +1109,8 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is Dismantle)
-                    if (TargetHasEffectAny(Debuffs.Dismantled) && IsOffCooldown(Dismantle))
+                if (actionID is 武装解除Dismantle)
+                    if (TargetHasEffectAny(Debuffs.Dismantled) && IsOffCooldown(武装解除Dismantle))
                         return BLM.Fire;
 
                 return actionID;

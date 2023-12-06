@@ -393,7 +393,7 @@ namespace XIVSlothComboX.Combos.PvE
                     bool improvisationReady = LevelChecked(即兴表演Improvisation) && IsOffCooldown(即兴表演Improvisation);
                     bool standardStepReady = LevelChecked(标准舞步StandardStep) && IsOffCooldown(标准舞步StandardStep);
                     bool technicalStepReady = LevelChecked(技巧舞步TechnicalStep) && IsOffCooldown(技巧舞步TechnicalStep);
-                    bool interruptable = CanInterruptEnemy() && IsOffCooldown(All.HeadGraze) && LevelChecked(All.HeadGraze);
+                    bool interruptable = CanInterruptEnemy() && IsOffCooldown(All.伤头HeadGraze) && LevelChecked(All.伤头HeadGraze);
                     int standardStepBurstThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleSSBurstPercent);
                     int technicalStepBurstThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleTSBurstPercent);
 
@@ -411,7 +411,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
                     if (IsEnabled(CustomComboPreset.DNC_ST_Simple_Interrupt) && interruptable)
-                        return All.HeadGraze;
+                        return All.伤头HeadGraze;
 
                     // Simple ST Standard (activates dance with no target, or when target is over HP% threshold)
                     //if ((!HasTarget() || GetTargetHPPercent() > standardStepBurstThreshold) &&
@@ -457,14 +457,14 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.DNC_ST_Simple_PanicHeals))
                         {
                             bool curingWaltzReady = LevelChecked(治疗之华尔兹CuringWaltz) && IsOffCooldown(治疗之华尔兹CuringWaltz);
-                            bool secondWindReady = LevelChecked(All.SecondWind) && IsOffCooldown(All.SecondWind);
+                            bool secondWindReady = LevelChecked(All.内丹SecondWind) && IsOffCooldown(All.内丹SecondWind);
                             int waltzThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimplePanicHealWaltzPercent);
                             int secondWindThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimplePanicHealWindPercent);
 
                             if (PlayerHealthPercentageHp() < waltzThreshold && curingWaltzReady)
                                 return 治疗之华尔兹CuringWaltz;
                             if (PlayerHealthPercentageHp() < secondWindThreshold && secondWindReady)
-                                return All.SecondWind;
+                                return All.内丹SecondWind;
                         }
 
                         if (IsEnabled(CustomComboPreset.DNC_ST_Simple_Improvisation) && improvisationReady)
@@ -684,7 +684,7 @@ namespace XIVSlothComboX.Combos.PvE
                     bool improvisationReady = LevelChecked(即兴表演Improvisation) && IsOffCooldown(即兴表演Improvisation);
                     bool standardStepReady = LevelChecked(标准舞步StandardStep) && IsOffCooldown(标准舞步StandardStep);
                     bool technicalStepReady = LevelChecked(技巧舞步TechnicalStep) && IsOffCooldown(技巧舞步TechnicalStep);
-                    bool interruptable = CanInterruptEnemy() && IsOffCooldown(All.HeadGraze) && LevelChecked(All.HeadGraze);
+                    bool interruptable = CanInterruptEnemy() && IsOffCooldown(All.伤头HeadGraze) && LevelChecked(All.伤头HeadGraze);
                     int standardStepBurstThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleSSAoEBurstPercent);
                     int technicalStepBurstThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleTSAoEBurstPercent);
 
@@ -699,7 +699,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
                     if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_Interrupt) && interruptable)
-                        return All.HeadGraze;
+                        return All.伤头HeadGraze;
 
                     // Simple AoE Standard (activates dance with no target, or when target is over HP% threshold)
                     if ((!HasTarget() || GetTargetHPPercent() > standardStepBurstThreshold) && IsEnabled(CustomComboPreset.DNC_AoE_Simple_SS) && standardStepReady && ((!HasEffect(Buffs.技巧舞步TechnicalStep) && !techBurst) || techBurstTimer > 5))
@@ -746,14 +746,14 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_PanicHeals))
                         {
                             bool curingWaltzReady = LevelChecked(治疗之华尔兹CuringWaltz) && IsOffCooldown(治疗之华尔兹CuringWaltz);
-                            bool secondWindReady = LevelChecked(All.SecondWind) && IsOffCooldown(All.SecondWind);
+                            bool secondWindReady = LevelChecked(All.内丹SecondWind) && IsOffCooldown(All.内丹SecondWind);
                             int waltzThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleAoEPanicHealWaltzPercent);
                             int secondWindThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleAoEPanicHealWindPercent);
 
                             if (PlayerHealthPercentageHp() < waltzThreshold && curingWaltzReady)
                                 return 治疗之华尔兹CuringWaltz;
                             if (PlayerHealthPercentageHp() < secondWindThreshold && secondWindReady)
-                                return All.SecondWind;
+                                return All.内丹SecondWind;
                         }
 
                         if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_Improvisation) && improvisationReady)
