@@ -6,7 +6,7 @@
     "Description": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
     "InternalName": "XIVSlothComboX",
     "AssemblyVersion": "3.0.18.33",
-    "Changelog": "绝枪续剑BUG",
+    "Changelog": "重写了机工、绝枪子弹连加入控制",
     "RepoUrl": "https://github.com/44451516/XIVSlothCombo/",
     "ApplicableVersion": "any",
     "DalamudApiLevel": 8,
