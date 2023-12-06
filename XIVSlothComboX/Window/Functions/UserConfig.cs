@@ -1578,16 +1578,16 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.MCH_ST_Adv_Reassembled)
             {
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.热弹HotShot)}/{ActionWatching.GetActionName(MCH.空气锚AirAnchor)}", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.钻头Drill)}", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.回转飞锯ChainSaw)}", "", 3, 2);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"{ActionWatching.GetActionName(MCH.热弹HotShot)}/{ActionWatching.GetActionName(MCH.空气锚AirAnchor)}", "", 3, 0);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"{ActionWatching.GetActionName(MCH.钻头Drill)}", "", 3, 1);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"{ActionWatching.GetActionName(MCH.回转飞锯ChainSaw)}", "", 3, 2);
             }
 
             if (preset is CustomComboPreset.MCH_AoE_Adv_Reassemble)
             {
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.散射SpreadShot)}/{ActionWatching.GetActionName(MCH.霰弹枪Scattergun)}", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.自动弩AutoCrossbow)}", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.回转飞锯ChainSaw)}", "", 3, 2);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"{ActionWatching.GetActionName(MCH.散射SpreadShot)}/{ActionWatching.GetActionName(MCH.霰弹枪Scattergun)}", "", 3, 0);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"{ActionWatching.GetActionName(MCH.自动弩AutoCrossbow)}", "", 3, 1);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"{ActionWatching.GetActionName(MCH.回转飞锯ChainSaw)}", "", 3, 2);
             }
 
             if (preset == CustomComboPreset.MCH_ST_Adv_SecondWind)

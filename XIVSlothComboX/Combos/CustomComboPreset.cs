@@ -493,12 +493,13 @@ namespace XIVSlothComboX.Combos
 
         [BlueInactive(BLU.Whistle, BLU.Tingle, BLU.MoonFlute, BLU.JKick, BLU.TripleTrident, BLU.Nightbloom, BLU.RoseOfDestruction, BLU.FeatherRain, BLU.Bristle, BLU.GlassDance, BLU.Surpanakha, BLU.MatraMagic, BLU.ShockStrike, BLU.PhantomFlurry)]
         [ReplaceSkill(BLU.MoonFlute)]
-        [CustomComboInfo("月之笛起手连击", "Puts the Full 月之笛起手连击 on Moon Flute or Whistle.", BLU.JobID)]
+        [ConflictingCombos(BLU_NewMoonFluteOpener)]
+        [CustomComboInfo("月笛开启器","将满月笛开启器放在月笛或口哨上。", BLU.JobID)]
         BLU_Opener = 70001,
 
         [BlueInactive(BLU.MoonFlute, BLU.Tingle, BLU.ShockStrike, BLU.Whistle, BLU.FinalSting)]
         [ReplaceSkill(BLU.FinalSting)]
-        [CustomComboInfo("终极针连击", "Turns Final Sting into the buff combo of: Moon Flute, Tingle, Whistle, Final Sting. Will use any primals off cooldown before casting Final Sting.", BLU.JobID)]
+        [CustomComboInfo("终极针连击", "将 \"终极之刺 \"变成 \"月笛\"、\"叮当\"、\"口哨\"、\"终极之刺 \"的组合效果： 月笛、叮当、口哨、最终刺痛。在施放最终刺痛前，会使用任何已冷却的原初效果。", BLU.JobID)]
         BLU_FinalSting = 70002,
 
         [BlueInactive(BLU.RoseOfDestruction, BLU.FeatherRain, BLU.GlassDance, BLU.JKick)]
@@ -513,7 +514,7 @@ namespace XIVSlothComboX.Combos
 
         [BlueInactive(BLU.Offguard, BLU.BadBreath, BLU.Devour)]
         [ReplaceSkill(BLU.Devour, BLU.Offguard, BLU.BadBreath)]
-        [CustomComboInfo("坦克Debuff特性", "Puts Devour, Off-Guard, Lucid Dreaming, and Bad Breath into one button when under Tank Mimicry.", BLU.JobID)]
+        [CustomComboInfo("坦克Debuff特性", "在 \"坦克模仿 \"状态下，将 \"吞噬\"、\"脱离警戒\"、\"清醒梦境 \"和 \"口臭 \"放入一个按钮。", BLU.JobID)]
         BLU_DebuffCombo = 70006,
 
         [BlueInactive(BLU.MagicHammer)]
@@ -533,7 +534,7 @@ namespace XIVSlothComboX.Combos
 
         [BlueInactive(BLU.PeripheralSynthesis, BLU.MustardBomb)]
         [ReplaceSkill(BLU.PeripheralSynthesis)]
-        [CustomComboInfo("生成外设-芥末爆弹", "Turns 生成外设-芥末爆弹 when target is under the effect of Lightheaded.", BLU.JobID)]
+        [CustomComboInfo("生成外设-芥末爆弹", "当目标受到 '光头强'的影响时，生成外设-芥末爆弹。", BLU.JobID)]
         BLU_LightHeadedCombo = 70010,
 
         [BlueInactive(BLU.BasicInstinct)]
@@ -550,6 +551,18 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(BLU_PrimalCombo)]
         [CustomComboInfo("正义飞踢选项", "将正义飞踢加入蛮神技能选项", BLU.JobID)]
         BLU_PrimalCombo_JKick = 70013,
+        
+        
+        [BlueInactive(BLU.SeaShanty)]
+        [ParentCombo(BLU_PrimalCombo)]
+        [CustomComboInfo("海洋棚屋选项","为原始特质添加海洋棚屋", BLU.JobID)]
+        BLU_PrimalCombo_SeaShanty = 70024,
+
+        [BlueInactive(BLU.WingedRepropbation)]
+        [ParentCombo(BLU_PrimalCombo)]
+        [CustomComboInfo("有翼斥力选项","为原始特征添加有翼斥力", BLU.JobID)]
+        BLU_PrimalCombo_WingedReprobation = 70025,
+        
 
         [BlueInactive(BLU.PerpetualRay, BLU.SharpenedKnife)]
         [CustomComboInfo("永恒射线-锋利菜刀", "当目标是眩晕且在近战范围内时，将永恒射线转为锋利菜刀。", BLU.JobID)]
@@ -583,7 +596,23 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(BLU_PrimalCombo)]
         [CustomComboInfo("月下彼岸花选项", "将月下彼岸花添加到蛮神特性中", BLU.JobID)]
         BLU_PrimalCombo_Nightbloom = 70020,
+        
+        [ReplaceSkill(BLU.MoonFlute)]
+        [BlueInactive(BLU.Whistle, BLU.Tingle, BLU.RoseOfDestruction, BLU.MoonFlute, BLU.JKick, BLU.TripleTrident, BLU.Nightbloom, BLU.WingedRepropbation, BLU.SeaShanty, BLU.BeingMortal, BLU.ShockStrike, BLU.Surpanakha, BLU.MatraMagic, BLU.PhantomFlurry, BLU.Bristle)]
+        [ConflictingCombos(BLU_Opener)]
+        [CustomComboInfo("全新 BLU 月笛开启器（80 级版）","将月笛变为完整开启器（80 级更新）", BLU.JobID)]
+        BLU_NewMoonFluteOpener = 70021,
 
+        [BlueInactive(BLU.BreathOfMagic, BLU.MortalFlame)]
+        [ParentCombo(BLU_NewMoonFluteOpener)]
+        [CustomComboInfo("DoT开场者","将开场者改为使用必杀火焰或魔法之息，而不是使用翼之斥力", BLU.JobID)]
+        BLU_NewMoonFluteOpener_DoTOpener = 70022,
+
+        [ReplaceSkill(BLU.DeepClean)]
+        [BlueInactive(BLU.PeatPelt, BLU.DeepClean)]
+        [CustomComboInfo("泥炭清洁","如果当前目标没有受到乞丐袭扰，则将'深度清洁'改为'泥炭佩尔特'", BLU.JobID)]
+        BLU_PeatClean = 70023,
+        
         // Last value = 70020
 
         #endregion
