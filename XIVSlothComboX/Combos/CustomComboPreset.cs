@@ -514,7 +514,7 @@ namespace XIVSlothComboX.Combos
 
         [BlueInactive(BLU.Offguard, BLU.BadBreath, BLU.Devour)]
         [ReplaceSkill(BLU.Devour, BLU.Offguard, BLU.BadBreath)]
-        [CustomComboInfo("坦克Debuff特性", "在 \"坦克模仿 \"状态下，将 \"吞噬\"、\"脱离警戒\"、\"清醒梦境 \"和 \"口臭 \"放入一个按钮。", BLU.JobID)]
+        [CustomComboInfo("坦克Debuff特性", "在坦克模仿状态下，将吞噬、脱离警戒、清醒梦境和口臭放入一个按钮。", BLU.JobID)]
         BLU_DebuffCombo = 70006,
 
         [BlueInactive(BLU.MagicHammer)]
@@ -2262,7 +2262,7 @@ namespace XIVSlothComboX.Combos
 
 
         [ReplaceSkill(PLD.安魂祈祷Requiescat)]
-        [CustomComboInfo("安魂祈祷替换选项", "当安魂祈祷状态下用下面的技能替换 \"Requiescat\"", PLD.JobID)]
+        [CustomComboInfo("安魂祈祷替换选项", "当安魂祈祷状态下用下面的技能替换安魂祈祷", PLD.JobID)]
         PLD_Requiescat_Options = 11024,
 
         [ReplaceSkill(PLD.深奥之灵SpiritsWithin, PLD.偿赎剑Expiacion)]
