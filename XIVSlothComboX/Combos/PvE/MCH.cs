@@ -415,23 +415,23 @@ namespace XIVSlothComboX.Combos.PvE
                             && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
                             && !gauge.IsRobotActive)
                         {
-                            if (gauge.Battery >= 80 )
+                            if (gauge.Battery >= 80)
                             {
                                 var 空气锚快好了 = GetCooldownRemainingTime(OriginalHook(空气锚AirAnchor)) <= 3
                                              || ActionReady(OriginalHook(空气锚AirAnchor));
-                                
-                                if(空气锚快好了)
+
+                                if (空气锚快好了)
                                     return OriginalHook(车式浮空炮塔RookAutoturret);
-                                
+
                                 var 回转飞锯ChainSaw快好了 = GetCooldownRemainingTime(回转飞锯ChainSaw) <= 3
                                                       || ActionReady(OriginalHook(回转飞锯ChainSaw));
-                                
-                                if(回转飞锯ChainSaw快好了)
+
+                                if (回转飞锯ChainSaw快好了)
                                     return OriginalHook(车式浮空炮塔RookAutoturret);
-                                
+
                             }
-                            
-                            if (gauge.Battery >= 90 )
+
+                            if (gauge.Battery >= 90)
                             {
                                 if (lastComboMove is 独头弹SlugShot or 热独头弹HeatedSlugshot)
                                 {
@@ -522,12 +522,24 @@ namespace XIVSlothComboX.Combos.PvE
                                 //超荷状态下
                                 if (gauge.IsOverheated)
                                 {
-                                    if (!WasLastAbility(弹射Ricochet)&&GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet)
-                                                                   && WasLastAction(热冲击HeatBlast))
+                                    //先注释点 可能有点问题，有时间再测试，开无后腰会双插
+                                    // if (!WasLastAction(弹射Ricochet)
+                                    //     && WasLastAction(热冲击HeatBlast)
+                                    //     && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
+                                    //     return 虹吸弹GaussRound;
+                                    //
+                                    // if (!WasLastAction(虹吸弹GaussRound)
+                                    //     && WasLastAction(热冲击HeatBlast)
+                                    //     && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
+                                    //     return 弹射Ricochet;
+                                    //
+                                    
+                                    if (WasLastAction(热冲击HeatBlast)
+                                        && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
                                         return 虹吸弹GaussRound;
 
-                                    if (!WasLastAbility(虹吸弹GaussRound)&&GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound)
-                                                                     && WasLastAction(热冲击HeatBlast))
+                                    if (WasLastAction(热冲击HeatBlast)
+                                        && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
                                         return 弹射Ricochet;
                                 }
 
@@ -546,21 +558,21 @@ namespace XIVSlothComboX.Combos.PvE
                                         && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 20)
                                         return 弹射Ricochet;
 
-                                    
+
                                     if (RaidBuff.爆发期())
                                     {
                                         if (虹吸弹GaussRound.ActionReady())
                                         {
                                             return 虹吸弹GaussRound;
                                         }
-                                
+
                                         if (弹射Ricochet.ActionReady())
                                         {
                                             return 弹射Ricochet;
                                         }
                                     }
                                 }
-                                
+
                             }
 
                             if (gauge.IsOverheated)
@@ -682,21 +694,21 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     return false;
                 }
-                
-                
+
+
                 if (gauge.Heat >= 50)
                 {
                     if (wildfireCDTime >= 60)
                     {
                         return true;
                     }
-                    
+
                     if (gauge.Heat >= 50)
                     {
                         return true;
                     }
                 }
-                
+
                 return false;
             }
 
