@@ -1430,104 +1430,43 @@ namespace XIVSlothComboX.Window.Functions
 
             #endregion
             // ====================================================================================
-            #region DRAGOON
-
-            if (preset == CustomComboPreset.DRG_ST_Dives_Dragonfire)
+             #region DRAGOON
+            if (preset == CustomComboPreset.DRG_ST_Dives && enabled)
             {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under 猛枪", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under 巨龙右眼", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Dragonfire, "Under 战斗连倒", "", 3, 2);
-            }
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_ST_DiveOptions, "冷却好了用", "单插友好. 冷却好了使用.", 1);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_ST_DiveOptions, "战斗连倒和红莲龙血下用", "需要双插. 破碎冲龙炎冲在战斗连倒和红莲龙血下用, 坠星冲在红莲龙血下用.", 2);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_ST_DiveOptions, "配合猛枪使用", "单插友好. 配合猛枪使用破碎冲龙炎冲, 红莲龙血下的坠星冲.", 3); }
 
-            if (preset == CustomComboPreset.DRG_ST_Dives_Spineshatter)
+            if (preset == CustomComboPreset.DRG_AoE_Dives && enabled)
             {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under 猛枪", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under 巨龙右眼", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_ST_DivesOption_Spineshatter, "Under 战斗连倒", "", 3, 2);
-            }
-
-            if (preset == CustomComboPreset.DRG_AoE_Dragonfire_Dive)
-            {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under 猛枪", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under 巨龙右眼", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Dragonfire, "Under 战斗连倒", "", 3, 2);
-            }
-
-            if (preset == CustomComboPreset.DRG_AoE_Spineshatter_Dive)
-            {
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under 猛枪", "", 3, 0);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under 巨龙右眼", "", 3, 1);
-                UserConfig.DrawHorizontalMultiChoice(DRG.Config.DRG_AoE_DivesOption_Spineshatter, "Under 战斗连倒", "", 3, 2);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_AOE_DiveOptions, "冷却好了用", "单插友好. 冷却好了使用.", 1);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_AOE_DiveOptions, "战斗连倒和红莲龙血下用", "需要双插. 破碎冲龙炎冲在战斗连倒和红莲龙血下用, 坠星冲在红莲龙血下用.", 2);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_AOE_DiveOptions, "配合猛枪使用", "单插友好. 配合猛枪使用破碎冲龙炎冲, 红莲龙血下的坠星冲.", 3);
             }
 
             if (preset == CustomComboPreset.DRG_ST_Opener && enabled)
             {
-                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_Opener_Choice, "2.5 Skill Speed Opener", "", 0);
-                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_Opener_Choice, "2.46 Skill Speed Opener", "", 1);
-
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_OpenerOptions, "标准开场起手", "使用标准起手（自己吃爆发药）", 1);
+                UserConfig.DrawHorizontalRadioButton(DRG.Config.DRG_OpenerOptions, "低Ping开场起手", "低延迟下的起手. 第一个直刺连中开猛枪的不吃药开场起手.", 2);                
             }
 
             if (preset == CustomComboPreset.DRG_ST_ComboHeals)
             {
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_SecondWind_Threshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_Bloodbath_Threshold, "使用浴血的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_STSecondWindThreshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_STBloodbathThreshold, "使用浴血的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
             }
 
             if (preset == CustomComboPreset.DRG_AoE_ComboHeals)
             {
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoE_SecondWind_Threshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoEBloodbath_Threshold, "使用浴血的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoESecondWindThreshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoEBloodbathThreshold, "使用浴血的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
             }
 
             if (preset == CustomComboPreset.DRG_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, DRG.Config.DRG_Variant_Cure, "HP% to be at or under", 200);
-
-            if (preset == CustomComboPreset.DRG_TrueNorthDynamic)
-            {
-                UserConfig.DrawAdditionalBoolChoice(DRG.Config.DRG_ST_TrueNorth_Moving, "Only When Not Moving", "");
-                UserConfig.DrawAdditionalBoolChoice(DRG.Config.DRG_ST_TrueNorth_FirstOnly, "Only On First Positional", "When you have back-to-back positionals, True North will only trigger on the first one allowing you to move in time for the second positional.");
-            }
-
-            if (preset == CustomComboPreset.DRG_ST_Litany)
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_LitanyHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-
-
-            if (preset == CustomComboPreset.DRG_ST_DragonSight)
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_SightHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-
-
-            if (preset == CustomComboPreset.DRG_ST_Lance)
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_ST_LanceChargeHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-
-            if (preset == CustomComboPreset.DRG_AoE_Litany)
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoE_LitanyHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-
-
-            if (preset == CustomComboPreset.DRG_AoE_DragonSight)
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoE_SightHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-
-
-            if (preset == CustomComboPreset.DRG_AoE_Lance)
-                UserConfig.DrawSliderInt(0, 100, DRG.Config.DRG_AoE_LanceChargeHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
-
-
-            #region Dragoon PvP
-
-            if (preset is CustomComboPreset.DRGPvP_Nastrond)
-                UserConfig.DrawSliderInt(0, 100, DRGPvP.Config.DRGPvP_LOTD_HPValue, "Ends Life of the Dragon if HP falls below the set percentage", 150, SliderIncrements.Ones);
-
-            if (preset is CustomComboPreset.DRGPvP_Nastrond)
-                UserConfig.DrawSliderInt(2, 8, DRGPvP.Config.DRGPvP_LOTD_Duration, "Seconds remaining of Life of the Dragon buff before using Nastrond if you are still above the set HP percentage.", 150, SliderIncrements.Ones);
-
-            if (preset is CustomComboPreset.DRGPvP_ChaoticSpringSustain)
-                UserConfig.DrawSliderInt(0, 101, DRGPvP.Config.DRGPvP_CS_HP_Threshold, "Chaos Spring HP percentage threshold", 150, SliderIncrements.Ones);
-
-            if (preset is CustomComboPreset.DRGPvP_WyrmwindThrust)
-                UserConfig.DrawSliderInt(0, 20, DRGPvP.Config.DRGPvP_Distance_Threshold, "Distance Treshold for Wyrmwind Thrust", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(1, 100, DRG.Config.DRG_VariantCure, "HP% to be at or under", 200);
 
             #endregion
-
-            #endregion
+            
             // ====================================================================================
             #region GUNBREAKER
 

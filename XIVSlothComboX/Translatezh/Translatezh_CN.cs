@@ -219,21 +219,43 @@ public class Translatezh_CN
         {"Simple Mode - Single Target" , "简单模式 - 单目标"  },
         {"Replaces True Thrust with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job." , "将真正的突刺替换为完整的单目标一键式旋转。\n这是新手的理想选择。"  },
         #region Advanced ST Dragoon
+        {"Advanced Dragoon","高级龙骑"},
         {"Replaces True Thrust with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "将真正的突刺替换为完整的单目标一键式旋转。\n如果您想自定义旋转，则这些功能非常理想。"  },
         {"Level 88+ Opener" , "88级起手"  },
         {"Adds the Balance opener to the rotation.\nOPTIONAL: USE REACTION OR MOACTION FOR OPTIMAL TARGETING." , "等待翻译"  },
         #region Buffs ST
+        {"Collection of CD features on Main Combo.","cd技能循环整合"},
+        {"Collection of CD features on main combo.","将CD技能加入循环"},
         {"Buffs Option" , "增益选项"  },
+        {"Collection of Buff features on Main Combo.","buff技能循环整合"},
+        {"Includes Life Surge, while under proper buffs, onto proper GCDs, to the rotation.","在樱花/直刺/山境酷刑连击中的合适时机和buff下插入龙剑。"},
+        {"Melee Dives Option","冲冲冲设置"},
+        {"Dives Option","跳跃选项"},
+        {"Uses Spineshatter Dive, Dragonfire Dive, and Stardiver when in the target's target ring (1 yalm) and closer.","当在目标的目标圈内（1米）时使用破碎冲，龙炎冲和坠星冲"},
+        {"Buffs on Main Combo","主连击Buff整合"},
+        {"Adds Spineshatter Dive, Dragonfire Dive, and Stardiver to the rotation.\n Select options below for when to use dives.","将破碎冲，龙炎冲和坠星冲加入循环，用以下选项确定释放时机"},
+        {"High Jump AoE Feature","高跳设置"},
+        {"Includes High Jump to the AoE rotation.","在连击中插入高跳。"},
         {"Adds various buffs to the rotation." , "将各种增益效果添加到旋转中。"  },
         {"Battle Litany Option" , "战斗连祷选项"  },
+        {"Includes Geirskogul and Nastrond to the AoE rotation.","将武神枪与死者之岸插入AOE循环"},
+        {"Includes High Jump/Jump to the rotation.","将高跳/跳跃加入循环"},
         {"Adds Battle Litany to the rotation." , "将战斗连祷添加到旋转中。"  },
         {"Lance Charge Option" , "猛枪选项"  },
         {"Adds Lance Charge to the rotation." , "将猛枪添加到旋转中。"  },
+        {"Includes Lance Charge to the rotation.","猛枪加入循环"},
         {"Dragon Sight Option" , "巨龙视线选项"  },
+        {"Advanced Dragoon AoE","高级龙骑AOE"},
+        {"Mirage AoE Feature","幻象冲设置"},
+        {"Includes Mirage to the AoE rotation.","在AOE连击中插入幻象冲"},
+        {"Replaces Doom Spike with its combo chain","等待翻译"},
+        {"Includes Dragon Sight to the AoE rotation. OPTIONAL: USE REACTION OR MOACTION FOR OPTIMAL TARGETING.","在连击中插入巨龙视线。需要自行选择最优目标。\n可选：使用【REACTION】或【MOACTION】以获得最佳目标。"},
         {"Adds Dragon Sight to the rotation.\nOPTIONAL: USE REACTION OR MOACTION FOR OPTIMAL TARGETING." , "将巨龙视线添加到旋转中。\n可选：使用REACTION或MOACTION以获得最佳目标。"  },
         #endregion
         #region Cooldowns ST
         {"Cooldowns Option" , "冷却选项"  },
+        {"Includes Life Surge, while under proper buffs, onto proper GCDs, to the AoE rotation.","在连击中合适的状态和窗口内插入龙剑。"},
+        {"Replaces Main AoE Combo with Piercing Talon when you are out of melee range.","超出近战范围时，将主要AOE连击替换为贯穿尖"},
         {"Adds various cooldowns to the rotation." , "等待翻译"  },
         {"Life Surge Option" , "龙剑选项"  },
         {"Adds Life Surge, while under Dragon Sight and Lance Charge buffs, to the rotation." , "等待翻译"  },
@@ -262,8 +284,16 @@ public class Translatezh_CN
         {"Adds True North before Chaos Thrust/Chaotic Spring, Fang And Claw and Wheeling Thrust when you are not in the correct position for the enhanced potency bonus." , "在不处于增强效力奖励的正确位置时，在混沌突/混沌之泉、破碎之牙和旋风突前添加真北。"  },
         #endregion
         {"Simple Mode - AoE" , "简单模式 - AoE"  },
-        {"Replaces Doom Spike with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job." , "用一个全键AoE旋转替换末日尖刺。\n这是新手的理想选择。"  },
+        {"Buffs AoE Feature","buff设置"},
+        {"Dragon Sight AoE Feature","巨龙视线设置Aoe"},
+        {"Includes Lance Charge and Battle Litany to the AoE rotation.","在连击中插入猛枪和战斗连祷。"},
+        {"Includes Battle Litany to the rotation.","将战斗连祷加入循环"},
+        {"Replaces Main Combo with Piercing Talon when you are out of melee range.","超出近战范围时，将主要AOE连击替换为贯穿尖"},
+        {"Includes Geirskogul and Nastrond to the rotation.","将武神枪和死者之岸加入循环"},
         #region Advanced AoE Dragoon
+        {"CDs on Main Combo","主连击CD整合"},
+        {"Dives AoE Feature","跳跃类能力技设置"},
+        {"Includes Spineshatter Dive, Dragonfire Dive and Stardiver to the AoE rotation.","在aoe连击中插入破碎冲，龙炎冲，坠星冲。"},
         {"Replaces Doom Spike with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "用一个全键AoE旋转替换末日尖刺。\n如果你想自定义旋转，这些功能是理想的。"  },
         #region Buffs AoE
         {"Buffs AoE Option" , "等待翻译"  },
@@ -279,6 +309,7 @@ public class Translatezh_CN
         {"Wyrmwind Option" , "等待翻译"  },
         #endregion
         #endregion
+        
         {"Jump to Mirage Dive" , "等待翻译"  },
         {"Replace (High) Jump with Mirage Dive when Dive Ready." , "等待翻译"  },
         {"Stardiver Feature" , "坠星冲设置"  },
@@ -381,7 +412,7 @@ public class Translatezh_CN
         #endregion
         #region MONK
         {"Start with the Lunar Solar Opener on the main combo. Requires level 68 for Riddle of Fire.\nA 1.93/1.94 GCD is highly recommended." , "[AI]在主连击中使用月光/日光开场。需要疾风的极意68级。\n强烈建议使用1.93/1.94 GCD。"  },
-        {"Adds Bloodbath and Second Wind to the combo, using them when below the HP Percentage threshold." , "[AI]将吸血和第二道风添加到连击中，在生命值低于百分比阈值时使用。"  },
+        {"Adds Bloodbath and Second Wind to the combo, using them when below the HP Percentage threshold." , "将吸血和内丹添加到连击中，在生命值低于百分比阈值时使用。"  },
         #endregion
         #region NINJA
         {"Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work." , "以平衡开场为开始。\n如果您在隐藏开场之前进入战斗，开场将失败。\n同样，在天地人之间移动也会导致开场失败。\n需要您处于非战斗状态，并且大部分冷却时间可用才能正常工作。"  },
