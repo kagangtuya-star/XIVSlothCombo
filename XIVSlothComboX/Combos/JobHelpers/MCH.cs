@@ -28,6 +28,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
         private DateTime lastCheck;
 
         internal readonly static List<uint> 起手技能合集 = new();
+        internal static bool isInit=false;
 
         public bool DoFullOpener(ref uint actionID, bool simpleMode)
         {
@@ -62,6 +63,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     }
                     else
                     {
+                        
                         初始起手技能();
                         currentState = OpenerState.InOpener;
                     }
@@ -70,7 +72,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 case OpenerState.InOpener:
                 {
-                    if (!CustomComboFunctions.InCombat() && CustomComboFunctions.HasEffect(Buffs.整备Reassembled))
+                    // if (!CustomComboFunctions.InCombat() && CustomComboFunctions.HasEffect(Buffs.整备Reassembled))
+                    if (!CustomComboFunctions.InCombat() )
                     {
                         actionID = 空气锚AirAnchor;
                         return true;
@@ -78,7 +81,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     if (CustomComboFunctions.InCombat())
                     {
-                        var 使用过的技能集合 = ActionWatching.CombatActions.Where(action
+                        var 使用过的技能集合 = ActionWatching.特殊起手Actions.Where(action
                             => action is 热狙击弹HeatedCleanShot
                                 or 热分裂弹HeatedSplitShot
                                 or 热独头弹HeatedSlugshot
@@ -92,11 +95,30 @@ namespace XIVSlothComboX.Combos.JobHelpers
                                 or 整备Reassemble
                                 or 超荷Hypercharge
                                 or 热冲击HeatBlast
-                                or 后式自走人偶AutomatonQueen);
+                                or 后式自走人偶AutomatonQueen).ToList();;
 
 
                         if (下一个使用的技能(ref actionID))
                         {
+
+                            // if (actionID == ActionWatching.LastAction)
+                            // {
+                            //     actionID = All.Raise;
+                            // }
+
+                            
+                            
+
+                            if (使用过的技能集合.Count() >= 2)
+                            {
+                                if (使用过的技能集合[1] != 空气锚AirAnchor)
+                                {
+                                    currentState = OpenerState.FailedOpener;
+                                    return false;
+                                }
+                            }
+
+
                             if (!actionID.ActionReady())
                             {
                                 // Service.ChatGui.Print($"失败技能 {actionID} -> {使用过的技能集合.Count()}");
@@ -135,11 +157,13 @@ namespace XIVSlothComboX.Combos.JobHelpers
         }
 
 
-        private void 初始起手技能()
+        private static void 初始起手技能()
         {
+            // MCHOpenerLogic.isInit = true;
             // Service.ChatGui.Print($"初始起手技能");
-
+            isInit = true;
             起手技能合集.Clear();
+            起手技能合集.Add(整备Reassemble);
             起手技能合集.Add(空气锚AirAnchor);
             起手技能合集.Add(虹吸弹GaussRound);
             起手技能合集.Add(弹射Ricochet);
@@ -189,7 +213,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
         private bool 下一个使用的技能(ref uint actionID)
         {
 
-            var 处理后的技能集合 = ActionWatching.CombatActions.Where(action => action is 热狙击弹HeatedCleanShot
+            var 处理后的技能集合 = ActionWatching.特殊起手Actions.Where(action => action is 热狙击弹HeatedCleanShot
                 or 热分裂弹HeatedSplitShot
                 or 热独头弹HeatedSlugshot
                 or 钻头Drill
@@ -203,6 +227,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 or 超荷Hypercharge
                 or 热冲击HeatBlast
                 or 后式自走人偶AutomatonQueen);
+            
+            
 
             if (处理后的技能集合.Count() < 起手技能合集.Count())
             {

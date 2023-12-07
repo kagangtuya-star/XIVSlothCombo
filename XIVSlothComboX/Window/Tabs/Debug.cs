@@ -75,6 +75,12 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) && CustomComboFunctions.IsOnCooldown(DNC.进攻之探戈Devilment)} ");
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
 
+                    if (ActionWatching.特殊起手Actions.Count >0 )
+                    {
+                        ImGui.TextUnformatted($"{MCHOpenerLogic.currentState }  ActionWatching.特殊起手Actions.Count: {ActionWatching.特殊起手Actions.Count} {ActionWatching.GetActionName(ActionWatching.特殊起手Actions[0])}->{ActionWatching.特殊起手Actions[0]} ");
+                    }
+             
+
 
                     // ImGui.TextUnformatted($"战逃倒计时 : {CustomComboFunctions.GetCooldownRemainingTime(PLD.战逃反应FightOrFlight)}");
                     // ImGui.TextUnformatted($"战逃个数 : {ActionWatching.CombatActions.FindAll(actionId => actionId ==PLD. 战逃反应FightOrFlight).Count}");

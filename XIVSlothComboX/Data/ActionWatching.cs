@@ -1,15 +1,17 @@
-﻿using Dalamud.Game.ClientState.Objects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Hooking;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using Lumina.Excel.GeneratedSheets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using XIVSlothComboX.Combos.PvE;
+using XIVSlothComboX.Combos.JobHelpers;
+using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Services;
+using AST = XIVSlothComboX.Combos.PvE.AST;
 
 namespace XIVSlothComboX.Data
 {
@@ -32,16 +34,25 @@ namespace XIVSlothComboX.Data
         private static readonly Dictionary<string, List<uint>> statusCache = new();
 
         internal readonly static List<uint> CombatActions = new();
+        internal readonly static List<uint> 特殊起手Actions = new();
+        // internal readonly static List<uint> CombatActions = new();
 
         private delegate void ReceiveActionEffectDelegate(int sourceObjectId, IntPtr sourceActor, IntPtr position, IntPtr effectHeader, IntPtr effectArray, IntPtr effectTrail);
         private readonly static Hook<ReceiveActionEffectDelegate>? ReceiveActionEffectHook;
         private static void ReceiveActionEffectDetour(int sourceObjectId, IntPtr sourceActor, IntPtr position, IntPtr effectHeader, IntPtr effectArray, IntPtr effectTrail)
         {
-            ReceiveActionEffectHook!.Original(sourceObjectId, sourceActor, position, effectHeader, effectArray, effectTrail);
-            TimeLastActionUsed = DateTime.Now;
-            if (!CustomComboFunctions.InCombat()) 
+            if (!CustomComboFunctions.InCombat())
+            {
                 CombatActions.Clear();
-            
+            }
+          
+            if (MCHOpenerLogic.isInit &&MCHOpenerLogic.currentState ==OpenerState.InOpener)
+            {
+                特殊起手Actions.Clear();
+                MCHOpenerLogic.isInit = false;
+            }
+
+            ReceiveActionEffectHook!.Original(sourceObjectId, sourceActor, position, effectHeader, effectArray, effectTrail);
             ActionEffectHeader header = Marshal.PtrToStructure<ActionEffectHeader>(effectHeader);
 
             if (ActionType is 13 or 2) return;
@@ -49,6 +60,7 @@ namespace XIVSlothComboX.Data
                 header.ActionId != 8 &&
                 sourceObjectId == Service.ClientState.LocalPlayer.ObjectId)
             {
+                TimeLastActionUsed = DateTime.Now;
                 LastActionUseCount++;
                 if (header.ActionId != LastAction)
                 {
@@ -75,6 +87,7 @@ namespace XIVSlothComboX.Data
                 }
 
                 CombatActions.Add(header.ActionId);
+                特殊起手Actions.Add(header.ActionId);
 
                 if (Service.Configuration.EnabledOutputLog)
                     OutputLog();
@@ -85,6 +98,10 @@ namespace XIVSlothComboX.Data
         private static readonly Hook<SendActionDelegate>? SendActionHook;
         private unsafe static void SendActionDetour(long targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7, long a8, long a9)
         {
+        
+        
+        
+        
             try
             {
                 CheckForChangedTarget(actionId, ref targetObjectId);
@@ -146,7 +163,8 @@ namespace XIVSlothComboX.Data
                 {
                     int index = CombatActions.LastIndexOf(action);
 
-                    if (index > currentLastIndex) currentLastIndex = index;
+                    if (index > currentLastIndex) 
+                        currentLastIndex = index;
                 }
             }
 
@@ -174,7 +192,7 @@ namespace XIVSlothComboX.Data
         {
             if (CombatActions.Count < 2) return false;
             var lastAction = CombatActions.Last();
-            var secondLastAction = CombatActions[CombatActions.Count - 2];
+            var secondLastAction = CombatActions[^2];
 
             return (GetAttackType(lastAction) == GetAttackType(secondLastAction) && GetAttackType(lastAction) == ActionAttackType.Ability);
         }
@@ -214,15 +232,30 @@ namespace XIVSlothComboX.Data
         {
             ReceiveActionEffectHook?.Enable();
             SendActionHook?.Enable();
+            Service.Condition.ConditionChange += ResetActions;
+        }
+
+        private static void ResetActions(ConditionFlag flag, bool value)
+        {
+            if (flag == ConditionFlag.InCombat && !value)
+            {
+                CombatActions.Clear();
+                LastAbility = 0;
+                LastAction = 0;
+                LastWeaponskill = 0;
+                LastSpell = 0;
+            }
         }
 
         public static void Disable()
         {
             ReceiveActionEffectHook.Disable();
             SendActionHook?.Disable();
+            Service.Condition.ConditionChange -= ResetActions;
         }
 
         public static int GetLevel(uint id) => ActionSheet.TryGetValue(id, out var action) && action.ClassJobCategory is not null ? action.ClassJobLevel : 255;
+        public static float GetActionCastTime(uint id) => ActionSheet.TryGetValue(id, out var action) ? action.Cast100ms / (float)10 : 0;
         public static int GetActionRange(uint id) => ActionSheet.TryGetValue(id, out var action) ? action.Range : -2; // 0 & -1 are valid numbers. -2 is our failure code for InActionRange
         public static int GetActionEffectRange(uint id) => ActionSheet.TryGetValue(id, out var action) ? action.EffectRange : -1;
         public static int GetTraitLevel(uint id) => TraitSheet.TryGetValue(id, out var trait) ? trait.Level : 255;
@@ -244,11 +277,11 @@ namespace XIVSlothComboX.Data
         {
             if (!ActionSheet.TryGetValue(id, out var action)) return ActionAttackType.Unknown;
 
-            return action.ActionCategory.Value.Name.RawString switch
+            return action.ActionCategory.Row switch
             {
-                "Spell" => ActionAttackType.Spell,
-                "Weaponskill" => ActionAttackType.Weaponskill,
-                "Ability" => ActionAttackType.Ability,
+                2 => ActionAttackType.Spell,
+                3 => ActionAttackType.Weaponskill,
+                4 => ActionAttackType.Ability,
                 _ => ActionAttackType.Unknown
             };
         }

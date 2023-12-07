@@ -227,8 +227,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
 
 
-                ActionWatching.ActionSheet.TryGetValue(
-                    ActionWatching.CombatActions[ActionWatching.CombatActions.Count - 2],
+                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2],
                     out var Last_2);
                 if (Last_2 != null)
                 {
