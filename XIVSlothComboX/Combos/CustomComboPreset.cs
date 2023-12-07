@@ -499,7 +499,7 @@ namespace XIVSlothComboX.Combos
 
         [BlueInactive(BLU.MoonFlute, BLU.Tingle, BLU.ShockStrike, BLU.Whistle, BLU.FinalSting)]
         [ReplaceSkill(BLU.FinalSting)]
-        [CustomComboInfo("终极针连击", "将 \"终极之刺 \"变成 \"月笛\"、\"叮当\"、\"口哨\"、\"终极之刺 \"的组合效果： 月笛、叮当、口哨、最终刺痛。在施放最终刺痛前，会使用任何已冷却的原初效果。", BLU.JobID)]
+        [CustomComboInfo("终极针连击", "将终极之刺变成月笛叮当口哨终极之刺的组合效果： 月笛、叮当、口哨、最终刺痛。在施放最终刺痛前，会使用任何已冷却的原初效果。", BLU.JobID)]
         BLU_FinalSting = 70002,
 
         [BlueInactive(BLU.RoseOfDestruction, BLU.FeatherRain, BLU.GlassDance, BLU.JKick)]
