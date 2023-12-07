@@ -522,12 +522,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 //超荷状态下
                                 if (gauge.IsOverheated)
                                 {
-                                    if (GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet)
-                                        && WasLastAction(热冲击HeatBlast))
+                                    if (!WasLastAbility(弹射Ricochet)&&GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet)
+                                                                   && WasLastAction(热冲击HeatBlast))
                                         return 虹吸弹GaussRound;
 
-                                    if (GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound)
-                                        && WasLastAction(热冲击HeatBlast))
+                                    if (!WasLastAbility(虹吸弹GaussRound)&&GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound)
+                                                                     && WasLastAction(热冲击HeatBlast))
                                         return 弹射Ricochet;
                                 }
 
@@ -546,21 +546,21 @@ namespace XIVSlothComboX.Combos.PvE
                                         && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 20)
                                         return 弹射Ricochet;
 
-                                }
-
-                                if (RaidBuff.爆发期())
-                                {
-                                    if (虹吸弹GaussRound.ActionReady())
+                                    
+                                    if (RaidBuff.爆发期())
                                     {
-                                        return 虹吸弹GaussRound;
-                                    }
-
-                                    if (弹射Ricochet.ActionReady())
-                                    {
-                                        return 弹射Ricochet;
+                                        if (虹吸弹GaussRound.ActionReady())
+                                        {
+                                            return 虹吸弹GaussRound;
+                                        }
+                                
+                                        if (弹射Ricochet.ActionReady())
+                                        {
+                                            return 弹射Ricochet;
+                                        }
                                     }
                                 }
-
+                                
                             }
 
                             if (gauge.IsOverheated)
