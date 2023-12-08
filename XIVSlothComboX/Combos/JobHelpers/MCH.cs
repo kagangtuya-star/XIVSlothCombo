@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dalamud.Game.ClientState.JobGauge.Types;
 using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Combos.PvE;
-using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
-using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-    internal class MCHOpenerLogic : PvE.MCH
+    internal class MCHOpenerLogic : MCH
     {
 
 
@@ -53,7 +50,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     {
                         if (!CustomComboFunctions.InCombat())
                         {
-                            if (CustomComboFunctions.GetCooldownRemainingTime(MCH.整备Reassemble) == 0)
+                            if (CustomComboFunctions.GetCooldownRemainingTime(整备Reassemble) == 0)
                             {
                                 actionID = 整备Reassemble;
                                 return true;

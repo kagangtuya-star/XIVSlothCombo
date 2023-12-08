@@ -512,7 +512,8 @@ namespace XIVSlothComboX.Combos.PvE
         internal class DNC_DT_SimpleMode : CustomCombo
         {
             
-            internal static DNCOpenerLogic DNCOpener = new();
+            
+            internal static JobHelpers.DNCOpenerLogic  DNCOpener= new();
             
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DNC_DT_SimpleMode;
 
