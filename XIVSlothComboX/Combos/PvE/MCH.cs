@@ -113,7 +113,7 @@ namespace XIVSlothComboX.Combos.PvE
                 bool interruptReady = ActionReady(All.伤头HeadGraze) && CanInterruptEnemy();
 
                 // if (actionID is 分裂弹SplitShot or 热分裂弹HeatedSplitShot )
-                if (actionID is 分裂弹SplitShot)
+                if (actionID is 分裂弹SplitShot or 热分裂弹HeatedSplitShot)
                 {
 
                     if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
@@ -133,9 +133,6 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         return OriginalHook(actionID);
                     }
-
-
-                    // Service.ChatGui.Print($"{actionID}");
 
 
                     // Interrupt
@@ -354,7 +351,7 @@ namespace XIVSlothComboX.Combos.PvE
                 bool interruptReady = ActionReady(All.伤头HeadGraze) && CanInterruptEnemy();
 
 
-                if (actionID is 分裂弹SplitShot)
+                if (actionID is 分裂弹SplitShot or 热分裂弹HeatedSplitShot)
                 {
                     if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
                         && IsEnabled(Variant.VariantCure)

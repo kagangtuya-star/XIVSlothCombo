@@ -11,23 +11,15 @@ namespace XIVSlothComboX.Combos.JobHelpers
 {
     internal class MCHOpenerLogic : MCH
     {
-
-
         private static uint OpenerLevel => 90;
-
         public static OpenerState currentState = OpenerState.PrePull;
-
         public static bool LevelChecked => CustomComboFunctions.LocalPlayer.Level >= OpenerLevel;
-
         public static bool CanOpener => HasCooldowns() && LevelChecked;
 
-
         private DateTime lastCheck;
-
         internal readonly static List<uint> 起手技能合集 = new();
-        internal static bool isInit=false;
-
-        public  bool DoFullOpener(ref uint actionID, bool simpleMode)
+        internal static bool isInit = false;
+        public bool DoFullOpener(ref uint actionID, bool simpleMode)
         {
             if (!LevelChecked) return false;
 
@@ -40,7 +32,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     lastCheck = DateTime.Now;
                 }
             }
-
 
             switch (currentState)
             {
@@ -60,7 +51,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     }
                     else
                     {
-                        
+
                         初始起手技能();
                         currentState = OpenerState.InOpener;
                     }
@@ -70,7 +61,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 case OpenerState.InOpener:
                 {
                     // if (!CustomComboFunctions.InCombat() && CustomComboFunctions.HasEffect(Buffs.整备Reassembled))
-                    if (!CustomComboFunctions.InCombat() )
+                    if (!CustomComboFunctions.InCombat())
                     {
                         actionID = 空气锚AirAnchor;
                         return true;
@@ -78,12 +69,12 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     if (CustomComboFunctions.InCombat())
                     {
-                        
+
                         var 使用过的技能集合 = 技能过滤(ActionWatching.特殊起手Actions);
-                        
+
                         if (下一个使用的技能(ref actionID))
                         {
-                            
+
                             for (var i = 0; i < 使用过的技能集合.Count; i++)
                             {
                                 if (使用过的技能集合[i] != 起手技能合集[i])
@@ -92,7 +83,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                                     return false;
                                 }
                             }
-                            
+
                             // if (使用过的技能集合.Count() >= 2)
                             // {
                             //     if (使用过的技能集合[1] != 空气锚AirAnchor)
@@ -139,8 +130,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
             }
             return false;
         }
-
-
         private static void 初始起手技能()
         {
             // MCHOpenerLogic.isInit = true;
@@ -189,11 +178,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
             起手技能合集.Add(空气锚AirAnchor);
             起手技能合集.Add(后式自走人偶AutomatonQueen);
         }
-
-
-
-
-
         private bool 下一个使用的技能(ref uint actionID)
         {
             var 处理后的技能集合 = 技能过滤(ActionWatching.特殊起手Actions);
@@ -205,30 +189,24 @@ namespace XIVSlothComboX.Combos.JobHelpers
             }
             return false;
         }
-
         private List<uint> 技能过滤(List<uint> 特殊起手Actions)
         {
             return 特殊起手Actions.Where(action => action is 热狙击弹HeatedCleanShot
-                or 热分裂弹HeatedSplitShot
-                or 热独头弹HeatedSlugshot
-                or 钻头Drill
-                or 空气锚AirAnchor
-                or 回转飞锯ChainSaw
-                or 枪管加热BarrelStabilizer
-                or 野火Wildfire
-                or 弹射Ricochet
-                or 虹吸弹GaussRound
-                or 整备Reassemble
-                or 超荷Hypercharge
-                or 热冲击HeatBlast
-                or 后式自走人偶AutomatonQueen).ToList();
+                    or 热分裂弹HeatedSplitShot
+                    or 热独头弹HeatedSlugshot
+                    or 钻头Drill
+                    or 空气锚AirAnchor
+                    or 回转飞锯ChainSaw
+                    or 枪管加热BarrelStabilizer
+                    or 野火Wildfire
+                    or 弹射Ricochet
+                    or 虹吸弹GaussRound
+                    or 整备Reassemble
+                    or 超荷Hypercharge
+                    or 热冲击HeatBlast
+                    or 后式自走人偶AutomatonQueen)
+                .ToList();
         }
-
-
-
-
-
-
         public static bool HasCooldowns()
         {
             if (CustomComboFunctions.GetRemainingCharges(弹射Ricochet) < 3)
@@ -255,6 +233,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
             return true;
         }
 
-  
+
     }
 }
