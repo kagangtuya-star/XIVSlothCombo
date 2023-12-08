@@ -511,10 +511,7 @@ namespace XIVSlothComboX.Combos.PvE
          */
         internal class DNC_DT_SimpleMode : CustomCombo
         {
-            
-            
-            internal static JobHelpers.DNCOpenerLogic  DNCOpener= new();
-            
+            // internal static JobHelpers.DNCOpenerLogic  DNCOpener= new();
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DNC_DT_SimpleMode;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
@@ -541,10 +538,10 @@ namespace XIVSlothComboX.Combos.PvE
                     // Opener for DNC 自动跳舞
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_AUTO_SS))
                     {
-                        if (DNCOpener.DoFullOpener(ref actionID))
-                        {
-                            return actionID;
-                        }
+                        // if (DNCOpener.DoFullOpener(ref actionID))
+                        // {
+                        //     return actionID;
+                        // }
                     }
                     
 
