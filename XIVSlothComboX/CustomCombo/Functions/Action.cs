@@ -119,8 +119,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <returns> The appropriate action to use. </returns>
         public static uint CalcBestAction(uint original, params uint[] actions)
         {
-            static (uint ActionID, CooldownData Data) Compare(
-                uint original,
+            static (uint ActionID, CooldownData Data) 
+                Compare(uint original,
                 (uint ActionID, CooldownData Data) a1,
                 (uint ActionID, CooldownData Data) a2)
             {
@@ -167,7 +167,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 return a1.Data.IsCooldown ? a2 : a1;
             }
 
-            static (uint ActionID, CooldownData Data) Selector(uint actionID) => (actionID, GetCooldown(actionID));
+            static (uint ActionID, CooldownData Data) 
+                Selector(uint actionID) => (actionID, GetCooldown(actionID));
 
             return actions.Select(Selector).Aggregate((a1, a2) => Compare(original, a1, a2)).ActionID;
         }
@@ -200,72 +201,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         //添加只双插
         public static bool CanSpellWeavePlus(uint actionID, double weaveTime = 0.6)
         {
-            if (ActionWatching.CombatActions.Count > 2)
-            {
-                var 能力技数量 = 0;
-
-                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions.Last(), out var Last);
-                if (Last != null)
-                {
-                    switch (Last.ActionCategory.Value.RowId)
-                    {
-                        case 2: //Spell
-                            break;
-                        case 3: //Weaponskill
-                            break;
-                        case 4: //Ability
-                            //能力技
-                            能力技数量++;
-                            break;
-                    }
-                }
-                if (Last.RowId is DNC.四色技巧舞步结束TechnicalFinish4_0)
-                {
-                    return false;
-                }
-
-
-
-
-                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2],
-                    out var Last_2);
-                if (Last_2 != null)
-                {
-                    switch (Last_2.ActionCategory.Value.RowId)
-                    {
-                        case 2: //Spell
-                            break;
-                        case 3: //Weaponskill
-                            break;
-                        case 4: //Ability
-                            //能力技
-                            能力技数量++;
-                            break;
-                    }
-
-                }
-
-                if (Last_2.RowId is DNC.双色标准舞步结束StandardFinish2
-                    or DNC.四色技巧舞步结束TechnicalFinish4
-                    or DNC.提拉纳Tillana
-                    or MCH.热冲击HeatBlast
-                    or MCH.自动弩AutoCrossbow)
-                {
-
-                    if (能力技数量 >= 1)
-                    {
-                        return false;
-                    }
-                }
-
-
-
-                if (能力技数量 >= 2)
-                {
-                    return false;
-                }
-
-            }
+            if (!checkUseAbility())
+                return false;
 
 
             float castTimeRemaining = LocalPlayer.TotalCastTime - LocalPlayer.CurrentCastTime;
@@ -291,7 +228,21 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25, double end = 0.6)
         {
-            if (ActionWatching.CombatActions.Count > 2)
+            if (!checkUseAbility())
+                return false;
+
+            if (GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+        private static bool checkUseAbility()
+        {
+
+            if (ActionWatching.CombatActions.Count >= 2)
             {
                 var 能力技数量 = 0;
 
@@ -310,11 +261,20 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                             break;
                     }
                 }
-
-                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2], out var last2);
-                if (last2 != null)
+                
+                if (Last.RowId is DNC.四色技巧舞步结束TechnicalFinish4_0)
                 {
-                    switch (last2.ActionCategory.Value.RowId)
+                    return false;
+                }
+
+
+
+
+                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2],
+                    out var Last_2);
+                if (Last_2 != null)
+                {
+                    switch (Last_2.ActionCategory.Value.RowId)
                     {
                         case 2: //Spell
                             break;
@@ -327,6 +287,24 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     }
 
                 }
+                
+                // if(ActionWatching.GetActionCastTime())
+                
+
+                if (Last_2.RowId is 
+                    DNC.双色标准舞步结束StandardFinish2
+                    or DNC.四色技巧舞步结束TechnicalFinish4
+                    or DNC.提拉纳Tillana
+                    or MCH.热冲击HeatBlast
+                    or MCH.自动弩AutoCrossbow)
+                {
+
+                    if (能力技数量 >= 1)
+                    {
+                        return false;
+                    }
+                }
+
 
 
                 if (能力技数量 >= 2)
@@ -335,14 +313,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 }
 
             }
-
-            if (GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end)
-            {
-                return true;
-            }
-
-            return false;
-
+            return true;
         }
     }
 }

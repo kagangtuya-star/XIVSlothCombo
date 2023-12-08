@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
@@ -43,6 +44,7 @@ namespace XIVSlothComboX.Combos.PvE
             野火Wildfire = 2878,
             武装解除Dismantle = 2887,
             火焰喷射器Flamethrower = 7418;
+
 
         internal static class Buffs
         {
@@ -238,7 +240,7 @@ namespace XIVSlothComboX.Combos.PvE
                     //Heatblast, Gauss, Rico
                     if (gauge.IsOverheated && LevelChecked(热冲击HeatBlast))
                     {
-                        if (WasLastAction(热冲击HeatBlast) && CanWeave(actionID))
+                        if (LastPreAction == (热冲击HeatBlast) && CanSpellWeavePlus(actionID))
                         {
                             if (ActionReady(虹吸弹GaussRound)
                                 && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
@@ -382,16 +384,33 @@ namespace XIVSlothComboX.Combos.PvE
                         // Wildfire
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
                         {
-                            if (gauge.Heat >= 50 && ActionReady(野火Wildfire) && CanDelayedWeave(actionID))
+                            if (gauge.Heat >= 50 && ActionReady(野火Wildfire) && CanSpellWeavePlus(actionID))
                             {
-                                if (level >= 90)
+
+                                //钻头都没学 直接用吧
+                                if (!LevelChecked(钻头Drill))
                                 {
-                                    //90级 野火好了就用
+                                    // Service.ChatGui.Print($"我用的野火1");
                                     return 野火Wildfire;
                                 }
-                                else
+
+                                if (三件套最小冷却Time() >= 7.51)
                                 {
-                                    return 野火Wildfire;
+                                    //起手延后使用野火 起码再3大剑之后
+                                    if (LevelChecked(回转飞锯ChainSaw))
+                                    {
+                                        return 野火Wildfire;
+                                    }
+
+                                    if (LevelChecked(钻头Drill) && !LevelChecked(空气锚AirAnchor))
+                                    {
+                                        return 野火Wildfire;
+                                    }
+
+                                    if (LevelChecked(空气锚AirAnchor) && !LevelChecked(回转飞锯ChainSaw))
+                                    {
+                                        return 野火Wildfire;
+                                    }
                                 }
                             }
 
@@ -399,7 +418,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // BarrelStabilizer use
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer)
-                            && CanDelayedWeave(actionID)
+                            && CanDelayedWeavePlus(actionID, 1.5)
                             && gauge.Heat <= 55
                             && ActionReady(枪管加热BarrelStabilizer))
                         {
@@ -410,7 +429,7 @@ namespace XIVSlothComboX.Combos.PvE
                         //queen 优雅的使用机器人
                         if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen)
                             && Config.MCH_ST_TurretUsage == 1
-                            && CanDelayedWeavePlus(actionID)
+                            && CanSpellWeavePlus(actionID)
                             && !gauge.IsOverheated
                             && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
                             && !gauge.IsRobotActive)
@@ -514,59 +533,77 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
+                        // TOOLS!! ChainSaw Drill Air Anchor
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
+                            && CanSpellWeavePlus(狙击弹CleanShot)
+                            && !HasEffect(Buffs.野火Wildfire)
+                            && !HasEffect(Buffs.整备Reassembled)
+                            && HasCharges(整备Reassemble)
+                            && (OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
+                                || 钻头Drill.GCDActionReady(狙击弹CleanShot)
+                                || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot)))
+                        {
+                            return 整备Reassemble;
+                        }
+
 
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && LevelChecked(热冲击HeatBlast))
                         {
                             if (CanSpellWeavePlus(actionID))
                             {
                                 //超荷状态下
-                                if (gauge.IsOverheated)
+                                if (gauge.IsOverheated && CanDelayedWeavePlus(actionID, 1.5, 0.65))
                                 {
-                                    //先注释点 可能有点问题，有时间再测试，开无后腰会双插
-                                    // if (!WasLastAction(弹射Ricochet)
-                                    //     && WasLastAction(热冲击HeatBlast)
-                                    //     && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
-                                    //     return 虹吸弹GaussRound;
-                                    //
-                                    // if (!WasLastAction(虹吸弹GaussRound)
-                                    //     && WasLastAction(热冲击HeatBlast)
-                                    //     && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
-                                    //     return 弹射Ricochet;
-                                    //
-                                    
-                                    if (WasLastAction(热冲击HeatBlast)
-                                        && GetRemainingCharges(虹吸弹GaussRound) >= GetRemainingCharges(弹射Ricochet))
-                                        return 虹吸弹GaussRound;
+                                    if (LastPreAction != 虹吸弹GaussRound
+                                        && WasLastAction(热冲击HeatBlast)
+                                        && GetCooldownRemainingTime(虹吸弹GaussRound)
+                                        >= GetCooldownRemainingTime(弹射Ricochet)
+                                        && 弹射Ricochet.ActionReady())
+                                    {
 
-                                    if (WasLastAction(热冲击HeatBlast)
-                                        && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
                                         return 弹射Ricochet;
+                                    }
+
+                                    if (LastPreAction != 弹射Ricochet
+                                        && WasLastAction(热冲击HeatBlast)
+                                        && GetCooldownRemainingTime(弹射Ricochet)
+                                        >= GetCooldownRemainingTime(虹吸弹GaussRound)
+                                        && 虹吸弹GaussRound.ActionReady())
+                                    {
+                                        // IsOverheatedLock = false;
+                                        return 虹吸弹GaussRound;
+                                    }
+
                                 }
 
                                 if (!gauge.IsOverheated && !HasEffect(Buffs.野火Wildfire))
                                 {
 
-                                    if (LevelChecked(虹吸弹GaussRound)
+                                    if (!WasLastAction(虹吸弹GaussRound)
+                                        && 虹吸弹GaussRound.ActionReady()
                                         && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) >= 0
-                                        && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) <= 20)
+                                        && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) <= 26)
                                     {
                                         return 虹吸弹GaussRound;
                                     }
 
-                                    if (LevelChecked(弹射Ricochet)
+                                    if (!WasLastAction(弹射Ricochet)
+                                        && 弹射Ricochet.ActionReady()
                                         && GetCooldownRemainingTime(MCH.弹射Ricochet) >= 0
-                                        && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 20)
+                                        && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 26)
+                                    {
                                         return 弹射Ricochet;
+                                    }
 
 
                                     if (RaidBuff.爆发期())
                                     {
-                                        if (虹吸弹GaussRound.ActionReady())
+                                        if (!WasLastAction(虹吸弹GaussRound)&& 虹吸弹GaussRound.ActionReady())
                                         {
                                             return 虹吸弹GaussRound;
                                         }
 
-                                        if (弹射Ricochet.ActionReady())
+                                        if (!WasLastAction(弹射Ricochet) && 弹射Ricochet.ActionReady())
                                         {
                                             return 弹射Ricochet;
                                         }
@@ -578,15 +615,15 @@ namespace XIVSlothComboX.Combos.PvE
                             if (gauge.IsOverheated)
                             {
                                 if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
+                                {
                                     return 热冲击HeatBlast;
+                                }
                             }
 
                         }
-
-                        //整备 三大件
+                        //三大件
                         if (ReassembledTools(ref actionID))
                             return actionID;
-
                     }
 
                     // healing
@@ -617,11 +654,14 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 var GCDCooldownRemainingTime = GetCooldownRemainingTime(狙击弹CleanShot);
 
-                var 钻头DrillCooldownRemainingTime = GetCooldownRemainingTime(钻头Drill) + GCDCooldownRemainingTime;
-                var 空气锚AirAnchorCooldownRemainingTime =
-                    GetCooldownRemainingTime(空气锚AirAnchor) + GCDCooldownRemainingTime;
-                var 回转飞锯ChainSawDrillCooldownRemainingTime =
-                    GetCooldownRemainingTime(钻头Drill) + GCDCooldownRemainingTime;
+                var 钻头DrillCooldownRemainingTime = (LevelChecked(钻头Drill))
+                    ? GetCooldownRemainingTime(钻头Drill) + GCDCooldownRemainingTime : 999;
+
+                var 空气锚AirAnchorCooldownRemainingTime = (LevelChecked(空气锚AirAnchor))
+                    ? GetCooldownRemainingTime(空气锚AirAnchor) + GCDCooldownRemainingTime : 9999;
+
+                var 回转飞锯ChainSawDrillCooldownRemainingTime = (LevelChecked(回转飞锯ChainSaw))
+                    ? GetCooldownRemainingTime(回转飞锯ChainSaw) + GCDCooldownRemainingTime : 9999;
 
 
                 return Math.Min(Math.Min(钻头DrillCooldownRemainingTime, 空气锚AirAnchorCooldownRemainingTime),
@@ -630,7 +670,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             private bool ReassembledTools(ref uint actionId)
             {
-                
+
 
                 // bool reassembledAnchor = (Config.MCH_ST_Reassembled[0] && HasEffect(Buffs.整备Reassembled))
                 //                          || (!Config.MCH_ST_Reassembled[0] && !HasEffect(Buffs.整备Reassembled))
@@ -653,23 +693,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                 bool reassembledChainsaw = (Config.MCH_ST_Reassembled[2]) && 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot);
 
-                // TOOLS!! ChainSaw Drill Air Anchor
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
-                    && CanSpellWeavePlus(狙击弹CleanShot)
-                    && !HasEffect(Buffs.野火Wildfire)
-                    && !HasEffect(Buffs.整备Reassembled)
-                    && HasCharges(整备Reassemble)
-                    && (reassembledAnchor || reassembledDrill || reassembledChainsaw))
+
+                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_AirAnchor) && reassembledAnchor)
                 {
-                    actionId = 整备Reassemble;
+                    actionId = OriginalHook(空气锚AirAnchor);
                     return true;
                 }
 
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_ChainSaw) && reassembledChainsaw)
-                {
-                    actionId = 回转飞锯ChainSaw;
-                    return true;
-                }
 
                 if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Drill) && reassembledDrill)
                 {
@@ -677,11 +707,13 @@ namespace XIVSlothComboX.Combos.PvE
                     return true;
                 }
 
-                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_AirAnchor) && reassembledAnchor)
+
+                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_ChainSaw) && reassembledChainsaw)
                 {
-                    actionId = OriginalHook(空气锚AirAnchor);
+                    actionId = 回转飞锯ChainSaw;
                     return true;
                 }
+
 
                 return false;
             }

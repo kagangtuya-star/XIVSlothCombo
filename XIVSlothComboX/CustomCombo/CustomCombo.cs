@@ -40,7 +40,13 @@ namespace XIVSlothComboX.CustomComboNS
         protected byte ClassID { get; }
 
         /// <summary> Gets the job ID associated with this combo. </summary>
-        protected byte JobID { get; }
+        protected byte JobID { get;   }
+
+
+        /// <summary>
+        ///  上个本地 计算出来的技能 他可能还没有释放
+        /// </summary>
+        protected uint LastPreAction { get; private set; }
 
         /// <summary> Performs various checks then attempts to invoke the combo. </summary>
         /// <param name="actionID"> Starting action ID. </param>
@@ -54,6 +60,8 @@ namespace XIVSlothComboX.CustomComboNS
         {
             newActionID = 0;
 
+            LastPreAction = actionID;
+            
             if (!IsEnabled(Preset))
                 return false;
 
@@ -77,6 +85,7 @@ namespace XIVSlothComboX.CustomComboNS
 
             newActionID = resultingActionID;
 
+            
             return true;
         }
 

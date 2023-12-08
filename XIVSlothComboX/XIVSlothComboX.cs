@@ -622,6 +622,12 @@ namespace XIVSlothComboX
                                 
                                 await Service.Framework.RunOnFrameworkThread(() =>
                                 {
+                                    if (!Service.ClientState.IsLoggedIn)
+                                    {
+                                        autoActionId = 0;
+                                        autoTokenSource.Cancel();
+                                    }
+                                    
                                     unsafe
                                     {
                                         var targetObjectId = localPlayer.TargetObjectId;

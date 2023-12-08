@@ -75,11 +75,16 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) && CustomComboFunctions.IsOnCooldown(DNC.进攻之探戈Devilment)} ");
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
 
-                    if (ActionWatching.特殊起手Actions.Count >0 )
-                    {
-                        ImGui.TextUnformatted($"{MCHOpenerLogic.currentState }  ActionWatching.特殊起手Actions.Count: {ActionWatching.特殊起手Actions.Count} {ActionWatching.GetActionName(ActionWatching.特殊起手Actions[0])}->{ActionWatching.特殊起手Actions[0]} ");
-                    }
-             
+                    // if (ActionWatching.特殊起手Actions.Count >0 )
+                    // {
+                    //     ImGui.TextUnformatted($"{MCHOpenerLogic.currentState }  ActionWatching.特殊起手Actions.Count: {ActionWatching.特殊起手Actions.Count} {ActionWatching.GetActionName(ActionWatching.特殊起手Actions[0])}->{ActionWatching.特殊起手Actions[0]} ");
+                    // }
+                    //
+                    // foreach (var combatAction in ActionWatching.CombatActions)
+                    // {
+                    //     ImGui.TextUnformatted($"{ActionWatching.GetActionName(combatAction)} {ActionWatching.GetAttackType(combatAction)}");
+                    // }
+                    //
 
 
                     // ImGui.TextUnformatted($"战逃倒计时 : {CustomComboFunctions.GetCooldownRemainingTime(PLD.战逃反应FightOrFlight)}");
@@ -105,11 +110,17 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
                     
-                    // ImGui.TextUnformatted($"ActionReady:{CustomComboFunctions.ActionReady(MCH.弹射Ricochet)} GetCooldownRemainingTime:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
+                    ImGui.TextUnformatted($"虹吸弹GaussRound:{CustomComboFunctions.GetCooldownRemainingTime(MCH.虹吸弹GaussRound)}，弹射Ricochet:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
+                    
+                    // ImGui.TextUnformatted($"GetRemainingCharges{CustomComboFunctions. GetRemainingCharges(MCH.虹吸弹GaussRound)} IsOffCooldown {CustomComboFunctions.IsOffCooldown(MCH.虹吸弹GaussRound)}");
                     
                     
-                    ImGui.TextUnformatted($"MCHOpenerLogic {MCHOpenerLogic.CanOpener} {MCHOpenerLogic.currentState}");
-                    // ImGui.TextUnformatted($"Enum.IsDefined(typeof(All),id)2 : {Enum.IsDefined(typeof(All),9999)} ");
+                    
+                    // ImGui.TextUnformatted($"MCHOpenerLogic {MCHOpenerLogic.CanOpener} {MCHOpenerLogic.currentState} {CustomComboFunctions. GetRemainingCharges(MCH.热冲击HeatBlast)}");
+                    // ImGui.TextUnformatted($"GetCooldownElapsed {CustomComboFunctions.GetCooldownElapsed(MCH.虹吸弹GaussRound)} {ActionWatching.GetActionCastTime(MCH.虹吸弹GaussRound)}");
+                    
+                    
+                    
                     
                     
                     // ImGui.TextUnformatted($"CanOpener : {MCHOpenerLogic.CanOpener}  currentState{MCHOpenerLogic.currentState.ToString()}");
