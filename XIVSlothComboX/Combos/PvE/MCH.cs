@@ -593,9 +593,9 @@ namespace XIVSlothComboX.Combos.PvE
                                     }
 
 
-                                    if (RaidBuff.爆发期())
+                                    if (wildfireCDTime >= 40 && RaidBuff.爆发期())
                                     {
-                                        if (!WasLastAction(虹吸弹GaussRound)&& 虹吸弹GaussRound.ActionReady())
+                                        if (!WasLastAction(虹吸弹GaussRound) && 虹吸弹GaussRound.ActionReady())
                                         {
                                             return 虹吸弹GaussRound;
                                         }

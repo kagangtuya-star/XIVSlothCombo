@@ -201,6 +201,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (RaidBuff.爆发期())
                                 {
+                                    
                                     if (gauge.Blood >= 50 || GetBuffStacks(Buffs.Delirium) > 0)
                                     {
                                         return 血溅;

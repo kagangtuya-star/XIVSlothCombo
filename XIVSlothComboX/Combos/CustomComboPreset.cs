@@ -3563,7 +3563,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("战壕与裂石飞环/地毁人亡整合", "小于等于设置距离时，将裂石飞环/地毁人亡整合到战壕", WAR.JobID, 0, "", "")]
         WAR_InfuriateFellCleave = 18018,
 
-        [ReplaceSkill(WAR.InnerRelease)]
+        [ReplaceSkill(WAR.原初的解放InnerRelease)]
         [CustomComboInfo("蛮荒崩裂Main combo", "在蛮荒崩裂预备状态下，将原初的解放替换为蛮荒崩裂.", WAR.JobID, 0, "", "")]
         WAR_PrimalRend_InnerRelease = 18019,
 

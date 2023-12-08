@@ -244,7 +244,7 @@ using XIVSlothComboX.Extensions;
                             GetResourceCost(圣灵HolySpirit) <= LocalPlayer.CurrentMp)
                             return 圣灵HolySpirit;
 
-                        if (RaidBuff.爆发期())
+                        if (GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 && RaidBuff.爆发期())
                         {
                             if (HasEffect(Buffs.DivineMight) &&
                                 GetResourceCost(圣灵HolySpirit) <= LocalPlayer.CurrentMp)
@@ -570,7 +570,7 @@ using XIVSlothComboX.Extensions;
                                 return 赎罪剑Atonement;
                         }
 
-                        if (RaidBuff.爆发期())
+                        if (GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 &&RaidBuff.爆发期())
                         {
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit) &&
                                 HasEffect(Buffs.DivineMight) &&
