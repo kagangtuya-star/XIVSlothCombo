@@ -766,8 +766,13 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("舞者单体无脑模式[推荐]", "Single button, double targets. Includes songs, flourishes and overprotections.\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", DNC.JobID, 0, "", "")]
         DNC_DT_SimpleMode = 4065,
 
+        
         [ParentCombo(DNC_DT_SimpleMode)]
-        [CustomComboInfo("无脑模式_标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 0, "", "")]
+        [CustomComboInfo("无脑模式_倒计时自动跳小舞", "起手自动跳舞", DNC.JobID, 0, "", "")]
+        DNC_DT_Simple_AUTO_SS = 4091,
+        
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("无脑模式_标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 1, "", "")]
         DNC_DT_Simple_SS = 4066,
 
         [ParentCombo(DNC_DT_SimpleMode)]

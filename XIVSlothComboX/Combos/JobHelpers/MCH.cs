@@ -30,7 +30,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
         internal readonly static List<uint> 起手技能合集 = new();
         internal static bool isInit=false;
 
-        public bool DoFullOpener(ref uint actionID, bool simpleMode)
+        public  bool DoFullOpener(ref uint actionID, bool simpleMode)
         {
             if (!LevelChecked) return false;
 

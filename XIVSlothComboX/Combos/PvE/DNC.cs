@@ -1,4 +1,5 @@
 ﻿using Dalamud.Game.ClientState.JobGauge.Types;
+using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.Extensions;
@@ -6,7 +7,7 @@ using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.PvE
 {
-    internal static class DNC
+    internal  class DNC
     {
         public const byte JobID = 38;
 
@@ -510,6 +511,9 @@ namespace XIVSlothComboX.Combos.PvE
          */
         internal class DNC_DT_SimpleMode : CustomCombo
         {
+            
+            internal static DNCOpenerLogic DNCOpener = new();
+            
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DNC_DT_SimpleMode;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
@@ -532,6 +536,18 @@ namespace XIVSlothComboX.Combos.PvE
 
                     #endregion
 
+                    
+                    // Opener for DNC 自动跳舞
+                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_AUTO_SS))
+                    {
+                        if (DNCOpener.DoFullOpener(ref actionID))
+                        {
+                            return actionID;
+                        }
+                    }
+                    
+
+                  
                     // Simple DT Standard Steps & Fill Feature
                     if (HasEffect(Buffs.标准舞步StandardStep))
                         // if (HasEffect(Buffs.标准舞步StandardStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS))
@@ -543,10 +559,13 @@ namespace XIVSlothComboX.Combos.PvE
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
 
+                    
+                   
+                    
                     // Devilment & Flourish
                     if (canWeave)
                     {
-                        bool flourishReady = 百花争艳Flourish.ActionReady() && !HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !HasEffect(Buffs.扇舞_终FourFoldFanDance) && !HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry) && !HasEffect(Buffs.非对称投掷_百花争艳FlourishingFlow);
+                        bool flourishReady =InCombat() &&  百花争艳Flourish.ActionReady() && !HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !HasEffect(Buffs.扇舞_终FourFoldFanDance) && !HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry) && !HasEffect(Buffs.非对称投掷_百花争艳FlourishingFlow);
 
                         bool devilmentReady = 进攻之探戈Devilment.ActionReady() && IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment);
 
