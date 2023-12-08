@@ -132,7 +132,7 @@ using XIVSlothComboX.Extensions;
                             
                             
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Requiescat) &&
-                                WasLastAbility(战逃反应FightOrFlight) && ActionReady(安魂祈祷Requiescat))
+                                WasLastAction(战逃反应FightOrFlight) && ActionReady(安魂祈祷Requiescat))
                             {
                                 return 安魂祈祷Requiescat;
                             }
@@ -167,7 +167,7 @@ using XIVSlothComboX.Extensions;
 
                         if (HasEffect(Buffs.FightOrFlight))
                         {
-                            if (CanSpellWeavePlus(actionID) && !WasLastAbility(战逃反应FightOrFlight))
+                            if (CanSpellWeavePlus(actionID) && !WasLastAction(战逃反应FightOrFlight))
                             {
                                 if (InMeleeRange())
                                 {
@@ -179,7 +179,7 @@ using XIVSlothComboX.Extensions;
                                 }
 
                                 if (OriginalHook(调停Intervene).LevelChecked() &&
-                                    !WasLastAbility(调停Intervene) &&
+                                    !WasLastAction(调停Intervene) &&
                                     GetRemainingCharges(调停Intervene) > Config.PLD_Intervene_HoldCharges &&
                                     GetCooldownRemainingTime(厄运流转CircleOfScorn) > 3 &&
                                     GetCooldownRemainingTime(OriginalHook(厄运流转CircleOfScorn)) > 3 &&
@@ -216,7 +216,7 @@ using XIVSlothComboX.Extensions;
                         }
                         
                         // 非爆发期
-                        if (CanSpellWeavePlus(actionID) && !WasLastAbility(战逃反应FightOrFlight) && GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15  && InMeleeRange())
+                        if (CanSpellWeavePlus(actionID) && !WasLastAction(战逃反应FightOrFlight) && GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15  && InMeleeRange())
                         {
                             if (ActionReady(厄运流转CircleOfScorn))
                                 return 厄运流转CircleOfScorn;
@@ -311,7 +311,7 @@ using XIVSlothComboX.Extensions;
                     
                     if (ActionReady(安魂祈祷Requiescat))
                     {
-                        if (WasLastAbility(战逃反应FightOrFlight))
+                        if (WasLastAction(战逃反应FightOrFlight))
                         {
                             return 安魂祈祷Requiescat;
                         }
@@ -363,7 +363,7 @@ using XIVSlothComboX.Extensions;
                         if (ActionReady(战逃反应FightOrFlight))
                             return 战逃反应FightOrFlight;
 
-                        if (!WasLastAbility(战逃反应FightOrFlight) && IsOnCooldown(战逃反应FightOrFlight))
+                        if (!WasLastAction(战逃反应FightOrFlight) && IsOnCooldown(战逃反应FightOrFlight))
                         {
                             if (ActionReady(厄运流转CircleOfScorn))
                                 return 厄运流转CircleOfScorn;
@@ -468,7 +468,7 @@ using XIVSlothComboX.Extensions;
                             if (ActionReady(安魂祈祷Requiescat))
                             {
                                 if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Requiescat) &&
-                                    WasLastAbility(战逃反应FightOrFlight))
+                                    WasLastAction(战逃反应FightOrFlight))
                                 {
                                     return 安魂祈祷Requiescat;
                                 }
@@ -505,7 +505,7 @@ using XIVSlothComboX.Extensions;
 
                         if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_FoF) && HasEffect(Buffs.FightOrFlight))
                         {
-                            if (CanSpellWeavePlus(actionID) && !WasLastAbility(战逃反应FightOrFlight))
+                            if (CanSpellWeavePlus(actionID) && !WasLastAction(战逃反应FightOrFlight))
                             {
                                 if (InMeleeRange()&& GetCooldownRemainingTime(安魂祈祷Requiescat) > 40 )
                                 {
@@ -520,7 +520,7 @@ using XIVSlothComboX.Extensions;
 
                                 if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Intervene) &&
                                     OriginalHook(调停Intervene).LevelChecked() &&
-                                    !WasLastAbility(调停Intervene) &&
+                                    !WasLastAction(调停Intervene) &&
                                     GetRemainingCharges(调停Intervene) > Config.PLD_Intervene_HoldCharges &&
                                     GetCooldownRemainingTime(厄运流转CircleOfScorn) > 3 &&
                                     GetCooldownRemainingTime(OriginalHook(厄运流转CircleOfScorn)) > 3 &&
@@ -584,7 +584,7 @@ using XIVSlothComboX.Extensions;
 
                         // 没用启动战逃反应
                         if (CanSpellWeavePlus(actionID,0.3f) &&
-                            (!WasLastAbility(战逃反应FightOrFlight) && GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 ||
+                            (!WasLastAction(战逃反应FightOrFlight) && GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 ||
                              IsNotEnabled(CustomComboPreset.PLD_ST_AdvancedMode_FoF)) && InMeleeRange())
                         {
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) &&
@@ -682,7 +682,7 @@ using XIVSlothComboX.Extensions;
                     if (ActionReady(安魂祈祷Requiescat))
                     {
                         if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) &&
-                            WasLastAbility(战逃反应FightOrFlight))
+                            WasLastAction(战逃反应FightOrFlight))
                         {
                             return 安魂祈祷Requiescat;
                         }
@@ -699,7 +699,7 @@ using XIVSlothComboX.Extensions;
                     // Actions under FoF burst
                     if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_FoF) && HasEffect(Buffs.FightOrFlight))
                     {
-                        if (CanSpellWeavePlus(actionID) && !WasLastAbility(战逃反应FightOrFlight))
+                        if (CanSpellWeavePlus(actionID) && !WasLastAction(战逃反应FightOrFlight))
                         {
                             if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_CircleOfScorn) &&
                                 ActionReady(厄运流转CircleOfScorn))
@@ -747,7 +747,7 @@ using XIVSlothComboX.Extensions;
                             return 战逃反应FightOrFlight;
 
                         // Usage outside of burst (desync for Req, 30s windows for CoS/SW)
-                        if ((!WasLastAbility(战逃反应FightOrFlight) && GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 || IsNotEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_FoF)) &&
+                        if ((!WasLastAction(战逃反应FightOrFlight) && GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 || IsNotEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_FoF)) &&
                             !ActionWatching.WasLast2ActionsAbilities())
                         {
                             if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) && ActionReady(安魂祈祷Requiescat))
