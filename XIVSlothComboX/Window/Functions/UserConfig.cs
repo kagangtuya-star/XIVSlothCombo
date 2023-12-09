@@ -2303,36 +2303,36 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.WHM_STHeals_Benediction)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_BenedictionWeave, "Only Weave", "");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_BenedictionWeave, "只在能力技窗口期插入", "");
                 UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_BenedictionHP, "在目标生命值百分比等于或低于时使用。");
             }
 
             if (preset == CustomComboPreset.WHM_STHeals_Tetragrammaton)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_TetraWeave, "Only Weave", "");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_TetraWeave, "只在能力技窗口期插入", "");
                 UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_TetraHP, "在目标生命值百分比等于或低于时使用。");
             }
 
             if (preset == CustomComboPreset.WHM_STHeals_Benison)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_BenisonWeave, "Only Weave", "");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_BenisonWeave, "只在能力技窗口期插入", "");
                 UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_BenisonHP, "在目标生命值百分比等于或低于时使用。");
             }
 
             if (preset == CustomComboPreset.WHM_STHeals_Aquaveil)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_AquaveilWeave, "Only Weave", "");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_STHeals_AquaveilWeave, "只在能力技窗口期插入", "");
                 UserConfig.DrawSliderInt(1, 100, WHM.Config.WHM_STHeals_AquaveilHP, "在目标生命值百分比等于或低于时使用。");
             }
 
             if (preset == CustomComboPreset.WHM_AoEHeals_Assize)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_AssizeWeave, "Only Weave", "");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_AssizeWeave, "只在能力技窗口期插入", "");
             }
 
             if (preset == CustomComboPreset.WHM_AoEHeals_Plenary)
             {
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_PlenaryWeave, "Only Weave", "");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_PlenaryWeave, "只在能力技窗口期插入", "");
             }
 
             #endregion

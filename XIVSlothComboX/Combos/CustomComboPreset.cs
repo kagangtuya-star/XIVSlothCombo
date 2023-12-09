@@ -1357,7 +1357,7 @@ namespace XIVSlothComboX.Combos
         #region Gnashing Fang
 
         [ParentCombo(GNB_ST_MainCombo)]
-        [CustomComboInfo("烈牙与续剑整合到主连击", "将烈牙与续剑整合到主连击。烈牙必须被手动激活，之后会被替换到主连击。", GNB.JobID, 0, "", "")]
+        [CustomComboInfo("烈牙与续剑整合到主连击", "将烈牙与续剑整合到主连击。关闭之后后续连击仍然会被替换到主连击。", GNB.JobID, 0, "", "")]
         GNB_ST_Gnashing = 7002,
 
         #endregion
@@ -1413,7 +1413,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(GNB_ST_MainCombo)]
         [CustomComboInfo("闪雷弹激活", "当自身与所选目标在近战距离外时，插入闪雷弹.", GNB.JobID, 0, "", "")]
-        GNB_ST_RangedUptime = 7014,
+        GNB_ST_RangedUptime = 7014, 
 
         #endregion
 
