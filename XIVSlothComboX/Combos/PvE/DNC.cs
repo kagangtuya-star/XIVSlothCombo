@@ -691,7 +691,9 @@ namespace XIVSlothComboX.Combos.PvE
                     if (LevelChecked(剑舞SaberDance) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance))
                     {
                         if ((gauge.Esprit >= 85 || (techBurst && gauge.Esprit >= 50)))
+                        {
                             return 剑舞SaberDance;
+                        }
 
                         if (技巧舞步TechnicalStepCD倒计时 >= 40 && RaidBuff.爆发期() && gauge.Esprit >= 50)
                         {

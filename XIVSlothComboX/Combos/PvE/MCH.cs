@@ -417,6 +417,8 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Stabilizer)
                             && CanDelayedWeavePlus(actionID, 1.5)
                             && gauge.Heat <= 55
+                            && GetRemainingCharges(MCH.虹吸弹GaussRound)!=GetMaxCharges(虹吸弹GaussRound)
+                            && GetRemainingCharges(MCH.弹射Ricochet)!=GetMaxCharges(弹射Ricochet)
                             && ActionReady(枪管加热BarrelStabilizer))
                         {
                             return 枪管加热BarrelStabilizer;
@@ -551,8 +553,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 //超荷状态下
                                 if (gauge.IsOverheated && CanDelayedWeavePlus(actionID, 1.5, 0.65))
                                 {
-                                    if (LastPreAction != 虹吸弹GaussRound
-                                        && WasLastAction(热冲击HeatBlast)
+                                    if (WasLastAction(热冲击HeatBlast)
                                         && GetCooldownRemainingTime(虹吸弹GaussRound)
                                         >= GetCooldownRemainingTime(弹射Ricochet)
                                         && 弹射Ricochet.ActionReady())
@@ -561,8 +562,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         return 弹射Ricochet;
                                     }
 
-                                    if (LastPreAction != 弹射Ricochet
-                                        && WasLastAction(热冲击HeatBlast)
+                                    if (WasLastAction(热冲击HeatBlast)
                                         && GetCooldownRemainingTime(弹射Ricochet)
                                         >= GetCooldownRemainingTime(虹吸弹GaussRound)
                                         && 虹吸弹GaussRound.ActionReady())
