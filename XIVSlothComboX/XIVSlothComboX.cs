@@ -153,7 +153,6 @@ namespace XIVSlothComboX
         private void PrintLoginMessage(object? sender, EventArgs e)
         {
             // Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(task => ResetFeatures());
-
             if (!Service.Configuration.HideMessageOfTheDay)
                 Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task => PrintMotD());
         }
@@ -561,7 +560,6 @@ namespace XIVSlothComboX
                 {
 
                     autoActionId = 0;
-                    // isAuto = false;
                     autoTokenSource.Cancel();
 
                     if (localPlayer == null)

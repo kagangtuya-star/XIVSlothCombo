@@ -2172,7 +2172,7 @@ namespace XIVSlothComboX.Window.Functions
             {
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "巴哈姆特", "巴哈阶段爆发.", 1);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "菲尼克斯", "凤凰阶段爆发.", 2);
-                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "巴哈姆特或菲尼克斯3", "巴哈或凤凰阶段爆发 (取决于那个先到).", 3);
+                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "巴哈姆特或菲尼克斯", "巴哈或凤凰阶段爆发 (取决于那个先到).", 3);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "灵活 (SpS) ", "当灼热之光时爆发, 而不管处在哪个阶段.", 4);
             }
 
