@@ -330,7 +330,7 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 float wildfireCDTime = GetCooldownRemainingTime(野火Wildfire);
                 MCHGauge? gauge = GetJobGauge<MCHGauge>();
-                int rotationSelection = Config.MCH_ST_RotationSelection;
+                // int rotationSelection = Config.MCH_ST_RotationSelection;
                 bool interruptReady = ActionReady(All.伤头HeadGraze) && CanInterruptEnemy();
 
 
@@ -374,7 +374,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     return 野火Wildfire;
                                 }
 
-                                if (三件套最小冷却Time() >= 7.51)
+                                if (三件套最小冷却Time() >= 8.01)
                                 {
                                     //起手延后使用野火 起码再3大剑之后
                                     if (LevelChecked(回转飞锯ChainSaw))
@@ -536,7 +536,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         if (!WasLastAction(虹吸弹GaussRound)
                                             && 虹吸弹GaussRound.ActionReady()
                                             && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) >= 0
-                                            && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) <= 45)
+                                            && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) <= 61)
                                         {
                                             return 虹吸弹GaussRound;
                                         }
@@ -544,7 +544,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         if (!WasLastAction(弹射Ricochet)
                                             && 弹射Ricochet.ActionReady()
                                             && GetCooldownRemainingTime(MCH.弹射Ricochet) >= 0
-                                            && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 45)
+                                            && GetCooldownRemainingTime(MCH.弹射Ricochet) <= 61)
                                         {
                                             return 弹射Ricochet;
                                         }
@@ -577,20 +577,20 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                         }
-                          //超荷判断
+                        //超荷判断
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Hypercharge)
                             && CanSpellWeavePlus(actionID)
                             && gauge.Heat >= 50
                             && 超荷Hypercharge.ActionReady()
                             && !gauge.IsOverheated)
                         {
-                            if (LevelChecked(钻头Drill) && GetCooldownRemainingTime(钻头Drill) + GetCooldownRemainingTime(狙击弹CleanShot) >= 7.51)
+                            if (LevelChecked(钻头Drill) && GetCooldownRemainingTime(钻头Drill) + GetCooldownRemainingTime(狙击弹CleanShot) >= 8.01)
                             {
                                 if (LevelChecked(空气锚AirAnchor)
-                                    && GetCooldownRemainingTime(空气锚AirAnchor) + GetCooldownRemainingTime(狙击弹CleanShot) >= 7.51)
+                                    && GetCooldownRemainingTime(空气锚AirAnchor) + GetCooldownRemainingTime(狙击弹CleanShot) >= 8.01)
                                 {
                                     if (LevelChecked(回转飞锯ChainSaw)
-                                        && GetCooldownRemainingTime(回转飞锯ChainSaw) + GetCooldownRemainingTime(狙击弹CleanShot) >= 7.51)
+                                        && GetCooldownRemainingTime(回转飞锯ChainSaw) + GetCooldownRemainingTime(狙击弹CleanShot) >= 8.01)
                                     {
                                         if (UseHyperchargeDelayedTools(gauge, wildfireCDTime))
                                             return 超荷Hypercharge;
@@ -609,14 +609,13 @@ namespace XIVSlothComboX.Combos.PvE
                                         return 超荷Hypercharge;
                                 }
                             }
-
                             else if (!LevelChecked(钻头Drill))
                             {
                                 if (UseHyperchargeDelayedTools(gauge, wildfireCDTime))
                                     return 超荷Hypercharge;
                             }
                         }
-                        
+
                         //三大件
                         if (ReassembledTools(ref actionID))
                             return actionID;
@@ -624,10 +623,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                     // healing
                     if (IsEnabled(CustomComboPreset.MCH_ST_Adv_SecondWind)
-                        && CanWeave(actionID, 0.6)
+                        && CanSpellWeavePlus(actionID, 0.6)
                         && PlayerHealthPercentageHp() <= Config.MCH_ST_SecondWindThreshold
                         && ActionReady(All.内丹SecondWind))
+                    {
+
                         return All.内丹SecondWind;
+                    }
 
                     //1-2-3 Combo
                     if (comboTime > 0)
