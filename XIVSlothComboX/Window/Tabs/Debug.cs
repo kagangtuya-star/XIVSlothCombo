@@ -110,7 +110,8 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
                     
-                    ImGui.TextUnformatted($"虹吸弹GaussRound:{CustomComboFunctions.GetRemainingCharges(MCH.虹吸弹GaussRound)}，弹射Ricochet:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
+                    ImGui.TextUnformatted($"整备Reassemble:{CustomComboFunctions.GetCooldownRemainingTime(MCH.整备Reassemble)}，野火:{CustomComboFunctions.GetCooldownRemainingTime(MCH.野火Wildfire)} ");
+                    // ImGui.TextUnformatted($"虹吸弹GaussRound:{CustomComboFunctions.GetRemainingCharges(MCH.虹吸弹GaussRound)}，弹射Ricochet:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
                     
                     // ImGui.TextUnformatted($"GetRemainingCharges{CustomComboFunctions. GetRemainingCharges(MCH.虹吸弹GaussRound)} IsOffCooldown {CustomComboFunctions.IsOffCooldown(MCH.虹吸弹GaussRound)}");
                     
