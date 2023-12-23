@@ -136,47 +136,101 @@ namespace XIVSlothComboX.Combos.JobHelpers
             // Service.ChatGui.Print($"初始起手技能");
             isInit = true;
             起手技能合集.Clear();
-            起手技能合集.Add(整备Reassemble);
-            起手技能合集.Add(空气锚AirAnchor);
-            起手技能合集.Add(虹吸弹GaussRound);
-            起手技能合集.Add(弹射Ricochet);
-            起手技能合集.Add(钻头Drill);
-            起手技能合集.Add(枪管加热BarrelStabilizer);
-            起手技能合集.Add(热分裂弹HeatedSplitShot);
-            起手技能合集.Add(热独头弹HeatedSlugshot);
-            起手技能合集.Add(虹吸弹GaussRound);
-            起手技能合集.Add(弹射Ricochet);
-            起手技能合集.Add(热狙击弹HeatedCleanShot);
-            起手技能合集.Add(整备Reassemble);
 
-            起手技能合集.Add(野火Wildfire);
-            起手技能合集.Add(回转飞锯ChainSaw);
-            起手技能合集.Add(虹吸弹GaussRound);
-            起手技能合集.Add(超荷Hypercharge);
-            起手技能合集.Add(热冲击HeatBlast);
-            起手技能合集.Add(弹射Ricochet);
-            起手技能合集.Add(热冲击HeatBlast);
-            起手技能合集.Add(虹吸弹GaussRound);
-            起手技能合集.Add(热冲击HeatBlast);
-            起手技能合集.Add(弹射Ricochet);
+            if (Config.MCH_ST_RotationSelection == 0)
+            {
+                起手技能合集.Add(整备Reassemble);
+                起手技能合集.Add(空气锚AirAnchor);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(钻头Drill);
+                起手技能合集.Add(枪管加热BarrelStabilizer);
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(热独头弹HeatedSlugshot);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(热狙击弹HeatedCleanShot);
+                起手技能合集.Add(整备Reassemble);
+                起手技能合集.Add(野火Wildfire);
+                起手技能合集.Add(回转飞锯ChainSaw);
+                起手技能合集.Add(后式自走人偶AutomatonQueen);
+                起手技能合集.Add(超荷Hypercharge);
+                
+                //下面可以删了
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(弹射Ricochet);
 
-            起手技能合集.Add(热冲击HeatBlast);
-            起手技能合集.Add(虹吸弹GaussRound);
-            起手技能合集.Add(热冲击HeatBlast);
-            起手技能合集.Add(弹射Ricochet);
-            起手技能合集.Add(钻头Drill);
-            起手技能合集.Add(虹吸弹GaussRound);
-            起手技能合集.Add(弹射Ricochet);
-            起手技能合集.Add(热分裂弹HeatedSplitShot);
-            起手技能合集.Add(热独头弹HeatedSlugshot);
-            起手技能合集.Add(热狙击弹HeatedCleanShot);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(钻头Drill);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
+                起手技能合集.Add(热独头弹HeatedSlugshot);
+                起手技能合集.Add(热狙击弹HeatedCleanShot);
 
 
-            起手技能合集.Add(热分裂弹HeatedSplitShot);
-            起手技能合集.Add(热独头弹HeatedSlugshot);
-            起手技能合集.Add(热狙击弹HeatedCleanShot);
-            起手技能合集.Add(空气锚AirAnchor);
-            起手技能合集.Add(后式自走人偶AutomatonQueen);
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
+                起手技能合集.Add(热独头弹HeatedSlugshot);
+                起手技能合集.Add(热狙击弹HeatedCleanShot);
+                起手技能合集.Add(空气锚AirAnchor);
+              
+                
+            }
+
+            if (Config.MCH_ST_RotationSelection == 1)
+            {
+                起手技能合集.Add(整备Reassemble);
+                起手技能合集.Add(空气锚AirAnchor);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(钻头Drill);
+                起手技能合集.Add(枪管加热BarrelStabilizer);
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
+                起手技能合集.Add(热独头弹HeatedSlugshot);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(热狙击弹HeatedCleanShot);
+                起手技能合集.Add(整备Reassemble);
+
+                起手技能合集.Add(野火Wildfire);
+                起手技能合集.Add(回转飞锯ChainSaw);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(超荷Hypercharge);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(弹射Ricochet);
+
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(热冲击HeatBlast);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(钻头Drill);
+                起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(弹射Ricochet);
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
+                起手技能合集.Add(热独头弹HeatedSlugshot);
+                起手技能合集.Add(热狙击弹HeatedCleanShot);
+
+
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
+                起手技能合集.Add(热独头弹HeatedSlugshot);
+                起手技能合集.Add(热狙击弹HeatedCleanShot);
+                起手技能合集.Add(空气锚AirAnchor);
+                起手技能合集.Add(后式自走人偶AutomatonQueen);
+            }
+
+
         }
         private bool 下一个使用的技能(ref uint actionID)
         {

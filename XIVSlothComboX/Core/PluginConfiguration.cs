@@ -22,7 +22,7 @@ namespace XIVSlothComboX.Core
         private static readonly HashSet<CustomComboPreset> BozjaCombos;
         private static readonly HashSet<CustomComboPreset> EurekaCombos;
         private static readonly Dictionary<CustomComboPreset, CustomComboPreset[]> ConflictingCombos;
-        private static readonly Dictionary<CustomComboPreset, CustomComboPreset?> ParentCombos;  // child: parent
+        private static readonly Dictionary<CustomComboPreset, CustomComboPreset?> ParentCombos; // child: parent
 
         static PluginConfiguration()
         {
@@ -31,29 +31,20 @@ namespace XIVSlothComboX.Core
                 .Where(preset => preset.GetAttribute<SecretCustomComboAttribute>() != default)
                 .ToHashSet();
 
-            VariantCombos = Enum.GetValues<CustomComboPreset>()
-                .Where(preset => preset.GetAttribute<VariantAttribute>() != default)
-                .ToHashSet();
+            VariantCombos = Enum.GetValues<CustomComboPreset>().Where(preset => preset.GetAttribute<VariantAttribute>() != default).ToHashSet();
 
-            BozjaCombos = Enum.GetValues<CustomComboPreset>()
-                .Where(preset => preset.GetAttribute<BozjaAttribute>() != default)
-                .ToHashSet();
+            BozjaCombos = Enum.GetValues<CustomComboPreset>().Where(preset => preset.GetAttribute<BozjaAttribute>() != default).ToHashSet();
 
-            EurekaCombos = Enum.GetValues<CustomComboPreset>()
-                .Where(preset => preset.GetAttribute<EurekaAttribute>() != default)
-                .ToHashSet();
+            EurekaCombos = Enum.GetValues<CustomComboPreset>().Where(preset => preset.GetAttribute<EurekaAttribute>() != default).ToHashSet();
 
             // Conflicting combos
             ConflictingCombos = Enum.GetValues<CustomComboPreset>()
-                .ToDictionary(
-                    preset => preset,
+                .ToDictionary(preset => preset,
                     preset => preset.GetAttribute<ConflictingCombosAttribute>()?.ConflictingPresets ?? Array.Empty<CustomComboPreset>());
 
             // Parent combos
             ParentCombos = Enum.GetValues<CustomComboPreset>()
-                .ToDictionary(
-                    preset => preset,
-                    preset => preset.GetAttribute<ParentComboAttribute>()?.ParentPreset);
+                .ToDictionary(preset => preset, preset => preset.GetAttribute<ParentComboAttribute>()?.ParentPreset);
         }
 
         #region Version
@@ -237,12 +228,12 @@ namespace XIVSlothComboX.Core
 
         /// <summary> Gets or sets an array of 4 ability IDs to interact with the <see cref="CustomComboPreset.DNC_DanceComboReplacer"/> combo. </summary>
         public uint[] DancerDanceCompatActionIDs { get; set; } = new uint[]
-        {
-            DNC.瀑泻Cascade,
-            DNC.百花争艳Flourish,
-            DNC.扇舞序FanDance1,
-            DNC.扇舞破FanDance2,
-        };
+                                                                 {
+                                                                     DNC.瀑泻Cascade,
+                                                                     DNC.百花争艳Flourish,
+                                                                     DNC.扇舞序FanDance1,
+                                                                     DNC.扇舞破FanDance2,
+                                                                 };
 
         #endregion
 
@@ -277,9 +268,7 @@ namespace XIVSlothComboX.Core
                     Dalamud.Logging.PluginLog.Debug(value.ToString());
                     if (presets.Contains(value))
                     {
-                        var preset = Enum.GetValues<CustomComboPreset>()
-                            .Where(preset => (int)preset == value)
-                            .First();
+                        var preset = Enum.GetValues<CustomComboPreset>().Where(preset => (int)preset == value).First();
 
                         if (!IsEnabled(preset)) continue;
 
@@ -294,9 +283,10 @@ namespace XIVSlothComboX.Core
                         EnabledActions.Remove(preset);
                     }
                 }
-                
+
                 if (needToResetMessagePrinted)
-                Service.ChatGui.PrintError($"[XIVSlothComboX] Please re-enable these features to use them again. We apologise for the inconvenience");
+                    Service.ChatGui.PrintError(
+                        $"[XIVSlothComboX] Please re-enable these features to use them again. We apologise for the inconvenience");
             }
             SetResetValues(config, true);
             Save();
@@ -312,17 +302,24 @@ namespace XIVSlothComboX.Core
         /// <summary> Hides the message of the day. </summary>
         public bool HideMessageOfTheDay { get; set; } = false;
 
-        
+
         public bool SetOutChat { get; set; } = true;
-        
+
         /// <summary> Save the configuration to disk. </summary>
         public void Save() => Service.Interface.SavePluginConfig(this);
-        
+
         #region UI Settings
+
         public bool AutomaticallyOpenToCurrentJob { get; set; } = false;
 
         #endregion
-        
+
+        #endregion
+
+        #region test
+
+        public string FakeName { get; set; } = string.Empty;
+        public bool isFakeName { get; set; } = false;
 
         #endregion
     }

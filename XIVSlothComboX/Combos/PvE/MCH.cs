@@ -413,7 +413,7 @@ namespace XIVSlothComboX.Combos.PvE
                             && Config.MCH_ST_TurretUsage == 1
                             && CanSpellWeavePlus(actionID)
                             && !gauge.IsOverheated
-                            && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
+                            && OriginalHook(车式浮空炮塔RookAutoturret).ActionReady()
                             && !gauge.IsRobotActive)
                         {
                             if (gauge.Battery >= 80)
@@ -448,7 +448,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.MCH_Adv_TurretQueen)
                             && Config.MCH_ST_TurretUsage == 0
                             && CanSpellWeavePlus(actionID)
-                            && LevelChecked(OriginalHook(车式浮空炮塔RookAutoturret))
+                            && OriginalHook(车式浮空炮塔RookAutoturret).ActionReady()
                             && gauge.Battery >= 50)
                         {
                             if (HasEffect(Buffs.野火Wildfire) && gauge.Heat < 50)

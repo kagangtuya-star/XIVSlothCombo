@@ -110,6 +110,12 @@ namespace XIVSlothComboX.Window
                         Settings.Draw();
                         ImGui.EndTabItem();
                     }
+                    
+                    if (ImGui.BeginTabItem("实验室"))
+                    {
+                        TestFeatures.Draw();
+                        ImGui.EndTabItem();
+                    }
 
                     if (ImGui.BeginTabItem("关于 XIVSlothComboX / 提出建议"))
                     {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Dalamud;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
@@ -77,7 +78,8 @@ namespace XIVSlothComboX
                 });
 
             Service.ClientState.Login += PrintLoginMessage;
-
+            Service.ClientState.Login += TestFeatures.function;
+            
             if (Service.ClientState.IsLoggedIn)
             {
                 ResetFeatures();
@@ -152,6 +154,7 @@ namespace XIVSlothComboX
 
         private void PrintLoginMessage(object? sender, EventArgs e)
         {
+            
             // Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(task => ResetFeatures());
             if (!Service.Configuration.HideMessageOfTheDay)
                 Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task => PrintMotD());
@@ -160,46 +163,7 @@ namespace XIVSlothComboX
         private void PrintMotD()
         {
             Service.ChatGui.PrintError(AboutUs.Ban);
-            Service.ChatGui.PrintError($"[XIVSlothComboX] 和 [XIVSlothCombo]冲突，请关闭或者删掉一个");
-            
-            // List<Payload>? payloads = new()
-            // {
-            //     starterMotd,
-            //     EmphasisItalicPayload.ItalicsOn,
-            //     new TextPayload(AboutUs.Ban),
-            //     EmphasisItalicPayload.ItalicsOff
-            // };
-            //
-            // Service.ChatGui.PrintChat(new XivChatEntry
-            // {
-            // Message = new SeString(payloads),
-            // Type = XivChatType.Echo
-            // });
-            
-            // try
-            // {
-            //     using HttpResponseMessage? motd = Dalamud.Utility.Util.HttpClient.GetAsync("https://raw.githubusercontent.com/Nik-Potokar/XIVSlothComboX/main/res/motd.txt").Result;
-            //     motd.EnsureSuccessStatusCode();
-            //     string? data = motd.Content.ReadAsStringAsync().Result;
-            //     List<Payload>? payloads = new()
-            //     {
-            //         starterMotd,
-            //         EmphasisItalicPayload.ItalicsOn,
-            //         new TextPayload(data.Trim()),
-            //         EmphasisItalicPayload.ItalicsOff
-            //     };
-            //
-            //     Service.ChatGui.PrintChat(new XivChatEntry
-            //     {
-            //         Message = new SeString(payloads),
-            //         Type = XivChatType.Echo
-            //     });
-            // }
-            //
-            // catch (Exception ex)
-            // {
-            //     Dalamud.Logging.PluginLog.Error(ex, "Unable to retrieve MotD");
-            // }
+            // Service.ChatGui.PrintError($"[XIVSlothComboX] 和 [XIVSlothCombo]冲突，请关闭或者删掉一个");
         }
 
         /// <inheritdoc/>
@@ -231,6 +195,9 @@ namespace XIVSlothComboX
             // Service.Framework.Update -= OnFramework;
 
             Service.ClientState.Login -= PrintLoginMessage;
+            Service.ClientState.Login -= TestFeatures.function;
+
+            TestFeatures.Dispose();
         }
 
         private void OnOpenConfigUi() => configWindow.Visible = !configWindow.Visible;
@@ -674,7 +641,7 @@ namespace XIVSlothComboX
                             unsafe
                             {
                                 FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* Struct = (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*) localPlayer.Address;
-                                MemoryHelper.WriteSeString((IntPtr)Struct->Name, SeStringUtils.Text(argumentsParts[1]));
+                                SafeMemory.WriteBytes((IntPtr)Struct->Name, SeStringUtils.NameText(argumentsParts[1]));
                             }
                         }
 

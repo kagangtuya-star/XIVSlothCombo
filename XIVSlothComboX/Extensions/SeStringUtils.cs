@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 
@@ -15,7 +16,9 @@ public static class SeStringUtils
         emptyPtr = SeStringToPtr(Text(""));
     }
 
-    public static void Dispose() { }
+    public static void Dispose()
+    {
+    }
 
     public static SeString SeStringFromPtr(IntPtr seStringPtr)
     {
@@ -24,7 +27,7 @@ public static class SeStringUtils
 
         unsafe
         {
-            while ((b = *(byte*) (seStringPtr + offset)) != 0)
+            while ((b = *(byte*)(seStringPtr + offset)) != 0)
             {
                 offset++;
             }
@@ -53,6 +56,16 @@ public static class SeStringUtils
             Marshal.FreeHGlobal(seStringPtr);
         }
     }
+
+    public static Byte[] NameText(string rawText)
+    {
+        var b = new byte[32];
+        var Length = Math.Min(Encoding.UTF8.GetBytes(rawText.ToCharArray()).Length, b.Length);
+        Array.Copy(Encoding.UTF8.GetBytes(rawText.ToCharArray()), b, Length);
+        return b;
+    }
+
+
 
     public static SeString Text(string rawText)
     {

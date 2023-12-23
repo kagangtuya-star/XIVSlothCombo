@@ -435,7 +435,8 @@ namespace XIVSlothComboX.Window.Functions
         public static void DrawHorizontalMultiChoice(string config, string checkBoxName, string checkboxDescription, int totalChoices, int choice, float itemWidth = 150, Vector4 descriptionColor = new Vector4())
         {
             ImGui.Indent();
-            if (descriptionColor == new Vector4()) descriptionColor = ImGuiColors.DalamudWhite;
+            if (descriptionColor == new Vector4()) 
+                descriptionColor = ImGuiColors.DalamudWhite;
             ImGui.PushItemWidth(itemWidth);
             ImGui.SameLine();
             ImGui.Dummy(new Vector2(21, 0));
@@ -1503,9 +1504,9 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.MCH_ST_AdvancedMode)
             {
                 //哥们一套循环都写不好 还要写3套？？
-                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "标准循环", "", 0);
+                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "标准起手", "", 0);
                 
-                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "标准循环", "", 1);
+                UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "90电起手", "", 1);
                 // UserConfig.DrawHorizontalRadioButton(MCH.Config.MCH_ST_RotationSelection, "Early Tools", "", 2);
             }
 
