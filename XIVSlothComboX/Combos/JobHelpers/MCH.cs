@@ -24,6 +24,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
         {
             if (!LevelChecked) return false;
 
+            var 使用过的技能集合 = 技能过滤(ActionWatching.特殊起手Actions);
+            if (currentState == OpenerState.PrePull && !CanOpener && 使用过的技能集合.Count == 0)
+            {
+                currentState = OpenerState.FailedOpener;
+                return false;
+            }
+
+
             if (currentState != OpenerState.PrePull)
             {
                 if (CanOpener && !CustomComboFunctions.InCombat() && (DateTime.Now - lastCheck).TotalSeconds > 5)
@@ -71,7 +79,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.InCombat())
                     {
 
-                        var 使用过的技能集合 = 技能过滤(ActionWatching.特殊起手Actions);
+
 
                         if (下一个使用的技能(ref actionID))
                         {

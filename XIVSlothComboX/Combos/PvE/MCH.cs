@@ -361,6 +361,27 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Interrupt) && interruptReady)
                             return All.伤头HeadGraze;
 
+
+
+                        //这里一般是爆发药 加入
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
+                            && !gauge.IsOverheated
+                            && gauge.Heat >= 50
+                            && !WasLastAction(热冲击HeatBlast)
+                            && GetCooldownRemainingTime(回转飞锯ChainSaw) <= 2.13f
+                            && GetCooldownRemainingTime(野火Wildfire) <= 1.1f
+                            && CanSpellWeavePlus(actionID)
+                            && GetCooldownRemainingTime(MCH.弹射Ricochet) >= 5
+                            && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) >= 5
+                            && !HasEffect(Buffs.整备Reassembled)
+                            && !HasEffect(Buffs.野火Wildfire)
+                            && HasCharges(整备Reassemble)
+                            && 整备Reassemble.ActionReady())
+                        {
+                            return 整备Reassemble;
+                        }
+
+
                         // Wildfire
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
                         {
@@ -373,6 +394,12 @@ namespace XIVSlothComboX.Combos.PvE
                                     // Service.ChatGui.Print($"我用的野火1");
                                     return 野火Wildfire;
                                 }
+
+
+
+
+
+
 
                                 if (GetCooldownRemainingTime(回转飞锯ChainSaw) < 1.5f
                                     && GetCooldownRemainingTime(空气锚AirAnchor) > 8
@@ -564,32 +591,37 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // TOOLS!! ChainSaw Drill Air Anchor
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
-                            && wildfireCDTime > 20
                             && !gauge.IsOverheated
-                            && CanSpellWeavePlus(狙击弹CleanShot)
-                            && !HasEffect(Buffs.野火Wildfire)
+                            && wildfireCDTime > 60
+                            && wildfireCDTime > GetCooldownRemainingTime(整备Reassemble)
+                            && GetCooldownRemainingTime(MCH.弹射Ricochet) >= 5
+                            && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) >= 5
+                            && CanSpellWeavePlus(actionID)
                             && !HasEffect(Buffs.整备Reassembled)
                             && HasCharges(整备Reassemble)
                             && (OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
                                 || 钻头Drill.GCDActionReady(狙击弹CleanShot)
                                 || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot)))
                         {
-                            return 整备Reassemble;
+
+                            if (HasEffect(RaidBuff.强化药))
+                            {
+                                return 整备Reassemble;
+                            }
+
+                            if (!HasEffect(Buffs.野火Wildfire))
+                            {
+                                return 整备Reassemble;
+                            }
+
+                            if (HasEffect(Buffs.野火Wildfire) && FindEffect(Buffs.野火Wildfire)?.RemainingTime < 2f)
+                            {
+                                return 整备Reassemble;
+                            }
                         }
 
 
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
-                            && HasEffect(RaidBuff.强化药)
-                            && CanSpellWeavePlus(狙击弹CleanShot)
-                            && !HasEffect(Buffs.野火Wildfire)
-                            && !HasEffect(Buffs.整备Reassembled)
-                            && HasCharges(整备Reassemble)
-                            && (OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
-                                || 钻头Drill.GCDActionReady(狙击弹CleanShot)
-                                || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot)))
-                        {
-                            return 整备Reassemble;
-                        }
+
 
 
 

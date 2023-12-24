@@ -109,8 +109,11 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
-                    
-                    ImGui.TextUnformatted($"整备Reassemble:{CustomComboFunctions.GetCooldownRemainingTime(MCH.整备Reassemble)}，野火:{CustomComboFunctions.GetCooldownRemainingTime(MCH.野火Wildfire)} ");
+                    ;
+                    ;
+                    ;
+                    ImGui.TextUnformatted($"回转飞锯ChainSaw:{CustomComboFunctions.GetCooldownRemainingTime(MCH.回转飞锯ChainSaw)}，野火:{CustomComboFunctions.GetCooldownRemainingTime(MCH.野火Wildfire)}，整备Reassemble:{CustomComboFunctions.GetCooldownRemainingTime(MCH.整备Reassemble)} ");
+                    ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
                     // ImGui.TextUnformatted($"虹吸弹GaussRound:{CustomComboFunctions.GetRemainingCharges(MCH.虹吸弹GaussRound)}，弹射Ricochet:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
                     
                     // ImGui.TextUnformatted($"GetRemainingCharges{CustomComboFunctions. GetRemainingCharges(MCH.虹吸弹GaussRound)} IsOffCooldown {CustomComboFunctions.IsOffCooldown(MCH.虹吸弹GaussRound)}");

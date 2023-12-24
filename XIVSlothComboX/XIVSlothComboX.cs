@@ -89,6 +89,7 @@ namespace XIVSlothComboX
 
             autoToken = autoTokenSource.Token; // 开关绑
 
+            TestFeatures.function(null,null);
             KillRedundantIDs();
         }
         private unsafe void OnFramework(Framework framework)
