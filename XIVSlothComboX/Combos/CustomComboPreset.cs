@@ -3539,7 +3539,7 @@ namespace XIVSlothComboX.Combos
         WAR_AoE_Overpower_Orogeny = 18009,
 
         [ParentCombo(WAR_ST_StormsPath)]
-        [CustomComboInfo("裂石飞环/地毁人亡", "当兽魂高于50及以上时，将 裂石飞环 加入主连击，地毁人亡 加入AoE连击。\n战嚎时将使用 狂魂/混沌旋风，原初的解放时将使用 裂石飞环/钢铁旋风。\n当 原初的解放 小于30秒时开始留资源。", WAR.JobID, 0, "", "")]
+        [CustomComboInfo("裂石飞环/地毁人亡", "当兽魂高于50及以上时，将 裂石飞环 加入主连击，地毁人亡 加入AoE连击。\n战嚎时将使用 狂魂/混沌旋风，原初的解放时将使用 裂石飞环/钢铁旋风。\n当 超过设置的仪表盘会释放资源。", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath_FellCleave = 18011,
 
         [ParentCombo(WAR_ST_StormsPath)]
