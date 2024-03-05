@@ -55,7 +55,7 @@ namespace XIVSlothComboX
 
             Service.Configuration = pluginInterface.GetPluginConfig() as PluginConfiguration ?? new PluginConfiguration();
             Service.Address = new PluginAddressResolver();
-            Service.Address.Setup();
+            Service.Address.Setup(Service.SigScanner);
 
             if (Service.Configuration.Version == 4)
                 UpgradeConfig4();
@@ -78,7 +78,7 @@ namespace XIVSlothComboX
                 });
 
             Service.ClientState.Login += PrintLoginMessage;
-            Service.ClientState.Login += TestFeatures.function;
+            // Service.ClientState.Login += TestFeatures.function;
             
             if (Service.ClientState.IsLoggedIn)
             {
@@ -89,46 +89,10 @@ namespace XIVSlothComboX
 
             autoToken = autoTokenSource.Token; // 开关绑
 
-            TestFeatures.function(null,null);
+            // TestFeatures.function();
             KillRedundantIDs();
         }
-        private unsafe void OnFramework(Framework framework)
-        {
-            /*
-            if ((DateTime.Now - lastAutoActionTime).TotalMilliseconds > 100)
-            {
-                lastAutoActionTime = DateTime.Now;
-
-                if (Service.ClientState.LocalPlayer == null)
-                    return;
-
-                if (Service.ClientState.IsLoggedIn == false)
-                    return;
-
-                var localPlayerTargetObjectId = Service.ClientState.LocalPlayer.TargetObjectId;
-
-
-                if (autoActionId != 0)
-                {
-                    if (localPlayerTargetObjectId != 0)
-                    {
-                        GameObject? targetObject = Service.ClientState.LocalPlayer.TargetObject;
-
-                        if (targetObject != null && targetObject is BattleChara battleChara)
-                        {
-                            if (battleChara.ObjectKind == ObjectKind.BattleNpc)
-                            {
-                                // if(ActionManager.pInstance->GetActionStatus(ActionType.Spell, autoActionId, localPlayerTargetObjectId) == 0)
-                                {
-                                    ActionManager.Instance()->UseAction(ActionType.Spell, autoActionId, (long)localPlayerTargetObjectId);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            */
-        }
+       
 
         private static void KillRedundantIDs()
         {
@@ -153,7 +117,7 @@ namespace XIVSlothComboX
 
         private void DrawUI() => configWindow.Draw();
 
-        private void PrintLoginMessage(object? sender, EventArgs e)
+        private void PrintLoginMessage()
         {
             
             // Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(task => ResetFeatures());
@@ -196,9 +160,9 @@ namespace XIVSlothComboX
             // Service.Framework.Update -= OnFramework;
 
             Service.ClientState.Login -= PrintLoginMessage;
-            Service.ClientState.Login -= TestFeatures.function;
+            // Service.ClientState.Login -= TestFeatures.function;
 
-            TestFeatures.Dispose();
+            // TestFeatures.Dispose();
         }
 
         private void OnOpenConfigUi() => configWindow.Visible = !configWindow.Visible;
@@ -608,7 +572,7 @@ namespace XIVSlothComboX
                                                     if (battleChara.ObjectKind == ObjectKind.BattleNpc)
                                                     {
                                                         {
-                                                            ActionManager.Instance()->UseAction(ActionType.Spell, autoActionId, (long)targetObjectId);
+                                                            ActionManager.Instance()->UseAction(ActionType.Action, autoActionId, targetObjectId);
                                                         }
                                                     }
                                                 }

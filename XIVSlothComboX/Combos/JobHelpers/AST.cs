@@ -21,7 +21,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             Service.Framework.Update += CheckCards;
         }
 
-        private static void CheckCards(Framework framework)
+        private static void CheckCards(IFramework framework)
         {
             if (Service.ClientState.LocalPlayer is null || Service.ClientState.LocalPlayer.ClassJob.Id != 33)
                 return;

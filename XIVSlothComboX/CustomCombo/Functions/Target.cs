@@ -120,7 +120,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static unsafe GameObject? GetHealTarget(bool checkMOPartyUI = false, bool restrictToMouseover = false)
         {
             GameObject? healTarget = null;
-            TargetManager tm = Service.TargetManager;
+            ITargetManager tm = Service.TargetManager;
             
             if (HasFriendlyTarget(tm.SoftTarget)) healTarget = tm.SoftTarget;
             if (healTarget is null && HasFriendlyTarget(CurrentTarget) && !restrictToMouseover) healTarget = CurrentTarget;
@@ -128,11 +128,13 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             if (checkMOPartyUI)
             {
                 StructsObject.GameObject* t = PartyTargetingService.UITarget;
-                if (t != null)
+                if (t != null && t->ObjectID != 0)
                 {
-                    long o = PartyTargetingService.GetObjectID(t);
-                    GameObject? uiTarget =  Service.ObjectTable.Where(x => x.ObjectId == o).First();
-                    if (HasFriendlyTarget(uiTarget)) healTarget = uiTarget;
+                    GameObject? uiTarget =  Service.ObjectTable.Where(x => x.ObjectId == t->ObjectID).FirstOrDefault();
+                    if (uiTarget != null && HasFriendlyTarget(uiTarget)) healTarget = uiTarget;
+
+                    if (restrictToMouseover)
+                        return healTarget;
                 }
 
                 if (restrictToMouseover)
@@ -141,7 +143,6 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             healTarget ??= LocalPlayer;
             return healTarget;
         }
-
         /// <summary> Determines if the enemy can be interrupted if they are currently casting. </summary>
         /// <returns> Bool indicating whether they can be interrupted or not. </returns>
         public static bool CanInterruptEnemy()

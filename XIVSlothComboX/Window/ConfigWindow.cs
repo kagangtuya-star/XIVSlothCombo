@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Dalamud.Interface;
+using Dalamud.Interface.Utility;
 using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -113,7 +114,7 @@ namespace XIVSlothComboX.Window
                     
                     if (ImGui.BeginTabItem("实验室"))
                     {
-                        TestFeatures.Draw();
+                        // TestFeatures.Draw();
                         ImGui.EndTabItem();
                     }
 

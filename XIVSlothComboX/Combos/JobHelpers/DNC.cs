@@ -36,7 +36,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         {
                             unsafe
                             {
-                                ActionManager.Instance()->UseAction(ActionType.Spell, actionID);
+                                ActionManager.Instance()->UseAction(ActionType.Action, actionID);
                             }
                         }
                     }
@@ -51,7 +51,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         actionID = 标准舞步StandardStep;
                         unsafe
                         {
-                            ActionManager.Instance()->UseAction(ActionType.Spell, actionID);
+                            ActionManager.Instance()->UseAction(ActionType.Action, actionID);
                         }
                     }
                 }
@@ -63,7 +63,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         actionID = 双色标准舞步结束StandardFinish2;
                         unsafe
                         {
-                            ActionManager.Instance()->UseAction(ActionType.Spell, 双色标准舞步结束StandardFinish2);
+                            ActionManager.Instance()->UseAction(ActionType.Action, 双色标准舞步结束StandardFinish2);
                         }
                     }
                 }

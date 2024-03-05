@@ -6,7 +6,7 @@
   "Description": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/44451516/XIVSlothCombo",
-  "DalamudApiLevel": 8,
+  "DalamudApiLevel": 9,
   "LoadRequiredState": 0,
   "LoadSync": false,
   "LoadPriority": 0,
@@ -15,6 +15,6 @@
   ],
   "IconUrl": "https://i.imgur.com/iEcxM81.png",
   "Punchline": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
-  "Changelog": "黑魔舞者优化",
+  "Changelog": "API9",
   "AcceptsFeedback": true
 }

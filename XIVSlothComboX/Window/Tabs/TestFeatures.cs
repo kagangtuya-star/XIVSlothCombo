@@ -30,7 +30,7 @@ namespace XIVSlothComboX.Window.Tabs
             {
                 Service.Configuration.isFakeName = isFakeName;
                 Service.Configuration.Save();
-                function(null, null);
+                function();
             }
             ImGui.PushItemWidth(100);
             string FakeName = Service.Configuration.FakeName;
@@ -41,7 +41,7 @@ namespace XIVSlothComboX.Window.Tabs
             {
                 Service.Configuration.FakeName = FakeName;
                 Service.Configuration.Save();
-                function(null, null);
+                function();
             }
 
             #endregion
@@ -52,7 +52,7 @@ namespace XIVSlothComboX.Window.Tabs
         private static CancellationTokenSource? tokenSource = new();
         private static CancellationToken cancellationToken;
 
-        public static void function(object? sender, EventArgs e)
+        public static void function()
         {
             if (Service.ClientState.LocalPlayer == null)
             {
