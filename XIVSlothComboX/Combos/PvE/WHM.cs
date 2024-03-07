@@ -6,6 +6,7 @@ using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Extensions;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
 
 namespace XIVSlothComboX.Combos.PvE
@@ -308,7 +309,8 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.WHM_AoeHeals_ThinAir) && thinAirReady)
                         return ThinAir;
 
-                    if (!HasEffect(Buffs.Medica2) && ActionReady(Medica2))
+         
+                    if (!HasEffect(Buffs.Medica2) && Medica2.LevelChecked())
                         return Medica2;
 
                     if (IsEnabled(CustomComboPreset.WHM_AoEHeals_Cure3) && ActionReady(Cure3) && (LocalPlayer.CurrentMp >= Config.WHM_AoEHeals_Cure3MP || HasEffect(Buffs.ThinAir)))
