@@ -702,16 +702,17 @@ namespace XIVSlothComboX.Combos.PvE
 
                             }
 
-                            if (gauge.IsOverheated)
-                            {
-                                if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
-                                {
-                                    return 热冲击HeatBlast;
-                                }
-                            }
-
                         }
-
+                        
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
+                        {
+                            if (gauge.IsOverheated && LevelChecked(热冲击HeatBlast))
+                            {
+                                return 热冲击HeatBlast;
+                            }
+                            
+                        }
+                        
                         //三大件
                         if (ReassembledTools(ref actionID))
                             return actionID;

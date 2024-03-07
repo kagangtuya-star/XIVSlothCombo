@@ -851,9 +851,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 case 3:
                                 {
-
-
-
+                                    
                                     if (IsEnabled(CustomComboPreset.GNB_ST_SonicBreak) && ActionReady(音速破SonicBreak))
                                         return 音速破SonicBreak;
 
