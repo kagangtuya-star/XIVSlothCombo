@@ -731,10 +731,10 @@ namespace XIVSlothComboX.Combos.PvE
                     //1-2-3 Combo
                     if (comboTime > 0)
                     {
-                        if (lastComboMove is 分裂弹SplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
+                        if (lastComboMove is 分裂弹SplitShot  or 热分裂弹HeatedSplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
                             return OriginalHook(独头弹SlugShot);
 
-                        if (lastComboMove is 独头弹SlugShot && LevelChecked(OriginalHook(狙击弹CleanShot)))
+                        if (lastComboMove is 独头弹SlugShot or 热独头弹HeatedSlugshot && LevelChecked(OriginalHook(狙击弹CleanShot)))
                             return OriginalHook(狙击弹CleanShot);
                     }
 
