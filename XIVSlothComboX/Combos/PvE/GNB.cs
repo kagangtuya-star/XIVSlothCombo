@@ -692,7 +692,7 @@ namespace XIVSlothComboX.Combos.PvE
                 return false;
             }
 
-            if (CustomComboFunctions.HasEffect((ushort)Buffs.NoMercy))
+            if (CustomComboFunctions.HasEffect(Buffs.NoMercy))
             {
                 //70级循环
                 if (MaxCartridges(level) == 2 && 子弹连是否准备就绪() && gauge.Ammo >= 1)
@@ -729,7 +729,7 @@ namespace XIVSlothComboX.Combos.PvE
         private static bool 使用子弹连2(GNBGauge gauge, byte level, uint lastComboMove)
         {
 
-            if (CustomComboFunctions.HasEffect((ushort)Buffs.NoMercy))
+            if (CustomComboFunctions.HasEffect(Buffs.NoMercy))
             {
                 //70级循环
                 if (MaxCartridges(level) == 2 && 子弹连是否准备就绪() && gauge.Ammo >= 1)
@@ -755,6 +755,14 @@ namespace XIVSlothComboX.Combos.PvE
                 }
             }
 
+            if (CustomComboFunctions.GetCooldownRemainingTime(无情NoMercy) > 0)
+            {
+                if (gauge.Ammo >= 1 && 子弹连是否准备就绪())
+                {
+                    return true;
+                }
+            }
+            
             if (lastComboMove == 残暴弹BrutalShell && gauge.Ammo >= 2 && 子弹连是否准备就绪())
             {
                 return true;
