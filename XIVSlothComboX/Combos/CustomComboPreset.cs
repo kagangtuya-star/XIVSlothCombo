@@ -794,6 +794,10 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("无脑模式_进攻之探戈", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_Devilment = 4090,
 
+        
+        [ParentCombo(DNC_DT_Simple_SaberDance)]
+        [CustomComboInfo("无脑模式_伶俐防止溢出[测试中]", "大舞快好的时候并且伶俐>=70的时候放剑舞。", DNC.JobID, 2, "", "")]
+        DNC_DT_Simple_SaberDance_1 = 4082,
         #endregion
 
         #region Single Target Multibutton

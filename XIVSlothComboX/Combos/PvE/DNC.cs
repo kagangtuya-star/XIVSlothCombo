@@ -686,10 +686,20 @@ namespace XIVSlothComboX.Combos.PvE
 
                     // Simple DT Tech (activates dance with no target, or when target is over HP% threshold)
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && technicalStepReady && !HasEffect(Buffs.标准舞步StandardStep))
+                    {
                         return 技巧舞步TechnicalStep;
+                    }
 
                     if (LevelChecked(剑舞SaberDance) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance))
                     {
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance_1))
+                        {
+                            if (gauge.Esprit >= 70 && 剑舞SaberDance.GCDActionPreReady(技巧舞步TechnicalStep))
+                            {
+                                return 剑舞SaberDance;
+                            }
+                        }
+
                         if ((gauge.Esprit >= 85 || (techBurst && gauge.Esprit >= 50)))
                         {
                             return 剑舞SaberDance;
