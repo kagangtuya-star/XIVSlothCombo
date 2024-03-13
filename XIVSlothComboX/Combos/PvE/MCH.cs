@@ -733,12 +733,14 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (lastComboMove is 分裂弹SplitShot  or 热分裂弹HeatedSplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
                             return OriginalHook(独头弹SlugShot);
-
+                        
                         if (lastComboMove is 独头弹SlugShot or 热独头弹HeatedSlugshot && LevelChecked(OriginalHook(狙击弹CleanShot)))
                             return OriginalHook(狙击弹CleanShot);
                     }
 
-                    return 分裂弹SplitShot;
+                    return OriginalHook(分裂弹SplitShot);
+                    // 这个也是可以的
+                    // return 热分裂弹HeatedSplitShot; 
                 }
 
                 return actionID;
