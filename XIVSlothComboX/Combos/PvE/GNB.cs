@@ -729,41 +729,7 @@ namespace XIVSlothComboX.Combos.PvE
         private static bool 使用子弹连2(GNBGauge gauge, byte level, uint lastComboMove)
         {
 
-            if (CustomComboFunctions.HasEffect(Buffs.NoMercy))
-            {
-                //70级循环
-                if (MaxCartridges(level) == 2 && 子弹连是否准备就绪() && gauge.Ammo >= 1)
-                {
-                    return true;
-                }
-
-
-                if (gauge.Ammo == 1 && 子弹连是否准备就绪() && CustomComboFunctions.IsOffCooldown(血壤Bloodfest))
-                {
-                    return true;
-                }
-
-                if (gauge.Ammo == 1 && 子弹连是否准备就绪() && CustomComboFunctions.GetCooldownRemainingTime(倍攻DoubleDown) >= 40)
-                {
-                    return true;
-                }
-
-
-                if (gauge.Ammo == 3 && 子弹连是否准备就绪())
-                {
-                    return true;
-                }
-            }
-
-            if (CustomComboFunctions.GetCooldownRemainingTime(无情NoMercy) > 0)
-            {
-                if (gauge.Ammo >= 1 && 子弹连是否准备就绪())
-                {
-                    return true;
-                }
-            }
-            
-            if (lastComboMove == 残暴弹BrutalShell && gauge.Ammo >= 2 && 子弹连是否准备就绪())
+            if (gauge.Ammo >= 1 && 子弹连是否准备就绪())
             {
                 return true;
             }
