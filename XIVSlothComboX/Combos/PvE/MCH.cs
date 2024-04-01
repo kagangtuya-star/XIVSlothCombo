@@ -27,6 +27,8 @@ namespace XIVSlothComboX.Combos.PvE
             钻头Drill = 16498,
             热弹HotShot = 2872,
             整备Reassemble = 2876,
+            // 250 获取不到先拿散弹枪的ID
+            整备ReassembleV2 = 25786,
             空气锚AirAnchor = 16500,
             超荷Hypercharge = 17209,
             热冲击HeatBlast = 7410,
@@ -68,6 +70,7 @@ namespace XIVSlothComboX.Combos.PvE
                 MCH_VariantCure = new("MCH_VariantCure"),
                 MCH_ST_TurretUsage = new("MCH_ST_Adv_TurretGauge"),
                 MCH_AoE_TurretUsage = new("MCH_AoE_TurretUsage");
+
             public static UserBoolArray MCH_ST_Reassembled = new("MCH_ST_Reassembled"),
                 MCH_AoE_Reassembled = new("MCH_AoE_Reassembled");
             public static UserBool MCH_AoE_Hypercharge = new("MCH_AoE_Hypercharge");
@@ -368,7 +371,7 @@ namespace XIVSlothComboX.Combos.PvE
                             && !gauge.IsOverheated
                             && gauge.Heat >= 50
                             && !WasLastAction(热冲击HeatBlast)
-                            && GetCooldownRemainingTime(回转飞锯ChainSaw) <= 2.13f
+                            && 回转飞锯ChainSaw.GCDActionReady(actionID, 2.15f)
                             && GetCooldownRemainingTime(野火Wildfire) <= 1.1f
                             && CanSpellWeavePlus(actionID)
                             && GetCooldownRemainingTime(MCH.弹射Ricochet) >= 5
@@ -385,6 +388,13 @@ namespace XIVSlothComboX.Combos.PvE
                         // Wildfire
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
                         {
+
+                            //钻头都没学 直接用吧
+                            if (!LevelChecked(钻头Drill))
+                            {
+                                return 野火Wildfire;
+                            }
+
                             if (gauge.Heat >= 50 && ActionReady(野火Wildfire) && CanSpellWeavePlus(actionID))
                             {
 
@@ -394,9 +404,6 @@ namespace XIVSlothComboX.Combos.PvE
                                     // Service.ChatGui.Print($"我用的野火1");
                                     return 野火Wildfire;
                                 }
-
-
-
 
 
 
@@ -587,7 +594,7 @@ namespace XIVSlothComboX.Combos.PvE
 
 
 
-
+                        // Service.ChatGui.Print($"整备Reassemble3");
 
                         // TOOLS!! ChainSaw Drill Air Anchor
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
@@ -703,16 +710,39 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                         }
-                        
+
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
                         {
                             if (gauge.IsOverheated && LevelChecked(热冲击HeatBlast))
                             {
                                 return 热冲击HeatBlast;
                             }
-                            
+
                         }
                         
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled) 
+                            && !整备ReassembleV2.LevelChecked() 
+                            && HasCharges(整备Reassemble))
+                        {
+                            if (OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
+                                || 钻头Drill.GCDActionReady(狙击弹CleanShot)
+                                || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot))
+                            {
+                                if (InCombat())
+                                {
+                                    if (CanSpellWeavePlus(actionID))
+                                    {
+                                        return 整备Reassemble;
+                                    }
+                                }
+                                else
+                                {
+                                    return 整备Reassemble;
+                                }
+                            }
+                        }
+
+
                         //三大件
                         if (ReassembledTools(ref actionID))
                             return actionID;
@@ -731,9 +761,9 @@ namespace XIVSlothComboX.Combos.PvE
                     //1-2-3 Combo
                     if (comboTime > 0)
                     {
-                        if (lastComboMove is 分裂弹SplitShot  or 热分裂弹HeatedSplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
+                        if (lastComboMove is 分裂弹SplitShot or 热分裂弹HeatedSplitShot && LevelChecked(OriginalHook(独头弹SlugShot)))
                             return OriginalHook(独头弹SlugShot);
-                        
+
                         if (lastComboMove is 独头弹SlugShot or 热独头弹HeatedSlugshot && LevelChecked(OriginalHook(狙击弹CleanShot)))
                             return OriginalHook(狙击弹CleanShot);
                     }

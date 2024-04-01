@@ -1542,6 +1542,9 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.MCH_AoE_Adv_GaussRicochet)
                 UserConfig.DrawAdditionalBoolChoice(MCH.Config.MCH_AoE_Hypercharge, $"Use Outwith {ActionWatching.GetActionName(MCH.超荷Hypercharge)}", "");
 
+            if (preset == CustomComboPreset.MCH_Variant_Cure)
+                UserConfig.DrawSliderInt(1, 100, MCH.Config.MCH_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
+            
             #endregion
             // ====================================================================================
             #region MONK

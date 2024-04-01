@@ -55,6 +55,7 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"TARGET OBJECT KIND: {Service.ClientState.LocalPlayer.TargetObject?.ObjectKind}");
                     ImGui.TextUnformatted($"TARGET IS BATTLE CHARA: {Service.ClientState.LocalPlayer.TargetObject is BattleChara}");
                     ImGui.TextUnformatted($"PLAYER IS BATTLE CHARA: {LocalPlayer is BattleChara}");
+                    ImGui.TextUnformatted($"Level: {Service.ClientState.LocalPlayer.Level}");
                     ImGui.TextUnformatted($"IN COMBAT: {CustomComboFunctions.InCombat()}");
                     ImGui.TextUnformatted($"ActionWatching.CombatActions.Count: {ActionWatching.CombatActions.Count}");
                     ImGui.TextUnformatted($"IN MELEE RANGE: {CustomComboFunctions.InMeleeRange()}");
@@ -67,6 +68,7 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"LAST SPELL: {ActionWatching.GetActionName(ActionWatching.LastSpell)}");
                     ImGui.TextUnformatted($"LAST ABILITY: {ActionWatching.GetActionName(ActionWatching.LastAbility)}");
                     ImGui.TextUnformatted($"ZONE: {Service.ClientState.TerritoryType}");
+               
 
                     // ImGui.TextUnformatted($"buff : {CustomComboFunctions.GetBuffRemainingTime(PLD.Buffs.DivineMight)}");
                     // ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");
@@ -105,10 +107,12 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"倍攻DoubleDown : {CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
 
 
-                    //机工 start
+                    // 机工 start
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
+                    ImGui.TextUnformatted($"整备ReassembleV2 : {MCH.整备ReassembleV2.LevelChecked()} ");
+                    ImGui.TextUnformatted($"整备ReassembleV21 : {CustomComboFunctions.GetLevel(MCH.整备ReassembleV2)} ");
                     ;
                     ;
                     ;

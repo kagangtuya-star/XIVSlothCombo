@@ -21,6 +21,23 @@ namespace XIVSlothComboX.Extensions
             }
             return false;
         }
+        
+        
+        internal static bool GCDActionReady(this uint value, uint gcdActionId,float RemainingTime)
+        {
+            if (!CustomComboFunctions.LevelChecked(value))
+            {
+                return false;
+            }
+
+            if (CustomComboFunctions.GetCooldownRemainingTime(value) <= 0
+                || (CustomComboFunctions.GetCooldownRemainingTime(value) <= CustomComboFunctions.GetCooldownRemainingTime(gcdActionId)
+                    && CustomComboFunctions.GetCooldownRemainingTime(gcdActionId) < RemainingTime))
+            {
+                return true;
+            }
+            return false;
+        }
         /// <summary>
         /// 能力技好之前的最后一个gcd
         /// </summary>
