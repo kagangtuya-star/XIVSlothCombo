@@ -389,12 +389,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
                         {
 
-                            //钻头都没学 直接用吧
-                            if (!LevelChecked(钻头Drill))
-                            {
-                                return 野火Wildfire;
-                            }
-
+                       
                             if (gauge.Heat >= 50 && ActionReady(野火Wildfire) && CanSpellWeavePlus(actionID))
                             {
 
@@ -404,8 +399,6 @@ namespace XIVSlothComboX.Combos.PvE
                                     // Service.ChatGui.Print($"我用的野火1");
                                     return 野火Wildfire;
                                 }
-
-
 
 
                                 if (GetCooldownRemainingTime(回转飞锯ChainSaw) < 1.5f
