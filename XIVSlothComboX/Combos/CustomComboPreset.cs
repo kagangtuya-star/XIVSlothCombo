@@ -1045,6 +1045,19 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Simple AoE Improvisation Option", "Includes Improvisation in the AoE rotation when available.", DNC.JobID, 10, "", "")]
         DNC_AoE_Simple_Improvisation = 4080,
 
+            
+            
+            
+        [Variant]
+        [VariantParent(DNC_ST_SimpleMode, DNC_AoE_SimpleMode)]
+        [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁",  DNC.JobID)]
+        DNC_Variant_Rampart = 4085,
+
+        [Variant]
+        [VariantParent(DNC_DT_SimpleMode, DNC_AoE_SimpleMode)]
+        [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值",  DNC.JobID)]
+        DNC_Variant_Cure = 4086,
+            
         #endregion
 
         #endregion

@@ -15,6 +15,7 @@ namespace XIVSlothComboX.Combos.PvE
     internal class MCH
     {
         public const byte JobID = 31;
+        public static int MaxCartridges(byte level) => level >= 74 ? 2 : 1;
 
         internal const uint 狙击弹CleanShot = 2873,
             热狙击弹HeatedCleanShot = 7413,
@@ -378,7 +379,6 @@ namespace XIVSlothComboX.Combos.PvE
                             && GetCooldownRemainingTime(MCH.虹吸弹GaussRound) >= 5
                             && !HasEffect(Buffs.整备Reassembled)
                             && !HasEffect(Buffs.野火Wildfire)
-                            && HasCharges(整备Reassemble)
                             && 整备Reassemble.ActionReady())
                         {
                             return 整备Reassemble;
@@ -599,9 +599,7 @@ namespace XIVSlothComboX.Combos.PvE
                             && CanSpellWeavePlus(actionID)
                             && !HasEffect(Buffs.整备Reassembled)
                             && HasCharges(整备Reassemble)
-                            && (OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
-                                || 钻头Drill.GCDActionReady(狙击弹CleanShot)
-                                || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot)))
+                            && 整备使用条件())
                         {
 
                             if (HasEffect(RaidBuff.强化药))
@@ -713,13 +711,12 @@ namespace XIVSlothComboX.Combos.PvE
 
                         }
                         
+                        
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled) 
-                            && !整备ReassembleV2.LevelChecked() 
+                            && MaxCartridges(level) ==1 
                             && HasCharges(整备Reassemble))
                         {
-                            if (OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
-                                || 钻头Drill.GCDActionReady(狙击弹CleanShot)
-                                || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot))
+                            if (整备使用条件())
                             {
                                 if (InCombat())
                                 {
@@ -767,6 +764,13 @@ namespace XIVSlothComboX.Combos.PvE
                 }
 
                 return actionID;
+            }
+            private static bool 整备使用条件()
+            {
+
+                return OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
+                       || 钻头Drill.GCDActionReady(狙击弹CleanShot)
+                       || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot);
             }
 
 

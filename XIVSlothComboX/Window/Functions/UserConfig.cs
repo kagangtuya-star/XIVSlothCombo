@@ -1411,6 +1411,10 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.DNCPvP_BurstMode_CuringWaltz)
                 UserConfig.DrawSliderInt(0, 90, DNCPvP.Config.DNCPvP_WaltzThreshold, "治疗之华尔兹 HP% - caps at 90 to prevent waste.", 150, SliderIncrements.Ones);
 
+            
+            if (preset == CustomComboPreset.DNC_Variant_Cure)
+                UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
+            
             #endregion
 
             #endregion

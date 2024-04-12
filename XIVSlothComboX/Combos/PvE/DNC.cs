@@ -1,7 +1,9 @@
 ﻿using Dalamud.Game.ClientState.JobGauge.Types;
 using XIVSlothComboX.Combos.JobHelpers;
+using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
+using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 
@@ -88,6 +90,9 @@ namespace XIVSlothComboX.Combos.PvE
 
         public static class Config
         {
+
+            public static UserInt DNC_VariantCure = new("DNC_VariantCure");
+            
             public const string DNCEspritThreshold_ST = "DNCEspritThreshold_ST"; // Single target Esprit threshold
             public const string DNCEspritThreshold_AoE = "DNCEspritThreshold_AoE"; // AoE Esprit threshold
 
@@ -550,6 +555,18 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is 瀑泻Cascade)
                 {
+                    
+                    if (IsEnabled(CustomComboPreset.DNC_Variant_Rampart)
+                        && IsEnabled(Variant.VariantCure)
+                        && PlayerHealthPercentageHp() <= Config.DNC_VariantCure)
+                        return Variant.VariantCure;
+
+                    if (IsEnabled(CustomComboPreset.DNC_Variant_Rampart)
+                        && IsEnabled(Variant.VariantRampart)
+                        && IsOffCooldown(Variant.VariantRampart)
+                        && CanWeave(actionID))
+                        return Variant.VariantRampart;
+                    
                     #region Types
 
                     DNCGauge? gauge = GetJobGauge<DNCGauge>();
@@ -755,6 +772,18 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is 风车Windmill)
                 {
+                    
+                    if (IsEnabled(CustomComboPreset.DNC_Variant_Rampart)
+                        && IsEnabled(Variant.VariantCure)
+                        && PlayerHealthPercentageHp() <= Config.DNC_VariantCure)
+                        return Variant.VariantCure;
+
+                    if (IsEnabled(CustomComboPreset.DNC_Variant_Rampart)
+                        && IsEnabled(Variant.VariantRampart)
+                        && IsOffCooldown(Variant.VariantRampart)
+                        && CanWeave(actionID))
+                        return Variant.VariantRampart;
+                    
                     #region Types
 
                     DNCGauge? gauge = GetJobGauge<DNCGauge>();
