@@ -204,20 +204,20 @@ namespace XIVSlothComboX.Combos.PvE
                         if (LevelChecked(血乱) && IsEnabled(CustomComboPreset.DRK_Bloodspiller) && IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group))
                         {
 
-                            if (血溅3.ActionReady())
-                            {
-                                return 血溅3;
-                            }
-
-                            if (血溅2.ActionReady())
-                            {
-                                return 血溅2;
-                            }
-                            
-                            if (血溅1.ActionReady())
-                            {
-                                return 血溅1;
-                            }
+                            // if (血溅3.ActionReady())
+                            // {
+                            //     return 血溅3;
+                            // }
+                            //
+                            // if (血溅2.ActionReady())
+                            // {
+                            //     return 血溅2;
+                            // }
+                            //
+                            // if (血溅1.ActionReady())
+                            // {
+                            //     return 血溅1;
+                            // }
 
 
                             //对团辅
@@ -228,7 +228,8 @@ namespace XIVSlothComboX.Combos.PvE
                                     
                                     if (gauge.Blood >= 50 || GetBuffStacks(Buffs.血乱BUFF) > 0)
                                     {
-                                        return 血溅;
+                                        
+                                        return 血溅.OriginalHook();
                                     }
                                 }
                             }
@@ -240,7 +241,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 if (gauge.Blood >= 50 || GetBuffStacks(Buffs.血乱BUFF) > 0)
                                 {
                                     // Dalamud.Logging.PluginLog.Error("1");
-                                    return 血溅;
+                                    return 血溅.OriginalHook();
                                 }
                             }
 
@@ -249,13 +250,13 @@ namespace XIVSlothComboX.Combos.PvE
                             if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 60 && GetBuffStacks(Buffs.BloodWeapon) > 0 && GetBuffStacks(Buffs.血乱BUFF) > 0)
                             {
                                 // Dalamud.Logging.PluginLog.Error("1");
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
 
                             if (gauge.Blood == 100 && (GetCooldownRemainingTime(嗜血) is >= 0 and < 5 || GetCooldownRemainingTime(血乱) is >= 0 and < 5))
                             {
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
 
@@ -263,7 +264,7 @@ namespace XIVSlothComboX.Combos.PvE
                             if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 70 && GetCooldownRemainingTime(嗜血) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 5)
                             {
                                 // Dalamud.Logging.PluginLog.Error("3");
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
 
@@ -271,7 +272,7 @@ namespace XIVSlothComboX.Combos.PvE
                             if (gauge.Blood >= 60 && GetCooldownRemainingTime(嗜血) is >= 0 and < 5 && GetCooldownRemainingTime(血乱) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 7.5f)
                             {
                                 // Dalamud.Logging.PluginLog.Error("4");
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
 
@@ -282,21 +283,21 @@ namespace XIVSlothComboX.Combos.PvE
                             if (GetBuffStacks(Buffs.血乱BUFF) > 0 && GetCooldownRemainingTime(血乱) + GetCooldownRemainingTime(血溅) <= 50.2f)
                             {
                                 // Dalamud.Logging.PluginLog.Error($"{GetCooldownRemainingTime(血乱)}  {GetBuffRemainingTime(Buffs.Delirium)} -> {7.5f + GetCooldownRemainingTime(血溅)}");
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
                             //Regular Delirium
                             if (GetBuffStacks(Buffs.血乱BUFF) > 0 && IsNotEnabled(CustomComboPreset.DRK_DelayedBloodspiller))
                             {
                                 // Dalamud.Logging.PluginLog.Error("6");
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
                             //Delayed Delirium
                             if (IsEnabled(CustomComboPreset.DRK_DelayedBloodspiller) && GetBuffStacks(Buffs.血乱BUFF) > 0 && IsOnCooldown(嗜血) && GetBuffStacks(Buffs.BloodWeapon) < 2)
                             {
                                 // Dalamud.Logging.PluginLog.Error("7");
-                                return 血溅;
+                                return 血溅.OriginalHook();
                             }
 
                         }
@@ -306,10 +307,12 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (lastComboMove == HardSlash && LevelChecked(SyphonStrike))
                                 return SyphonStrike;
+                            
                             if (lastComboMove == SyphonStrike && LevelChecked(Souleater))
                             {
                                 if (IsEnabled(CustomComboPreset.DRK_BloodGaugeOvercap) && LevelChecked(血溅) && gauge.Blood >= 90)
-                                    return 血溅;
+                                    return 血溅.OriginalHook();
+                                
                                 return Souleater;
                             }
                         }
