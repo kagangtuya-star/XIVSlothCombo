@@ -12,6 +12,8 @@ namespace XIVSlothComboX.Combos.PvE
     {
         public const byte JobID = 32;
 
+        public const int 血乱学习等级 = 68;
+        
         public const uint HardSlash = 3617,
             Unleash = 3621,
             //吸收斩
@@ -165,10 +167,10 @@ namespace XIVSlothComboX.Combos.PvE
                                 
                                 if (IsEnabled(CustomComboPreset.DRK_MainComboBuffs_Group))
                                 {
-                                    if (IsEnabled(CustomComboPreset.DRK_BloodWeapon) && 嗜血.ActionReady() && level< 68)
+                                    if (IsEnabled(CustomComboPreset.DRK_BloodWeapon) && 嗜血.ActionReady() && level< 血乱学习等级)
                                         return 嗜血;
 
-                                    if (IsEnabled(CustomComboPreset.DRK_Delirium) && 嗜血.ActionReady() && (gauge.Blood <= 70 || GetBuffStacks(Buffs.BloodWeapon) < 0))
+                                    if (IsEnabled(CustomComboPreset.DRK_Delirium) && 血乱.ActionReady() && (gauge.Blood <= 70 || GetBuffStacks(Buffs.BloodWeapon) < 0))
                                         return 血乱;
                                 }
 
@@ -254,26 +256,55 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
 
-                            if (gauge.Blood == 100 && (GetCooldownRemainingTime(嗜血) is >= 0 and < 5 || GetCooldownRemainingTime(血乱) is >= 0 and < 5))
+                            if (level < 血乱学习等级)
                             {
-                                return 血溅.OriginalHook();
+                                if (gauge.Blood == 100 && (GetCooldownRemainingTime(嗜血) is >= 0 and < 5 || GetCooldownRemainingTime(血乱) is >= 0 and < 5))
+                                {
+                                    return 血溅.OriginalHook();
+                                }
+                                //防止延后血乱
+                                if (gauge.Blood >= 60 && GetCooldownRemainingTime(嗜血) is >= 0 and < 5 && GetCooldownRemainingTime(血乱) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 7.5f)
+                                {
+                                    // Dalamud.Logging.PluginLog.Error("4");
+                                    return 血溅.OriginalHook();
+                                }
+                                
+                                
+                                //防止乱打血溅，导致弗雷延后
+                                if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 70 && GetCooldownRemainingTime(嗜血) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 5)
+                                {
+                                    // Dalamud.Logging.PluginLog.Error("3");
+                                    return 血溅.OriginalHook();
+                                }
+
+                            }
+                            else
+                            {
+                                if (gauge.Blood == 100 && (GetCooldownRemainingTime(血乱) is >= 0 and < 5))
+                                {
+                                    return 血溅.OriginalHook();
+                                }
+                                //防止延后血乱
+                                if (gauge.Blood >= 60 && GetCooldownRemainingTime(血乱) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 7.5f)
+                                {
+                                    // Dalamud.Logging.PluginLog.Error("4");
+                                    return 血溅.OriginalHook();
+                                }
+                                
+                                
+                                //防止乱打血溅，导致弗雷延后
+                                if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 70 && GetCooldownRemainingTime(LivingShadow) is > 5)
+                                {
+                                    // Dalamud.Logging.PluginLog.Error("3");
+                                    return 血溅.OriginalHook();
+                                }
                             }
 
 
-                            //防止乱打血溅，导致弗雷延后
-                            if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 70 && GetCooldownRemainingTime(嗜血) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 5)
-                            {
-                                // Dalamud.Logging.PluginLog.Error("3");
-                                return 血溅.OriginalHook();
-                            }
 
 
-                            //防止延后血乱
-                            if (gauge.Blood >= 60 && GetCooldownRemainingTime(嗜血) is >= 0 and < 5 && GetCooldownRemainingTime(血乱) is >= 0 and < 5 && GetCooldownRemainingTime(LivingShadow) is > 7.5f)
-                            {
-                                // Dalamud.Logging.PluginLog.Error("4");
-                                return 血溅.OriginalHook();
-                            }
+
+
 
 
 
@@ -352,10 +383,12 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(FloodOfDarkness);
                         if (gauge.DarksideTimeRemaining > 1)
                         {
-                            if (IsEnabled(CustomComboPreset.DRK_AoE_BloodWeapon) && IsOffCooldown(嗜血) && LevelChecked(嗜血))
+                            if (IsEnabled(CustomComboPreset.DRK_AoE_BloodWeapon) && 嗜血.ActionReady() && level< 血乱学习等级)
                                 return 嗜血;
+                            
                             if (IsEnabled(CustomComboPreset.DRK_AoE_Delirium) && IsOffCooldown(血乱) && LevelChecked(血乱))
                                 return 血乱;
+                            
                             if (IsEnabled(CustomComboPreset.DRK_AoE_LivingShadow) && LivingShadow.ActionReady())
                                 return LivingShadow;
                             if (IsEnabled(CustomComboPreset.DRK_AoE_SaltedEarth) && LevelChecked(SaltedEarth))
