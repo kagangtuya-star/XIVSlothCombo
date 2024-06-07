@@ -1,4 +1,5 @@
 ### 7.0更新中。。。
+战士[等待BuffId]
 
 
 ### 群名称：XIVSlothComboX汉化
