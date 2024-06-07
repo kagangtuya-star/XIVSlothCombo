@@ -34,8 +34,10 @@ namespace XIVSlothComboX.Combos.PvE
             Orogeny = 25752,
             PrimalRend = 25753,
             Onslaught = 7386,
+            
             原初激震 = 36923,
             破坏斧 = 36925,
+            
             留空 = 999999;
 
         public static class Buffs
@@ -44,8 +46,8 @@ namespace XIVSlothComboX.Combos.PvE
                 SurgingTempest = 2677,
                 NascentChaos = 1897,
                 PrimalRendReady = 2624,
-                破坏斧Pre = 9999,
-                原初激震Pre = 9999,
+                破坏斧Pre = 3834,
+                原初激震Pre = 3901,
                 Berserk = 86;
         }
 
