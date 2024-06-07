@@ -28,6 +28,8 @@ namespace XIVSlothComboX.Combos.PvE
             王权剑RoyalAuthority = 3539,
             全蚀斩TotalEclipse = 7381,
             安魂祈祷Requiescat = 7383,
+            安魂祈祷Requiescatv2 = 36921,
+            安魂祈祷徐剑 = 36922,
             圣灵HolySpirit = 7384,
             日珥斩Prominence = 16457,
             圣环HolyCircle = 16458,
@@ -37,9 +39,12 @@ namespace XIVSlothComboX.Combos.PvE
             BladeOfTruth = 25749,
             BladeOfValor = 25750,
             战逃反应FightOrFlight = 20,
+            赎罪剑Atonement3 = 36919,
+            赎罪剑Atonement2 = 36918,
             赎罪剑Atonement = 16460,
             调停Intervene = 16461,
-            盾阵Sheltron = 3542;
+            盾阵Sheltron = 3542,
+            荣誉之剑 = 36922;
 
         public static class Buffs
         {
@@ -49,6 +54,10 @@ namespace XIVSlothComboX.Combos.PvE
                 ConfiteorReady = 3019,
                 DivineMight = 2673,
                 HolySheltron = 2674,
+                沥血剑BUFF = 2674,
+                赎罪剑Atonement2BUFF = 3827,
+                赎罪剑Atonement3BUFF = 3828,
+                荣誉之剑Pre = 3831,
                 Sheltron = 1856;
         }
 
@@ -80,7 +89,6 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is 先锋剑FastBlade)
                 {
-
                     if (IsEnabled(CustomComboPreset.PLD_Variant_Cure)
                         && IsEnabled(Variant.VariantCure)
                         && PlayerHealthPercentageHp() <= Config.PLD_VariantCure)
@@ -88,7 +96,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (HasBattleTarget())
                     {
-
                         if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit)
                             && GetBuffRemainingTime(Buffs.DivineMight) > 0f
                             && GetBuffRemainingTime(Buffs.DivineMight) <= 2.5f
@@ -103,7 +110,6 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (ActionReady(战逃反应FightOrFlight))
                             {
-
                                 if (!ActionWatching.CombatActions.Exists(x => x == 战逃反应FightOrFlight))
                                 {
                                     if (lastComboActionID == 暴乱剑RiotBlade)
@@ -121,7 +127,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     return OriginalHook(战逃反应FightOrFlight);
                                 }
-
                             }
 
 
@@ -129,14 +134,14 @@ namespace XIVSlothComboX.Combos.PvE
                                 && WasLastAbility(战逃反应FightOrFlight)
                                 && ActionReady(安魂祈祷Requiescat))
                             {
-                                return 安魂祈祷Requiescat;
+                                return OriginalHook(安魂祈祷Requiescat);
                             }
 
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Requiescat)
                                 && HasEffect(Buffs.FightOrFlight)
                                 && ActionReady(安魂祈祷Requiescat))
                             {
-                                return 安魂祈祷Requiescat;
+                                return OriginalHook(安魂祈祷Requiescat);
                             }
 
 
@@ -158,7 +163,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 && IsOffCooldown(Variant.VariantUltimatum))
                                 return Variant.VariantUltimatum;
                         }
-
 
 
                         if (HasEffect(Buffs.FightOrFlight))
@@ -228,7 +232,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // Goring on cooldown (burst features disabled)
                         if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_GoringBlade)
-                            && ActionReady(沥血剑GoringBlade)
+                            && ActionReady(沥血剑GoringBlade) && HasEffect(Buffs.沥血剑BUFF)
                             && IsNotEnabled(CustomComboPreset.PLD_ST_AdvancedMode_FoF))
                             return 沥血剑GoringBlade;
 
@@ -273,7 +277,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 return OriginalHook(战女神之怒RageOfHalone);
                             }
                         }
-
                     }
                 }
 
@@ -313,12 +316,12 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (WasLastAbility(战逃反应FightOrFlight))
                         {
-                            return 安魂祈祷Requiescat;
+                            return OriginalHook(安魂祈祷Requiescat);
                         }
 
                         if (HasEffect(Buffs.FightOrFlight))
                         {
-                            return 安魂祈祷Requiescat;
+                            return OriginalHook(安魂祈祷Requiescat);
                         }
                     }
 
@@ -397,7 +400,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (HasBattleTarget())
                     {
-
                         if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit)
                             && GetBuffRemainingTime(Buffs.DivineMight) > 0f
                             && GetBuffRemainingTime(Buffs.DivineMight) <= 2.5f
@@ -437,7 +439,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 }
 
 
-
                                 var choice = GetOptionValue(Config.PLD_FOF_GCD);
                                 if (!ActionWatching.CombatActions.Exists(x => x == 战逃反应FightOrFlight))
                                 {
@@ -449,6 +450,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             {
                                                 return OriginalHook(战逃反应FightOrFlight);
                                             }
+
                                             break;
                                         }
 
@@ -458,6 +460,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             {
                                                 return OriginalHook(战逃反应FightOrFlight);
                                             }
+
                                             break;
                                         }
                                         default:
@@ -466,6 +469,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             {
                                                 return OriginalHook(战逃反应FightOrFlight);
                                             }
+
                                             break;
                                         }
                                     }
@@ -476,15 +480,20 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Requiescat) && WasLastAbility(战逃反应FightOrFlight))
                                 {
-                                    return 安魂祈祷Requiescat;
+                                    return OriginalHook(安魂祈祷Requiescat);
                                 }
 
                                 if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Requiescat) && HasEffect(Buffs.FightOrFlight))
                                 {
-                                    return 安魂祈祷Requiescat;
+                                    return OriginalHook(安魂祈祷Requiescat);
                                 }
                             }
 
+
+                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_荣誉之剑) && HasEffect(Buffs.荣誉之剑Pre) && 荣誉之剑.ActionReady())
+                            {
+                                return 荣誉之剑;
+                            }
 
 
                             Status? sustainedDamage = FindTargetEffect(Variant.Debuffs.SustainedDamage);
@@ -532,7 +541,8 @@ namespace XIVSlothComboX.Combos.PvE
                                     return OriginalHook(调停Intervene);
                             }
 
-                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_GoringBlade) && ActionReady(沥血剑GoringBlade) && InMeleeRange())
+                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_GoringBlade) && ActionReady(沥血剑GoringBlade) &&
+                                HasEffect(Buffs.沥血剑BUFF) && InMeleeRange())
                                 return 沥血剑GoringBlade;
 
                             if (HasEffect(Buffs.Requiescat))
@@ -564,9 +574,6 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 return OriginalHook(战女神之怒RageOfHalone);
                             }
-
-                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.忠义之剑SwordOath))
-                                return 赎罪剑Atonement;
                         }
 
                         if (GetCooldownRemainingTime(战逃反应FightOrFlight) >= 15 && RaidBuff.爆发期())
@@ -576,9 +583,27 @@ namespace XIVSlothComboX.Combos.PvE
                                 && GetResourceCost(圣灵HolySpirit) <= LocalPlayer.CurrentMp)
                                 return 圣灵HolySpirit;
 
-                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.忠义之剑SwordOath))
-                                return 赎罪剑Atonement;
+                            // if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.忠义之剑SwordOath))
+                            //     return 赎罪剑Atonement;
                         }
+
+
+                        if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.赎罪剑Atonement3BUFF))
+                        {
+                            return 赎罪剑Atonement3;
+                        }
+
+                        if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.赎罪剑Atonement2BUFF))
+                        {
+                            return 赎罪剑Atonement2;
+                        }
+
+
+                        if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.忠义之剑SwordOath))
+                        {
+                            return 赎罪剑Atonement;
+                        }
+
 
                         // 没用启动战逃反应
                         if (CanSpellWeavePlus(actionID, 0.3f)
@@ -595,7 +620,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // Goring on cooldown (burst features disabled)
                         if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_GoringBlade)
-                            && ActionReady(沥血剑GoringBlade)
+                            && ActionReady(沥血剑GoringBlade) && HasEffect(Buffs.沥血剑BUFF)
                             && IsNotEnabled(CustomComboPreset.PLD_ST_AdvancedMode_FoF))
                             return 沥血剑GoringBlade;
 
@@ -617,7 +642,6 @@ namespace XIVSlothComboX.Combos.PvE
                             return 圣灵HolySpirit;
 
 
-
                         // Base combo
                         if (comboTime > 0)
                         {
@@ -626,8 +650,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (lastComboActionID is 暴乱剑RiotBlade && 战女神之怒RageOfHalone.LevelChecked())
                             {
-                                if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.忠义之剑SwordOath) && InMeleeRange())
-                                    return 赎罪剑Atonement;
+                                // if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && HasEffect(Buffs.忠义之剑SwordOath) && InMeleeRange())
+                                //     return 赎罪剑Atonement;
 
                                 if ((IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit)
                                      && HasEffect(Buffs.DivineMight)
@@ -688,15 +712,14 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) && WasLastAction(战逃反应FightOrFlight))
                         {
-                            return 安魂祈祷Requiescat;
+                            return OriginalHook(安魂祈祷Requiescat);
                         }
 
                         if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) && HasEffect(Buffs.FightOrFlight))
                         {
-                            return 安魂祈祷Requiescat;
+                            return OriginalHook(安魂祈祷Requiescat);
                         }
                     }
-
 
 
                     // Actions under FoF burst
@@ -726,7 +749,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 && GetResourceCost(圣环HolyCircle) <= LocalPlayer.CurrentMp
                                 && LevelChecked(圣环HolyCircle))
                                 return 圣环HolyCircle;
-
                         }
 
                         // HC under DM/Req
@@ -752,7 +774,7 @@ namespace XIVSlothComboX.Combos.PvE
                             && !ActionWatching.WasLast2ActionsAbilities())
                         {
                             if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) && ActionReady(安魂祈祷Requiescat))
-                                return 安魂祈祷Requiescat;
+                                return OriginalHook(安魂祈祷Requiescat);
 
                             if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn))
                                 return 厄运流转CircleOfScorn;

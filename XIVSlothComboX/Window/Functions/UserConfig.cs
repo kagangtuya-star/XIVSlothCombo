@@ -1659,8 +1659,8 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.PLD_Requiescat_Options)
             {
                 UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "悔罪", "", 1);
-                UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "Blades of 信仰/真理/英勇", "", 2);
-                UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "悔罪 & Blades of 信仰/真理/英勇", "", 3);
+                UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "信仰/真理/英勇", "", 2);
+                UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "悔罪 & 信仰/真理/英勇", "", 3);
                 UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "圣灵", "", 4);
                 UserConfig.DrawRadioButton(PLD.Config.PLD_RequiescatOption, "圣环", "", 5);
             }

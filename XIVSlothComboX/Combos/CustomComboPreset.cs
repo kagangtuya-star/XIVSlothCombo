@@ -2226,8 +2226,13 @@ namespace XIVSlothComboX.Combos
         PLD_ST_AdvancedMode_HolySpirit = 11009,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("安魂祈祷Option", "添加 安魂祈祷到自定义循环", PLD.JobID)]
+        [CustomComboInfo("安魂祈祷", "添加 安魂祈祷到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Requiescat = 11010,
+        
+        
+        [ParentCombo(PLD_ST_AdvancedMode)]
+        [CustomComboInfo("荣誉之剑", "添加 荣誉之剑到自定义循环", PLD.JobID)]
+        PLD_ST_AdvancedMode_荣誉之剑 = 110101,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
         [CustomComboInfo("调停选项", "添加 调停 到自定义循环", PLD.JobID)]
