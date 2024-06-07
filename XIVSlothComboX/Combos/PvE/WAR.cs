@@ -11,6 +11,7 @@ namespace XIVSlothComboX.Combos.PvE
     {
         public const byte ClassID = 3;
         public const byte JobID = 21;
+
         public const uint HeavySwing = 31,
             Maim = 37,
             Berserk = 38,
@@ -32,7 +33,10 @@ namespace XIVSlothComboX.Combos.PvE
             InnerChaos = 16465,
             Orogeny = 25752,
             PrimalRend = 25753,
-            Onslaught = 7386;
+            Onslaught = 7386,
+            原初激震 = 36923,
+            破坏斧 = 36925,
+            留空 = 999999;
 
         public static class Buffs
         {
@@ -40,6 +44,8 @@ namespace XIVSlothComboX.Combos.PvE
                 SurgingTempest = 2677,
                 NascentChaos = 1897,
                 PrimalRendReady = 2624,
+                破坏斧Pre = 9999,
+                原初激震Pre = 9999,
                 Berserk = 86;
         }
 
@@ -61,6 +67,7 @@ namespace XIVSlothComboX.Combos.PvE
         }
 
         // Replace Storm's Path with Storm's Path combo and overcap feature on main combo to fellcleave
+        // 
         internal class WAR_ST_StormsPath : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.WAR_ST_StormsPath;
@@ -121,8 +128,13 @@ namespace XIVSlothComboX.Combos.PvE
                                 && IsOffCooldown(OriginalHook(Berserk))
                                 && LevelChecked(Berserk))
                                 return OriginalHook(Berserk);
+                            
                             if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_Upheaval) && IsOffCooldown(Upheaval) && LevelChecked(Upheaval))
                                 return Upheaval;
+                            
+                            if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_原初激震) && HasEffect(Buffs.原初激震Pre) && LevelChecked(原初激震))
+                                return 原初激震;
+                            
                             if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_Onslaught)
                                 && LevelChecked(Onslaught)
                                 && GetRemainingCharges(Onslaught) > onslaughtChargesRemaining)
@@ -146,6 +158,17 @@ namespace XIVSlothComboX.Combos.PvE
                                 return PrimalRend;
                         }
 
+                        //破坏斧 7.0新增
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.破坏斧Pre) && LevelChecked(破坏斧))
+                        {
+                            // if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange)
+                            //     && !IsMoving
+                            //     && (GetTargetDistance() <= 1 || GetBuffRemainingTime(Buffs.PrimalRendReady) <= 10))
+                            //     return 破坏斧;
+                            // if (IsNotEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange))
+                            return 破坏斧;
+                        }
+
                         if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(原初之魂InnerBeast))
                         {
                             if (HasEffect(Buffs.原初的解放InnerRelease) || (HasEffect(Buffs.NascentChaos) && InnerChaos.LevelChecked()))
@@ -157,11 +180,9 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
 
-
                             if (HasEffect(Buffs.NascentChaos) && !InnerChaos.LevelChecked())
                                 return OriginalHook(Decimate);
                         }
-
                     }
 
                     if (comboTime > 0)
@@ -333,14 +354,11 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID == 原初之魂InnerBeast || actionID == SteelCyclone)
                 {
-
                     if (LevelChecked(PrimalRend) && HasEffect(Buffs.PrimalRendReady))
                         return PrimalRend;
 
                     // Fell Cleave or Decimate
                     return OriginalHook(actionID);
-
-
                 }
 
                 return actionID;

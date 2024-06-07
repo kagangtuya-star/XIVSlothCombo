@@ -3546,10 +3546,18 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(WAR_ST_StormsPath)]
         [CustomComboInfo("动乱", "在有暴风碎BUFF时，将动乱加入到暴风斩连击", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath_Upheaval = 18007,
+        
+        [ParentCombo(WAR_ST_StormsPath)]
+        [CustomComboInfo("原初激震", "在有原初激震BUFF时，将原初激震加入到暴风斩连击", WAR.JobID, 0, "", "")]
+        WAR_ST_StormsPath_原初激震 = 180071,
 
         [ParentCombo(WAR_ST_StormsPath)]
         [CustomComboInfo("蛮荒崩裂", "在蛮荒崩裂预备状态下，将裂石飞环/地毁人亡替换为蛮荒崩裂(也加入AOE连击)", WAR.JobID, 0, "", "")]
         WAR_ST_StormsPath_PrimalRend = 18008,
+            
+        [ParentCombo(WAR_ST_StormsPath)]
+        [CustomComboInfo("破坏斧", "在破坏斧状态下，将破坏斧入到暴风斩连击", WAR.JobID, 0, "", "")]
+        WAR_ST_StormsPath_破坏斧 = 180081,
 
         [ParentCombo(WAR_AoE_Overpower)]
         [CustomComboInfo("群山隆起", "在有暴风碎BUFF时，将群山隆起加入到AOE连击", WAR.JobID, 0, "", "")]
