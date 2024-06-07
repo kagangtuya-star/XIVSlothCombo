@@ -4,6 +4,7 @@ using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Combos.PvP;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
+using XIVSlothComboX.Extensions;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -24,6 +25,9 @@ namespace XIVSlothComboX.Combos.PvE
             Quietus = 7391,
             //Bloodspiller
             血溅 = 7392,
+            血溅3 = 36930,
+            血溅2 = 36929,
+            血溅1 = 36928,
             //暗黑波动
             FloodOfDarkness = 16466,
             //暗黑锋
@@ -33,6 +37,7 @@ namespace XIVSlothComboX.Combos.PvE
             EdgeOfShadow = 16470,
             //弗雷
             LivingShadow = 16472,
+            蔑视厌恶 = 36932,
             SaltAndDarkness = 25755,
             Oblation = 25754,
             Shadowbringer = 25757,
@@ -49,7 +54,7 @@ namespace XIVSlothComboX.Combos.PvE
                 Darkside = 751,
                 BlackestNight = 1178,
                 //血乱
-                Delirium = 1972,
+                血乱BUFF = 1972,
                 SaltedEarth = 749;
         }
 
@@ -152,15 +157,18 @@ namespace XIVSlothComboX.Combos.PvE
                             //oGCD Features
                             if (gauge.DarksideTimeRemaining > 1)
                             {
-                                if (IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group) && IsEnabled(CustomComboPreset.DRK_LivingShadow) && gauge.Blood >= 50 && IsOffCooldown(LivingShadow) && LevelChecked(LivingShadow))
+                                if (IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group) && IsEnabled(CustomComboPreset.DRK_LivingShadow) && LivingShadow.ActionReady())
                                     return LivingShadow;
 
+                                if (IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group) && IsEnabled(CustomComboPreset.DRK_蔑视厌恶) && 蔑视厌恶.ActionReady())
+                                    return 蔑视厌恶;
+                                
                                 if (IsEnabled(CustomComboPreset.DRK_MainComboBuffs_Group))
                                 {
-                                    if (IsEnabled(CustomComboPreset.DRK_BloodWeapon) && IsOffCooldown(嗜血) && LevelChecked(嗜血))
+                                    if (IsEnabled(CustomComboPreset.DRK_BloodWeapon) && 嗜血.ActionReady() && level< 68)
                                         return 嗜血;
 
-                                    if (IsEnabled(CustomComboPreset.DRK_Delirium) && IsOffCooldown(血乱) && LevelChecked(血乱) && (gauge.Blood <= 70 || GetBuffStacks(Buffs.BloodWeapon) < 0))
+                                    if (IsEnabled(CustomComboPreset.DRK_Delirium) && 嗜血.ActionReady() && (gauge.Blood <= 70 || GetBuffStacks(Buffs.BloodWeapon) < 0))
                                         return 血乱;
                                 }
 
@@ -196,13 +204,29 @@ namespace XIVSlothComboX.Combos.PvE
                         if (LevelChecked(血乱) && IsEnabled(CustomComboPreset.DRK_Bloodspiller) && IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group))
                         {
 
+                            if (血溅3.ActionReady())
+                            {
+                                return 血溅3;
+                            }
+
+                            if (血溅2.ActionReady())
+                            {
+                                return 血溅2;
+                            }
+                            
+                            if (血溅1.ActionReady())
+                            {
+                                return 血溅1;
+                            }
+
+
                             //对团辅
                             if (GetCooldownRemainingTime(LivingShadow) >= 40)
                             {
                                 if (RaidBuff.爆发期())
                                 {
                                     
-                                    if (gauge.Blood >= 50 || GetBuffStacks(Buffs.Delirium) > 0)
+                                    if (gauge.Blood >= 50 || GetBuffStacks(Buffs.血乱BUFF) > 0)
                                     {
                                         return 血溅;
                                     }
@@ -213,7 +237,7 @@ namespace XIVSlothComboX.Combos.PvE
                             // 不用对团辅直接放
                             if (GetCooldownRemainingTime(血乱) >= 40 && GetCooldownRemainingTime(LivingShadow) is >= 40 and <= 70)
                             {
-                                if (gauge.Blood >= 50 || GetBuffStacks(Buffs.Delirium) > 0)
+                                if (gauge.Blood >= 50 || GetBuffStacks(Buffs.血乱BUFF) > 0)
                                 {
                                     // Dalamud.Logging.PluginLog.Error("1");
                                     return 血溅;
@@ -222,7 +246,7 @@ namespace XIVSlothComboX.Combos.PvE
 
 
                             //防止暗血溢出
-                            if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 60 && GetBuffStacks(Buffs.BloodWeapon) > 0 && GetBuffStacks(Buffs.Delirium) > 0)
+                            if (comboTime > 0 && lastComboMove == SyphonStrike && gauge.Blood >= 60 && GetBuffStacks(Buffs.BloodWeapon) > 0 && GetBuffStacks(Buffs.血乱BUFF) > 0)
                             {
                                 // Dalamud.Logging.PluginLog.Error("1");
                                 return 血溅;
@@ -255,21 +279,21 @@ namespace XIVSlothComboX.Combos.PvE
 
                             //防止血溅没有打完
                             // if (GetBuffStacks(Buffs.Delirium) > 0 && GetBuffRemainingTime(Buffs.Delirium)> 0 && GetBuffRemainingTime(Buffs.Delirium) < (7.5f + GetCooldownRemainingTime(血溅)))
-                            if (GetBuffStacks(Buffs.Delirium) > 0 && GetCooldownRemainingTime(血乱) + GetCooldownRemainingTime(血溅) <= 50.2f)
+                            if (GetBuffStacks(Buffs.血乱BUFF) > 0 && GetCooldownRemainingTime(血乱) + GetCooldownRemainingTime(血溅) <= 50.2f)
                             {
                                 // Dalamud.Logging.PluginLog.Error($"{GetCooldownRemainingTime(血乱)}  {GetBuffRemainingTime(Buffs.Delirium)} -> {7.5f + GetCooldownRemainingTime(血溅)}");
                                 return 血溅;
                             }
 
                             //Regular Delirium
-                            if (GetBuffStacks(Buffs.Delirium) > 0 && IsNotEnabled(CustomComboPreset.DRK_DelayedBloodspiller))
+                            if (GetBuffStacks(Buffs.血乱BUFF) > 0 && IsNotEnabled(CustomComboPreset.DRK_DelayedBloodspiller))
                             {
                                 // Dalamud.Logging.PluginLog.Error("6");
                                 return 血溅;
                             }
 
                             //Delayed Delirium
-                            if (IsEnabled(CustomComboPreset.DRK_DelayedBloodspiller) && GetBuffStacks(Buffs.Delirium) > 0 && IsOnCooldown(嗜血) && GetBuffStacks(Buffs.BloodWeapon) < 2)
+                            if (IsEnabled(CustomComboPreset.DRK_DelayedBloodspiller) && GetBuffStacks(Buffs.血乱BUFF) > 0 && IsOnCooldown(嗜血) && GetBuffStacks(Buffs.BloodWeapon) < 2)
                             {
                                 // Dalamud.Logging.PluginLog.Error("7");
                                 return 血溅;
@@ -329,7 +353,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 return 嗜血;
                             if (IsEnabled(CustomComboPreset.DRK_AoE_Delirium) && IsOffCooldown(血乱) && LevelChecked(血乱))
                                 return 血乱;
-                            if (IsEnabled(CustomComboPreset.DRK_AoE_LivingShadow) && gauge.Blood >= 50 && IsOffCooldown(LivingShadow) && LevelChecked(LivingShadow))
+                            if (IsEnabled(CustomComboPreset.DRK_AoE_LivingShadow) && LivingShadow.ActionReady())
                                 return LivingShadow;
                             if (IsEnabled(CustomComboPreset.DRK_AoE_SaltedEarth) && LevelChecked(SaltedEarth))
                             {
@@ -348,7 +372,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (IsEnabled(CustomComboPreset.DRK_Delirium))
                     {
-                        if (LevelChecked(血乱) && HasEffect(Buffs.Delirium) && gauge.DarksideTimeRemaining > 0)
+                        if (LevelChecked(血乱) && HasEffect(Buffs.血乱BUFF) && gauge.DarksideTimeRemaining > 0)
                             return Quietus;
                     }
 
@@ -378,8 +402,12 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID == CarveAndSpit || actionID == AbyssalDrain)
                 {
-                    if (gauge.Blood >= 50 && IsOffCooldown(LivingShadow) && LevelChecked(LivingShadow))
+                    if (LivingShadow.ActionReady())
                         return LivingShadow;
+                    
+                    if (蔑视厌恶.ActionReady())
+                        return 蔑视厌恶;
+                    
                     if (IsOffCooldown(SaltedEarth) && LevelChecked(SaltedEarth))
                         return SaltedEarth;
                     if (IsOffCooldown(CarveAndSpit) && LevelChecked(AbyssalDrain))
