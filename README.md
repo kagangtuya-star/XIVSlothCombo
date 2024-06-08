@@ -6,9 +6,9 @@
 * DK [更新中]
 * 舞者[更新中]
 ---
-### 群名称：XIVSlothComboX汉化
-### 群   号：544685806
-### 来点好兄弟一起汉化(用爱发电全靠自觉)
+### 群名称：XIVSlothComboX7.0
+### 群   号：964392714
+### 来点好兄弟一起开发不要这么多人了
 翻译相关：
 [UserConfig](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothComboX/Window/Functions/UserConfig.cs)、[Translatezh_CN.cs](https://github.com/44451516/XIVSlothCombo/blob/CN/XIVSlothComboX/Translatezh/Translatezh_CN.cs)
 ### 手动安装（推荐）
