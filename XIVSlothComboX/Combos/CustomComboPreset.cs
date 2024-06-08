@@ -721,10 +721,10 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(DNC_DT_Simple_SaberDance)] [CustomComboInfo("无脑模式_伶俐防止溢出[测试中]", "大舞快好的时候并且伶俐>=70的时候放剑舞。", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_SaberDance_1 = 4082,
         
-        [ParentCombo(DNC_DT_Simple_SaberDance)] [CustomComboInfo("最后一舞", "最后一舞加入循环", DNC.JobID, 2, "", "")]
+        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("最后一舞", "最后一舞加入循环", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_最后一舞 = 4092,
         
-        [ParentCombo(DNC_DT_Simple_SaberDance)] [CustomComboInfo("舞步终结", "舞步终结加入循环", DNC.JobID, 2, "", "")]
+        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("舞步终结", "舞步终结加入循环", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_舞步终结 = 4093,    
         
   
