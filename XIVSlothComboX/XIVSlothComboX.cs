@@ -34,7 +34,7 @@ namespace XIVSlothComboX
     {
         private const string Command = "/scombo";
 
-        private readonly ConfigWindow configWindow;
+        private readonly ConfigWindow _ConfigWindow;
 
         private readonly TextPayload starterMotd = new("[Sloth Message of the Day] ");
 
@@ -64,11 +64,12 @@ namespace XIVSlothComboX
             Service.IconReplacer = new IconReplacer();
             ActionWatching.Enable();
             Combos.JobHelpers.AST.Init();
-            
-            configWindow = new();
+
+            _ConfigWindow = new();
 
             Service.Interface.UiBuilder.Draw += DrawUI;
             Service.Interface.UiBuilder.OpenConfigUi += OnOpenConfigUi;
+            Service.Interface.UiBuilder.OpenMainUi += OpenMainUi;
 
             Service.CommandManager.AddHandler(Command,
                 new CommandInfo(OnCommand)
@@ -79,7 +80,7 @@ namespace XIVSlothComboX
 
             Service.ClientState.Login += PrintLoginMessage;
             // Service.ClientState.Login += TestFeatures.function;
-            
+
             if (Service.ClientState.IsLoggedIn)
             {
                 ResetFeatures();
@@ -92,18 +93,18 @@ namespace XIVSlothComboX
             // TestFeatures.function();
             KillRedundantIDs();
         }
-       
+
 
         private static void KillRedundantIDs()
         {
-            List<int> redundantIDs = Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _)).OrderBy(x => x).Cast<int>().ToList();
+            List<int> redundantIDs = Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _)).OrderBy(x => x).Cast<int>()
+                .ToList();
             foreach (int id in redundantIDs)
             {
                 Service.Configuration.EnabledActions.RemoveWhere(x => (int)x == id);
             }
 
             Service.Configuration.Save();
-
         }
 
         private void ResetFeatures()
@@ -115,11 +116,23 @@ namespace XIVSlothComboX
             // Service.Configuration.ResetFeatures("v3.0.18.0_GNBCleanup", Enumerable.Range(7000, 700).ToArray());
         }
 
-        private void DrawUI() => configWindow.Draw();
+        private void DrawUI()
+        {
+            _ConfigWindow.Draw();
+        }
+
+        private void OpenMainUi()
+        {
+            _ConfigWindow.Visible = true;
+        }
+
+        private void OnOpenConfigUi()
+        {
+            _ConfigWindow.Visible = !_ConfigWindow.Visible;
+        }
 
         private void PrintLoginMessage()
         {
-            
             // Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(task => ResetFeatures());
             if (!Service.Configuration.HideMessageOfTheDay)
                 Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task => PrintMotD());
@@ -143,7 +156,7 @@ namespace XIVSlothComboX
 
             autoTokenSource.Cancel();
 
-            configWindow?.Dispose();
+            _ConfigWindow?.Dispose();
 
             Service.CommandManager.RemoveHandler(Command);
 
@@ -153,10 +166,10 @@ namespace XIVSlothComboX
             Service.IconReplacer?.Dispose();
             Service.ComboCache?.Dispose();
             ActionWatching.Dispose();
-            
-          
+
+
             Combos.JobHelpers.AST.Dispose();
-            
+
             // Service.Framework.Update -= OnFramework;
 
             Service.ClientState.Login -= PrintLoginMessage;
@@ -165,7 +178,6 @@ namespace XIVSlothComboX
             // TestFeatures.Dispose();
         }
 
-        private void OnOpenConfigUi() => configWindow.Visible = !configWindow.Visible;
 
         private void OnCommand(string command, string arguments)
         {
@@ -205,7 +217,6 @@ namespace XIVSlothComboX
                     Service.Configuration.Save();
                     break;
                 }
-
 
 
                 case "set": // set a feature
@@ -435,7 +446,8 @@ namespace XIVSlothComboX
                         if (i > 0)
                         {
                             file.WriteLine($"START REDUNDANT IDs");
-                            foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _)).OrderBy(x => x))
+                            foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _))
+                                         .OrderBy(x => x))
                             {
                                 file.WriteLine($"{(int)preset}");
                             }
@@ -490,7 +502,6 @@ namespace XIVSlothComboX
 
                 case "auto1":
                 {
-
                     autoActionId = 0;
                     autoTokenSource.Cancel();
 
@@ -521,25 +532,24 @@ namespace XIVSlothComboX
                         {
                             autoActionId = WAR.StormsPath;
                             break;
-                        }   
-                        
+                        }
+
                         case DNC.JobID:
                         {
                             autoActionId = DNC.瀑泻Cascade;
                             break;
                         }
-                        
+
                         case MCH.JobID:
                         {
                             autoActionId = MCH.分裂弹SplitShot;
                             break;
                         }
-
                     }
 
                     if (autoActionId != 0)
                     {
-                        autoTokenSource = new(); 
+                        autoTokenSource = new();
                         autoToken = autoTokenSource.Token;
                     }
 
@@ -549,7 +559,7 @@ namespace XIVSlothComboX
                             {
                                 Random random = new Random();
                                 var interval = random.Next(32, 64);
-                                
+
                                 await Service.Framework.RunOnFrameworkThread(() =>
                                 {
                                     if (!Service.ClientState.IsLoggedIn)
@@ -557,7 +567,7 @@ namespace XIVSlothComboX
                                         autoActionId = 0;
                                         autoTokenSource.Cancel();
                                     }
-                                    
+
                                     unsafe
                                     {
                                         var targetObjectId = localPlayer.TargetObjectId;
@@ -578,7 +588,6 @@ namespace XIVSlothComboX
                                                 }
                                             }
                                         }
-                                        
                                     }
                                 });
                                 await Task.Delay(TimeSpan.FromMilliseconds(interval));
@@ -605,28 +614,31 @@ namespace XIVSlothComboX
                         {
                             unsafe
                             {
-                                FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* Struct = (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*) localPlayer.Address;
+                                FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* Struct =
+                                    (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)localPlayer.Address;
                                 SafeMemory.WriteBytes((IntPtr)Struct->Name, SeStringUtils.NameText(argumentsParts[1]));
                             }
                         }
-
                     }
+
                     break;
                 }
 
                 default:
                 {
-                    configWindow.Visible = !configWindow.Visible;
+                    _ConfigWindow.Visible = !_ConfigWindow.Visible;
                     PvEFeatures.HasToOpenJob = true;
                     if (argumentsParts[0].Length > 0)
                     {
-                        var jobname = ConfigWindow.groupedPresets.Where(x => x.Value.Any(y => y.Info.JobShorthand.Equals(argumentsParts[0].ToLower(), StringComparison.CurrentCultureIgnoreCase))).FirstOrDefault().Key;
+                        var jobname = ConfigWindow.groupedPresets.Where(x =>
+                                x.Value.Any(y => y.Info.JobShorthand.Equals(argumentsParts[0].ToLower(), StringComparison.CurrentCultureIgnoreCase)))
+                            .FirstOrDefault().Key;
                         var header = $"{jobname} - {argumentsParts[0].ToUpper()}";
                         Dalamud.Logging.PluginLog.Debug($"{jobname}");
                         PvEFeatures.HeaderToOpen = header;
                     }
-                    break;
 
+                    break;
                 }
             }
 
