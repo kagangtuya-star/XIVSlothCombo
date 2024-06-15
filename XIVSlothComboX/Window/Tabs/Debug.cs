@@ -74,7 +74,7 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");
 
                     ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
-                    ImGui.TextUnformatted($"{CustomComboFunctions.HasEffect(DNC.Buffs.标准舞步StandardStep)} ");
+                    ImGui.TextUnformatted($"{CustomComboFunctions.HasEffect(DNC.Buffs.标准舞步预备StandardStep)} ");
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
 
                     // if (ActionWatching.特殊起手Actions.Count >0 )

@@ -27,7 +27,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
 
                 DNCGauge? gauge = CustomComboFunctions.GetJobGauge<DNCGauge>();
-                if (CustomComboFunctions.HasEffect(Buffs.标准舞步StandardStep))
+                if (CustomComboFunctions.HasEffect(Buffs.标准舞步预备StandardStep))
                 {
                     if (gauge.CompletedSteps < 2)
                     {

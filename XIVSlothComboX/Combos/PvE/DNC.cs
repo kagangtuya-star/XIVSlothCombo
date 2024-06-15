@@ -74,8 +74,8 @@ namespace XIVSlothComboX.Combos.PvE
                 对称投掷_百花争艳FlourishingSymmetry = 3017,
                 非对称投掷_百花争艳FlourishingFlow = 3018,
                 // Dances
-                标准舞步StandardStep = 1818,
-                技巧舞步TechnicalStep = 1819,
+                标准舞步预备StandardStep = 1818,
+                技巧舞步预备TechnicalStep = 1819,
                 StandardFinish = 1821,
                 技巧舞步结束TechnicalFinish = 1822,
                 // Fan Dances
@@ -165,8 +165,8 @@ namespace XIVSlothComboX.Combos.PvE
                     float 技巧舞步TechnicalStepCD倒计时 = GetCooldownRemainingTime(技巧舞步TechnicalStep);
 
                     bool techBurst = HasEffect(Buffs.技巧舞步结束TechnicalFinish);
-                    bool standardStepReady = LevelChecked(标准舞步StandardStep) && IsOffCooldown(标准舞步StandardStep);
-                    bool technicalStepReady = LevelChecked(技巧舞步TechnicalStep) && IsOffCooldown(技巧舞步TechnicalStep);
+                    bool standardStepReady = 标准舞步StandardStep.ActionReady();
+                    bool technicalStepReady = 技巧舞步TechnicalStep.ActionReady();
 
                     #endregion
 
@@ -182,12 +182,12 @@ namespace XIVSlothComboX.Combos.PvE
 
 
                     // Simple DT Standard Steps & Fill Feature
-                    if (HasEffect(Buffs.标准舞步StandardStep))
+                    if (HasEffect(Buffs.标准舞步预备StandardStep))
                         // if (HasEffect(Buffs.标准舞步StandardStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS))
                         return gauge.CompletedSteps < 2 ? gauge.NextStep : 双色标准舞步结束StandardFinish2;
 
                     // Simple DT Tech Steps & Fill Feature
-                    if (HasEffect(Buffs.技巧舞步TechnicalStep))
+                    if (HasEffect(Buffs.技巧舞步预备TechnicalStep))
                         // if (HasEffect(Buffs.技巧舞步TechnicalStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_TS))
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
@@ -281,9 +281,14 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
+                    if (standardStepReady && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS) && !HasEffect(Buffs.StandardFinish))
+                    {
+                        return 标准舞步StandardStep;
+                    }
+
 
                     // Simple DT Tech (activates dance with no target, or when target is over HP% threshold)
-                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && technicalStepReady && !HasEffect(Buffs.标准舞步StandardStep))
+                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && technicalStepReady && !HasEffect(Buffs.标准舞步预备StandardStep))
                     {
                         return 技巧舞步TechnicalStep;
                     }
@@ -338,17 +343,16 @@ namespace XIVSlothComboX.Combos.PvE
 
                     // Simple DT Standard (activates dance with no target, or when target is over HP% threshold)
                     // limited to 3 times in 120 seconds
-                    bool burstProtected = (LevelChecked(技巧舞步TechnicalStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_TS))
-                        ? ((技巧舞步TechnicalStepCD倒计时 < 90 && 技巧舞步TechnicalStepCD倒计时 > 5)
-                           || (techBurstTimer > 5 && !canWeave && !flow && !symmetry && comboTime <= 0))
-                        : true;
+                    // bool burstProtected = (LevelChecked(技巧舞步TechnicalStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_TS))
+                    //     ? ((技巧舞步TechnicalStepCD倒计时 < 90 && 技巧舞步TechnicalStepCD倒计时 > 5)
+                    //        || (techBurstTimer > 5 && !canWeave && !flow && !symmetry && comboTime <= 0))
+                    //     : true;
 
                     // bool flourishProtected = (LevelChecked(百花争艳Flourish) && IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish))
                     //     ? (GetCooldownRemainingTime(百花争艳Flourish) > 4)
                     //     : true;
 
-                    if (standardStepReady && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS) && burstProtected)
-                        return 标准舞步StandardStep;
+               
 
                     if (LevelChecked(坠喷泉Fountainfall) && flow)
                         return 坠喷泉Fountainfall;
@@ -404,12 +408,12 @@ namespace XIVSlothComboX.Combos.PvE
                     #endregion
 
                     // Simple AoE Standard Steps & Fill Feature
-                    if (HasEffect(Buffs.标准舞步StandardStep)
+                    if (HasEffect(Buffs.标准舞步预备StandardStep)
                         && (IsEnabled(CustomComboPreset.DNC_AoE_Simple_SS) || IsEnabled(CustomComboPreset.DNC_AoE_Simple_StandardFill)))
                         return gauge.CompletedSteps < 2 ? gauge.NextStep : 双色标准舞步结束StandardFinish2;
 
                     // Simple AoE Tech Steps & Fill Feature
-                    if (HasEffect(Buffs.技巧舞步TechnicalStep)
+                    if (HasEffect(Buffs.技巧舞步预备TechnicalStep)
                         && (IsEnabled(CustomComboPreset.DNC_AoE_Simple_TS) || IsEnabled(CustomComboPreset.DNC_AoE_Simple_TechFill)))
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
@@ -420,14 +424,14 @@ namespace XIVSlothComboX.Combos.PvE
                     if ((!HasTarget() || GetTargetHPPercent() > standardStepBurstThreshold)
                         && IsEnabled(CustomComboPreset.DNC_AoE_Simple_SS)
                         && standardStepReady
-                        && ((!HasEffect(Buffs.技巧舞步TechnicalStep) && !techBurst) || techBurstTimer > 5))
+                        && ((!HasEffect(Buffs.技巧舞步预备TechnicalStep) && !techBurst) || techBurstTimer > 5))
                         return 标准舞步StandardStep;
 
                     // Simple AoE Tech (activates dance with no target, or when target is over HP% threshold)
                     if ((!HasTarget() || GetTargetHPPercent() > technicalStepBurstThreshold)
                         && IsEnabled(CustomComboPreset.DNC_AoE_Simple_TS)
                         && technicalStepReady
-                        && !HasEffect(Buffs.标准舞步StandardStep))
+                        && !HasEffect(Buffs.标准舞步预备StandardStep))
                         return 技巧舞步TechnicalStep;
 
                     if (canWeave)
@@ -504,6 +508,30 @@ namespace XIVSlothComboX.Combos.PvE
                     if (LevelChecked(落刃雨Bladeshower) && lastComboMove is 风车Windmill && comboTime > 0)
                         return 落刃雨Bladeshower;
                 }
+
+                return actionID;
+            }
+        }
+        
+        
+        /***
+         * 一键跳舞
+         */
+        internal class DNC_DanceStepCombo : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DNC_DanceStepCombo;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                DNCGauge? gauge = GetJobGauge<DNCGauge>();
+
+                // Standard Step
+                if (actionID is 标准舞步StandardStep && gauge.IsDancing && HasEffect(Buffs.标准舞步预备StandardStep))
+                    return gauge.CompletedSteps < 2 ? gauge.NextStep : 双色标准舞步结束StandardFinish2;
+
+                // Technical Step
+                if ((actionID is 技巧舞步TechnicalStep) && gauge.IsDancing && HasEffect(Buffs.技巧舞步预备TechnicalStep))
+                    return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
                 return actionID;
             }

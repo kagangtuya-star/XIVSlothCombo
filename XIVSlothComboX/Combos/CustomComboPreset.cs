@@ -732,7 +732,9 @@ namespace XIVSlothComboX.Combos
 
 
 
-
+        [ReplaceSkill(DNC.标准舞步StandardStep, DNC.技巧舞步TechnicalStep)]
+        [CustomComboInfo("舞步连击相关", "在跳舞时将标准舞步和技巧舞步更改为每个舞步.", DNC.JobID, 1, "", "")]
+        DNC_DanceStepCombo = 4039,
        
 
 
