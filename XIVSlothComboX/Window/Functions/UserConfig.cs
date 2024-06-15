@@ -1340,52 +1340,8 @@ namespace XIVSlothComboX.Window.Functions
             // ====================================================================================
             #region DANCER
 
-            if (preset == CustomComboPreset.DNC_DanceComboReplacer)
-            {
-                int[]? actions = Service.Configuration.DancerDanceCompatActionIDs.Cast<int>().ToArray();
-                bool inputChanged = false;
+            
 
-                inputChanged |= ImGui.InputInt("Emboite (图标红那个) 的技能ID", ref actions[0], 0);
-                inputChanged |= ImGui.InputInt("Entrechat (图标蓝那个) 的技能ID", ref actions[1], 0);
-                inputChanged |= ImGui.InputInt("Jete (图标绿那个) 的技能ID", ref actions[2], 0);
-                inputChanged |= ImGui.InputInt("Pirouette (图标黄那个) 的技能ID", ref actions[3], 0);
-
-                if (inputChanged)
-                {
-                    Service.Configuration.DancerDanceCompatActionIDs = actions.Cast<uint>().ToArray();
-                    Service.Configuration.Save();
-                }
-
-                ImGui.Spacing();
-            }
-
-            if (preset == CustomComboPreset.DNC_ST_EspritOvercap)
-                UserConfig.DrawSliderInt(50, 100, DNC.Config.DNCEspritThreshold_ST, "伶俐", 150, SliderIncrements.Fives);
-
-            if (preset == CustomComboPreset.DNC_AoE_EspritOvercap)
-                UserConfig.DrawSliderInt(50, 100, DNC.Config.DNCEspritThreshold_AoE, "伶俐", 150, SliderIncrements.Fives);
-
-
-
-            #region Simple ST Sliders
-
-            if (preset == CustomComboPreset.DNC_ST_Simple_SS)
-                UserConfig.DrawSliderInt(0, 5, DNC.Config.DNCSimpleSSBurstPercent, "目标生命值百分比低于此值不再使用标准舞步", 75, SliderIncrements.Ones);
-
-            if (preset == CustomComboPreset.DNC_ST_Simple_TS)
-                UserConfig.DrawSliderInt(0, 5, DNC.Config.DNCSimpleTSBurstPercent, "目标生命值百分比低于此值不再使用技巧舞步", 75, SliderIncrements.Ones);
-
-            if (preset == CustomComboPreset.DNC_ST_Simple_Feathers)
-                UserConfig.DrawSliderInt(0, 5, DNC.Config.DNCSimpleFeatherBurstPercent, "目标生命值百分比低于此值打出全部下面囤积的技能", 75, SliderIncrements.Ones);
-
-
-            if (preset == CustomComboPreset.DNC_ST_Simple_PanicHeals)
-                UserConfig.DrawSliderInt(0, 100, DNC.Config.DNCSimplePanicHealWaltzPercent, "使用治疗华尔兹的生命值百分比临界点", 200, SliderIncrements.Ones);
-
-            if (preset == CustomComboPreset.DNC_ST_Simple_PanicHeals)
-                UserConfig.DrawSliderInt(0, 100, DNC.Config.DNCSimplePanicHealWindPercent, "使用内丹的生命值百分比临界点", 200, SliderIncrements.Ones);
-
-            #endregion
 
             #region Simple AoE Sliders
 
