@@ -861,8 +861,6 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(DRK_oGCD)] [CustomComboInfo("暗影使者 设置", "将暗影使者整合到能力技特性", DRK.JobID, 0, "", "")]
         DRK_Shadowbringer_oGCD = 5007,
 
-        [ParentCombo(DRK_MainComboCDs_Group)] [CustomComboInfo("跳斩特性", "当暗黑激活时将跳斩添加到主连击。", DRK.JobID, 0, "", "")]
-        DRK_Plunge = 5008,
 
         [ParentCombo(DRK_Bloodspiller)] [CustomComboInfo("延后使用血溅 设置", "当血乱在偶数窗口使用时，将血溅延迟2个GCD，在奇数窗口直接使用。更容易对团辅。", DRK.JobID, 0, "", "")]
         DRK_DelayedBloodspiller = 5010,
@@ -893,9 +891,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(DRK_MainComboCDs_Group)] [CustomComboInfo("精雕怒斩特性", "当自身存在暗影状态时插入精雕怒斩至主连击中.", DRK.JobID, 0, "", "")]
         DRK_CarveAndSpit = 5022,
-
-        [ParentCombo(DRK_Plunge)] [CustomComboInfo("近战时使用跳斩 设置", "当你在目标圈内且自身存在暗影状态时在主连击中自动插入跳斩.\n会使用上方选择的所有跳斩层数.", DRK.JobID, 0, "", "")]
-        DRK_MeleePlunge = 5023,
+        
 
         [ParentCombo(DRK_MainComboCDs_Group)] [CustomComboInfo("腐秽大地特性", "若自身存在暗影状态且腐秽大地未在冷却中.", DRK.JobID, 0, "", "")]
         DRK_SaltedEarth = 5024,

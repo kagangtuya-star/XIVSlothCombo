@@ -1379,9 +1379,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.DRK_EoSPooling && enabled)
                 UserConfig.DrawSliderInt(0, 3000, DRK.Config.DRK_MPManagement, "保留多少MP (0 = 全部使用)", 150, SliderIncrements.Thousands);
-
-            if (preset == CustomComboPreset.DRK_Plunge && enabled)
-                UserConfig.DrawSliderInt(0, 1, DRK.Config.DRK_KeepPlungeCharges, "留几层充能? (0 = 用光，一层不留)", 75, SliderIncrements.Ones);
+            
 
             if (preset == CustomComboPreset.DRKPvP_Burst)
                 UserConfig.DrawSliderInt(1, 100, DRKPvP.Config.ShadowbringerThreshold, "HP% to be at or above to use Shadowbringer");

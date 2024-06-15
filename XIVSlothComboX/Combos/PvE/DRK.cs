@@ -193,11 +193,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                                     if (IsEnabled(CustomComboPreset.DRK_CarveAndSpit) && IsOffCooldown(CarveAndSpit) && LevelChecked(CarveAndSpit))
                                         return CarveAndSpit;
-                                    if (LevelChecked(Plunge) && IsEnabled(CustomComboPreset.DRK_Plunge) && GetRemainingCharges(Plunge) > plungeChargesRemaining)
-                                    {
-                                        if (IsNotEnabled(CustomComboPreset.DRK_MeleePlunge) || (IsEnabled(CustomComboPreset.DRK_MeleePlunge) && GetTargetDistance() <= 1 && ((GetMaxCharges(Plunge) > 1 && GetCooldownRemainingTime(血乱) >= 45) || GetMaxCharges(Plunge) == 1)))
-                                            return Plunge;
-                                    }
+                              
                                 }
                             }
                         }
