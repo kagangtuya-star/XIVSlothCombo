@@ -693,30 +693,30 @@ namespace XIVSlothComboX.Combos
         DNC_DT_SimpleMode = 4065,
 
 
-        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("无脑模式_倒计时自动跳小舞", "起手自动跳舞", DNC.JobID, 0, "", "")]
+        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("倒计时自动跳小舞", "起手自动跳舞", DNC.JobID, 0, "", "")]
         DNC_DT_Simple_AUTO_SS = 4091,
 
         [ParentCombo(DNC_DT_SimpleMode)]
-        [CustomComboInfo("无脑模式_标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 1, "", "")]
+        [CustomComboInfo("标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 1, "", "")]
         DNC_DT_Simple_SS = 4066,
 
         [ParentCombo(DNC_DT_SimpleMode)]
-        [CustomComboInfo("无脑模式_技巧舞步", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 1, "", "")]
+        [CustomComboInfo("技巧舞步", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 1, "", "")]
         DNC_DT_Simple_TS = 4067,
 
-        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("无脑模式_简易百花争艳", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
+        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("简易百花争艳", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_Flourish = 4068,
 
 
-        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("无脑模式_剑舞/晓之舞", "剑舞/晓之舞加入循环", DNC.JobID, 2, "", "")]
+        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("剑舞/晓之舞", "剑舞/晓之舞加入循环", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_SaberDance = 4069,
 
 
-        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("无脑模式_进攻之探戈", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
+        [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("进攻之探戈", "Includes Flourish in the rotation.", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_Devilment = 4090,
 
 
-        [ParentCombo(DNC_DT_Simple_SaberDance)] [CustomComboInfo("无脑模式_伶俐防止溢出[测试中]", "大舞快好的时候并且伶俐>=70的时候放剑舞。", DNC.JobID, 2, "", "")]
+        [ParentCombo(DNC_DT_Simple_SaberDance)] [CustomComboInfo("伶俐防止溢出[测试中]", "大舞快好的时候并且伶俐>=70的时候放剑舞。", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_SaberDance_1 = 4082,
         
         [ParentCombo(DNC_DT_SimpleMode)] [CustomComboInfo("最后一舞", "最后一舞加入循环", DNC.JobID, 2, "", "")]
@@ -2839,7 +2839,7 @@ namespace XIVSlothComboX.Combos
         SMN_ESPainflare = 17009,
 
         // BONUS TWEAKS
-        [CustomComboInfo("宝石兽自动召唤", "当没有宝石兽跟随时，大部分技能变为召唤宝石兽", SMN.JobID, 8, "", "")]
+        [CustomComboInfo("宝石兽自动召唤", "当没有宝石兽自动召唤宝石兽", SMN.JobID, 8, "", "")]
         SMN_CarbuncleReminder = 17010,
 
         [ParentCombo(SMN_Advanced_Combo)]

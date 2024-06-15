@@ -137,7 +137,7 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DNC_DT_SimpleMode;
 
-            internal static DNCOpenerLogic DNCOpener = new();
+            internal static DNCOpenerLogic _DNCOpenerLogic = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -174,7 +174,7 @@ namespace XIVSlothComboX.Combos.PvE
                     // Opener for DNC 自动跳舞
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_AUTO_SS))
                     {
-                        if (DNCOpener.DoFullOpener(ref actionID))
+                        if (_DNCOpenerLogic.DoFullOpener(ref actionID))
                         {
                             return actionID;
                         }

@@ -3,7 +3,9 @@ using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using System;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Extensions;
+using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -688,6 +690,10 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
+                
+                // if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or 星极超流 or 龙神迸发 or 灼热之光SearingLight or RadiantAegis or Outburst
+                    // or Tridisaster or 宝石辉AoePreciousBrilliance or 宝石耀Gemshine)
+                
                 if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or 星极超流 or 龙神迸发 or 灼热之光SearingLight or RadiantAegis or Outburst
                     or Tridisaster or 宝石辉AoePreciousBrilliance or 宝石耀Gemshine)
                 {
@@ -704,10 +710,21 @@ namespace XIVSlothComboX.Combos.PvE
                     //Deals with the game's half second pet refresh
                     if (deltaTime > 500 && !HasPetPresent() && gauge.SummonTimerRemaining == 0 && gauge.Attunement == 0 &&
                         GetCooldownRemainingTime(Ruin) == 0)
+                    {
                         carbyPresent = false;
+                    }
 
-                    if (carbyPresent == false)
-                        return SummonCarbuncle;
+
+                    if (carbyPresent == false && LocalPlayer.IsCasting == false)
+                    {
+                        //7.0改成自动召唤了
+                        unsafe
+                        {
+                            ActionManager.Instance()->UseAction(ActionType.Action, SummonCarbuncle);
+                        }
+                        // return SummonCarbuncle;
+                    }
+
                 }
 
                 return actionID;
