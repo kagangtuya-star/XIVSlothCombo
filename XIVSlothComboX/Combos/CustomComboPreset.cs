@@ -1127,7 +1127,6 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(GNB_ST_MainCombo_CooldownsGroup)] [CustomComboInfo("血壤整合到主连击", "当晶壤为0时在主连击中插入血壤.", GNB.JobID, 0, "", "")]
         GNB_ST_Bloodfest = 7007,
 
-        [ConflictingCombos(GNB_NoMercy_Cooldowns)]
         [ParentCombo(GNB_ST_MainCombo_CooldownsGroup)]
         [CustomComboInfo("无情整合到主连击", "当晶壤积累满时在主连击中插入无情.", GNB.JobID, 0, "", "")]
         GNB_ST_NoMercy = 7008,
@@ -1143,18 +1142,7 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        #region Rough Divide
 
-        [ParentCombo(GNB_ST_MainCombo)] [CustomComboInfo("粗分斩设置", "当可用时在主连击中插入粗分斩.", GNB.JobID, 0, "", "")]
-        GNB_ST_RoughDivide = 7012,
-
-        [ParentCombo(GNB_ST_RoughDivide)]
-        [CustomComboInfo("近战时插入粗分斩 设置",
-            "Uses Rough Divide when under No Mercy, burst cooldowns when available, not moving, and in the target ring (1 yalm).\nWill use as many stacks as selected in the above slider.",
-            GNB.JobID, 0, "", "")]
-        GNB_ST_MeleeRoughDivide = 7013,
-
-        #endregion
 
         [ParentCombo(GNB_ST_MainCombo)] [CustomComboInfo("闪雷弹激活", "当自身与所选目标在近战距离外时，插入闪雷弹.", GNB.JobID, 0, "", "")]
         GNB_ST_RangedUptime = 7014,
@@ -1183,7 +1171,6 @@ namespace XIVSlothComboX.Combos
         [ReplaceSkill(GNB.恶魔切DemonSlice)] [CustomComboInfo("绝枪战士AOE功能", "将恶魔杀替换为恶魔杀连击。", GNB.JobID, 0, "", "")]
         GNB_AoE_MainCombo = 7300,
 
-        [ConflictingCombos(GNB_NoMercy_Cooldowns)]
         [ParentCombo(GNB_AoE_MainCombo)]
         [CustomComboInfo("无情整合至AoE连击", "当无情可用时在AoE连击中插入无情.", GNB.JobID, 0, "", "")]
         GNB_AoE_NoMercy = 7301,
@@ -1225,18 +1212,7 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        #region No Mercy
-
-        [ConflictingCombos(GNB_ST_NoMercy, GNB_AoE_NoMercy)] [ReplaceSkill(GNB.无情NoMercy)] [CustomComboInfo("无情", "无情冷却替换无情", GNB.JobID, 0, "", "")]
-        GNB_NoMercy_Cooldowns = 7500,
-
-        [ParentCombo(GNB_NoMercy_Cooldowns)] [CustomComboInfo("倍攻", "无情状态下，用倍攻代替无情", GNB.JobID, 0, "", "")]
-        GNB_NoMercy_Cooldowns_DD = 7501,
-
-        [ParentCombo(GNB_NoMercy_Cooldowns)] [CustomComboInfo("音速破/弓形冲波", "无情状态下，用音速破/弓形冲波代替无情", GNB.JobID, 0, "", "")]
-        GNB_NoMercy_Cooldowns_SonicBreakBowShock = 7502,
-
-        #endregion
+      
 
         [CustomComboInfo("极光保护机制", "自身身上有极光，将极光变为原初的勇猛", GNB.JobID, 0, "", "")]
         GNB_AuroraProtection = 7600,

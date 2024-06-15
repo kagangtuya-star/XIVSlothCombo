@@ -324,21 +324,6 @@ namespace XIVSlothComboX.Combos.PvE
                             }
                         }
 
-                        //Rough Divide Feature
-                        if (LevelChecked(粗分斩RoughDivide)
-                            && IsEnabled(CustomComboPreset.GNB_ST_RoughDivide)
-                            && GetRemainingCharges(粗分斩RoughDivide) > roughDivideChargesRemaining
-                            && !IsMoving
-                            && !HasEffect(Buffs.ReadyToBlast))
-                        {
-                            if (IsNotEnabled(CustomComboPreset.GNB_ST_MeleeRoughDivide)
-                                || (IsEnabled(CustomComboPreset.GNB_ST_MeleeRoughDivide)
-                                    && GetTargetDistance() <= 1
-                                    && HasEffect(Buffs.NoMercy)
-                                    && IsOnCooldown(OriginalHook(爆破领域DangerZone))
-                                    && IsOnCooldown(弓形冲波BowShock)))
-                                return 粗分斩RoughDivide;
-                        }
                     }
 
 
@@ -1115,41 +1100,7 @@ namespace XIVSlothComboX.Combos.PvE
                 return actionID;
             }
         }
-
-        internal class GNB_NoMercy_Cooldowns : CustomCombo
-        {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GNB_NoMercy_Cooldowns;
-
-            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-            {
-                if (actionID == 无情NoMercy)
-                {
-                    var gauge = GetJobGauge<GNBGauge>().Ammo;
-
-
-                    if (IsOnCooldown(无情NoMercy) && InCombat())
-                    {
-                        if (IsEnabled(CustomComboPreset.GNB_NoMercy_Cooldowns_DD)
-                            && GetCooldownRemainingTime(无情NoMercy) < 60
-                            && IsOffCooldown(倍攻DoubleDown)
-                            && gauge >= 2
-                            && LevelChecked(倍攻DoubleDown))
-                            return 倍攻DoubleDown;
-
-
-                        if (IsEnabled(CustomComboPreset.GNB_NoMercy_Cooldowns_SonicBreakBowShock))
-                        {
-                            if (IsOffCooldown(音速破SonicBreak))
-                                return 音速破SonicBreak;
-                            if (IsOffCooldown(弓形冲波BowShock))
-                                return 弓形冲波BowShock;
-                        }
-                    }
-                }
-
-                return actionID;
-            }
-        }
+        
 
         internal class GNB_AuroraProtection : CustomCombo
         {

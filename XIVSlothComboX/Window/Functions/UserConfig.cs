@@ -1450,9 +1450,6 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawRadioButton(GNB.Config.GNB_SkS, "倍攻-子弹连-音速破", "", 6);
             }
 
-            if (preset == CustomComboPreset.GNB_ST_RoughDivide && enabled)
-                UserConfig.DrawSliderInt(0, 1, GNB.Config.GNB_RoughDivide_HeldCharges, "准备保留几层充能? (0 = 用光，一层不留)");
-
             if (preset == CustomComboPreset.GNB_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, GNB.Config.GNB_VariantCure, "HP% to be at or under", 200);
 
