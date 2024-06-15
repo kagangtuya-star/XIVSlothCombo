@@ -69,7 +69,7 @@ namespace XIVSlothComboX.Window
         }
 
         /// <summary> Initializes a new instance of the <see cref="ConfigWindow"/> class. </summary>
-        public ConfigWindow() : base("XIVSlothComboX 配置", ImGuiWindowFlags.AlwaysAutoResize)
+        public ConfigWindow() : base("XIVSlothComboX_ConfigWindow", ImGuiWindowFlags.AlwaysAutoResize)
         {
             RespectCloseHotkey = true;
 

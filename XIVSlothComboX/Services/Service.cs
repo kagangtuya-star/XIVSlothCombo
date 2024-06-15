@@ -3,11 +3,13 @@ using System.IO;
 using System.Reflection;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Objects;
+using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Window;
 
 namespace XIVSlothComboX.Services
 {
@@ -99,5 +101,7 @@ namespace XIVSlothComboX.Services
 
         [PluginService]
         internal static IPluginLog PluginLog { get; private set; } = null!;
+        
+        internal static WindowSystem WindowSystem { get; set; } = null!;
     }
 }

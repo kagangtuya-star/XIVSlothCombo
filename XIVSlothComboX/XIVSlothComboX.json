@@ -8,5 +8,8 @@
     "RepoUrl": "https://github.com/44451516/XIVSlothCombo",
     "IconUrl": "https://i.imgur.com/iEcxM81.png",
     "ImageUrls": [ "https://i.imgur.com/iEcxM81.png" ],
-    "Changelog": "API9"
+    "Changelog": "API9",
+    "Tags": [
+        "combo"
+    ]
 }
