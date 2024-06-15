@@ -1197,20 +1197,20 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.AST_Cards_QuickTargetCards)
             {
-                UserConfig.DrawRadioButton(AST.Config.AST_QuickTarget_Override, "No Override", "", 0);
-                UserConfig.DrawRadioButton(AST.Config.AST_QuickTarget_Override, "Hard Target Override", "Overrides selection with hard target if you have one", 1);
-                UserConfig.DrawRadioButton(AST.Config.AST_QuickTarget_Override, "UI Mousover Override", "Overrides selection with UI mouseover target if you have one", 2);
+                UserConfig.DrawRadioButton(AST.Config.AST_QuickTarget_Override, "无覆盖", "", 0);
+                UserConfig.DrawRadioButton(AST.Config.AST_QuickTarget_Override, "硬目标覆盖", "Overrides selection with hard target if you have one", 1);
+                UserConfig.DrawRadioButton(AST.Config.AST_QuickTarget_Override, "UI悬停覆盖", "Overrides selection with UI mouseover target if you have one", 2);
 
                 ImGui.Spacing();
-                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_QuickTarget_SkipDamageDown, $"Skip targets with a {ActionWatching.GetStatusName(62)} debuff", "");
-                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_QuickTarget_SkipRezWeakness, $"Skip targets with a {ActionWatching.GetStatusName(43)} or {ActionWatching.GetStatusName(44)} debuff", "");
+                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_QuickTarget_SkipDamageDown, $"跳过有{ActionWatching.GetStatusName(62)} debuff", "");
+                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_QuickTarget_SkipRezWeakness, $"跳过有 {ActionWatching.GetStatusName(43)} or {ActionWatching.GetStatusName(44)} debuff", "");
             }
 
             if (preset is CustomComboPreset.AST_DPS_AutoPlay)
             {
-                UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "Fast (1 DPS GCD minimum delay)", "", 1);
-                UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "Medium (2 DPS GCD minimum delay)", "", 2);
-                UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "Slow (3 DPS GCD minimum delay)", "", 3);
+                UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "快速 (1 DPS GCD minimum delay)", "", 1);
+                UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "平衡 (2 DPS GCD minimum delay)", "", 2);
+                UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "缓慢 (3 DPS GCD minimum delay)", "", 3);
 
             }
 
