@@ -2805,7 +2805,6 @@ namespace XIVSlothComboX.Combos
         #region SUMMONER
 
         [ReplaceSkill(SMN.Ruin, SMN.Ruin2, SMN.Outburst, SMN.Tridisaster)]
-        [ConflictingCombos(SMN_Simple_Combo)]
         [CustomComboInfo("高级自定义循环开关",
             "Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes.",
             SMN.JobID, 0, "", "")]
@@ -2914,12 +2913,7 @@ namespace XIVSlothComboX.Combos
             "", "")]
         SMN_Ifrit_Cyclone_Option = 17040,
 
-        [ConflictingCombos(SMN_Advanced_Combo)]
-        [ReplaceSkill(SMN.Ruin, SMN.Ruin2, SMN.Outburst, SMN.Tridisaster)]
-        [CustomComboInfo("简易召唤",
-            "General purpose one-button combo.\nBursts on Bahamut phase.\nSummons Titan, Garuda, then Ifrit.\nSwiftcasts on Slipstream unless drifted.",
-            SMN.JobID, -1, "", "")]
-        SMN_Simple_Combo = 17041,
+ 
 
         [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)] [CustomComboInfo("爆发延迟开关", "自定义爆发延迟设置\n适用于咏速套装", SMN.JobID, 2, "", "")]
         SMN_Advanced_Burst_Delay_Option = 17043,
@@ -2929,13 +2923,13 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("灼热之光防顶", "检查任何 灼热之光 状态，而不仅仅是你自己的。\n如果有多个召唤师并担心你的灼热之光被覆盖，请使用此选项。", SMN.JobID, 1, "", "")]
         SMN_Advanced_Burst_Any_Option = 17044,
 
-        [Variant] [VariantParent(SMN_Simple_Combo, SMN_Advanced_Combo)] [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", SMN.JobID)]
+        [Variant] [VariantParent( SMN_Advanced_Combo)] [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", SMN.JobID)]
         SMN_Variant_Rampart = 17045,
 
         [Variant] [VariantParent(SMN_Raise)] [CustomComboInfo("复活 选项", "当你有即刻BUFF时，替换即刻为成多变复活", SMN.JobID)]
         SMN_Variant_Raise = 17046,
 
-        [Variant] [VariantParent(SMN_Simple_Combo, SMN_Advanced_Combo)] [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", SMN.JobID)]
+        [Variant] [VariantParent( SMN_Advanced_Combo)] [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", SMN.JobID)]
         SMN_Variant_Cure = 17047,
 
         // Last value = 17047 (170181)
