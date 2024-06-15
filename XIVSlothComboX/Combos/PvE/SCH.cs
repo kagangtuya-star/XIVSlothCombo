@@ -255,7 +255,7 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SCH_Raise;
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                => actionID is All.Swiftcast && IsOnCooldown(All.Swiftcast) ? Resurrection : actionID;
+                => actionID is All.即刻咏唱Swiftcast && IsOnCooldown(All.即刻咏唱Swiftcast) ? Resurrection : actionID;
         }
 
         // Replaces Fairy abilities with Fairy summoning with Eos (default) or Selene

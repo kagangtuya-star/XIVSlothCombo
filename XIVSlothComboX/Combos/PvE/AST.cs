@@ -196,7 +196,7 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.AST_Raise_Alternative;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                => actionID is All.Swiftcast && IsOnCooldown(All.Swiftcast) ? Ascend : actionID;
+                => actionID is All.即刻咏唱Swiftcast && IsOnCooldown(All.即刻咏唱Swiftcast) ? Ascend : actionID;
         }
 
         internal class AST_ST_DPS : CustomCombo

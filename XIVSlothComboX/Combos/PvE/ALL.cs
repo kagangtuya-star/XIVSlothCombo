@@ -13,7 +13,7 @@ namespace XIVSlothComboX.Combos.PvE
             内丹SecondWind = 7541,
             TrueNorth = 7546,
             Addle = 7560,
-            Swiftcast = 7561,
+            即刻咏唱Swiftcast = 7561,
             LucidDreaming = 7562,
             Resurrection = 173,
             Raise = 125,
@@ -135,8 +135,8 @@ namespace XIVSlothComboX.Combos.PvE
                 if ((actionID is WHM.Raise or AST.Ascend or SGE.Egeiro) 
                     || (actionID is SCH.Resurrection && LocalPlayer.ClassJob.Id is SCH.JobID))
                 {
-                    if (ActionReady(Swiftcast))
-                        return Swiftcast;
+                    if (ActionReady(即刻咏唱Swiftcast))
+                        return 即刻咏唱Swiftcast;
 
                     if (actionID == WHM.Raise && IsEnabled(CustomComboPreset.WHM_ThinAirRaise) && ActionReady(WHM.ThinAir) && !HasEffect(WHM.Buffs.ThinAir))
                         return WHM.ThinAir;
@@ -176,8 +176,8 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     if (HasEffect(Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast))
                         return actionID;
-                    if (IsOffCooldown(Swiftcast))
-                        return Swiftcast;
+                    if (IsOffCooldown(即刻咏唱Swiftcast))
+                        return 即刻咏唱Swiftcast;
                 }
 
                 return actionID;

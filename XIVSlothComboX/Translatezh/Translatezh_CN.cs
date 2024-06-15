@@ -492,7 +492,7 @@ public class Translatezh_CN
         {"Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes." , "[AI]高级连击功能，可实现更高程度的自定义。\n适用于SpS构建。\n为了提高机动性，Ruin III保持不变。"  },
         {"Adds Deathflare, Ahk Morn and Revelation to the single target and AoE combos." , "将龙神迸发、不死鸟迸发和死星核爆添加到单目标和群体技能中。"  },
         {"Adds Gemshine and Precious Brilliance to the single target and AoE combos, respectively." , "分别将宝石耀和宝石辉添加到单目标和群体技能中。"  },
-        {"Adds Ruin IV to the single target and AoE combos.\nUses when moving during Garuda Phase and you have no attunement, when moving during Ifrit phase, or when you have no active Egi or Demi summon." , "将毁绝 IV 添加到单目标和群体技能中。\n在Garuda阶段移动且没有调谐时，或在Ifrit阶段移动时，或没有活动的Egi或Demi召唤时使用。"  },
+        {"Adds Ruin IV to the single target and AoE combos.\nUses when moving during Garuda Phase and you have no attunement, when moving during Ifrit phase, or when you have no active Egi or Demi summon." , "将毁绝添加到单目标和群体技能中。\n在风神阶段移动且没有调谐时，或在火神阶段移动时，或没有活动的Egi或Demi召唤时使用。"  },
         {"Changes Painflare to Ruin IV when out of Aetherflow stacks, Energy Siphon is on cooldown, and Ruin IV is up." , "[AI]当以太流堆栈用完、能量虹吸冷却时，将痛苦核爆替换为毁绝 IV。"  },
         {"Only uses Crimson Cyclone if you are not moving, or have no remaining Ifrit Attunement charges." , "只在未移动或者没有火神对应技能的情况下使用。"  },
         {"General purpose one-button combo.\nBursts on Bahamut phase.\nSummons Titan, Garuda, then Ifrit.\nSwiftcasts on Slipstream unless drifted." , "[AI]通用单按钮连击。\n在巴哈姆特阶段爆发。\n召唤泰坦、迦楼罗，然后召唤伊弗利特。\n除非漂移，否则在滑流上使用迅捷咏叹。"  },

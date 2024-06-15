@@ -260,7 +260,7 @@ namespace XIVSlothComboX.Combos
 
         #region Utility
 
-        [ReplaceSkill(All.Swiftcast)] [ConflictingCombos(ALL_Healer_Raise)] [CustomComboInfo("替代性的复活功能", "自动把即刻咏唱改为生辰", AST.JobID, 5, "", "")]
+        [ReplaceSkill(All.即刻咏唱Swiftcast)] [ConflictingCombos(ALL_Healer_Raise)] [CustomComboInfo("替代性的复活功能", "自动把即刻咏唱改为生辰", AST.JobID, 5, "", "")]
         AST_Raise_Alternative = 1003,
 
         [Variant] [VariantParent(AST_ST_DPS_CombustUptime, AST_AoE_DPS)] [CustomComboInfo("精神镖选项", "当没有dot或dot剩余时间少于3s时，使用多变精神镖", AST.JobID)]
@@ -2200,7 +2200,7 @@ namespace XIVSlothComboX.Combos
 
         #region QoL
 
-        [ReplaceSkill(All.Swiftcast)]
+        [ReplaceSkill(All.即刻咏唱Swiftcast)]
         [ConflictingCombos(ALL_Caster_Raise)]
         [CustomComboInfo("赤复活 设置", "当存在连续咏唱状态或使用即刻咏唱后，将即刻咏唱替换为赤复活.", RDM.JobID, 620)]
         RDM_Raise = 13620,
@@ -2392,7 +2392,7 @@ namespace XIVSlothComboX.Combos
 
         #region Utility
 
-        [ReplaceSkill(All.Swiftcast)] [ConflictingCombos(ALL_Healer_Raise)] [CustomComboInfo("即刻复活 设置", "整合即可咏唱至复苏", SGE.JobID, 800, "", "")]
+        [ReplaceSkill(All.即刻咏唱Swiftcast)] [ConflictingCombos(ALL_Healer_Raise)] [CustomComboInfo("即刻复活 设置", "整合即可咏唱至复苏", SGE.JobID, 800, "", "")]
         SGE_Raise = 14800,
 
         [ReplaceSkill(SGE.Soteria)] [CustomComboInfo("替换拯救为心关 设置", "当未使用心关或拯救处于冷却状态时，替换拯救为心关。", SGE.JobID, 900, "", "")]
@@ -2777,7 +2777,7 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(SCH_Aetherflow)] [CustomComboInfo("转化", "If Aetherflow is on cooldown, show Dissipation instead.", SCH.JobID)]
         SCH_Aetherflow_Dissipation = 16320,
 
-        [ReplaceSkill(All.Swiftcast)] [ConflictingCombos(ALL_Healer_Raise)] [CustomComboInfo("即刻复活设置", "当 即刻咏唱 冷却完毕时替换 复生。", SCH.JobID, 10)]
+        [ReplaceSkill(All.即刻咏唱Swiftcast)] [ConflictingCombos(ALL_Healer_Raise)] [CustomComboInfo("即刻复活设置", "当 即刻咏唱 冷却完毕时替换 复生。", SCH.JobID, 10)]
         SCH_Raise = 16400,
 
         [ReplaceSkill(SCH.WhisperingDawn, SCH.FeyBlessing, SCH.FeyBlessing, SCH.Aetherpact, SCH.Dissipation)]
@@ -2832,10 +2832,10 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(SMN_Advanced_Combo)] [CustomComboInfo("山崩-泰坦替换", "山崩 可用时替换 毁荡和三重灾祸", SMN.JobID, 5, "", "")]
         SMN_Titan_MountainBuster = 17007,
 
-        [ReplaceSkill(SMN.Fester)] [CustomComboInfo("能量吸收替换", "当自身没有以太超流时 用能量吸收替换溃烂爆发。", SMN.JobID, 6, "", "")]
+        [ReplaceSkill(SMN.溃烂爆发Fester)] [CustomComboInfo("能量吸收替换", "当自身没有以太超流时 用能量吸收替换溃烂爆发。", SMN.JobID, 6, "", "")]
         SMN_EDFester = 17008,
 
-        [ReplaceSkill(SMN.Painflare)] [CustomComboInfo("能量抽取替换", "当自身没有以太超流时 用能量抽取替换痛苦核爆", SMN.JobID, 7, "", "")]
+        [ReplaceSkill(SMN.痛苦核爆Painflare)] [CustomComboInfo("能量抽取替换", "当自身没有以太超流时 用能量抽取替换痛苦核爆", SMN.JobID, 7, "", "")]
         SMN_ESPainflare = 17009,
 
         // BONUS TWEAKS
@@ -2872,7 +2872,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("亚神技能替换亚神召唤", "龙神迸发 不死鸟迸发 死星核爆 可用时替换掉 对应的亚神召唤", SMN.JobID, 11, "", "")]
         SMN_DemiAbilities = 17024,
 
-        [ParentCombo(SMN_Advanced_Combo_EDFester)] [CustomComboInfo("高级能力技选项", "只在选定条件下以及灼热之光buff中使用 能力技", SMN.JobID, 1, "", "")]
+        [ParentCombo(SMN_Advanced_Combo_EDFester)] [CustomComboInfo("爆发选项", "只在选定条件下中使用溃烂爆发/痛苦核爆", SMN.JobID, 1, "", "")]
         SMN_DemiEgiMenu_oGCDPooling = 17025,
 
         [ConflictingCombos(ALL_Caster_Raise)] [CustomComboInfo("替代性的复活功能", "当即刻冷却完毕 替换 复生", SMN.JobID, 8, "", "")]
@@ -2881,7 +2881,7 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(SMN_Advanced_Combo)] [CustomComboInfo("循环加入苏生之炎", "循环 AOE循环中 加入苏生之炎", SMN.JobID, 13, "", "")]
         SMN_Advanced_Combo_DemiSummons_Rekindle = 17028,
 
-        [ReplaceSkill(SMN.Ruin4)] [CustomComboInfo("毁荡走位设置", "当你没有毁绝预备buff时，用毁荡替换毁绝。", SMN.JobID, 9, "", "")]
+        [ReplaceSkill(SMN.毁绝Ruin4)] [CustomComboInfo("毁荡走位设置", "当你没有毁绝预备buff时，用毁荡替换毁绝。", SMN.JobID, 9, "", "")]
         SMN_RuinMobility = 17030,
 
         [ParentCombo(SMN_Advanced_Combo)] [CustomComboInfo("循环加入醒梦", "当MP低于设定值时，将醒梦加入到循环中", SMN.JobID, 2, "", "")]
@@ -2915,8 +2915,8 @@ namespace XIVSlothComboX.Combos
 
  
 
-        [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)] [CustomComboInfo("爆发延迟开关", "自定义爆发延迟设置\n适用于咏速套装", SMN.JobID, 2, "", "")]
-        SMN_Advanced_Burst_Delay_Option = 17043,
+        // [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)] [CustomComboInfo("爆发延迟开关", "自定义爆发延迟设置\n适用于咏速套装", SMN.JobID, 2, "", "")]
+        // SMN_Advanced_Burst_Delay_Option = 17043,
 
 
         [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)]
@@ -3172,7 +3172,7 @@ namespace XIVSlothComboX.Combos
         [ReplaceSkill(WHM.Cure2)] [CustomComboInfo("Cure II Sync Feature", "Changes Cure II to Cure when synced below Lv.30.", WHM.JobID, 70, "", "")]
         WHM_CureSync = 19002,
 
-        [ReplaceSkill(All.Swiftcast)]
+        [ReplaceSkill(All.即刻咏唱Swiftcast)]
         [ConflictingCombos(ALL_Healer_Raise)]
         [CustomComboInfo("Alternative Raise Feature", "Changes Swiftcast to Raise.", WHM.JobID, 80, "", "")]
         WHM_Raise = 19004,

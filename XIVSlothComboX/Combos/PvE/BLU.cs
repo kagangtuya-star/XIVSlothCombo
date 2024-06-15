@@ -148,10 +148,10 @@ namespace XIVSlothComboX.Combos.PvE
                         return FeatherRain;
                     if (IsOffCooldown(Eruption) && IsSpellActive(Eruption))
                         return Eruption;
-                    if (!HasEffect(Buffs.Bristle) && IsOffCooldown(All.Swiftcast) && IsSpellActive(Bristle))
+                    if (!HasEffect(Buffs.Bristle) && IsOffCooldown(All.即刻咏唱Swiftcast) && IsSpellActive(Bristle))
                         return Bristle;
-                    if (IsOffCooldown(All.Swiftcast) && LevelChecked(All.Swiftcast))
-                        return All.Swiftcast;
+                    if (IsOffCooldown(All.即刻咏唱Swiftcast) && LevelChecked(All.即刻咏唱Swiftcast))
+                        return All.即刻咏唱Swiftcast;
                     if (IsOffCooldown(GlassDance) && IsSpellActive(GlassDance))
                         return GlassDance;
                     if (GetCooldownRemainingTime(Surpanakha) < 95 && IsSpellActive(Surpanakha))
@@ -200,8 +200,8 @@ namespace XIVSlothComboX.Combos.PvE
                             return ShockStrike;
                     }
 
-                    if (IsOffCooldown(All.Swiftcast) && LevelChecked(All.Swiftcast))
-                        return All.Swiftcast;
+                    if (IsOffCooldown(All.即刻咏唱Swiftcast) && LevelChecked(All.即刻咏唱Swiftcast))
+                        return All.即刻咏唱Swiftcast;
                     if (IsSpellActive(FinalSting))
                         return FinalSting;
                 }
@@ -225,8 +225,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (TargetHasEffectAny(Debuffs.DeepFreeze))
                     {
-                        if (IsOffCooldown(All.Swiftcast))
-                            return All.Swiftcast;
+                        if (IsOffCooldown(All.即刻咏唱Swiftcast))
+                            return All.即刻咏唱Swiftcast;
                         if (IsSpellActive(Ultravibration) && IsOffCooldown(Ultravibration))
                             return Ultravibration;
                     }
@@ -474,8 +474,8 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsSpellActive(Bristle) && !HasEffect(Buffs.Bristle) && IsOffCooldown(MatraMagic) && IsSpellActive(MatraMagic))
                         return Bristle;
 
-                    if (IsOffCooldown(All.Swiftcast))
-                        return All.Swiftcast;
+                    if (IsOffCooldown(All.即刻咏唱Swiftcast))
+                        return All.即刻咏唱Swiftcast;
 
                     if (IsSpellActive(Surpanakha))
                     {

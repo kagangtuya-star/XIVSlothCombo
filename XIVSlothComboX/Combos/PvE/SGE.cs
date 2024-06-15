@@ -378,7 +378,7 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_Raise;
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                    => actionID is All.Swiftcast && IsOnCooldown(All.Swiftcast) ? Egeiro : actionID;
+                    => actionID is All.即刻咏唱Swiftcast && IsOnCooldown(All.即刻咏唱Swiftcast) ? Egeiro : actionID;
         }
 
         /* 

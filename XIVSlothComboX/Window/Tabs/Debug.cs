@@ -176,6 +176,16 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"{DNC.剑舞SaberDance.GCDActionPreReady(DNC.百花争艳Flourish)},百花:{CustomComboFunctions.GetCooldownRemainingTime(DNC.百花争艳Flourish)}，剑舞:{CustomComboFunctions.GetCooldownRemainingTime(DNC.剑舞SaberDance)}");
                     // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
                     //舞者 end
+                    
+                             
+                    //召唤 start
+                    ImGui.TextUnformatted($"{SMN.SMN_Advanced_Combo.DemiAttackCount},{SMN.SMN_Advanced_Combo.UsedDemiAttack}");
+                    // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
+                    //召唤 end
+                    
+                    
+                    
+                    
                     ImGui.EndChild();
                 }
             }

@@ -2130,21 +2130,21 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling)
-                UserConfig.DrawSliderInt(0, 3, SMN.Config.SMN_Burst_Delay, "多少GCD延迟打爆发", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 3, SMN.Config.SMN_Burst_Delay, "延迟几个GCD打爆发", 150, SliderIncrements.Ones);
 
             if (preset == CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling)
             {
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "巴哈姆特", "巴哈阶段爆发.", 1);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "菲尼克斯", "凤凰阶段爆发.", 2);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "巴哈姆特或菲尼克斯", "巴哈或凤凰阶段爆发 (取决于那个先到).", 3);
-                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "灵活 (SpS) ", "当灼热之光时爆发, 而不管处在哪个阶段.", 4);
+                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_BurstPhase, "好了就用 ", "当灼热之光时爆发, 而不管处在哪个阶段.", 4);
             }
 
             if (preset == CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi)
             {
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "迦楼罗", "即刻用来使用螺旋气流", 1);
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "伊芙利特", "即刻用来使用红宝石之仪", 2);
-                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "灵活 (SpS) ", "当即刻可用，用来使用第一个能用的灵攻技能.", 3);
+                UserConfig.DrawHorizontalRadioButton(SMN.Config.SMN_SwiftcastPhase, "好了就用", "当即刻可用，用来使用第一个能用的灵攻技能.", 3);
             }
 
 

@@ -156,7 +156,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is All.Swiftcast)
+                if (actionID is All.即刻咏唱Swiftcast)
                 {
                     bool thinAirReady = !HasEffect(Buffs.ThinAir) && LevelChecked(ThinAir) && HasCharges(ThinAir);
 
@@ -204,8 +204,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (Glare3Count == 3 && CanWeave(actionID))
                         {
-                            if (ActionReady(All.Swiftcast) && Config.WHM_ST_MainCombo_Opener_Swiftcast)
-                                return OriginalHook(All.Swiftcast);
+                            if (ActionReady(All.即刻咏唱Swiftcast) && Config.WHM_ST_MainCombo_Opener_Swiftcast)
+                                return OriginalHook(All.即刻咏唱Swiftcast);
 
                             if (ActionReady(PresenceOfMind))
                                 return PresenceOfMind;

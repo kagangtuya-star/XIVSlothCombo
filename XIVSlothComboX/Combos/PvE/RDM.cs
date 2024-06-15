@@ -148,7 +148,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // Reset check for opener
                         if ((IsEnabled(CustomComboPreset.RDM_Balance_Opener_AnyMana) || (blackmana == 0 && whitemana == 0))
-                            && IsOffCooldown(Embolden) && IsOffCooldown(Manafication) && IsOffCooldown(All.Swiftcast)
+                            && IsOffCooldown(Embolden) && IsOffCooldown(Manafication) && IsOffCooldown(All.即刻咏唱Swiftcast)
                             && GetRemainingCharges(Acceleration) == 2 && GetRemainingCharges(Corpsacorps) == 2 && GetRemainingCharges(Engagement) == 2
                             && IsOffCooldown(Fleche) && IsOffCooldown(ContreSixte)
                             && GetTargetHPPercent() == 100 && !inCombat && !inOpener && !openerStarted)
@@ -197,8 +197,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (step == 1)
                             {
-                                if (IsOnCooldown(All.Swiftcast)) step++;
-                                else return All.Swiftcast;
+                                if (IsOnCooldown(All.即刻咏唱Swiftcast)) step++;
+                                else return All.即刻咏唱Swiftcast;
                             }
 
                             if (step == 2)
@@ -542,9 +542,9 @@ namespace XIVSlothComboX.Combos.PvE
                         && GetCooldown(Acceleration).ChargeCooldownRemaining < 54.5)
                         return Acceleration;
                     if (IsEnabled(CustomComboPreset.RDM_ST_ThunderAero_Accel_Swiftcast)
-                        && ActionReady(All.Swiftcast)
+                        && ActionReady(All.即刻咏唱Swiftcast)
                         && !HasCharges(Acceleration))
-                        return All.Swiftcast;
+                        return All.即刻咏唱Swiftcast;
                 }
                 //END_RDM_ST_ACCELERATION
 
@@ -731,10 +731,10 @@ namespace XIVSlothComboX.Combos.PvE
                         && GetCooldown(Acceleration).ChargeCooldownRemaining < 54.5)
                         return Acceleration;
                     if (IsEnabled(CustomComboPreset.RDM_AoE_Accel_Swiftcast)
-                        && ActionReady(All.Swiftcast)
+                        && ActionReady(All.即刻咏唱Swiftcast)
                         && !HasCharges(Acceleration)
                         && GetCooldown(Acceleration).ChargeCooldownRemaining < 54.5)
-                        return All.Swiftcast;
+                        return All.即刻咏唱Swiftcast;
                 }
                 //END_RDM_AoE_ACCELERATION
 
@@ -764,13 +764,13 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.RDM_Raise;
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is All.Swiftcast)
+                if (actionID is All.即刻咏唱Swiftcast)
                 {
                     if (HasEffect(All.Buffs.Swiftcast) && IsEnabled(CustomComboPreset.SMN_Variant_Raise) && IsEnabled(Variant.VariantRaise))
                         return Variant.VariantRaise;
 
                     if (LevelChecked(Verraise) &&
-                        (GetCooldownRemainingTime(All.Swiftcast) > 0 ||     // Condition 1: Swiftcast is on cooldown
+                        (GetCooldownRemainingTime(All.即刻咏唱Swiftcast) > 0 ||     // Condition 1: Swiftcast is on cooldown
                         HasEffect(Buffs.Dualcast)))                              // Condition 2: Swiftcast is available, but we have Dualcast)
                         return Verraise;
                 }
