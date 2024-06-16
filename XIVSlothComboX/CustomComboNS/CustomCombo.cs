@@ -64,6 +64,7 @@ namespace XIVSlothComboX.CustomComboNS
             
             if (!IsEnabled(Preset))
                 return false;
+            
 
             uint classJobID = LocalPlayer!.ClassJob.Id;
 

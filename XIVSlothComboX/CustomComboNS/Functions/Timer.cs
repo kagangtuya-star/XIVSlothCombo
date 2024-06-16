@@ -39,7 +39,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         protected void StartTimer()
         {
-            combatTimer = new Timer(1000); // in milliseconds
+            combatTimer = new Timer(100); // in milliseconds
             combatTimer.Elapsed += UpdateCombatTimer;
             combatTimer.Start();
         }
