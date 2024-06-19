@@ -336,45 +336,44 @@ namespace XIVSlothComboX.Combos.PvE
         internal class MCH_ST_Custom : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_ST_CustomMode;
-            
+
 
             public bool isInit = false;
-            
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-           
-
                 if (actionID is 独头弹SlugShot or 热独头弹HeatedSlugshot)
                 {
                     // Service.ChatGui.PrintError($"CustomComboPreset");
-                    
-                    
+
+
                     var 开始时间 = DateTime.Now;
-                    
-                    
-                    if (_CustomTimeline.JobId == MCH.JobID)
+
+                    if (_CustomTimeline != null)
                     {
-                        var seconds = CombatEngageDuration().TotalSeconds;
-                        foreach (var customAction in 序列轴)
+                        if (_CustomTimeline.JobId == MCH.JobID)
                         {
-                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            var seconds = CombatEngageDuration().TotalSeconds;
+                            foreach (var customAction in 时间轴)
                             {
-                                return customAction.ActionId;
+                                if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                                {
+                                    return customAction.ActionId;
+                                }
+                            }
+
+
+                            int index = ActionWatching.CustomList.Count;
+                            if (index < 序列轴.Count)
+                            {
+                                var newActionId = 序列轴[index].ActionId;
+                                return newActionId;
                             }
                         }
-                        
-                        
-                        int index = ActionWatching.CustomList.Count;
-                        if (index < 序列轴.Count)
-                        {
-                            var newActionId = 序列轴[index].ActionId;
-                            return newActionId;
-                        }
                     }
-                    
                 }
 
-                
+
                 return actionID;
             }
         }

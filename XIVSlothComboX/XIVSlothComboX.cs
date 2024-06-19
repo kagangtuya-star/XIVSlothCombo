@@ -20,6 +20,7 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
+using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
@@ -625,6 +626,14 @@ namespace XIVSlothComboX
                             }
                         }
                     }
+
+                    break;
+                }
+                
+                case "useitem":
+                {
+                    Dalamud.Logging.PluginLog.Error("1");
+                    CustomComboFunctions.Useitem(4551);
 
                     break;
                 }

@@ -4,7 +4,7 @@ using System.Numerics;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
-using Dalamud.Game.ClientState.Statuses;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using ImGuiNET;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.JobHelpers;
@@ -15,6 +15,7 @@ using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
+using Status = Dalamud.Game.ClientState.Statuses.Status;
 
 #if DEBUG
 namespace XIVSlothComboX.Window.Tabs
@@ -70,7 +71,12 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"ZONE: {Service.ClientState.TerritoryType}");
                     ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
                     ImGui.TextUnformatted($"战斗时间 : {CustomComboFunctions.CombatEngageDuration().TotalSeconds}");
-                    
+
+                    {
+                        uint itemId = 4551;
+                        ImGui.TextUnformatted($"恢复药数量 : {InventoryManager.Instance()->GetInventoryItemCount(itemId, true)}");
+                    }
+
 
                     // ImGui.TextUnformatted($"buff : {CustomComboFunctions.GetBuffRemainingTime(PLD.Buffs.DivineMight)}");
                     // ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");

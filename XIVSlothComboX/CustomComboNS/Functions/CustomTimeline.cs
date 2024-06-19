@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using ECommons.GameHelpers;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.Data;
 
@@ -106,6 +108,18 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             }
 
             return false;
+        }
+        
+        
+        public static unsafe bool Useitem( uint itemId)
+        {
+            uint a4 = 65535;
+            if (InventoryManager.Instance()->GetInventoryItemCount(itemId, true) > 0)
+            {
+                return ActionManager.Instance()->UseAction(ActionType.Item, itemId + 1000000, LocalPlayer.ObjectId, a4);
+            }
+
+            return ActionManager.Instance()->UseAction(ActionType.Item, itemId, LocalPlayer.ObjectId, a4);
         }
     }
 }

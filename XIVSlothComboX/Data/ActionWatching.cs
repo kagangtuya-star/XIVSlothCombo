@@ -109,6 +109,8 @@ namespace XIVSlothComboX.Data
 
 
                 {
+                    // Service.ChatGui.PrintError($"[ReceiveActionEffectDetour]");
+                    
                     var customAction = new CustomAction();
 
                     var totalSeconds = CustomComboFunctions.CombatEngageDuration().TotalSeconds;
@@ -170,6 +172,9 @@ namespace XIVSlothComboX.Data
 
         private static unsafe void CheckForChangedTarget(uint actionId, ref long targetObjectId)
         {
+            // Service.ChatGui.PrintError($"[CheckForChangedTarget]");
+
+            
             if (CustomComboFunctions.CustomTimelineIsEnable())
             {
                 CustomAction? customAction = CustomComboFunctions.CustomTimelineFindBy时间轴(actionId);
