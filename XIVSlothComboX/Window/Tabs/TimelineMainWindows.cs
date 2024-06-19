@@ -34,6 +34,14 @@ namespace XIVSlothComboX.Window.Tabs
                 ImGui.Text($"当前使用的时间轴是:{customTimeline.Index}-{customTimeline.JobId}-{customTimeline.Name}");
             }
 
+            ImGui.Separator();
+
+            if (ImGui.Checkbox("是否使用爆发药", ref CustomComboFunctions.IsUseItem))
+            {
+                PluginConfiguration.SetCustomBoolValue(CustomComboFunctions.UseCustomTimeKeyUseItem, CustomComboFunctions.IsUseItem);
+                Service.Configuration.Save();
+            }
+
 
             if (ImGui.Button("停用"))
             {

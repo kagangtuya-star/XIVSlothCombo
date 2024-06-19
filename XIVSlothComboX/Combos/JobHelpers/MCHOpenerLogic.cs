@@ -159,8 +159,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 起手技能合集.Add(弹射Ricochet);
                 起手技能合集.Add(钻头Drill);
                 起手技能合集.Add(枪管加热BarrelStabilizer);
-                起手技能合集.Add(热分裂弹HeatedSplitShot);
                 起手技能合集.Add(虹吸弹GaussRound);
+                起手技能合集.Add(热分裂弹HeatedSplitShot);
                 起手技能合集.Add(热独头弹HeatedSlugshot);
                 起手技能合集.Add(虹吸弹GaussRound);
                 起手技能合集.Add(弹射Ricochet);

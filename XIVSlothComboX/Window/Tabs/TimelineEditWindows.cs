@@ -8,6 +8,7 @@ using ECommons.ImGuiMethods;
 using ECommons.LanguageHelpers;
 using ImGuiNET;
 using Lumina.Excel;
+using Lumina.Excel.GeneratedSheets;
 using Newtonsoft.Json;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
@@ -61,13 +62,12 @@ namespace XIVSlothComboX.Window.Tabs
                 ImGui.SetClipboardText(json);
             }
 
-           
 
             ImGui.SameLine();
             if (ImGui.Button("读取"))
             {
                 ActionWatching.TimelineList.Clear();
-                foreach (var customTimeline in CustomComboFunctions.序列轴)
+                foreach (var customTimeline in CustomComboFunctions.整个轴)
                 {
                     ActionWatching.TimelineList.Add(customTimeline);
                 }
@@ -97,9 +97,15 @@ namespace XIVSlothComboX.Window.Tabs
                     customTimeline.JobId = Service.ClientState.LocalPlayer.ClassJob.Id;
                     customTimeline.Name = saveAs;
                     customTimeline.Enable = false;
-                    customTimeline.ActionList = ActionWatching.TimelineList;
-                    customTimelineList.Add(customTimeline);
+                    customTimeline.ActionList = new List<CustomAction>();
                     
+                    foreach (var customAction in ActionWatching.TimelineList)
+                    {
+                        customTimeline.ActionList.Add(customAction);
+                    }
+                    
+                    customTimelineList.Add(customTimeline);
+
                     Service.Configuration.Save();
                     ImGui.CloseCurrentPopup();
                 }
@@ -117,12 +123,7 @@ namespace XIVSlothComboX.Window.Tabs
 
             ImGuiEx.Tooltip("Delete Hold CTRL+click.");
 
-            // ImGui.SameLine();
-            // if (ImGui.Button("测试1清空"))
-            // {
-            //     customTimelineList.Clear();
-            //     Service.Configuration.Save();
-            // }
+      
 
             var ActionSheet = Service.DataManager.GetExcelSheet<Action>();
 
@@ -132,55 +133,86 @@ namespace XIVSlothComboX.Window.Tabs
                 ImGui.PushID("List" + i);
 
                 var customAction = ActionWatching.TimelineList[i];
-
-                Action action = ActionSheet.GetRow(customAction.ActionId)!;
-
-                IDalamudTextureWrap? textureWrap = Service.IconManager.GetActionIcon(action);
-
-
-                switch (action.ActionCategory.Value.RowId)
+                
+                switch (customAction.CustomActionType)
                 {
-                    //Spell GCD
-                    case 2:
-                        if (textureWrap != null)
-                        {
-                            ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
-                            ImGui.SameLine();
-                            ImGui.Text(
-                                $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
-                        }
+                    case CustomType.序列:
+                    case CustomType.时间:
+                    {
+                        Action action = ActionSheet.GetRow(customAction.ActionId)!;
 
-                        break;
-                    //Weaponskill GCD
-                    case 3:
-                        if (textureWrap != null)
-                        {
-                            ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
-                            ImGui.SameLine();
-                            ImGui.Text(
-                                $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
-                        }
+                        IDalamudTextureWrap? textureWrap = Service.IconManager.GetActionIcon(action);
 
+
+                        switch (action.ActionCategory.Value.RowId)
+                        {
+                            //Spell GCD
+                            case 2:
+                                if (textureWrap != null)
+                                {
+                                    ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
+                                    ImGui.SameLine();
+                                    ImGui.Text(
+                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                                }
+
+                                break;
+                            //Weaponskill GCD
+                            case 3:
+                                if (textureWrap != null)
+                                {
+                                    ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
+                                    ImGui.SameLine();
+                                    ImGui.Text(
+                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                                }
+
+                                break;
+                            //Ability 能力技
+                            case 4:
+                                if (textureWrap != null)
+                                {
+                                    ImGui.Text($"     ");
+                                    ImGui.SameLine();
+
+                                    ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 16 * ImGuiHelpers.GlobalScale);
+                                    ImGui.SameLine();
+                                    ImGui.Text(
+                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                                }
+
+                                break;
+                        }
                         break;
-                    //Ability 能力技
-                    case 4:
+                    }
+
+                    case CustomType.药品:
+                    {
+                        var itemsSheet = Service.DataManager.GetExcelSheet<Item>();
+                        Item? item = itemsSheet.GetRow(customAction.ActionId);
+                        IDalamudTextureWrap? textureWrap = Service.IconManager.GetIconTexture(item.Icon);
                         if (textureWrap != null)
                         {
+                           
+                            
                             ImGui.Text($"     ");
                             ImGui.SameLine();
 
                             ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 16 * ImGuiHelpers.GlobalScale);
                             ImGui.SameLine();
                             ImGui.Text(
-                                $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
-                        }
+                                $"{ActionWatching.GetItemName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
 
+                        }
                         break;
+                    }
                 }
+
 
                 ImGui.SameLine();
 
                 #region 编辑
+
                 ImGui.SetCursorPosX(300);
                 if (ImGuiEx.Button("编辑".Loc()))
                 {
@@ -238,7 +270,7 @@ namespace XIVSlothComboX.Window.Tabs
                 if (ImGuiEx.IconButton(FontAwesomeIcon.Trash) && ImGui.GetIO().KeyCtrl)
                 {
                     removeIndex = i;
-                    Service.ChatGui.PrintError($"删除{removeIndex}");
+                    // Service.ChatGui.PrintError($"删除{removeIndex}");
                 }
 
                 ImGuiEx.Tooltip("Delete list. Hold CTRL+click.");
@@ -276,8 +308,14 @@ namespace XIVSlothComboX.Window.Tabs
 
             if (removeIndex > -1)
             {
-                Service.ChatGui.PrintError($"删除{removeIndex}");
-                ActionWatching.TimelineList.RemoveAt(removeIndex);
+                // Service.ChatGui.PrintError($"删除{removeIndex}");
+                if (removeIndex < ActionWatching.TimelineList.Count)
+                {
+                    ActionWatching.TimelineList.RemoveAt(removeIndex);
+                    removeIndex = -1;
+                }
+
+             
             }
 
             if (addIndex > -1)
@@ -305,7 +343,7 @@ namespace XIVSlothComboX.Window.Tabs
             ImGui.DragFloat("释放开始时间", ref UseTimeStart, 0, 30 * 60);
             ImGui.DragFloat("释放最晚时间", ref UseTimeEnd, 0, 30 * 60);
             ImGui.SliderInt("目标类别", ref TargetType, 0, 20);
-            ImGui.SliderInt("技能类别", ref CustomActionType, 1, 2);
+            ImGui.SliderInt("技能类别", ref CustomActionType, 1, 3);
 
 
             if (ImGui.Button("保存".Loc()))

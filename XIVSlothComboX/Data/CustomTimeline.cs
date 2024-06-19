@@ -48,9 +48,10 @@ public class CustomAction
 
 internal static class CustomType
 {
-    internal  const byte
+    internal const byte
         序列 = 1,
-        时间 = 2;
+        时间 = 2,
+        药品 = 3;
 }
 
 

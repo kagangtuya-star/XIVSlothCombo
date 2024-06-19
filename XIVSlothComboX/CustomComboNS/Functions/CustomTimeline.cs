@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Core;
@@ -8,22 +9,29 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 {
     internal abstract partial class CustomComboFunctions
     {
-        public const string UseCustomTimeKey = "UseCustomTimeKey";
+        public const string UseCustomTimeKeyIndex = "UseCustomTimeKey";
+        public const string UseCustomTimeKeyUseItem = "UseCustomTimeKeyIsUseItem";
 
         public static CustomTimeline? _CustomTimeline;
 
+        public static bool IsUseItem = false;
 
-        /**
-         * 当前自定义
-         */
+
+        public static readonly List<CustomAction> 药品轴 = new();
+
         public static readonly List<CustomAction> 序列轴 = new();
 
         public static readonly List<CustomAction> 时间轴 = new();
 
 
+        public static readonly List<CustomAction> 整个轴 = new();
+
+
         public static void InitCustomTimeline()
         {
-            var customIntValue = PluginConfiguration.GetCustomIntValue(UseCustomTimeKey, -1);
+            IsUseItem = PluginConfiguration.GetCustomBoolValue(UseCustomTimeKeyUseItem);
+
+            var customIntValue = PluginConfiguration.GetCustomIntValue(UseCustomTimeKeyIndex, -1);
             if (customIntValue != -1)
             {
                 foreach (var customTimeline in PluginConfiguration.CustomTimelineList)
@@ -34,19 +42,20 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     }
                 }
             }
-
         }
-        
+
         public static void LoadCustomTime(CustomTimeline tCustomAction)
         {
             ResetCustomTime();
-            
-            PluginConfiguration.SetCustomIntValue(UseCustomTimeKey, tCustomAction.Index);
+
+            PluginConfiguration.SetCustomIntValue(UseCustomTimeKeyIndex, tCustomAction.Index);
             _CustomTimeline = tCustomAction;
-            
+
 
             foreach (var customAction in tCustomAction.ActionList)
             {
+                整个轴.Add(customAction);
+
                 switch (customAction.CustomActionType)
                 {
                     case CustomType.序列:
@@ -57,7 +66,13 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
                     case CustomType.时间:
                     {
-                        序列轴.Add(customAction);
+                        时间轴.Add(customAction);
+                        break;
+                    }
+
+                    case CustomType.药品:
+                    {
+                        药品轴.Add(customAction);
                         break;
                     }
                 }
@@ -67,10 +82,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static void ResetCustomTime()
         {
-            PluginConfiguration.SetCustomIntValue(UseCustomTimeKey, -1);
+            PluginConfiguration.SetCustomIntValue(UseCustomTimeKeyIndex, -1);
             _CustomTimeline = null;
             时间轴.Clear();
             序列轴.Clear();
+            药品轴.Clear();
+            整个轴.Clear();
             ActionWatching.CustomList.Clear();
         }
 
@@ -109,11 +126,18 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
             return false;
         }
-        
-        
-        public static unsafe bool Useitem( uint itemId)
+
+
+        public static unsafe bool Useitem(uint itemId)
         {
             uint a4 = 65535;
+
+            if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId + 1000000) != 0)
+                return false;
+
+            if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId) != 0)
+                return false;
+
             if (InventoryManager.Instance()->GetInventoryItemCount(itemId, true) > 0)
             {
                 return ActionManager.Instance()->UseAction(ActionType.Item, itemId + 1000000, LocalPlayer.ObjectId, a4);
@@ -121,5 +145,10 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
             return ActionManager.Instance()->UseAction(ActionType.Item, itemId, LocalPlayer.ObjectId, a4);
         }
+
+        // public static long DateTimeToLongTimeStamp(DateTime dateTime)
+        // {
+        //     return (long)(dateTime.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+        // }
     }
 }

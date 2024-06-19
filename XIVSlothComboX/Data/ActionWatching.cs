@@ -26,6 +26,11 @@ namespace XIVSlothComboX.Data
         internal static Dictionary<uint, Lumina.Excel.GeneratedSheets.Status> StatusSheet =
             Service.DataManager.GetExcelSheet<Lumina.Excel.GeneratedSheets.Status>()!
                 .ToDictionary(i => i.RowId, i => i);
+        
+        internal static Dictionary<uint, Item>    ItemsSheet =  
+            Service.DataManager.GetExcelSheet<Item>()!
+            .ToDictionary(i => i.RowId, i => i);
+        
 
         internal static Dictionary<uint, Trait> TraitSheet = Service.DataManager.GetExcelSheet<Trait>()!
             .Where(i =>
@@ -154,6 +159,8 @@ namespace XIVSlothComboX.Data
         private static unsafe void SendActionDetour(long targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7,
             long a8, long a9)
         {
+            
+            // Service.ChatGui.PrintError($"SendActionDetour{CustomComboFunctions.DateTimeToLongTimeStamp(DateTime.Now)}");
             try
             {
                 CheckForChangedTarget(actionId, ref targetObjectId);
@@ -361,6 +368,7 @@ namespace XIVSlothComboX.Data
         public static int GetActionEffectRange(uint id) => ActionSheet.TryGetValue(id, out var action) ? action.EffectRange : -1;
         public static int GetTraitLevel(uint id) => TraitSheet.TryGetValue(id, out var trait) ? trait.Level : 255;
         public static string GetActionName(uint id) => ActionSheet.TryGetValue(id, out var action) ? (string)action.Name : "UNKNOWN ABILITY";
+        public static string GetItemName(uint id) => ItemsSheet.TryGetValue(id, out var item) ? (string)item.Name : "UNKNOWN ITEM";
         public static string GetStatusName(uint id) => StatusSheet.TryGetValue(id, out var status) ? (string)status.Name : "Unknown Status";
 
         public static List<uint>? GetStatusesByName(string status)

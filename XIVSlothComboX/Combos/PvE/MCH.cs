@@ -354,6 +354,16 @@ namespace XIVSlothComboX.Combos.PvE
                         if (_CustomTimeline.JobId == MCH.JobID)
                         {
                             var seconds = CombatEngageDuration().TotalSeconds;
+                            
+                            foreach (var customAction in 药品轴)
+                            {
+                                if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                                {
+                                    Useitem(customAction.ActionId);
+                                }
+                            }
+
+                            
                             foreach (var customAction in 时间轴)
                             {
                                 if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
@@ -366,6 +376,8 @@ namespace XIVSlothComboX.Combos.PvE
                             int index = ActionWatching.CustomList.Count;
                             if (index < 序列轴.Count)
                             {
+                                
+                                // Service.ChatGui.PrintError($"序列轴:{DateTimeToLongTimeStamp(DateTime.Now)}");
                                 var newActionId = 序列轴[index].ActionId;
                                 return newActionId;
                             }

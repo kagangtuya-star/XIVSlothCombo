@@ -75,6 +75,7 @@ namespace XIVSlothComboX.Window.Tabs
                     {
                         uint itemId = 4551;
                         ImGui.TextUnformatted($"恢复药数量 : {InventoryManager.Instance()->GetInventoryItemCount(itemId, true)}");
+                        ImGui.TextUnformatted($"恢复药数量 : {ActionManager.Instance()->GetActionStatus(ActionType.Item,itemId+ 1000000)}");
                     }
 
 
