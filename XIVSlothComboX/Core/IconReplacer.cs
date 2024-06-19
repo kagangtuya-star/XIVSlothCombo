@@ -6,6 +6,7 @@ using Dalamud.Hooking;
 using Dalamud.Logging;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.Services;
 
@@ -63,7 +64,8 @@ namespace XIVSlothComboX.Core
                 if (Service.ClientState.LocalPlayer == null)
                     return OriginalHook(actionID);
 
-                if (ClassLocked()) return OriginalHook(actionID);
+                if (ClassLocked()) 
+                    return OriginalHook(actionID);
 
                 uint lastComboMove = *(uint*)Service.Address.LastComboMove;
                 float comboTime = *(float*)Service.Address.ComboTimer;
@@ -74,7 +76,10 @@ namespace XIVSlothComboX.Core
                 foreach (CustomCombo? combo in customCombos)
                 {
                     if (combo.TryInvoke(actionID, level, lastComboMove, comboTime, out uint newActionID))
+                    {
                         return newActionID;
+                    }
+
                 }
 
                 return OriginalHook(actionID);
@@ -90,9 +95,11 @@ namespace XIVSlothComboX.Core
         // Class locking
         public unsafe static bool ClassLocked()
         {
-            if (Service.ClientState.LocalPlayer is null) return false;
+            if (Service.ClientState.LocalPlayer is null) 
+                return false;
 
-            if (Service.ClientState.LocalPlayer.Level <= 35) return false;
+            if (Service.ClientState.LocalPlayer.Level <= 35) 
+                return false;
 
             if (Service.ClientState.LocalPlayer.ClassJob.Id is
                 (>= 8 and <= 25) or 27 or 28 or >= 30)
@@ -103,7 +110,8 @@ namespace XIVSlothComboX.Core
 
             if ((Service.ClientState.LocalPlayer.ClassJob.Id is 1 or 2 or 3 or 4 or 5 or 6 or 7 or 26 or 29) &&
                 Service.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.BoundByDuty] &&
-                Service.ClientState.LocalPlayer.Level > 35) return true;
+                Service.ClientState.LocalPlayer.Level > 35) 
+                return true;
 
             return false;
         }

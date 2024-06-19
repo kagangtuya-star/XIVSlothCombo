@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Dalamud.Game.ClientState.JobGauge.Types;
+using ECommons.DalamudServices;
+using Newtonsoft.Json;
 using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
+using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
@@ -74,6 +78,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             public static UserBoolArray MCH_ST_Reassembled = new("MCH_ST_Reassembled"),
                 MCH_AoE_Reassembled = new("MCH_AoE_Reassembled");
+
             public static UserBool MCH_AoE_Hypercharge = new("MCH_AoE_Hypercharge");
         }
 
@@ -119,7 +124,6 @@ namespace XIVSlothComboX.Combos.PvE
                 // if (actionID is 分裂弹SplitShot or 热分裂弹HeatedSplitShot )
                 if (actionID is 分裂弹SplitShot or 热分裂弹HeatedSplitShot)
                 {
-
                     if (IsEnabled(CustomComboPreset.MCH_Variant_Cure)
                         && IsEnabled(Variant.VariantCure)
                         && PlayerHealthPercentageHp() <= Config.MCH_VariantCure)
@@ -240,6 +244,7 @@ namespace XIVSlothComboX.Combos.PvE
                             if (ActionReady(弹射Ricochet) && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
                                 return 弹射Ricochet;
                         }
+
                         return 热冲击HeatBlast;
                     }
 
@@ -295,12 +300,14 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(独头弹SlugShot);
 
                         if (lastComboMove is 独头弹SlugShot && LevelChecked(OriginalHook(狙击弹CleanShot)))
-                            return (!LevelChecked(钻头Drill) && !HasEffect(Buffs.整备Reassembled) && HasCharges(整备Reassemble)) ? 整备Reassemble
+                            return (!LevelChecked(钻头Drill) && !HasEffect(Buffs.整备Reassembled) && HasCharges(整备Reassemble))
+                                ? 整备Reassemble
                                 : OriginalHook(狙击弹CleanShot);
                     }
-                    return OriginalHook(分裂弹SplitShot);
 
+                    return OriginalHook(分裂弹SplitShot);
                 }
+
                 return actionID;
             }
 
@@ -320,11 +327,62 @@ namespace XIVSlothComboX.Combos.PvE
                     if (CombatEngageDuration().Minutes % 2 == 0)
                         return true;
                 }
+
                 return false;
             }
-
         }
 
+
+        internal class MCH_ST_Custom : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_ST_CustomMode;
+            
+
+            public bool isInit = false;
+            
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+           
+
+                if (actionID is 独头弹SlugShot or 热独头弹HeatedSlugshot)
+                {
+                    // Service.ChatGui.PrintError($"CustomComboPreset");
+                    
+                    
+                    var 开始时间 = DateTime.Now;
+                    
+                    
+                    if (_CustomTimeline.JobId == MCH.JobID)
+                    {
+                        var seconds = CombatEngageDuration().TotalSeconds;
+                        foreach (var customAction in 序列轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                return customAction.ActionId;
+                            }
+                        }
+                        
+                        
+                        int index = ActionWatching.CustomList.Count;
+                        if (index < 序列轴.Count)
+                        {
+                            var newActionId = 序列轴[index].ActionId;
+                            return newActionId;
+                        }
+                    }
+                    
+                }
+
+                
+                return actionID;
+            }
+        }
+
+
+        /***
+         * 单体循环
+         */
         internal class MCH_ST_AdvancedMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_ST_AdvancedMode;
@@ -366,7 +424,6 @@ namespace XIVSlothComboX.Combos.PvE
                             return All.伤头HeadGraze;
 
 
-
                         //这里一般是爆发药 加入
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
                             && !gauge.IsOverheated
@@ -388,11 +445,8 @@ namespace XIVSlothComboX.Combos.PvE
                         // Wildfire
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_WildFire))
                         {
-
-                       
                             if (gauge.Heat >= 50 && ActionReady(野火Wildfire) && CanSpellWeavePlus(actionID))
                             {
-
                                 //钻头都没学 直接用吧
                                 if (!LevelChecked(钻头Drill))
                                 {
@@ -412,7 +466,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 if (三件套最小冷却Time() > 7.5)
                                 {
-
                                     if (GetCooldownRemainingTime(超荷Hypercharge) > 0.6f)
                                     {
                                         if (CanDelayedWeavePlus(actionID))
@@ -452,11 +505,8 @@ namespace XIVSlothComboX.Combos.PvE
                                             return 野火Wildfire;
                                         }
                                     }
-
-
                                 }
                             }
-
                         }
 
                         //queen 优雅的使用机器人
@@ -479,7 +529,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 if (回转飞锯ChainSaw快好了)
                                     return OriginalHook(车式浮空炮塔RookAutoturret);
-
                             }
 
                             if (gauge.Battery >= 90)
@@ -514,9 +563,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 return OriginalHook(车式浮空炮塔RookAutoturret);
                             }
-
                         }
-
 
 
                         //超荷判断
@@ -531,7 +578,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 return 超荷Hypercharge;
                             }
                         }
-
 
 
                         //超荷判断
@@ -586,7 +632,6 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-
                         // Service.ChatGui.Print($"整备Reassemble3");
 
                         // TOOLS!! ChainSaw Drill Air Anchor
@@ -601,7 +646,6 @@ namespace XIVSlothComboX.Combos.PvE
                             && HasCharges(整备Reassemble)
                             && 整备使用条件())
                         {
-
                             if (HasEffect(RaidBuff.强化药))
                             {
                                 return 整备Reassemble;
@@ -617,10 +661,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 return 整备Reassemble;
                             }
                         }
-
-
-
-
 
 
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_GaussRicochet) && LevelChecked(热冲击HeatBlast))
@@ -695,11 +735,8 @@ namespace XIVSlothComboX.Combos.PvE
                                             }
                                         }
                                     }
-
                                 }
-
                             }
-
                         }
 
                         if (IsEnabled(CustomComboPreset.MCH_ST_Adv_HeatBlast))
@@ -708,12 +745,11 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 return 热冲击HeatBlast;
                             }
-
                         }
-                        
-                        
-                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled) 
-                            && MaxCartridges(level) ==1 
+
+
+                        if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassembled)
+                            && MaxCartridges(level) == 1
                             && HasCharges(整备Reassemble))
                         {
                             if (整备使用条件())
@@ -744,7 +780,6 @@ namespace XIVSlothComboX.Combos.PvE
                         && PlayerHealthPercentageHp() <= Config.MCH_ST_SecondWindThreshold
                         && ActionReady(All.内丹SecondWind))
                     {
-
                         return All.内丹SecondWind;
                     }
 
@@ -765,9 +800,9 @@ namespace XIVSlothComboX.Combos.PvE
 
                 return actionID;
             }
+
             private static bool 整备使用条件()
             {
-
                 return OriginalHook(热弹HotShot).GCDActionReady(狙击弹CleanShot)
                        || 钻头Drill.GCDActionReady(狙击弹CleanShot)
                        || 回转飞锯ChainSaw.GCDActionReady(狙击弹CleanShot);
@@ -790,8 +825,6 @@ namespace XIVSlothComboX.Combos.PvE
 
             private bool ReassembledTools(ref uint actionId)
             {
-
-
                 // bool reassembledAnchor = (Config.MCH_ST_Reassembled[0] && HasEffect(Buffs.整备Reassembled))
                 //                          || (!Config.MCH_ST_Reassembled[0] && !HasEffect(Buffs.整备Reassembled))
                 //                          || (!HasEffect(Buffs.整备Reassembled) && GetRemainingCharges(整备Reassemble) == 0);
@@ -850,10 +883,8 @@ namespace XIVSlothComboX.Combos.PvE
                 }
 
 
-
                 if (gauge.Heat >= 50)
                 {
-
                     if (wildfireCDTime is >= 0.5f and <= 33)
                     {
                         if (GetCooldownRemainingTime(枪管加热BarrelStabilizer) < wildfireCDTime)
@@ -980,6 +1011,7 @@ namespace XIVSlothComboX.Combos.PvE
                             if (ActionReady(弹射Ricochet) && GetRemainingCharges(弹射Ricochet) >= GetRemainingCharges(虹吸弹GaussRound))
                                 return 弹射Ricochet;
                         }
+
                         return 自动弩AutoCrossbow;
                     }
 
@@ -1086,7 +1118,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (GetRemainingCharges(虹吸弹GaussRound) > 0)
                                 return 虹吸弹GaussRound;
-
                         }
                     }
 
@@ -1135,6 +1166,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return 虹吸弹GaussRound;
                     return 弹射Ricochet;
                 }
+
                 return actionID;
             }
         }
@@ -1145,7 +1177,6 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-
                 if (actionID is 虹吸弹GaussRound or 弹射Ricochet)
 
                 {
@@ -1214,6 +1245,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class MCH_DismantleTactician : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_DismantleTactician;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID is 武装解除Dismantle

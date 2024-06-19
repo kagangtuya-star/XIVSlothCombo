@@ -100,8 +100,12 @@ namespace XIVSlothComboX.Services
         internal static IGameInteropProvider GameInteropProvider { get; private set; } = null!;
 
         [PluginService]
-        internal static IPluginLog PluginLog { get; private set; } = null!;
+        internal static IPluginLog PluginLog { get; private set; } = null!;   
+        [PluginService]
+        internal static ITextureProvider TextureProvider { get; private set; } = null!;
         
-        internal static WindowSystem WindowSystem { get; set; } = null!;
+        internal static WindowSystem WindowSystem { get; set; } = null!;   
+        
+        internal static IconManager IconManager { get; set; } = null!;
     }
 }

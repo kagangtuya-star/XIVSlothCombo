@@ -29,15 +29,15 @@ namespace XIVSlothComboX.Attributes
             var fancyName技能翻译 = true;
             var description技能翻译 = true;
             var saveWord = "等待翻译";
-
-
+            
+            
             // if (Service.Configuration != null)
             {
                 // if (Service.Configuration.Language == "zh-CN")
                 {
                     Dictionary<string, string> db = Translatezh_CN.db;
                     Dictionary<string, string> dbActionName = Translatezh_CN_DBActionName.dbActionName;
-
+            
                     if (db.ContainsKey(原始fancyName))
                     {
                         if (db[原始fancyName] != saveWord)
@@ -47,7 +47,7 @@ namespace XIVSlothComboX.Attributes
                             fancyName技能翻译 = false;
                         }
                     }
-
+            
                     if (fancyName技能翻译)
                     {
                         ProcessingActionName(原始fancyName, dbActionName, out fancyName);
@@ -57,9 +57,9 @@ namespace XIVSlothComboX.Attributes
                             增加搜索 = false;
                         }
                     }
-
-
-
+            
+            
+            
                     if (db.ContainsKey(原始description))
                     {
                         if (db[原始description] != saveWord)
@@ -69,31 +69,31 @@ namespace XIVSlothComboX.Attributes
                             增加搜索 = false;
                         }
                     }
-
+            
                     if (description技能翻译)
                     {
                         ProcessingActionName(原始description, dbActionName, out description);
-
+            
                         if (description != 原始description)
                         {
                             db[原始description] = description;
                             增加搜索 = false;
-
+            
                         }
                     }
-
-
+            
+            
                     if (增加搜索)
                     {
                         try
                         {
                             var replaceOption = fancyName.Replace(" Option", "");
-
+            
                             if (db.ContainsKey($"{replaceOption}"))
                             {
                                 fancyName = db[$"{replaceOption}"];
                             }
-
+            
                             if (db.ContainsKey($"{replaceOption}"))
                             {
                                 description = db[$"{replaceOption}"];
@@ -102,22 +102,22 @@ namespace XIVSlothComboX.Attributes
                         catch (Exception e)
                         {
                             // PluginLog.Information($"log fancyName:{fancyName} description:{description} {e.Message}");
-
+            
                             // Console.WriteLine(e);
                             // throw;
                         }
                     }
                 }
             }
-
-
+            
+            
             if (增加搜索)
             {
                 if (fancyName == saveWord)
                 {
                     fancyName = 原始fancyName;
                 }
-
+            
                 if (description == saveWord)
                 {
                     description = 原始description;

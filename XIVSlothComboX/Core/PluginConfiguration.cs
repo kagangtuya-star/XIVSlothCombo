@@ -10,6 +10,7 @@ using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Services;
 using XIVSlothComboX.Extensions;
 using System.Numerics;
+using XIVSlothComboX.Data;
 
 namespace XIVSlothComboX.Core
 {
@@ -244,7 +245,8 @@ namespace XIVSlothComboX.Core
 
         private bool GetResetValues(string config)
         {
-            if (ResetFeatureCatalog.TryGetValue(config, out var value)) return value;
+            if (ResetFeatureCatalog.TryGetValue(config, out var value)) 
+                return value;
 
             return false;
         }
@@ -253,6 +255,13 @@ namespace XIVSlothComboX.Core
         {
             ResetFeatureCatalog[config] = value;
         }
+    
+      
+        
+        
+        [JsonProperty]
+        public static List<CustomTimeline> CustomTimelineList { get; set; } = new();
+        
 
         public void ResetFeatures(string config, int[] values)
         {
@@ -322,5 +331,7 @@ namespace XIVSlothComboX.Core
         public bool isFakeName { get; set; } = false;
 
         #endregion
+
+     
     }
 }

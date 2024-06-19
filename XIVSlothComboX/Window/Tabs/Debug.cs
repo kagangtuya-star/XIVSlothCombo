@@ -68,12 +68,14 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"LAST SPELL: {ActionWatching.GetActionName(ActionWatching.LastSpell)}");
                     ImGui.TextUnformatted($"LAST ABILITY: {ActionWatching.GetActionName(ActionWatching.LastAbility)}");
                     ImGui.TextUnformatted($"ZONE: {Service.ClientState.TerritoryType}");
-               
+                    ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
+                    ImGui.TextUnformatted($"战斗时间 : {CustomComboFunctions.CombatEngageDuration().TotalSeconds}");
+                    
 
                     // ImGui.TextUnformatted($"buff : {CustomComboFunctions.GetBuffRemainingTime(PLD.Buffs.DivineMight)}");
                     // ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");
 
-                    ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
+                  
                     ImGui.TextUnformatted($"{CustomComboFunctions.HasEffect(DNC.Buffs.标准舞步预备StandardStep)} ");
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
 
@@ -111,8 +113,8 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"HasPrePullCooldowns:{MCHOpenerLogic.HasPrePullCooldowns()} HasCooldowns:{MCHOpenerLogic.HasCooldowns()}");
                     // ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
-                    ImGui.TextUnformatted($"整备ReassembleV2 : {MCH.整备ReassembleV2.LevelChecked()} ");
-                    ImGui.TextUnformatted($"整备ReassembleV21 : {CustomComboFunctions.GetLevel(MCH.整备ReassembleV2)} ");
+                    // ImGui.TextUnformatted($"整备ReassembleV2 : {MCH.整备ReassembleV2.LevelChecked()} ");
+                    // ImGui.TextUnformatted($"整备ReassembleV21 : {CustomComboFunctions.GetLevel(MCH.整备ReassembleV2)} ");
                     ;
                     ;
                     ;
@@ -173,13 +175,13 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"SELECTED BLU SPELLS:\n{string.Join("\n", Service.Configuration.ActiveBLUSpells.Select(x => ActionWatching.GetActionName(x)).OrderBy(x => x))}");
                     
                     //舞者 start
-                    ImGui.TextUnformatted($"{DNC.剑舞SaberDance.GCDActionPreReady(DNC.百花争艳Flourish)},百花:{CustomComboFunctions.GetCooldownRemainingTime(DNC.百花争艳Flourish)}，剑舞:{CustomComboFunctions.GetCooldownRemainingTime(DNC.剑舞SaberDance)}");
+                    // ImGui.TextUnformatted($"{DNC.剑舞SaberDance.GCDActionPreReady(DNC.百花争艳Flourish)},百花:{CustomComboFunctions.GetCooldownRemainingTime(DNC.百花争艳Flourish)}，剑舞:{CustomComboFunctions.GetCooldownRemainingTime(DNC.剑舞SaberDance)}");
                     // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
                     //舞者 end
                     
                              
                     //召唤 start
-                    ImGui.TextUnformatted($"{SMN.SMN_Advanced_Combo.DemiAttackCount},{SMN.SMN_Advanced_Combo.UsedDemiAttack}");
+                    // ImGui.TextUnformatted($"{SMN.SMN_Advanced_Combo.DemiAttackCount},{SMN.SMN_Advanced_Combo.UsedDemiAttack}");
                     // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
                     //召唤 end
                     

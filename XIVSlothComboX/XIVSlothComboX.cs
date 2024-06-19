@@ -92,6 +92,10 @@ namespace XIVSlothComboX
 
             // TestFeatures.function();
             KillRedundantIDs();
+
+            Service.IconManager = new IconManager();
+
+
         }
 
 
@@ -165,6 +169,7 @@ namespace XIVSlothComboX
 
             Service.IconReplacer?.Dispose();
             Service.ComboCache?.Dispose();
+            Service.IconManager?.Dispose();
             ActionWatching.Dispose();
 
 

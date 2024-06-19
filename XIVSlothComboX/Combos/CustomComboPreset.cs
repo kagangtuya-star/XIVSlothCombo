@@ -1238,6 +1238,15 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
+        #region 自定义循环
+        
+        [ReplaceSkill(MCH.独头弹SlugShot)]
+        // [ConflictingCombos(MCH_ST_AdvancedMode)]
+        [CustomComboInfo("自定义起手-独头弹", "如果他足够长的话，就不一样了",MCH.JobID)]
+        MCH_ST_CustomMode = 81001,
+        
+        #endregion
+            
         #region Advanced ST
 
         [ReplaceSkill(MCH.分裂弹SplitShot)]

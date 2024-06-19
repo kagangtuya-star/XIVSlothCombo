@@ -121,7 +121,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         {
             GameObject? healTarget = null;
             ITargetManager tm = Service.TargetManager;
-            
+
             if (HasFriendlyTarget(tm.SoftTarget)) healTarget = tm.SoftTarget;
             if (healTarget is null && HasFriendlyTarget(CurrentTarget) && !restrictToMouseover) healTarget = CurrentTarget;
             //if (checkMO && HasFriendlyTarget(tm.MouseOverTarget)) healTarget = tm.MouseOverTarget;
@@ -130,7 +130,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 StructsObject.GameObject* t = PartyTargetingService.UITarget;
                 if (t != null && t->ObjectID != 0)
                 {
-                    GameObject? uiTarget =  Service.ObjectTable.Where(x => x.ObjectId == t->ObjectID).FirstOrDefault();
+                    GameObject? uiTarget = Service.ObjectTable.Where(x => x.ObjectId == t->ObjectID).FirstOrDefault();
                     if (uiTarget != null && HasFriendlyTarget(uiTarget)) healTarget = uiTarget;
 
                     if (restrictToMouseover)
@@ -140,9 +140,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 if (restrictToMouseover)
                     return healTarget;
             }
+
             healTarget ??= LocalPlayer;
             return healTarget;
         }
+
         /// <summary> Determines if the enemy can be interrupted if they are currently casting. </summary>
         /// <returns> Bool indicating whether they can be interrupted or not. </returns>
         public static bool CanInterruptEnemy()
@@ -174,7 +176,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static bool TargetNeedsPositionals()
         {
             if (!HasBattleTarget()) return false;
-            if (ActionWatching.BNpcSheet.TryGetValue(CurrentTarget.DataId, out var bnpc) && !bnpc.Unknown10) return true;
+            if (ActionWatching.BNpcSheet.TryGetValue(CurrentTarget.DataId, out var bnpc) && !bnpc.Unknown10)
+                return true;
             return false;
         }
 
@@ -274,7 +277,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public float angleToTarget()
         {
             if (CurrentTarget is null || LocalPlayer is null)
-               return 0;
+                return 0;
 
             if (CurrentTarget is not BattleChara chara || CurrentTarget.ObjectKind != Dalamud.Game.ClientState.Objects.Enums.ObjectKind.BattleNpc)
                 return 0;
@@ -283,22 +286,31 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             var angle = PositionalMath.AngleXZ(CurrentTarget.Position, LocalPlayer.Position) - CurrentTarget.Rotation;
 
             var regionDegrees = PositionalMath.Degrees(angle);
-            if(regionDegrees < 0) {
+            if (regionDegrees < 0)
+            {
                 regionDegrees = 360 + regionDegrees;
             }
 
-            if( ( regionDegrees >= 45 ) && ( regionDegrees <= 135 ) ) {
+            if ((regionDegrees >= 45) && (regionDegrees <= 135))
+            {
                 return 1;
             }
-            if( ( regionDegrees >= 135 ) && ( regionDegrees <= 225 ) ) {
+
+            if ((regionDegrees >= 135) && (regionDegrees <= 225))
+            {
                 return 2;
             }
-            if( ( regionDegrees >= 225 ) && ( regionDegrees <= 315 ) ) {
+
+            if ((regionDegrees >= 225) && (regionDegrees <= 315))
+            {
                 return 3;
             }
-            if( ( regionDegrees >= 315 ) || ( regionDegrees <= 45 ) ) {
+
+            if ((regionDegrees >= 315) || (regionDegrees <= 45))
+            {
                 return 4;
             }
+
             return 0;
         }
 
@@ -318,13 +330,16 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             var angle = PositionalMath.AngleXZ(CurrentTarget.Position, LocalPlayer.Position) - CurrentTarget.Rotation;
 
             var regionDegrees = PositionalMath.Degrees(angle);
-            if( regionDegrees < 0 ) {
+            if (regionDegrees < 0)
+            {
                 regionDegrees = 360 + regionDegrees;
             }
 
-            if( ( regionDegrees >= 135 ) && ( regionDegrees <= 225 ) ) {
+            if ((regionDegrees >= 135) && (regionDegrees <= 225))
+            {
                 return true;
-            }            
+            }
+
             return false;
         }
 
@@ -344,18 +359,23 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             var angle = PositionalMath.AngleXZ(CurrentTarget.Position, LocalPlayer.Position) - CurrentTarget.Rotation;
 
             var regionDegrees = PositionalMath.Degrees(angle);
-            if( regionDegrees < 0 ) {
+            if (regionDegrees < 0)
+            {
                 regionDegrees = 360 + regionDegrees;
             }
 
             // left flank
-            if( ( regionDegrees >= 45 ) && ( regionDegrees <= 135 ) ) {
+            if ((regionDegrees >= 45) && (regionDegrees <= 135))
+            {
                 return true;
             }
+
             // right flank
-            if( ( regionDegrees >= 225 ) && ( regionDegrees <= 315 ) ) {            
+            if ((regionDegrees >= 225) && (regionDegrees <= 315))
+            {
                 return true;
             }
+
             return false;
         }
 
@@ -378,7 +398,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             }
         }
 
-        internal unsafe static bool OutOfRange(uint actionID, GameObject target) => ActionWatching.OutOfRange(actionID, (StructsObject.GameObject*)Service.ClientState.LocalPlayer.Address, (StructsObject.GameObject*)target.Address);
-
+        internal unsafe static bool OutOfRange(uint actionID, GameObject target) => ActionWatching.OutOfRange(actionID,
+            (StructsObject.GameObject*)Service.ClientState.LocalPlayer.Address, (StructsObject.GameObject*)target.Address);
     }
 }

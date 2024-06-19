@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
+using JsonConverter = Newtonsoft.Json.JsonConverter;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
@@ -241,7 +244,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 起手技能合集.Add(后式自走人偶AutomatonQueen);
             }
 
-
+            // var serializeObject = JsonConvert.SerializeObject(起手技能合集);
+            // Dalamud.Logging.PluginLog.Error(serializeObject);
+                
         }
         private bool 下一个使用的技能(ref uint actionID)
         {

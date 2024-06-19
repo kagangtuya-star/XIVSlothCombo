@@ -3,6 +3,7 @@ using XIVSlothComboX.Attributes;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS.Functions;
+using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.CustomComboNS
 {
@@ -30,7 +31,9 @@ namespace XIVSlothComboX.CustomComboNS
                 _ => 0xFF,
             };
 
-            StartTimer();
+            InitCustomTimeline();
+
+            // StartTimer();
         }
 
         /// <summary> Gets the preset associated with this combo. </summary>
@@ -42,11 +45,8 @@ namespace XIVSlothComboX.CustomComboNS
         /// <summary> Gets the job ID associated with this combo. </summary>
         protected byte JobID { get;   }
 
-
-        /// <summary>
-        ///  上个本地 计算出来的技能 他可能还没有释放
-        /// </summary>
-        protected uint LastPreAction { get; private set; }
+        protected static uint LastPreAction = 0;
+    
 
         /// <summary> Performs various checks then attempts to invoke the combo. </summary>
         /// <param name="actionID"> Starting action ID. </param>
@@ -60,7 +60,7 @@ namespace XIVSlothComboX.CustomComboNS
         {
             newActionID = 0;
 
-            LastPreAction = actionID;
+            UpdateCombatTimer();
             
             if (!IsEnabled(Preset))
                 return false;
@@ -79,7 +79,7 @@ namespace XIVSlothComboX.CustomComboNS
                 return false;
 
             uint resultingActionID = Invoke(actionID, lastComboMove, comboTime, level);
-            //Dalamud.Logging.PluginLog.Debug(resultingActionID.ToString());
+            
 
             if (resultingActionID == 0 || actionID == resultingActionID)
                 return false;

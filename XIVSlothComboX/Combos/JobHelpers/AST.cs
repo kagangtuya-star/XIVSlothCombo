@@ -69,9 +69,12 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 PartyTargets.Clear();
                 for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
                 {
-                    if (GetPartySlot(i) is not BattleChara member) continue;
-                    if (member is null) continue; //Skip nulls/disconnected people
-                    if (member.IsDead) continue;
+                    if (GetPartySlot(i) is not BattleChara member) 
+                        continue;
+                    if (member is null) 
+                        continue; //Skip nulls/disconnected people
+                    if (member.IsDead) 
+                        continue;
                     if (OutOfRange(Bole, member)) continue;
 
                     if (FindEffectOnMember(Buffs.BalanceDamage, member) is not null) continue;
