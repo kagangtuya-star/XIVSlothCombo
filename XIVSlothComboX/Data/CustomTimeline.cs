@@ -41,6 +41,9 @@ public class CustomAction
     public double UseTimeStart;
     public double UseTimeEnd;
     
+    /// <summary>
+    /// 1自己 2-8为小队其他队友 9为血量百分比最低
+    /// </summary>
     public int TargetType;
 
     public byte CustomActionType = CustomType.序列;

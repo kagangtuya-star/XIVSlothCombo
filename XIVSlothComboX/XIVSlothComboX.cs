@@ -41,6 +41,7 @@ namespace XIVSlothComboX
 
 
         private uint autoActionId = 0;
+        private int CustomTimelineIndex = 0;
 
         // private bool isAuto = false;
 
@@ -95,8 +96,6 @@ namespace XIVSlothComboX
             KillRedundantIDs();
 
             Service.IconManager = new IconManager();
-
-
         }
 
 
@@ -629,7 +628,7 @@ namespace XIVSlothComboX
 
                     break;
                 }
-                
+
                 case "useitem":
                 {
                     Dalamud.Logging.PluginLog.Error("1");
@@ -637,6 +636,32 @@ namespace XIVSlothComboX
 
                     break;
                 }
+
+                case "use_custom_timeline":
+                {
+                    CustomTimelineIndex = 0;
+                    try
+                    {
+                        CustomTimelineIndex = int.Parse(argumentsParts[1]);
+                        if (CustomTimelineIndex > 0)
+                        {
+                            CustomComboFunctions.LoadCustomTime(CustomTimelineIndex);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                    }
+
+                    break;
+                }
+                
+                case "stop_custom_timeline":
+                {
+                    CustomComboFunctions.ResetCustomTime();
+
+                    break;
+                }
+
 
                 default:
                 {

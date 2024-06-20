@@ -4,6 +4,7 @@ using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.CustomComboNS.Functions
 {
@@ -44,6 +45,18 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             }
         }
 
+        public static void LoadCustomTime(int index)
+        {
+            foreach (CustomTimeline tCustomTimeline in PluginConfiguration.CustomTimelineList)
+            {
+                if (tCustomTimeline.Index == index)
+                {
+                    LoadCustomTime(tCustomTimeline);
+                    return;
+                }
+            }
+        }
+
         public static void LoadCustomTime(CustomTimeline tCustomAction)
         {
             ResetCustomTime();
@@ -77,6 +90,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     }
                 }
             }
+            Service.Configuration.Save();
         }
 
 
@@ -89,6 +103,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             药品轴.Clear();
             整个轴.Clear();
             ActionWatching.CustomList.Clear();
+            Service.Configuration.Save();
         }
 
         public static CustomAction? CustomTimelineFindBy时间轴(uint actionId)
@@ -131,6 +146,9 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static unsafe bool Useitem(uint itemId)
         {
             uint a4 = 65535;
+
+            if (IsUseItem == false)
+                return false;
 
             if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId + 1000000) != 0)
                 return false;

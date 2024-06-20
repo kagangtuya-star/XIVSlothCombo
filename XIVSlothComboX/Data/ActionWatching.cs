@@ -12,6 +12,7 @@ using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Services;
+using Action = Lumina.Excel.GeneratedSheets.Action;
 using AST = XIVSlothComboX.Combos.PvE.AST;
 
 namespace XIVSlothComboX.Data
@@ -112,12 +113,26 @@ namespace XIVSlothComboX.Data
                 CombatActions.Add(header.ActionId);
                 特殊起手Actions.Add(header.ActionId);
 
+                
 
-                {
-                    // Service.ChatGui.PrintError($"[ReceiveActionEffectDetour]");
+                if (Service.Configuration.EnabledOutputLog)
+                    OutputLog();
+            }
+        }
+
+        private delegate void SendActionDelegate(ulong targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7,
+            long a8, long a9);
+
+        private static readonly Hook<SendActionDelegate>? SendActionHook;
+
+        private static unsafe void SendActionDetour(ulong targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7,
+            long a8, long a9)
+        {
+            
+            {
                     
                     var customAction = new CustomAction();
-
+                    customAction.ActionId = actionId;
                     var totalSeconds = CustomComboFunctions.CombatEngageDuration().TotalSeconds;
 
                     if (CustomComboFunctions.InCombat())
@@ -139,26 +154,31 @@ namespace XIVSlothComboX.Data
                         }
                     }
 
-                    customAction.ActionId = header.ActionId;
+                    if (ActionSheet.ContainsKey(actionId))
+                    {
+                        Action actionByActionSheet = ActionSheet[actionId];
+                        // Service.ChatGui.PrintError($"{GetActionName(customAction.ActionId)}-{actionByActionSheet.CanTargetParty}-{sourceActor}-{Service.ClientState.LocalPlayer.Address}");
+                        
+                        if (actionByActionSheet.CanTargetParty)
+                        {
+                            // CustomComboFunctions.get
+                            
+                            customAction.CustomActionType = CustomType.时间;
+                            customAction.TargetType = CustomComboFunctions.getPartyIndex(targetObjectId);
+                            
+                            // Service.ChatGui.PrintError($"{GetActionName(customAction.ActionId)}-{targetObjectId}- {CustomComboFunctions.getPartyIndex(targetObjectId)}");
+
+                        }
+                    }
+
+                 
+
+            
 
                     TimelineList.Add(customAction);
                  
                 }
 
-
-                if (Service.Configuration.EnabledOutputLog)
-                    OutputLog();
-            }
-        }
-
-        private delegate void SendActionDelegate(long targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7,
-            long a8, long a9);
-
-        private static readonly Hook<SendActionDelegate>? SendActionHook;
-
-        private static unsafe void SendActionDetour(long targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7,
-            long a8, long a9)
-        {
             
             // Service.ChatGui.PrintError($"SendActionDetour{CustomComboFunctions.DateTimeToLongTimeStamp(DateTime.Now)}");
             try
@@ -177,7 +197,7 @@ namespace XIVSlothComboX.Data
             }
         }
 
-        private static unsafe void CheckForChangedTarget(uint actionId, ref long targetObjectId)
+        private static unsafe void CheckForChangedTarget(uint actionId, ref ulong targetObjectId)
         {
             // Service.ChatGui.PrintError($"[CheckForChangedTarget]");
 

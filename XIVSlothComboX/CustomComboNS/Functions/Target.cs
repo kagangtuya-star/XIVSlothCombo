@@ -249,6 +249,100 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             return o != null ? (StructsObject.GameObject*)o.Address : null;
         }
 
+
+        public unsafe static int getPartyIndex(ulong ObjectId)
+        {
+            {
+                GameObject? gameObject = GetPartySlot(2);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId ==gameObject.ObjectId)
+                    {
+                        return 2;
+                    }
+                }   
+            }
+        
+
+            {
+                GameObject? gameObject = GetPartySlot(3);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId ==  gameObject.ObjectId)
+                    {
+                        return 3;
+                    }
+                }  
+            }
+            
+            {
+                GameObject? gameObject = GetPartySlot(4);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId == gameObject.ObjectId)
+                    {
+                        return 4;
+                    }
+                }  
+            }
+            
+            
+            {
+                GameObject? gameObject = GetPartySlot(5);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId ==  gameObject.ObjectId)
+                    {
+                        return 5;
+                    }
+                }  
+            }
+
+            
+            {
+                GameObject? gameObject = GetPartySlot(6);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId == gameObject.ObjectId)
+                    {
+                        return 6;
+                    }
+                } 
+            }
+            
+            {
+                GameObject? gameObject = GetPartySlot(7);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId ==  gameObject.ObjectId)
+                    {
+                        return 7;
+                    }
+                } 
+            }
+
+            {
+                GameObject? gameObject = GetPartySlot(8);
+
+                if (gameObject != null)
+                {
+                    if (ObjectId ==  gameObject.ObjectId)
+                    {
+                        return 8;
+                    }
+                } 
+            }
+
+            return 1;
+
+        }
+
         public enum TargetType
         {
             Target,
