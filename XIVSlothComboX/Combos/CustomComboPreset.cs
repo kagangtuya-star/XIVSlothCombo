@@ -1242,7 +1242,7 @@ namespace XIVSlothComboX.Combos
         
         [ReplaceSkill(MCH.独头弹SlugShot)]
         // [ConflictingCombos(MCH_ST_AdvancedMode)]
-        [CustomComboInfo("自定义起手-独头弹", "如果他足够长的话，就不一样了",MCH.JobID)]
+        [CustomComboInfo("自定义循环", "自定义循环",MCH.JobID)]
         MCH_ST_CustomMode = 81001,
         
         #endregion
@@ -2787,10 +2787,16 @@ namespace XIVSlothComboX.Combos
 
         #region SUMMONER
 
+        [ReplaceSkill(All.Sleep)]
+        [CustomComboInfo("自定义循环",
+            "自定义循环",
+            SMN.JobID, 0, "", "")]
+        SMN_Advanced_CustomMode = 170000,
+        
         [ReplaceSkill(SMN.Ruin, SMN.Ruin2, SMN.Outburst, SMN.Tridisaster)]
         [CustomComboInfo("高级自定义循环开关",
             "Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes.",
-            SMN.JobID, 0, "", "")]
+            SMN.JobID, 1, "", "")]
         SMN_Advanced_Combo = 17000,
 
 

@@ -4,6 +4,7 @@ using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using System;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 
@@ -229,6 +230,64 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
+        
+        internal class SMN_ST_Custom : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SMN_Advanced_CustomMode;
+
+
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID is All.Sleep)
+                {
+                    // Service.ChatGui.PrintError($"CustomComboPreset");
+
+
+                    var 开始时间 = DateTime.Now;
+
+                    if (_CustomTimeline != null)
+                    {
+                        if (CustomTimelineIsEnable())
+                        {
+                            var seconds = CombatEngageDuration().TotalSeconds;
+                            
+                            foreach (var customAction in 药品轴)
+                            {
+                                if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                                {
+                                    Useitem(customAction.ActionId);
+                                }
+                            }
+
+                            
+                            foreach (var customAction in 时间轴)
+                            {
+                                if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                                {
+                                    return customAction.ActionId;
+                                }
+                            }
+
+
+                            int index = ActionWatching.CustomList.Count;
+                            if (index < 序列轴.Count)
+                            {
+                                
+                                // Service.ChatGui.PrintError($"序列轴:{DateTimeToLongTimeStamp(DateTime.Now)}");
+                                var newActionId = 序列轴[index].ActionId;
+                                return newActionId;
+                            }
+                        }
+                    }
+                }
+
+
+                return actionID;
+            }
+        }
+
+        
         /**
          * 高级召唤
          */

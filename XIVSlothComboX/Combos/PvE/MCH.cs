@@ -351,7 +351,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (_CustomTimeline != null)
                     {
-                        if (_CustomTimeline.JobId == MCH.JobID)
+                        if (CustomTimelineIsEnable())
                         {
                             var seconds = CombatEngageDuration().TotalSeconds;
                             

@@ -380,14 +380,10 @@ namespace XIVSlothComboX.Window.Functions
 
                
             }
-            ImGui.SameLine();
-            ImGui.Spacing();
-            ImGui.SameLine();
-            ImGui.Spacing();
-            ImGui.SameLine();
-            ImGui.Spacing();
+           
             
             ImGui.SameLine();
+            ImGui.SetCursorPosX(60);
             if (ImGui.Button("停用"))
             {
                 customTimeline.Enable = false;
@@ -397,14 +393,11 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             
-            
-            
           
 
             {
                 ImGui.SameLine();
-                ImGui.Spacing();
-                ImGui.SameLine();
+                ImGui.SetCursorPosX(110);
                 ImGui.PushItemWidth(300);
 
 
@@ -2341,6 +2334,19 @@ namespace XIVSlothComboX.Window.Functions
 
             #region PvE
 
+            if (preset is CustomComboPreset.SMN_Advanced_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == SMN.JobID);
+                
+                
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline,customTimelineList);
+                }
+            }
+            
             if (preset == CustomComboPreset.SMN_DemiEgiMenu_EgiOrder)
             {
                 UserConfig.DrawHorizontalRadioButton(SMN.Config.召唤顺序, "土风火", "按泰坦，迦楼罗，伊芙利特的顺序召唤", 1);
