@@ -292,8 +292,8 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(Kassatsu);
 
                         //healing - please move if not appropriate priority
-                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_SecondWind) && All.内丹SecondWind.LevelChecked() && playerHP <= SecondWindThreshold && IsOffCooldown(All.内丹SecondWind))
-                            return All.内丹SecondWind;
+                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_SecondWind) && All.SecondWind.LevelChecked() && playerHP <= SecondWindThreshold && IsOffCooldown(All.SecondWind))
+                            return All.SecondWind;
 
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_ShadeShift) && ShadeShift.LevelChecked() && playerHP <= ShadeShiftThreshold && IsOffCooldown(NIN.ShadeShift))
                             return NIN.ShadeShift;
@@ -338,8 +338,8 @@ namespace XIVSlothComboX.Combos.PvE
                                 return OriginalHook(TenChiJin);
                         }
 
-                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_SecondWind) && All.内丹SecondWind.LevelChecked() && playerHP <= SecondWindThreshold && IsOffCooldown(All.内丹SecondWind))
-                            return All.内丹SecondWind;
+                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_SecondWind) && All.SecondWind.LevelChecked() && playerHP <= SecondWindThreshold && IsOffCooldown(All.SecondWind))
+                            return All.SecondWind;
 
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_ShadeShift) && ShadeShift.LevelChecked() && playerHP <= ShadeShiftThreshold && IsOffCooldown(NIN.ShadeShift))
                             return NIN.ShadeShift;
@@ -367,14 +367,14 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Ninjitsus_Huton) &&
                             IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Ninjitsus) &&
                             (!Huraijin.LevelChecked() || !InCombat()) &&
-                            gauge.HutonTimer <= 15000 &&
+                            // gauge.HutonTimer <= 15000 &&
                             chargeCheck &&
                             mudraState.CastHuton(ref actionID))
                             return actionID;
 
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Huraijin) &&
                             InCombat() &&
-                            gauge.HutonTimer <= hutonHuraijinTimer &&
+                            // gauge.HutonTimer <= hutonHuraijinTimer &&
                             Huraijin.LevelChecked() && !inMudraState)
                             return OriginalHook(Huraijin);
 
@@ -415,8 +415,8 @@ namespace XIVSlothComboX.Combos.PvE
                         lastComboMove == GustSlash &&
                         (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack) && IsOnCooldown(TrickAttack) ||
                         IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack)) &&
-                        ((gauge.HutonTimer <= hutonArmorCrushTimer) || doubleArmorCrush && timesLastEnderWasArmorCrush == 1) &&
-                        gauge.HutonTimer > 0 && ArmorCrush.LevelChecked() &&
+                        // ((gauge.HutonTimer <= hutonArmorCrushTimer) || doubleArmorCrush && timesLastEnderWasArmorCrush == 1) &&
+                        // gauge.HutonTimer > 0 && ArmorCrush.LevelChecked() &&
                         comboTime > 1f)
                     {
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrueNorth) &&
@@ -549,8 +549,8 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(Assassinate);
 
                         // healing - please move if not appropriate priority
-                        if (IsEnabled(CustomComboPreset.NIN_AoE_AdvancedMode_SecondWind) && All.内丹SecondWind.LevelChecked() && playerHP <= SecondWindThreshold && IsOffCooldown(All.内丹SecondWind))
-                            return All.内丹SecondWind;
+                        if (IsEnabled(CustomComboPreset.NIN_AoE_AdvancedMode_SecondWind) && All.SecondWind.LevelChecked() && playerHP <= SecondWindThreshold && IsOffCooldown(All.SecondWind))
+                            return All.SecondWind;
 
                         if (IsEnabled(CustomComboPreset.NIN_AoE_AdvancedMode_ShadeShift) && ShadeShift.LevelChecked() && playerHP <= ShadeShiftThreshold && IsOffCooldown(NIN.ShadeShift))
                             return NIN.ShadeShift;
@@ -576,14 +576,14 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.NIN_AoE_AdvancedMode_Ninjitsus_Huton) &&
                         IsEnabled(CustomComboPreset.NIN_AoE_AdvancedMode_Ninjitsus) &&
                         (!Huraijin.LevelChecked() || !InCombat()) &&
-                        gauge.HutonTimer <= 15000 &&
+                        // gauge.HutonTimer <= 15000 &&
                         chargeCheck &&
                         mudraState.CastHuton(ref actionID))
                         return actionID;
 
                     if (IsEnabled(CustomComboPreset.NIN_AoE_AdvancedMode_Huraijin) &&
                         InCombat() &&
-                        gauge.HutonTimer <= hutonHuraijinTimer &&
+                        // gauge.HutonTimer <= hutonHuraijinTimer &&
                         Huraijin.LevelChecked() && !inMudraState)
                         return OriginalHook(Huraijin);
 
@@ -665,11 +665,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.NIN_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= GetOptionValue(Config.NIN_VariantCure))
                         return Variant.VariantCure;
 
-                    if (!Huraijin.LevelChecked() && gauge.HutonTimer <= 15000 && mudraState.CastHuton(ref actionID))
-                        return actionID;
-
-                    if (InCombat() && gauge.HutonTimer == 0 && Huraijin.LevelChecked() && !inMudraState)
-                        return OriginalHook(Huraijin);
+              
 
                     if (mudraState.CastHyoshoRanryu(ref actionID))
                         return actionID;
@@ -738,8 +734,9 @@ namespace XIVSlothComboX.Combos.PvE
                         if (lastComboMove == SpinningEdge && GustSlash.LevelChecked())
                             return OriginalHook(GustSlash);
 
-                        if (lastComboMove == GustSlash && gauge.HutonTimer <= 30000 && ArmorCrush.LevelChecked())
-                            return OriginalHook(ArmorCrush);
+                        
+                        // if (lastComboMove == GustSlash && gauge.HutonTimer <= 30000 && ArmorCrush.LevelChecked())
+                        //     return OriginalHook(ArmorCrush);
 
                         if (lastComboMove == GustSlash && TargetNeedsPositionals() && GetRemainingCharges(All.TrueNorth) > 0 && All.TrueNorth.LevelChecked() && !HasEffect(All.Buffs.TrueNorth) && canWeave)
                             return OriginalHook(All.TrueNorth);
@@ -790,11 +787,11 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.NIN_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= GetOptionValue(Config.NIN_VariantCure))
                         return Variant.VariantCure;
 
-                    if (!Huraijin.LevelChecked() && gauge.HutonTimer <= 15000 && mudraState.CastHuton(ref actionID))
-                        return actionID;
+                    // if (!Huraijin.LevelChecked() && gauge.HutonTimer <= 15000 && mudraState.CastHuton(ref actionID))
+                        // return actionID;
 
-                    if (InCombat() && gauge.HutonTimer == 0 && Huraijin.LevelChecked())
-                        return OriginalHook(Huraijin);
+                    // if (InCombat() && gauge.HutonTimer == 0 && Huraijin.LevelChecked())
+                        // return OriginalHook(Huraijin);
 
                     if (HasEffect(Buffs.Kassatsu))
                     {

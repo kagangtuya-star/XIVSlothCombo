@@ -10,6 +10,7 @@ namespace XIVSlothComboX.Window.Tabs
     {
         internal static new void Draw()
         {
+            PvEFeatures.HasToOpenJob = true;
             ImGui.BeginChild("main", new Vector2(0, 0), true);
             ImGui.Text("此选项卡允许您在启用功能时自定义选项");
 
@@ -140,23 +141,6 @@ namespace XIVSlothComboX.Window.Tabs
 
             #endregion
             
-            
-            #region UI Settings
-            bool openAtJob = Service.Configuration.AutomaticallyOpenToCurrentJob;
-            if (ImGui.Checkbox("自动打开当前职业的PVE配置项", ref openAtJob))
-            {
-                Service.Configuration.AutomaticallyOpenToCurrentJob = openAtJob;
-                Service.Configuration.Save();
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.BeginTooltip();
-                ImGui.TextUnformatted("当配置窗口打开时，自动展开当前职业的PVE配置项。");
-                ImGui.EndTooltip();
-            }
-
-            #endregion
             
             ImGui.EndChild();
         }

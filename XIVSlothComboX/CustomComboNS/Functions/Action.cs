@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Services;
@@ -20,8 +21,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <summary> Checks if the player is high enough level to use the passed Action ID. </summary>
         /// <param name="actionid"> ID of the action. </param>
         /// <returns></returns>
-        public static bool LevelChecked(uint actionid)
-            => LocalPlayer.Level >= GetLevel(actionid) && NoBlockingStatuses(actionid);
+        public static bool LevelChecked(uint actionid) => LocalPlayer.Level >= GetLevel(actionid) && NoBlockingStatuses(actionid) && IsActionUnlocked(actionid);
+
 
         /// <summary> Checks if the player is high enough level to use the passed Trait ID. </summary>
         /// <param name="traitid"> ID of the action. </param>
@@ -37,6 +38,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <param name="id"> ID of the action. </param>
         /// <returns></returns>
         public static int GetLevel(uint id) => ActionWatching.GetLevel(id);
+        
+        /// <summary> Get the Cast time of an action. </summary>
+        /// <param name="id"> Action ID to check. </param>
+        /// <returns> Returns the cast time of an action. </returns>
+        internal static unsafe float GetActionCastTime(uint id) => ActionWatching.GetActionCastTime(id);
 
         /// <summary> Checks if the player is in range to use an action. Best used with actions with irregular ranges.</summary>
         /// <param name="id"> ID of the action. </param>
@@ -177,8 +183,13 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <param name="actionID"> Action ID to check. </param>
         /// <param name="weaveTime"> Time when weaving window is over. Defaults to 0.7. </param>
         /// <returns> True or false. </returns>
-        public static bool CanWeave(uint actionID, double weaveTime = 0.7)
-            => (GetCooldown(actionID).CooldownRemaining > weaveTime) || (HasSilence() && HasPacification());
+        public static bool CanWeave(uint actionID, double weaveTime = 0.66)
+        {
+            if (!checkUseAbility())
+                return false;
+            
+            return (GetCooldown(actionID).CooldownRemaining > weaveTime) || (HasSilence() && HasPacification());
+        }
 
         /// <summary> Checks if the provided actionID has enough cooldown remaining to weave against it without causing clipping and checks if you're casting a spell. </summary>
         /// <param name="actionID"> Action ID to check. </param>
@@ -225,7 +236,16 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static bool CanDelayedWeave(uint actionID, double start = 1.25, double end = 0.6)
             => GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end;
 
+        /// <summary>
+        /// Returns the current combo timer.
+        /// </summary>
+        public static unsafe float ComboTimer => ActionManager.Instance()->Combo.Timer;
 
+        /// <summary>
+        /// Returns the last combo action.
+        /// </summary>
+        public static unsafe uint ComboAction => ActionManager.Instance()->Combo.Action;
+        
         public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25, double end = 0.6)
         {
             if (!checkUseAbility())
@@ -238,6 +258,29 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
             return false;
 
+        }
+        private unsafe uint GetActionState(uint actionID)
+        {
+            return ActionManager.Instance()->GetActionStatus(ActionType.Action, actionID);
+        }
+
+        public bool CanUse(uint actionID)
+        {
+            if (GetActionState(actionID)==572)//黑的
+            {
+                return false;
+            }
+            if (GetActionState(actionID)==573)//没学技能
+            {
+                return false;
+            }
+
+            if (GetActionState(actionID)==582)//没准备好
+            {
+                return false;
+            }
+
+            return true;
         }
         private static bool checkUseAbility()
         {
@@ -294,9 +337,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 if (Last_2.RowId is 
                     DNC.双色标准舞步结束StandardFinish2
                     or DNC.四色技巧舞步结束TechnicalFinish4
-                    or DNC.提拉纳Tillana
-                    or MCH.热冲击HeatBlast
-                    or MCH.自动弩AutoCrossbow)
+                    or MCH.Heatblast
+                    or MCH.AutoCrossbow)
                 {
 
                     if (能力技数量 >= 1)

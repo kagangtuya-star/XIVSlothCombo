@@ -6,14 +6,16 @@ namespace XIVSlothComboX.Combos.PvE
 {
     internal class All
     {
-        public const byte JobID = 99;
+        public const byte JobID = 0;
 
         public const uint
             Rampart = 7531,
-            内丹SecondWind = 7541,
+            //内丹SecondWind
+            SecondWind = 7541,
             TrueNorth = 7546,
             Addle = 7560,
-            即刻咏唱Swiftcast = 7561,
+            // 即刻咏唱Swiftcast = 7561,
+            Swiftcast = 7561,
             LucidDreaming = 7562,
             Resurrection = 173,
             Raise = 125,
@@ -29,7 +31,8 @@ namespace XIVSlothComboX.Combos.PvE
             WiseToTheWorldBTN = 26522,
             LowBlow = 7540,
             Bloodbath = 7542,
-            伤头HeadGraze = 7551,
+            //伤头HeadGraze
+            HeadGraze = 7551,
             FootGraze = 7553,
             LegGraze = 7554,
             Feint = 7549,
@@ -83,8 +86,28 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is Sprint && Service.ClientState.TerritoryType is 1055) return IsleSprint;
-                else return actionID;
+                if (actionID is Sprint && Service.ClientState.TerritoryType is 1055)
+                {
+                    
+                    return IsleSprint;
+                }
+                else
+                {
+                    return actionID;
+                }
+                
+                
+                // if (actionID is PLD.先锋剑FastBlade )
+                // {
+                //     
+                //     return 20;
+                //     // return 20;
+                // }
+                // else
+                // {
+                //     return actionID;
+                // }
+
             }
         }
 
@@ -135,8 +158,8 @@ namespace XIVSlothComboX.Combos.PvE
                 if ((actionID is WHM.Raise or AST.Ascend or SGE.Egeiro) 
                     || (actionID is SCH.Resurrection && LocalPlayer.ClassJob.Id is SCH.JobID))
                 {
-                    if (ActionReady(即刻咏唱Swiftcast))
-                        return 即刻咏唱Swiftcast;
+                    if (ActionReady(Swiftcast))
+                        return Swiftcast;
 
                     if (actionID == WHM.Raise && IsEnabled(CustomComboPreset.WHM_ThinAirRaise) && ActionReady(WHM.ThinAir) && !HasEffect(WHM.Buffs.ThinAir))
                         return WHM.ThinAir;
@@ -176,8 +199,8 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     if (HasEffect(Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast))
                         return actionID;
-                    if (IsOffCooldown(即刻咏唱Swiftcast))
-                        return 即刻咏唱Swiftcast;
+                    if (IsOffCooldown(Swiftcast))
+                        return Swiftcast;
                 }
 
                 return actionID;
@@ -224,9 +247,9 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is BRD.Troubadour or MCH.策动Tactician or DNC.防守之桑巴ShieldSamba)
+                if (actionID is BRD.Troubadour or MCH.Tactician or DNC.防守之桑巴ShieldSamba)
                 {
-                    if ((HasEffectAny(BRD.Buffs.Troubadour) || HasEffectAny(MCH.Buffs.策动Tactician) || HasEffectAny(DNC.Buffs.防守之桑巴ShieldSamba)) && IsOffCooldown(actionID))
+                    if ((HasEffectAny(BRD.Buffs.Troubadour) || HasEffectAny(MCH.Buffs.Tactician) || HasEffectAny(DNC.Buffs.防守之桑巴ShieldSamba)) && IsOffCooldown(actionID))
                         return DRG.Stardiver;
                 }
 
@@ -240,7 +263,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                return (actionID is FootGraze && CanInterruptEnemy() && ActionReady(伤头HeadGraze) ) ? 伤头HeadGraze : actionID;
+                return (actionID is FootGraze && CanInterruptEnemy() && ActionReady(HeadGraze) ) ? HeadGraze : actionID;
             }
         }
     }

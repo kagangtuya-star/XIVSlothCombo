@@ -82,6 +82,7 @@ namespace XIVSlothComboX.Combos.PvE
             // Demi summons
             龙神召唤SummonBahamut = 7427,
             不死鸟召唤SummonPhoenix = 25831,
+            太阳哈巴姆特SummonSolarBahamut = 36992,
 
             // Demi summon abilities
             星极脉冲AstralImpulse = 25820, // Single target Bahamut GCD
@@ -89,14 +90,14 @@ namespace XIVSlothComboX.Combos.PvE
             //死星核爆 Deathflare
             死星核爆 = 3582, // Damage oGCD Bahamut
             //龙神迸发 EnkindleBahamut
-            龙神迸发 = 7429,
+            龙神迸发EnkindleBahamut = 7429,
             灵泉之炎FountainOfFire = 16514, // Single target Phoenix GCD
             炼狱之炎BrandOfPurgatory = 16515, // AoE Phoenix GCD
             Rekindle = 25830, // Healing oGCD Phoenix
             EnkindlePhoenix = 16516,
 
             // Shared summon abilities  星极超流 AstralFlow
-            星极超流 = 25822,
+            星极超流AstralFlow = 25822,
 
             // Summoner GCDs
             Ruin = 163,
@@ -123,7 +124,13 @@ namespace XIVSlothComboX.Combos.PvE
             RadiantAegis = 25799,
             以太蓄能Aethercharge = 25800,
             //灼热之光 SearingLight
-            灼热之光SearingLight = 25801;
+            灼热之光SearingLight = 25801,
+            EnkindleSolarBahamut = 36998,
+            SummonSolarBahamut = 36992,
+            Sunflare = 36996,
+            UmbralImpulse = 36994, //Single target Solar Bahamut GCD
+            UmbralFlare = 36995, //AoE Solar Bahamut GCD
+            灼热的闪光SearingFlash = 36991;
 
 
         public static class Buffs
@@ -134,7 +141,8 @@ namespace XIVSlothComboX.Combos.PvE
                 TitansFavor = 2853,
                 IfritsFavor = 2724,
                 EverlastingFlight = 16517,
-                SearingLight = 2703;
+                SearingLight = 2703,
+                RubyGlimmer = 3873;
         }
 
         public static class Config
@@ -155,12 +163,12 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID == All.即刻咏唱Swiftcast)
+                if (actionID == All.Swiftcast)
                 {
                     if (HasEffect(All.Buffs.Swiftcast) && IsEnabled(CustomComboPreset.SMN_Variant_Raise) && IsEnabled(Variant.VariantRaise))
                         return Variant.VariantRaise;
 
-                    if (IsOnCooldown(All.即刻咏唱Swiftcast))
+                    if (IsOnCooldown(All.Swiftcast))
                         return Resurrection;
                 }
 
@@ -230,54 +238,61 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
-        
+
         internal class SMN_ST_Custom : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SMN_Advanced_CustomMode;
-
-
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID is All.Sleep)
                 {
-                    // Service.ChatGui.PrintError($"CustomComboPreset");
-
-
-                    var 开始时间 = DateTime.Now;
-
-                    if (_CustomTimeline != null)
+                    if (CustomTimelineIsEnable())
                     {
-                        if (CustomTimelineIsEnable())
+                        double? seconds = -9999d;
+
+                        if (InCombat())
                         {
-                            var seconds = CombatEngageDuration().TotalSeconds;
-                            
-                            foreach (var customAction in 药品轴)
+                            seconds = CombatEngageDuration().TotalSeconds;
+                        }
+                        else
+                        {
+                            var timeRemaining = Countdown.TimeRemaining();
+                            if (timeRemaining != null)
                             {
-                                if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                                {
-                                    Useitem(customAction.ActionId);
-                                }
+                                seconds = -timeRemaining;
                             }
+                        }
 
-                            
-                            foreach (var customAction in 时间轴)
+                        foreach (var customAction in 药品轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                             {
-                                if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                                {
-                                    return customAction.ActionId;
-                                }
+                                Useitem(customAction.ActionId);
                             }
+                        }
 
-
-                            int index = ActionWatching.CustomList.Count;
-                            if (index < 序列轴.Count)
+                        foreach (var customAction in 地面轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                             {
-                                
-                                // Service.ChatGui.PrintError($"序列轴:{DateTimeToLongTimeStamp(DateTime.Now)}");
-                                var newActionId = 序列轴[index].ActionId;
-                                return newActionId;
+                                Use地面技能(customAction);
                             }
+                        }
+
+                        foreach (var customAction in 时间轴)
+                        {
+                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                return customAction.ActionId;
+                            }
+                        }
+
+                        int index = ActionWatching.CustomList.Count;
+                        if (index < 序列轴.Count)
+                        {
+                            var newActionId = 序列轴[index].ActionId;
+                            return newActionId;
                         }
                     }
                 }
@@ -287,7 +302,7 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
-        
+
         /**
          * 高级召唤
          */
@@ -308,8 +323,17 @@ namespace XIVSlothComboX.Combos.PvE
                 //0-3
                 var 延迟几个GCD打爆发 = PluginConfiguration.GetCustomIntValue(Config.SMN_Burst_Delay);
                 var inOpener = CombatEngageDuration().TotalSeconds < 40;
+
                 var STCombo = actionID is Ruin or Ruin2;
                 var AoECombo = actionID is Outburst or Tridisaster;
+
+                var IsGarudaAttuned = OriginalHook(宝石耀Gemshine) is EmeralRuin1 or EmeralRuin2 or EmeralRuin3 or EmeraldRite;
+                var IsTitanAttuned = OriginalHook(宝石耀Gemshine) is TopazRuin1 or TopazRuin2 or TopazRuin3 or TopazRite;
+                var IsIfritAttuned = OriginalHook(宝石耀Gemshine) is RubyRuin1 or RubyRuin2 or RubyRuin3 or RubyRite;
+
+                var IsBahamutReady = OriginalHook(以太蓄能Aethercharge) is 龙神召唤SummonBahamut;
+                var IsPhoenixReady = OriginalHook(以太蓄能Aethercharge) is 不死鸟召唤SummonPhoenix;
+                var IsSolarBahamutReady = OriginalHook(以太蓄能Aethercharge) is SummonSolarBahamut;
 
                 if (WasLastAction(OriginalHook(以太蓄能Aethercharge)))
                 {
@@ -319,7 +343,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                 // If SMN_Advanced_Burst_Delay_Option is active and outside opener window, set DemiAttackCount to 6 to ignore delayed oGCDs 
                 if (!inOpener)
-                // if (IsEnabled(CustomComboPreset.SMN_Advanced_Burst_Delay_Option) && !inOpener)
+                    // if (IsEnabled(CustomComboPreset.SMN_Advanced_Burst_Delay_Option) && !inOpener)
                 {
                     DemiAttackCount = 6;
                 }
@@ -338,7 +362,8 @@ namespace XIVSlothComboX.Combos.PvE
 
 
                 //CHECK_DEMIATTACK_USE
-                if (UsedDemiAttack == false && lastComboMove is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or 星极核爆AstralFlare or 炼狱之炎BrandOfPurgatory &&
+                if (UsedDemiAttack == false && lastComboMove is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or 星极核爆AstralFlare or 炼狱之炎BrandOfPurgatory
+                        or UmbralImpulse or UmbralFlare &&
                     DemiAttackCount is not 6 && GetCooldownRemainingTime(星极脉冲AstralImpulse) > 1)
                 {
                     UsedDemiAttack = true; // Registers that a Demi Attack was used and blocks further incrementation of DemiAttackCountCount
@@ -388,25 +413,25 @@ namespace XIVSlothComboX.Combos.PvE
                     if (CanSpellWeavePlus(actionID))
                     {
                         // Emergency priority Demi Nuke to prevent waste if you can't get demi attacks out to satisfy the slider check.
-                        if (OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire &&
+                        if (OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or UmbralImpulse &&
                             GetCooldown(OriginalHook(以太蓄能Aethercharge)).CooldownElapsed >= 12.5)
                         {
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Attacks))
                             {
-                                if (IsOffCooldown(OriginalHook(龙神迸发)) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
+                                if (IsOffCooldown(OriginalHook(龙神迸发EnkindleBahamut)) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
                                     LevelChecked(龙神召唤SummonBahamut))
-                                    return OriginalHook(龙神迸发);
+                                    return OriginalHook(龙神迸发EnkindleBahamut);
 
                                 if (IsOffCooldown(死星核爆) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 && LevelChecked(死星核爆) &&
                                     OriginalHook(Ruin) is 星极脉冲AstralImpulse)
-                                    return OriginalHook(星极超流);
+                                    return OriginalHook(星极超流AstralFlow);
                             }
 
                             // Demi Nuke 2: Electric Boogaloo
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Rekindle))
                             {
                                 if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
-                                    return OriginalHook(星极超流);
+                                    return OriginalHook(星极超流AstralFlow);
                             }
                         }
 
@@ -433,34 +458,53 @@ namespace XIVSlothComboX.Combos.PvE
                                     (在什么阶段用爆发 is not 4) ||
                                     (在什么阶段用爆发 == 4 && !HasEffect(Buffs.TitansFavor)))
                                 {
-                                    if (STCombo)
-                                        return 溃烂爆发Fester;
+                                    if (灼热的闪光SearingFlash.ActionReady() && HasEffect(Buffs.RubyGlimmer))
+                                    {
+                                        return OriginalHook(灼热之光SearingLight);
+                                    }
 
-                                    if (AoECombo && LevelChecked(痛苦核爆Painflare) && IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling_Only))
+                                    if (STCombo && !WasLastAction(OriginalHook(溃烂爆发Fester)))
+                                    {
+                                        return OriginalHook(溃烂爆发Fester);
+                                    }
+
+
+                                    if (AoECombo && LevelChecked(痛苦核爆Painflare) && !WasLastAction(痛苦核爆Painflare) && IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling_Only))
                                         return 痛苦核爆Painflare;
                                 }
                             }
                         }
 
                         // Demi Nuke
-                        if (OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire)
+                        if (OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or UmbralImpulse)
                         {
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Attacks) && DemiAttackCount >= 延迟几个GCD打爆发)
                             {
-                                if (IsOffCooldown(OriginalHook(龙神迸发)) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
-                                    LevelChecked(龙神召唤SummonBahamut))
-                                    return OriginalHook(龙神迸发);
+                                if (GetCooldownRemainingTime(灼热之光SearingLight) is >= 10)
+                                {
+                                    if (IsSolarBahamutReady)
+                                    {
+                                        if (Sunflare.ActionReady())
+                                            return OriginalHook(星极超流AstralFlow);
 
-                                if (IsOffCooldown(死星核爆) && LevelChecked(死星核爆) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
-                                    OriginalHook(Ruin) is 星极脉冲AstralImpulse)
-                                    return OriginalHook(星极超流);
+                                        if (IsOffCooldown(OriginalHook(EnkindleSolarBahamut)) &&
+                                            LevelChecked(SummonSolarBahamut))
+                                            return OriginalHook(EnkindleSolarBahamut);
+                                    }
+
+                                    if (IsOffCooldown(OriginalHook(龙神迸发EnkindleBahamut)) && LevelChecked(龙神召唤SummonBahamut))
+                                        return OriginalHook(龙神迸发EnkindleBahamut);
+
+                                    if (死星核爆.ActionReady())
+                                        return OriginalHook(星极超流AstralFlow);
+                                }
                             }
 
                             // Demi Nuke 2: Electric Boogaloo
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Rekindle))
                             {
                                 if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
-                                    return OriginalHook(星极超流);
+                                    return OriginalHook(星极超流AstralFlow);
                             }
                         }
 
@@ -471,10 +515,15 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling))
                                 {
-                                    if (STCombo)
-                                        return 溃烂爆发Fester;
+                                    if (灼热的闪光SearingFlash.ActionReady() && HasEffect(Buffs.RubyGlimmer))
+                                    {
+                                        return OriginalHook(灼热的闪光SearingFlash);
+                                    }
 
-                                    if (AoECombo && LevelChecked(痛苦核爆Painflare))
+                                    if (STCombo && !WasLastAction(痛苦核爆Painflare) && !WasLastAction(OriginalHook(溃烂爆发Fester)))
+                                        return OriginalHook(溃烂爆发Fester);
+
+                                    if (AoECombo && !WasLastAction(痛苦核爆Painflare) && LevelChecked(痛苦核爆Painflare))
                                         return 痛苦核爆Painflare;
                                 }
 
@@ -482,8 +531,8 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     if (!LevelChecked(灼热之光SearingLight))
                                     {
-                                        if (STCombo)
-                                            return 溃烂爆发Fester;
+                                        if (STCombo && !WasLastAction(OriginalHook(溃烂爆发Fester)))
+                                            return OriginalHook(溃烂爆发Fester);
 
                                         if (AoECombo && LevelChecked(痛苦核爆Painflare) &&
                                             IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling_Only))
@@ -495,8 +544,16 @@ namespace XIVSlothComboX.Combos.PvE
                                         (在什么阶段用爆发 is 0 or 1 or 2 or 3 && DemiAttackCount >= 延迟几个GCD打爆发) ||
                                         (在什么阶段用爆发 == 4 && !HasEffect(Buffs.TitansFavor)))
                                     {
-                                        if (STCombo)
-                                            return 溃烂爆发Fester;
+                                        if (灼热的闪光SearingFlash.ActionReady() && HasEffect(Buffs.RubyGlimmer))
+                                        {
+                                            return OriginalHook(灼热的闪光SearingFlash);
+                                        }
+
+                                        if (STCombo && !WasLastAction(OriginalHook(溃烂爆发Fester)))
+                                        {
+                                            return OriginalHook(溃烂爆发Fester);
+                                        }
+
 
                                         if (AoECombo && LevelChecked(痛苦核爆Painflare) &&
                                             IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_oGCDPooling_Only))
@@ -516,46 +573,48 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (InCombat() && gauge.SummonTimerRemaining == 0 && IsOffCooldown(OriginalHook(以太蓄能Aethercharge)) &&
                             (LevelChecked(以太蓄能Aethercharge) && !LevelChecked(龙神召唤SummonBahamut) || // Pre-Bahamut Phase
-                             gauge.IsBahamutReady && LevelChecked(龙神召唤SummonBahamut) || // Bahamut Phase
-                             gauge.IsPhoenixReady && LevelChecked(不死鸟召唤SummonPhoenix))) // Phoenix Phase
+                             // Bahamut Phase
+                             IsBahamutReady && LevelChecked(龙神召唤SummonBahamut) ||
+                             IsSolarBahamutReady && LevelChecked(太阳哈巴姆特SummonSolarBahamut) ||
+                             IsPhoenixReady && LevelChecked(不死鸟召唤SummonPhoenix))) // Phoenix Phase
                             return OriginalHook(以太蓄能Aethercharge);
                     }
 
                     //Ruin4 in Egi Phases
                     if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_Ruin4) && HasEffect(Buffs.FurtherRuin) &&
-                        ((!HasEffect(All.Buffs.Swiftcast) && IsMoving && ((HasEffect(Buffs.螺旋气流GarudasFavor) && !gauge.IsGarudaAttuned) ||
-                                                                          (gauge.IsIfritAttuned && lastComboMove is not CrimsonCyclone))) ||
+                        ((!HasEffect(All.Buffs.Swiftcast) && IsMoving && ((HasEffect(Buffs.螺旋气流GarudasFavor) && !IsGarudaAttuned) ||
+                                                                          (IsIfritAttuned && lastComboMove is not CrimsonCyclone))) ||
                          GetCooldownRemainingTime(OriginalHook(以太蓄能Aethercharge)) is < 2.5f and > 0))
                         return 毁绝Ruin4;
 
                     // Egi Features
-                    if (IsEnabled(CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi) && LevelChecked(All.即刻咏唱Swiftcast))
+                    if (IsEnabled(CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi) && LevelChecked(All.Swiftcast))
                     {
                         // Swiftcast Garuda Feature
                         if (即可咏唱swiftcastPhase is 0 or 1 && LevelChecked(螺旋气流Slipstream) && HasEffect(Buffs.螺旋气流GarudasFavor))
                         {
-                            if (CanSpellWeave(actionID) && gauge.IsGarudaAttuned && IsOffCooldown(All.即刻咏唱Swiftcast))
+                            if (CanSpellWeave(actionID) && IsGarudaAttuned && IsOffCooldown(All.Swiftcast))
                             {
                                 if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi_Only)))
-                                    return All.即刻咏唱Swiftcast;
+                                    return All.Swiftcast;
                             }
 
                             if (IsEnabled(CustomComboPreset.SMN_Garuda_Slipstream) &&
                                 ((HasEffect(Buffs.螺旋气流GarudasFavor) && HasEffect(All.Buffs.Swiftcast)) ||
                                  (gauge.Attunement == 0))) // Astral Flow if Swiftcast is not ready throughout Garuda
-                                return OriginalHook(星极超流);
+                                return OriginalHook(星极超流AstralFlow);
                         }
 
                         // Swiftcast Ifrit Feature (Conditions to allow for SpS Ruins to still be under the effect of Swiftcast)
                         if (即可咏唱swiftcastPhase == 2)
                         {
-                            if (IsOffCooldown(All.即刻咏唱Swiftcast) && gauge.IsIfritAttuned && lastComboMove is not CrimsonCyclone)
+                            if (IsOffCooldown(All.Swiftcast) && IsIfritAttuned && lastComboMove is not CrimsonCyclone)
                             {
                                 if (IsNotEnabled(CustomComboPreset.SMN_Ifrit_Cyclone) ||
                                     (IsEnabled(CustomComboPreset.SMN_Ifrit_Cyclone) && gauge.Attunement >= 1))
                                 {
                                     if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi_Only)))
-                                        return All.即刻咏唱Swiftcast;
+                                        return All.Swiftcast;
                                 }
                             }
                         }
@@ -566,26 +625,26 @@ namespace XIVSlothComboX.Combos.PvE
                             // Swiftcast Garuda Feature
                             if (LevelChecked(螺旋气流Slipstream) && HasEffect(Buffs.螺旋气流GarudasFavor))
                             {
-                                if (CanSpellWeave(actionID) && gauge.IsGarudaAttuned && IsOffCooldown(All.即刻咏唱Swiftcast))
+                                if (CanSpellWeave(actionID) && IsGarudaAttuned && IsOffCooldown(All.Swiftcast))
                                 {
                                     if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi_Only)))
-                                        return All.即刻咏唱Swiftcast;
+                                        return All.Swiftcast;
                                 }
 
                                 if (IsEnabled(CustomComboPreset.SMN_Garuda_Slipstream) &&
                                     ((HasEffect(Buffs.螺旋气流GarudasFavor) && HasEffect(All.Buffs.Swiftcast)) ||
                                      (gauge.Attunement == 0))) // Astral Flow if Swiftcast is not ready throughout Garuda
-                                    return OriginalHook(星极超流);
+                                    return OriginalHook(星极超流AstralFlow);
                             }
 
                             // Swiftcast Ifrit Feature (Conditions to allow for SpS Ruins to still be under the effect of Swiftcast)
-                            if (IsOffCooldown(All.即刻咏唱Swiftcast) && gauge.IsIfritAttuned && lastComboMove is not CrimsonCyclone)
+                            if (IsOffCooldown(All.Swiftcast) && IsIfritAttuned && lastComboMove is not CrimsonCyclone)
                             {
                                 if (IsNotEnabled(CustomComboPreset.SMN_Ifrit_Cyclone) ||
                                     (IsEnabled(CustomComboPreset.SMN_Ifrit_Cyclone) && gauge.Attunement >= 1))
                                 {
                                     if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_DemiEgiMenu_SwiftcastEgi_Only)))
-                                        return All.即刻咏唱Swiftcast;
+                                        return All.Swiftcast;
                                 }
                             }
                         }
@@ -593,7 +652,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     // Gemshine/Precious Brilliance priority casting
                     if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_EgiSummons_Attacks) &&
-                        ((gauge.IsIfritAttuned && gauge.Attunement >= 1 && HasEffect(All.Buffs.Swiftcast) && lastComboMove is not CrimsonCyclone) ||
+                        ((IsIfritAttuned && gauge.Attunement >= 1 && HasEffect(All.Buffs.Swiftcast) && lastComboMove is not CrimsonCyclone) ||
                          (HasEffect(Buffs.螺旋气流GarudasFavor) && gauge.Attunement >= 1 && !HasEffect(All.Buffs.Swiftcast) && IsMoving)))
                     {
                         if (STCombo)
@@ -612,13 +671,12 @@ namespace XIVSlothComboX.Combos.PvE
                           (IsNotEnabled(CustomComboPreset.SMN_Ifrit_Cyclone_Option) || (IsMoving || gauge.Attunement == 0))) ||
                          (lastComboMove == CrimsonCyclone && InMeleeRange()))) // Ifrit
                     {
-                        return OriginalHook(星极超流);
+                        return OriginalHook(星极超流AstralFlow);
                     }
 
 
                     // Gemshine/Precious Brilliance
-                    if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_EgiSummons_Attacks) &&
-                        (gauge.IsGarudaAttuned || gauge.IsTitanAttuned || gauge.IsIfritAttuned))
+                    if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_EgiSummons_Attacks) && (IsGarudaAttuned || IsTitanAttuned || IsIfritAttuned))
                     {
                         if (STCombo)
                             return OriginalHook(宝石耀Gemshine);
@@ -749,11 +807,11 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                
                 // if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or 星极超流 or 龙神迸发 or 灼热之光SearingLight or RadiantAegis or Outburst
-                    // or Tridisaster or 宝石辉AoePreciousBrilliance or 宝石耀Gemshine)
-                
-                if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or 星极超流 or 龙神迸发 or 灼热之光SearingLight or RadiantAegis or Outburst
+                // or Tridisaster or 宝石辉AoePreciousBrilliance or 宝石耀Gemshine)
+
+                if (actionID is Ruin or Ruin2 or Ruin3 or DreadwyrmTrance or 星极超流AstralFlow or 龙神迸发EnkindleBahamut or 灼热之光SearingLight or RadiantAegis
+                    or Outburst
                     or Tridisaster or 宝石辉AoePreciousBrilliance or 宝石耀Gemshine)
                 {
                     presentTime = DateTime.Now;
@@ -783,7 +841,6 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                         // return SummonCarbuncle;
                     }
-
                 }
 
                 return actionID;
@@ -802,7 +859,7 @@ namespace XIVSlothComboX.Combos.PvE
                      HasEffect(Buffs.螺旋气流GarudasFavor)) ||
                     (actionID is SummonTopaz_黄宝石召唤 or SummonTitan or SummonTitan2 or SummonRuby_红宝石召唤 or SummonIfrit or SummonIfrit2 &&
                      (HasEffect(Buffs.IfritsFavor) || (lastComboMove == CrimsonCyclone && InMeleeRange()))))
-                    return OriginalHook(星极超流);
+                    return OriginalHook(星极超流AstralFlow);
 
                 return actionID;
             }
@@ -818,16 +875,20 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     if (CanSpellWeavePlus(actionID))
                     {
-                        if (IsOffCooldown(龙神迸发) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 && OriginalHook(Ruin) is 星极脉冲AstralImpulse)
-                            return OriginalHook(龙神迸发);
+                        if (IsOffCooldown(龙神迸发EnkindleBahamut) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
+                            OriginalHook(Ruin) is 星极脉冲AstralImpulse)
+                            return OriginalHook(龙神迸发EnkindleBahamut);
 
                         if (IsOffCooldown(EnkindlePhoenix) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
                             return OriginalHook(EnkindlePhoenix);
 
-                        if ((OriginalHook(星极超流) is 死星核爆 && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
+                        if ((OriginalHook(星极超流AstralFlow) is 死星核爆 && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
                              IsOffCooldown(死星核爆)) ||
-                            (OriginalHook(星极超流) is Rekindle && IsOffCooldown(Rekindle)))
-                            return OriginalHook(星极超流);
+                            (OriginalHook(星极超流AstralFlow) is Rekindle && IsOffCooldown(Rekindle)))
+                            return OriginalHook(星极超流AstralFlow);
+
+                        if (OriginalHook(星极超流AstralFlow) is Sunflare && IsOffCooldown(Sunflare))
+                            return OriginalHook(Sunflare);
                     }
                 }
 

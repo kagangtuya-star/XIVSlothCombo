@@ -53,9 +53,9 @@ namespace XIVSlothComboX.Combos.PvE
             即兴表演Improvisation = 16014,
             治疗之华尔兹CuringWaltz = 16015,
             //7.0 等待技能ID
-            最后一舞 = 4584,
-            舞步终结 = 4584,
-            晓之舞 = 36985,
+            最后一舞LastDance = 36983,
+            舞步终结 = 36984,
+            晓之舞DanceOfTheDawn = 36985,
             _ = 0;
 
         public static class Buffs
@@ -85,8 +85,8 @@ namespace XIVSlothComboX.Combos.PvE
                 速行Peloton = 1199,
                 防守之桑巴ShieldSamba = 1826,
                 //7.0 等待BUFFid
-                最后一舞预备PRE = 1826,
-                舞步终结预备 = 1826,
+                最后一舞预备PRE = 3867,
+                舞步终结预备 = 3868,
                 晓之舞预备 = 3869,
                 _ = 0;
         }
@@ -125,10 +125,6 @@ namespace XIVSlothComboX.Combos.PvE
             #endregion
         }
 
-       
-
-       
-        
 
         /*
          * 单体模块
@@ -242,7 +238,9 @@ namespace XIVSlothComboX.Combos.PvE
                                         if (HasEffect(Buffs.扇舞_终FourFoldFanDance))
                                             return 扇舞终FanDance4;
 
-                                        if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !WasLastAction(提拉纳Tillana))
+                                        if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
+                                            //注释掉 7.0提拉纳Tillana 可以双插了
+                                            // if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !WasLastAction(提拉纳Tillana))
                                         {
                                             if (gauge.Feathers > 0)
                                             {
@@ -281,9 +279,17 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
-                    if (standardStepReady && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS) && !HasEffect(Buffs.StandardFinish))
+                    if (standardStepReady && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS))
                     {
-                        return 标准舞步StandardStep;
+                        if (HasEffect(Buffs.StandardFinish))
+                        {
+                            return 标准舞步StandardStep;
+                        }
+
+                        if (techBurstTimer > 5)
+                        {
+                            return 标准舞步StandardStep;
+                        }
                     }
 
 
@@ -297,8 +303,8 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (gauge.Esprit >= 50)
                         {
-                            if (晓之舞.LevelChecked() && HasEffect(Buffs.晓之舞预备))
-                                return 晓之舞;
+                            if (晓之舞DanceOfTheDawn.LevelChecked() && HasEffect(Buffs.晓之舞预备))
+                                return 晓之舞DanceOfTheDawn;
                         }
 
                         if (IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance_1))
@@ -322,8 +328,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_最后一舞))
                     {
-                        if (最后一舞.LevelChecked() && HasEffect(Buffs.最后一舞预备PRE))
-                            return 最后一舞;
+                        if (GetBuffRemainingTime(Buffs.最后一舞预备PRE) < 3f)
+                        {
+                            return 最后一舞LastDance;
+                        }
+                        
+                        if (最后一舞LastDance.LevelChecked() && HasEffect(Buffs.最后一舞预备PRE) && 技巧舞步TechnicalStepCD倒计时 > 15)
+                            return 最后一舞LastDance;
                     }
 
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_舞步终结))
@@ -335,8 +346,16 @@ namespace XIVSlothComboX.Combos.PvE
                     if (LevelChecked(喷泉Fountain) && lastComboMove is 瀑泻Cascade && comboTime is < 2 and > 0)
                         return 喷泉Fountain;
 
-                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish))
+                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit < 20)
+                    {
                         return 提拉纳Tillana;
+                    }
+
+                    if (GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) < 3f)
+                    {
+                        return 提拉纳Tillana;
+                    }
+
 
                     if (HasEffect(Buffs.流星舞预备FlourishingStarfall))
                         return 流星舞StarfallDance;
@@ -352,7 +371,6 @@ namespace XIVSlothComboX.Combos.PvE
                     //     ? (GetCooldownRemainingTime(百花争艳Flourish) > 4)
                     //     : true;
 
-               
 
                     if (LevelChecked(坠喷泉Fountainfall) && flow)
                         return 坠喷泉Fountainfall;
@@ -401,7 +419,7 @@ namespace XIVSlothComboX.Combos.PvE
                     bool improvisationReady = LevelChecked(即兴表演Improvisation) && IsOffCooldown(即兴表演Improvisation);
                     bool standardStepReady = LevelChecked(标准舞步StandardStep) && IsOffCooldown(标准舞步StandardStep);
                     bool technicalStepReady = LevelChecked(技巧舞步TechnicalStep) && IsOffCooldown(技巧舞步TechnicalStep);
-                    bool interruptable = CanInterruptEnemy() && IsOffCooldown(All.伤头HeadGraze) && LevelChecked(All.伤头HeadGraze);
+                    bool interruptable = CanInterruptEnemy() && IsOffCooldown(All.HeadGraze) && LevelChecked(All.HeadGraze);
                     int standardStepBurstThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleSSAoEBurstPercent);
                     int technicalStepBurstThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleTSAoEBurstPercent);
 
@@ -418,7 +436,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
                     if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_Interrupt) && interruptable)
-                        return All.伤头HeadGraze;
+                        return All.HeadGraze;
 
                     // Simple AoE Standard (activates dance with no target, or when target is over HP% threshold)
                     if ((!HasTarget() || GetTargetHPPercent() > standardStepBurstThreshold)
@@ -478,14 +496,14 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_PanicHeals))
                         {
                             bool curingWaltzReady = LevelChecked(治疗之华尔兹CuringWaltz) && IsOffCooldown(治疗之华尔兹CuringWaltz);
-                            bool secondWindReady = LevelChecked(All.内丹SecondWind) && IsOffCooldown(All.内丹SecondWind);
+                            bool secondWindReady = LevelChecked(All.SecondWind) && IsOffCooldown(All.SecondWind);
                             int waltzThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleAoEPanicHealWaltzPercent);
                             int secondWindThreshold = PluginConfiguration.GetCustomIntValue(Config.DNCSimpleAoEPanicHealWindPercent);
 
                             if (PlayerHealthPercentageHp() < waltzThreshold && curingWaltzReady)
                                 return 治疗之华尔兹CuringWaltz;
                             if (PlayerHealthPercentageHp() < secondWindThreshold && secondWindReady)
-                                return All.内丹SecondWind;
+                                return All.SecondWind;
                         }
 
                         if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_Improvisation) && improvisationReady)
@@ -498,6 +516,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (HasEffect(Buffs.提拉纳预备FlourishingFinish))
                         return 提拉纳Tillana;
+
                     if (HasEffect(Buffs.流星舞预备FlourishingStarfall))
                         return 流星舞StarfallDance;
 
@@ -512,8 +531,8 @@ namespace XIVSlothComboX.Combos.PvE
                 return actionID;
             }
         }
-        
-        
+
+
         /***
          * 一键跳舞
          */

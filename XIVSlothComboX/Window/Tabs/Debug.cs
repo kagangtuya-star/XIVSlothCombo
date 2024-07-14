@@ -5,6 +5,7 @@ using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
 using ImGuiNET;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.JobHelpers;
@@ -33,14 +34,14 @@ namespace XIVSlothComboX.Window.Tabs
 
         internal static new  void Draw()
         {
-            PlayerCharacter? LocalPlayer = Service.ClientState.LocalPlayer;
+            IPlayerCharacter? LocalPlayer = Service.ClientState.LocalPlayer;
             // DebugCombo? comboClass = new();
 
             if (LocalPlayer != null)
             {
                 unsafe
                 {
-                    if (Service.ClientState.LocalPlayer.TargetObject is BattleChara chara)
+                    if (Service.ClientState.LocalPlayer.TargetObject is IBattleChara chara)
                     {
                         foreach (Status? status in chara.StatusList)
                         {
@@ -48,14 +49,13 @@ namespace XIVSlothComboX.Window.Tabs
                         }
                     }
 
-                    foreach (Status? status in (Service.ClientState.LocalPlayer as BattleChara).StatusList)
+                    foreach (Status? status in Service.ClientState.LocalPlayer.StatusList)
                     {
                         ImGui.TextUnformatted($"SELF STATUS CHECK: {Service.ClientState.LocalPlayer.Name} -> {ActionWatching.GetStatusName(status.StatusId)}: {status.StatusId}");
                     }
 
                     ImGui.TextUnformatted($"TARGET OBJECT KIND: {Service.ClientState.LocalPlayer.TargetObject?.ObjectKind}");
-                    ImGui.TextUnformatted($"TARGET IS BATTLE CHARA: {Service.ClientState.LocalPlayer.TargetObject is BattleChara}");
-                    ImGui.TextUnformatted($"PLAYER IS BATTLE CHARA: {LocalPlayer is BattleChara}");
+                    ImGui.TextUnformatted($"TARGET IS BATTLE CHARA: {Service.ClientState.LocalPlayer.TargetObject is IBattleChara}");
                     ImGui.TextUnformatted($"Level: {Service.ClientState.LocalPlayer.Level}");
                     ImGui.TextUnformatted($"IN COMBAT: {CustomComboFunctions.InCombat()}");
                     ImGui.TextUnformatted($"ActionWatching.CombatActions.Count: {ActionWatching.CombatActions.Count}");
@@ -68,22 +68,55 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"LAST WEAPONSKILL: {ActionWatching.GetActionName(ActionWatching.LastWeaponskill)}");
                     ImGui.TextUnformatted($"LAST SPELL: {ActionWatching.GetActionName(ActionWatching.LastSpell)}");
                     ImGui.TextUnformatted($"LAST ABILITY: {ActionWatching.GetActionName(ActionWatching.LastAbility)}");
+                    ImGui.TextUnformatted($"ComboAction: {CustomComboFunctions.ComboAction}");
                     ImGui.TextUnformatted($"ZONE: {Service.ClientState.TerritoryType}");
-                    ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
                     ImGui.TextUnformatted($"战斗时间 : {CustomComboFunctions.CombatEngageDuration().TotalSeconds}");
 
+                    ImGui.TextUnformatted($"倒计时 : {Countdown.TimeRemaining()} ");
                     {
-                        uint itemId = 4551;
-                        ImGui.TextUnformatted($"恢复药数量 : {InventoryManager.Instance()->GetInventoryItemCount(itemId, true)}");
-                        ImGui.TextUnformatted($"恢复药数量 : {ActionManager.Instance()->GetActionStatus(ActionType.Item,itemId+ 1000000)}");
+                        // uint itemId = 4551;
+                        // ImGui.TextUnformatted($"恢复药数量 : {InventoryManager.Instance()->GetInventoryItemCount(itemId, true)}");
+                        // ImGui.TextUnformatted($"恢复药状态 : {ActionManager.Instance()->GetActionStatus(ActionType.Item,itemId+ 1000000)}");
+                        
+                        
+                        // ImGui.TextUnformatted($"TimelineList.Count : {ActionWatching.TimelineList.Count}");
+                        
+                        
+                        // ActionManager.Instance()->UseActionLocation()
+                        // ImGui.TextUnformatted($"恢复药状态 : {}");
+                        
+                        // ImGui.TextUnformatted($"恢复药状态 : {ActionManager.Addresses.GetAdjustedActionIdwas}");
                     }
+                    /*
+                    var gauge = new TmpPCTGauge();
+                    
+                    ImGui.TextUnformatted($"豆子: {gauge.豆子}");
+                    ImGui.TextUnformatted($"能量: {gauge.能量}");
+                    ImGui.TextUnformatted($"CreatureFlags: {gauge.CreatureFlags}");
+                    ImGui.TextUnformatted($"CanvasFlags: {gauge.CanvasFlags}");
+                    ImGui.TextUnformatted($"CreatureMotifDrawn: {gauge.生物画}");
+                    ImGui.TextUnformatted($"LandscapeMotifDrawn: {gauge.风景画}");
+                    ImGui.TextUnformatted($"WeaponMotifDrawn: {gauge.武器画}");
+                    ImGui.TextUnformatted($"MadeenPortraitReady: {gauge.蔬菜准备}");
+                    ImGui.TextUnformatted($"MooglePortraitReady: {gauge.莫古准备}");
+                    */
+                    
+                    
+                    /*ImGui.TextUnformatted($"PalleteGauge: {gauge.PalleteGauge}");
+                    ImGui.TextUnformatted($"CanvasFlags: {gauge.CanvasFlags}");
+                    ImGui.TextUnformatted($"CreatureFlags: {gauge.CreatureFlags}");
+                    ImGui.TextUnformatted($"CreatureMotifDrawn: {gauge.CreatureMotifDrawn}");
+                    ImGui.TextUnformatted($"LandscapeMotifDrawn: {gauge.LandscapeMotifDrawn}");
+                    ImGui.TextUnformatted($"WeaponMotifDrawn: {gauge.WeaponMotifDrawn}");
+                    ImGui.TextUnformatted($"MadeenPortraitReady: {gauge.MadeenPortraitReady}");
+                    ImGui.TextUnformatted($"MooglePortraitReady: {gauge.MooglePortraitReady}");*/
 
 
                     // ImGui.TextUnformatted($"buff : {CustomComboFunctions.GetBuffRemainingTime(PLD.Buffs.DivineMight)}");
                     // ImGui.TextUnformatted($"王权层数 : {CustomComboFunctions.GetBuffStacks(PLD.Buffs.忠义之剑SwordOath)}");
 
                   
-                    ImGui.TextUnformatted($"{CustomComboFunctions.HasEffect(DNC.Buffs.标准舞步预备StandardStep)} ");
+                    // ImGui.TextUnformatted($"{CustomComboFunctions.HasEffect(DNC.Buffs.标准舞步预备StandardStep)} ");
                     // ImGui.TextUnformatted($"四色技巧舞步结束TechnicalFinish4 : {CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4)} 进攻之探戈Devilment {CustomComboFunctions.WasLastAction(DNC.进攻之探戈Devilment)}}} 综合{!CustomComboFunctions.WasLastAction(DNC.四色技巧舞步结束TechnicalFinish4) && !CustomComboFunctions.WasLastAbility(DNC.进攻之探戈Devilment) } ");
 
                     // if (ActionWatching.特殊起手Actions.Count >0 )
@@ -194,8 +227,22 @@ namespace XIVSlothComboX.Window.Tabs
                     
                     
                     
+                    //骑士 start
+                    // ImGui.TextUnformatted($"{SMN.SMN_Advanced_Combo.DemiAttackCount},{SMN.SMN_Advanced_Combo.UsedDemiAttack}");
+                    // ImGui.TextUnformatted($"1-{CustomComboFunctions.GetJobGauge<ASTGauge>().DrawnCard}");
+                    // ImGui.TextUnformatted($"2-{CustomComboFunctions.GetJobGauge<ASTGauge>().DrawnCrownCard}");
                     
-                    ImGui.EndChild();
+                    ImGui.TextUnformatted($"无情NoMercy-{CustomComboFunctions.GetCooldownRemainingTime(GNB.无情NoMercy)}");
+                    ImGui.TextUnformatted($"倍攻DoubleDown-{CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
+                    ImGui.TextUnformatted($"利刃斩KeenEdge-{CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
+                    ImGui.TextUnformatted($"血壤Bloodfest-{CustomComboFunctions.GetCooldownRemainingTime(GNB.血壤Bloodfest)}");
+                    // ImGui.TextUnformatted($"1-{CustomComboFunctions.GetCooldownRemainingTime(GNB.血壤Bloodfest)}");
+                    ImGui.TextUnformatted($"子弹数量-{CustomComboFunctions.GetJobGauge<GNBGauge>().Ammo}");
+                    ImGui.TextUnformatted($"子弹连是否准备就绪-{GNB.GNB_ST_MainCombo.子弹连是否准备就绪()}");
+                    // ImGui.TextUnformatted($"2-{CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
+                    // ImGui.TextUnformatted($"3-{CustomComboFunctions.GetJobGauge<DRKGauge>().ShadowTimeRemaining}");
+                    // ImGui.TextUnformatted($"4-{CustomComboFunctions.GetJobGauge<DRKGauge>().DarksideTimeRemaining}");
+                    //骑士 end
                 }
             }
 

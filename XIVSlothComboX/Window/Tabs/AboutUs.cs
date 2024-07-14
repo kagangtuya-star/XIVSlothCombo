@@ -15,6 +15,8 @@ namespace XIVSlothComboX.Window.Tabs
         
         internal static new void Draw()
         {
+            
+            PvEFeatures.HasToOpenJob = true;
             version ??= Assembly.GetExecutingAssembly().GetName().Version!;
             
             PvEFeatures.HasToOpenJob = true;
@@ -34,25 +36,26 @@ namespace XIVSlothComboX.Window.Tabs
 
             if (ImGui.Button("有问题来这里提"))
             {
-                Util.OpenLink("https://github.com/44451516/XIVSlothCombo/issues");
+                Util.OpenLink("https://docs.qq.com/sheet/DT2JDcGl0SGhKWUFD?tab=BB08J2");
+                // Util.OpenLink("https://github.com/44451516/XIVSlothCombo/issues");
             }
 
             // ImGui.PopStyleColor();
             // ImGui.PopStyleColor();
 
        
-            if (ImGui.Button("想来汉化？点击这里"))
+            if (ImGui.Button("想来开发？点击这里"))
             {
-                Util.OpenLink("https://github.com/44451516/XIVSlothCombo");
+                Util.OpenLink("https://qm.qq.com/q/eBaUVYbKpi");
             }
 
             ImGui.Spacing();
             ImGui.Spacing();
             ImGui.Spacing();
             ImGui.Spacing();
-            ImGui.TextColored(ImGuiColors.ParsedGreen, $"由于写的汉化脚本不算智能，部分区域未匹配到而没有汉化。");
-            ImGui.TextColored(ImGuiColors.ParsedGreen, $"如果你要是从某个咸鱼小铺买的，恭喜你，上大当了，请立刻退款差评免得被人嘲笑。");
-            ImGui.TextColored(ImGuiColors.ParsedGreen, $"温馨提醒：怂就别开，但开别怂，少开点挂。");
+            // ImGui.TextColored(ImGuiColors.ParsedGreen, $"由于写的汉化脚本不算智能，部分区域未匹配到而没有汉化。");
+            // ImGui.TextColored(ImGuiColors.ParsedGreen, $"如果你要是从某个咸鱼小铺买的，恭喜你，上大当了，请立刻退款差评免得被人嘲笑。");
+            // ImGui.TextColored(ImGuiColors.ParsedGreen, $"温馨提醒：怂就别开，但开别怂，少开点挂。");
             ImGui.Spacing();
             ImGui.Spacing();
             ImGui.Spacing();

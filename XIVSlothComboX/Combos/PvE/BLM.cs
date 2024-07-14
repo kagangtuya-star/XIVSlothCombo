@@ -5,6 +5,7 @@ using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
+using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 
 namespace XIVSlothComboX.Combos.PvE
@@ -129,6 +130,51 @@ namespace XIVSlothComboX.Combos.PvE
             public static UserFloat
                 BLM_AstralFire_Refresh = new("BLM_AstralFire_Refresh");
         }
+        
+        internal class BLM_ST_Custom : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Advanced_CustomMode;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID is All.Sleep)
+                {
+                    if (CustomTimelineIsEnable())
+                    {
+                        var seconds = CombatEngageDuration().TotalSeconds;
+
+                        foreach (var customAction in 药品轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                Useitem(customAction.ActionId);
+                            }
+                        }
+
+
+                        foreach (var customAction in 时间轴)
+                        {
+                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                return customAction.ActionId;
+                            }
+                        }
+
+
+                        int index = ActionWatching.CustomList.Count;
+                        if (index < 序列轴.Count)
+                        {
+                            var newActionId = 序列轴[index].ActionId;
+                            return newActionId;
+                        }
+                    }
+                }
+
+
+                return actionID;
+            }
+        }
+        
 
         internal class BLM_ST_SimpleMode : CustomCombo
         {
@@ -190,8 +236,8 @@ namespace XIVSlothComboX.Combos.PvE
                             if (LevelChecked(Xenoglossy) && gauge.PolyglotStacks > 1)
                                 return Xenoglossy;
 
-                            if (ActionReady(All.即刻咏唱Swiftcast) && !HasEffect(Buffs.Triplecast))
-                                return All.即刻咏唱Swiftcast;
+                            if (ActionReady(All.Swiftcast) && !HasEffect(Buffs.Triplecast))
+                                return All.Swiftcast;
 
                             if (ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) is 0 && !HasEffect(All.Buffs.Swiftcast))
                                 return Triplecast;
@@ -439,8 +485,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if ((rotationSelection is 0 || level < 90) &&
                                 Config.BLM_Adv_Movement_Choice[5] &&
-                                ActionReady(All.即刻咏唱Swiftcast) && !HasEffect(Buffs.Triplecast))
-                                return All.即刻咏唱Swiftcast;
+                                ActionReady(All.Swiftcast) && !HasEffect(Buffs.Triplecast))
+                                return All.Swiftcast;
 
                             if (Config.BLM_Adv_Movement_Choice[6] &&
                                 ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) is 0 && !HasEffect(All.Buffs.Swiftcast))
@@ -452,14 +498,14 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // Start of Transpose rotation - tried to merge with ice part, but it won't behave.. ( think its too low in the order to make this part work correctly if i merge in umbral ince)
                         if (rotationSelection is 1 &&
-                            gauge.InUmbralIce && gauge.HasPolyglotStacks() && ActionReady(All.即刻咏唱Swiftcast) && level >= 90)
+                            gauge.InUmbralIce && gauge.HasPolyglotStacks() && ActionReady(All.Swiftcast) && level >= 90)
                         {
                             if (gauge.UmbralIceStacks < 3 &&
-                                ActionReady(All.LucidDreaming) && ActionReady(All.即刻咏唱Swiftcast))
+                                ActionReady(All.LucidDreaming) && ActionReady(All.Swiftcast))
                                 return All.LucidDreaming;
 
-                            if (HasEffect(All.Buffs.LucidDreaming) && ActionReady(All.即刻咏唱Swiftcast))
-                                return All.即刻咏唱Swiftcast;
+                            if (HasEffect(All.Buffs.LucidDreaming) && ActionReady(All.Swiftcast))
+                                return All.Swiftcast;
                         }
 
                         // Sharpcast
@@ -583,7 +629,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // Transpose rotation Fire phase
                         if (rotationSelection is 1 && level >= 90 &&
-                            !WasLastAction(Manafont) && IsOnCooldown(Manafont) && ActionReady(All.即刻咏唱Swiftcast) &&
+                            !WasLastAction(Manafont) && IsOnCooldown(Manafont) && ActionReady(All.Swiftcast) &&
                             currentMP < MP.FireI && gauge.PolyglotStacks is 2)
                         {
                             if (WasLastAction(Despair))
@@ -946,7 +992,7 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Variant_Raise;
 
             protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level) =>
-                (actionID is All.即刻咏唱Swiftcast && HasEffect(All.Buffs.Swiftcast) && IsEnabled(Variant.VariantRaise))
+                (actionID is All.Swiftcast && HasEffect(All.Buffs.Swiftcast) && IsEnabled(Variant.VariantRaise))
                 ? Variant.VariantRaise
                 : actionID;
         }

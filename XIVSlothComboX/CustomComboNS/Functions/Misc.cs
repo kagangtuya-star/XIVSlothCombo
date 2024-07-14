@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
+using XIVSlothComboX.Core;
 using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.CustomComboNS.Functions
@@ -10,7 +11,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <summary> Determine if the given preset is enabled. </summary>
         /// <param name="preset"> Preset to check. </param>
         /// <returns> A value indicating whether the preset is enabled. </returns>
-        public static bool IsEnabled(CustomComboPreset preset) => (int)preset < 100 || Service.Configuration.IsEnabled(preset);
+        public static bool IsEnabled(CustomComboPreset preset) => (int)preset < 100 || PresetStorage.IsEnabled(preset);
 
         /// <summary> Determine if the given preset is not enabled. </summary>
         /// <param name="preset"> Preset to check. </param>
@@ -26,7 +27,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 MNK.JobID, MNK.ClassID,
                 NIN.JobID, NIN.ClassID,
                 RPR.JobID,
-                SAM.JobID
+                SAM.JobID,
+                VPR.JobID
             };
 
             public static readonly List<byte> Ranged = new()
@@ -37,7 +39,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 MCH.JobID,
                 RDM.JobID,
                 DNC.JobID,
-                BLU.JobID
+                BLU.JobID,
+                PCT.JobID
             };
 
             public static readonly List<byte> Tank = new()

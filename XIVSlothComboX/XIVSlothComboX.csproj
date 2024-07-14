@@ -4,7 +4,7 @@
 	<PropertyGroup>
 		<Authors>Aki, k-kz, ele-starshade, damolitionn, Taurenkey, Augporto, grimgal, Genesis-Nova, Tartarga</Authors>
 		<Company>-</Company>
-		<Version>3.0.19.13</Version>
+		<Version>3.1.2.1</Version>
 		<!-- This is the version that will be used when pushing to the repo.-->
 		<Description>XIVCombo for lazy players</Description>
 		<Copyright>Copyleft attick 2021 thanks attick UwU</Copyright>
@@ -14,6 +14,7 @@
 
 	<PropertyGroup>
 		<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+<!--		<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>-->
 <!--		<DalamudPluginPath>$(appdata)\XIVLauncher\installedPlugins\XIVSlothComboX\$(version)</DalamudPluginPath>-->
 <!--		<DalamudDevPlugins>$(appdata)\XIVLauncher\devPlugins\XIVSlothComboX\</DalamudDevPlugins>-->
 		<AssemblyName>XIVSlothComboX</AssemblyName>
@@ -34,6 +35,7 @@
 		<OutputPath>..\release</OutputPath>
 		<NoWarn>CS1591</NoWarn>
 	</PropertyGroup>
+	
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
 		<TargetFramework>net8.0-windows</TargetFramework>
@@ -67,28 +69,26 @@
 
 	<ItemGroup>
 		<PackageReference Include="DalamudPackager" Version="2.1.12" />
-<!--		<PackageReference Include="ECommons" Version="2.0.0.4" />-->
 		<PackageReference Include="ILRepack" Version="2.0.18" />
-<!--		<ProjectReference Include="E:\DevProject\FF14\Dalamud-ECommons\ECommons\ECommons.csproj" />-->
 	</ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\ECommons\ECommons\ECommons.csproj" />
+	</ItemGroup>
+	
 	<ItemGroup>
 		<Reference Include="Dalamud">
 			<HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
 			<Private>False</Private>
 		</Reference>	
 		
-		<Reference Include="ECommons">
-			<HintPath>E:\DevProject\FF14\Dalamud-ECommons\ECommons\bin\Debug\ECommons.dll</HintPath>
-			<Private>True</Private>
-		</Reference>
 
 		<Reference Include="FFXIVClientStructs">
 			<HintPath>$(DalamudLibPath)FFXIVClientStructs.dll</HintPath>
 			<Private>False</Private>
 
 		</Reference>
-
+		
 		<Reference Include="Newtonsoft.Json">
 			<HintPath>$(DalamudLibPath)Newtonsoft.Json.dll</HintPath>
 			<Private>False</Private>
@@ -112,6 +112,12 @@
 		<Reference Include="Lumina.Excel">
 			<HintPath>$(DalamudLibPath)Lumina.Excel.dll</HintPath>
 			<Private>False</Private>
+		</Reference>
+
+		<Reference Include="InteropGenerator.Runtime">
+			<HintPath>$(DalamudLibPath)InteropGenerator.Runtime.dll</HintPath>
+<!--			<HintPath>C:\Users\Tykku\AppData\Roaming\XIVLauncher\dev\InteropGenerator.Runtime.dll</HintPath>-->
+			<Private>false</Private>
 		</Reference>
 
 	</ItemGroup>

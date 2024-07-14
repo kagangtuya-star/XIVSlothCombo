@@ -16,6 +16,9 @@ namespace XIVSlothComboX.Services
     /// <summary> Dalamud and plugin services. </summary>
     internal class Service
     {
+        
+     
+        
         /// <summary> Gets or sets the plugin address resolver. </summary>
         internal static PluginAddressResolver Address { get; set; } = null!;
 
@@ -62,7 +65,7 @@ namespace XIVSlothComboX.Services
 
         /// <summary> Gets the Dalamud plugin interface. </summary>
         [PluginService]
-        internal static DalamudPluginInterface Interface { get; private set; } = null!;
+        internal static IDalamudPluginInterface Interface { get; private set; } = null!;
 
         /// <summary> Gets the Dalamud job gauges. </summary>
         [PluginService]
@@ -107,5 +110,7 @@ namespace XIVSlothComboX.Services
         internal static WindowSystem WindowSystem { get; set; } = null!;   
         
         internal static IconManager IconManager { get; set; } = null!;
+        
+        
     }
 }

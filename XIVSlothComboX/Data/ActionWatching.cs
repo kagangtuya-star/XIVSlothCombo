@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Hooking;
+using ECommons.GameFunctions;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using Lumina.Excel.GeneratedSheets;
-using XIVSlothComboX.Combos.JobHelpers;
-using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Services;
 using Action = Lumina.Excel.GeneratedSheets.Action;
 using AST = XIVSlothComboX.Combos.PvE.AST;
+using Status = Lumina.Excel.GeneratedSheets.Status;
+using Vector3Struct = FFXIVClientStructs.FFXIV.Common.Math.Vector3;
 
 namespace XIVSlothComboX.Data
 {
     public static class ActionWatching
     {
-        internal static Dictionary<uint, Lumina.Excel.GeneratedSheets.Action> ActionSheet =
-            Service.DataManager.GetExcelSheet<Lumina.Excel.GeneratedSheets.Action>()!
+        internal static Dictionary<uint, Action> ActionSheet =
+            Service.DataManager.GetExcelSheet<Action>()!
                 .Where(i => i.RowId is not 7)
                 .ToDictionary(i => i.RowId, i => i);
 
-        internal static Dictionary<uint, Lumina.Excel.GeneratedSheets.Status> StatusSheet =
-            Service.DataManager.GetExcelSheet<Lumina.Excel.GeneratedSheets.Status>()!
+        internal static Dictionary<uint, Status> StatusSheet =
+            Service.DataManager.GetExcelSheet<Status>()!
                 .ToDictionary(i => i.RowId, i => i);
-        
-        internal static Dictionary<uint, Item>    ItemsSheet =  
+
+        internal static Dictionary<uint, Item> ItemsSheet =
             Service.DataManager.GetExcelSheet<Item>()!
-            .ToDictionary(i => i.RowId, i => i);
-        
+                .ToDictionary(i => i.RowId, i => i);
+
 
         internal static Dictionary<uint, Trait> TraitSheet = Service.DataManager.GetExcelSheet<Trait>()!
             .Where(i =>
@@ -44,7 +46,7 @@ namespace XIVSlothComboX.Data
         private static readonly Dictionary<string, List<uint>> statusCache = new();
 
         internal static readonly List<uint> CombatActions = new();
-        internal static readonly List<uint> 特殊起手Actions = new();
+        // internal static readonly List<uint> 特殊起手Actions = new();
 
         /**
          * 这个记录用的编辑
@@ -57,12 +59,84 @@ namespace XIVSlothComboX.Data
          */
         internal static readonly List<uint> CustomList = new();
 
-        private delegate void ReceiveActionEffectDelegate(int sourceObjectId, IntPtr sourceActor, IntPtr position, IntPtr effectHeader,
+
+        private delegate byte UseActionLocationDelegate(IntPtr actionManager, uint actionType, uint actionID, long targetedActorID,
+            IntPtr vectorLocation, uint param);
+
+        private static readonly Hook<UseActionLocationDelegate>? UseActionLocationHook;
+
+        private static byte UseActionLocationDetour(IntPtr actionManager, uint actionType, uint actionId, long targetedActorID, IntPtr vectorLocation,
+            uint param)
+        {
+            // Service.ChatGui.PrintError($"UseActionLocationDetour{GetActionName(actionId)} - {actionType}");
+
+            Vector3Struct vector3 = Marshal.PtrToStructure<Vector3Struct>(vectorLocation);
+
+
+            bool isSkip = vector3 is { X: 0, Y: 0, Z: 0 };
+
+            if (isSkip == false)
+            {
+                //用于记录
+                {
+                    var customAction = new CustomAction();
+                    customAction.ActionId = actionId;
+                    var totalSeconds = CustomComboFunctions.CombatEngageDuration().TotalSeconds;
+
+                    if (CustomComboFunctions.InCombat())
+                    {
+                        customAction.UseTimeStart = totalSeconds;
+                        customAction.UseTimeEnd = totalSeconds + 0.5f;
+                    }
+                    else
+                    {
+                        var timeRemaining = Countdown.TimeRemaining();
+                        if (timeRemaining != null)
+                        {
+                            customAction.UseTimeStart = (double)-timeRemaining;
+                            customAction.UseTimeEnd = (double)-timeRemaining + 0.5f;
+                        }
+                        else
+                        {
+                            customAction.UseTimeStart = -1;
+                        }
+                    }
+
+
+                    if (ActionSheet.ContainsKey(actionId))
+                    {
+                        {
+                            customAction.CustomActionType = CustomType.地面;
+                            customAction.Vector3.X = vector3.X;
+                            customAction.Vector3.Y = vector3.Y;
+                            customAction.Vector3.Z = vector3.Z;
+                        }
+                    }
+
+
+                    TimelineList.Add(customAction);
+                }
+
+
+                // Service.ChatGui.PrintError(
+                //     $"UseActionLocationDetour{GetActionName(actionId)}-{actionId}-{actionType}-{targetedActorID} {param}");
+            }
+
+
+            var ret = UseActionLocationHook.Original(actionManager, actionType, actionId, targetedActorID, vectorLocation, param);
+
+            return ret;
+        }
+
+        private delegate void ReceiveActionEffectDelegate(ulong sourceObjectId, IntPtr sourceActor, IntPtr position, IntPtr effectHeader,
             IntPtr effectArray, IntPtr effectTrail);
 
         private static readonly Hook<ReceiveActionEffectDelegate>? ReceiveActionEffectHook;
 
-        private static void ReceiveActionEffectDetour(int sourceObjectId, IntPtr sourceActor, IntPtr position, IntPtr effectHeader,
+
+        
+
+        private static void ReceiveActionEffectDetour(ulong sourceObjectId, IntPtr sourceActor, IntPtr position, IntPtr effectHeader,
             IntPtr effectArray, IntPtr effectTrail)
         {
             if (!CustomComboFunctions.InCombat())
@@ -70,11 +144,11 @@ namespace XIVSlothComboX.Data
                 CombatActions.Clear();
             }
 
-            if (MCHOpenerLogic.isInit && MCHOpenerLogic.currentState == OpenerState.InOpener)
-            {
-                特殊起手Actions.Clear();
-                MCHOpenerLogic.isInit = false;
-            }
+            // if (MCHOpenerLogic.isInit && MCHOpenerLogic.currentState == OpenerState.InOpener)
+            // {
+            //     特殊起手Actions.Clear();
+            //     MCHOpenerLogic.isInit = false;
+            // }
 
             ReceiveActionEffectHook!.Original(sourceObjectId, sourceActor, position, effectHeader, effectArray, effectTrail);
             ActionEffectHeader header = Marshal.PtrToStructure<ActionEffectHeader>(effectHeader);
@@ -82,7 +156,7 @@ namespace XIVSlothComboX.Data
             if (ActionType is 13 or 2) return;
             if (header.ActionId != 7 &&
                 header.ActionId != 8 &&
-                sourceObjectId == Service.ClientState.LocalPlayer.ObjectId)
+                sourceObjectId == Service.ClientState.LocalPlayer.GameObjectId)
             {
                 TimeLastActionUsed = DateTime.Now;
                 LastActionUseCount++;
@@ -111,9 +185,8 @@ namespace XIVSlothComboX.Data
                 }
 
                 CombatActions.Add(header.ActionId);
-                特殊起手Actions.Add(header.ActionId);
+                // 特殊起手Actions.Add(header.ActionId);
 
-                
 
                 if (Service.Configuration.EnabledOutputLog)
                     OutputLog();
@@ -128,71 +201,57 @@ namespace XIVSlothComboX.Data
         private static unsafe void SendActionDetour(ulong targetObjectId, byte actionType, uint actionId, ushort sequence, long a5, long a6, long a7,
             long a8, long a9)
         {
-            
             {
-                    
-                    var customAction = new CustomAction();
-                    customAction.ActionId = actionId;
-                    var totalSeconds = CustomComboFunctions.CombatEngageDuration().TotalSeconds;
+                var customAction = new CustomAction();
+                customAction.ActionId = actionId;
+                var totalSeconds = CustomComboFunctions.CombatEngageDuration().TotalSeconds;
 
-                    if (CustomComboFunctions.InCombat())
+                if (CustomComboFunctions.InCombat())
+                {
+                    customAction.UseTimeStart = totalSeconds;
+                    customAction.UseTimeEnd = totalSeconds + 0.5f;
+                }
+                else
+                {
+                    var timeRemaining = Countdown.TimeRemaining();
+                    if (timeRemaining != null)
                     {
-                        customAction.UseTimeStart = totalSeconds;
-                        customAction.UseTimeEnd = totalSeconds + 0.5f;
+                        customAction.UseTimeStart = (double)-timeRemaining;
+                        customAction.UseTimeEnd = (double)-timeRemaining + 0.5f;
                     }
                     else
                     {
-                        var timeRemaining = Countdown.TimeRemaining();
-                        if (timeRemaining != null)
-                        {
-                            customAction.UseTimeStart = (double)-timeRemaining;
-                            customAction.UseTimeEnd = (double)-timeRemaining + 0.5f;
-                        }
-                        else
-                        {
-                            customAction.UseTimeStart = -1;
-                        }
+                        customAction.UseTimeStart = -1;
                     }
-
-                    if (ActionSheet.ContainsKey(actionId))
-                    {
-                        Action actionByActionSheet = ActionSheet[actionId];
-                        // Service.ChatGui.PrintError($"{GetActionName(customAction.ActionId)}-{actionByActionSheet.CanTargetParty}-{sourceActor}-{Service.ClientState.LocalPlayer.Address}");
-                        
-                        if (actionByActionSheet.CanTargetParty)
-                        {
-                            // CustomComboFunctions.get
-                            
-                            customAction.CustomActionType = CustomType.时间;
-                            customAction.TargetType = CustomComboFunctions.getPartyIndex(targetObjectId);
-                            
-                            // Service.ChatGui.PrintError($"{GetActionName(customAction.ActionId)}-{targetObjectId}- {CustomComboFunctions.getPartyIndex(targetObjectId)}");
-
-                        }
-                    }
-
-                 
-
-            
-
-                    TimelineList.Add(customAction);
-                 
                 }
 
-            
-            // Service.ChatGui.PrintError($"SendActionDetour{CustomComboFunctions.DateTimeToLongTimeStamp(DateTime.Now)}");
+                if (ActionSheet.ContainsKey(actionId))
+                {
+                    var actionByActionSheet = ActionSheet[actionId];
+
+                    if (actionByActionSheet.CanTargetParty)
+                    {
+                        customAction.CustomActionType = CustomType.时间;
+                        customAction.TargetType = CustomComboFunctions.getPartyIndex(targetObjectId);
+                    }
+                }
+
+                // Service.ChatGui.PrintError($"{targetObjectId} - {actionType} - {actionId}");
+                //为啥不换UseAction？？？
+                TimelineList.Add(customAction);
+            }
+
+
             try
             {
                 CheckForChangedTarget(actionId, ref targetObjectId);
                 SendActionHook!.Original(targetObjectId, actionType, actionId, sequence, a5, a6, a7, a8, a9);
                 TimeLastActionUsed = DateTime.Now;
                 ActionType = actionType;
-
-                //Dalamud.Logging.PluginLog.Debug($"{actionId} {sequence} {a5} {a6} {a7} {a8} {a9}");
             }
             catch (Exception ex)
             {
-                Dalamud.Logging.PluginLog.Error(ex, "SendActionDetour");
+                // Dalamud.Logging.PluginLog.Error(ex, "SendActionDetour");
                 SendActionHook!.Original(targetObjectId, actionType, actionId, sequence, a5, a6, a7, a8, a9);
             }
         }
@@ -201,7 +260,7 @@ namespace XIVSlothComboX.Data
         {
             // Service.ChatGui.PrintError($"[CheckForChangedTarget]");
 
-            
+
             if (CustomComboFunctions.CustomTimelineIsEnable())
             {
                 CustomAction? customAction = CustomComboFunctions.CustomTimelineFindBy时间轴(actionId);
@@ -214,48 +273,50 @@ namespace XIVSlothComboX.Data
                         var gameObject = CustomComboFunctions.GetPartySlot(targetType);
                         if (gameObject != null)
                         {
-                            targetObjectId = gameObject.ObjectId;
+                            // targetObjectId = gameObject.ObjectId;
+                            targetObjectId = gameObject.GameObjectId;
                         }
                     }
-                }else
+                }
+                else
                 {
                     CustomList.Add(actionId);
                 }
-                
             }
-            
+
 
             if (actionId is AST.Balance or AST.Bole or AST.Ewer or AST.Arrow or AST.Spire or AST.Spear &&
                 Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember is not null &&
-                !OutOfRange(actionId, (GameObject*)Service.ClientState.LocalPlayer.Address,
-                    (GameObject*)Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.Address))
+                !OutOfRange(actionId, Service.ClientState.LocalPlayer!, Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember))
             {
                 int targetOptions = AST.Config.AST_QuickTarget_Override;
 
                 switch (targetOptions)
                 {
                     case 0:
-                        targetObjectId = Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.ObjectId;
+                        targetObjectId = Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.GameObjectId;
                         break;
                     case 1:
                         if (CustomComboFunctions.HasFriendlyTarget())
-                            targetObjectId = Service.ClientState.LocalPlayer.TargetObject.ObjectId;
+                            targetObjectId = Service.ClientState.LocalPlayer.TargetObject.GameObjectId;
                         else
-                            targetObjectId = Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.ObjectId;
+                            targetObjectId = Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.GameObjectId;
                         break;
                     case 2:
                         if (CustomComboFunctions.GetHealTarget(true, true) is not null)
-                            targetObjectId = CustomComboFunctions.GetHealTarget(true, true).ObjectId;
+                            targetObjectId = CustomComboFunctions.GetHealTarget(true, true).GameObjectId;
                         else
-                            targetObjectId = Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.ObjectId;
+                            targetObjectId = Combos.JobHelpers.AST.AST_QuickTargetCards.SelectedRandomMember.GameObjectId;
                         break;
                 }
             }
         }
 
-        public static unsafe bool OutOfRange(uint actionId, GameObject* source, GameObject* target)
+        // public static unsafe bool OutOfRange(uint actionId, GameObject* source, GameObject* target)
+        public static unsafe bool OutOfRange(uint actionId, IGameObject source, IGameObject target)
         {
-            return ActionManager.GetActionInRangeOrLoS(actionId, source, target) is 566;
+            // return ActionManager.GetActionInRangeOrLoS(actionId, source, target) is 566;
+            return ActionManager.GetActionInRangeOrLoS(actionId, source.Struct(), target.Struct()) is 566;
         }
 
         public static uint WhichOfTheseActionsWasLast(params uint[] actions)
@@ -320,37 +381,37 @@ namespace XIVSlothComboX.Data
 
         public static void OutputLog()
         {
-            Service.ChatGui.Print($"You just used: {GetActionName(LastAction)} x{LastActionUseCount}");
+            Service.ChatGui.Print($"You just used: {GetActionName(LastAction)}-{LastAction}");
         }
 
-        public static void Dispose()
-        {
-            ReceiveActionEffectHook?.Dispose();
-            SendActionHook?.Dispose();
-        }
+    
 
         static unsafe ActionWatching()
         {
-            // ReceiveActionEffectHook ??= Hook<ReceiveActionEffectDelegate>.FromAddress(Service.SigScanner.ScanText("E8 ?? ?? ?? ?? 48 8B 8D F0 03 00 00"), ReceiveActionEffectDetour);
-            // SendActionHook ??= Hook<SendActionDelegate>.FromAddress(Service.SigScanner.ScanText("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? F3 0F 10 3D ?? ?? ?? ?? 48 8D 4D BF"), SendActionDetour);
             ReceiveActionEffectHook ??=
-                Service.GameInteropProvider.HookFromSignature<ReceiveActionEffectDelegate>("E8 ?? ?? ?? ?? 48 8B 8D F0 03 00 00",
+                Service.GameInteropProvider.HookFromSignature<ReceiveActionEffectDelegate>(HookAddress.ReceiveActionEffect,
                     ReceiveActionEffectDetour);
-            SendActionHook ??=
-                Service.GameInteropProvider.HookFromSignature<SendActionDelegate>("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? F3 0F 10 3D ?? ?? ?? ?? 48 8D 4D BF",
-                    SendActionDetour);
+
+            SendActionHook ??= Service.GameInteropProvider.HookFromSignature<SendActionDelegate>(HookAddress.SendAction, SendActionDetour);
+
+
+            //E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46
+            //E8 ?? ?? ?? ?? 41 3A C5 0F 85 ?? ?? ?? ?? ?? ??
+
+            UseActionLocationHook ??=
+                Service.GameInteropProvider.HookFromSignature<UseActionLocationDelegate>(HookAddress.UseActionLocation,
+                    UseActionLocationDetour);
+
+
+
+
+            Service.PluginLog.Error($"{nameof(ReceiveActionEffectHook)}         0x{ReceiveActionEffectHook.Address:X}");
+            Service.PluginLog.Error($"{nameof(SendActionHook)}                  0x{SendActionHook.Address:X}");
+            Service.PluginLog.Error($"{nameof(UseActionLocationHook)}           0x{UseActionLocationHook.Address:X}");
         }
 
 
-        public static void Enable()
-        {
-            ReceiveActionEffectHook?.Enable();
-            SendActionHook?.Enable();
-            Service.Condition.ConditionChange += ResetActions;
-
-            Service.ClientState.TerritoryChanged += TerritoryChangedEvent;
-        }
-
+     
         private static void ResetActions(ConditionFlag flag, bool value)
         {
             if (flag == ConditionFlag.InCombat && !value)
@@ -363,10 +424,33 @@ namespace XIVSlothComboX.Data
             }
         }
 
+        
+        public static void Enable()
+        {
+            ReceiveActionEffectHook?.Enable();
+            SendActionHook?.Enable();
+            UseActionLocationHook?.Enable();
+
+            Service.Condition.ConditionChange += ResetActions;
+            Service.ClientState.TerritoryChanged += TerritoryChangedEvent;
+        }
+
+        
+        public static void Dispose()
+        {
+            Disable();
+            
+            ReceiveActionEffectHook?.Dispose();
+            SendActionHook?.Dispose();
+            UseActionLocationHook?.Dispose();
+        }
+        
         public static void Disable()
         {
-            ReceiveActionEffectHook.Disable();
-            SendActionHook?.Disable();
+            // ReceiveActionEffectHook.Disable();
+            // SendActionHook?.Disable();
+            // HttpResponseMessageHook?.Disable();
+            
             Service.Condition.ConditionChange -= ResetActions;
             Service.ClientState.TerritoryChanged -= TerritoryChangedEvent;
         }
@@ -391,10 +475,19 @@ namespace XIVSlothComboX.Data
         public static string GetItemName(uint id) => ItemsSheet.TryGetValue(id, out var item) ? (string)item.Name : "UNKNOWN ITEM";
         public static string GetStatusName(uint id) => StatusSheet.TryGetValue(id, out var status) ? (string)status.Name : "Unknown Status";
 
+        public static string GetBLUIndex(uint id)
+        {
+            var aozKey = Service.DataManager.GetExcelSheet<AozAction>()!.First(x => x.Action.Row == id).RowId;
+            var index = Service.DataManager.GetExcelSheet<AozActionTransient>().GetRow(aozKey).Number;
+
+            return $"#{index} ";
+        }
+
         public static List<uint>? GetStatusesByName(string status)
         {
             if (statusCache.TryGetValue(status, out List<uint>? list))
                 return list;
+
 
             return statusCache.TryAdd(status,
                 StatusSheet.Where(x => x.Value.Name.ToString().Equals(status, StringComparison.CurrentCultureIgnoreCase)).Select(x => x.Key).ToList())

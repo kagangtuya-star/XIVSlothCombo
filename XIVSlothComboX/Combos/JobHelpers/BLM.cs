@@ -17,7 +17,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 return false;
             if (!CustomComboFunctions.ActionReady(Manafont))
                 return false;
-            if (!CustomComboFunctions.ActionReady(All.即刻咏唱Swiftcast))
+            if (!CustomComboFunctions.ActionReady(All.Swiftcast))
                 return false;
             if (!CustomComboFunctions.ActionReady(Amplifier))
                 return false;
@@ -154,8 +154,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 0 && OpenerStep == 7) OpenerStep++;
                     else if (OpenerStep == 7) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(All.即刻咏唱Swiftcast) && OpenerStep == 8) OpenerStep++;
-                    else if (OpenerStep == 8) actionID = All.即刻咏唱Swiftcast;
+                    if (CustomComboFunctions.WasLastAction(All.Swiftcast) && OpenerStep == 8) OpenerStep++;
+                    else if (OpenerStep == 8) actionID = All.Swiftcast;
 
                     if (CustomComboFunctions.WasLastAction(Fire4) && OpenerStep == 9) OpenerStep++;
                     else if (OpenerStep == 9) actionID = Fire4;
@@ -199,7 +199,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                         (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                         (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
-                        (actionID == All.即刻咏唱Swiftcast && CustomComboFunctions.IsOnCooldown(All.即刻咏唱Swiftcast)) ||
+                        (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
                         (actionID == Xenoglossy && CustomComboFunctions.GetJobGauge<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                     {
                         CurrentState = OpenerState.FailedOpener;
@@ -261,8 +261,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Paradox) && OpenerStep == 17) OpenerStep++;
                     else if (OpenerStep == 17) actionID = Paradox;
 
-                    if (CustomComboFunctions.WasLastAction(All.即刻咏唱Swiftcast) && OpenerStep == 18) OpenerStep++;
-                    else if (OpenerStep == 18) actionID = All.即刻咏唱Swiftcast;
+                    if (CustomComboFunctions.WasLastAction(All.Swiftcast) && OpenerStep == 18) OpenerStep++;
+                    else if (OpenerStep == 18) actionID = All.Swiftcast;
 
                     if (CustomComboFunctions.WasLastAction(Xenoglossy) && OpenerStep == 19) OpenerStep++;
                     else if (OpenerStep == 19) actionID = Xenoglossy;
@@ -304,7 +304,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
-                    (actionID == All.即刻咏唱Swiftcast && CustomComboFunctions.IsOnCooldown(All.即刻咏唱Swiftcast)) ||
+                    (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
                     (actionID == Xenoglossy && CustomComboFunctions.GetJobGauge<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
@@ -344,8 +344,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 0 && OpenerStep == 7) OpenerStep++;
                 else if (OpenerStep == 7) actionID = Fire4;
 
-                if (CustomComboFunctions.WasLastAction(All.即刻咏唱Swiftcast) && OpenerStep == 8) OpenerStep++;
-                else if (OpenerStep == 8) actionID = All.即刻咏唱Swiftcast;
+                if (CustomComboFunctions.WasLastAction(All.Swiftcast) && OpenerStep == 8) OpenerStep++;
+                else if (OpenerStep == 8) actionID = All.Swiftcast;
 
                 if (CustomComboFunctions.WasLastAction(Fire4) && OpenerStep == 9) OpenerStep++;
                 else if (OpenerStep == 9) actionID = Fire4;
@@ -395,7 +395,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
-                    (actionID == All.即刻咏唱Swiftcast && CustomComboFunctions.IsOnCooldown(All.即刻咏唱Swiftcast)) ||
+                    (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
                     (actionID == Xenoglossy && CustomComboFunctions.GetJobGauge<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;

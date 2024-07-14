@@ -3,8 +3,11 @@ using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
 using System.Collections.Generic;
 using XIVSlothComboX.Combos.PvE.Content;
+using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
+using XIVSlothComboX.Data;
+using XIVSlothComboX.Extensions;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -39,11 +42,11 @@ namespace XIVSlothComboX.Combos.PvE
             EnergyDrain = 167,
             ArtOfWar = 16539,
             ArtOfWarII = 25866,
+            BanefulImpaction = 37012,
 
             // Faerie
             SummonSeraph = 16545,
             SummonEos = 17215,
-            SummonSelene = 17216,
             WhisperingDawn = 16537,
             FeyIllumination = 16538,
             Dissipation = 3587,
@@ -58,15 +61,17 @@ namespace XIVSlothComboX.Combos.PvE
 
         //Action Groups
         internal static readonly List<uint>
-            BroilList = new() { Ruin, Broil, Broil2, Broil3, Broil4 },
-            AetherflowList = new() { EnergyDrain, Lustrate, SacredSoil, Indomitability, Excogitation },
-            FairyList = new() { WhisperingDawn, FeyBlessing, FeyIllumination, Dissipation, Aetherpact };
+            BroilList = [Ruin, Broil, Broil2, Broil3, Broil4],
+            AetherflowList = [EnergyDrain, Lustrate, SacredSoil, Indomitability, Excogitation],
+            FairyList = [WhisperingDawn, FeyBlessing, FeyIllumination, Dissipation, Aetherpact];
 
         internal static class Buffs
         {
             internal const ushort
                 Galvanize = 297,
-                Recitation = 1896;
+                SacredSoil = 299,
+                Recitation = 1896,
+                ImpactImminent = 3882;
         }
 
         internal static class Debuffs
@@ -80,14 +85,17 @@ namespace XIVSlothComboX.Combos.PvE
 
         //Debuff Pairs of Actions and Debuff
         internal static readonly Dictionary<uint, ushort>
-            BioList = new() {
+            BioList = new()
+            {
                 { Bio, Debuffs.Bio1 },
                 { Bio2, Debuffs.Bio2 },
                 { Biolysis, Debuffs.Biolysis }
             };
 
         // Class Gauge
+
         private static SCHGauge Gauge => CustomComboFunctions.GetJobGauge<SCHGauge>();
+
         private static bool HasAetherflow(this SCHGauge gauge) => (gauge.Aetherflow > 0);
 
         internal enum OpenerState
@@ -97,54 +105,127 @@ namespace XIVSlothComboX.Combos.PvE
             PostOpener,
         }
 
-        internal static class Config
+        public static class Config
         {
             #region DPS
-            internal static UserInt
+
+            public static UserInt
                 SCH_ST_DPS_AltMode = new("SCH_ST_DPS_AltMode"),
-                SCH_ST_DPS_LucidOption = new("SCH_ST_DPS_LucidOption"),
-                SCH_ST_DPS_BioOption = new("SCH_ST_DPS_BioOption"),
-                SCH_ST_DPS_ChainStratagemOption = new("SCH_ST_DPS_ChainStratagemOption");
-            internal static UserBool
+                SCH_ST_DPS_LucidOption = new("SCH_ST_DPS_LucidOption", 6500),
+                SCH_ST_DPS_BioOption = new("SCH_ST_DPS_BioOption", 10),
+                SCH_ST_DPS_ChainStratagemOption = new("SCH_ST_DPS_ChainStratagemOption", 10);
+
+            public static UserBool
                 SCH_ST_DPS_Adv = new("SCH_ST_DPS_Adv"),
                 SCH_ST_DPS_Bio_Adv = new("SCH_ST_DPS_Bio_Adv"),
                 SCH_ST_DPS_EnergyDrain_Adv = new("SCH_ST_DPS_EnergyDrain_Adv");
-            internal static UserFloat
-                SCH_ST_DPS_Bio_Threshold = new("SCH_ST_DPS_Bio_Threshold"),
-                SCH_ST_DPS_EnergyDrain = new("SCH_ST_DPS_EnergyDrain");
-            internal static UserBoolArray
+
+            public static UserFloat
+                SCH_ST_DPS_Bio_Threshold = new("SCH_ST_DPS_Bio_Threshold", 3.0f),
+                SCH_ST_DPS_EnergyDrain = new("SCH_ST_DPS_EnergyDrain", 3.0f);
+
+            public static UserBoolArray
                 SCH_ST_DPS_Adv_Actions = new("SCH_ST_DPS_Adv_Actions");
+
             #endregion
 
             #region Healing
-            internal static UserInt
-                SCH_AoE_LucidOption = new("SCH_AoE_LucidOption"),
-                SCH_AoE_Heal_LucidOption = new("SCH_AoE_Heal_LucidOption"),
-                SCH_ST_Heal_LucidOption = new("SCH_ST_Heal_LucidOption"),
+
+            public static UserInt
+                SCH_AoE_LucidOption = new("SCH_AoE_LucidOption", 6500),
+                SCH_AoE_Heal_LucidOption = new("SCH_AoE_Heal_LucidOption", 6500),
+                SCH_ST_Heal_LucidOption = new("SCH_ST_Heal_LucidOption", 6500),
                 SCH_ST_Heal_AdloquiumOption = new("SCH_ST_Heal_AdloquiumOption"),
-                SCH_ST_Heal_LustrateOption = new("SCH_ST_Heal_LustrateOption");
-            internal static UserBool
+                SCH_ST_Heal_LustrateOption = new("SCH_ST_Heal_LustrateOption"),
+                SCH_ST_Heal_EsunaOption = new("SCH_ST_Heal_EsunaOption");
+
+            public static UserBool
                 SCH_ST_Heal_Adv = new("SCH_ST_Heal_Adv"),
                 SCH_ST_Heal_UIMouseOver = new("SCH_ST_Heal_UIMouseOver"),
-                SCH_DeploymentTactics_Adv = new ("SCH_DeploymentTactics_Adv"),
-                SCH_DeploymentTactics_UIMouseOver = new ("SCH_DeploymentTactics_UIMouseOver");
+                SCH_DeploymentTactics_Adv = new("SCH_DeploymentTactics_Adv"),
+                SCH_DeploymentTactics_UIMouseOver = new("SCH_DeploymentTactics_UIMouseOver");
+
             #endregion
 
             #region Utility
+
             internal static UserBool
                 SCH_Aetherflow_Recite_Indom = new("SCH_Aetherflow_Recite_Indom"),
                 SCH_Aetherflow_Recite_Excog = new("SCH_Aetherflow_Recite_Excog");
+
             internal static UserInt
                 SCH_Aetherflow_Display = new("SCH_Aetherflow_Display"),
                 SCH_Aetherflow_Recite_ExcogMode = new("SCH_Aetherflow_Recite_ExcogMode"),
                 SCH_Aetherflow_Recite_IndomMode = new("SCH_Aetherflow_Recite_IndomMode"),
-                SCH_Recitation_Mode = new("SCH_Recitation_Mode"),
-                SCH_FairyFeature = new("SCH_FairyFeature");
-            #endregion
+                SCH_Recitation_Mode = new("SCH_Recitation_Mode");
 
+            #endregion
         }
 
-        /*
+        internal class SCH_ST_Custom : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SCH_Advanced_CustomMode;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID is All.Repose)
+                {
+                    if (CustomTimelineIsEnable())
+                    {
+                        double? seconds = -9999d;
+
+                        if (InCombat())
+                        {
+                            seconds = CombatEngageDuration().TotalSeconds;
+                        }
+                        else
+                        {
+                            var timeRemaining = Countdown.TimeRemaining();
+                            if (timeRemaining != null)
+                            {
+                                seconds = -timeRemaining;
+                            }
+                        }
+
+                        foreach (var customAction in 药品轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                Useitem(customAction.ActionId);
+                            }
+                        }
+
+                        foreach (var customAction in 地面轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                Use地面技能(customAction);
+                            }
+                        }
+
+                        foreach (var customAction in 时间轴)
+                        {
+                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                return customAction.ActionId;
+                            }
+                        }
+
+                        int index = ActionWatching.CustomList.Count;
+                        if (index < 序列轴.Count)
+                        {
+                            var newActionId = 序列轴[index].ActionId;
+                            return newActionId;
+                        }
+                    }
+                }
+
+
+                return actionID;
+            }
+        }
+
+          /*
          * SCH_Consolation
          * Even though Summon Seraph becomes Consolation, 
          * This Feature also places Seraph's AoE heal+barrier ontop of the existing fairy AoE skill, Fey Blessing
@@ -231,7 +312,8 @@ namespace XIVSlothComboX.Combos.PvE
                     if (!HasAetherFlows)
                     {
                         bool ShowAetherflowOnAll = (Config.SCH_Aetherflow_Display == 1);
-                        if ((actionID is EnergyDrain && !ShowAetherflowOnAll) || ShowAetherflowOnAll)
+                        if (((actionID is EnergyDrain && !ShowAetherflowOnAll) || ShowAetherflowOnAll) &&
+                            IsOffCooldown(actionID))
                         {
                             if (IsEnabled(CustomComboPreset.SCH_Aetherflow_Dissipation) &&
                                 ActionReady(Dissipation) &&
@@ -255,17 +337,15 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SCH_Raise;
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                => actionID is All.即刻咏唱Swiftcast && IsOnCooldown(All.即刻咏唱Swiftcast) ? Resurrection : actionID;
+                => actionID is All.Swiftcast && IsOnCooldown(All.Swiftcast) ? Resurrection : actionID;
         }
 
-        // Replaces Fairy abilities with Fairy summoning with Eos (default) or Selene
+        // Replaces Fairy abilities with Fairy summoning with Eos
         internal class SCH_FairyReminder : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SCH_FairyReminder;
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                => FairyList.Contains(actionID) && !HasPetPresent() && Gauge.SeraphTimer == 0
-                    ? (Config.SCH_FairyFeature == 1) ? SummonSelene : SummonEos
-                    : actionID;
+                => FairyList.Contains(actionID) && !HasPetPresent() && Gauge.SeraphTimer == 0 ? SummonEos : actionID;
         }
 
         /*
@@ -282,15 +362,15 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is DeploymentTactics && ActionReady(DeploymentTactics))
                 {
                     //Grab our target (Soft->Hard->Self)
-                    GameObject? healTarget = GetHealTarget(Config.SCH_DeploymentTactics_Adv && Config.SCH_DeploymentTactics_UIMouseOver);
+                    IGameObject? healTarget = GetHealTarget(Config.SCH_DeploymentTactics_Adv && Config.SCH_DeploymentTactics_UIMouseOver);
 
                     //Check for the Galvanize shield buff. Start applying if it doesn't exist
-                    if (FindEffect(Buffs.Galvanize, healTarget, LocalPlayer.ObjectId) is null)
+                    if (FindEffect(Buffs.Galvanize, healTarget, LocalPlayer.GameObjectId) is null)
                     {
                         if (IsEnabled(CustomComboPreset.SCH_DeploymentTactics_Recitation) && ActionReady(Recitation))
                             return Recitation;
 
-                        return Adloquium;
+                        return OriginalHook(Adloquium);
                     }
                 }
                 return actionID;
@@ -324,6 +404,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (ActionFound)
                 {
+
                     var incombat = HasCondition(Dalamud.Game.ClientState.Conditions.ConditionFlag.InCombat);
                     if (!incombat)
                     {
@@ -373,18 +454,30 @@ namespace XIVSlothComboX.Combos.PvE
                             if (LevelChecked(EnergyDrain) && InCombat() &&
                                 Gauge.HasAetherflow() &&
                                 GetCooldownRemainingTime(Aetherflow) <= edTime &&
-                                (!IsEnabled(CustomComboPreset.SCH_DPS_EnergyDrain_BurstSaver) || GetCooldownRemainingTime(ChainStratagem) > 10) &&
+                                (!IsEnabled(CustomComboPreset.SCH_DPS_EnergyDrain_BurstSaver) || (LevelChecked(ChainStratagem) && GetCooldownRemainingTime(ChainStratagem) > 10)) &&
                                 CanSpellWeave(actionID))
                                 return EnergyDrain;
                         }
 
                         // Chain Stratagem
-                        if (IsEnabled(CustomComboPreset.SCH_DPS_ChainStrat) &&
-                            ActionReady(ChainStratagem) && InCombat() &&
-                            !TargetHasEffectAny(Debuffs.ChainStratagem) && //Overwrite protection
-                            GetTargetHPPercent() > Config.SCH_ST_DPS_ChainStratagemOption &&
-                            CanSpellWeave(actionID))
-                            return ChainStratagem;
+                        if (IsEnabled(CustomComboPreset.SCH_DPS_ChainStrat))
+                        {
+                            // If CS is available and usable, or if the Impact Buff is on Player
+                            if (ActionReady(ChainStratagem) &&
+                                !TargetHasEffectAny(Debuffs.ChainStratagem) &&
+                                GetTargetHPPercent() > Config.SCH_ST_DPS_ChainStratagemOption &&
+                                InCombat() &&
+                                CanSpellWeave(actionID))
+                                return ChainStratagem;
+
+                            if (LevelChecked(BanefulImpaction) &&
+                                HasEffect(Buffs.ImpactImminent) &&
+                                InCombat() &&
+                                CanSpellWeave(actionID))
+                                return BanefulImpaction; 
+                            // Don't use OriginalHook(ChainStratagem), because player can disable ingame action replacement
+                        }
+                        
 
                         //Bio/Biolysis
                         if (IsEnabled(CustomComboPreset.SCH_DPS_Bio) && LevelChecked(Bio) && InCombat())
@@ -407,8 +500,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                         //Ruin 2 Movement 
                         if (IsEnabled(CustomComboPreset.SCH_DPS_Ruin2Movement) &&
-                            LevelChecked(Ruin2) && InCombat() &&
-                            IsMoving) return OriginalHook(Ruin2); //Who knows in the future
+                            LevelChecked(Ruin2) &&
+                            IsMoving) return OriginalHook(Ruin2);
                     }
                 }
                 return actionID;
@@ -549,18 +642,19 @@ namespace XIVSlothComboX.Combos.PvE
                         return All.LucidDreaming;
 
                     //Grab our target (Soft->Hard->Self)
-                    GameObject? healTarget = GetHealTarget(Config.SCH_ST_Heal_Adv && Config.SCH_ST_Heal_UIMouseOver);
+                    IGameObject? healTarget = GetHealTarget(Config.SCH_ST_Heal_Adv && Config.SCH_ST_Heal_UIMouseOver);
 
                     if (IsEnabled(CustomComboPreset.SCH_ST_Heal_Esuna) && ActionReady(All.Esuna) &&
+                        GetTargetHPPercent(healTarget) >= Config.SCH_ST_Heal_EsunaOption &&
                         HasCleansableDebuff(healTarget))
                         return All.Esuna;
 
                     //Check for the Galvanize shield buff. Start applying if it doesn't exist or Target HP is below %
                     if (IsEnabled(CustomComboPreset.SCH_ST_Heal_Adloquium) &&
                         ActionReady(Adloquium) &&
-                        (FindEffect(Buffs.Galvanize, healTarget, LocalPlayer?.ObjectId) is null || GetTargetHPPercent(healTarget) <= Config.SCH_ST_Heal_AdloquiumOption))
+                        (FindEffectOnMember(Buffs.Galvanize, healTarget) is null || GetTargetHPPercent(healTarget) <= Config.SCH_ST_Heal_AdloquiumOption))
                     {
-                        return Adloquium;
+                        return OriginalHook(Adloquium);
                     }
                     
                     //Cast Lustrate if you have Aetherflow and Target HP is below %
