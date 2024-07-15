@@ -1489,6 +1489,11 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "平衡 (2 DPS GCD minimum delay)", "", 2);
                 UserConfig.DrawRadioButton(AST.Config.AST_ST_DPS_Play_SpeedSetting, "缓慢 (3 DPS GCD minimum delay)", "", 3);
             }
+            
+            if (preset is CustomComboPreset.AST_DPS_AutoDraw)
+            {
+                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_DPS_OverwriteCards, "Overwrite Non-DPS Cards", "Will draw even if you have healing cards remaining.");
+            }
 
             #endregion
 
