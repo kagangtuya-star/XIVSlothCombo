@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Artisan.RawInformation;
 using Dalamud;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Objects.Enums;
@@ -779,6 +780,31 @@ namespace XIVSlothComboX
                 case "stop_custom_timeline":
                 {
                     CustomComboFunctions.ResetCustomTime();
+
+                    break;
+                }
+                
+                case "test1":
+                {
+
+                    Spiritbond.ExtractMateriaTask(true);
+                    
+
+                    break;
+                }
+                 case "test2":
+                {
+
+                    Spiritbond.ExtractFirstMateria();
+
+                    break;
+                }
+
+                
+                case "test3":
+                {
+                    Service.ChatGui.PrintError(Spiritbond.IsSpiritbondReadyAny().ToString());
+                    // Spiritbond.ExtractFirstMateria();
 
                     break;
                 }

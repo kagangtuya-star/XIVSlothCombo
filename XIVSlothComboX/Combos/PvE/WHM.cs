@@ -56,7 +56,7 @@ namespace XIVSlothComboX.Combos.PvE
             PlenaryIndulgence = 7433;
 
         //Action Groups
-        internal static readonly List<uint> StoneGlareList = new List<uint>() { Stone1, Stone2, Stone3, Stone4, Glare1, Glare3, Glare4 };
+        internal static readonly List<uint> StoneGlareList = new List<uint>() { Stone1, Stone2, Stone3, Stone4, Glare1, Glare3 };
 
         public static class Buffs
         {
@@ -348,12 +348,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 return Glare4;
                             }
 
-                            if (GetBuffStacks(Buffs.Glare4Pre) >= 3 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 7)
+                            if (GetBuffStacks(Buffs.Glare4Pre) >= 3 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 9)
                             {
                                 return Glare4;
                             }
                             
-                            if (GetBuffStacks(Buffs.Glare4Pre) >= 2 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 5)
+                            if (GetBuffStacks(Buffs.Glare4Pre) >= 2 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 7)
                             {
                                 return Glare4;
                             }
