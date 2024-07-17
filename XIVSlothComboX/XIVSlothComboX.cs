@@ -787,7 +787,16 @@ namespace XIVSlothComboX
                 case "test1":
                 {
 
-                    Spiritbond.ExtractMateriaTask(true);
+                    //判断有没有可以精炼的
+                    if (Spiritbond.IsSpiritbondReadyAny())
+                    {
+                        //集成打开精炼窗口、选择第一个精炼、开始精炼
+                        //
+                        Spiritbond.ExtractMateriaTask(true);
+                    }
+
+
+                 
                     
 
                     break;

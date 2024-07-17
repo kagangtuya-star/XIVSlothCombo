@@ -46,7 +46,7 @@
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<OutputPath>E:\Games\FFVIX\Dalamud6.0\XIVLauncher\devPlugins\XIVSlothComboX7.0\</OutputPath>
+		<OutputPath>$(appdata)\XIVLauncher\devPlugins\XIVSlothComboX7.0\</OutputPath>
 		<NoWarn>CS1591</NoWarn>
 	</PropertyGroup>
 
