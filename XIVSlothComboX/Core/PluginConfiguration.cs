@@ -50,6 +50,8 @@ namespace XIVSlothComboX.Core
 
         public Vector4 TargetHighlightColor { get; set; } = new() { W = 1, X = 0.5f, Y = 0.5f, Z = 0.5f };
 
+        public bool 自动精炼 { get; set; } = false;
+        
         #endregion
 
         #region Custom Float Values

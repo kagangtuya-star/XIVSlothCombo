@@ -219,15 +219,27 @@ namespace XIVSlothComboX
                 JobID = Service.ClientState.LocalPlayer?.ClassJob?.Id;
                 BlueMageService.PopulateBLUSpells();
                 //判断有没有可以精炼的
-                if (Spiritbond.IsSpiritbondReadyAny())
+
+                if (Service.Configuration.自动精炼)
                 {
-                    //集成打开精炼窗口、选择第一个精炼、开始精炼
-                    //
-                    Spiritbond.ExtractMateriaTask(true);
-                }
-                else
-                {
-                    Spiritbond.CloseMateriaMenu();
+                    if (CustomComboFunctions.InCombat())
+                    {
+                        Spiritbond.CloseMateriaMenu();
+                    }
+                    else
+                    {
+                        if (Spiritbond.IsSpiritbondReadyAny())
+                        {
+                            //集成打开精炼窗口、选择第一个精炼、开始精炼
+                            //
+                            Spiritbond.ExtractMateriaTask(true);
+                        }
+                        else
+                        {
+                            Spiritbond.CloseMateriaMenu();
+                        }
+                    }
+
                 }
 
             }

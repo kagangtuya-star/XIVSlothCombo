@@ -141,6 +141,20 @@ namespace XIVSlothComboX.Window.Tabs
 
             #endregion
             
+            #region 输出到聊天框
+
+            
+            var 自动精炼 = Service.Configuration.自动精炼;
+
+            //if (ImGui.Checkbox("Hide Message of the Day", ref motd))
+            if (ImGui.Checkbox("" + "自动精炼" + "", ref 自动精炼))
+            {
+                Service.Configuration.自动精炼 = 自动精炼;
+                Service.Configuration.Save();
+            }
+
+            #endregion
+            
             
             ImGui.EndChild();
         }
