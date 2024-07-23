@@ -3018,8 +3018,8 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawRoundedSliderFloat(0f, 6f, WHM.Config.WHM_STHeals_RegenTimer, "Time Remaining Before Refreshing");
 
             if (preset == CustomComboPreset.WHM_ST_MainCombo_Opener)
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_ST_MainCombo_Opener_Swiftcast, "Swiftcast Option",
-                    "Adds Swiftcast to the opener.");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_ST_MainCombo_Opener_Swiftcast, "即刻咏唱",
+                    "Adds 即刻咏唱 to the opener.");
 
             if (preset == CustomComboPreset.WHM_STHeals_Benediction)
             {

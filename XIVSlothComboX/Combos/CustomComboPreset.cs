@@ -3437,7 +3437,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Single Target DPS Feature", "Collection of cooldowns and spell features on Glare/Stone.", WHM.JobID, 1, "", "")]
         WHM_ST_MainCombo = 19099,
 
-        [ParentCombo(WHM_ST_MainCombo)] [CustomComboInfo("Opener Option", "Use the Balance opener from level 56+.", WHM.JobID, 11, "", "")]
+        [ParentCombo(WHM_ST_MainCombo)] [CustomComboInfo("Opener Option", "Use the 神速咏唱 opener", WHM.JobID, 11, "", "")]
         WHM_ST_MainCombo_Opener = 19023,
 
         [ParentCombo(WHM_ST_MainCombo)]
@@ -3446,7 +3446,7 @@ namespace XIVSlothComboX.Combos
         WHM_ST_MainCombo_DoT = 19013,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo("闪炽",
+        [CustomComboInfo("闪炽-快速咏唱续剑",
             "闪炽加入循环 移动或者剩余时间不够的时候", WHM.JobID, 12, "", "")]
         WHM_ST_MainCombo_Glare4 = 19018,
 

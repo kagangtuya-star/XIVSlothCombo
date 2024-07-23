@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Artisan.RawInformation;
 using Dalamud;
-using Dalamud.Game;
-using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Command;
-using Dalamud.Game.Text;
-using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface.Windowing;
-using Dalamud.Memory;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 using ECommons;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using XIVSlothComboX.Attributes;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
@@ -32,6 +29,8 @@ using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 using XIVSlothComboX.Window;
 using XIVSlothComboX.Window.Tabs;
+using AST = XIVSlothComboX.Combos.JobHelpers.AST;
+using ObjectKind = Dalamud.Game.ClientState.Objects.Enums.ObjectKind;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
 
 namespace XIVSlothComboX
@@ -41,12 +40,12 @@ namespace XIVSlothComboX
     {
         private const string Command = "/scombo";
 
-        
+
         private readonly ConfigWindow _ConfigWindow;
         internal static XIVSlothComboX P = null!;
         internal WindowSystem _WindowSystem;
         private static uint? jobID;
-        
+
 
         public static readonly List<uint> DisabledJobsPVE = new List<uint>()
         {
@@ -114,7 +113,7 @@ namespace XIVSlothComboX
             }
         }
 
-        
+
 
         private readonly TextPayload starterMotd = new("[Sloth Message of the Day] ");
 
@@ -122,10 +121,10 @@ namespace XIVSlothComboX
         private uint autoActionId = 0;
         private int CustomTimelineIndex = 0;
 
-        
-        
-        
-        
+
+
+
+
         // private bool isAuto = false;
 
         private CancellationTokenSource autoTokenSource = new(); // 令牌对象
@@ -139,35 +138,37 @@ namespace XIVSlothComboX
             P = this;
             pluginInterface.Create<Service>();
             ECommonsMain.Init(pluginInterface, this);
-          
+
             Service.Configuration = pluginInterface.GetPluginConfig() as PluginConfiguration ?? new PluginConfiguration();
             Service.Address = new PluginAddressResolver();
             Service.Address.Setup(Service.SigScanner);
             PresetStorage.Init();
-   
+
 
             Service.ComboCache = new CustomComboCache();
             Service.IconReplacer = new IconReplacer();
-            
+
             ActionWatching.Enable();
-            Combos.JobHelpers.AST.Init();
+            AST.Init();
 
             _ConfigWindow = new();
             _WindowSystem = new();
             _WindowSystem.AddWindow(_ConfigWindow);
-            
 
-            
+
             // Service.Interface.UiBuilder.OpenMainUi += OnOpenConfigUi;
             Service.Interface.UiBuilder.OpenConfigUi += OnOpenConfigUi;
             Service.Interface.UiBuilder.Draw += _WindowSystem.Draw;
 
-            Service.CommandManager.AddHandler(Command,
+            Service.CommandManager.AddHandler
+            (
+                Command,
                 new CommandInfo(OnCommand)
                 {
                     HelpMessage = "Open a window to edit custom combo settings.",
                     ShowInHelp = true,
-                });
+                }
+            );
 
             Service.ClientState.Login += PrintLoginMessage;
 
@@ -177,7 +178,7 @@ namespace XIVSlothComboX
             }
 
             Service.Framework.Update += OnFrameworkUpdate;
-            
+
 
             autoToken = autoTokenSource.Token; // 开关绑
 
@@ -187,7 +188,7 @@ namespace XIVSlothComboX
             Service.IconManager = new IconManager();
         }
 
-        
+
         private static void HandleConflictedCombos()
         {
             var enabledCopy = Service.Configuration.EnabledActions.ToHashSet(); //Prevents issues later removing during enumeration
@@ -210,19 +211,32 @@ namespace XIVSlothComboX
             }
         }
 
-        
+
         private static void OnFrameworkUpdate(IFramework framework)
         {
             if (Service.ClientState.LocalPlayer is not null)
+            {
                 JobID = Service.ClientState.LocalPlayer?.ClassJob?.Id;
+                BlueMageService.PopulateBLUSpells();
+                //判断有没有可以精炼的
+                if (Spiritbond.IsSpiritbondReadyAny())
+                {
+                    //集成打开精炼窗口、选择第一个精炼、开始精炼
+                    //
+                    Spiritbond.ExtractMateriaTask(true);
+                }
+                else
+                {
+                    Spiritbond.CloseMateriaMenu();
+                }
 
-            BlueMageService.PopulateBLUSpells();
+            }
+
         }
-        
+
         private static void KillRedundantIDs()
         {
-            List<int> redundantIDs = Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _)).OrderBy(x => x).Cast<int>()
-                .ToList();
+            List<int> redundantIDs = Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _)).OrderBy(x => x).Cast<int>().ToList();
             foreach (int id in redundantIDs)
             {
                 Service.Configuration.EnabledActions.RemoveWhere(x => (int)x == id);
@@ -245,7 +259,7 @@ namespace XIVSlothComboX
             _ConfigWindow.Draw();
         }
 
-     
+
 
         private void OnOpenConfigUi()
         {
@@ -273,35 +287,35 @@ namespace XIVSlothComboX
         {
             autoActionId = 0;
             // isAuto = false;
-            
+
             autoTokenSource.Cancel();
             _ConfigWindow?.Dispose();
             _WindowSystem.RemoveAllWindows();
-            
+
             Service.CommandManager.RemoveHandler(Command);
             Service.Framework.Update -= OnFrameworkUpdate;
             Service.Interface.UiBuilder.OpenConfigUi -= OnOpenConfigUi;
             Service.Interface.UiBuilder.Draw -= DrawUI;
-            
+
             Service.IconReplacer?.Dispose();
             Service.ComboCache?.Dispose();
             Service.IconManager?.Dispose();
             ActionWatching.Dispose();
 
 
-            Combos.JobHelpers.AST.Dispose();
+            AST.Dispose();
 
 
             Service.ClientState.Login -= PrintLoginMessage;
             ECommonsMain.Dispose();
-            
+
             P = null;
 
-            
+
 // #if DEBUG
 //             ConfigWindow.IsOpen = true;
 // #endif
-            
+
         }
 
 
@@ -448,8 +462,7 @@ namespace XIVSlothComboX
 
                     if (filter == "set") // list set features
                     {
-                        foreach (bool preset in Enum.GetValues<CustomComboPreset>()
-                                     .Select(preset => PresetStorage.IsEnabled(preset)))
+                        foreach (bool preset in Enum.GetValues<CustomComboPreset>().Select(preset => PresetStorage.IsEnabled(preset)))
                         {
                             if (setOutChat)
                             {
@@ -493,6 +506,7 @@ namespace XIVSlothComboX
                     foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.OrderBy(x => x))
                     {
                         if (int.TryParse(preset.ToString(), out int pres)) continue;
+
                         if (setOutChat)
                         {
                             Service.ChatGui.Print($"{(int)preset} - {preset}");
@@ -518,13 +532,16 @@ namespace XIVSlothComboX
                         file.WriteLine("");
                         file.WriteLine($"Installation Repo: {RepoCheckFunctions.FetchCurrentRepo()?.InstalledFromUrl}"); // Installation Repo
                         file.WriteLine("");
-                        file.WriteLine($"Current Job: "
-                                       + // Current Job
-                                       $"{localPlayer.ClassJob.GameData.Name} / "
-                                       + // - Client Name
-                                       $"{localPlayer.ClassJob.GameData.NameEnglish} / "
-                                       + // - EN Name
-                                       $"{localPlayer.ClassJob.GameData.Abbreviation}"); // - Abbreviation
+                        file.WriteLine
+                        (
+                            $"Current Job: "
+                            + // Current Job
+                            $"{localPlayer.ClassJob.GameData.Name} / "
+                            + // - Client Name
+                            $"{localPlayer.ClassJob.GameData.NameEnglish} / "
+                            + // - EN Name
+                            $"{localPlayer.ClassJob.GameData.Abbreviation}"
+                        ); // - Abbreviation
                         file.WriteLine($"Current Job Index: {localPlayer.ClassJob.GameData.JobIndex}"); // Job Index
                         file.WriteLine("");
                         file.WriteLine($"Current Zone: {Service.ClientState.TerritoryType}"); // Current zone location
@@ -573,8 +590,7 @@ namespace XIVSlothComboX
                         if (i > 0)
                         {
                             file.WriteLine($"START REDUNDANT IDs");
-                            foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _))
-                                         .OrderBy(x => x))
+                            foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.Where(x => int.TryParse(x.ToString(), out _)).OrderBy(x => x))
                             {
                                 file.WriteLine($"{(int)preset}");
                             }
@@ -680,47 +696,53 @@ namespace XIVSlothComboX
                         autoToken = autoTokenSource.Token;
                     }
 
-                    Task.Run(async delegate
+                    Task.Run
+                    (
+                        async delegate
                         {
                             while (!autoToken.IsCancellationRequested)
                             {
                                 Random random = new Random();
                                 var interval = random.Next(32, 64);
 
-                                await Service.Framework.RunOnFrameworkThread(() =>
-                                {
-                                    if (!Service.ClientState.IsLoggedIn)
+                                await Service.Framework.RunOnFrameworkThread
+                                (
+                                    () =>
                                     {
-                                        autoActionId = 0;
-                                        autoTokenSource.Cancel();
-                                    }
-
-                                    unsafe
-                                    {
-                                        var targetObjectId = localPlayer.TargetObjectId;
-                                        if (autoActionId != 0)
+                                        if (!Service.ClientState.IsLoggedIn)
                                         {
-                                            if (targetObjectId != 0)
-                                            {
-                                                IGameObject? targetObject = Service.ClientState.LocalPlayer.TargetObject;
+                                            autoActionId = 0;
+                                            autoTokenSource.Cancel();
+                                        }
 
-                                                if (targetObject != null && targetObject is IBattleChara battleChara)
+                                        unsafe
+                                        {
+                                            var targetObjectId = localPlayer.TargetObjectId;
+                                            if (autoActionId != 0)
+                                            {
+                                                if (targetObjectId != 0)
                                                 {
-                                                    if (battleChara.ObjectKind == ObjectKind.BattleNpc)
+                                                    IGameObject? targetObject = Service.ClientState.LocalPlayer.TargetObject;
+
+                                                    if (targetObject != null && targetObject is IBattleChara battleChara)
                                                     {
+                                                        if (battleChara.ObjectKind == ObjectKind.BattleNpc)
                                                         {
-                                                            ActionManager.Instance()->UseAction(ActionType.Action, autoActionId, targetObjectId);
+                                                            {
+                                                                ActionManager.Instance()->UseAction(ActionType.Action, autoActionId, targetObjectId);
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                });
+                                );
                                 await Task.Delay(TimeSpan.FromMilliseconds(interval));
                             }
                         },
-                        autoToken);
+                        autoToken
+                    );
                     break;
                 }
 
@@ -741,8 +763,8 @@ namespace XIVSlothComboX
                         {
                             unsafe
                             {
-                                FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* Struct =
-                                    (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)localPlayer.Address;
+                                GameObject* Struct =
+                                    (GameObject*)localPlayer.Address;
                                 SafeMemory.WriteBytes((IntPtr)Struct->Name.GetPinnableReference(), SeStringUtils.NameText(argumentsParts[1]));
                             }
                         }
@@ -776,14 +798,14 @@ namespace XIVSlothComboX
 
                     break;
                 }
-                
+
                 case "stop_custom_timeline":
                 {
                     CustomComboFunctions.ResetCustomTime();
 
                     break;
                 }
-                
+
                 case "test1":
                 {
 
@@ -796,12 +818,9 @@ namespace XIVSlothComboX
                     }
 
 
-                 
-                    
-
                     break;
                 }
-                 case "test2":
+                case "test2":
                 {
 
                     Spiritbond.ExtractFirstMateria();
@@ -809,10 +828,29 @@ namespace XIVSlothComboX
                     break;
                 }
 
-                
+
                 case "test3":
                 {
-                    Service.ChatGui.PrintError(Spiritbond.IsSpiritbondReadyAny().ToString());
+                    Task.Run
+                    (
+                        async delegate
+                        {
+                            using (HttpClient client = new HttpClient())
+                            {
+                                CustomTimeline customTime = new CustomTimeline();
+
+
+                                var JsonContent1 = JsonContent.Create<CustomTimeline>(customTime);
+
+                                var result = client.PostAsync("https://cm.bilibili.com/cm/api/receive/content/pc", JsonContent1).Result;
+                                var readAsStringAsync = await result.Content.ReadAsStringAsync();
+                                Service.ChatGui.PrintError(readAsStringAsync);
+                            }
+
+                        }
+                    );
+
+                    // Service.ChatGui.PrintError(Spiritbond.IsSpiritbondReadyAny().ToString());
                     // Spiritbond.ExtractFirstMateria();
 
                     break;
@@ -836,6 +874,5 @@ namespace XIVSlothComboX
 
             Service.Configuration.Save();
         }
-        
     }
 }
