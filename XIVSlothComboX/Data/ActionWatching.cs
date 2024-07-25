@@ -475,6 +475,17 @@ namespace XIVSlothComboX.Data
         public static string GetItemName(uint id) => ItemsSheet.TryGetValue(id, out var item) ? (string)item.Name : "UNKNOWN ITEM";
         public static string GetStatusName(uint id) => StatusSheet.TryGetValue(id, out var status) ? (string)status.Name : "Unknown Status";
 
+        
+        public static bool HasDoubleWeaved()
+        {
+            if (CombatActions.Count < 2) 
+                return false;
+            var lastAction = CombatActions.Last();
+            var secondLastAction = CombatActions[^2];
+
+            return (GetAttackType(lastAction) == GetAttackType(secondLastAction) && GetAttackType(lastAction) == ActionAttackType.Ability);
+        }
+        
         public static string GetBLUIndex(uint id)
         {
             var aozKey = Service.DataManager.GetExcelSheet<AozAction>()!.First(x => x.Action.Row == id).RowId;

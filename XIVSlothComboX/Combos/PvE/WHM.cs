@@ -320,16 +320,16 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (pomEnabled && pomReady)
                             return PresenceOfMind;
+                        
                         if (assizeEnabled && assizeReady)
                             return Assize;
+                        
                         if (lucidEnabled && lucidReady)
                             return All.LucidDreaming;
                     }
 
                     if (InCombat())
                     {
-
-
                         if (IsEnabled(CustomComboPreset.WHM_ST_MainCombo_LilyOvercap) && LevelChecked(AfflatusRapture) && (liliesFull || liliesNearlyFull))
                             return AfflatusRapture;
 
