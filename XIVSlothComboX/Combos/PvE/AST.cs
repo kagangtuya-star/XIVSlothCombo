@@ -283,7 +283,8 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.AST_DPS_LightSpeed) &&
                         ActionReady(Lightspeed) &&
                         GetTargetHPPercent() > Config.AST_DPS_LightSpeedOption &&
-                        CanSpellWeave(actionID))
+                        IsMoving &&
+                        !HasEffect(Buffs.Lightspeed))
                         return Lightspeed;
 
                     if (IsEnabled(CustomComboPreset.AST_DPS_Lucid) &&

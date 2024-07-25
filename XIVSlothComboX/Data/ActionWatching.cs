@@ -51,7 +51,7 @@ namespace XIVSlothComboX.Data
         /**
          * 这个记录用的编辑
          */
-        internal static readonly List<CustomAction> TimelineList = new();
+        internal static readonly List<CustomAction> TimelineList = [];
 
         /**
          * 当前使用的时间轴
