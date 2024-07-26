@@ -224,6 +224,9 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"{SMN.SMN_Advanced_Combo.DemiAttackCount},{SMN.SMN_Advanced_Combo.UsedDemiAttack}");
                     // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
                     //召唤 end
+                    ImGui.TextUnformatted($"{CustomComboFunctions.GetBuffRemainingTime(WHM.Buffs.Glare4Pre)
+                    }");
+                    ImGui.TextUnformatted($"{CustomComboFunctions.GetBuffStacks(WHM.Buffs.Glare4Pre)}");
                     
                     
                     
@@ -232,13 +235,13 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"1-{CustomComboFunctions.GetJobGauge<ASTGauge>().DrawnCard}");
                     // ImGui.TextUnformatted($"2-{CustomComboFunctions.GetJobGauge<ASTGauge>().DrawnCrownCard}");
                     
-                    ImGui.TextUnformatted($"无情NoMercy-{CustomComboFunctions.GetCooldownRemainingTime(GNB.无情NoMercy)}");
-                    ImGui.TextUnformatted($"倍攻DoubleDown-{CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
-                    ImGui.TextUnformatted($"利刃斩KeenEdge-{CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
-                    ImGui.TextUnformatted($"血壤Bloodfest-{CustomComboFunctions.GetCooldownRemainingTime(GNB.血壤Bloodfest)}");
+                    // ImGui.TextUnformatted($"无情NoMercy-{CustomComboFunctions.GetCooldownRemainingTime(GNB.无情NoMercy)}");
+                    // ImGui.TextUnformatted($"倍攻DoubleDown-{CustomComboFunctions.GetCooldownRemainingTime(GNB.倍攻DoubleDown)}");
+                    // ImGui.TextUnformatted($"利刃斩KeenEdge-{CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
+                    // ImGui.TextUnformatted($"血壤Bloodfest-{CustomComboFunctions.GetCooldownRemainingTime(GNB.血壤Bloodfest)}");
                     // ImGui.TextUnformatted($"1-{CustomComboFunctions.GetCooldownRemainingTime(GNB.血壤Bloodfest)}");
-                    ImGui.TextUnformatted($"子弹数量-{CustomComboFunctions.GetJobGauge<GNBGauge>().Ammo}");
-                    ImGui.TextUnformatted($"子弹连是否准备就绪-{GNB.GNB_ST_MainCombo.子弹连是否准备就绪()}");
+                    // ImGui.TextUnformatted($"子弹数量-{CustomComboFunctions.GetJobGauge<GNBGauge>().Ammo}");
+                    // ImGui.TextUnformatted($"子弹连是否准备就绪-{GNB.GNB_ST_MainCombo.子弹连是否准备就绪()}");
                     // ImGui.TextUnformatted($"2-{CustomComboFunctions.GetCooldownRemainingTime(GNB.利刃斩KeenEdge)}");
                     // ImGui.TextUnformatted($"3-{CustomComboFunctions.GetJobGauge<DRKGauge>().ShadowTimeRemaining}");
                     // ImGui.TextUnformatted($"4-{CustomComboFunctions.GetJobGauge<DRKGauge>().DarksideTimeRemaining}");

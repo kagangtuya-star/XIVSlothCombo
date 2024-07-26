@@ -8,6 +8,7 @@ using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
+using XIVSlothComboX.Services;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
 
 namespace XIVSlothComboX.Combos.PvE
@@ -320,10 +321,10 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (pomEnabled && pomReady)
                             return PresenceOfMind;
-                        
+
                         if (assizeEnabled && assizeReady)
                             return Assize;
-                        
+
                         if (lucidEnabled && lucidReady)
                             return All.LucidDreaming;
                     }
@@ -338,25 +339,30 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.WHM_ST_MainCombo_Glare4))
                         {
-                            if (IsMoving && GetBuffStacks(Buffs.Glare4Pre) > 0)
+                           
+                            if (GetBuffRemainingTime(Buffs.Glare4Pre) > 0)
                             {
-                                return Glare4;
+                                if (IsMoving)
+                                {
+                                    return Glare4;
+                                }
+                                
+                                if (GetBuffStacks(Buffs.Glare4Pre) >= 3 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 9)
+                                {
+                                    return Glare4;
+                                }
+
+                                if (GetBuffStacks(Buffs.Glare4Pre) >= 2 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 7)
+                                {
+                                    return Glare4;
+                                }
+
+                                if (GetBuffStacks(Buffs.Glare4Pre) >= 1 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 3)
+                                {
+                                    return Glare4;
+                                }
                             }
 
-                            if (GetBuffStacks(Buffs.Glare4Pre) >= 3 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 9)
-                            {
-                                return Glare4;
-                            }
-
-                            if (GetBuffStacks(Buffs.Glare4Pre) >= 2 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 7)
-                            {
-                                return Glare4;
-                            }
-
-                            if (GetBuffStacks(Buffs.Glare4Pre) >= 1 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 3)
-                            {
-                                return Glare4;
-                            }
 
                         }
 
