@@ -4350,6 +4350,7 @@ namespace XIVSlothComboX.Combos
         WHM_Raise = 19004,
 
         [ReplaceSkill(WHM.Raise)]
+        [ParentCombo(WHM_Raise)]
         [CustomComboInfo("Thin Air Raise Feature", "Adds Thin Air to the Global Raise Feature/Alternative Raise Feature.", WHM.JobID, 90, "", "")]
         WHM_ThinAirRaise = 19014,
 
