@@ -752,8 +752,7 @@ namespace XIVSlothComboX
                                 );
                                 await Task.Delay(TimeSpan.FromMilliseconds(interval));
                             }
-                        },
-                        autoToken
+                        }, autoToken
                     );
                     break;
                 }
