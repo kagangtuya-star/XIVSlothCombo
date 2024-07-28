@@ -380,7 +380,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                             // DoT Uptime & HP% threshold
                             float refreshtimer = Config.WHM_ST_MainCombo_DoT_Adv ? Config.WHM_ST_MainCombo_DoT_Threshold : 3;
-                            if (!HasEffect(Buffs.PresenceOfMind) && (dotDebuff is null || dotDebuff.RemainingTime <= refreshtimer) && GetTargetHPPercent() > Config.WHM_STDPS_MainCombo_DoT)
+                            // if (!HasEffect(Buffs.PresenceOfMind) && (dotDebuff is null || dotDebuff.RemainingTime <= refreshtimer) && GetTargetHPPercent() > Config.WHM_STDPS_MainCombo_DoT)
+                            if ((dotDebuff is null || dotDebuff.RemainingTime <= refreshtimer) && GetTargetHPPercent() > Config.WHM_STDPS_MainCombo_DoT)
                             {
                                 return OriginalHook(Aero);
                             }

@@ -201,14 +201,20 @@ namespace XIVSlothComboX.Combos.PvE
                         bool devilmentReady = 进攻之探戈Devilment.ActionReady() && IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment);
 
                         if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
+                        {
                             return 进攻之探戈Devilment;
+                        }
 
                         if (WasLastAction(四色技巧舞步结束TechnicalFinish4))
+                        {
                             return 进攻之探戈Devilment;
+                        }
 
 
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && CanDelayedWeavePlus(actionID, 1.5, 0.5f))
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && 技巧舞步TechnicalStepCD倒计时 > 0 && CanDelayedWeavePlus(actionID, 1.5, 0.5f))
+                        {
                             return 百花争艳Flourish;
+                        }
                     }
 
                     if (canWeave)
@@ -268,13 +274,17 @@ namespace XIVSlothComboX.Combos.PvE
                                     }
 
                                     if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
+                                    {
                                         return 扇舞急FanDance3;
+                                    }
                                 }
                             }
                             else
                             {
                                 if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
+                                {
                                     return 扇舞急FanDance3;
+                                }
                             }
                         }
                     }
@@ -299,21 +309,29 @@ namespace XIVSlothComboX.Combos.PvE
                         return 技巧舞步TechnicalStep;
                     }
 
+                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_舞步终结))
+                    {
+                        if (舞步终结.ActionReady() && HasEffect(Buffs.舞步终结预备))
+                        {
+                            return 标准舞步StandardStep.OriginalHook();
+                        }
+                    }
+
                     if (LevelChecked(剑舞SaberDance) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance))
                     {
                         if (gauge.Esprit >= 50)
                         {
                             if (晓之舞DanceOfTheDawn.LevelChecked() && HasEffect(Buffs.晓之舞预备))
-                                return 晓之舞DanceOfTheDawn;
-                        }
-
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance_1))
-                        {
-                            if (gauge.Esprit >= 70 && 剑舞SaberDance.GCDActionPreReady(技巧舞步TechnicalStep))
                             {
-                                return 剑舞SaberDance;
+                                return 晓之舞DanceOfTheDawn;
                             }
                         }
+
+                        if (gauge.Esprit >= 50)
+                        {
+                            return 剑舞SaberDance;
+                        }
+
 
                         if ((gauge.Esprit >= 85 || (techBurst && gauge.Esprit >= 50)))
                         {
@@ -326,60 +344,55 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
-                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_最后一舞))
+                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_最后一舞) && 最后一舞LastDance.LevelChecked() && HasEffect(Buffs.最后一舞预备PRE))
                     {
-                        if (GetBuffRemainingTime(Buffs.最后一舞预备PRE) < 3f)
+                        if (GetBuffRemainingTime(Buffs.最后一舞预备PRE) > 0f && GetBuffRemainingTime(Buffs.最后一舞预备PRE) < 3f)
                         {
                             return 最后一舞LastDance;
                         }
-                        
-                        if (最后一舞LastDance.LevelChecked() && HasEffect(Buffs.最后一舞预备PRE) && 技巧舞步TechnicalStepCD倒计时 > 15)
+
+                        if (技巧舞步TechnicalStepCD倒计时 > 15)
+                        {
                             return 最后一舞LastDance;
+                        }
                     }
 
-                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_舞步终结))
-                    {
-                        if (舞步终结.LevelChecked() && HasEffect(Buffs.舞步终结预备))
-                            return 舞步终结;
-                    }
 
                     if (LevelChecked(喷泉Fountain) && lastComboMove is 瀑泻Cascade && comboTime is < 2 and > 0)
+                    {
                         return 喷泉Fountain;
+                    }
 
-                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit < 20)
+                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= 20)
                     {
                         return 提拉纳Tillana;
                     }
 
-                    if (GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) < 3f)
+                    if (GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) > 0f && GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) < 3f)
                     {
                         return 提拉纳Tillana;
                     }
 
 
                     if (HasEffect(Buffs.流星舞预备FlourishingStarfall))
+                    {
                         return 流星舞StarfallDance;
-
-                    // Simple DT Standard (activates dance with no target, or when target is over HP% threshold)
-                    // limited to 3 times in 120 seconds
-                    // bool burstProtected = (LevelChecked(技巧舞步TechnicalStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_TS))
-                    //     ? ((技巧舞步TechnicalStepCD倒计时 < 90 && 技巧舞步TechnicalStepCD倒计时 > 5)
-                    //        || (techBurstTimer > 5 && !canWeave && !flow && !symmetry && comboTime <= 0))
-                    //     : true;
-
-                    // bool flourishProtected = (LevelChecked(百花争艳Flourish) && IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish))
-                    //     ? (GetCooldownRemainingTime(百花争艳Flourish) > 4)
-                    //     : true;
-
+                    }
 
                     if (LevelChecked(坠喷泉Fountainfall) && flow)
+                    {
                         return 坠喷泉Fountainfall;
+                    }
 
                     if (LevelChecked(逆瀑泻ReverseCascade) && symmetry)
+                    {
                         return 逆瀑泻ReverseCascade;
+                    }
 
                     if (LevelChecked(喷泉Fountain) && lastComboMove is 瀑泻Cascade && comboTime > 0)
+                    {
                         return 喷泉Fountain;
+                    }
                 }
 
                 return actionID;

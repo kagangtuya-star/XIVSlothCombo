@@ -859,9 +859,6 @@ namespace XIVSlothComboX.Combos
         DNC_DT_Simple_Devilment = 4090,
 
 
-        [ParentCombo(DNC_DT_Simple_SaberDance)]
-        [CustomComboInfo("伶俐防止溢出[测试中]", "大舞快好的时候并且伶俐>=70的时候放剑舞。", DNC.JobID, 2, "", "")]
-        DNC_DT_Simple_SaberDance_1 = 4082,
 
         [ParentCombo(DNC_DT_SimpleMode)]
         [CustomComboInfo("最后一舞", "最后一舞加入循环", DNC.JobID, 2, "", "")]

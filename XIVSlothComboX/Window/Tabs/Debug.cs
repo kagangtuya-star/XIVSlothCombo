@@ -215,8 +215,9 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"SELECTED BLU SPELLS:\n{string.Join("\n", Service.Configuration.ActiveBLUSpells.Select(x => ActionWatching.GetActionName(x)).OrderBy(x => x))}");
                     
                     //舞者 start
-                    // ImGui.TextUnformatted($"{DNC.剑舞SaberDance.GCDActionPreReady(DNC.百花争艳Flourish)},百花:{CustomComboFunctions.GetCooldownRemainingTime(DNC.百花争艳Flourish)}，剑舞:{CustomComboFunctions.GetCooldownRemainingTime(DNC.剑舞SaberDance)}");
-                    // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
+                    ImGui.TextUnformatted($"{DNC.剑舞SaberDance.GCDActionPreReady(DNC.百花争艳Flourish)},百花:{CustomComboFunctions.GetCooldownRemainingTime(DNC.百花争艳Flourish)}，剑舞:{CustomComboFunctions.GetCooldownRemainingTime(DNC.剑舞SaberDance)}");
+                    ImGui.TextUnformatted($"{CustomComboFunctions.GetCooldownRemainingTime(DNC.技巧舞步TechnicalStep)}");
+                    // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(DNC.Buffs.野火Wildfire)?.RemainingTime}");
                     //舞者 end
                     
                              
@@ -224,9 +225,8 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"{SMN.SMN_Advanced_Combo.DemiAttackCount},{SMN.SMN_Advanced_Combo.UsedDemiAttack}");
                     // ImGui.TextUnformatted($"{CustomComboFunctions.FindEffect(MCH.Buffs.野火Wildfire)?.RemainingTime}");
                     //召唤 end
-                    ImGui.TextUnformatted($"{CustomComboFunctions.GetBuffRemainingTime(WHM.Buffs.Glare4Pre)
-                    }");
-                    ImGui.TextUnformatted($"{CustomComboFunctions.GetBuffStacks(WHM.Buffs.Glare4Pre)}");
+                    // ImGui.TextUnformatted($"{CustomComboFunctions.GetBuffRemainingTime(WHM.Buffs.Glare4Pre)}");
+                    // ImGui.TextUnformatted($"{CustomComboFunctions.GetBuffStacks(WHM.Buffs.Glare4Pre)}");
                     
                     
                     
