@@ -226,6 +226,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
+                        //舞娘初始等级为60 扇舞破FanDance2学习等级为56 所以永远为真
                         if (LevelChecked(扇舞破FanDance2))
                         {
                             int minFeathers = LevelChecked(技巧舞步TechnicalStep) ? (GetCooldownRemainingTime(技巧舞步TechnicalStep) < 5f ? 4 : 3) : 0;
@@ -239,10 +240,14 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && GetCooldownRemainingTime(技巧舞步TechnicalStep) > 3)
                                     {
                                         if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
-                                            return 扇舞急FanDance3;
+                                        {
+                                             return 扇舞急FanDance3;
+                                        }
 
                                         if (HasEffect(Buffs.扇舞_终FourFoldFanDance))
+                                        {
                                             return 扇舞终FanDance4;
+                                        }
 
                                         if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
                                             //注释掉 7.0提拉纳Tillana 可以双插了
@@ -273,10 +278,20 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
                                     }
 
-                                    if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
+                                    
+                                }
+
+                                if (IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
+                                {
+                                    if (gauge.Feathers >= 4)
                                     {
-                                        return 扇舞急FanDance3;
+                                        return 扇舞序FanDance1;
                                     }
+                                }
+                                
+                                if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
+                                {
+                                    return 扇舞急FanDance3;
                                 }
                             }
                             else
@@ -300,6 +315,11 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             return 标准舞步StandardStep;
                         }
+                        
+                        if (HasEffect(Buffs.舞步终结预备))
+                        {
+                            return 标准舞步StandardStep.OriginalHook();
+                        }
                     }
 
 
@@ -309,13 +329,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return 技巧舞步TechnicalStep;
                     }
 
-                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_舞步终结))
-                    {
-                        if (舞步终结.ActionReady() && HasEffect(Buffs.舞步终结预备))
-                        {
-                            return 标准舞步StandardStep.OriginalHook();
-                        }
-                    }
+           
 
                     if (LevelChecked(剑舞SaberDance) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance))
                     {
@@ -346,7 +360,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_最后一舞) && 最后一舞LastDance.LevelChecked() && HasEffect(Buffs.最后一舞预备PRE))
                     {
-                        if (GetBuffRemainingTime(Buffs.最后一舞预备PRE) > 0f && GetBuffRemainingTime(Buffs.最后一舞预备PRE) < 3f)
+                        if (GetBuffRemainingTime(Buffs.最后一舞预备PRE) is > 0 and <= 3)
                         {
                             return 最后一舞LastDance;
                         }
@@ -357,27 +371,34 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
+                    
+                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= 20)
+                    {
+                        return 提拉纳Tillana;
+                    }
+
+                    if (GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) is > 0 and <= 3)
+                    {
+                        return 提拉纳Tillana;
+                    }
+                    
+                    if (HasEffect(Buffs.流星舞预备FlourishingStarfall))
+                    {
+                        return 流星舞StarfallDance;
+                    }
+                    
+                    if (GetBuffRemainingTime(Buffs.流星舞预备FlourishingStarfall) is > 0 and <= 3)
+                    {
+                        return 流星舞StarfallDance;
+                    }
+                    
 
                     if (LevelChecked(喷泉Fountain) && lastComboMove is 瀑泻Cascade && comboTime is < 2 and > 0)
                     {
                         return 喷泉Fountain;
                     }
 
-                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= 20)
-                    {
-                        return 提拉纳Tillana;
-                    }
-
-                    if (GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) > 0f && GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) < 3f)
-                    {
-                        return 提拉纳Tillana;
-                    }
-
-
-                    if (HasEffect(Buffs.流星舞预备FlourishingStarfall))
-                    {
-                        return 流星舞StarfallDance;
-                    }
+                    
 
                     if (LevelChecked(坠喷泉Fountainfall) && flow)
                     {
