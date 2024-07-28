@@ -209,9 +209,9 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             return 进攻之探戈Devilment;
                         }
+                        
 
-
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && 技巧舞步TechnicalStepCD倒计时 > 0 && CanDelayedWeavePlus(actionID, 1.5, 0.5f))
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步TechnicalStepCD倒计时 > 0 && CanSpellWeavePlus(actionID))
                         {
                             return 百花争艳Flourish;
                         }
@@ -241,7 +241,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     {
                                         if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
                                         {
-                                             return 扇舞急FanDance3;
+                                            return 扇舞急FanDance3;
                                         }
 
                                         if (HasEffect(Buffs.扇舞_终FourFoldFanDance))
@@ -278,7 +278,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
                                     }
 
-                                    
+
                                 }
 
                                 if (IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
@@ -288,7 +288,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         return 扇舞序FanDance1;
                                     }
                                 }
-                                
+
                                 if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
                                 {
                                     return 扇舞急FanDance3;
@@ -315,7 +315,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             return 标准舞步StandardStep;
                         }
-                        
+
                         if (HasEffect(Buffs.舞步终结预备))
                         {
                             return 标准舞步StandardStep.OriginalHook();
@@ -329,7 +329,6 @@ namespace XIVSlothComboX.Combos.PvE
                         return 技巧舞步TechnicalStep;
                     }
 
-           
 
                     if (LevelChecked(剑舞SaberDance) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance))
                     {
@@ -371,7 +370,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
-                    
+
                     if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= 20)
                     {
                         return 提拉纳Tillana;
@@ -381,24 +380,23 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         return 提拉纳Tillana;
                     }
-                    
+
                     if (HasEffect(Buffs.流星舞预备FlourishingStarfall))
                     {
                         return 流星舞StarfallDance;
                     }
-                    
+
                     if (GetBuffRemainingTime(Buffs.流星舞预备FlourishingStarfall) is > 0 and <= 3)
                     {
                         return 流星舞StarfallDance;
                     }
-                    
+
 
                     if (LevelChecked(喷泉Fountain) && lastComboMove is 瀑泻Cascade && comboTime is < 2 and > 0)
                     {
                         return 喷泉Fountain;
                     }
 
-                    
 
                     if (LevelChecked(坠喷泉Fountainfall) && flow)
                     {
