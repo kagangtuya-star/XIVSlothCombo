@@ -1901,13 +1901,13 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.MCH_ST_Adv_WildFire)
             {
-                UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_WildfireHP, "目标低于多少血量停止使用(单位万)");
+                UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_WildfireHP, "目标低于多少血量停止使用(单位万)-[建议为0]");
             }
             
 
             if (preset == CustomComboPreset.MCH_ST_Adv_Hypercharge)
             {
-                  UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_HyperchargeHP, "目标低于多少血量停止使用(单位万)");
+                  UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_HyperchargeHP, "目标低于多少血量停止使用(单位万)-[建议为0]");
             }
 
             
