@@ -72,6 +72,18 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 ? 0
                 : (float)chara.CurrentHp / chara.MaxHp * 100;
         }
+        
+        public static uint GetTargetHP(IGameObject? OurTarget = null)
+        {
+            if (OurTarget is null)
+            {
+                OurTarget = CurrentTarget; // Fallback to CurrentTarget
+                if (OurTarget is null)
+                    return 0;
+            }
+
+            return OurTarget is not IBattleChara chara ? 0 : chara.CurrentHp ;
+        }
 
         public static float EnemyHealthMaxHp()
         {

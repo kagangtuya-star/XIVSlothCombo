@@ -1532,29 +1532,12 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-
-        #region Simple ST
-
-        [ReplaceSkill(MCH.SplitShot, MCH.HeatedSplitShot)]
-        [CustomComboInfo
-        (
-            "Simple Mode - Single Target",
-            "Replaces Split Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MCH.JobID
-        )]
-        MCH_ST_SimpleMode = 8001,
-
-        #endregion
-
+        
         #region Advanced ST
 
         [ReplaceSkill(MCH.SplitShot, MCH.HeatedSplitShot)]
-        [ConflictingCombos(MCH_ST_SimpleMode)]
         [CustomComboInfo
-        (
-            "Advanced Mode - Single Target",
-            "Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.",
-            MCH.JobID
-        )]
+        ("Advanced Mode - Single Target", "Replaces Split Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MCH.JobID)]
         MCH_ST_AdvancedMode = 8100,
 
         [ParentCombo(MCH_ST_AdvancedMode)]
@@ -1628,30 +1611,13 @@ namespace XIVSlothComboX.Combos
         MCH_ST_Adv_SecondWind = 8114,
 
         #endregion
-
-        #region Simple AoE
-
-        [ReplaceSkill(MCH.SpreadShot)]
-        [ConflictingCombos(MCH_AoE_AdvancedMode)]
-        [CustomComboInfo
-        (
-            "Simple Mode - AoE",
-            "Replaces Spread Shot with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MCH.JobID
-        )]
-        MCH_AoE_SimpleMode = 8200,
-
-        #endregion
+        
 
         #region Advanced AoE
 
         [ReplaceSkill(MCH.SpreadShot, MCH.Scattergun)]
-        [ConflictingCombos(MCH_AoE_SimpleMode)]
         [CustomComboInfo
-        (
-            "Advanced Mode - AoE",
-            "Replaces Spread Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.",
-            MCH.JobID
-        )]
+        ("Advanced Mode - AoE", "Replaces Spread Shot with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MCH.JobID)]
         MCH_AoE_AdvancedMode = 8300,
 
         [ParentCombo(MCH_AoE_AdvancedMode)]
@@ -1660,11 +1626,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(MCH_AoE_AdvancedMode)]
         [ConflictingCombos(MCH_GaussRoundRicochet, MCH_Heatblast_GaussRound)]
-        [CustomComboInfo
-        (
-            "Gauss Round / Ricochet \nDouble Check / Checkmate option",
-            "Adds Gauss Round and Ricochet or Double Check and Checkmate to the rotation.", MCH.JobID
-        )]
+        [CustomComboInfo("Gauss Round / Ricochet \nDouble Check / Checkmate option", "Adds Gauss Round and Ricochet or Double Check and Checkmate to the rotation.", MCH.JobID)]
         MCH_AoE_Adv_GaussRicochet = 8302,
 
         [ParentCombo(MCH_AoE_AdvancedMode)]
@@ -1719,7 +1681,7 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        [ReplaceSkill(MCH.RookAutoturret, MCH.AutomatonQueen)]
+        [ReplaceSkill(MCH.车式浮空炮塔RookAutoturret, MCH.AutomatonQueen)]
         [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID)]
         MCH_Overdrive = 8002,
 
@@ -1737,7 +1699,7 @@ namespace XIVSlothComboX.Combos
         //     "Replace Drill and Air Anchor (Hot Shot) with one or the other (or Chain Saw) depending on which is on cooldown.", MCH.JobID)]
         // MCH_HotShotDrillChainsaw = 8004,
 
-        [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot, MCH.Chainsaw)]
+        [ReplaceSkill(MCH.钻头Drill, MCH.AirAnchor, MCH.HotShot, MCH.Chainsaw)]
         [CustomComboInfo("Big Hitter Feature", "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", MCH.JobID)]
         MCH_HotShotDrillChainsawExcavator = 8004,
 

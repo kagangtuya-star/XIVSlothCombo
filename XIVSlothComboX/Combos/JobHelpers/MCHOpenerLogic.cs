@@ -129,8 +129,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 3) OpenerStep++;
                 else if (OpenerStep == 3) actionID = DoubleCheck;
 
-                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 4) OpenerStep++;
-                else if (OpenerStep == 4) actionID = Drill;
+                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 4) OpenerStep++;
+                else if (OpenerStep == 4) actionID = 钻头Drill;
 
                 if (CustomComboFunctions.WasLastAction(BarrelStabilizer) && OpenerStep == 5) OpenerStep++;
                 else if (OpenerStep == 5) actionID = BarrelStabilizer;
@@ -147,8 +147,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(Reassemble) && OpenerStep == 9) OpenerStep++;
                 else if (OpenerStep == 9) actionID = Reassemble;
 
-                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 10) OpenerStep++;
-                else if (OpenerStep == 10) actionID = Drill;
+                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 10) OpenerStep++;
+                else if (OpenerStep == 10) actionID = 钻头Drill;
 
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 11) OpenerStep++;
                 else if (OpenerStep == 11) actionID = CheckMate;
@@ -162,8 +162,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 14) OpenerStep++;
                 else if (OpenerStep == 14) actionID = DoubleCheck;
 
-                if (CustomComboFunctions.WasLastAction(Hypercharge) && OpenerStep == 15) OpenerStep++;
-                else if (OpenerStep == 15) actionID = Hypercharge;
+                if (CustomComboFunctions.WasLastAction(超荷Hypercharge) && OpenerStep == 15) OpenerStep++;
+                else if (OpenerStep == 15) actionID = 超荷Hypercharge;
 
                 if (CustomComboFunctions.WasLastAction(BlazingShot) && OpenerStep == 16) OpenerStep++;
                 else if (OpenerStep == 16) actionID = BlazingShot;
@@ -195,8 +195,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 25) OpenerStep++;
                 else if (OpenerStep == 25) actionID = CheckMate;
 
-                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 26) OpenerStep++;
-                else if (OpenerStep == 26) actionID = Drill;
+                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 26) OpenerStep++;
+                else if (OpenerStep == 26) actionID = 钻头Drill;
 
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 27) OpenerStep++;
                 else if (OpenerStep == 27) actionID = DoubleCheck;
@@ -274,10 +274,10 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         internal static uint LastSummonBattery(this MCHGauge gauge)
         {
-            if (!CustomComboFunctions.InCombat() || ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.RookAutoturret)) == 0)
+            if (!CustomComboFunctions.InCombat() || ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.车式浮空炮塔RookAutoturret)) == 0)
                 lastBattery = 0;
 
-            if (ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.RookAutoturret)) > 0)
+            if (ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.车式浮空炮塔RookAutoturret)) > 0)
                 lastBattery = gauge.LastSummonBatteryPower;
 
             return lastBattery;

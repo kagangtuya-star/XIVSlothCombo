@@ -1847,16 +1847,16 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.MCH_ST_Adv_Reassemble)
-                UserConfig.DrawSliderInt(0, 1, MCH.Config.MCH_ST_ReassemblePool, "Number of Charges to Save for Manual Use");
+                UserConfig.DrawSliderInt(0, 1, MCH.Config.MCH_ST_ReassemblePool, "保留多少层充能");
 
             if (preset == CustomComboPreset.MCH_AoE_Adv_Reassemble)
-                UserConfig.DrawSliderInt(0, 1, MCH.Config.MCH_AoE_ReassemblePool, "Number of Charges to Save for Manual Use");
+                UserConfig.DrawSliderInt(0, 1, MCH.Config.MCH_AoE_ReassemblePool, "保留多少层充能");
 
             if (preset is CustomComboPreset.MCH_ST_Adv_Reassemble)
             {
                 UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled,
                     $"Use on {ActionWatching.GetActionName(MCH.HotShot)}/{ActionWatching.GetActionName(MCH.AirAnchor)}", "", 5, 0);
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.Drill)}", "", 5, 1);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.钻头Drill)}", "", 5, 1);
                 UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.Chainsaw)}", "", 5, 2);
                 UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.Excavator)}", "", 5,
                     3);
@@ -1866,7 +1866,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.MCH_AoE_Adv_Reassemble)
             {
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled,
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, 
                     $"Use on {ActionWatching.GetActionName(MCH.SpreadShot)}/{ActionWatching.GetActionName(MCH.Scattergun)}", "", 4, 0);
                 UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_AoE_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.AutoCrossbow)}", "",
                     4, 1);
@@ -1888,20 +1888,27 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(50, 100, MCH.Config.MCH_AoE_TurretUsage, "电池阈值", sliderIncrement: 5);
 
             if (preset == CustomComboPreset.MCH_AoE_Adv_GaussRicochet)
-                UserConfig.DrawAdditionalBoolChoice(MCH.Config.MCH_AoE_Hypercharge, $"Use Outwith {ActionWatching.GetActionName(MCH.Hypercharge)}",
+                UserConfig.DrawAdditionalBoolChoice(MCH.Config.MCH_AoE_Hypercharge, $"Use Outwith {ActionWatching.GetActionName(MCH.超荷Hypercharge)}",
                     "");
 
             if (preset == CustomComboPreset.MCH_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, MCH.Config.MCH_VariantCure, "HP% to be at or under", 200);
 
             if (preset == CustomComboPreset.MCH_ST_Adv_QueenOverdrive)
-                UserConfig.DrawSliderInt(1, 10, MCH.Config.MCH_ST_QueenOverDrive, "HP% for the target to be at or under");
+            {
+                UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_QueenOverDrive, "目标血量小于多少使用(单位万)-0就是不用");
+            }
 
             if (preset == CustomComboPreset.MCH_ST_Adv_WildFire)
-                UserConfig.DrawSliderInt(0, 15, MCH.Config.MCH_ST_WildfireHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
+            {
+                UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_WildfireHP, "目标低于多少血量停止使用(单位万)");
+            }
+            
 
             if (preset == CustomComboPreset.MCH_ST_Adv_Hypercharge)
-                UserConfig.DrawSliderInt(0, 15, MCH.Config.MCH_ST_HyperchargeHP, "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)");
+            {
+                  UserConfig.DrawSliderInt(0, 10000, MCH.Config.MCH_ST_HyperchargeHP, "目标低于多少血量停止使用(单位万)");
+            }
 
             
             #endregion
