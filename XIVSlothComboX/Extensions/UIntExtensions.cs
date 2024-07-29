@@ -19,9 +19,8 @@ namespace XIVSlothComboX.Extensions
                 return false;
             }
 
-            if (CustomComboFunctions.GetCooldownRemainingTime(value) <= 0
-                || (CustomComboFunctions.GetCooldownRemainingTime(value) <= CustomComboFunctions.GetCooldownRemainingTime(gcdActionId)
-                    && CustomComboFunctions.GetCooldownRemainingTime(gcdActionId) < 1.5f))
+            if (CustomComboFunctions.GetCooldownRemainingTime(value) <= 0 || (CustomComboFunctions.GetCooldownRemainingTime(value) <= CustomComboFunctions.GetCooldownRemainingTime(gcdActionId)
+                                                                              && CustomComboFunctions.GetCooldownRemainingTime(gcdActionId) < 1.5f))
             {
                 return true;
             }

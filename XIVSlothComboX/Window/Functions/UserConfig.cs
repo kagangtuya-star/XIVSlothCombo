@@ -2097,10 +2097,10 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawHorizontalMultiChoice
                 (
                     MCH.Config.MCH_ST_Reassembled,
-                    $"Use on {ActionWatching.GetActionName(MCH.HotShot)}/{ActionWatching.GetActionName(MCH.AirAnchor)}", "", 5, 0
+                    $"Use on {ActionWatching.GetActionName(MCH.HotShot)}/{ActionWatching.GetActionName(MCH.空气锚AirAnchor)}", "", 5, 0
                 );
                 UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.钻头Drill)}", "", 5, 1);
-                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.Chainsaw)}", "", 5, 2);
+                UserConfig.DrawHorizontalMultiChoice(MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.回转飞锯ChainSaw)}", "", 5, 2);
                 UserConfig.DrawHorizontalMultiChoice
                 (
                     MCH.Config.MCH_ST_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.Excavator)}", "", 5,
@@ -2127,7 +2127,7 @@ namespace XIVSlothComboX.Window.Functions
                 );
                 UserConfig.DrawHorizontalMultiChoice
                 (
-                    MCH.Config.MCH_AoE_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.Chainsaw)}", "", 4,
+                    MCH.Config.MCH_AoE_Reassembled, $"Use on {ActionWatching.GetActionName(MCH.回转飞锯ChainSaw)}", "", 4,
                     2
                 );
                 UserConfig.DrawHorizontalMultiChoice

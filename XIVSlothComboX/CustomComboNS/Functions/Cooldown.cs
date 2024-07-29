@@ -1,4 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Services;
 
@@ -14,7 +15,21 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <summary> Gets the cooldown total remaining time. </summary>
         /// <param name="actionID"> Action ID to check. </param>
         /// <returns> Total remaining time of the cooldown. </returns>
-        public static float GetCooldownRemainingTime(uint actionID) => Service.ComboCache.GetCooldown(actionID).CooldownRemaining;
+        public static float GetCooldownRemainingTime(uint actionID)
+        {
+            if (actionID == MCH.钻头Drill)
+            {
+                if (Service.ComboCache.GetCooldown(actionID).CooldownRemaining == 0)
+                {
+                    return 0;
+                }
+                
+                return Service.ComboCache.GetCooldown(actionID).CooldownRemaining - MCH.钻头倒计时偏移;
+            }
+
+            return Service.ComboCache.GetCooldown(actionID).CooldownRemaining;
+        }
+
 
         /// <summary> Gets the cooldown remaining time for the next charge. </summary>
         /// <param name="actionID"> Action ID to check. </param>

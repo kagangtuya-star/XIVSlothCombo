@@ -1681,11 +1681,11 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        [ReplaceSkill(MCH.车式浮空炮塔RookAutoturret, MCH.AutomatonQueen)]
+        [ReplaceSkill(MCH.车式浮空炮塔RookAutoturret, MCH.后式自走人偶AutomatonQueen)]
         [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID)]
         MCH_Overdrive = 8002,
 
-        [ReplaceSkill(MCH.GaussRound, MCH.Ricochet)]
+        [ReplaceSkill(MCH.虹吸弹GaussRound, MCH.弹射Ricochet)]
         [ConflictingCombos(MCH_ST_Adv_Opener, MCH_ST_Adv_GaussRicochet, MCH_AoE_Adv_GaussRicochet, MCH_Heatblast_GaussRound)]
         [CustomComboInfo
         (
@@ -1699,11 +1699,11 @@ namespace XIVSlothComboX.Combos
         //     "Replace Drill and Air Anchor (Hot Shot) with one or the other (or Chain Saw) depending on which is on cooldown.", MCH.JobID)]
         // MCH_HotShotDrillChainsaw = 8004,
 
-        [ReplaceSkill(MCH.钻头Drill, MCH.AirAnchor, MCH.HotShot, MCH.Chainsaw)]
+        [ReplaceSkill(MCH.钻头Drill, MCH.空气锚AirAnchor, MCH.HotShot, MCH.回转飞锯ChainSaw)]
         [CustomComboInfo("Big Hitter Feature", "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", MCH.JobID)]
         MCH_HotShotDrillChainsawExcavator = 8004,
 
-        [ReplaceSkill(MCH.Heatblast)]
+        [ReplaceSkill(MCH.热冲击HeatBlast)]
         [CustomComboInfo("Single Button Heat Blast Feature", "Turns Heat Blast into Hypercharge when at or above 50 heat.", MCH.JobID)]
         MCH_Heatblast = 8006,
 

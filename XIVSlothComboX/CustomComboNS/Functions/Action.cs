@@ -337,7 +337,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 if (Last_2.RowId is 
                     DNC.双色标准舞步结束StandardFinish2
                     or DNC.四色技巧舞步结束TechnicalFinish4
-                    or MCH.Heatblast
+                    or MCH.热冲击HeatBlast
+                    or MCH.BlazingShot
                     or MCH.AutoCrossbow)
                 {
 
