@@ -4121,11 +4121,7 @@ namespace XIVSlothComboX.Combos
         WHM_ST_MainCombo_Opener = 19023,
 
         [ParentCombo(WHM_ST_MainCombo)]
-        [CustomComboInfo
-        (
-            "Aero/Dia Uptime Option",
-            "Adds Aero/Dia to the single target combo if the debuff is not present on current target, or is about to expire.", WHM.JobID, 12, "", ""
-        )]
+        [CustomComboInfo("Aero/Dia Uptime Option", "Adds Aero/Dia to the single target combo if the debuff is not present on current target, or is about to expire.", WHM.JobID, 12, "", "")]
         WHM_ST_MainCombo_DoT = 19013,
 
         [ParentCombo(WHM_ST_MainCombo)]

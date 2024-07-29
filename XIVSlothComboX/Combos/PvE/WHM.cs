@@ -89,7 +89,7 @@ namespace XIVSlothComboX.Combos.PvE
         public static class Config
         {
             internal static UserInt WHM_STDPS_Lucid = new("WHMLucidDreamingFeature"),
-                                    WHM_STDPS_MainCombo_DoT = new("WHM_ST_MainCombo_DoT"),
+                                    WHM_STDPS_MainCombo_DoT = new("WHM_ST_MainCombo_DoT", 100),
                                     WHM_AoEDPS_Lucid = new("WHM_AoE_Lucid"),
                                     WHM_STHeals_Lucid = new("WHM_STHeals_Lucid"),
                                     WHM_STHeals_ThinAir = new("WHM_STHeals_ThinAir"),
@@ -339,14 +339,14 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.WHM_ST_MainCombo_Glare4))
                         {
-                           
+
                             if (GetBuffRemainingTime(Buffs.Glare4Pre) > 0)
                             {
                                 if (IsMoving)
                                 {
                                     return Glare4;
                                 }
-                                
+
                                 if (GetBuffStacks(Buffs.Glare4Pre) >= 3 && GetBuffRemainingTime(Buffs.Glare4Pre) <= 9)
                                 {
                                     return Glare4;
@@ -381,7 +381,7 @@ namespace XIVSlothComboX.Combos.PvE
                             // DoT Uptime & HP% threshold
                             float refreshtimer = Config.WHM_ST_MainCombo_DoT_Adv ? Config.WHM_ST_MainCombo_DoT_Threshold : 3;
                             // if (!HasEffect(Buffs.PresenceOfMind) && (dotDebuff is null || dotDebuff.RemainingTime <= refreshtimer) && GetTargetHPPercent() > Config.WHM_STDPS_MainCombo_DoT)
-                            if ((dotDebuff is null || dotDebuff.RemainingTime <= refreshtimer) && GetTargetHPPercent() > Config.WHM_STDPS_MainCombo_DoT)
+                            if ((dotDebuff is null || dotDebuff.RemainingTime <= refreshtimer) && GetTargetHP() > Config.WHM_STDPS_MainCombo_DoT * 10000)
                             {
                                 return OriginalHook(Aero);
                             }
