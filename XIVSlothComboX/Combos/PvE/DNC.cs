@@ -158,11 +158,13 @@ namespace XIVSlothComboX.Combos.PvE
                     bool symmetry = HasEffect(Buffs.对称投掷SilkenSymmetry) || HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry);
                     float techBurstTimer = GetBuffRemainingTime(Buffs.技巧舞步结束TechnicalFinish);
 
-                    float 技巧舞步TechnicalStepCD倒计时 = GetCooldownRemainingTime(技巧舞步TechnicalStep);
+                    float 技巧舞步倒计时 = GetCooldownRemainingTime(技巧舞步TechnicalStep);
+                    float 标准舞步倒计时 = GetCooldownRemainingTime(标准舞步StandardStep);
+                    float GCD = GetCooldownRemainingTime(瀑泻Cascade);
 
                     bool techBurst = HasEffect(Buffs.技巧舞步结束TechnicalFinish);
-                    bool standardStepReady = 标准舞步StandardStep.ActionReady();
-                    bool technicalStepReady = 技巧舞步TechnicalStep.ActionReady();
+                    // bool standardStepReady = 标准舞步StandardStep.ActionReady();
+                    // bool technicalStepReady = 技巧舞步TechnicalStep.ActionReady();
 
                     #endregion
 
@@ -179,7 +181,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                     // Simple DT Standard Steps & Fill Feature
                     if (HasEffect(Buffs.标准舞步预备StandardStep))
-                        // if (HasEffect(Buffs.标准舞步StandardStep) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS))
                         return gauge.CompletedSteps < 2 ? gauge.NextStep : 双色标准舞步结束StandardFinish2;
 
                     // Simple DT Tech Steps & Fill Feature
@@ -209,9 +210,9 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             return 进攻之探戈Devilment;
                         }
-                        
 
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步TechnicalStepCD倒计时 > 0 && CanSpellWeavePlus(actionID))
+
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0 && CanSpellWeavePlus(actionID))
                         {
                             return 百花争艳Flourish;
                         }
@@ -264,7 +265,7 @@ namespace XIVSlothComboX.Combos.PvE
                                                 {
                                                     if (LevelChecked(技巧舞步TechnicalStep))
                                                     {
-                                                        if (技巧舞步TechnicalStepCD倒计时 >= 40)
+                                                        if (技巧舞步倒计时 >= 40)
                                                         {
                                                             return 扇舞序FanDance1;
                                                         }
@@ -304,29 +305,65 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
-                    if (standardStepReady && IsEnabled(CustomComboPreset.DNC_DT_Simple_SS))
+                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_SS))
                     {
-                        if (HasEffect(Buffs.StandardFinish))
+                        if (标准舞步倒计时 - GCD <= 0 || 标准舞步StandardStep.ActionReady())
                         {
-                            return 标准舞步StandardStep;
+                            if (HasEffect(Buffs.StandardFinish))
+                            {
+                                return 标准舞步StandardStep;
+                            }
+
+                            if (techBurstTimer > 5)
+                            {
+                                return 标准舞步StandardStep;
+                            }
+
+                            if (HasEffect(Buffs.舞步终结预备))
+                            {
+                                return 标准舞步StandardStep.OriginalHook();
+                            }
                         }
 
-                        if (techBurstTimer > 5)
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD))
                         {
-                            return 标准舞步StandardStep;
-                        }
+                            if (标准舞步倒计时 - GCD is > 0 and < 0.9f)
+                            {
+                                if (HasEffect(Buffs.StandardFinish))
+                                {
+                                    return 标准舞步StandardStep;
+                                }
 
-                        if (HasEffect(Buffs.舞步终结预备))
-                        {
-                            return 标准舞步StandardStep.OriginalHook();
+                                if (techBurstTimer > 5)
+                                {
+                                    return 标准舞步StandardStep;
+                                }
+
+                                if (HasEffect(Buffs.舞步终结预备))
+                                {
+                                    return 标准舞步StandardStep.OriginalHook();
+                                }
+                            }
                         }
                     }
 
 
                     // Simple DT Tech (activates dance with no target, or when target is over HP% threshold)
-                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && technicalStepReady && !HasEffect(Buffs.标准舞步预备StandardStep))
+                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && !HasEffect(Buffs.标准舞步预备StandardStep))
                     {
-                        return 技巧舞步TechnicalStep;
+                        if (技巧舞步倒计时 - GCD <= 0 || 技巧舞步TechnicalStep.ActionReady())
+                        {
+                            return 技巧舞步TechnicalStep;
+                        }
+
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD))
+                        {
+                            if (技巧舞步倒计时 - GCD is > 0 and < 0.9f)
+                            {
+                                return 技巧舞步TechnicalStep;
+                            }
+
+                        }
                     }
 
 
@@ -351,7 +388,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return 剑舞SaberDance;
                         }
 
-                        if (技巧舞步TechnicalStepCD倒计时 >= 40 && RaidBuff.爆发期() && gauge.Esprit >= 50)
+                        if (技巧舞步倒计时 >= 40 && RaidBuff.爆发期() && gauge.Esprit >= 50)
                         {
                             return 剑舞SaberDance;
                         }
@@ -364,7 +401,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return 最后一舞LastDance;
                         }
 
-                        if (技巧舞步TechnicalStepCD倒计时 > 15)
+                        if (技巧舞步倒计时 > 15)
                         {
                             return 最后一舞LastDance;
                         }

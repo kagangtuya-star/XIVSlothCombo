@@ -831,17 +831,25 @@ namespace XIVSlothComboX.Combos
         )]
         DNC_DT_SimpleMode = 4065,
 
+        
+        
+        
 
         [ParentCombo(DNC_DT_SimpleMode)]
         [CustomComboInfo("倒计时自动跳小舞", "起手自动跳舞", DNC.JobID, 0, "", "")]
         DNC_DT_Simple_AUTO_SS = 4091,
 
         [ParentCombo(DNC_DT_SimpleMode)]
-        [CustomComboInfo("标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 1, "", "")]
+        [CustomComboInfo("卡GCD-大舞小舞", "不知道什么原因小舞大舞卡GCD才能让循环工整、如果你知道告诉我那是最好的了", DNC.JobID, 1, "", "")]
+        DNC_DT_Simple_GCD = 4095,
+        
+        
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("标准舞步", "Includes Standard Step (and all steps) in the rotation.", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_SS = 4066,
 
         [ParentCombo(DNC_DT_SimpleMode)]
-        [CustomComboInfo("技巧舞步", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 1, "", "")]
+        [CustomComboInfo("技巧舞步", "Includes Technical Step, all dance steps and Technical Finish in the rotation.", DNC.JobID, 2, "", "")]
         DNC_DT_Simple_TS = 4067,
 
         [ParentCombo(DNC_DT_SimpleMode)]
