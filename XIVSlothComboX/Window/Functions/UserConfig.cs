@@ -1841,12 +1841,23 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.BRD_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, BRD.Config.BRD_VariantCure, "HP% to be at or under", 200);
 
+            
+            
             #endregion
 
             // ====================================================================================
 
             #region DANCER
 
+            if (preset == CustomComboPreset.DNC_Variant_Cure)
+                UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
+
+            
+            if (preset == CustomComboPreset.DNC_DT_Simple_SaberDance)
+                UserConfig.DrawSliderInt(0, 100, DNC.Config.DNC_ST_Tillana, "提拉那伶俐不超过多少使用", 200);
+            
+            
+            
             #region Simple AoE Sliders
 
             if (preset == CustomComboPreset.DNC_AoE_Simple_SS)
@@ -1876,9 +1887,7 @@ namespace XIVSlothComboX.Window.Functions
                 );
 
 
-            if (preset == CustomComboPreset.DNC_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
-
+      
             #endregion
 
             #endregion

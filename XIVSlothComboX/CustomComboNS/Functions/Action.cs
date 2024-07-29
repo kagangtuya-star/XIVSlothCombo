@@ -305,10 +305,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     }
                 }
                 
+                
                 if (Last.RowId is DNC.四色技巧舞步结束TechnicalFinish4_0)
                 {
                     return false;
-                }
+                } 
+             
 
 
 

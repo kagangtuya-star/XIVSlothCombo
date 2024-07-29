@@ -100,7 +100,9 @@ namespace XIVSlothComboX.Combos.PvE
 
         public static class Config
         {
-            public static UserInt DNC_VariantCure = new("DNC_VariantCure");
+            public static UserInt DNC_VariantCure = new("DNC_VariantCure"),
+                                  DNC_ST_Tillana = new("DNC_ST_Tillana", 40)
+                ;
 
             public const string DNCEspritThreshold_ST = "DNCEspritThreshold_ST"; // Single target Esprit threshold
             public const string DNCEspritThreshold_AoE = "DNCEspritThreshold_AoE"; // AoE Esprit threshold
@@ -309,40 +311,44 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (标准舞步倒计时 - GCD <= 0 || 标准舞步StandardStep.ActionReady())
                         {
-                            if (HasEffect(Buffs.StandardFinish))
-                            {
-                                return 标准舞步StandardStep;
-                            }
-
-                            if (techBurstTimer > 5)
-                            {
-                                return 标准舞步StandardStep;
-                            }
-
                             if (HasEffect(Buffs.舞步终结预备))
                             {
                                 return 标准舞步StandardStep.OriginalHook();
                             }
+                            
+                            if (HasEffect(Buffs.StandardFinish))
+                            {
+                                return 标准舞步StandardStep.OriginalHook();
+                            }
+
+                            if (techBurstTimer > 5)
+                            {
+                                return 标准舞步StandardStep.OriginalHook();
+                            }
+
+                         
                         }
 
                         if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD))
                         {
                             if (标准舞步倒计时 - GCD is > 0 and < 0.9f)
                             {
-                                if (HasEffect(Buffs.StandardFinish))
-                                {
-                                    return 标准舞步StandardStep;
-                                }
-
-                                if (techBurstTimer > 5)
-                                {
-                                    return 标准舞步StandardStep;
-                                }
-
                                 if (HasEffect(Buffs.舞步终结预备))
                                 {
                                     return 标准舞步StandardStep.OriginalHook();
                                 }
+                                
+                                if (HasEffect(Buffs.StandardFinish))
+                                {
+                                    return 标准舞步StandardStep.OriginalHook();
+                                }
+
+                                if (techBurstTimer > 5)
+                                {
+                                    return 标准舞步StandardStep.OriginalHook();
+                                }
+
+                              
                             }
                         }
                     }
@@ -408,7 +414,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
 
-                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= 20)
+                    if (HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= Config.DNC_ST_Tillana)
                     {
                         return 提拉纳Tillana;
                     }
