@@ -300,11 +300,11 @@ namespace XIVSlothComboX.Combos.PvE
                                 if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit)
                                     && GetResourceCost(圣灵HolySpirit) <= LocalPlayer.CurrentMp)
                                 {
-                                    // Service.ChatGui.PrintError("圣灵1");
                                     return 圣灵HolySpirit;
                                 }
                             }
 
+                            //这个是为了打 圣灵 王权 圣灵
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit)
                                 && GetBuffRemainingTime(Buffs.DivineMight) >= 27
                                 && GetBuffRemainingTime(Buffs.FightOrFlight) >= 0.1f

@@ -101,8 +101,7 @@ namespace XIVSlothComboX.Combos.PvE
         public static class Config
         {
             public static UserInt DNC_VariantCure = new("DNC_VariantCure"),
-                                  DNC_ST_Tillana = new("DNC_ST_Tillana", 40)
-                ;
+                                  DNC_ST_Tillana = new("DNC_ST_Tillana", 40);
 
             public const string DNCEspritThreshold_ST = "DNCEspritThreshold_ST"; // Single target Esprit threshold
             public const string DNCEspritThreshold_AoE = "DNCEspritThreshold_AoE"; // AoE Esprit threshold
@@ -214,7 +213,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0 && CanSpellWeavePlus(actionID))
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0)
                         {
                             return 百花争艳Flourish;
                         }
@@ -232,7 +231,7 @@ namespace XIVSlothComboX.Combos.PvE
                         //舞娘初始等级为60 扇舞破FanDance2学习等级为56 所以永远为真
                         if (LevelChecked(扇舞破FanDance2))
                         {
-                            int minFeathers = LevelChecked(技巧舞步TechnicalStep) ? (GetCooldownRemainingTime(技巧舞步TechnicalStep) < 5f ? 4 : 3) : 0;
+                            int minFeathers = LevelChecked(技巧舞步TechnicalStep) ? (GetCooldownRemainingTime(技巧舞步TechnicalStep) < 5f ? 3 : 3) : 0;
 
                             if (LevelChecked(技巧舞步TechnicalStep))
                             {
@@ -286,7 +285,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 if (IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
                                 {
-                                    if (gauge.Feathers >= 4)
+                                    if (gauge.Feathers >= 3)
                                     {
                                         return 扇舞序FanDance1;
                                     }
@@ -315,7 +314,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 return 标准舞步StandardStep.OriginalHook();
                             }
-                            
+
                             if (HasEffect(Buffs.StandardFinish))
                             {
                                 return 标准舞步StandardStep.OriginalHook();
@@ -326,7 +325,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 return 标准舞步StandardStep.OriginalHook();
                             }
 
-                         
+
                         }
 
                         if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD))
@@ -337,7 +336,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     return 标准舞步StandardStep.OriginalHook();
                                 }
-                                
+
                                 if (HasEffect(Buffs.StandardFinish))
                                 {
                                     return 标准舞步StandardStep.OriginalHook();
@@ -348,7 +347,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     return 标准舞步StandardStep.OriginalHook();
                                 }
 
-                              
+
                             }
                         }
                     }
@@ -418,6 +417,14 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         return 提拉纳Tillana;
                     }
+
+
+                    //这里团辅基本结束了 不太会溢出了
+                    if (GetBuffRemainingTime(Buffs.技巧舞步结束TechnicalFinish) is > 0 and <= 3 && HasEffect(Buffs.提拉纳预备FlourishingFinish) && gauge.Esprit <= 45)
+                    {
+                        return 提拉纳Tillana;
+                    }
+
 
                     if (GetBuffRemainingTime(Buffs.提拉纳预备FlourishingFinish) is > 0 and <= 3)
                     {

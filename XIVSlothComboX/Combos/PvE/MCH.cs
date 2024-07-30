@@ -461,9 +461,9 @@ namespace XIVSlothComboX.Combos.PvE
                     && (CanWeave(actionID) || !InCombat())
                     && GetRemainingCharges(整备Reassemble) > Config.MCH_ST_ReassemblePool
                     && ((Config.MCH_ST_Reassembled[0] && LevelChecked(Excavator) && HasEffect(Buffs.ExcavatorReady) && !battery)
-                        || (Config.MCH_ST_Reassembled[1] && LevelChecked(回转飞锯ChainSaw) && (!LevelChecked(Excavator) || !Config.MCH_ST_Reassembled[0]) && ((GetCooldownRemainingTime(回转飞锯ChainSaw) <= GetCooldownRemainingTime(OriginalHook(SplitShot)) + 0.25) || ActionReady(回转飞锯ChainSaw)) && !battery)
-                        || (Config.MCH_ST_Reassembled[2] && LevelChecked(空气锚AirAnchor) && ((GetCooldownRemainingTime(空气锚AirAnchor) <= GetCooldownRemainingTime(OriginalHook(SplitShot)) + 0.25) || ActionReady(空气锚AirAnchor)) && !battery)
-                        || (Config.MCH_ST_Reassembled[3] && LevelChecked(钻头Drill) && (!LevelChecked(空气锚AirAnchor) || !Config.MCH_ST_Reassembled[2]) && (GetCooldownRemainingTime(钻头Drill) <= GetCooldownRemainingTime(OriginalHook(SplitShot)) + 0.25) || ActionReady(钻头Drill)))
+                        || (Config.MCH_ST_Reassembled[1] && LevelChecked(回转飞锯ChainSaw) && (!LevelChecked(Excavator) || !Config.MCH_ST_Reassembled[0]) && ((GetCooldownRemainingTime(回转飞锯ChainSaw) <= GetCooldownRemainingTime(OriginalHook(SplitShot)) + 0.25) || ActionReady(回转飞锯ChainSaw) || 回转飞锯ChainSaw.GCDActionReady()) && !battery)
+                        || (Config.MCH_ST_Reassembled[2] && LevelChecked(空气锚AirAnchor) && ((GetCooldownRemainingTime(空气锚AirAnchor) <= GetCooldownRemainingTime(OriginalHook(SplitShot)) + 0.55) || ActionReady(空气锚AirAnchor) || 空气锚AirAnchor.GCDActionReady() ) && !battery)
+                        || (Config.MCH_ST_Reassembled[3] && LevelChecked(钻头Drill) && (!LevelChecked(空气锚AirAnchor) || !Config.MCH_ST_Reassembled[2]) && (GetCooldownRemainingTime(钻头Drill) <= GetCooldownRemainingTime(OriginalHook(SplitShot)) + 0.25) || ActionReady(钻头Drill)|| 钻头Drill.GCDActionReady()))
                    )
                 {
                     actionID = 整备Reassemble;
@@ -515,7 +515,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
                     else
                     {
-                        if (GetCooldownRemainingTime(钻头Drill) < 1.4f)
+                        if (钻头Drill.GCDActionReady())
                         {
                             actionID = 钻头Drill;
                             return true;

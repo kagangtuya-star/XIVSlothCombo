@@ -13,18 +13,17 @@ using XIVSlothComboX.Services;
 namespace XIVSlothComboX.Data
 {
     /// <summary> Cached conditional combo logic. </summary>
+    /// <summary> Cached conditional combo logic. </summary>
     internal partial class CustomComboCache : IDisposable
     {
-         private const uint InvalidObjectID = 0xE000_0000;
+        private const uint InvalidObjectID = 0xE000_0000;
 
         // Invalidate these
         private readonly ConcurrentDictionary<(uint StatusID, ulong? TargetID, ulong? SourceID), DalamudStatus.Status?> statusCache = new();
-        private readonly ConcurrentDictionary<uint, CooldownData> cooldownCache = new();
+        private readonly ConcurrentDictionary<uint, CooldownData?> cooldownCache = new();
 
         // Do not invalidate these
-        private readonly ConcurrentDictionary<uint, byte> cooldownGroupCache = new();
         private readonly ConcurrentDictionary<Type, JobGaugeBase> jobGaugeCache = new();
-        private readonly ConcurrentDictionary<(uint ActionID, uint ClassJobID, byte Level), (ushort CurrentMax, ushort Max)> chargesCache = new();
 
         /// <summary> Initializes a new instance of the <see cref="CustomComboCache"/> class. </summary>
         public CustomComboCache() => Service.Framework.Update += Framework_Update;
@@ -76,53 +75,21 @@ namespace XIVSlothComboX.Data
         /// <returns> Cooldown data. </returns>
         internal unsafe CooldownData GetCooldown(uint actionID)
         {
-            if (cooldownCache.TryGetValue(actionID, out CooldownData found))
-                return found;
+            if (cooldownCache.TryGetValue(actionID, out CooldownData? found))
+                return found!;
 
-            ActionManager* actionManager = ActionManager.Instance();
-            if (actionManager == null)
-                return cooldownCache[actionID] = default;
-
-            byte cooldownGroup = GetCooldownGroup(actionID);
-
-            RecastDetail* cooldownPtr = actionManager->GetRecastGroupDetail(cooldownGroup - 1);
-            if (cooldownPtr is null)
+            CooldownData data = new()
             {
-                CooldownData data = new()
-                {
-                    CooldownTotal = -1
-                };
+                ActionID = actionID,
+            };
 
-                return cooldownCache[actionID] = data;
-            }
-
-            cooldownPtr->ActionId = actionID;
-
-            return cooldownCache[actionID] = *(CooldownData*)cooldownPtr;
+            return cooldownCache[actionID] = data;  
         }
 
         /// <summary> Get the maximum number of charges for an action. </summary>
         /// <param name="actionID"> Action ID to check. </param>
-        /// <returns> Max number of charges at current and max level. </returns>
-        internal unsafe (ushort Current, ushort Max) GetMaxCharges(uint actionID)
-        {
-            IPlayerCharacter? player = Service.ClientState.LocalPlayer;
-            if (player == null)
-                return (0, 0);
-
-            uint job = player.ClassJob.Id;
-            byte level = player.Level;
-            if (job == 0 || level == 0)
-                return (0, 0);
-
-            var key = (actionID, job, level);
-            if (chargesCache.TryGetValue(key, out var found))
-                return found;
-
-            ushort cur = ActionManager.GetMaxCharges(actionID, 0);
-            ushort max = ActionManager.GetMaxCharges(actionID, 90);
-            return chargesCache[key] = (cur, max);
-        }
+        /// <returns> Max number of charges at current level. </returns>
+        internal unsafe ushort GetMaxCharges(uint actionID) => GetCooldown(actionID).MaxCharges;
 
         /// <summary> Get the resource cost of an action. </summary>
         /// <param name="actionID"> Action ID to check. </param>
@@ -136,19 +103,6 @@ namespace XIVSlothComboX.Data
             int cost = ActionManager.GetActionCost(ActionType.Action, actionID, 0, 0, 0, 0);
 
             return cost;
-        }
-
-        /// <summary> Get the cooldown group of an action. </summary>
-        /// <param name="actionID"> Action ID to check. </param>
-        private byte GetCooldownGroup(uint actionID)
-        {
-            if (cooldownGroupCache.TryGetValue(actionID, out byte cooldownGroup))
-                return cooldownGroup;
-
-            var sheet = Service.DataManager.GetExcelSheet<Lumina.Excel.GeneratedSheets.Action>()!;
-            var row = sheet.GetRow(actionID);
-
-            return cooldownGroupCache[actionID] = row!.CooldownGroup;
         }
 
         /// <summary> Triggers when the game framework updates. Clears cooldown and status caches. </summary>

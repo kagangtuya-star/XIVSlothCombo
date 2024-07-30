@@ -136,7 +136,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
         {
             internal static bool CanUse(in uint actionID, in bool SingleTarget, out uint newActionID)
             {
-                static ushort GetRemainingCharges(uint actionID) => CustomComboFunctions.GetRemainingCharges(actionID);
+                static uint GetRemainingCharges(uint actionID) => CustomComboFunctions.GetRemainingCharges(actionID);
                 static float GetCooldownRemainingTime(uint actionID) => CustomComboFunctions.GetCooldownRemainingTime(actionID);
                 static bool LevelChecked(uint id) => CustomComboFunctions.LevelChecked(id);
                 static bool ActionReady(uint id) => CustomComboFunctions.ActionReady(id);

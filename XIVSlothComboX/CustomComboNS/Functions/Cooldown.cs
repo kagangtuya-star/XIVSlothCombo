@@ -1,11 +1,10 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game;
-using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.CustomComboNS.Functions
 {
-    internal abstract partial class CustomComboFunctions
+     internal abstract partial class CustomComboFunctions
     {
         /// <summary> Gets the cooldown data for an action. </summary>
         /// <param name="actionID"> Action ID to check. </param>
@@ -15,21 +14,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <summary> Gets the cooldown total remaining time. </summary>
         /// <param name="actionID"> Action ID to check. </param>
         /// <returns> Total remaining time of the cooldown. </returns>
-        public static float GetCooldownRemainingTime(uint actionID)
-        {
-            if (actionID == MCH.钻头Drill)
-            {
-                if (Service.ComboCache.GetCooldown(actionID).CooldownRemaining == 0)
-                {
-                    return 0;
-                }
-                
-                return Service.ComboCache.GetCooldown(actionID).CooldownRemaining - MCH.钻头倒计时偏移;
-            }
-
-            return Service.ComboCache.GetCooldown(actionID).CooldownRemaining;
-        }
-
+        public static float GetCooldownRemainingTime(uint actionID) => Service.ComboCache.GetCooldown(actionID).CooldownRemaining;
 
         /// <summary> Gets the cooldown remaining time for the next charge. </summary>
         /// <param name="actionID"> Action ID to check. </param>
@@ -53,8 +38,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         /// <summary> Check if the Cooldown was just used. </summary>
         /// <param name="actionID"> Action ID to check. </param>
+        /// <param name="variance"> Variance of how long to check the elapsed cooldown</param>
         /// <returns> True or false. </returns>
-        // public static bool JustUsed(uint actionID) => IsOnCooldown(actionID) && GetCooldownRemainingTime(actionID) > (GetCooldown(actionID).CooldownTotal - 3);
         public static bool JustUsed(uint actionID, float variance = 3f) => IsOnCooldown(actionID) && GetCooldownElapsed(actionID) <= variance;
 
         /// <summary> Gets a value indicating whether an action has any available charges. </summary>
@@ -65,7 +50,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <summary> Get the current number of charges remaining for an action. </summary>
         /// <param name="actionID"> Action ID to check. </param>
         /// <returns> Number of charges. </returns>
-        public static ushort GetRemainingCharges(uint actionID) => GetCooldown(actionID).RemainingCharges;
+        public static uint GetRemainingCharges(uint actionID) => GetCooldown(actionID).RemainingCharges;
 
         /// <summary> Get the maximum number of charges for an action. </summary>
         /// <param name="actionID"> Action ID to check. </param>
