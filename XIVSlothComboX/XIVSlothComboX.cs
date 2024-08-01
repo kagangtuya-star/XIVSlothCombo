@@ -222,6 +222,15 @@ namespace XIVSlothComboX
 
                 if (Service.Configuration.自动精炼)
                 {
+                    if (Service.Configuration.只精炼亚力山大)
+                    {
+                        if (Service.ClientState.TerritoryType != 1199)
+                        {
+                            return;
+                        }
+
+                    }
+
                     if (CustomComboFunctions.InCombat())
                     {
                         Spiritbond.CloseMateriaMenu();

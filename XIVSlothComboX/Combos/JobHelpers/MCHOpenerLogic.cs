@@ -25,13 +25,13 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (CustomComboFunctions.GetRemainingCharges(DoubleCheck) < 3)
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(回转飞锯ChainSaw))
+            if (!CustomComboFunctions.ActionReady(ChainSaw))
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(野火Wildfire))
+            if (!CustomComboFunctions.ActionReady(Wildfire))
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(枪管加热BarrelStabilizer))
+            if (!CustomComboFunctions.ActionReady(BarrelStabilizer))
                 return false;
 
             if (!CustomComboFunctions.ActionReady(Excavator))
@@ -101,7 +101,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
             {
                 if (CustomComboFunctions.HasEffect(Buffs.Reassembled) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
-                else if (PrePullStep == 1) actionID = 整备Reassemble;
+                else if (PrePullStep == 1) actionID = Reassemble;
 
                 if (ActionWatching.CombatActions.Count > 2 && CustomComboFunctions.InCombat())
                     CurrentState = OpenerState.FailedOpener;
@@ -120,8 +120,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             if (currentState == OpenerState.InOpener)
             {
-                if (CustomComboFunctions.WasLastAction(空气锚AirAnchor) && OpenerStep == 1) OpenerStep++;
-                else if (OpenerStep == 1) actionID = 空气锚AirAnchor;
+                if (CustomComboFunctions.WasLastAction(AirAnchor) && OpenerStep == 1) OpenerStep++;
+                else if (OpenerStep == 1) actionID = AirAnchor;
 
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 2) OpenerStep++;
                 else if (OpenerStep == 2) actionID = CheckMate;
@@ -129,32 +129,32 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 3) OpenerStep++;
                 else if (OpenerStep == 3) actionID = DoubleCheck;
 
-                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 4) OpenerStep++;
-                else if (OpenerStep == 4) actionID = 钻头Drill;
+                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 4) OpenerStep++;
+                else if (OpenerStep == 4) actionID = Drill;
 
-                if (CustomComboFunctions.WasLastAction(枪管加热BarrelStabilizer) && OpenerStep == 5) OpenerStep++;
-                else if (OpenerStep == 5) actionID = 枪管加热BarrelStabilizer;
+                if (CustomComboFunctions.WasLastAction(BarrelStabilizer) && OpenerStep == 5) OpenerStep++;
+                else if (OpenerStep == 5) actionID = BarrelStabilizer;
 
-                if (CustomComboFunctions.WasLastAction(回转飞锯ChainSaw) && OpenerStep == 6) OpenerStep++;
-                else if (OpenerStep == 6) actionID = 回转飞锯ChainSaw;
+                if (CustomComboFunctions.WasLastAction(ChainSaw) && OpenerStep == 6) OpenerStep++;
+                else if (OpenerStep == 6) actionID = ChainSaw;
 
                 if (CustomComboFunctions.WasLastAction(Excavator) && OpenerStep == 7) OpenerStep++;
                 else if (OpenerStep == 7) actionID = Excavator;
 
-                if (CustomComboFunctions.WasLastAction(后式自走人偶AutomatonQueen) && OpenerStep == 8) OpenerStep++;
-                else if (OpenerStep == 8) actionID = 后式自走人偶AutomatonQueen;
+                if (CustomComboFunctions.WasLastAction(AutomatonQueen) && OpenerStep == 8) OpenerStep++;
+                else if (OpenerStep == 8) actionID = AutomatonQueen;
 
-                if (CustomComboFunctions.WasLastAction(整备Reassemble) && OpenerStep == 9) OpenerStep++;
-                else if (OpenerStep == 9) actionID = 整备Reassemble;
+                if (CustomComboFunctions.WasLastAction(Reassemble) && OpenerStep == 9) OpenerStep++;
+                else if (OpenerStep == 9) actionID = Reassemble;
 
-                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 10) OpenerStep++;
-                else if (OpenerStep == 10) actionID = 钻头Drill;
+                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 10) OpenerStep++;
+                else if (OpenerStep == 10) actionID = Drill;
 
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 11) OpenerStep++;
                 else if (OpenerStep == 11) actionID = CheckMate;
 
-                if (CustomComboFunctions.WasLastAction(野火Wildfire) && OpenerStep == 12) OpenerStep++;
-                else if (OpenerStep == 12) actionID = 野火Wildfire;
+                if (CustomComboFunctions.WasLastAction(Wildfire) && OpenerStep == 12) OpenerStep++;
+                else if (OpenerStep == 12) actionID = Wildfire;
 
                 if (CustomComboFunctions.WasLastAction(FullMetalField) && OpenerStep == 13) OpenerStep++;
                 else if (OpenerStep == 13) actionID = FullMetalField;
@@ -162,8 +162,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 14) OpenerStep++;
                 else if (OpenerStep == 14) actionID = DoubleCheck;
 
-                if (CustomComboFunctions.WasLastAction(超荷Hypercharge) && OpenerStep == 15) OpenerStep++;
-                else if (OpenerStep == 15) actionID = 超荷Hypercharge;
+                if (CustomComboFunctions.WasLastAction(Hypercharge) && OpenerStep == 15) OpenerStep++;
+                else if (OpenerStep == 15) actionID = Hypercharge;
 
                 if (CustomComboFunctions.WasLastAction(BlazingShot) && OpenerStep == 16) OpenerStep++;
                 else if (OpenerStep == 16) actionID = BlazingShot;
@@ -195,8 +195,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 25) OpenerStep++;
                 else if (OpenerStep == 25) actionID = CheckMate;
 
-                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 26) OpenerStep++;
-                else if (OpenerStep == 26) actionID = 钻头Drill;
+                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 26) OpenerStep++;
+                else if (OpenerStep == 26) actionID = Drill;
 
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 27) OpenerStep++;
                 else if (OpenerStep == 27) actionID = DoubleCheck;
@@ -220,11 +220,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     CurrentState = OpenerState.FailedOpener;
 
                 if (((actionID == CheckMate && CustomComboFunctions.GetRemainingCharges(CheckMate) < 3) ||
-                     (actionID == 回转飞锯ChainSaw && CustomComboFunctions.IsOnCooldown(回转飞锯ChainSaw)) ||
-                     (actionID == 野火Wildfire && CustomComboFunctions.IsOnCooldown(野火Wildfire)) ||
-                     (actionID == 枪管加热BarrelStabilizer && CustomComboFunctions.IsOnCooldown(枪管加热BarrelStabilizer)) ||
-                     (actionID == 枪管加热BarrelStabilizer && CustomComboFunctions.IsOnCooldown(Excavator)) ||
-                     (actionID == 枪管加热BarrelStabilizer && CustomComboFunctions.IsOnCooldown(FullMetalField)) ||
+                     (actionID == ChainSaw && CustomComboFunctions.IsOnCooldown(ChainSaw)) ||
+                     (actionID == Wildfire && CustomComboFunctions.IsOnCooldown(Wildfire)) ||
+                     (actionID == BarrelStabilizer && CustomComboFunctions.IsOnCooldown(BarrelStabilizer)) ||
+                     (actionID == BarrelStabilizer && CustomComboFunctions.IsOnCooldown(Excavator)) ||
+                     (actionID == BarrelStabilizer && CustomComboFunctions.IsOnCooldown(FullMetalField)) ||
                      (actionID == DoubleCheck && CustomComboFunctions.GetRemainingCharges(DoubleCheck) < 3)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
@@ -274,10 +274,10 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         internal static uint LastSummonBattery(this MCHGauge gauge)
         {
-            if (!CustomComboFunctions.InCombat() || ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.车式浮空炮塔RookAutoturret)) == 0)
+            if (!CustomComboFunctions.InCombat() || ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.RookAutoturret)) == 0)
                 lastBattery = 0;
 
-            if (ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.车式浮空炮塔RookAutoturret)) > 0)
+            if (ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.RookAutoturret)) > 0)
                 lastBattery = gauge.LastSummonBatteryPower;
 
             return lastBattery;

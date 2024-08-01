@@ -141,17 +141,26 @@ namespace XIVSlothComboX.Window.Tabs
 
             #endregion
             
-            #region 输出到聊天框
+            #region 自动精炼
 
             
             var 自动精炼 = Service.Configuration.自动精炼;
 
-            //if (ImGui.Checkbox("Hide Message of the Day", ref motd))
             if (ImGui.Checkbox("" + "自动精炼" + "", ref 自动精炼))
             {
                 Service.Configuration.自动精炼 = 自动精炼;
                 Service.Configuration.Save();
             }
+            
+            var 只精炼亚力山大 = Service.Configuration.只精炼亚力山大;
+
+            ImGui.SameLine();
+            if (ImGui.Checkbox("" + "只精炼亚力山大" + "", ref 只精炼亚力山大))
+            {
+                Service.Configuration.只精炼亚力山大 = 只精炼亚力山大;
+                Service.Configuration.Save();
+            }
+
 
             #endregion
             

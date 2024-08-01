@@ -1689,11 +1689,11 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        [ReplaceSkill(MCH.车式浮空炮塔RookAutoturret, MCH.后式自走人偶AutomatonQueen)]
+        [ReplaceSkill(MCH.RookAutoturret, MCH.AutomatonQueen)]
         [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID)]
         MCH_Overdrive = 8002,
 
-        [ReplaceSkill(MCH.虹吸弹GaussRound, MCH.弹射Ricochet)]
+        [ReplaceSkill(MCH.GaussRound, MCH.Ricochet)]
         [ConflictingCombos(MCH_ST_Adv_Opener, MCH_ST_Adv_GaussRicochet, MCH_AoE_Adv_GaussRicochet, MCH_Heatblast_GaussRound)]
         [CustomComboInfo
         (
@@ -1707,11 +1707,11 @@ namespace XIVSlothComboX.Combos
         //     "Replace Drill and Air Anchor (Hot Shot) with one or the other (or Chain Saw) depending on which is on cooldown.", MCH.JobID)]
         // MCH_HotShotDrillChainsaw = 8004,
 
-        [ReplaceSkill(MCH.钻头Drill, MCH.空气锚AirAnchor, MCH.HotShot, MCH.回转飞锯ChainSaw)]
+        [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot, MCH.ChainSaw)]
         [CustomComboInfo("Big Hitter Feature", "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", MCH.JobID)]
         MCH_HotShotDrillChainsawExcavator = 8004,
 
-        [ReplaceSkill(MCH.热冲击HeatBlast)]
+        [ReplaceSkill(MCH.HeatBlast)]
         [CustomComboInfo("Single Button Heat Blast Feature", "Turns Heat Blast into Hypercharge when at or above 50 heat.", MCH.JobID)]
         MCH_Heatblast = 8006,
 
@@ -3810,12 +3810,9 @@ namespace XIVSlothComboX.Combos
         VPR_ST_AdvancedMode = 30001,
 
         [ParentCombo(VPR_ST_AdvancedMode)]
+        [ConflictingCombos(VPR_ReawakenLegacy)]
         [CustomComboInfo("Level 100 Opener", "Adds the Balance opener to the rotation.\n Does not check positional choice.\n Always does Hunter's Coil first ( FLANK )", VPR.JobID)]
         VPR_ST_Opener = 30002,
-
-        [ParentCombo(VPR_ST_AdvancedMode)]
-        [CustomComboInfo("Noxious Gnash", "Adds Noxious Gnash if it is not present on current target, or is about to expire.", VPR.JobID)]
-        VPR_ST_NoxiousGnash = 30003,
 
         #region Cooldowns ST
 
@@ -3828,12 +3825,12 @@ namespace XIVSlothComboX.Combos
         VPR_ST_SerpentsIre = 30005,
 
         [ParentCombo(VPR_ST_CDs)]
-        [CustomComboInfo("Dreadwinder", "Adds Dreadwinder to the rotation.", VPR.JobID)]
-        VPR_ST_Dreadwinder = 30006,
+        [CustomComboInfo("Vicewinder", "Adds Vicewinder to the rotation.", VPR.JobID)]
+        VPR_ST_Vicewinder = 30006,
 
         [ParentCombo(VPR_ST_CDs)]
-        [CustomComboInfo("Dreadwinder Combo", "Adds Swiftskin's Coil and Hunter's Coil to the rotation.", VPR.JobID)]
-        VPR_ST_DreadwinderCombo = 30007,
+        [CustomComboInfo("Vicewinder Combo", "Adds Swiftskin's Coil and Hunter's Coil to the rotation.", VPR.JobID)]
+        VPR_ST_VicewinderCombo = 30007,
 
         #endregion
 
@@ -3876,7 +3873,7 @@ namespace XIVSlothComboX.Combos
         VPR_TrueNorthDynamic = 30098,
 
         [ParentCombo(VPR_TrueNorthDynamic)]
-        [CustomComboInfo("Hold True North for Dreadwinder", "Will hold the last charge of True North for use with Dreadwinder, even when out of position for other Positionals.", VPR.JobID)]
+        [CustomComboInfo("Hold True North for Vicewinder", "Will hold the last charge of True North for use with Vicewinder, even when out of position for other Positionals.", VPR.JobID)]
         VPR_TrueNorthDynamic_HoldCharge = 30099,
 
         #endregion
@@ -3890,12 +3887,9 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(VPR.SteelMaw)]
         [ConflictingCombos(VPR_AoE_SimpleMode)]
-        [CustomComboInfo("Advanced Mode AoE", "Replaces Steel Maw with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", VPR.JobID)]
+        [CustomComboInfo("Advanced Mode - AoE", "Replaces Steel Maw with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", VPR.JobID)]
         VPR_AoE_AdvancedMode = 30101,
 
-        [ParentCombo(VPR_AoE_AdvancedMode)]
-        [CustomComboInfo("Noxious Gnash", "Adds Noxious Gnash if it is not present on current target or is below 20 secs.", VPR.JobID)]
-        VPR_AoE_NoxiousGnash = 30102,
         #region Cooldowns AoE
 
         [ParentCombo(VPR_AoE_AdvancedMode)]
@@ -3907,12 +3901,12 @@ namespace XIVSlothComboX.Combos
         VPR_AoE_SerpentsIre = 30104,
 
         [ParentCombo(VPR_AoE_CDs)]
-        [CustomComboInfo("Pit Of Dread", "Adds Pit Of Dread to the rotation.", VPR.JobID)]
-        VPR_AoE_PitOfDread = 30105,
+        [CustomComboInfo("Vicepit", "Adds Vicepit to the rotation.", VPR.JobID)]
+        VPR_AoE_Vicepit = 30105,
 
         [ParentCombo(VPR_AoE_CDs)]
-        [CustomComboInfo("Pit Of Dread Combo", "Adds Swiftskin's Den and Hunter's Den to the rotation.", VPR.JobID)]
-        VPR_AoE_PitOfDreadCombo = 30106,
+        [CustomComboInfo("Vicepit Combo", "Adds Swiftskin's Den and Hunter's Den to the rotation.", VPR.JobID)]
+        VPR_AoE_VicepitCombo = 30106,
 
         #endregion
 
@@ -3944,20 +3938,24 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        [ReplaceSkill(VPR.Dreadwinder)]
-        [CustomComboInfo("Dreadwinder - Coils", "Replaces Dreadwinder with Hunter's/Swiftskin's Coils.", VPR.JobID)]
-        VPR_DreadwinderCoils = 30200,
+        [ReplaceSkill(VPR.Vicewinder)]
+        [CustomComboInfo("Vicewinder - Coils", "Replaces Vicewinder with Hunter's/Swiftskin's Coils.", VPR.JobID)]
+        VPR_VicewinderCoils = 30200,
 
-        [ReplaceSkill(VPR.PitofDread)]
-        [CustomComboInfo("Pit Of Dread - Dens", "Replaces Pit Of Dread with Hunter's/Swiftskin's Dens.", VPR.JobID)]
-        VPR_PitOfDreadDens = 30201,
+        [ParentCombo(VPR_VicewinderCoils)]
+        [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus.", VPR.JobID)]
+        VPR_VicewinderCoilsTN = 30208,
+
+        [ReplaceSkill(VPR.Vicepit)]
+        [CustomComboInfo("Vicepit - Dens", "Replaces Vicepit with Hunter's/Swiftskin's Dens.", VPR.JobID)]
+        VPR_VicepitDens = 30201,
 
         [ReplaceSkill(VPR.UncoiledFury)]
         [CustomComboInfo("Uncoiled - Twins", "Replaces Uncoiled Fury with Uncoiled Twinfang and Uncoiled Twinblood.", VPR.JobID)]
         VPR_UncoiledTwins = 30202,
 
         [ReplaceSkill(VPR.Reawaken, VPR.SteelFangs)]
-        [ConflictingCombos(VPR_ST_Reawaken, VPR_ST_ReawakenCombo, VPR_AoE_Reawaken, VPR_AoE_ReawakenCombo)]
+        [ConflictingCombos(VPR_ST_Reawaken, VPR_ST_ReawakenCombo, VPR_AoE_Reawaken, VPR_AoE_ReawakenCombo, VPR_ST_Opener)]
         [CustomComboInfo("Reawaken - Generation", "Replaces Option with the Generations.", VPR.JobID)]
         VPR_ReawakenLegacy = 30203,
 
@@ -3969,16 +3967,15 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Combined Combo Ability Feature", "Combines Serpent's Tail, Twinfang, and Twinblood to one button.", VPR.JobID)]
         VPR_TwinTails = 30205,
 
-        [ParentCombo(VPR_DreadwinderCoils)]
+        [ParentCombo(VPR_VicewinderCoils)]
         [CustomComboInfo("Include Twin Combo Actions", "Adds Twinfang and Twinblood to the button.", VPR.JobID)]
-        VPR_DreadwinderCoils_oGCDs = 30206,
+        VPR_VicewinderCoils_oGCDs = 30206,
 
-        [ParentCombo(VPR_PitOfDreadDens)]
+        [ParentCombo(VPR_VicepitDens)]
         [CustomComboInfo("Include Twin Combo Actions", "Adds Twinfang and Twinblood to the button.", VPR.JobID)]
-        VPR_PitOfDreadDens_oGCDs = 30207,
-
+        VPR_VicepitDens_oGCDs = 30207,
+        
         #endregion
-
         #region WARRIOR
 
         [ReplaceSkill(WAR.Maim)]
