@@ -251,6 +251,7 @@ namespace XIVSlothComboX.Window.Functions
         /// <param name="additonalChoiceCondition"></param>
         public static void DrawDragFloat
         (
+            float  speed,
             float  minValue,
             float  maxValue,
             string config,
@@ -333,7 +334,7 @@ namespace XIVSlothComboX.Window.Functions
                     ImGui.SameLine();
                     ImGui.SetCursorPosX(currentPos.X);
                     ImGui.PushItemWidth(itemWidth);
-                    inputChanged |= ImGui.DragFloat($"{newLines}###{config}", ref output, minValue, maxValue);
+                    inputChanged |= ImGui.DragFloat($"{newLines}###{config}", ref output, speed, minValue, maxValue);
 
                     if (inputChanged)
                     {
@@ -1841,8 +1842,6 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.BRD_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, BRD.Config.BRD_VariantCure, "HP% to be at or under", 200);
 
-            
-            
             #endregion
 
             // ====================================================================================
@@ -1852,12 +1851,11 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.DNC_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
 
-            
+
             if (preset == CustomComboPreset.DNC_DT_Simple_SaberDance)
                 UserConfig.DrawSliderInt(0, 100, DNC.Config.DNC_ST_Tillana, "提拉那伶俐不超过多少使用", 200);
-            
-            
-            
+
+
             #region Simple AoE Sliders
 
             if (preset == CustomComboPreset.DNC_AoE_Simple_SS)
@@ -1886,8 +1884,6 @@ namespace XIVSlothComboX.Window.Functions
                     SliderIncrements.Ones
                 );
 
-
-      
             #endregion
 
             #endregion
@@ -1912,9 +1908,9 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.DRK_SouleaterCombo)
             {
-                UserConfig.DrawDragFloat(0, 30, DRK.Config.DRK_Burst_Delay, "延迟多少秒使用[爆发]", 150);
-                UserConfig.DrawDragFloat(0, 30, DRK.Config.DRK_LivingShadow_Delay, "延迟多少秒使用[弗雷]", 150);
-                UserConfig.DrawDragFloat(0, 40, DRK.Config.DRK_Burst_Delay_GCD, "延迟多少秒使用血溅和蔑视厌恶", 150);
+                UserConfig.DrawDragFloat(0.1f, 0, 30, DRK.Config.DRK_Burst_Delay, "延迟多少秒使用[爆发]", 150);
+                UserConfig.DrawDragFloat(0.1f, 0, 30, DRK.Config.DRK_LivingShadow_Delay, "延迟多少秒使用[弗雷]", 150);
+                UserConfig.DrawDragFloat(0.1f, 0, 40, DRK.Config.DRK_Burst_Delay_GCD, "延迟多少秒使用[血溅]和[蔑视厌恶]", 150);
                 UserConfig.DrawSliderInt(0, 100, DRK.Config.DRK_Burs_HP, "目标低于多少血量打出所有的血溅(单位万)", 150);
             }
 
@@ -2061,7 +2057,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.GNB_START_GCD)
             {
-                UserConfig.DrawDragFloat(0, 30, GNB.Config.GNB_Burst_Delay, "延迟多少秒使用血壤无情，因为延迟的问题大概率要-0.6秒", 150);
+                UserConfig.DrawDragFloat(0.1f, 0, 30, GNB.Config.GNB_Burst_Delay, "延迟多少秒使用血壤无情，因为延迟的问题大概率要-0.6秒", 150);
 
                 // UserConfig.DrawHorizontalRadioButton(GNB.Config.GNB_START_GCD, "1GCD", "", 1);
                 // UserConfig.DrawHorizontalRadioButton(GNB.Config.GNB_START_GCD, "2GCD", "", 2);
@@ -3363,7 +3359,7 @@ namespace XIVSlothComboX.Window.Functions
 
             // ====================================================================================
 
-              #region VIPER
+            #region VIPER
 
             if ((preset == CustomComboPreset.VPR_ST_AdvancedMode && enabled) || (preset == CustomComboPreset.VPR_VicewinderCoils && enabled))
             {
