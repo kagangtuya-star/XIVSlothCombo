@@ -3831,7 +3831,10 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(VPR_ST_CDs)]
         [CustomComboInfo("Vicewinder Combo", "Adds Swiftskin's Coil and Hunter's Coil to the rotation.", VPR.JobID)]
         VPR_ST_VicewinderCombo = 30007,
-
+        
+        [ParentCombo(VPR_ST_VicewinderCombo)]
+        [CustomComboInfo("Dynamic First Coil", "Uses Hunter's Coil first if you are on the flank, and Swiftskin's Coil first if you are on the rear.\nDefaults to your selection if you are elsewhere.", VPR.JobID)]
+        VPR_ST_DynamicFirstCoil = 30013,
         #endregion
 
         [ParentCombo(VPR_ST_AdvancedMode)]
@@ -3869,7 +3872,7 @@ namespace XIVSlothComboX.Combos
         VPR_ST_ComboHeals = 30097,
 
         [ParentCombo(VPR_ST_AdvancedMode)]
-        [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus.", VPR.JobID)]
+        [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus..\n Only for basic combo. Does NOT care about Vicewinder positionals.", VPR.JobID)]
         VPR_TrueNorthDynamic = 30098,
 
         [ParentCombo(VPR_TrueNorthDynamic)]
@@ -3941,7 +3944,11 @@ namespace XIVSlothComboX.Combos
         [ReplaceSkill(VPR.Vicewinder)]
         [CustomComboInfo("Vicewinder - Coils", "Replaces Vicewinder with Hunter's/Swiftskin's Coils.", VPR.JobID)]
         VPR_VicewinderCoils = 30200,
-
+        
+        [ParentCombo(VPR_VicewinderCoils)]
+        [CustomComboInfo("Dynamic First Coil", "Uses Hunter's Coil first if you are on the flank, and Swiftskin's Coil first if you are on the rear.\nDefaults to your selection if you are elsewhere.", VPR.JobID)]
+        VPR_DynamicFirstCoil = 30209,
+        
         [ParentCombo(VPR_VicewinderCoils)]
         [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus.", VPR.JobID)]
         VPR_VicewinderCoilsTN = 30208,
