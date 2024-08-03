@@ -366,7 +366,9 @@ namespace XIVSlothComboX.Combos.PvE
                     return true;
                 }
 
-                bool 钻头是否可以使用 = GetCooldownRemainingTime(钻头Drill) - GetCooldownRemainingTime(SplitShot) < 20.5f;
+                bool 钻头是否可以使用 = GetCooldownRemainingTime(钻头Drill) - GetCooldownRemainingTime(SplitShot) < GetCooldown(钻头Drill).单次计时器 + 0.5f;
+
+
                 if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Drill) && reassembledDrill && LevelChecked(钻头Drill) && 钻头是否可以使用)
                 {
 

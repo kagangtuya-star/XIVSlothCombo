@@ -8,10 +8,7 @@ namespace XIVSlothComboX.Data
         /// <summary> Gets a value indicating whether the action is on cooldown. </summary>
         public bool IsCooldown
         {
-            get
-            {
-                return CooldownRemaining > 0;
-            }
+            get { return CooldownRemaining > 0; }
         }
 
         /// <summary> Gets the action ID on cooldown. </summary>
@@ -33,6 +30,9 @@ namespace XIVSlothComboX.Data
         /// <summary> Gets a value indicating whether the action has charges, not charges available. </summary>
         public bool HasCharges => MaxCharges > 1;
 
+
+        public float 单次计时器 => CooldownTotal / MaxCharges;
+
         /// <summary> Gets the remaining number of charges for an action. </summary>
         public unsafe uint RemainingCharges
         {
@@ -48,10 +48,7 @@ namespace XIVSlothComboX.Data
         /// <summary> Gets the cooldown time remaining until the next charge. </summary>
         public float ChargeCooldownRemaining
         {
-            get
-            {
-                return CooldownRemaining % (CooldownTotal / MaxCharges);
-            }
+            get { return CooldownRemaining % (CooldownTotal / MaxCharges); }
         }
     }
 }
