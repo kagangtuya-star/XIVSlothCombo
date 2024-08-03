@@ -366,7 +366,16 @@ namespace XIVSlothComboX.Combos.PvE
                     return true;
                 }
 
-                bool 钻头是否可以使用 = GetCooldownRemainingTime(钻头Drill) - GetCooldownRemainingTime(SplitShot) < GetCooldown(钻头Drill).单次计时器 + 0.5f;
+                bool 钻头是否可以使用 = false;
+
+                if (GetMaxCharges(钻头Drill) > 1)
+                {
+                    钻头是否可以使用 = GetCooldownRemainingTime(钻头Drill) - GetCooldownRemainingTime(SplitShot) < GetCooldown(钻头Drill).单次计时器 + 0.5f;
+                }
+                else
+                {
+                    钻头是否可以使用 = GetCooldownRemainingTime(钻头Drill) - GetCooldownRemainingTime(SplitShot) <= 0;
+                }
 
 
                 if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Drill) && reassembledDrill && LevelChecked(钻头Drill) && 钻头是否可以使用)
