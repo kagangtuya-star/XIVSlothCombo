@@ -174,14 +174,29 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"钻头Drill充能 : {CustomComboFunctions.GetRemainingCharges(MCH.钻头Drill) }");
                     // ImGui.TextUnformatted($"GCDActionReady : {MCH.钻头Drill.GCDActionReady(MCH.CleanShot) }");
 
-                    // ImGui.TextUnformatted($"Heatblast : {CustomComboFunctions.GetCooldown(MCH.热冲击HeatBlast).CooldownTotal }");
-                    // ImGui.TextUnformatted($"Heatblastx6 : {CustomComboFunctions.GetCooldown(MCH.热冲击HeatBlast).CooldownTotal*6 }");
-                    // ImGui.TextUnformatted($"Heatblastx6 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.热冲击HeatBlast)}");
-                    // ImGui.TextUnformatted($"钻头DrillGetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) }");
+                    // ImGui.TextUnformatted($"Heatblast : {CustomComboFunctions.GetCooldown(MCH.HeatBlast).CooldownTotal }");
+                    // ImGui.TextUnformatted($"Heatblastx6 : {CustomComboFunctions.GetCooldown(MCH.HeatBlast).CooldownTotal*6 }");
+                    // ImGui.TextUnformatted($"Heatblastx6 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.HeatBlast)}");
+                    ImGui.TextUnformatted($"钻头DrillGetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill)}");
+                    ImGui.TextUnformatted($"钻头ActionReady: {MCH.钻头Drill.ActionReady()}");
+                    ImGui.TextUnformatted($"比较: {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) <= CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot) + 0.25}");
+
+                    var 钻头是否可以用 = CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) - CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot);
+                    var 钻头是否可以用bool = CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) - CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot) < 20f;
+
+                    bool 用bool = MCH.Config.MCH_ST_Reassembled[3]  && 钻头是否可以用bool;
+
+                    ImGui.TextUnformatted($"钻头是否可以用: {钻头是否可以用}");
+                    ImGui.TextUnformatted($"钻头是否可以用<20f: {钻头是否可以用bool}");
+                    
+                    ImGui.TextUnformatted($"MCH_ST_Adv_Reassemble: {CustomComboFunctions.IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassemble)}");
+                    ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) > MCH.Config.MCH_ST_ReassemblePool}");
+                    ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) }");
+                    ImGui.TextUnformatted($"MCH_ST_ReassemblePool: {  MCH.Config.MCH_ST_ReassemblePool+""}");
                     // ImGui.TextUnformatted($"CleanShot_GetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.CleanShot) }");
-                    // ImGui.TextUnformatted($"回转飞 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.回转飞锯ChainSaw) }");
-                    // ImGui.TextUnformatted($"空气 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.空气锚AirAnchor) }");
-                    // ImGui.TextUnformatted($"虹吸弹GaussRound:{CustomComboFunctions.GetCooldownRemainingTime(MCH.虹吸弹GaussRound)}，弹射Ricochet:{CustomComboFunctions.GetCooldownRemainingTime(MCH.弹射Ricochet)} ");
+                    // ImGui.TextUnformatted($"回转飞 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.ChainSaw) }");
+                    // ImGui.TextUnformatted($"空气 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.AirAnchor) }");
+                    // ImGui.TextUnformatted($"虹吸弹GaussRound:{CustomComboFunctions.GetCooldownRemainingTime(MCH.GaussRound)}，弹射Ricochet:{CustomComboFunctions.GetCooldownRemainingTime(MCH.Ricochet)} ");
                     //机工 end
 
 
@@ -217,14 +232,14 @@ namespace XIVSlothComboX.Window.Tabs
                     //舞者 start
                     // ImGui.TextUnformatted($"{DNC.剑舞SaberDance.GCDActionPreReady(DNC.百花争艳Flourish)},百花:{CustomComboFunctions.GetCooldownRemainingTime(DNC.百花争艳Flourish)}，剑舞:{CustomComboFunctions.GetCooldownRemainingTime(DNC.剑舞SaberDance)}");
 
-                    var 标准舞步CD = CustomComboFunctions.GetCooldownRemainingTime(DNC.标准舞步StandardStep);
-                    var 技巧舞步CD = CustomComboFunctions.GetCooldownRemainingTime(DNC.技巧舞步TechnicalStep);
-                    var GCD = CustomComboFunctions.GetCooldownRemainingTime(DNC.瀑泻Cascade);
-                    var 技巧舞步CD_ = 技巧舞步CD - GCD;
-                    var 标准舞步CD_ = 标准舞步CD - GCD;
-                    ImGui.TextUnformatted($"技巧舞步:{技巧舞步CD}={技巧舞步CD_} ={技巧舞步CD_ is > 0 and < 0.5f}");
-                    ImGui.TextUnformatted($"标准舞步:{标准舞步CD}={标准舞步CD_} ={标准舞步CD_ is > 0 and < 0.5f} ");
-                    ImGui.TextUnformatted($"GCD:{GCD}");
+                    // var 标准舞步CD = CustomComboFunctions.GetCooldownRemainingTime(DNC.标准舞步StandardStep);
+                    // var 技巧舞步CD = CustomComboFunctions.GetCooldownRemainingTime(DNC.技巧舞步TechnicalStep);
+                    // var GCD = CustomComboFunctions.GetCooldownRemainingTime(DNC.瀑泻Cascade);
+                    // var 技巧舞步CD_ = 技巧舞步CD - GCD;
+                    // var 标准舞步CD_ = 标准舞步CD - GCD;
+                    // ImGui.TextUnformatted($"技巧舞步:{技巧舞步CD}={技巧舞步CD_} ={技巧舞步CD_ is > 0 and < 0.5f}");
+                    // ImGui.TextUnformatted($"标准舞步:{标准舞步CD}={标准舞步CD_} ={标准舞步CD_ is > 0 and < 0.5f} ");
+                    // ImGui.TextUnformatted($"GCD:{GCD}");
                     //舞者 end
 
 

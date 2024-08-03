@@ -1707,11 +1707,11 @@ namespace XIVSlothComboX.Combos
         //     "Replace Drill and Air Anchor (Hot Shot) with one or the other (or Chain Saw) depending on which is on cooldown.", MCH.JobID)]
         // MCH_HotShotDrillChainsaw = 8004,
 
-        [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot, MCH.ChainSaw)]
+        [ReplaceSkill(MCH.钻头Drill, MCH.AirAnchor, MCH.HotShot, MCH.ChainSaw)]
         [CustomComboInfo("Big Hitter Feature", "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", MCH.JobID)]
         MCH_HotShotDrillChainsawExcavator = 8004,
 
-        [ReplaceSkill(MCH.HeatBlast)]
+        [ReplaceSkill(MCH.热冲击HeatBlast)]
         [CustomComboInfo("Single Button Heat Blast Feature", "Turns Heat Blast into Hypercharge when at or above 50 heat.", MCH.JobID)]
         MCH_Heatblast = 8006,
 

@@ -101,7 +101,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
             {
                 if (CustomComboFunctions.HasEffect(Buffs.Reassembled) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
-                else if (PrePullStep == 1) actionID = Reassemble;
+                else if (PrePullStep == 1) actionID = 整备Reassemble;
 
                 if (ActionWatching.CombatActions.Count > 2 && CustomComboFunctions.InCombat())
                     CurrentState = OpenerState.FailedOpener;
@@ -129,8 +129,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 3) OpenerStep++;
                 else if (OpenerStep == 3) actionID = DoubleCheck;
 
-                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 4) OpenerStep++;
-                else if (OpenerStep == 4) actionID = Drill;
+                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 4) OpenerStep++;
+                else if (OpenerStep == 4) actionID = 钻头Drill;
 
                 if (CustomComboFunctions.WasLastAction(BarrelStabilizer) && OpenerStep == 5) OpenerStep++;
                 else if (OpenerStep == 5) actionID = BarrelStabilizer;
@@ -144,11 +144,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(AutomatonQueen) && OpenerStep == 8) OpenerStep++;
                 else if (OpenerStep == 8) actionID = AutomatonQueen;
 
-                if (CustomComboFunctions.WasLastAction(Reassemble) && OpenerStep == 9) OpenerStep++;
-                else if (OpenerStep == 9) actionID = Reassemble;
+                if (CustomComboFunctions.WasLastAction(整备Reassemble) && OpenerStep == 9) OpenerStep++;
+                else if (OpenerStep == 9) actionID = 整备Reassemble;
 
-                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 10) OpenerStep++;
-                else if (OpenerStep == 10) actionID = Drill;
+                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 10) OpenerStep++;
+                else if (OpenerStep == 10) actionID = 钻头Drill;
 
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 11) OpenerStep++;
                 else if (OpenerStep == 11) actionID = CheckMate;
@@ -195,8 +195,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(CheckMate) && OpenerStep == 25) OpenerStep++;
                 else if (OpenerStep == 25) actionID = CheckMate;
 
-                if (CustomComboFunctions.WasLastAction(Drill) && OpenerStep == 26) OpenerStep++;
-                else if (OpenerStep == 26) actionID = Drill;
+                if (CustomComboFunctions.WasLastAction(钻头Drill) && OpenerStep == 26) OpenerStep++;
+                else if (OpenerStep == 26) actionID = 钻头Drill;
 
                 if (CustomComboFunctions.WasLastAction(DoubleCheck) && OpenerStep == 27) OpenerStep++;
                 else if (OpenerStep == 27) actionID = DoubleCheck;
