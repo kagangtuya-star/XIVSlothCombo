@@ -186,7 +186,6 @@ namespace XIVSlothComboX.Window.Tabs
 
                     bool 用bool = MCH.Config.MCH_ST_Reassembled[3]  && 钻头是否可以用bool;
 
-                    ImGui.TextUnformatted($"钻头是否可以用: {钻头是否可以用}");
                     ImGui.TextUnformatted($"钻头是否可以用<20f: {钻头是否可以用bool}");
                     
                     ImGui.TextUnformatted($"MCH_ST_Adv_Reassemble: {CustomComboFunctions.IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassemble)}");
@@ -194,12 +193,15 @@ namespace XIVSlothComboX.Window.Tabs
                     ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) }");
                     ImGui.TextUnformatted($"MCH_ST_ReassemblePool: {  MCH.Config.MCH_ST_ReassemblePool+""}");
                     
-                    ImGui.TextUnformatted($"白盾倒计时GetMaxCharges: { CustomComboFunctions.GetMaxCharges(WHM.DivineBenison)}");
-                    ImGui.TextUnformatted($"白盾倒计时CooldownTotal: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).CooldownTotal}");
-                    ImGui.TextUnformatted($"白盾倒计时CooldownRemaining: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).CooldownRemaining}");
-                    ImGui.TextUnformatted($"白盾倒计时CooldownElapsed: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).CooldownElapsed}");
-                    ImGui.TextUnformatted($"白盾倒计时ChargeCooldownRemaining: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).ChargeCooldownRemaining}");
-                    ImGui.TextUnformatted($"白盾倒计时单次计时器: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).单次计时器}");
+                    ImGui.TextUnformatted($"白盾倒计时GetMaxCharges: { CustomComboFunctions.GetMaxCharges(MCH.钻头Drill)}");
+                    ImGui.TextUnformatted($"白盾倒计时CooldownTotal: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownTotal}");
+                    ImGui.TextUnformatted($"白盾倒计时CooldownRemaining: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownRemaining}");
+                    ImGui.TextUnformatted($"白盾倒计时CooldownElapsed: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownElapsed}");
+                    ImGui.TextUnformatted($"白盾倒计时ChargeCooldownRemaining: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).ChargeCooldownRemaining}");
+                    ImGui.TextUnformatted($"白盾倒计时单次计时器: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).单次计时器}");
+                    ImGui.TextUnformatted($"钻头是否可以用: {钻头是否可以用}");
+                    
+                    
                     // ImGui.TextUnformatted($"白盾倒计时: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).ChargeCooldownRemaining}");
                     
                     // ImGui.TextUnformatted($"CleanShot_GetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.CleanShot) }");

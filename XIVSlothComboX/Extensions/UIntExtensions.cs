@@ -27,6 +27,16 @@ namespace XIVSlothComboX.Extensions
             {
                 return true;
             }
+            
+            if (CustomComboFunctions.GetMaxCharges(value) > 1)
+            {
+                if (cooldownRemainingTime - gcdCooldownRemainingTime <= CustomComboFunctions.GetCooldown(value).单次计时器 + 0.5f)
+                {
+                    return true;
+                }
+            }
+
+
             return false;
         }
 

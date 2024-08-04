@@ -375,6 +375,7 @@ namespace XIVSlothComboX.Combos.PvE
                 else
                 {
                     钻头是否可以使用 = GetCooldownRemainingTime(钻头Drill) - GetCooldownRemainingTime(SplitShot) <= 0;
+                    
                 }
 
 
