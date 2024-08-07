@@ -19,70 +19,68 @@ namespace XIVSlothComboX.Combos.PvE
 
 
         public const uint 利刃斩KeenEdge = 16137,
-            无情NoMercy = 16138,
-            残暴弹BrutalShell = 16139,
-            恶魔切DemonSlice = 16141,
-            迅连斩SolidBarrel = 16145,
-            烈牙GnashingFang = 16146,
-            SavageClaw = 16147,
-            恶魔杀DemonSlaughter = 16149,
-            WickedTalon = 16150,
-            音速破SonicBreak = 16153,
-            续剑Continuation = 16155,
-            JugularRip = 16156,
-            AbdomenTear = 16157,
-            EyeGouge = 16158,
-            弓形冲波BowShock = 16159,
-            HeartOfLight = 16160,
-            爆发击BurstStrike = 16162,
-            命运之环FatedCircle = 16163,
-            Aurora = 16151,
-            倍攻DoubleDown = 25760,
-            爆破领域DangerZone = 16144,
-            BlastingZone = 16165,
-            血壤Bloodfest = 16164,
-            超高速Hypervelocity = 25759,
-            粗分斩RoughDivide = 16154,
-            闪雷弹LightningShot = 16143,
-            师心连1FatedBrand = 36937,
-            师心连2ReignOfBeasts = 36938,
-            师心连3NobleBlood = 36939;
+                          无情NoMercy = 16138,
+                          残暴弹BrutalShell = 16139,
+                          恶魔切DemonSlice = 16141,
+                          迅连斩SolidBarrel = 16145,
+                          烈牙GnashingFang = 16146,
+                          SavageClaw = 16147,
+                          恶魔杀DemonSlaughter = 16149,
+                          WickedTalon = 16150,
+                          音速破SonicBreak = 16153,
+                          续剑Continuation = 16155,
+                          JugularRip = 16156,
+                          AbdomenTear = 16157,
+                          EyeGouge = 16158,
+                          弓形冲波BowShock = 16159,
+                          HeartOfLight = 16160,
+                          爆发击BurstStrike = 16162,
+                          命运之环FatedCircle = 16163,
+                          Aurora = 16151,
+                          倍攻DoubleDown = 25760,
+                          爆破领域DangerZone = 16144,
+                          BlastingZone = 16165,
+                          血壤Bloodfest = 16164,
+                          超高速Hypervelocity = 25759,
+                          粗分斩RoughDivide = 16154,
+                          闪雷弹LightningShot = 16143,
+                          师心连1FatedBrand = 36937,
+                          师心连2ReignOfBeasts = 36938,
+                          师心连3NobleBlood = 36939;
 
         public static class Buffs
         {
             public const ushort NoMercy = 1831,
-                Aurora = 1835,
-                //撕喉预备
-                子弹连1ReadyToRip = 1842,
-                //子弹连
-                子弹连2ReadyToTear = 1843,
-                子弹连3ReadyToGouge = 1844,
-                //音速破
-                ReadyToBreak = 3886,
-                //超高速
-                超高速ReadyToBlast = 2686,
-                ReadyToReign = 3840,
-                ReadyToRaze = 3839;
+                                Aurora = 1835,
+                                //撕喉预备
+                                子弹连1ReadyToRip = 1842,
+                                //子弹连
+                                子弹连2ReadyToTear = 1843,
+                                子弹连3ReadyToGouge = 1844,
+                                //音速破
+                                ReadyToBreak = 3886,
+                                //超高速
+                                超高速ReadyToBlast = 2686,
+                                ReadyToReign = 3840,
+                                ReadyToRaze = 3839;
         }
 
         public static class Debuffs
         {
             public const ushort BowShock = 1838,
-                SonicBreak = 1837;
+                                SonicBreak = 1837;
         }
 
         public static class Config
         {
             public static UserFloat
-                GNB_Burst_Delay = new("GNB_Burst_Delay", 1.9f)
-                ;
-            
+                GNB_Burst_Delay = new("GNB_Burst_Delay", 1.9f);
+
             public static UserInt
-                GNB_SkS = new("GNB_SkS", 6),
-                GNB_VariantCure= new ("GNB_VariantCure")
-                ;
-            
-            public const string 
+                GNB_SkS = new("GNB_SkS", 1),
+                GNB_VariantCure = new("GNB_VariantCure");
+
+            public const string
                 // GNB_SkS = "GNB_SkS",
                 GNB_START_GCD = "GNB_START_GCD",
                 GNB_RoughDivide_HeldCharges = "GNB_RoughDivide_HeldCharges"
@@ -196,7 +194,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
 
-                            if (CanDelayedWeavePlus(actionID,1.25f, 0.4f) && LevelChecked(超高速Hypervelocity) && HasEffect(Buffs.超高速ReadyToBlast))
+                            if (CanDelayedWeavePlus(actionID, 1.25f, 0.4f) && LevelChecked(超高速Hypervelocity) && HasEffect(Buffs.超高速ReadyToBlast))
                             {
                                 return 超高速Hypervelocity;
                             }
@@ -274,12 +272,11 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(血壤Bloodfest);
                                         }
 
-
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
+
 
                                         break;
                                     }
@@ -302,12 +299,10 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
-
                                         break;
                                     }
 
@@ -329,12 +324,10 @@ namespace XIVSlothComboX.Combos.PvE
                                             return 倍攻DoubleDown;
                                         }
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
-
 
                                         break;
                                     }
@@ -357,12 +350,10 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(烈牙GnashingFang);
                                         }
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
-
 
                                         break;
                                     }
@@ -386,12 +377,10 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(烈牙GnashingFang);
                                         }
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
-
                                         break;
                                     }
 
@@ -415,10 +404,9 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
 
 
@@ -443,12 +431,10 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 45 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (是否使用音速破(ref actionID))
                                         {
-                                            return 音速破SonicBreak.OriginalHook();
+                                            return actionID;
                                         }
-
 
                                         break;
                                     }
@@ -465,13 +451,23 @@ namespace XIVSlothComboX.Combos.PvE
                                 }
 
 
-                                if (gnbGauge.Ammo > 0 && 子弹连是否准备就绪() && GetCooldownRemainingTime(无情NoMercy) > 17 &&
-                                    GetCooldownRemainingTime(无情NoMercy) < 35)
+                                if (gnbGauge.Ammo > 0 && 子弹连是否准备就绪() && GetCooldownRemainingTime(无情NoMercy) > 17 && GetCooldownRemainingTime(无情NoMercy) < 35)
                                 {
                                     return 烈牙GnashingFang;
                                 }
                             }
                         }
+                    }
+
+                    if (gnbGauge.AmmoComboStep is 3 or 4)
+                    {
+                        return 血壤Bloodfest.OriginalHook();
+                    }
+
+
+                    if (使用师心连许剑())
+                    {
+                        return 血壤Bloodfest.OriginalHook();
                     }
 
 
@@ -493,8 +489,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     && GetCooldownRemainingTime(烈牙GnashingFang) > 10)
                                     return 爆发击BurstStrike;
 
-                                if (gnbGauge.Ammo != 0 && GetCooldownRemainingTime(烈牙GnashingFang) > 7.5f &&
-                                    GetCooldownRemainingTime(倍攻DoubleDown) > 40)
+                                if (gnbGauge.Ammo != 0 && GetCooldownRemainingTime(烈牙GnashingFang) > 7.5f && GetCooldownRemainingTime(倍攻DoubleDown) > 40)
                                 {
                                     return 爆发击BurstStrike;
                                 }
@@ -543,6 +538,28 @@ namespace XIVSlothComboX.Combos.PvE
                 }
 
                 return actionID;
+            }
+
+            private static bool 是否使用音速破(ref uint actionID)
+            {
+
+                if (音速破SonicBreak.LevelChecked() && HasEffect(Buffs.ReadyToBreak))
+                {
+                    if (GetCooldownRemainingTime(倍攻DoubleDown) > 45)
+                    {
+                        actionID = 音速破SonicBreak.OriginalHook();
+                        return true;
+                    }
+                    
+                    if (HasEffect(Buffs.NoMercy) && GetCooldownRemainingTime(烈牙GnashingFang) < 2.5)
+                    {
+                        actionID = 音速破SonicBreak.OriginalHook();
+                        return true;
+                    }
+
+
+                }
+                return false;
             }
 
             private static bool 血壤的使用条件(GNBGauge gnbGauge, double combatTotalSeconds, float burstDelay)
@@ -611,7 +628,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return true;
                     }
 
-                    if (GetCooldownRemainingTime(血壤Bloodfest) > 110f)
+                    if (GetCooldownRemainingTime(血壤Bloodfest) == 0)
                     {
                         return true;
                     }
@@ -656,6 +673,12 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         return true;
                     }
+
+                    if (gnbGauge.AmmoComboStep is 1 && gnbGauge.Ammo >= 2)
+                    {
+                        return true;
+                    }
+
                 }
 
                 return false;
@@ -795,6 +818,18 @@ namespace XIVSlothComboX.Combos.PvE
             }
 
 
+            private static bool 使用师心连许剑()
+            {
+
+                if (OriginalHook(GNB.血壤Bloodfest) is 师心连2ReignOfBeasts or 师心连3NobleBlood)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+
             internal class GNB_GF_Continuation : CustomCombo
             {
                 protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GNB_GF_Continuation;
@@ -911,8 +946,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -935,8 +969,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             return 倍攻DoubleDown;
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -960,8 +993,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             return 倍攻DoubleDown;
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -983,8 +1015,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         if (子弹连_使用子弹连(gauge, level, lastComboMove))
                                             return OriginalHook(烈牙GnashingFang);
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -1009,8 +1040,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(烈牙GnashingFang);
 
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -1033,8 +1063,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(血壤Bloodfest);
                                         }
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -1056,8 +1085,7 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(血壤Bloodfest);
                                         }
 
-                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 &&
-                                            HasEffect(Buffs.ReadyToBreak))
+                                        if (音速破SonicBreak.LevelChecked() && GetCooldownRemainingTime(倍攻DoubleDown) > 50 && HasEffect(Buffs.ReadyToBreak))
                                         {
                                             return 音速破SonicBreak;
                                         }
@@ -1104,8 +1132,7 @@ namespace XIVSlothComboX.Combos.PvE
                                         && GetCooldownRemainingTime(烈牙GnashingFang) > 10)
                                         return 爆发击BurstStrike;
 
-                                    if (gauge.Ammo != 0 && GetCooldownRemainingTime(烈牙GnashingFang) > 10 &&
-                                        GetCooldownRemainingTime(倍攻DoubleDown) > 40)
+                                    if (gauge.Ammo != 0 && GetCooldownRemainingTime(烈牙GnashingFang) > 10 && GetCooldownRemainingTime(倍攻DoubleDown) > 40)
                                         return 爆发击BurstStrike;
                                 }
 
@@ -1153,7 +1180,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.GNB_BS_DoubleDown)
                             && HasEffect(Buffs.NoMercy)
-                            && 倍攻是否准备就绪() && gauge.Ammo >= 2)
+                            && 倍攻是否准备就绪()
+                            && gauge.Ammo >= 2)
                             return 倍攻DoubleDown;
 
                         if (IsEnabled(CustomComboPreset.GNB_BS_ReignOfBeasts) && 使用师心连(lastComboMove))
@@ -1216,8 +1244,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
 
-                            if (IsEnabled(CustomComboPreset.GNB_AoE_DoubleDown) && gauge.Ammo >= 2 && ActionReady(倍攻DoubleDown) &&
-                                ActionReady(无情NoMercy) == false)
+                            if (IsEnabled(CustomComboPreset.GNB_AoE_DoubleDown) && gauge.Ammo >= 2 && ActionReady(倍攻DoubleDown) && ActionReady(无情NoMercy) == false)
                             {
                                 return 倍攻DoubleDown;
                             }
@@ -1248,8 +1275,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (comboTime > 0 && lastComboMove == 恶魔切DemonSlice)
                         {
-                            if (IsEnabled(CustomComboPreset.GNB_AOE_Overcap) && LevelChecked(命运之环FatedCircle) &&
-                                gauge.Ammo == MaxCartridges(level))
+                            if (IsEnabled(CustomComboPreset.GNB_AOE_Overcap) && LevelChecked(命运之环FatedCircle) && gauge.Ammo == MaxCartridges(level))
                             {
                                 return 命运之环FatedCircle;
                             }

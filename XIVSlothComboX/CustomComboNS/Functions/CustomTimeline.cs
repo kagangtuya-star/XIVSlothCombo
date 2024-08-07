@@ -209,6 +209,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId) != 0)
                 return false;
 
+            // InventoryManager.Instance()->GetEmptySlotsInBag()
+            
             if (InventoryManager.Instance()->GetInventoryItemCount(itemId, true) > 0)
             {
                 return ActionManager.Instance()->UseAction(ActionType.Item, itemId + 1000000, LocalPlayer.GameObjectId, a4);

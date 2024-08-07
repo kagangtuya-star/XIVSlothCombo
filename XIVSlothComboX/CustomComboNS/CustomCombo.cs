@@ -1,4 +1,5 @@
 ﻿using Dalamud.Utility;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using XIVSlothComboX.Attributes;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
@@ -56,9 +57,13 @@ namespace XIVSlothComboX.CustomComboNS
         /// <param name="newActionID"> Replacement action ID. </param>
         /// <returns> True if the action has changed, otherwise false. </returns>
 
-        public bool TryInvoke(uint actionID, byte level, uint lastComboMove, float comboTime, out uint newActionID)
+        public unsafe bool TryInvoke(uint actionID, byte level, uint lastComboMove, float comboTime, out uint newActionID)
         {
             newActionID = 0;
+            
+            if (!Service.ClientState.IsPvP && ActionManager.Instance()->QueuedActionType == ActionType.Action && ActionManager.Instance()->QueuedActionId != actionID)
+                return false;
+
 
             UpdateCombatTimer();
             

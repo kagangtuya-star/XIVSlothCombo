@@ -212,14 +212,24 @@ namespace XIVSlothComboX
         }
 
 
-        private static void OnFrameworkUpdate(IFramework framework)
+        private static unsafe void OnFrameworkUpdate(IFramework framework)
         {
             if (Service.ClientState.LocalPlayer is not null)
             {
                 JobID = Service.ClientState.LocalPlayer?.ClassJob?.Id;
                 BlueMageService.PopulateBLUSpells();
-                //判断有没有可以精炼的
+                
+                if (Service.Configuration.自动食物)
+                {
+                    AutoItem.自动吃食物((uint)Service.Configuration.自动食物Id);
+                }
+                
+                if (Service.Configuration.自动精炼药)
+                {
+                    AutoItem.自动精炼药();
+                }
 
+                
                 if (Service.Configuration.自动精炼)
                 {
                     if (Service.Configuration.只精炼亚力山大)
@@ -237,20 +247,31 @@ namespace XIVSlothComboX
                     }
                     else
                     {
-                        if (Spiritbond.IsSpiritbondReadyAny())
+                        //包裹大于0才精炼
+                        if (InventoryManager.Instance()->GetEmptySlotsInBag() > 0)
                         {
-                            //集成打开精炼窗口、选择第一个精炼、开始精炼
-                            //
-                            Spiritbond.ExtractMateriaTask(true);
+                            if (Spiritbond.IsSpiritbondReadyAny())
+                            {
+                                //集成打开精炼窗口、选择第一个精炼、开始精炼
+                                //
+                                Spiritbond.ExtractMateriaTask(true);
+                            }
+                            else
+                            {
+                                Spiritbond.CloseMateriaMenu();
+                            }
                         }
                         else
                         {
                             Spiritbond.CloseMateriaMenu();
                         }
+                        
                     }
 
                 }
-
+                
+                
+            
             }
 
         }

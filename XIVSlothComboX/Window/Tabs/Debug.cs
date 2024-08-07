@@ -1,20 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Numerics;
-using Dalamud.Game.ClientState.JobGauge.Types;
-using Dalamud.Game.ClientState.Objects.SubKinds;
+﻿using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
 using ImGuiNET;
 using XIVSlothComboX.Combos;
-using XIVSlothComboX.Combos.JobHelpers;
-using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
-using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
 
@@ -45,6 +37,7 @@ namespace XIVSlothComboX.Window.Tabs
                         {
                             ImGui.TextUnformatted($"TARGET STATUS CHECK: {chara.Name} -> {ActionWatching.GetStatusName(status.StatusId)}: {status.StatusId}");
                         }
+                        // ImGui.TextUnformatted($"目标读条 -> {chara.CastActionId}");
                     }
 
                     foreach (Status? status in Service.ClientState.LocalPlayer.StatusList)
@@ -177,33 +170,39 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"Heatblast : {CustomComboFunctions.GetCooldown(MCH.HeatBlast).CooldownTotal }");
                     // ImGui.TextUnformatted($"Heatblastx6 : {CustomComboFunctions.GetCooldown(MCH.HeatBlast).CooldownTotal*6 }");
                     // ImGui.TextUnformatted($"Heatblastx6 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.HeatBlast)}");
-                    ImGui.TextUnformatted($"钻头DrillGetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill)}");
-                    ImGui.TextUnformatted($"钻头ActionReady: {MCH.钻头Drill.ActionReady()}");
-                    ImGui.TextUnformatted($"比较: {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) <= CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot) + 0.25}");
+                    // ImGui.TextUnformatted($"钻头DrillGetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill)}");
+                    // ImGui.TextUnformatted($"钻头ActionReady: {MCH.钻头Drill.ActionReady()}");
+                    // ImGui.TextUnformatted($"比较: {CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) <= CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot) + 0.25}");
+                    //
+                    // var 钻头是否可以用 = CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) - CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot);
+                    // var 钻头是否可以用bool = CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) - CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot) < 20f;
+                    //
+                    // bool 用bool = MCH.Config.MCH_ST_Reassembled[3]  && 钻头是否可以用bool;
 
-                    var 钻头是否可以用 = CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) - CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot);
-                    var 钻头是否可以用bool = CustomComboFunctions.GetCooldownRemainingTime(MCH.钻头Drill) - CustomComboFunctions.GetCooldownRemainingTime(MCH.SplitShot) < 20f;
+                    // ImGui.TextUnformatted($"钻头是否可以用<20f: {钻头是否可以用bool}");
+                    //
+                    // ImGui.TextUnformatted($"MCH_ST_Adv_Reassemble: {CustomComboFunctions.IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassemble)}");
+                    // ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) > MCH.Config.MCH_ST_ReassemblePool}");
+                    // ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) }");
+                    // ImGui.TextUnformatted($"MCH_ST_ReassemblePool: {  MCH.Config.MCH_ST_ReassemblePool+""}");
+                    //
+                    // ImGui.TextUnformatted($"白盾倒计时GetMaxCharges: { CustomComboFunctions.GetMaxCharges(MCH.钻头Drill)}");
+                    // ImGui.TextUnformatted($"白盾倒计时CooldownTotal: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownTotal}");
+                    // ImGui.TextUnformatted($"白盾倒计时CooldownRemaining: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownRemaining}");
+                    // ImGui.TextUnformatted($"白盾倒计时CooldownElapsed: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownElapsed}");
+                    // ImGui.TextUnformatted($"白盾倒计时ChargeCooldownRemaining: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).ChargeCooldownRemaining}");
+                    // ImGui.TextUnformatted($"白盾倒计时单次计时器: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).单次计时器}");
+                    // ImGui.TextUnformatted($"钻头是否可以用: {钻头是否可以用}");
+                    //
+                    // var aaaa=    CustomComboFunctions.OriginalHook(GNB.血壤Bloodfest) is GNB.师心连1FatedBrand or GNB.师心连2ReignOfBeasts or GNB.师心连3NobleBlood;
 
-                    bool 用bool = MCH.Config.MCH_ST_Reassembled[3]  && 钻头是否可以用bool;
 
-                    ImGui.TextUnformatted($"钻头是否可以用<20f: {钻头是否可以用bool}");
-                    
-                    ImGui.TextUnformatted($"MCH_ST_Adv_Reassemble: {CustomComboFunctions.IsEnabled(CustomComboPreset.MCH_ST_Adv_Reassemble)}");
-                    ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) > MCH.Config.MCH_ST_ReassemblePool}");
-                    ImGui.TextUnformatted($"GetRemainingCharges 整备Reassemble: { CustomComboFunctions.GetRemainingCharges(MCH.整备Reassemble) }");
-                    ImGui.TextUnformatted($"MCH_ST_ReassemblePool: {  MCH.Config.MCH_ST_ReassemblePool+""}");
-                    
-                    ImGui.TextUnformatted($"白盾倒计时GetMaxCharges: { CustomComboFunctions.GetMaxCharges(MCH.钻头Drill)}");
-                    ImGui.TextUnformatted($"白盾倒计时CooldownTotal: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownTotal}");
-                    ImGui.TextUnformatted($"白盾倒计时CooldownRemaining: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownRemaining}");
-                    ImGui.TextUnformatted($"白盾倒计时CooldownElapsed: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).CooldownElapsed}");
-                    ImGui.TextUnformatted($"白盾倒计时ChargeCooldownRemaining: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).ChargeCooldownRemaining}");
-                    ImGui.TextUnformatted($"白盾倒计时单次计时器: { CustomComboFunctions.GetCooldown(MCH.钻头Drill).单次计时器}");
-                    ImGui.TextUnformatted($"钻头是否可以用: {钻头是否可以用}");
-                    
-                    
+                    // ImGui.TextUnformatted($"是否可以使用师心连: {aaaa}");
+                    // ImGui.TextUnformatted($"AmmoComboStep: {CustomComboFunctions.GetJobGauge<GNBGauge>().AmmoComboStep}");
+                    // ImGui.TextUnformatted($"师心连2ReignOfBeasts: {CustomComboFunctions.OriginalHook(GNB.血壤Bloodfest) is  GNB.师心连2ReignOfBeasts or GNB.师心连3NobleBlood}");
+
                     // ImGui.TextUnformatted($"白盾倒计时: { CustomComboFunctions.GetCooldown(WHM.DivineBenison).ChargeCooldownRemaining}");
-                    
+
                     // ImGui.TextUnformatted($"CleanShot_GetCooldownRemainingTime : {CustomComboFunctions.GetCooldownRemainingTime(MCH.CleanShot) }");
                     // ImGui.TextUnformatted($"回转飞 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.ChainSaw) }");
                     // ImGui.TextUnformatted($"空气 : {CustomComboFunctions.GetCooldownRemainingTime(MCH.AirAnchor) }");
@@ -278,6 +277,9 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"3-{CustomComboFunctions.GetJobGauge<DRKGauge>().ShadowTimeRemaining}");
                     // ImGui.TextUnformatted($"4-{CustomComboFunctions.GetJobGauge<DRKGauge>().DarksideTimeRemaining}");
                     //骑士 end
+                    ImGui.TextUnformatted($"GetEmptySlotsInBag-{InventoryManager.Instance()->GetEmptySlotsInBag()}");
+                    ImGui.TextUnformatted($"GetAlliedSeals-{InventoryManager.Instance()->GetAlliedSeals()}");
+                    ImGui.TextUnformatted($"GetWeeklyAcquiredTomestoneCount-{InventoryManager.Instance()->GetWeeklyAcquiredTomestoneCount()}");
                 }
             }
 

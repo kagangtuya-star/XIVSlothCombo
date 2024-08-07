@@ -68,11 +68,11 @@ namespace XIVSlothComboX.Window.Tabs
                 ImGui.TextUnformatted("每次使用一个技能，插件都会将其输出到聊天框中。Every time you use an action, the plugin will print it to the chat.");
                 ImGui.EndTooltip();
             }
+
             #endregion
 
             #region SpecialEvent
 
-     
             float offset = (float)Service.Configuration.MeleeOffset;
             ImGui.PushItemWidth(75);
 
@@ -127,9 +127,9 @@ namespace XIVSlothComboX.Window.Tabs
             //     ImGui.TextUnformatted($"Used for {CustomComboInfoAttribute.JobIDToName(33)} card targeting features.\r\nSet Alpha to 0 to hide the box.");
             // }
             //
+
             #region 输出到聊天框
 
-            
             var setOutChat = Service.Configuration.SetOutChat;
 
             //if (ImGui.Checkbox("Hide Message of the Day", ref motd))
@@ -140,10 +140,9 @@ namespace XIVSlothComboX.Window.Tabs
             }
 
             #endregion
-            
+
             #region 自动精炼
 
-            
             var 自动精炼 = Service.Configuration.自动精炼;
 
             if (ImGui.Checkbox("" + "自动精炼" + "", ref 自动精炼))
@@ -151,7 +150,7 @@ namespace XIVSlothComboX.Window.Tabs
                 Service.Configuration.自动精炼 = 自动精炼;
                 Service.Configuration.Save();
             }
-            
+
             var 只精炼亚力山大 = Service.Configuration.只精炼亚力山大;
 
             ImGui.SameLine();
@@ -161,10 +160,40 @@ namespace XIVSlothComboX.Window.Tabs
                 Service.Configuration.Save();
             }
 
+            #endregion
+
+            #region 自动食物
+
+            var 自动食物 = Service.Configuration.自动食物;
+
+            if (ImGui.Checkbox("" + "自动食物" + "", ref 自动食物))
+            {
+                Service.Configuration.自动食物 = 自动食物;
+                Service.Configuration.Save();
+            }
+            ImGui.SameLine();
+
+            var 自动食物Id = Service.Configuration.自动食物Id;
+
+            if (ImGui.DragInt("食物Id", ref 自动食物Id))
+            {
+                Service.Configuration.自动食物Id = 自动食物Id;
+                Service.Configuration.Save();
+            }
 
             #endregion
-            
-            
+
+            #region 自动精炼药
+
+            var 自动精炼药 = Service.Configuration.自动精炼药;
+            if (ImGui.Checkbox("" + "自动精炼药" + "", ref 自动精炼药))
+            {
+                Service.Configuration.自动精炼药 = 自动精炼药;
+                Service.Configuration.Save();
+            }
+
+            #endregion
+
             ImGui.EndChild();
         }
     }
