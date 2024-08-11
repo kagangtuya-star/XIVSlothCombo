@@ -135,8 +135,10 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             IGameObject? healTarget = null;
             ITargetManager tm = Service.TargetManager;
 
-            if (HasFriendlyTarget(tm.SoftTarget)) healTarget = tm.SoftTarget;
-            if (healTarget is null && HasFriendlyTarget(CurrentTarget) && !restrictToMouseover) healTarget = CurrentTarget;
+            if (HasFriendlyTarget(tm.SoftTarget)) 
+                healTarget = tm.SoftTarget;
+            if (healTarget is null && HasFriendlyTarget(CurrentTarget) && !restrictToMouseover) 
+                healTarget = CurrentTarget;
             //if (checkMO && HasFriendlyTarget(tm.MouseOverTarget)) healTarget = tm.MouseOverTarget;
             if (checkMOPartyUI)
             {

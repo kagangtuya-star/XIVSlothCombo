@@ -42,6 +42,9 @@ namespace XIVSlothComboX.Data
 
         internal static Dictionary<uint, BNpcBase> BNpcSheet = Service.DataManager.GetExcelSheet<BNpcBase>()!
             .ToDictionary(i => i.RowId, i => i);
+        
+        internal static readonly Dictionary<uint, long> ChargeTimestamps = [];
+
 
         private static readonly Dictionary<string, List<uint>> statusCache = new();
 
@@ -244,6 +247,10 @@ namespace XIVSlothComboX.Data
 
             try
             {
+                if (actionType == 1 && CustomComboFunctions.GetMaxCharges(actionId) > 0)
+                {
+                    ChargeTimestamps[actionId] = Environment.TickCount64;
+                }
                 CheckForChangedTarget(actionId, ref targetObjectId);
                 SendActionHook!.Original(targetObjectId, actionType, actionId, sequence, a5, a6, a7, a8, a9);
                 TimeLastActionUsed = DateTime.Now;

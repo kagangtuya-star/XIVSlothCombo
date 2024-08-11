@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ECommons.DalamudServices;
+using ECommons.GameHelpers;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
@@ -19,6 +20,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
     {
         internal static void Init()
         {
+            
+            
             Service.Framework.Update += CheckCards;
         }
 
@@ -78,21 +81,30 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             private static bool SetTarget()
             {
-                if (Gauge.DrawnCards[0].Equals(CardType.NONE)) return false;
+                if (Gauge.DrawnCards[0].Equals(CardType.NONE)) 
+                    return false;
                 CardType cardDrawn = Gauge.DrawnCards[0];
                 PartyTargets.Clear();
                 for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
                 {
-                    if (GetPartySlot(i) is not IBattleChara member) continue;
-                    if (member is null) continue; //Skip nulls/disconnected people
-                    if (member.IsDead) continue;
-                    if (OutOfRange(Balance, member)) continue;
+                    if (GetPartySlot(i) is not IBattleChara member)
+                        continue;
+                    if (member is null) 
+                        continue; //Skip nulls/disconnected people
+                    if (member.IsDead) 
+                        continue;
+                    if (OutOfRange(Balance, member)) 
+                        continue;
 
-                    if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) continue;
-                    if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) continue;
+                    if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) 
+                        continue;
+                    if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) 
+                        continue;
 
-                    if (Config.AST_QuickTarget_SkipDamageDown && TargetHasDamageDown(member)) continue;
-                    if (Config.AST_QuickTarget_SkipRezWeakness && TargetHasRezWeakness(member)) continue;
+                    if (Config.AST_QuickTarget_SkipDamageDown && TargetHasDamageDown(member)) 
+                        continue;
+                    if (Config.AST_QuickTarget_SkipRezWeakness && TargetHasRezWeakness(member)) 
+                        continue;
 
                     PartyTargets.Add(member);
                 }
@@ -101,13 +113,18 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 {
                     for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
                     {
-                        if (GetPartySlot(i) is not IBattleChara member) continue;
-                        if (member is null) continue; //Skip nulls/disconnected people
-                        if (member.IsDead) continue;
+                        if (GetPartySlot(i) is not IBattleChara member) 
+                            continue;
+                        if (member is null) 
+                            continue; //Skip nulls/disconnected people
+                        if (member.IsDead) 
+                            continue;
                         if (OutOfRange(Balance, member)) continue;
 
-                        if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) continue;
-                        if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) continue;
+                        if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) 
+                            continue;
+                        if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) 
+                            continue;
 
                         PartyTargets.Add(member);
                     }

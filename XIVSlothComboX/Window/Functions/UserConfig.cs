@@ -2958,96 +2958,42 @@ namespace XIVSlothComboX.Window.Functions
 
             #region SAMURAI
 
-            if (preset == CustomComboPreset.SAM_ST_Overcap && enabled)
-                UserConfig.DrawSliderInt(0, 85, SAM.Config.SAM_ST_KenkiOvercapAmount, "设置单体连击剑气积累数量.");
-            if (preset == CustomComboPreset.SAM_AoE_Overcap && enabled)
-                UserConfig.DrawSliderInt(0, 85, SAM.Config.SAM_AoE_KenkiOvercapAmount, "设置AOE连击剑气积累数量.");
-
-            if (preset == CustomComboPreset.SAM_ST_GekkoCombo_CDs_MeikyoShisui && enabled)
+            if (preset == CustomComboPreset.SAM_ST_CDs_Iaijutsu)
             {
-                UserConfig.DrawHorizontalRadioButton
-                (
-                    SAM.Config.SAM_MeikyoChoice, "Use after Hakaze/Sen Applier",
-                    "Uses Meikyo Shisui after Hakaze, Gekko, Yukikaze, or Kasha.", 1
-                );
-                UserConfig.DrawHorizontalRadioButton
-                (
-                    SAM.Config.SAM_MeikyoChoice, "Use outside of combo chain",
-                    "Uses Meikyo Shisui outside of a combo chain.", 2
-                );
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_ST_Higanbana_Threshold, "Stop using Higanbana on targets below this HP % (0% = always use).", 150, SliderIncrements.Ones);
             }
-
-            //PvP
-            if (preset == CustomComboPreset.SAMPvP_BurstMode && enabled)
-                UserConfig.DrawSliderInt(0, 2, SAMPvP.Config.SAMPvP_SotenCharges, "存几层必杀剑·早天? (0 = 全用，一层不留).");
-
-            if (preset == CustomComboPreset.SAMPvP_KashaFeatures_GapCloser && enabled)
-                UserConfig.DrawSliderInt(0, 100, SAMPvP.Config.SAMPvP_SotenHP, "使用必杀剑·早天当敌人低于设置的血量.");
-
-            //Fillers
-            if (preset == CustomComboPreset.SAM_ST_GekkoCombo_FillerCombos)
-            {
-                UserConfig.DrawHorizontalRadioButton(SAM.Config.SAM_FillerCombo, "2.14+", "2 Filler GCDs", 1);
-                UserConfig.DrawHorizontalRadioButton
-                (
-                    SAM.Config.SAM_FillerCombo, "2.06 - 2.08",
-                    "3 Filler GCDs. \nWill use Yaten into Enpi as part of filler and Gyoten back into Range.\nHakaze will be delayed by half a GCD after Enpi.",
-                    2
-                );
-                UserConfig.DrawHorizontalRadioButton(SAM.Config.SAM_FillerCombo, "1.99 - 2.01", "4 Filler GCDs. \nUses double Yukikaze loop.", 3);
-            }
-
-            if (preset == CustomComboPreset.SAM_ST_GekkoCombo_CDs_Iaijutsu)
-            {
-                UserConfig.DrawSliderInt
-                (
-                    0, 100, SAM.Config.SAM_ST_Higanbana_Threshold,
-                    "Stop using Higanbana on targets below this HP % (0% = always use).", 150, SliderIncrements.Ones
-                );
-            }
-
             if (preset == CustomComboPreset.SAM_ST_ComboHeals)
             {
-                UserConfig.DrawSliderInt
-                (
-                    0, 100, SAM.Config.SAM_STSecondWindThreshold, "HP percent threshold to use Second Wind below (0 = Disabled)",
-                    150, SliderIncrements.Ones
-                );
-                UserConfig.DrawSliderInt
-                (
-                    0, 100, SAM.Config.SAM_STBloodbathThreshold, "HP percent threshold to use Bloodbath (0 = Disabled)", 150,
-                    SliderIncrements.Ones
-                );
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_STSecondWindThreshold, "HP percent threshold to use Second Wind below (0 = Disabled)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_STBloodbathThreshold, "HP percent threshold to use Bloodbath (0 = Disabled)", 150, SliderIncrements.Ones);
             }
 
             if (preset == CustomComboPreset.SAM_AoE_ComboHeals)
             {
-                UserConfig.DrawSliderInt
-                (
-                    0, 100, SAM.Config.SAM_AoESecondWindThreshold,
-                    "HP percent threshold to use Second Wind below (0 = Disabled)", 150, SliderIncrements.Ones
-                );
-                UserConfig.DrawSliderInt
-                (
-                    0, 100, SAM.Config.SAM_AoEBloodbathThreshold, "HP percent threshold to use Bloodbath below (0 = Disabled)",
-                    150, SliderIncrements.Ones
-                );
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_AoESecondWindThreshold, "HP percent threshold to use Second Wind below (0 = Disabled)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_AoEBloodbathThreshold, "HP percent threshold to use Bloodbath below (0 = Disabled)", 150, SliderIncrements.Ones);
             }
 
-            if (preset == CustomComboPreset.SAM_ST_Execute)
+            if (preset == CustomComboPreset.SAM_ST_Shinten)
             {
-                UserConfig.DrawSliderInt
-                (
-                    0, 100, SAM.Config.SAM_ST_ExecuteThreshold, "HP percent threshold to use Shinten below", 150,
-                    SliderIncrements.Ones
-                );
+                UserConfig.DrawSliderInt(50, 85, SAM.Config.SAM_ST_KenkiOvercapAmount, "Set the Kenki overcap amount for ST combos.");
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_ST_ExecuteThreshold, "HP percent threshold to not save Kenki", 150, SliderIncrements.Ones);
             }
+
+            if (preset == CustomComboPreset.SAM_AoE_Kyuten)
+                UserConfig.DrawSliderInt(50, 85, SAM.Config.SAM_AoE_KenkiOvercapAmount, "Set the Kenki overcap amount for AOE combos.");
 
             if (preset == CustomComboPreset.SAM_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, SAM.Config.SAM_VariantCure, "HP% to be at or under", 200);
 
-            #endregion
+            //PvP
+            if (preset == CustomComboPreset.SAMPvP_BurstMode && enabled)
+                UserConfig.DrawSliderInt(0, 2, SAMPvP.Config.SAMPvP_SotenCharges, "How many charges of Soten to keep ready? (0 = Use All).");
 
+            if (preset == CustomComboPreset.SAMPvP_KashaFeatures_GapCloser && enabled)
+                UserConfig.DrawSliderInt(0, 100, SAMPvP.Config.SAMPvP_SotenHP, "Use Soten on enemies below selected HP.");
+
+            #endregion
 
             // ====================================================================================
 
