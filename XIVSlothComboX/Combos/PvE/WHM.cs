@@ -1,14 +1,13 @@
-using Dalamud.Game.ClientState.JobGauge.Types;
-using Dalamud.Game.ClientState.Objects.Types;
 using System.Collections.Generic;
 using System.Linq;
+using Dalamud.Game.ClientState.JobGauge.Types;
+using Dalamud.Game.ClientState.Objects.Types;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
-using XIVSlothComboX.Services;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
 
 namespace XIVSlothComboX.Combos.PvE

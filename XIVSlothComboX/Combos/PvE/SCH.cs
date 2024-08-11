@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
-using System.Collections.Generic;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
@@ -409,7 +411,7 @@ namespace XIVSlothComboX.Combos.PvE
                 if (ActionFound)
                 {
 
-                    var incombat = HasCondition(Dalamud.Game.ClientState.Conditions.ConditionFlag.InCombat);
+                    var incombat = HasCondition(ConditionFlag.InCombat);
                     if (!incombat)
                     {
                         openerState = OpenerState.PreOpener;
