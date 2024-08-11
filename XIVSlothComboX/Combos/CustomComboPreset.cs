@@ -253,9 +253,49 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(AST_ST_DPS)]
         [CustomComboInfo("Oracle Option", "Adds Oracle after Divination", AST.JobID)]
         AST_DPS_Oracle = 1015,
+        
+        [ParentCombo(AST_ST_DPS)]
+        [CustomComboInfo("Level 100 Opener", "Use the Balance opener.", AST.JobID, 11, "", "")]
+        AST_ST_DPS_Opener = 1040,
 
         #endregion
 
+        #region AOE DPS
+        [ReplaceSkill(AST.Gravity, AST.Gravity2)]
+        [CustomComboInfo("AoE DPS Feature", "Replaces Gravity with options below", AST.JobID, 2)]
+        AST_AOE_DPS = 1041,    
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Lightspeed Weave Option", "Adds Lightspeed", AST.JobID, 2, "", "")]
+        AST_AOE_LightSpeed = 1048,
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Lucid Dreaming Weave Option", "Adds Lucid Dreaming when MP drops below slider value", AST.JobID, 3, "", "")]
+        AST_AOE_Lucid = 1042,
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Divination Weave Option", "Adds Divination", AST.JobID, 4, "", "")]
+        AST_AOE_Divination = 1043,
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Card Draw Weave Option", "Draws your cards", AST.JobID, 5, "", "")]
+        AST_AOE_AutoDraw = 1044,
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Card Play Weave Option", "Weaves your Balance or Spear card (best used with Quick Target Cards)", AST.JobID, 6)]
+        AST_AOE_AutoPlay = 1045,
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Lord of Crowns Weave Option", "Adds Lord Of Crowns", AST.JobID, 10, "", "")]
+        AST_AOE_LazyLord = 1046,
+
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Oracle Option", "Adds Oracle after Divination", AST.JobID)]
+        AST_AOE_Oracle = 1047,       
+
+        #endregion
+
+        
         #region Healing
 
         [ReplaceSkill(AST.Benefic2)]
@@ -310,6 +350,15 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("The Ewer Option", "Adds The Ewer when the card has been drawn", AST.JobID)]
         AST_ST_SimpleHeals_Ewer = 1032,
 
+        
+        [ParentCombo(AST_ST_SimpleHeals)]
+        [CustomComboInfo("The Arrow Option", "Adds The Arrow (increased healing)  when the card has been drawn", AST.JobID)]
+        AST_ST_SimpleHeals_Arrow = 1049,
+
+        [ParentCombo(AST_ST_SimpleHeals)]
+        [CustomComboInfo("The Bole Option", "Adds The Bole (Reduced Damage) when the card has been drawn", AST.JobID)]
+        AST_ST_SimpleHeals_Bole = 1050,
+        
         #endregion
 
         #region Utility
@@ -814,7 +863,14 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", BRD.JobID)]
         BRD_Variant_Cure = 3031,
 
-        // Last value = 3031
+        [ParentCombo(BRD_AoE_Simple_Songs)]
+        [CustomComboInfo("Simple AoE Buffs Option", "Adds buffs onto the Simple AoE Bard feature.", BRD.JobID)]
+        BRD_AoE_Simple_Buffs = 3032,
+
+        [ParentCombo(BRD_AoE_SimpleMode)]
+        [CustomComboInfo("Simple AoE No Waste Option", "Adds enemy health checking on targetted mob for songs.\nThey will not be reapplied if less than specified.", BRD.JobID)]
+        BRD_AoE_Simple_NoWaste = 3033,
+        // Last value = 3033
 
         #endregion
 
