@@ -2823,6 +2823,11 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.SGE_ST_DPS_Rhizo)
                 UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_ST_DPS_Rhizo, "Addersgall Threshold", 150, SliderIncrements.Ones);
 
+            
+            if (preset is CustomComboPreset.SGE_ST_DPS_AddersgallProtect)
+                UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_ST_DPS_AddersgallProtect, "Addersgall Threshold", 150, SliderIncrements.Ones);
+
+            
             if (preset is CustomComboPreset.SGE_ST_DPS_Movement)
             {
                 UserConfig.DrawHorizontalMultiChoice
@@ -2853,6 +2858,10 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.SGE_AoE_DPS_Rhizo)
                 UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_AoE_DPS_Rhizo, "Addersgall Threshold", 150, SliderIncrements.Ones);
 
+            if (preset is CustomComboPreset.SGE_AoE_DPS_AddersgallProtect)
+                UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_AoE_DPS_AddersgallProtect, "Addersgall Threshold", 150, SliderIncrements.Ones);
+
+            
             if (preset is CustomComboPreset.SGE_ST_Heal)
             {
                 UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_Adv, "Advanced Options", "", isConditionalChoice: true);

@@ -2917,6 +2917,9 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("整合单体输出技能", "注药I/II/III 各种选项", SGE.JobID, 100, "", "")]
         SGE_ST_DPS = 14100,
 
+        [ParentCombo(SGE_ST_DPS)]
+        [CustomComboInfo("Opener Option", "Use the Balance opener from level 56+.", SGE.JobID,101)]
+        SGE_ST_DPS_Opener = 14055,
 
         [ParentCombo(SGE_ST_DPS)]
         [CustomComboInfo("循环加入醒梦", "当MP小于滑块值时，将醒梦整合至此循环", SGE.JobID, 120, "", "")]
@@ -2946,6 +2949,10 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("精神干预 Option", "Weaves(?) Psych when available.", SGE.JobID, 112, "", "")]
         SGE_ST_DPS_Psyche = 14008,
 
+        [ParentCombo(SGE_ST_DPS)]
+        [CustomComboInfo("Addersgall Overflow Protection", "Weaves Druochole when Addersgall gauge is greater than or equal to the specified value.", SGE.JobID, 123, "", "")]
+        SGE_ST_DPS_AddersgallProtect = 14054,
+        
         #endregion
 
         #region AoE DPS Feature
@@ -2979,6 +2986,10 @@ namespace XIVSlothComboX.Combos
         SGE_AoE_DPS_Rhizo = 14260,
 
 
+        [ParentCombo(SGE_AoE_DPS)]
+        [CustomComboInfo("Addersgall Overflow Protection", "Weaves Druochole when Addersgall gauge is greater than or equal to the specified value.", SGE.JobID, 6, "", "")]
+        SGE_AoE_DPS_AddersgallProtect = 14053,
+        
         [ParentCombo(SGE_AoE_DPS)]
         [CustomComboInfo("Psyche Option", "Weaves Psyche if available.", SGE.JobID, 2, "", "")]
         SGE_AoE_DPS_Psyche = 14051,
@@ -3118,6 +3129,10 @@ namespace XIVSlothComboX.Combos
         [ReplaceSkill(SGE.Druochole)]
         [CustomComboInfo("替换灵橡清汁为白牛清汁 设置", "当白牛青汁可用时，替换灵橡清汁为白牛清汁.", SGE.JobID, 700, "", "")]
         SGE_DruoTauro = 14700,
+        
+        [ReplaceSkill(SGE.Taurochole)]
+        [CustomComboInfo("Taurochole to Druochole Feature", "Turns Taurochole to Druochole when Taurochole is on cooldown.", SGE.JobID, 700, "", "")]
+        SGE_TauroDruo = 14038,
 
         [ReplaceSkill(SGE.Pneuma)]
         [CustomComboInfo("将活化整合至魂灵风息 设置", "魂灵风息变为活化，使用后变回魂灵风息.", SGE.JobID, 701, "", "")] //Temporary to keep the order
