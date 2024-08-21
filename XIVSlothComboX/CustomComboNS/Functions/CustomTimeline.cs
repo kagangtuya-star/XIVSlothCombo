@@ -27,6 +27,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static readonly List<CustomAction> 时间轴 = new();
 
         public static readonly List<CustomAction> 地面轴 = new();
+        public static readonly List<CustomAction> 强制插入轴 = new();
 
 
         public static readonly List<CustomAction> 整个轴 = new();
@@ -102,6 +103,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     case CustomType.地面:
                     {
                         地面轴.Add(customAction);
+                        break;
+                    } 
+                    case CustomType.强制插入:
+                    {
+                        强制插入轴.Add(customAction);
                         break;
                     }
                 }
@@ -210,7 +216,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 return false;
 
             // InventoryManager.Instance()->GetEmptySlotsInBag()
-            
+
             if (InventoryManager.Instance()->GetInventoryItemCount(itemId, true) > 0)
             {
                 return ActionManager.Instance()->UseAction(ActionType.Item, itemId + 1000000, LocalPlayer.GameObjectId, a4);
@@ -229,7 +235,15 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 vector3.Z = customAction.Vector3.Z;
 
                 ActionManager.Instance()->UseActionLocation(ActionType.Action, customAction.ActionId, 3758096384, &vector3, 0);
-                // ActionManager.Instance()->UseActionLocation(ActionType.Action, customAction.ActionId, 3758096384, &vector3, 0);
+            }
+        }
+
+
+        public static unsafe void AutoUseAction(uint ActionId)
+        {
+            if (ActionId.ActionReady())
+            {
+                ActionManager.Instance()->UseAction(ActionType.Action, ActionId);
             }
         }
 

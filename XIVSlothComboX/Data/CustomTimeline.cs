@@ -58,7 +58,8 @@ internal static class CustomType
         序列 = 1,
         时间 = 2,
         药品 = 3,
-        地面 = 4;
+        地面 = 4,
+        强制插入 = 5;
 }
 
 

@@ -29,6 +29,8 @@ namespace XIVSlothComboX.Combos.PvE
             Raise = 125,
             Benediction = 140,
             AfflatusMisery = 16535,
+            翅膀 = 16536,
+            翅膀续剑 = 37011,
             Medica1 = 124,
             Medica2 = 133,
             Medica3 = 37010,
@@ -156,7 +158,10 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                             {
-                                Use地面技能(customAction);
+                                if (CanWeave(Dia))
+                                {
+                                    Use地面技能(customAction);
+                                }
                             }
                         }
 
@@ -164,7 +169,10 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                             {
-                                return customAction.ActionId;
+                                if (CanWeave(Dia))
+                                {
+                                    AutoUseAction(customAction.ActionId);
+                                }
                             }
                         }
 

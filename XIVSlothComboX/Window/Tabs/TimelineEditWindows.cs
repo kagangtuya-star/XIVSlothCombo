@@ -47,6 +47,10 @@ namespace XIVSlothComboX.Window.Tabs
 
         static int editIndex = -1;
 
+        static float UseActionX = 0f;
+        static float UseActionY = 0f;
+        static float UseActionZ = 0f;
+
 
         // static int adfgdIndex = -1;
         static CustomAction _AddCustomAction = new CustomAction();
@@ -76,6 +80,23 @@ namespace XIVSlothComboX.Window.Tabs
                 }
             }
 
+            ImGui.SameLine();
+            if (ImGui.Button("保存"))
+            {
+                var customTimeline = CustomComboFunctions._CustomTimeline;
+                if (customTimelineList.Count > 0)
+                {
+                    customTimeline.ActionList = new List<CustomAction>();
+                    customTimeline.ActionList.Clear();
+                    foreach (var customAction in ActionWatching.TimelineList)
+                    {
+                        customTimeline.ActionList.Add(customAction);
+                    }
+                    CustomComboFunctions.LoadCustomTime(customTimeline, false);
+                    Service.Configuration.Save();
+                }
+            }
+
             ImGuiEx.Tooltip("读取当前使用的时间轴");
 
             ImGui.SameLine();
@@ -93,28 +114,29 @@ namespace XIVSlothComboX.Window.Tabs
 
                 if (ImGui.Button("保存".Loc()))
                 {
-                    int index = 1;
+
+
+                    var customTimeline = new CustomTimeline();
                     if (customTimelineList.Count == 0)
                     {
-                        index = 1;
+                        customTimeline.Index = 1;
                     }
                     else
                     {
-                        index = customTimelineList.Last().Index;
+                        int newIndex = customTimelineList.Last().Index;
+                        customTimeline.Index = ++newIndex;
                     }
-                    
-                    var customTimeline = new CustomTimeline();
-                    customTimeline.Index = ++index;
+
                     customTimeline.JobId = Service.ClientState.LocalPlayer.ClassJob.Id;
                     customTimeline.Name = saveAs;
                     customTimeline.Enable = false;
                     customTimeline.ActionList = new List<CustomAction>();
-                    
+
                     foreach (var customAction in ActionWatching.TimelineList)
                     {
                         customTimeline.ActionList.Add(customAction);
                     }
-                    
+
                     customTimelineList.Add(customTimeline);
 
                     Service.Configuration.Save();
@@ -134,7 +156,6 @@ namespace XIVSlothComboX.Window.Tabs
 
             ImGuiEx.Tooltip("Delete Hold CTRL+click.");
 
-      
 
             var ActionSheet = Service.DataManager.GetExcelSheet<Action>();
 
@@ -144,7 +165,7 @@ namespace XIVSlothComboX.Window.Tabs
                 ImGui.PushID("List" + i);
 
                 var customAction = ActionWatching.TimelineList[i];
-                
+
                 switch (customAction.CustomActionType)
                 {
                     case CustomType.序列:
@@ -170,8 +191,10 @@ namespace XIVSlothComboX.Window.Tabs
                                 {
                                     ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
                                     ImGui.SameLine();
-                                    ImGui.Text(
-                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                                    ImGui.Text
+                                    (
+                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]"
+                                    );
                                 }
 
                                 break;
@@ -181,8 +204,10 @@ namespace XIVSlothComboX.Window.Tabs
                                 {
                                     ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
                                     ImGui.SameLine();
-                                    ImGui.Text(
-                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                                    ImGui.Text
+                                    (
+                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]"
+                                    );
                                 }
 
                                 break;
@@ -195,8 +220,10 @@ namespace XIVSlothComboX.Window.Tabs
 
                                     ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 16 * ImGuiHelpers.GlobalScale);
                                     ImGui.SameLine();
-                                    ImGui.Text(
-                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                                    ImGui.Text
+                                    (
+                                        $"{ActionWatching.GetActionName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]"
+                                    );
                                 }
 
                                 break;
@@ -211,15 +238,17 @@ namespace XIVSlothComboX.Window.Tabs
                         IDalamudTextureWrap? textureWrap = Service.IconManager.GetIconTexture(item.Icon);
                         if (textureWrap != null)
                         {
-                           
-                            
+
+
                             ImGui.Text($"     ");
                             ImGui.SameLine();
 
                             ImGui.Image(textureWrap.ImGuiHandle, Vector2.One * 16 * ImGuiHelpers.GlobalScale);
                             ImGui.SameLine();
-                            ImGui.Text(
-                                $"{ActionWatching.GetItemName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]");
+                            ImGui.Text
+                            (
+                                $"{ActionWatching.GetItemName(customAction.ActionId)}[{customAction.ActionId}][{customAction.UseTimeStart}]"
+                            );
 
                         }
                         break;
@@ -239,6 +268,10 @@ namespace XIVSlothComboX.Window.Tabs
                     UseTimeEnd = (float)customAction.UseTimeEnd;
                     TargetType = customAction.TargetType;
                     CustomActionType = customAction.CustomActionType;
+                    UseActionX = customAction.Vector3.X;
+                    UseActionY = customAction.Vector3.Y;
+                    UseActionZ = customAction.Vector3.Z;
+
                     addIndex = -1;
                     editIndex = i;
 
@@ -333,7 +366,7 @@ namespace XIVSlothComboX.Window.Tabs
                     removeIndex = -1;
                 }
 
-             
+
             }
 
             if (addIndex > -1)
@@ -358,10 +391,13 @@ namespace XIVSlothComboX.Window.Tabs
             var addIndex = -1;
 
             ImGui.DragInt("技能Id", ref NewActionIdText, 0, 100000);
-            ImGui.DragFloat("释放开始时间", ref UseTimeStart, 0, 30 * 60);
-            ImGui.DragFloat("释放最晚时间", ref UseTimeEnd, 0, 30 * 60);
+            ImGui.DragFloat("释放开始时间", ref UseTimeStart, 0.1f, 0, 30 * 60);
+            ImGui.DragFloat("释放最晚时间", ref UseTimeEnd, 0.1f, 0, 30 * 60);
             ImGui.SliderInt("目标类别", ref TargetType, 0, 20);
-            ImGui.SliderInt("技能类别", ref CustomActionType, 1, 3);
+            ImGui.SliderInt("技能类别", ref CustomActionType, 1, 5);
+            ImGui.DragFloat("X", ref UseActionX, 0.1f, -99999, 9999);
+            ImGui.DragFloat("Y", ref UseActionY, 0.1f, -99999, 9999);
+            ImGui.DragFloat("Z", ref UseActionZ, 0.1f, -99999, 9999);
 
 
             if (ImGui.Button("保存".Loc()))
@@ -390,6 +426,7 @@ namespace XIVSlothComboX.Window.Tabs
                     customAction.UseTimeEnd = UseTimeEnd;
                     customAction.TargetType = TargetType;
                     customAction.CustomActionType = (byte)CustomActionType;
+                    customAction.Vector3 = new Vector3(UseActionX, UseActionY, UseActionZ);
 
                     ImGui.CloseCurrentPopup();
                 }
