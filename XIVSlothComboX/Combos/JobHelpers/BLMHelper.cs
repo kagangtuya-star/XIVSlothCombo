@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Security.Cryptography;
+using ECommons.DalamudServices;
 using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS.Functions;
@@ -9,7 +10,7 @@ using XIVSlothComboX.Data;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-    internal class BLMOpenerLogic : PvE.BLM
+  internal class BLMOpenerLogic : PvE.BLM
     {
         private static bool HasCooldowns()
         {
@@ -65,22 +66,17 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 {
                     if (value == OpenerState.PrePull)
                     {
-                        // Svc.Log.Debug($"Entered PrePull Opener");
+                        Svc.Log.Debug($"Entered PrePull Opener");
                     }
                     if (value == OpenerState.InOpener) OpenerStep = 1;
                     if (value == OpenerState.OpenerFinished || value == OpenerState.FailedOpener)
                     {
                         if (value == OpenerState.FailedOpener)
-                        {
-                        }
-                        // Svc.Log.Information($"Opener Failed at step {OpenerStep}");
+                            Svc.Log.Information($"Opener Failed at step {OpenerStep}");
 
                         ResetOpener();
                     }
-                    if (value == OpenerState.OpenerFinished)
-                    {
-                    }
-                    // Svc.Log.Information("Opener Finished");
+                    if (value == OpenerState.OpenerFinished) Svc.Log.Information("Opener Finished");
 
                     currentState = value;
                 }
@@ -109,7 +105,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.LocalPlayer.CastActionId == Fire3 && PrePullStep == 2) CurrentState = OpenerState.InOpener;
                 else if (PrePullStep == 2) actionID = Fire3;
 
-                if (PrePullStep == 2 && !CustomComboFunctions.HasEffect(BLM.Buffs.Sharpcast))
+                if (PrePullStep == 2 && !CustomComboFunctions.HasEffect(Buffs.Sharpcast))
                     CurrentState = OpenerState.FailedOpener;
 
                 if (PrePullStep > 1 && CustomComboFunctions.GetResourceCost(actionID) > CustomComboFunctions.LocalPlayer.CurrentMp && ActionWatching.TimeSinceLastAction.TotalSeconds >= 2)
@@ -200,7 +196,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                         (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
                         (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
-                        (actionID == Xenoglossy && CustomComboFunctions.GetJobGauge<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                        (actionID == Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                     {
                         CurrentState = OpenerState.FailedOpener;
                         return false;
@@ -305,7 +301,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
                     (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
-                    (actionID == Xenoglossy && CustomComboFunctions.GetJobGauge<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    (actionID == Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;
@@ -396,7 +392,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
                     (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
-                    (actionID == Xenoglossy && CustomComboFunctions.GetJobGauge<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    (actionID == Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;
@@ -438,14 +434,60 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 ResetOpener();
                 CurrentState = OpenerState.PrePull;
             }
-                
+
 
             return false;
         }
     }
 
-    internal static class BLMHelpers
+    internal static class BLMExtensions
     {
         public static bool HasPolyglotStacks(this BLMGauge gauge) => gauge.PolyglotStacks > 0;
+    }
+
+    internal class BLMHelper : BLM
+    {
+        public static float MPAfterCast()
+        {
+            var castedSpell = CustomComboFunctions.LocalPlayer.CastActionId;
+            var gauge = Svc.Gauges.Get<BLMGauge>();
+            int nextMpGain = gauge.UmbralIceStacks switch
+            {
+                0 => 0,
+                1 => 2500,
+                2 => 5000,
+                3 => 10000,
+                _ => 0
+            };
+            if (castedSpell is Blizzard or Blizzard2 or Blizzard3 or Blizzard4 or Freeze or HighBlizzard2)
+                return Math.Max(CustomComboFunctions.LocalPlayer.MaxMp, CustomComboFunctions.LocalPlayer.CurrentMp + nextMpGain);
+
+            return Math.Max(0, CustomComboFunctions.LocalPlayer.CurrentMp - CustomComboFunctions.GetResourceCost(castedSpell));
+
+        }
+
+        public static bool DoubleBlizz()
+        {
+            var spells = ActionWatching.CombatActions.Where(x => ActionWatching.GetAttackType(x) == ActionWatching.ActionAttackType.Spell && x != CustomComboFunctions.OriginalHook(Thunder) && x != CustomComboFunctions.OriginalHook(Thunder2)).ToList();
+            if (spells.Count < 1) return false;
+
+            var firstSpell = spells[^1];
+
+            if (firstSpell is Blizzard or Blizzard2 or Blizzard3 or Blizzard4 or Freeze or HighBlizzard2)
+            {
+                var castedSpell = CustomComboFunctions.LocalPlayer.CastActionId;
+                if (castedSpell is Blizzard or Blizzard2 or Blizzard3 or Blizzard4 or Freeze or HighBlizzard2) return true;
+
+                if (spells.Count >= 2)
+                {
+                    var secondSpell = spells[^2];
+                    if (secondSpell is Blizzard or Blizzard2 or Blizzard3 or Blizzard4 or Freeze or HighBlizzard2)
+                        return true;
+                }
+            }
+
+            return false;
+
+        }
     }
 }

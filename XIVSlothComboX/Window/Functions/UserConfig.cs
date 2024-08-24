@@ -1744,120 +1744,37 @@ namespace XIVSlothComboX.Window.Functions
                 }
             }
 
-            if (preset is CustomComboPreset.BLM_ST_AdvancedMode)
-            {
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_InitialCast, "火 3 Initial Cast", "", 0);
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_InitialCast, "冰结 3 Initial Cast", "", 1);
-                ImGui.Indent();
-                UserConfig.DrawRoundedSliderFloat(3.0f, 8.0f, BLM.Config.BLM_AstralFire_Refresh, "Seconds before refreshing 星极火");
-                ImGui.Unindent();
-            }
+     
 
             if (preset is CustomComboPreset.BLM_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, BLM.Config.BLM_VariantCure, "HP% to be at or under", 200);
 
             if (preset is CustomComboPreset.BLM_Adv_Opener)
             {
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Advanced_OpenerSelection, "Standard Opener", "Uses Standard Opener.", 0);
-                UserConfig.DrawHorizontalRadioButton
-                (
-                    BLM.Config.BLM_Advanced_OpenerSelection, "Double 星灵移位 Opener",
-                    "Uses Fire III opener - Double Transpose variation.", 1
-                );
+             
             }
+            
 
-            if (preset is CustomComboPreset.BLM_Adv_Rotation)
-            {
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_Rotation_Options, "Standard Rotation", "Uses Standard Rotation.", 0);
-                UserConfig.DrawHorizontalRadioButton
-                (
-                    BLM.Config.BLM_Adv_Rotation_Options, "Double 星灵移位 Rotation",
-                    "Uses Double Transpose rotation.\nOnly works at Lv.90.", 1
-                );
+    
 
-                if (BLM.Config.BLM_Adv_Rotation_Options == 0)
-                {
-                    ImGui.Indent();
-                    UserConfig.DrawAdditionalBoolChoice
-                    (
-                        BLM.Config.BLM_Adv_Xeno_Burst, "Use 异言 for burst",
-                        "Will save Xenoglossy for every minute burst window."
-                    );
-                    ImGui.Unindent();
-                    ImGui.Spacing();
-                }
-            }
+      
 
-            if (preset is CustomComboPreset.BLM_Adv_Cooldowns)
-            {
-                UserConfig.DrawGridMultiChoice
-                (
-                    BLM.Config.BLM_Adv_Cooldowns_Choice,
-                    4,
-                    new string[,]
-                    {
-                        { "魔泉", "Add Manafont to the rotation." },
-                        { "激情咏唱", "Add Sharpcast to the rotation." },
-                        { "详述", "Add Amplifier to the rotation." },
-                        { "黑魔纹", "Add Ley Lines to the rotation." },
-                    }
-                );
-            }
+            
 
-            if (preset is CustomComboPreset.BLM_AoE_Adv_Cooldowns)
-            {
-                UserConfig.DrawGridMultiChoice
-                (
-                    BLM.Config.BLM_AoE_Adv_Cooldowns_Choice,
-                    5,
-                    new string[,]
-                    {
-                        { "魔泉", "Add Manafont to the rotation." },
-                        { "激情咏唱", "Add Sharpcast to the rotation." },
-                        { "详述", "Add Amplifier to the rotation." },
-                        { "黑魔纹", "Add Ley Lines to the rotation." },
-                        { "三连咏唱", "Add Triplecast to the rotation" }
-                    }
-                );
-            }
-
-            if (preset is CustomComboPreset.BLM_Adv_Movement)
-            {
-                UserConfig.DrawGridMultiChoice
-                (
-                    BLM.Config.BLM_Adv_Movement_Choice,
-                    4,
-                    new string[,]
-                    {
-                        { "激情咏唱", "Add Sharpcast." },
-                        { "雷1/雷3", "Add Thunder I/Thunder III." },
-                        { "星极火", "Add 星极火 when in Astral 火炎." },
-                        { "悖论", "Add Paradox when in Umbral Ice." },
-                        { "异言", "Add Xenoglossy.\nOne charge will be held for rotation." },
-                        { "即刻咏唱", "Add Swiftcast." },
-                        { "三连咏唱", "Add (pooled) Triplecast." },
-                        { "崩溃", "Add Scathe." }
-                    }
-                );
-            }
-
-            if (preset is CustomComboPreset.BLM_ST_Adv_Thunder)
-                UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_Adv_Thunder, "刷新雷电前剩余的秒数");
-
-            if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
-                UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderUptime, "刷新雷电前剩余的秒数");
-
-            if (preset is CustomComboPreset.BLM_ST_Adv_Thunder)
-                UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_ST_Adv_ThunderHP, "停止使用雷云的目标HP％");
-
-            if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
-                UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderHP, "停止使用雷云的目标HP％");
-
-            if (preset is CustomComboPreset.BLM_ST_Adv_Thunder_ThunderCloud)
-            {
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_ThunderCloud, "只在更快的施法后（编织窗口）", "", 0);
-                UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_ThunderCloud, "尽快使用", "", 1);
-            }
+            // if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
+            //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderUptime, "刷新雷电前剩余的秒数");
+            //
+            // if (preset is CustomComboPreset.BLM_ST_Adv_Thunder)
+            //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_ST_Adv_ThunderHP, "停止使用雷云的目标HP％");
+            //
+            // if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
+            //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderHP, "停止使用雷云的目标HP％");
+            //
+            // if (preset is CustomComboPreset.BLM_ST_Adv_Thunder_ThunderCloud)
+            // {
+            //     UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_ThunderCloud, "只在更快的施法后（编织窗口）", "", 0);
+            //     UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_ThunderCloud, "尽快使用", "", 1);
+            // }
 
             #endregion
 
