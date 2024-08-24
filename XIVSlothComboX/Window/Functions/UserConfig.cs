@@ -2162,7 +2162,7 @@ namespace XIVSlothComboX.Window.Functions
 
             // ====================================================================================
 
-             #region NINJA
+            #region NINJA
 
             if (preset == CustomComboPreset.NIN_Simple_Mudras)
             {
@@ -2849,53 +2849,35 @@ namespace XIVSlothComboX.Window.Functions
 
             #region PICTOMANCER
 
-            if (preset is CustomComboPreset.PCT_Advanced_CustomMode)
-            {
-                List<CustomTimeline> customTimelineList =
-                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == PCT.JobID);
-
-
-                for (var i = 0; i < customTimelineList.Count; i++)
-                {
-                    CustomTimeline customTimeline = customTimelineList[i];
-                    UserConfig.DrawCustom(customTimeline, customTimelineList);
-                }
-            }
-
-
             if (preset == CustomComboPreset.CombinedAetherhues)
             {
-                UserConfig.DrawRadioButton
-                (
-                    PCT.Config.CombinedAetherhueChoices, "Both Single Target & AoE",
-                    $"Replaces both {PCT.FireInRed.ActionName()} & {PCT.FireIIinRed.ActionName()}", 0
-                );
-                UserConfig.DrawRadioButton
-                (
-                    PCT.Config.CombinedAetherhueChoices, "Single Target Only", $"Replace only {PCT.FireInRed.ActionName()}",
-                    1
-                );
+                UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Both Single Target & AoE", $"Replaces both {PCT.FireInRed.ActionName()} & {PCT.FireIIinRed.ActionName()}", 0);
+                UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Single Target Only", $"Replace only {PCT.FireInRed.ActionName()}", 1);
                 UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "AoE Only", $"Replace only {PCT.FireIIinRed.ActionName()}", 2);
             }
 
             if (preset == CustomComboPreset.CombinedMotifs)
             {
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    PCT.Config.CombinedMotifsMog, $"{PCT.MogoftheAges.ActionName()} Feature",
-                    $"Add {PCT.MogoftheAges.ActionName()} when fully drawn and off cooldown."
-                );
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    PCT.Config.CombinedMotifsMadeen, $"{PCT.RetributionoftheMadeen.ActionName()} Feature",
-                    $"Add {PCT.RetributionoftheMadeen.ActionName()} when fully drawn and off cooldown."
-                );
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    PCT.Config.CombinedMotifsWeapon, $"{PCT.HammerStamp.ActionName()} Feature",
-                    $"Add {PCT.HammerStamp.ActionName()} when under the effect of {PCT.Buffs.HammerTime.StatusName()}."
-                );
+                UserConfig.DrawAdditionalBoolChoice(PCT.Config.CombinedMotifsMog, $"{PCT.MogoftheAges.ActionName()} Feature", $"Add {PCT.MogoftheAges.ActionName()} when fully drawn and off cooldown.");
+                UserConfig.DrawAdditionalBoolChoice(PCT.Config.CombinedMotifsMadeen, $"{PCT.RetributionoftheMadeen.ActionName()} Feature", $"Add {PCT.RetributionoftheMadeen.ActionName()} when fully drawn and off cooldown.");
+                UserConfig.DrawAdditionalBoolChoice(PCT.Config.CombinedMotifsWeapon, $"{PCT.HammerStamp.ActionName()} Feature", $"Add {PCT.HammerStamp.ActionName()} when under the effect of {PCT.Buffs.HammerTime.StatusName()}.");
             }
+
+            if (preset == CustomComboPreset.PCT_ST_AdvancedMode_LucidDreaming)
+            {
+                UserConfig.DrawSliderInt(0, 10000, PCT.Config.PCT_ST_AdvancedMode_LucidOption, "Add Lucid Dreaming when below this MP", sliderIncrement: SliderIncrements.Hundreds);
+            }
+            if (preset == CustomComboPreset.PCT_AoE_AdvancedMode_LucidDreaming)
+            {
+                UserConfig.DrawSliderInt(0, 10000, PCT.Config.PCT_AoE_AdvancedMode_LucidOption, "Add Lucid Dreaming when below this MP", sliderIncrement: SliderIncrements.Hundreds);
+            }
+
+            // PvP
+            if (preset == CustomComboPreset.PCTPvP_BurstControl)
+                UserConfig.DrawSliderInt(1, 100, PCTPvP.Config.PCTPvP_BurstHP, "Target HP%", 200);
+
+            if (preset == CustomComboPreset.PCTPvP_TemperaCoat)
+                UserConfig.DrawSliderInt(1, 100, PCTPvP.Config.PCTPvP_TemperaHP, "Player HP%", 200);
 
             #endregion
 

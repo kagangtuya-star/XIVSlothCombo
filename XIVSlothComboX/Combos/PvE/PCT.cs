@@ -1,481 +1,90 @@
-using System;
 using Dalamud.Game.ClientState.JobGauge.Types;
-using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
+using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
-using XIVSlothComboX.Services;
 
-namespace XIVSlothComboX.Combos.PvE;
-
-/// <summary>
-/// fragile
-/// https://github.com/zfxsquare 
-/// </summary>
-internal class PCT
+namespace XIVSlothComboX.Combos.PvE
 {
-    public const byte JobID = 42;
-
-    public const uint
-        短1 = 34650,
-        短2 = 34651,
-        短3 = 34652,
-        长1 = 34653,
-        长2 = 34654,
-        长3 = 34655,
-        AOE短1 = 34656,
-        AOE短2 = 34657,
-        AOE短3 = 34658,
-        AOE长1 = 34659,
-        AOE长2 = 34660,
-        AOE长3 = 34661,
-        白豆 = 34662,
-        黑豆 = 34663,
-        反转 = 34683,
-        生物画1 = 34664,
-        生物画2 = 34665,
-        生物画3 = 34666,
-        生物画4 = 34667,
-        生物1具现 = 34670,
-        生物2具现 = 34671,
-        生物3具现 = 34672,
-        生物4具现 = 34673,
-        莫古 = 34676,
-        蔬菜 = 34677,
-        武器画 = 34668,
-        武器具现 = 34674,
-        锤1 = 34678,
-        锤2 = 34679,
-        锤3 = 34680,
-        大招 = 34681,
-        彩虹 = 34688,
-        风景画 = 34669,
-        黑魔纹 = 34675,
-        
-        BlizzardinCyan = 34653,
-        BlizzardIIinCyan = 34659,
-        ClawMotif = 34666,
-        ClawedMuse = 34672,
-        CometinBlack = 34663,
-        CreatureMotif = 34689,
-        FireInRed = 34650,
-        FireIIinRed = 34656,
-        HammerStamp = 34678,
-        HolyInWhite = 34662,
-        LandscapeMotif = 34691,
-        LivingMuse = 35347,
-        MawMotif = 34667,
-        MogoftheAges = 34676,
-        PomMotif = 34664,
-        PomMuse = 34670,
-        RainbowDrip = 34688,
-        RetributionoftheMadeen = 34677,
-        ScenicMuse = 35349,
-        Smudge = 34684,
-        StarPrism = 34681,
-        SteelMuse = 35348,
-        SubtractivePalette = 34683,
-        ThunderIIinMagenta = 34661,
-        ThunderinMagenta = 34655,
-        WaterinBlue = 34652,
-        WeaponMotif = 34690,
-        WingMotif = 34665;
-
-    public static class Buffs
+    internal class PCT
     {
-        public const ushort
-            长Buff = 3674,
-            连击2buff = 3675,
-            连击3buff = 3676,
-            黑豆buff = 3691,
-            锤子预备 = 3680,
-            彩虹预备 = 3679,
-            免费反转 = 3690,
-            大招预备 = 3681,
-            加速 = 3688,
-            团辅 = 3685,
-            
-            SubtractivePalette = 3674,
-            RainbowBright = 3679,
-            HammerTime = 3680,
-            MonochromeTones = 3691,
-            StarryMuse = 3685,
-            Hyperphantasia = 3688,
-            Inspiration = 3689,
-            SubtractiveSpectrum = 3690,
-            Starstruck = 3681;
-        
-    }
+        public const byte JobID = 42;
 
-    public static class Debuffs
-    {
-    }
+        public const uint
+            BlizzardinCyan = 34653,
+            StoneinYellow = 34654,
+            BlizzardIIinCyan = 34659,
+            ClawMotif = 34666,
+            ClawedMuse = 34672,
+            CometinBlack = 34663,
+            CreatureMotif = 34689,
+            FireInRed = 34650,
+            AeroInGreen = 34651,
+            WaterInBlue = 34652,
+            FireIIinRed = 34656,
+            HammerMotif = 34668,
+            WingedMuse = 34671,
+            StrikingMuse = 34674,
+            StarryMuse = 34675,
+            HammerStamp = 34678,
+            HammerBrush = 34679,
+            PolishingHammer = 34680,
+            HolyInWhite = 34662,
+            StarrySkyMotif = 34669,
+            LandscapeMotif = 34691,
+            LivingMuse = 35347,
+            MawMotif = 34667,
+            MogoftheAges = 34676,
+            PomMotif = 34664,
+            PomMuse = 34670,
+            RainbowDrip = 34688,
+            RetributionoftheMadeen = 34677,
+            ScenicMuse = 35349,
+            Smudge = 34684,
+            StarPrism = 34681,
+            SteelMuse = 35348,
+            SubtractivePalette = 34683,
+            ThunderIIinMagenta = 34661,
+            ThunderinMagenta = 34655,
+            WaterinBlue = 34652,
+            WeaponMotif = 34690,
+            WingMotif = 34665;
 
-    public static class Config
-    {
-        public static UserInt
-            CombinedAetherhueChoices = new("CombinedAetherhueChoices");
-
-        public static UserBool
-            CombinedMotifsMog = new("CombinedMotifsMog"),
-            CombinedMotifsMadeen = new("CombinedMotifsMadeen"),
-            CombinedMotifsWeapon = new("CombinedMotifsWeapon");
-    }
-
-    
-    internal class PCT_ST_Custom : CustomCombo
-    {
-        protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.PCT_Advanced_CustomMode;
-
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        public static class Buffs
         {
-            if (actionID is All.Sleep)
-            {
-                if (CustomTimelineIsEnable())
-                {
-                    var seconds = CombatEngageDuration().TotalSeconds;
-
-                    foreach (var customAction in 药品轴)
-                    {
-                        if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                        {
-                            Useitem(customAction.ActionId);
-                        }
-                    }
-
-
-                    foreach (var customAction in 时间轴)
-                    {
-                        if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                        {
-                            return customAction.ActionId;
-                        }
-                    }
-
-
-                    int index = ActionWatching.CustomList.Count;
-                    if (index < 序列轴.Count)
-                    {
-                        var newActionId = 序列轴[index].ActionId;
-                        return newActionId;
-                    }
-                }
-            }
-
-
-            return actionID;
+            public const ushort
+                SubtractivePalette = 3674,
+                RainbowBright = 3679,
+                HammerTime = 3680,
+                MonochromeTones = 3691,
+                StarryMuse = 3685,
+                Hyperphantasia = 3688,
+                Inspiration = 3689,
+                SubtractiveSpectrum = 3690,
+                Starstruck = 3681;
         }
-    }
 
-    
-    internal class PCT_ST_EasyMode : CustomCombo
-    {
-        protected internal override CustomComboPreset Preset => CustomComboPreset.PCT_ST_EasyMode;
-
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        public static class Debuffs
         {
-            var gauge = new TmpPCTGauge();
-            
-            if (actionID is 短1)
-            {
-                if (gauge.风景画)
-                {
-                    if (CanUse(黑魔纹))
-                    {
-                        return 黑魔纹;
-                    }
-                }
-                if (!gauge.风景画)
-                {
-                    if (!HasEffect(Buffs.团辅))
-                    {
-                        return 风景画;
-                    }
-                    
-                }
-                if (HasEffect(Buffs.大招预备))
-                {
-                    return 大招;
-                }
 
-                if (HasEffect(Buffs.彩虹预备))
-                {
-                    return 彩虹;
-                }
-
-                if (HasEffect(Buffs.加速))
-                {
-                    if ((gauge.能量>=50||HasEffect(Buffs.免费反转))&&LevelChecked(反转)&&!HasEffect(Buffs.长Buff))
-                    {
-                        return 反转;
-                    }
-                    if (HasEffect(Buffs.长Buff))
-                    {
-                        if (HasEffect(Buffs.连击3buff))
-                        {
-                            return 长3;
-                        }
-                        if (HasEffect(Buffs.连击2buff))
-                        {
-                            return 长2;
-                        }
-                        return 长1;
-                    }
-
-                    return 短1;
-                }
-                if (gauge.蔬菜准备&& CanUse(蔬菜))
-                {
-                    return 蔬菜;
-                }
-                if (gauge.莫古准备&& CanUse(莫古))
-                {
-                    return 莫古;
-                }
-
-                if (HasEffect(Buffs.锤子预备))
-                {
-                    return 锤1.OriginalHook();
-                }
-
-                if (gauge.武器画)
-                {
-                    if (CanUse(武器具现))
-                    {
-                        return 武器具现;
-                    }
-                    
-                }
-
-                if (!gauge.武器画)
-                {
-                    if (CanUse(武器画))
-                    {
-                        return 武器画;
-                    }
-                }
-                if (gauge.生物画)
-                {
-                    if (CanUse(生物4具现))
-                    {
-                        return 生物4具现;
-                    }
-                    if (CanUse(生物3具现))
-                    {
-                        return 生物3具现;
-                    }
-                    if (CanUse(生物2具现))
-                    {
-                        return 生物2具现;
-                    }
-                    if (CanUse(生物1具现))
-                    {
-                        return 生物1具现;
-                    }
-                }
-                if (!gauge.生物画)
-                {
-                    if (CanUse(生物画4))
-                    {
-                        return 生物画4;
-                    }
-                    if (CanUse(生物画3))
-                    {
-                        return 生物画3;
-                    }
-                    if (CanUse(生物画2))
-                    {
-                        return 生物画2;
-                    }
-                    if (CanUse(生物画1))
-                    {
-                        return 生物画1;
-                    }
-                }
-
-                
-                if (HasEffect(Buffs.黑豆buff))
-                {
-                    return 黑豆;
-                }
-                if ((gauge.能量>=50||HasEffect(Buffs.免费反转))&&LevelChecked(反转)&&!HasEffect(Buffs.长Buff))
-                {
-                    return 反转;
-                }
-
-                if (HasEffect(Buffs.长Buff))
-                {
-                    if (HasEffect(Buffs.连击3buff))
-                    {
-                        return 长3;
-                    }
-                    if (HasEffect(Buffs.连击2buff))
-                    {
-                        return 长2;
-                    }
-                    return 长1;
-                }
-            }
-            return actionID;
         }
-    }
-    
-    internal class PCT_AOE_EasyMode : CustomCombo
-    {
-        protected internal override CustomComboPreset Preset => CustomComboPreset.PCT_AOE_EasyMode;
 
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        public static class Config
         {
-            var gauge = new TmpPCTGauge();
-            
-            if (actionID is AOE短1)
-            {
-                if (gauge.风景画)
-                {
-                    if (CanUse(黑魔纹))
-                    {
-                        return 黑魔纹;
-                    }
-                }
-                if (!gauge.风景画)
-                {
-                    if (!HasEffect(Buffs.加速))
-                    {
-                        return 风景画;
-                    }
-                    
-                }
-                if (HasEffect(Buffs.大招预备))
-                {
-                    return 大招;
-                }
+            public static UserInt
+                CombinedAetherhueChoices = new("CombinedAetherhueChoices"),
+                PCT_ST_AdvancedMode_LucidOption = new("PCT_ST_AdvancedMode_LucidOption", 6500),
+                PCT_AoE_AdvancedMode_LucidOption = new("PCT_AoE_AdvancedMode_LucidOption", 6500);
 
-                if (HasEffect(Buffs.彩虹预备))
-                {
-                    return 彩虹;
-                }
-                if (HasEffect(Buffs.加速))
-                {
-                    if ((gauge.能量>=50||HasEffect(Buffs.免费反转))&&LevelChecked(反转)&&!HasEffect(Buffs.长Buff))
-                    {
-                        return 反转;
-                    }
-                    if (HasEffect(Buffs.长Buff))
-                    {
-                        if (HasEffect(Buffs.连击3buff))
-                        {
-                            return AOE长3;
-                        }
-                        if (HasEffect(Buffs.连击2buff))
-                        {
-                            return AOE长2;
-                        }
-                        return AOE长1;
-                    }
-
-                    return AOE短1;
-                }
-                if (gauge.蔬菜准备&& CanUse(蔬菜))
-                {
-                    return 蔬菜;
-                }
-                if (gauge.莫古准备&& CanUse(莫古))
-                {
-                    return 莫古;
-                }
-
-                if (HasEffect(Buffs.锤子预备))
-                {
-                    return 锤1.OriginalHook();
-                }
-
-                if (gauge.武器画)
-                {
-                    if (CanUse(武器具现))
-                    {
-                        return 武器具现;
-                    }
-                    
-                }
-
-                if (!gauge.武器画)
-                {
-                    if (CanUse(武器画))
-                    {
-                        return 武器画;
-                    }
-                }
-                if (gauge.生物画)
-                {
-                    if (CanUse(生物4具现))
-                    {
-                        return 生物4具现;
-                    }
-                    if (CanUse(生物3具现))
-                    {
-                        return 生物3具现;
-                    }
-                    if (CanUse(生物2具现))
-                    {
-                        return 生物2具现;
-                    }
-                    if (CanUse(生物1具现))
-                    {
-                        return 生物1具现;
-                    }
-                }
-                if (!gauge.生物画)
-                {
-                    if (CanUse(生物画4))
-                    {
-                        return 生物画4;
-                    }
-                    if (CanUse(生物画3))
-                    {
-                        return 生物画3;
-                    }
-
-                    // if(生物画2.ActionReady())
-                    
-                    if (CanUse(生物画2))
-                    {
-                        return 生物画2;
-                    }
-                    if (CanUse(生物画1))
-                    {
-                        return 生物画1;
-                    }
-                }
-
-                
-                if (HasEffect(Buffs.黑豆buff))
-                {
-                    return 黑豆;
-                }
-                if ((gauge.能量>=50||HasEffect(Buffs.免费反转))&&LevelChecked(反转)&&!HasEffect(Buffs.长Buff))
-                {
-                    return 反转;
-                }
-
-                if (HasEffect(Buffs.长Buff))
-                {
-                    if (HasEffect(Buffs.连击3buff))
-                    {
-                        return AOE长3;
-                    }
-                    if (HasEffect(Buffs.连击2buff))
-                    {
-                        return AOE长2;
-                    }
-                    return AOE长1;
-                }
-            }
-            return actionID;
+            public static UserBool
+                CombinedMotifsMog = new("CombinedMotifsMog"),
+                CombinedMotifsMadeen = new("CombinedMotifsMadeen"),
+                CombinedMotifsWeapon = new("CombinedMotifsWeapon");
         }
-    }
-    
-    internal class PCT_ST_SimpleMode : CustomCombo
+
+
+        internal class PCT_ST_SimpleMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.PCT_ST_SimpleMode;
 
@@ -484,7 +93,7 @@ internal class PCT
                 if (actionID is FireInRed)
                 {
                     var gauge = GetJobGauge<PCTGauge>();
-                    bool canWeave = HasEffect(Buffs.SubtractivePalette) ? CanSpellWeave(OriginalHook(BlizzardinCyan)) : CanSpellWeave(OriginalHook(FireInRed));
+                    bool canWeave = CanSpellWeave(ActionWatching.LastSpell);
 
                     if (HasEffect(Buffs.Starstruck))
                         return OriginalHook(StarPrism);
@@ -568,6 +177,281 @@ internal class PCT
             }
         }
 
+        internal class PCT_ST_AdvancedMode : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.PCT_ST_AdvancedMode;
+            internal static PCTOpenerLogicLvl100 PCTOpenerLvl100 = new();
+            internal static PCTOpenerLogicLvl92 PCTOpenerLvl92 = new();
+            internal static PCTOpenerLogicLvl90 PCTOpenerLvl90 = new();
+            internal static PCTOpenerLogicLvl80 PCTOpenerLvl80 = new();
+            internal static PCTOpenerLogicLvl70 PCTOpenerLvl70 = new();
+
+            protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
+            {
+                if (actionID is FireInRed)
+                {
+                    var gauge = GetJobGauge<PCTGauge>();
+                    bool canWeave = CanSpellWeave(ActionWatching.LastSpell) || CanSpellWeave(actionID);
+
+                    // Prepull logic
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_PrePullMotifs))
+                    {
+                        if (!InCombat() || (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_NoTargetMotifs) && InCombat() && CurrentTarget == null))
+                        {
+                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                                return OriginalHook(CreatureMotif);
+                            if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                                return OriginalHook(WeaponMotif);
+                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.StarryMuse))
+                                return OriginalHook(LandscapeMotif);
+                        }
+                    }
+
+                    // Check if Openers are enabled and determine which opener to execute based on current level
+                    if (IsEnabled(CustomComboPreset.PCT_ST_Advanced_Openers))
+                    {
+                        // Lvl 100 Opener
+                        if (StarPrism.LevelChecked())
+                        {
+                            if (PCTOpenerLvl100.DoFullOpener(ref actionID))
+                                return actionID;
+                        }
+                        // Lvl 92 Opener
+                        else if (!StarPrism.LevelChecked() && RainbowDrip.LevelChecked())
+                        {
+                            if (PCTOpenerLvl92.DoFullOpener(ref actionID))
+                                return actionID;
+                        }
+                        // Lvl 90 Opener
+                        else if (!StarPrism.LevelChecked() && !RainbowDrip.LevelChecked() && CometinBlack.LevelChecked())
+                        {
+                            if (PCTOpenerLvl90.DoFullOpener(ref actionID))
+                                return actionID;
+                        }
+                        // Lvl 80 Opener
+                        else if (!StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && HolyInWhite.LevelChecked())
+                        {
+                            if (PCTOpenerLvl80.DoFullOpener(ref actionID))
+                                return actionID;
+                        }
+                        // Lvl 70 Opener
+                        else if (!StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && !HolyInWhite.LevelChecked() && StarryMuse.LevelChecked())
+                        {
+                            if (PCTOpenerLvl70.DoFullOpener(ref actionID))
+                                return actionID;
+                        }
+                    }
+
+                    // General Weaves
+                    if (InCombat() && canWeave)
+                    {
+                        // ScenicMuse
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_ScenicMuse))
+                        {
+                            if (ScenicMuse.LevelChecked() &&
+                                gauge.LandscapeMotifDrawn &&
+                                gauge.WeaponMotifDrawn &&
+                                IsOffCooldown(ScenicMuse))
+                            {
+                                return OriginalHook(ScenicMuse);
+                            }
+                        }
+
+                        // LivingMuse
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LivingMuse))
+                        {
+                            if (LivingMuse.LevelChecked() &&
+                                gauge.CreatureMotifDrawn &&
+                                (!(gauge.MooglePortraitReady || gauge.MadeenPortraitReady) ||
+                                GetRemainingCharges(LivingMuse) == GetMaxCharges(LivingMuse)))
+                            {
+                                if (HasCharges(OriginalHook(LivingMuse)))
+                                {
+                                    if (!ScenicMuse.LevelChecked() ||
+                                        GetCooldown(ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
+                                    {
+                                        return OriginalHook(LivingMuse);
+                                    }
+                                }
+                            }
+                        }
+
+                        // SteelMuse
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SteelMuse))
+                        {
+                            if (SteelMuse.LevelChecked() &&
+                                !HasEffect(Buffs.HammerTime) &&
+                                gauge.WeaponMotifDrawn &&
+                                HasCharges(OriginalHook(SteelMuse)) &&
+                                (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(ScenicMuse).CooldownRemaining ||
+                                 GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) ||
+                                 !ScenicMuse.LevelChecked()))
+                            {
+                                return OriginalHook(SteelMuse);
+                            }
+                        }
+
+                        // MogoftheAges
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_MogOfTheAges))
+                        {
+                            if (MogoftheAges.LevelChecked() &&
+                                (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) &&
+                                IsOffCooldown(OriginalHook(MogoftheAges)) &&
+                                (GetCooldownRemainingTime(StarryMuse) >= 60 || !ScenicMuse.LevelChecked()))
+                            {
+                                return OriginalHook(MogoftheAges);
+                            }
+                        }
+
+                        // Swiftcast
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SwitfcastOption))
+                        {
+                            if (IsMoving &&
+                                IsOffCooldown(All.Swiftcast) &&
+                                All.Swiftcast.LevelChecked() &&
+                                !HasEffect(Buffs.HammerTime) &&
+                                gauge.Paint < 1 &&
+                                (!gauge.CreatureMotifDrawn || !gauge.WeaponMotifDrawn || !gauge.LandscapeMotifDrawn))
+                            {
+                                return All.Swiftcast;
+                            }
+                        }
+
+                        // SubtractivePalette
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SubtractivePalette))
+                        {
+                            if (SubtractivePalette.LevelChecked() &&
+                                !HasEffect(Buffs.SubtractivePalette) &&
+                                !HasEffect(Buffs.MonochromeTones))
+                            {
+                                if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= 50)
+                                {
+                                    return SubtractivePalette;
+                                }
+                            }
+                        }
+                    }
+
+                    // Swiftcast Motifs
+                    if (HasEffect(All.Buffs.Swiftcast))
+                    {
+                        if (!gauge.CreatureMotifDrawn && CreatureMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
+                            return OriginalHook(CreatureMotif);
+                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.StarryMuse))
+                            return OriginalHook(HammerMotif);
+                        if (!gauge.LandscapeMotifDrawn && LandscapeMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
+                            return OriginalHook(LandscapeMotif);
+
+                    }
+
+                    // IsMoving logic
+                    if (IsMoving && InCombat())
+                    {
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_MovementOption_HammerStampCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
+                            return OriginalHook(HammerStamp);
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_MovementOption_CometinBlack) && CometinBlack.LevelChecked() && gauge.Paint >= 1 && HasEffect(Buffs.MonochromeTones))
+                            return OriginalHook(CometinBlack);
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_MovementOption_HolyInWhite) && HolyInWhite.LevelChecked() && gauge.Paint >= 1)
+                            return OriginalHook(HolyInWhite);
+                    }
+
+                    //Prepare for Burst
+                    if (GetCooldownRemainingTime(ScenicMuse) <= 20)
+                    {
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LandscapeMotif) && LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
+                            return OriginalHook(LandscapeMotif);
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CreatureMotif) && CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                            return OriginalHook(CreatureMotif);
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_WeaponMotif) && WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                            return OriginalHook(WeaponMotif);
+                    }
+
+                    // Burst 
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_Phase) && HasEffect(Buffs.StarryMuse))
+                    {
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_CometInBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0)
+                            return CometinBlack;
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_HammerCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.Starstruck))
+                            return OriginalHook(HammerStamp);
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_StarPrism))
+                        {
+                            if (HasEffect(Buffs.Starstruck) || HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) <= 3f)
+                                return StarPrism;
+                        }
+
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_RainbowDrip))
+                        {
+                            if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) <= 3f)
+                                return RainbowDrip;
+                        }
+
+                    }
+
+                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.StarryMuse))
+                        return RainbowDrip;
+
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CometinBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(StarryMuse) > 30f)
+                        return OriginalHook(CometinBlack);
+
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_HammerStampCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
+                        return OriginalHook(HammerStamp);
+
+                    if (!HasEffect(Buffs.StarryMuse))
+                    {
+                        // LandscapeMotif
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LandscapeMotif))
+                        {
+                            if (LandscapeMotif.LevelChecked() &&
+                                !gauge.LandscapeMotifDrawn &&
+                                GetCooldownRemainingTime(ScenicMuse) <= 20)
+                            {
+                                return OriginalHook(LandscapeMotif);
+                            }
+                        }
+
+                        // CreatureMotif
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CreatureMotif))
+                        {
+                            if (CreatureMotif.LevelChecked() &&
+                                !gauge.CreatureMotifDrawn &&
+                                (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
+                            {
+                                return OriginalHook(CreatureMotif);
+                            }
+                        }
+
+                        // WeaponMotif
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_WeaponMotif))
+                        {
+                            if (WeaponMotif.LevelChecked() &&
+                                !HasEffect(Buffs.HammerTime) &&
+                                !gauge.WeaponMotifDrawn &&
+                                (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
+                            {
+                                return OriginalHook(WeaponMotif);
+                            }
+                        }
+                    }
+
+
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LucidDreaming) && All.LucidDreaming.LevelChecked() && ActionReady(All.LucidDreaming) && CanSpellWeave(actionID) && LocalPlayer.CurrentMp <= Config.PCT_ST_AdvancedMode_LucidOption)
+                        return All.LucidDreaming;
+
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_BlizzardInCyan) && BlizzardIIinCyan.LevelChecked() && HasEffect(Buffs.SubtractivePalette))
+                        return OriginalHook(BlizzardinCyan);
+                }
+
+                return actionID;
+            }
+        }
+
         internal class PCT_AoE_SimpleMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.PCT_AoE_SimpleMode;
@@ -577,7 +461,7 @@ internal class PCT
                 if (actionID is FireIIinRed)
                 {
                     var gauge = GetJobGauge<PCTGauge>();
-                    bool canWeave = HasEffect(Buffs.SubtractivePalette) ? CanSpellWeave(OriginalHook(BlizzardinCyan)) : CanSpellWeave(OriginalHook(FireInRed));
+                    bool canWeave = CanSpellWeave(ActionWatching.LastSpell);
 
                     if (HasEffect(Buffs.Starstruck))
                         return OriginalHook(StarPrism);
@@ -663,6 +547,223 @@ internal class PCT
             }
         }
 
+        internal class PCT_AoE_AdvancedMode : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.PCT_AoE_AdvancedMode;
+
+            protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
+            {
+                if (actionID is FireIIinRed)
+                {
+                    var gauge = GetJobGauge<PCTGauge>();
+                    bool canWeave = CanSpellWeave(ActionWatching.LastSpell);
+
+                    // Prepull logic
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_PrePullMotifs))
+                    {
+                        if (!InCombat() || (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_NoTargetMotifs) && InCombat() && CurrentTarget == null))
+                        {
+                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                                return OriginalHook(CreatureMotif);
+                            if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                                return OriginalHook(WeaponMotif);
+                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.StarryMuse))
+                                return OriginalHook(LandscapeMotif);
+                        }
+                    }
+
+                    // General Weaves
+                    if (InCombat() && canWeave)
+                    {
+                        // LivingMuse
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LivingMuse))
+                        {
+                            if (LivingMuse.LevelChecked() &&
+                                gauge.CreatureMotifDrawn &&
+                                (!(gauge.MooglePortraitReady || gauge.MadeenPortraitReady) ||
+                                GetRemainingCharges(LivingMuse) == GetMaxCharges(LivingMuse)))
+                            {
+                                if (HasCharges(OriginalHook(LivingMuse)))
+                                {
+                                    if (!ScenicMuse.LevelChecked() ||
+                                        GetCooldown(ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
+                                    {
+                                        return OriginalHook(LivingMuse);
+                                    }
+                                }
+                            }
+                        }
+
+                        // ScenicMuse
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_ScenicMuse))
+                        {
+                            if (ScenicMuse.LevelChecked() &&
+                                gauge.LandscapeMotifDrawn &&
+                                gauge.WeaponMotifDrawn &&
+                                IsOffCooldown(ScenicMuse))
+                            {
+                                return OriginalHook(ScenicMuse);
+                            }
+                        }
+
+                        // SteelMuse
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SteelMuse))
+                        {
+                            if (SteelMuse.LevelChecked() &&
+                                !HasEffect(Buffs.HammerTime) &&
+                                gauge.WeaponMotifDrawn &&
+                                HasCharges(OriginalHook(SteelMuse)) &&
+                                (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(ScenicMuse).CooldownRemaining ||
+                                 GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) ||
+                                 !ScenicMuse.LevelChecked()))
+                            {
+                                return OriginalHook(SteelMuse);
+                            }
+                        }
+
+                        // MogoftheAges
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_MogOfTheAges))
+                        {
+                            if (MogoftheAges.LevelChecked() &&
+                                (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) &&
+                                (IsOffCooldown(OriginalHook(MogoftheAges)) || !ScenicMuse.LevelChecked()))
+                            {
+                                return OriginalHook(MogoftheAges);
+                            }
+                        }
+
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SwitfcastOption))
+                        {
+                            if (IsMoving &&
+                                IsOffCooldown(All.Swiftcast) &&
+                                All.Swiftcast.LevelChecked() &&
+                                !HasEffect(Buffs.HammerTime) &&
+                                gauge.Paint < 1 &&
+                                (!gauge.CreatureMotifDrawn || !gauge.WeaponMotifDrawn || !gauge.LandscapeMotifDrawn))
+                            {
+                                return All.Swiftcast;
+                            }
+                        }
+
+
+                        // Subtractive Palette
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SubtractivePalette) &&
+                            SubtractivePalette.LevelChecked() &&
+                            !HasEffect(Buffs.SubtractivePalette) &&
+                            !HasEffect(Buffs.MonochromeTones))
+                        {
+                            if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= 50)
+                                return SubtractivePalette;
+                        }
+                    }
+
+
+                    if (HasEffect(All.Buffs.Swiftcast))
+                    {
+                        if (!gauge.CreatureMotifDrawn && CreatureMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
+                            return OriginalHook(CreatureMotif);
+                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.StarryMuse))
+                            return OriginalHook(HammerMotif);
+                        if (!gauge.LandscapeMotifDrawn && LandscapeMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
+                            return OriginalHook(LandscapeMotif);
+                    }
+
+                    if (IsMoving && InCombat())
+                    {
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_MovementOption_HammerStampCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
+                            return OriginalHook(HammerStamp);
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_MovementOption_CometinBlack) && CometinBlack.LevelChecked() && gauge.Paint >= 1 && HasEffect(Buffs.MonochromeTones))
+                            return OriginalHook(CometinBlack);
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_MovementOption_HolyInWhite) && HolyInWhite.LevelChecked() && gauge.Paint >= 1)
+                            return OriginalHook(HolyInWhite);
+
+                    }
+
+                    //Prepare for Burst
+                    if (GetCooldownRemainingTime(ScenicMuse) <= 20)
+                    {
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LandscapeMotif) && LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
+                            return OriginalHook(LandscapeMotif);
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CreatureMotif) && CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                            return OriginalHook(CreatureMotif);
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_WeaponMotif) && WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                            return OriginalHook(WeaponMotif);
+                    }
+
+                    // Burst 
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_Phase) && HasEffect(Buffs.StarryMuse))
+                    {
+                        // Check for CometInBlack
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_CometInBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0)
+                            return CometinBlack;
+
+                        // Check for HammerTime 
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_HammerCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.Starstruck))
+                            return OriginalHook(HammerStamp);
+
+                        // Check for Starstruck
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_StarPrism))
+                        {
+                            if (HasEffect(Buffs.Starstruck) || (HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) < 3))
+                                return StarPrism;
+                        }
+
+                        // Check for RainbowBright
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_RainbowDrip))
+                        {
+                            if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) < 3))
+                                return RainbowDrip;
+                        }
+                    }
+
+
+                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.StarryMuse))
+                        return RainbowDrip;
+
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CometinBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(StarryMuse) > 60)
+                        return OriginalHook(CometinBlack);
+
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_HammerStampCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
+                        return OriginalHook(HammerStamp);
+
+
+                    if (!HasEffect(Buffs.StarryMuse))
+                    {
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LandscapeMotif))
+                        {
+                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(ScenicMuse) <= 20)
+                                return OriginalHook(LandscapeMotif);
+                        }
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CreatureMotif))
+                        {
+                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
+                                return OriginalHook(CreatureMotif);
+                        }
+
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_WeaponMotif))
+                        {
+                            if (WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
+                                return OriginalHook(WeaponMotif);
+                        }
+                    }
+
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LucidDreaming) && All.LucidDreaming.LevelChecked() && ActionReady(All.LucidDreaming) && CanSpellWeave(actionID) && LocalPlayer.CurrentMp <= Config.PCT_ST_AdvancedMode_LucidOption)
+                        return All.LucidDreaming;
+
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_BlizzardInCyan) && BlizzardIIinCyan.LevelChecked() && HasEffect(Buffs.SubtractivePalette))
+                        return OriginalHook(BlizzardIIinCyan);
+
+                }
+                return actionID;
+            }
+        }
+
         internal class CombinedAetherhues : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.CombinedAetherhues;
@@ -738,4 +839,6 @@ internal class PCT
                 return actionID;
             }
         }
+    }
 }
+
