@@ -41,7 +41,10 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         public OpenerState CurrentState
         {
-            get { return currentState; }
+            get
+            {
+                return currentState;
+            }
             set
             {
                 if (value != currentState)
@@ -50,7 +53,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     {
                         Svc.Log.Debug($"Entered PrePull Opener");
                     }
-
                     if (value == OpenerState.InOpener) OpenerStep = 1;
                     if (value == OpenerState.OpenerFinished || value == OpenerState.FailedOpener)
                     {
@@ -59,7 +61,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                         ResetOpener();
                     }
-
                     if (value == OpenerState.OpenerFinished) Svc.Log.Information("Opener Finished");
 
                     currentState = value;
@@ -184,17 +185,15 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     CurrentState = OpenerState.FailedOpener;
 
                 if (((actionID == DragonfireDive && CustomComboFunctions.IsOnCooldown(DragonfireDive)) ||
-                     (actionID == BattleLitany && CustomComboFunctions.IsOnCooldown(BattleLitany)) ||
-                     (actionID == LanceCharge && CustomComboFunctions.IsOnCooldown(LanceCharge)) ||
-                     (actionID == LifeSurge && CustomComboFunctions.GetRemainingCharges(LifeSurge) < 2)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    (actionID == BattleLitany && CustomComboFunctions.IsOnCooldown(BattleLitany)) ||
+                    (actionID == LanceCharge && CustomComboFunctions.IsOnCooldown(LanceCharge)) ||
+                    (actionID == LifeSurge && CustomComboFunctions.GetRemainingCharges(LifeSurge) < 2)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;
                 }
-
                 return true;
             }
-
             return false;
         }
 
@@ -224,11 +223,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 ResetOpener();
                 CurrentState = OpenerState.PrePull;
             }
-
             return false;
         }
     }
-
     internal class AnimationLock
     {
         internal static readonly List<uint> FastLocks =
@@ -242,7 +239,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
             DRG.WyrmwindThrust,
             DRG.RiseOfTheDragon,
             DRG.Starcross,
-            PvE.Content.Variant.VariantRampart
+            PvE.Content.Variant.VariantRampart,
+            PvE.All.TrueNorth
         ];
 
         internal static readonly List<uint> MidLocks =
