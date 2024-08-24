@@ -2114,6 +2114,12 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(NIN_ST_AdvancedMode)]
         [CustomComboInfo("天地人 选项", "将 天地人 加入一键循环", NIN.JobID)]
         NIN_ST_AdvancedMode_TCJ = 10023,
+            
+            
+        [ParentCombo(NIN_ST_AdvancedMode)]
+        [CustomComboInfo("Tenri Jindo Option", "Adds Tenri Jindo to Advanced Mode.", NIN.JobID)]
+        NIN_ST_AdvancedMode_TenriJindo = 10071,
+
 
         [ParentCombo(NIN_ST_AdvancedMode)]
         [CustomComboInfo("命水 选项", "将 命水 加入一键循环", NIN.JobID)]
@@ -2169,6 +2175,10 @@ namespace XIVSlothComboX.Combos
         [ConflictingCombos(NIN_AoE_SimpleMode)]
         [CustomComboInfo("上忍模式 - AoE", "将血雨飞花替换为一键群体连击。\n自定义循环，上忍的理想之选。", NIN.JobID)]
         NIN_AoE_AdvancedMode = 10035,
+        
+        [ParentCombo(NIN_AoE_AdvancedMode)]
+        [CustomComboInfo("Kunai's Bane Option", "Adds Kunai's Bane to Advanced Mode. (Does not add Trick Attack)", NIN.JobID)]
+        NIN_AoE_AdvancedMode_KunaisBane = 10073,
 
         [ParentCombo(NIN_AoE_AdvancedMode)]
         [CustomComboInfo("断绝/梦幻三段", "将 断绝/梦幻三段 加入一键循环", NIN.JobID)]
@@ -2215,6 +2225,11 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("天地人 选项", "将 天地人 加入一键循环", NIN.JobID)]
         NIN_AoE_AdvancedMode_TCJ = 10046,
 
+        [ParentCombo(NIN_AoE_AdvancedMode)]
+        [CustomComboInfo("Tenri Jindo Option", "Adds Tenri Jindo to Advanced Mode.", NIN.JobID)]
+        NIN_AoE_AdvancedMode_TenriJindo = 10072,
+        
+        
         [ParentCombo(NIN_AoE_AdvancedMode)]
         [CustomComboInfo("命水 选项", "将 命水 加入一键循环", NIN.JobID)]
         NIN_AoE_AdvancedMode_Meisui = 10047,
@@ -2274,17 +2289,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("旋风刃 替换为 忍术", "此功能效果无效：当使用任意结印时，将 旋风刃 Combo 替换为 忍术。", NIN.JobID)]
         NIN_AeolianNinjutsu = 10058,
 
-        [ReplaceSkill(NIN.Huraijin)]
-        [CustomComboInfo("风来刃 替换为 雷兽", "当 月影雷兽爪 和 月影雷兽牙 可以使用时，替换 风来刃.", NIN.JobID)]
-        NIN_HuraijinRaiju = 10059,
-
-        [ParentCombo(NIN_HuraijinRaiju)]
-        [CustomComboInfo("风来刃 替换为 月影雷兽牙", "当 月影雷兽牙 可以使用时，替换 风来刃.", NIN.JobID)]
-        NIN_HuraijinRaiju_Fleeting = 10060,
-
-        [ParentCombo(NIN_HuraijinRaiju)]
-        [CustomComboInfo("风来刃 替换为 月影雷兽爪", "当 月影雷兽爪 可以使用时，替换 风来刃.", NIN.JobID)]
-        NIN_HuraijinRaiju_Forked = 10061,
+   
 
         [ReplaceSkill(NIN.Ten, NIN.Chi, NIN.Jin)]
         [CustomComboInfo("简化忍术", "简化忍术结印的操作.", NIN.JobID)]
@@ -2295,9 +2300,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("天地人 开关", "Turns Ten Chi Jin (the move) into Ten, Chi, and Jin.", NIN.JobID)]
         NIN_TCJ = 10063,
 
-        [ReplaceSkill(NIN.Huraijin)]
-        [CustomComboInfo("风来刃/强点破甲突", "使用 绝风 后，用 强甲破点突 替换 风来刃", NIN.JobID)]
-        NIN_HuraijinArmorCrush = 10064,
+ 
 
         [ParentCombo(NIN_ST_AdvancedMode_Ninjitsus_Raiton)]
         [CustomComboInfo("雷遁 选项", "将 雷遁 加入到循环", NIN.JobID)]

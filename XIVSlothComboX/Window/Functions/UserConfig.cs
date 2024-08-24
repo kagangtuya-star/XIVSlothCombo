@@ -2162,127 +2162,65 @@ namespace XIVSlothComboX.Window.Functions
 
             // ====================================================================================
 
-            #region NINJA
+             #region NINJA
 
             if (preset == CustomComboPreset.NIN_Simple_Mudras)
             {
-                UserConfig.DrawRadioButton
-                (
-                    NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 1",
-                    $"1. Ten Mudras -> Fuma Shuriken, Raiton/Hyosho Ranryu, Suiton (Doton under Kassatsu).\nChi Mudras -> Fuma Shuriken, Hyoton, Huton.\nJin Mudras -> Fuma Shuriken, Katon/Goka Mekkyaku, Doton",
-                    1
-                );
-                UserConfig.DrawRadioButton
-                (
-                    NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 2",
-                    $"2. Ten Mudras -> Fuma Shuriken, Hyoton/Hyosho Ranryu, Doton.\nChi Mudras -> Fuma Shuriken, Katon, Suiton.\nJin Mudras -> Fuma Shuriken, Raiton/Goka Mekkyaku, Huton (Doton under Kassatsu).",
-                    2
-                );
-            }
-
-            if (preset == CustomComboPreset.NIN_ST_AdvancedMode_Huraijin)
-                UserConfig.DrawSliderInt
-                (
-                    0, 60, NIN.Config.Huton_RemainingHuraijinST,
-                    "Set the amount of time remaining on Huton the feature should wait before using Huraijin"
-                );
-
-            if (preset == CustomComboPreset.NIN_ST_AdvancedMode_ArmorCrush)
-            {
-                UserConfig.DrawSliderInt
-                (
-                    0, 30, NIN.Config.Huton_RemainingArmorCrush,
-                    "Set the amount of time remaining on Huton the feature should wait before using Armor Crush", hasAdditionalChoice: true,
-                    additonalChoiceCondition: "Value set to 12 or less."
-                );
-
-                if (PluginConfiguration.GetCustomIntValue(NIN.Config.Huton_RemainingArmorCrush) <= 12)
-                    UserConfig.DrawAdditionalBoolChoice
-                    (
-                        NIN.Config.Advanced_DoubleArmorCrush, "Double Armor Crush Feature",
-                        "Uses the Armor Crush ender twice before switching back to Aeolian Edge.", isConditionalChoice: true
-                    );
+                UserConfig.DrawRadioButton(NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 1", $"1. Ten Mudras -> Fuma Shuriken, Raiton/Hyosho Ranryu, Suiton (Doton under Kassatsu).\nChi Mudras -> Fuma Shuriken, Hyoton, Huton.\nJin Mudras -> Fuma Shuriken, Katon/Goka Mekkyaku, Doton", 1);
+                UserConfig.DrawRadioButton(NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 2", $"2. Ten Mudras -> Fuma Shuriken, Hyoton/Hyosho Ranryu, Doton.\nChi Mudras -> Fuma Shuriken, Katon, Suiton.\nJin Mudras -> Fuma Shuriken, Raiton/Goka Mekkyaku, Huton (Doton under Kassatsu).", 2);
             }
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_Bhavacakra)
-                UserConfig.DrawSliderInt
-                (
-                    50, 100, NIN.Config.Ninki_BhavaPooling,
-                    "Set the minimal amount of Ninki required to have before spending on Bhavacakra."
-                );
+                UserConfig.DrawSliderInt(50, 100, NIN.Config.Ninki_BhavaPooling, "Set the minimal amount of Ninki required to have before spending on Bhavacakra.");
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack)
-                UserConfig.DrawSliderInt
-                (
-                    0, 21, NIN.Config.Trick_CooldownRemaining,
-                    "Set the amount of time remaining on Trick Attack cooldown before trying to set up with Suiton."
-                );
+                UserConfig.DrawSliderInt(0, 21, NIN.Config.Trick_CooldownRemaining, "Set the amount of time remaining on Trick Attack cooldown before trying to set up with Suiton.");
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_Bunshin)
-                UserConfig.DrawSliderInt
-                (
-                    50, 100, NIN.Config.Ninki_BunshinPoolingST,
-                    "Set the amount of Ninki required to have before spending on Bunshin."
-                );
+                UserConfig.DrawSliderInt(50, 100, NIN.Config.Ninki_BunshinPoolingST, "Set the amount of Ninki required to have before spending on Bunshin.");
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_Bunshin)
-                UserConfig.DrawSliderInt
-                (
-                    50, 100, NIN.Config.Ninki_BunshinPoolingAoE,
-                    "Set the amount of Ninki required to have before spending on Bunshin."
-                );
+                UserConfig.DrawSliderInt(50, 100, NIN.Config.Ninki_BunshinPoolingAoE, "Set the amount of Ninki required to have before spending on Bunshin.");
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Cooldowns)
-                UserConfig.DrawSliderInt
-                (
-                    0, 21, NIN.Config.Advanced_Trick_Cooldown,
-                    "Set the amount of time remaining on Trick Attack cooldown to start saving cooldowns."
-                );
+                UserConfig.DrawSliderInt(0, 21, NIN.Config.Advanced_Trick_Cooldown, "Set the amount of time remaining on Trick Attack cooldown to start saving cooldowns.");
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_SecondWind)
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.SecondWindThresholdST, "设置使用内丹时的剩余HP百分比");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.SecondWindThresholdST, "Set a HP% threshold for when Second Wind will be used.");
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_ShadeShift)
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.ShadeShiftThresholdST, "设置使用残影时的剩余HP百分比");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.ShadeShiftThresholdST, "Set a HP% threshold for when Shade Shift will be used.");
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_Bloodbath)
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.BloodbathThresholdST, "设置使用浴血时的剩余HP百分比");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.BloodbathThresholdST, "Set a HP% threshold for when Bloodbath will be used.");
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_SecondWind)
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.SecondWindThresholdAoE, "设置使用内丹时的剩余HP百分比");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.SecondWindThresholdAoE, "Set a HP% threshold for when Second Wind will be used.");
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_ShadeShift)
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.ShadeShiftThresholdAoE, "设置使用残影时的剩余HP百分比");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.ShadeShiftThresholdAoE, "Set a HP% threshold for when Shade Shift will be used.");
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_Bloodbath)
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.BloodbathThresholdAoE, "设置使用浴血时的剩余HP百分比");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.BloodbathThresholdAoE, "Set a HP% threshold for when Bloodbath will be used.");
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_HellfrogMedium)
-                UserConfig.DrawSliderInt(50, 100, NIN.Config.Ninki_HellfrogPooling, "设置积累多少忍气后使用大虾蟆.");
+                UserConfig.DrawSliderInt(50, 100, NIN.Config.Ninki_HellfrogPooling, "Set the amount of Ninki required to have before spending on Hellfrog Medium.");
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_Ninjitsus_Doton)
             {
-                UserConfig.DrawSliderInt(0, 18, NIN.Config.Advanced_DotonTimer, "设置土遁剩余多长时间时再次使用土遁之术.");
-                UserConfig.DrawSliderInt(0, 100, NIN.Config.Advanced_DotonHP, "设置当前目标剩余HP百分比大于多少时使用土遁之术.");
+                UserConfig.DrawSliderInt(0, 18, NIN.Config.Advanced_DotonTimer, "Sets the amount of time remaining on Doton before casting again.");
+                UserConfig.DrawSliderInt(0, 100, NIN.Config.Advanced_DotonHP, "Sets the max remaining HP percentage of the current target to cast Doton.");
             }
 
             if (preset == CustomComboPreset.NIN_AoE_AdvancedMode_TCJ)
             {
-                UserConfig.DrawRadioButton(NIN.Config.Advanced_TCJEnderAoE, "天地人结束1", "天地人以水遁结束.", 0);
-                UserConfig.DrawRadioButton
-                (
-                    NIN.Config.Advanced_TCJEnderAoE, $"天地人结束2",
-                    "天地人以土遁结束.\nIf you have Doton enabled, Ten Chi Jin will be delayed according to the settings in that feature.", 1
-                );
+                UserConfig.DrawRadioButton(NIN.Config.Advanced_TCJEnderAoE, "Ten Chi Jin Ender 1", "Ends Ten Chi Jin with Suiton.", 0);
+                UserConfig.DrawRadioButton(NIN.Config.Advanced_TCJEnderAoE, $"Ten Chi Jin Ender 2", "Ends Ten Chi Jin with Doton.\nIf you have Doton enabled, Ten Chi Jin will be delayed according to the settings in that feature.", 1);
             }
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_Ninjitsus_Raiton)
             {
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    NIN.Config.Advanced_ChargePool, "Pool Charges",
-                    "Waits until at least 2 seconds before your 2nd charge or if Trick Attack debuff is on your target before spending."
-                );
+                UserConfig.DrawAdditionalBoolChoice(NIN.Config.Advanced_ChargePool, "Pool Charges", "Waits until at least 2 seconds before your 2nd charge or if Trick Attack debuff is on your target before spending.");
             }
 
             if (preset == CustomComboPreset.NIN_Variant_Cure)
