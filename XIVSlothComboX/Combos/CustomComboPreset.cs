@@ -258,6 +258,10 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Level 100 Opener", "Use the Balance opener.", AST.JobID, 11, "", "")]
         AST_ST_DPS_Opener = 1040,
 
+        [ParentCombo(AST_ST_DPS)]
+        [CustomComboInfo("Earthly Star Option", "Adds Earthly Star." +
+                                                "\nTo be used in conjunction with Redirect/Reaction/etc", AST.JobID, 11)]
+        AST_ST_DPS_EarthlyStar = 1051,
         #endregion
 
         #region AOE DPS
@@ -292,7 +296,11 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(AST_AOE_DPS)]
         [CustomComboInfo("Oracle Option", "Adds Oracle after Divination", AST.JobID)]
         AST_AOE_Oracle = 1047,       
-
+        
+        [ParentCombo(AST_AOE_DPS)]
+        [CustomComboInfo("Earthly Star Option", "Adds Earthly Star." +
+                                                "\nTo be used in conjunction with Redirect/Reaction/etc", AST.JobID, 9)]
+        AST_AOE_DPS_EarthlyStar = 1052,
         #endregion
 
         
@@ -338,6 +346,12 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Horoscope Option", "添加天宫图进入治疗连击", AST.JobID)]
         AST_AoE_SimpleHeals_Horoscope = 1026,
 
+        
+        [ParentCombo(AST_AoE_SimpleHeals_AspectedHelios)]
+        [CustomComboInfo("Aspected Helios Option", "In Helios mode: Will Cast Aspected Helios when the HoT is missing on yourself."
+                                                   + "\nIn Aspected Helios mode: Is considered enabled regardless.", AST.JobID)]
+        AST_AoE_SimpleHeals_Aspected = 1053,
+            
         [ReplaceSkill(AST.Benefic2)]
         [CustomComboInfo("福星降级", "如果福星还没学会或用不了，将福星替换为吉星", AST.JobID, 4, "", "")]
         AST_Benefic = 1002,

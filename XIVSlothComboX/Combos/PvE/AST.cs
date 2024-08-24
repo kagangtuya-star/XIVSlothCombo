@@ -28,7 +28,8 @@ namespace XIVSlothComboX.Combos.PvE
             Gravity = 3615,
             Gravity2 = 25872,
             Oracle = 37029,
-
+            EarthlyStar = 7439,
+            
             //Cards
             AstralDraw = 37017,
             Play1 = 37019,
@@ -141,13 +142,14 @@ namespace XIVSlothComboX.Combos.PvE
                 AST_Bole = new("AST_Bole", 80),
                 AST_ST_SimpleHeals_Esuna = new("AST_ST_SimpleHeals_Esuna", 100),
                 AST_DPS_AltMode = new("AST_DPS_AltMode"),
+                AST_AoEHeals_AltMode = new("AST_AoEHeals_AltMode"),
                 AST_DPS_DivinationOption = new("AST_DPS_DivinationOption"),
                 AST_AOE_DivinationOption = new("AST_AOE_DivinationOption"),
                 AST_DPS_LightSpeedOption = new("AST_DPS_LightSpeedOption"),
                 AST_AOE_LightSpeedOption = new("AST_AOE_LightSpeedOption"),
                 AST_DPS_CombustOption = new("AST_DPS_CombustOption"),
                 AST_QuickTarget_Override = new("AST_QuickTarget_Override"),
-                AST_ST_DPS_Play_SpeedSetting = new("AST_ST_DPS_Play_SpeedSetting"); 
+                AST_ST_DPS_Play_SpeedSetting = new("AST_ST_DPS_Play_SpeedSetting");
 
             public static UserBool
                 AST_QuickTarget_SkipDamageDown = new("AST_QuickTarget_SkipDamageDown"),
@@ -236,11 +238,7 @@ namespace XIVSlothComboX.Combos.PvE
                 return actionID;
             }
         }
-
-
-
-
- internal class AST_Benefic : CustomCombo
+           internal class AST_Benefic : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.AST_Benefic;
 
@@ -412,6 +410,12 @@ namespace XIVSlothComboX.Combos.PvE
                         CanDelayedWeave(actionID))
                         return OriginalHook(MinorArcana);
 
+                    //Earthly Star
+                    if (IsEnabled(CustomComboPreset.AST_ST_DPS_EarthlyStar) &&
+                        ActionReady(EarthlyStar) &&
+                        CanSpellWeave(actionID))
+                        return EarthlyStar;
+
                     if (HasBattleTarget())
                     {
                         //Combust
@@ -426,12 +430,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 CanSpellWeave(actionID))
                                 return Variant.VariantSpiritDart;
                             
-                            float refreshtimer = Config.AST_ST_DPS_CombustUptime_Adv ? Config.AST_ST_DPS_CombustUptime_Threshold : 3;
-                            if (GetDebuffRemainingTime(dotDebuffID) <= refreshtimer &&
+                            float refreshTimer = Config.AST_ST_DPS_CombustUptime_Adv ? Config.AST_ST_DPS_CombustUptime_Threshold : 3;
+                            if (GetDebuffRemainingTime(dotDebuffID) <= refreshTimer &&
                                 GetTargetHPPercent() > Config.AST_DPS_CombustOption)
                                 return OriginalHook(Combust);
 
-                            //AlterateMode idles as Malefic
+                            //Alternate Mode (idles as Malefic)
                             if (AlternateMode) return OriginalHook(Malefic);
                         }
                     }
@@ -521,8 +525,14 @@ namespace XIVSlothComboX.Combos.PvE
                         IsEnabled(CustomComboPreset.AST_AOE_LazyLord) && Gauge.DrawnCrownCard is CardType.LORD &&
                         HasBattleTarget() &&
                         CanDelayedWeave(actionID))
-                        return OriginalHook(MinorArcana);                 
-                                            
+                        return OriginalHook(MinorArcana);
+
+                    //Earthly Star
+                    if (IsEnabled(CustomComboPreset.AST_AOE_DPS_EarthlyStar) &&
+                        ActionReady(EarthlyStar) &&
+                        CanSpellWeave(actionID))
+                        return EarthlyStar;
+
                 }
                 return actionID;
             }
@@ -533,14 +543,15 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is AspectedHelios)
+                bool NonaspectedMode = GetIntOptionAsBool(Config.AST_AoEHeals_AltMode); //(0 or 1 radio values)
+
+                if (NonaspectedMode && actionID is Helios || !NonaspectedMode && actionID is AspectedHelios or HeliosConjuction)
                 {
                     var canLady = (Config.AST_AoE_SimpleHeals_WeaveLady && CanSpellWeave(actionID)) || !Config.AST_AoE_SimpleHeals_WeaveLady;
                     var canHoroscope = (Config.AST_AoE_SimpleHeals_Horoscope && CanSpellWeave(actionID)) || !Config.AST_AoE_SimpleHeals_Horoscope;
                     var canOppose = (Config.AST_AoE_SimpleHeals_Opposition && CanSpellWeave(actionID)) || !Config.AST_AoE_SimpleHeals_Opposition;
 
-                    //Level check to exit if we can't use
-                    if (!LevelChecked(AspectedHelios))
+                    if (!LevelChecked(AspectedHelios)) //Level check to return helios immediately below 40
                         return Helios;
 
                     if (IsEnabled(CustomComboPreset.AST_AoE_SimpleHeals_LazyLady) &&
@@ -558,24 +569,30 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (ActionReady(Horoscope) &&
                             canHoroscope)
-                            return Horoscope;
-
-                        if ((ActionReady(AspectedHelios)
-                                 && !HasEffect(Buffs.AspectedHelios)
-                                 && !HasEffect(Buffs.HeliosConjunction))
-                             || HasEffect(Buffs.Horoscope)
-                             || (HasEffect(Buffs.NeutralSect) && !HasEffect(Buffs.NeutralSectShield)))
-                            return OriginalHook(AspectedHelios);
+                            return Horoscope;                                               
 
                         if (HasEffect(Buffs.HoroscopeHelios) &&
                             canHoroscope)
                             return OriginalHook(Horoscope);
                     }
 
-                    if ((HasEffect(Buffs.AspectedHelios)
-                         || HasEffect(Buffs.HeliosConjunction))
-                        && (FindEffect(Buffs.AspectedHelios)?.RemainingTime > 2
-                            || FindEffect(Buffs.HeliosConjunction)?.RemainingTime > 2))
+                    // Only check for our own HoTs
+                    var aspectedHeliosHoT = FindEffect(Buffs.AspectedBenefic, LocalPlayer, LocalPlayer?.GameObjectId);
+                    var heliosConjunctionHoT = FindEffect(Buffs.AspectedBenefic, LocalPlayer, LocalPlayer?.GameObjectId);
+
+                    if ((IsEnabled(CustomComboPreset.AST_AoE_SimpleHeals_Aspected) && NonaspectedMode) || // Helios mode: option must be on
+                        !NonaspectedMode) // Aspected mode: option is not required
+                    {
+                        if ((ActionReady(AspectedHelios)
+                                 && aspectedHeliosHoT is null
+                                 && heliosConjunctionHoT is null)
+                             || HasEffect(Buffs.Horoscope)
+                             || (HasEffect(Buffs.NeutralSect) && !HasEffect(Buffs.NeutralSectShield)))
+                            return OriginalHook(AspectedHelios);
+                    }
+
+                    if ((aspectedHeliosHoT is not null || heliosConjunctionHoT is not null)
+                        && (aspectedHeliosHoT?.RemainingTime > 2 || heliosConjunctionHoT?.RemainingTime > 2))
                         return Helios;
                 }
 
@@ -610,24 +627,28 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.AST_ST_SimpleHeals_Spire) &&
                         Gauge.DrawnCards[2] == CardType.SPIRE &&
                         GetTargetHPPercent(healTarget) <= Config.AST_Spire &&
+                        ActionReady(Play3) &&
                         canSpire)
                         return OriginalHook(Play3);
 
                     if (IsEnabled(CustomComboPreset.AST_ST_SimpleHeals_Ewer) &&
                         Gauge.DrawnCards[2] == CardType.EWER &&
                         GetTargetHPPercent(healTarget) <= Config.AST_Ewer &&
+                        ActionReady(Play3) &&
                         canEwer)
                         return OriginalHook(Play3);
 
                     if (IsEnabled(CustomComboPreset.AST_ST_SimpleHeals_Arrow) &&
                         Gauge.DrawnCards[1] == CardType.ARROW &&
                         GetTargetHPPercent(healTarget) <= Config.AST_Arrow &&
+                        ActionReady(Play2) &&
                         canArrow)
                         return OriginalHook(Play2);
                     
                     if (IsEnabled(CustomComboPreset.AST_ST_SimpleHeals_Bole) &&
                         Gauge.DrawnCards[1] == CardType.BOLE &&
                         GetTargetHPPercent(healTarget) <= Config.AST_Bole &&
+                        ActionReady(Play2) &&
                         canBole)
                         return OriginalHook(Play2);
 
