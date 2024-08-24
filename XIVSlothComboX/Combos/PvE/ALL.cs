@@ -1,8 +1,10 @@
-﻿using XIVSlothComboX.CustomComboNS;
+﻿using ECommons.DalamudServices;
+using XIVSlothComboX.Combos;
+using XIVSlothComboX.Combos.PvE;
+using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
-using XIVSlothComboX.Services;
 
-namespace XIVSlothComboX.Combos.PvE
+namespace XIVSlothCombox.Combos.PvE
 {
     internal class All
     {
@@ -10,11 +12,9 @@ namespace XIVSlothComboX.Combos.PvE
 
         public const uint
             Rampart = 7531,
-            //内丹SecondWind
             SecondWind = 7541,
             TrueNorth = 7546,
             Addle = 7560,
-            // 即刻咏唱Swiftcast = 7561,
             Swiftcast = 7561,
             LucidDreaming = 7562,
             Resurrection = 173,
@@ -31,7 +31,6 @@ namespace XIVSlothComboX.Combos.PvE
             WiseToTheWorldBTN = 26522,
             LowBlow = 7540,
             Bloodbath = 7542,
-            //伤头HeadGraze
             HeadGraze = 7551,
             FootGraze = 7553,
             LegGraze = 7554,
@@ -54,7 +53,8 @@ namespace XIVSlothComboX.Combos.PvE
                 Rampart = 1191,
                 Peloton = 1199,
                 LucidDreaming = 1204,
-                TrueNorth = 1250;
+                TrueNorth = 1250,
+                Sprint = 50;
         }
 
         public static class Debuffs
@@ -86,28 +86,8 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is Sprint && Service.ClientState.TerritoryType is 1055)
-                {
-                    
-                    return IsleSprint;
-                }
-                else
-                {
-                    return actionID;
-                }
-                
-                
-                // if (actionID is PLD.先锋剑FastBlade )
-                // {
-                //     
-                //     return 20;
-                //     // return 20;
-                // }
-                // else
-                // {
-                //     return actionID;
-                // }
-
+                if (actionID is Sprint && Svc.ClientState.TerritoryType is 1055) return IsleSprint;
+                else return actionID;
             }
         }
 
@@ -141,7 +121,7 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is Reprisal)
                 {
                     if (TargetHasEffectAny(Debuffs.Reprisal) && IsOffCooldown(Reprisal))
-                        return WHM.Stone1;
+                        return OriginalHook(11);
                 }
 
                 return actionID;
@@ -155,7 +135,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if ((actionID is WHM.Raise or AST.Ascend or SGE.Egeiro) 
+                if ((actionID is WHM.Raise or AST.Ascend or SGE.Egeiro)
                     || (actionID is SCH.Resurrection && LocalPlayer.ClassJob.Id is SCH.JobID))
                 {
                     if (ActionReady(Swiftcast))
@@ -181,7 +161,7 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is Addle)
                 {
                     if (TargetHasEffectAny(Debuffs.Addle) && IsOffCooldown(Addle))
-                        return WAR.裂石飞环FellCleave;
+                        return OriginalHook(11);
                 }
 
                 return actionID;
@@ -194,13 +174,16 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if ((actionID is BLU.AngelWhisper or RDM.Verraise) 
+                if ((actionID is BLU.AngelWhisper or RDM.Verraise)
                     || (actionID is SMN.Resurrection && LocalPlayer.ClassJob.Id is SMN.JobID))
                 {
                     if (HasEffect(Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast))
                         return actionID;
                     if (IsOffCooldown(Swiftcast))
                         return Swiftcast;
+                    if (LocalPlayer.ClassJob.Id is RDM.JobID &&
+                        ActionReady(RDM.Vercure))
+                        return RDM.Vercure;
                 }
 
                 return actionID;
@@ -217,7 +200,7 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is Feint)
                 {
                     if (TargetHasEffectAny(Debuffs.Feint) && IsOffCooldown(Feint))
-                        return BLM.Fire;
+                        return OriginalHook(11);
                 }
 
                 return actionID;
@@ -233,7 +216,7 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is TrueNorth)
                 {
                     if (HasEffect(Buffs.TrueNorth))
-                        return BLM.Fire;
+                        return OriginalHook(11);
                 }
 
                 return actionID;
@@ -250,7 +233,7 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is BRD.Troubadour or MCH.Tactician or DNC.防守之桑巴ShieldSamba)
                 {
                     if ((HasEffectAny(BRD.Buffs.Troubadour) || HasEffectAny(MCH.Buffs.Tactician) || HasEffectAny(DNC.Buffs.防守之桑巴ShieldSamba)) && IsOffCooldown(actionID))
-                        return DRG.Stardiver;
+                        return OriginalHook(11);
                 }
 
                 return actionID;
@@ -263,9 +246,8 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                return (actionID is FootGraze && CanInterruptEnemy() && ActionReady(HeadGraze) ) ? HeadGraze : actionID;
+                return (actionID is FootGraze && CanInterruptEnemy() && ActionReady(HeadGraze)) ? HeadGraze : actionID;
             }
         }
     }
 }
-
