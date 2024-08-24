@@ -1,10 +1,8 @@
 ﻿using ECommons.DalamudServices;
-using XIVSlothComboX.Combos;
-using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 
-namespace XIVSlothCombox.Combos.PvE
+namespace XIVSlothComboX.Combos.PvE
 {
     internal class All
     {
