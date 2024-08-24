@@ -1604,7 +1604,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.AST_DPS_LightSpeed)
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_DPS_LightSpeedOption, "当敌人HP百分比低于此设置值时停止使用. 如果想要忽略这个检测，设置为0.");
-            
+
             //AOE added
             if (preset is CustomComboPreset.AST_AOE_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, AST.Config.AST_LucidDreaming, "Set value for your MP to be at or under for this feature to work", 150, SliderIncrements.Hundreds);
@@ -1617,7 +1617,7 @@ namespace XIVSlothComboX.Window.Functions
             {
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_AOE_DPS_OverwriteCards, "Overwrite Non-DPS Cards", "Will draw even if you have healing cards remaining.");
             }
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals)
             {
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_Adv, "高级选项", "", isConditionalChoice: true);
@@ -1633,33 +1633,33 @@ namespace XIVSlothComboX.Window.Functions
                     ImGui.Unindent();
                 }
             }
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_CelestialIntersection)
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_WeaveIntersection, "Only Weave", "Will only weave this action.");
 
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_Exaltation)
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_WeaveExalt, "Only Weave", "Will only weave this action.");
 
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_Spire)
-            { 
+            {
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_Spire, "Set percentage value");
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_WeaveSpire, "Only Weave", "Will only weave this action.");
             }
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_Ewer)
-            {  
+            {
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_Ewer, "Set percentage value");
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_WeaveEwer, "Only Weave", "Will only weave this action.");
             }
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_Bole)
             {
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_Bole, "Set percentage value");
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_SimpleHeals_WeaveBole, "Only Weave", "Will only weave this action.");
             }
-            
+
             if (preset is CustomComboPreset.AST_ST_SimpleHeals_Arrow)
             {
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_Arrow, "Set percentage value");
@@ -1671,14 +1671,14 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(0, 100, AST.Config.AST_ST_SimpleHeals_Esuna, "当生命值低于％时停止使用。将其设置为零以禁用此检查");
             }
 
-            
+
             if (preset is CustomComboPreset.AST_AoE_SimpleHeals_AspectedHelios)
             {
                 UserConfig.DrawRadioButton(AST.Config.AST_AoEHeals_AltMode, "On Aspected Helios", "", 0);
                 UserConfig.DrawRadioButton(AST.Config.AST_AoEHeals_AltMode, "On Helios", "Alternative AOE Mode. Leaves Aspected Helios alone for manual HoTs", 1);
             }
 
-            
+
             if (preset is CustomComboPreset.AST_AoE_SimpleHeals_LazyLady)
                 UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_AoE_SimpleHeals_WeaveLady, "Only Weave", "Will only weave this action.");
 
@@ -1744,22 +1744,15 @@ namespace XIVSlothComboX.Window.Functions
                 }
             }
 
-     
 
             if (preset is CustomComboPreset.BLM_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, BLM.Config.BLM_VariantCure, "HP% to be at or under", 200);
 
             if (preset is CustomComboPreset.BLM_Adv_Opener)
             {
-             
+
             }
-            
 
-    
-
-      
-
-            
 
             // if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
             //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderUptime, "刷新雷电前剩余的秒数");
@@ -1794,7 +1787,7 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.BRD_AoE_Adv_NoWaste)
                 UserConfig.DrawSliderInt(1, 10, BRD.Config.BRD_AoENoWasteHPPercentage, "Remaining target HP percentage");
 
-            
+
             if (preset == CustomComboPreset.BRD_ST_SecondWind)
                 UserConfig.DrawSliderInt
                 (
@@ -2166,7 +2159,6 @@ namespace XIVSlothComboX.Window.Functions
 
             #endregion
 
-            
 
             // ====================================================================================
 
@@ -2686,11 +2678,11 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.SGE_ST_DPS_Rhizo)
                 UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_ST_DPS_Rhizo, "Addersgall Threshold", 150, SliderIncrements.Ones);
 
-            
+
             if (preset is CustomComboPreset.SGE_ST_DPS_AddersgallProtect)
                 UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_ST_DPS_AddersgallProtect, "Addersgall Threshold", 150, SliderIncrements.Ones);
 
-            
+
             if (preset is CustomComboPreset.SGE_ST_DPS_Movement)
             {
                 UserConfig.DrawHorizontalMultiChoice
@@ -2724,7 +2716,7 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.SGE_AoE_DPS_AddersgallProtect)
                 UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_AoE_DPS_AddersgallProtect, "Addersgall Threshold", 150, SliderIncrements.Ones);
 
-            
+
             if (preset is CustomComboPreset.SGE_ST_Heal)
             {
                 UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_Heal_Adv, "Advanced Options", "", isConditionalChoice: true);
@@ -3215,11 +3207,11 @@ namespace XIVSlothComboX.Window.Functions
 
             #region VIPER
 
-            // if ((preset == CustomComboPreset.VPR_ST_AdvancedMode && enabled) || (preset == CustomComboPreset.VPR_VicewinderCoils && enabled))
-            // {
-            //     UserConfig.DrawHorizontalRadioButton(VPR.Config.VPR_Positional, "Rear First", "First positional: Swiftskin's Coil.", 0);
-            //     UserConfig.DrawHorizontalRadioButton(VPR.Config.VPR_Positional, "Flank First", "First positional: Hunter's Coil.", 1);
-            // }
+            /* if ((preset == CustomComboPreset.VPR_ST_AdvancedMode && enabled) || (preset == CustomComboPreset.VPR_VicewinderCoils && enabled))
+             {
+                 UserConfig.DrawHorizontalRadioButton(VPR.Config.VPR_Positional, "Rear First", "First positional: Swiftskin's Coil.", 0);
+                 UserConfig.DrawHorizontalRadioButton(VPR.Config.VPR_Positional, "Flank First", "First positional: Hunter's Coil.", 1);
+             }*/
 
             if (preset == CustomComboPreset.VPR_ST_UncoiledFury && enabled)
             {
