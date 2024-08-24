@@ -38,7 +38,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <param name="id"> ID of the action. </param>
         /// <returns></returns>
         public static int GetLevel(uint id) => ActionWatching.GetLevel(id);
-        
+
         /// <summary> Get the Cast time of an action. </summary>
         /// <param name="id"> Action ID to check. </param>
         /// <returns> Returns the cast time of an action. </returns>
@@ -88,7 +88,10 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <param name="id"> ID of the action. </param>
         /// <returns></returns>
         //Note: Testing so far shows non charge skills have a max charge of 1, and it's zero during cooldown
-        public static bool ActionReady(uint id) => LevelChecked(id) && HasCharges(id);
+        // public static bool ActionReady(uint id) => LevelChecked(id) && HasCharges(id);
+        // public unsafe static bool ActionReady(uint id) => (LevelChecked(id) && (HasCharges(id) || GetCooldown(id).CooldownTotal <= 1.5f)) || ActionManager.Instance()->GetActionStatus(ActionType.Action, id) == 0;
+        public unsafe static bool ActionReady(uint id) => LevelChecked(id) && HasCharges(id) || ActionManager.Instance()->GetActionStatus(ActionType.Action, id) == 0;
+
 
         /// <summary> Checks if the last action performed was the passed ID. </summary>
         /// <param name="id"> ID of the action. </param>
@@ -125,10 +128,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <returns> The appropriate action to use. </returns>
         public static uint CalcBestAction(uint original, params uint[] actions)
         {
-            static (uint ActionID, CooldownData Data) 
-                Compare(uint original,
-                (uint ActionID, CooldownData Data) a1,
-                (uint ActionID, CooldownData Data) a2)
+            static (uint ActionID, CooldownData Data)
+                Compare
+                (
+                    uint                               original,
+                    (uint ActionID, CooldownData Data) a1,
+                    (uint ActionID, CooldownData Data) a2)
             {
                 // Neither, return the first parameter
                 if (!a1.Data.IsCooldown && !a2.Data.IsCooldown)
@@ -173,7 +178,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 return a1.Data.IsCooldown ? a2 : a1;
             }
 
-            static (uint ActionID, CooldownData Data) 
+            static (uint ActionID, CooldownData Data)
                 Selector(uint actionID) => (actionID, GetCooldown(actionID));
 
             return actions.Select(Selector).Aggregate((a1, a2) => Compare(original, a1, a2)).ActionID;
@@ -187,7 +192,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         {
             if (!checkUseAbility())
                 return false;
-            
+
             return (GetCooldown(actionID).CooldownRemaining > weaveTime) || (HasSilence() && HasPacification());
         }
 
@@ -206,6 +211,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime
                 >= 0) // Don't show if spell is still casting in weave window
                 return true;
+
             return false;
         }
 
@@ -225,6 +231,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime
                 >= 0) // Don't show if spell is still casting in weave window
                 return true;
+
             return false;
         }
 
@@ -245,7 +252,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// Returns the last combo action.
         /// </summary>
         public static unsafe uint ComboAction => ActionManager.Instance()->Combo.Action;
-        
+
         public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25, double end = 0.6)
         {
             if (!checkUseAbility())
@@ -259,6 +266,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             return false;
 
         }
+
         private unsafe uint GetActionState(uint actionID)
         {
             return ActionManager.Instance()->GetActionStatus(ActionType.Action, actionID);
@@ -266,22 +274,23 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public bool CanUse(uint actionID)
         {
-            if (GetActionState(actionID)==572)//黑的
+            if (GetActionState(actionID) == 572) //黑的
             {
                 return false;
             }
-            if (GetActionState(actionID)==573)//没学技能
+            if (GetActionState(actionID) == 573) //没学技能
             {
                 return false;
             }
 
-            if (GetActionState(actionID)==582)//没准备好
+            if (GetActionState(actionID) == 582) //没准备好
             {
                 return false;
             }
 
             return true;
         }
+
         private static bool checkUseAbility()
         {
 
@@ -304,19 +313,19 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                             break;
                     }
                 }
-                
-                
+
+
                 if (Last.RowId is DNC.四色技巧舞步结束TechnicalFinish4_0)
                 {
                     return false;
-                } 
-             
+                }
 
 
-
-
-                ActionWatching.ActionSheet.TryGetValue(ActionWatching.CombatActions[^2],
-                    out var Last_2);
+                ActionWatching.ActionSheet.TryGetValue
+                (
+                    ActionWatching.CombatActions[^2],
+                    out var Last_2
+                );
                 if (Last_2 != null)
                 {
                     switch (Last_2.ActionCategory.Value.RowId)
@@ -332,11 +341,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     }
 
                 }
-                
-                // if(ActionWatching.GetActionCastTime())
-                
 
-                if (Last_2.RowId is 
+                // if(ActionWatching.GetActionCastTime())
+
+
+                if (Last_2.RowId is
                     DNC.双色标准舞步结束StandardFinish2
                     or DNC.四色技巧舞步结束TechnicalFinish4
                     or MCH.热冲击HeatBlast
@@ -349,7 +358,6 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                         return false;
                     }
                 }
-
 
 
                 if (能力技数量 >= 2)
