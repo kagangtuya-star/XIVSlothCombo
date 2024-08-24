@@ -117,7 +117,7 @@
 
 		<Reference Include="InteropGenerator.Runtime">
 			<HintPath>$(DalamudLibPath)InteropGenerator.Runtime.dll</HintPath>
-<!--			<HintPath>C:\Users\Tykku\AppData\Roaming\XIVLauncher\dev\InteropGenerator.Runtime.dll</HintPath>-->
+<!--			<HintPath>C:\Users\Omnicrone\AppData\Roaming\XIVLauncher\dev\InteropGenerator.Runtime.dll</HintPath>-->
 			<Private>false</Private>
 		</Reference>
 
