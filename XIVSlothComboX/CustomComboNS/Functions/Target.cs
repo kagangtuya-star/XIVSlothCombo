@@ -387,7 +387,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// Get angle to target.
         /// </summary>
         /// <returns>Angle relative to target</returns>
-        public float angleToTarget()
+        public static float AngleToTarget()
         {
             if (CurrentTarget is null || LocalPlayer is null)
                 return 0;

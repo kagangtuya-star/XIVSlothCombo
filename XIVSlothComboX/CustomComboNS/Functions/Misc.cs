@@ -59,6 +59,24 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 SGE.JobID
             };
 
+            public static byte JobToClass(uint jobID)
+            {
+                return jobID switch
+                {
+                    ADV.JobID => ADV.ClassID,
+                    BLM.JobID => BLM.ClassID,
+                    BRD.JobID => BRD.ClassID,
+                    DRG.JobID => DRG.ClassID,
+                    MNK.JobID => MNK.ClassID,
+                    NIN.JobID => NIN.ClassID,
+                    PLD.JobID => PLD.ClassID,
+                    SCH.JobID => SCH.ClassID,
+                    SMN.JobID => SMN.ClassID,
+                    WAR.JobID => WAR.ClassID,
+                    WHM.JobID => WHM.ClassID,
+                    _ => 0xFF,
+                };
+            }
         }
     }
 }

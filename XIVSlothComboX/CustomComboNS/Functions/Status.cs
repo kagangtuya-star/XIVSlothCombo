@@ -21,9 +21,13 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             return eff?.StackCount ?? 0;
         }
 
-        public unsafe static float GetBuffRemainingTime(ushort effectId)
+   
+        public unsafe static float GetBuffRemainingTime(ushort effectId, bool isPlayerOwned = true)
         {
-            Status? eff = FindEffect(effectId);
+            Status? eff = (isPlayerOwned == true)
+                ? FindEffect(effectId)
+                : FindEffectAny(effectId);
+
             if (eff is null) return 0;
             if (eff.RemainingTime < 0) return (eff.RemainingTime * -1) + ActionManager.Instance()->AnimationLock;
             return eff.RemainingTime;
@@ -45,9 +49,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static Status? FindTargetEffect(ushort effectID) => FindEffect(effectID, CurrentTarget, LocalPlayer?.GameObjectId);
 
         /// <summary></summary>
-        public static unsafe float GetDebuffRemainingTime(ushort effectId)
+        public unsafe static float GetDebuffRemainingTime(ushort effectId, bool isPlayerOwned = true)
         {
-            Status? eff = FindTargetEffect(effectId);
+            Status? eff = (isPlayerOwned == true)
+                ? FindTargetEffect(effectId)
+                : FindTargetEffectAny(effectId);
+
             if (eff is null) return 0;
             if (eff.RemainingTime < 0) return (eff.RemainingTime * -1) + ActionManager.Instance()->AnimationLock;
             return eff.RemainingTime;

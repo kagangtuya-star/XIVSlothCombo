@@ -65,7 +65,7 @@ namespace XIVSlothComboX.Core
         /// <summary> Gets a value indicating whether a preset is secret. </summary>
         /// <param name="preset"> Preset to check. </param>
         /// <returns> The boolean representation. </returns>
-        public static bool IsVariant(CustomComboPreset preset) => VariantCombos.Contains(preset);
+        public static bool IsPvP(CustomComboPreset preset) => VariantCombos.Contains(preset);
 
         /// <summary> Gets a value indicating whether a preset is secret. </summary>
         /// <param name="preset"> Preset to check. </param>
