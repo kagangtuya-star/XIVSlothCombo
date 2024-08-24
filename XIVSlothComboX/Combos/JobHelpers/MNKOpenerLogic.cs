@@ -1,12 +1,12 @@
 ﻿using Dalamud.Game.ClientState.JobGauge.Types;
 using ECommons.DalamudServices;
 using System.Linq;
-using XIVSlothCombo.Combos.JobHelpers.Enums;
-using XIVSlothCombo.Combos.PvE;
-using XIVSlothCombo.CustomComboNS.Functions;
-using XIVSlothCombo.Data;
+using XIVSlothComboX.Combos.JobHelpers.Enums;
+using XIVSlothComboX.Combos.PvE;
+using XIVSlothComboX.CustomComboNS.Functions;
+using XIVSlothComboX.Data;
 
-namespace XIVSlothCombo.Combos.JobHelpers
+namespace XIVSlothComboX.Combos.JobHelpers
 {
 
     internal class MNKHelper : MNK

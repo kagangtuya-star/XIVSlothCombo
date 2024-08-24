@@ -44,7 +44,7 @@ namespace XIVSlothComboX.Window.Tabs
             {RDM.JobID,"7.0"},
             {PCT.JobID,"7.0"},
             
-            {MNK.JobID,"6.X"},
+            {MNK.JobID,"7.0"},
             {DRG.JobID,"7.0"},
             {NIN.JobID,"6.X"},
             {SAM.JobID,"7.0"},

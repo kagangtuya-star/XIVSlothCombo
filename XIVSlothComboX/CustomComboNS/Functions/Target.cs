@@ -431,7 +431,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// Is player on target's rear.
         /// </summary>
         /// <returns>True or false.</returns>
-        public bool OnTargetsRear()
+        public static bool OnTargetsRear()
         {
             if (CurrentTarget is null || LocalPlayer is null)
                 return false;
@@ -460,7 +460,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// Is player on target's flank.
         /// </summary>
         /// <returns>True or false.</returns>
-        public bool OnTargetsFlank()
+        public static bool OnTargetsFlank()
         {
             if (CurrentTarget is null || LocalPlayer is null)
                 return false;

@@ -1886,153 +1886,125 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
+     #region MONK
 
-        #region MONK
+        [ReplaceSkill([MNK.Bootshine])]
+        [CustomComboInfo("Simple Mode - Single Target", "Replaces Bootshine with a one - button full single target rotation.\nThis is ideal for newcomers to the job.", MNK.JobID)]
+        [ConflictingCombos(MNK_ST_BeastChakras, MNK_ST_AdvancedMode)]
+        MNK_ST_SimpleMode = 9004,
 
-        [ReplaceSkill(MNK.ArmOfTheDestroyer)]
-        [CustomComboInfo("破坏神冲 Combo", "将破坏神冲替换为其 Combo 链", MNK.JobID, 0, "", "")]
-        MNK_AoE_SimpleMode = 9000,
+        [ReplaceSkill([MNK.ArmOfTheDestroyer])]
+        [CustomComboInfo("Simple Mode - AoE", "Replaces Arm of the Destroyer with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MNK.JobID)]
+        MNK_AOE_SimpleMode = 9003,
 
-        [ReplaceSkill(MNK.DragonKick)]
-        [CustomComboInfo("双龙脚 --> 连击 功能", "在拥有连击效果提高时使用连击替换双龙脚。", MNK.JobID, 0, "", "")]
-        MNK_DragonKick_Bootshine = 9001,
+        #region Monk Advanced ST
+        [ReplaceSkill([MNK.Bootshine])]
+        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Bootshine with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MNK.JobID)]
+        [ConflictingCombos(MNK_ST_BeastChakras, MNK_ST_SimpleMode)]
+        MNK_ST_AdvancedMode = 9005,
 
-        [ReplaceSkill(MNK.TrueStrike)]
-        [CustomComboInfo("双掌打特性", "如果你功力buff不足六秒，使用双掌打替换正拳。", MNK.JobID, 0, "", "")]
-        MNK_TwinSnakes = 9011,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Opener Option", "Uses selected opener", MNK.JobID)]
+        MNK_STUseOpener = 9006,
 
-        [ReplaceSkill(MNK.Bootshine)]
-        [ConflictingCombos(MNK_ST_SimpleMode)]
-        [CustomComboInfo("基础循环", "整合一键基础循环", MNK.JobID, 0, "", "")]
-        MNK_BasicCombo = 9002,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Meditation Option", "Adds Meditation to the rotation", MNK.JobID)]
+        MNK_STUseMeditation = 9007,
 
-        [ReplaceSkill(MNK.PerfectBalance)]
-        [CustomComboInfo("震脚特性", "如果你拥有三档脉轮，那么使用必杀技替换震脚。", MNK.JobID, 0, "", "")]
-        MNK_PerfectBalance = 9003,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Buffs Option", "Adds selected buffs to the rotation", MNK.JobID)]
+        MNK_STUseBuffs = 9008,
 
-        [ReplaceSkill(MNK.DragonKick)]
-        [CustomComboInfo("连击平衡特性", "如果你拥有三档脉轮，那么使用必杀技替换双龙脚。", MNK.JobID, 0, "", "")]
-        MNK_BootshineBalance = 9004,
+        [ParentCombo(MNK_STUseBuffs)]
+        [CustomComboInfo("Brotherhood Option", "Adds Brotherhood to the rotation", MNK.JobID)]
+        MNK_STUseBrotherhood = 9009,
 
-        [ReplaceSkill(MNK.HowlingFist, MNK.Enlightenment)]
-        [CustomComboInfo("空鸣拳/万象斗气圈特性", "当你的斗气满时使用空鸣拳/万象斗气圈替换掉破坏神冲", MNK.JobID, 0, "", "")]
-        MNK_HowlingFistMeditation = 9005,
+        [ParentCombo(MNK_STUseBuffs)]
+        [CustomComboInfo("Riddle of Wind Option", "Adds Riddle of Wind to the rotation", MNK.JobID)]
+        MNK_STUseROW = 9010,
 
-        [ReplaceSkill(MNK.Bootshine)]
-        [ConflictingCombos(MNK_BasicCombo)]
-        [CustomComboInfo("连击连击", "将连击替换为其 Combo 链。\n如果启用所有子选项，将变成武僧的一键循环。滑块的值可以用来控制功力 buff 和破碎拳 dot 的正常运行时间。", MNK.JobID, -2, "", "")]
-        MNK_ST_SimpleMode = 9006,
+        [ParentCombo(MNK_STUseBuffs)]
+        [CustomComboInfo("Riddle of Fire Option", "Adds Riddle of Fire to the rotation", MNK.JobID)]
+        MNK_STUseROF = 9011,
 
-        [ReplaceSkill(MNK.MasterfulBlitz)]
-        [CustomComboInfo("震脚特性+", "当震脚激活时，使用可用的技能替换必杀技。", MNK.JobID, 0, "", "")]
-        MNK_PerfectBalance_Plus = 9007,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("The Forbidden Chakra Option", "Adds The Forbidden Chakra to the rotation", MNK.JobID)]
+        MNK_STUseTheForbiddenChakra = 9012,
 
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo("必杀技加入循环", "将必杀技加入循环", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_MasterfulBlitz = 9008,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Perfect Balance Option", "Adds Perfect Balance and Masterful Blitz to the rotation", MNK.JobID)]
+        MNK_STUsePerfectBalance = 9013,
 
-        [ParentCombo(MNK_AoE_SimpleMode)]
-        [CustomComboInfo("必杀技加入AOE循环", "将必杀技添加进AoE循环。", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_MasterfulBlitz = 9009,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("True North Option", "Adds True North dynamically, when not in positional, to the rotation", MNK.JobID)]
+        MNK_STUseTrueNorth = 9014,
 
-        [ReplaceSkill(MNK.RiddleOfFire)]
-        [CustomComboInfo("红莲极意/义结金兰特性", "如果红莲极意进入冷却，那么使用义结金兰替换红莲极意。", MNK.JobID, 0, "", "")]
-        MNK_Riddle_Brotherhood = 9012,
+        [ParentCombo(MNK_STUseROW)]
+        [CustomComboInfo("Wind's Reply Option", "Adds Wind's Reply to the rotation", MNK.JobID)]
+        MNK_STUseWindsReply = 9015,
 
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo("主连击CD整合", "当红莲极意进入冷却时，将各种能力技整合进连击。", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_CDs = 9013,
+        [ParentCombo(MNK_STUseROF)]
+        [CustomComboInfo("Fire's Reply Option", "Adds Fire's Reply to the rotation", MNK.JobID)]
+        MNK_STUseFiresReply = 9016,
 
-        [ParentCombo(MNK_ST_Simple_CDs)]
-        [CustomComboInfo("疾风极意整合", "将疾风极意整合进连击。", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_CDs_RiddleOfWind = 9014,
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Form Shift Option", "Adds Form Shift to the rotation", MNK.JobID)]
+        MNK_STUseFormShift = 9017,
 
-        [ParentCombo(MNK_ST_Simple_CDs)]
-        [CustomComboInfo("震脚整合", "将震脚整合进连击。", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_CDs_PerfectBalance = 9015,
-
-        [ParentCombo(MNK_ST_Simple_CDs)]
-        [CustomComboInfo("义结金兰整合", "将义结金兰整合进连击。", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_CDs_Brotherhood = 9016,
-
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo("斗气整合", "将 斗气 消耗添加进主循环中", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_Meditation = 9017,
-
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo
-        (
-            "阴阳开场",
-            "Start with the Lunar Solar Opener on the main combo. Requires level 68 for Riddle of Fire.\nA 1.93/1.94 GCD is highly recommended.",
-            MNK.JobID, 0, "", ""
-        )]
-        MNK_ST_Simple_LunarSolarOpener = 9018,
-
-        [ParentCombo(MNK_AoE_SimpleMode)]
-        [CustomComboInfo("AoE 循环中的能力技使用", "AoE循环下，在红莲极意中插入各种能力技。", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_CDs = 9019,
-
-        [ParentCombo(MNK_AoE_Simple_CDs)]
-        [CustomComboInfo("疾风极意应用于 AoE 循环", "将疾风极意添加进一键 AoE 循环。", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_CDs_RiddleOfWind = 9020,
-
-        [ParentCombo(MNK_AoE_Simple_CDs)]
-        [CustomComboInfo("震脚应用于 AoE 循环", "将震脚添加进一键 AoE 循环", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_CDs_PerfectBalance = 9021,
-
-        [ParentCombo(MNK_AoE_Simple_CDs)]
-        [CustomComboInfo("义结金兰应用于 AoE 循环", "将义结金兰添加进一键 AoE 循环。", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_CDs_Brotherhood = 9022,
-
-        [ParentCombo(MNK_AoE_SimpleMode)]
-        [CustomComboInfo("斗气应用于 AoE 循环", "将斗气添加进一键 AoE 循环。", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_Meditation = 9023,
-
-        [ParentCombo(MNK_AoE_SimpleMode)]
-        [CustomComboInfo("轻身步法应用于 AoE 循环", "将轻身步法添加进一键 AoE 循环", MNK.JobID, 0, "", "")]
-        MNK_AoE_Simple_Thunderclap = 9024,
-
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo("轻身步法应用于单体循环", "将轻身步法添加进一键单体循环。", MNK.JobID, 0, "", "")]
-        MNK_ST_Simple_Thunderclap = 9025,
-
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo
-        (
-            "回复设置", "Adds Bloodbath and Second Wind to the combo, using them when below the HP Percentage threshold.", MNK.JobID, 0, "",
-            ""
-        )]
-        MNK_ST_ComboHeals = 9026,
-
-        [ParentCombo(MNK_AoE_SimpleMode)]
-        [CustomComboInfo
-        (
-            "回复设置", "Adds Bloodbath and Second Wind to the combo, using them when below the HP Percentage threshold.", MNK.JobID, 0, "",
-            ""
-        )]
-        MNK_AoE_ComboHeals = 9027,
-
-        [ParentCombo(MNK_ST_Simple_Meditation)]
-        [CustomComboInfo("斗气 选项", "当你超出攻击范围且不在起手/爆发期时，将循环替换为 斗气", MNK.JobID, 0, "", "")]
-        MNK_ST_Meditation_Uptime = 9028,
-
-        [ParentCombo(MNK_ST_SimpleMode)]
-        [CustomComboInfo("动态真北选项", "当你不在触发增益状态的正确身位时，在触发增益状态前将 真北 加入到主循环中", MNK.JobID, 0, "", "")]
-        MNK_TrueNorthDynamic = 9029,
-
-        [Variant]
-        [VariantParent(MNK_ST_SimpleMode, MNK_AoE_SimpleMode)]
-        [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", MNK.JobID)]
-        MNK_Variant_Cure = 9030,
-
-        [Variant]
-        [VariantParent(MNK_ST_SimpleMode, MNK_AoE_SimpleMode)]
-        [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", MNK.JobID)]
-        MNK_Variant_Rampart = 9031,
-
-        // Last value = 9031
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Combo Heals Option", "Adds Bloodbath and Second Wind to the rotation.", MNK.JobID)]
+        MNK_ST_ComboHeals = 9018,
 
         #endregion
+
+        #region Monk Beast Chakras
+
+        [ConflictingCombos(MNK_ST_AdvancedMode, MNK_ST_SimpleMode)]
+        [CustomComboInfo("Beast Chakra Handlers", "Merge single target GCDs which share the same beast chakra", MNK.JobID)]
+        MNK_ST_BeastChakras = 9019,
+
+        [ReplaceSkill(MNK.Bootshine)]
+        [CustomComboInfo("Opo-opo Option", "Replace Bootshine/Leaping Opo with Dragon Kick.", MNK.JobID)]
+        [ParentCombo(MNK_ST_BeastChakras)]
+        MNK_BC_OPOOPO = 9020,
+
+        [ReplaceSkill(MNK.TrueStrike)]
+        [CustomComboInfo("Raptor Option", "Replace True Strike/Rising Raptor with Twin Snakes.", MNK.JobID)]
+        [ParentCombo(MNK_ST_BeastChakras)]
+        MNK_BC_RAPTOR = 9021,
+
+        [ReplaceSkill(MNK.SnapPunch)]
+        [CustomComboInfo("Coeurl Option", "Replace Snap Punch/Pouncing Coeurl with Demolish.", MNK.JobID)]
+        [ParentCombo(MNK_ST_BeastChakras)]
+        MNK_BC_COEURL = 9022,
+
+        #endregion
+
+        [ReplaceSkill(MNK.PerfectBalance)]
+        [CustomComboInfo("Perfect Balance Feature", "Perfect Balance becomes Masterful Blitz while you have 3 Beast Chakra.", MNK.JobID)]
+        MNK_PerfectBalance = 9023,
+
+        [ReplaceSkill(MNK.RiddleOfFire)]
+        [CustomComboInfo("Riddle of Fire/Brotherhood Feature", "Replaces Riddle of Fire with Brotherhood when Riddle of Fire is on cooldown.", MNK.JobID)]
+        MNK_Riddle_Brotherhood = 9024,
+
+        #region Variant
+
+        [Variant]
+        [VariantParent(MNK_ST_AdvancedMode, MNK_AOE_SimpleMode)]
+        [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", MNK.JobID)]
+        MNK_Variant_Rampart = 9025,
+
+        [Variant]
+        [VariantParent(MNK_ST_AdvancedMode, MNK_AOE_SimpleMode)]
+        [CustomComboInfo("Cure Option", "Use Variant Cure when HP is below set threshold.", MNK.JobID)]
+        MNK_Variant_Cure = 9026,
+
+        #endregion
+
+        // End Monk
+        #endregion
+   
 
         #region NINJA
 

@@ -5,6 +5,7 @@ using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Data;
 using static XIVSlothComboX.Combos.PvE.VPR;
 using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
+
 namespace XIVSlothCombo.Combos.JobHelpers
 {
     internal class VPRHelpers
@@ -36,10 +37,7 @@ namespace XIVSlothCombo.Combos.JobHelpers
 
             public OpenerState CurrentState
             {
-                get
-                {
-                    return currentState;
-                }
+                get { return currentState; }
                 set
                 {
                     if (value != currentState)
@@ -213,8 +211,7 @@ namespace XIVSlothCombo.Combos.JobHelpers
                     if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
                         CurrentState = OpenerState.FailedOpener;
 
-                    if (((actionID == SerpentsIre && IsOnCooldown(SerpentsIre)) ||
-                        (actionID == Vicewinder && GetRemainingCharges(Vicewinder) < 2)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    if (((actionID == SerpentsIre && IsOnCooldown(SerpentsIre)) || (actionID == Vicewinder && GetRemainingCharges(Vicewinder) < 2)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                     {
                         CurrentState = OpenerState.FailedOpener;
                         return false;
@@ -271,8 +268,7 @@ namespace XIVSlothCombo.Combos.JobHelpers
             {
                 float GCD = GetCooldown(SteelFangs).CooldownTotal * Times;
 
-                if ((HasEffect(Buffs.HonedSteel) && GetBuffRemainingTime(Buffs.HonedSteel) < GCD) ||
-                    (HasEffect(Buffs.HonedReavers) && GetBuffRemainingTime(Buffs.HonedReavers) < GCD))
+                if ((HasEffect(Buffs.HonedSteel) && GetBuffRemainingTime(Buffs.HonedSteel) < GCD) || (HasEffect(Buffs.HonedReavers) && GetBuffRemainingTime(Buffs.HonedReavers) < GCD))
                     return true;
 
                 else return false;
@@ -282,10 +278,7 @@ namespace XIVSlothCombo.Combos.JobHelpers
             {
                 float GCD = GetCooldown(SteelFangs).CooldownTotal * Times;
 
-                if ((HasEffect(Buffs.FlankstungVenom) && GetBuffRemainingTime(Buffs.FlankstungVenom) < GCD) ||
-                    (HasEffect(Buffs.FlanksbaneVenom) && GetBuffRemainingTime(Buffs.FlanksbaneVenom) < GCD) ||
-                    (HasEffect(Buffs.HindstungVenom) && GetBuffRemainingTime(Buffs.HindstungVenom) < GCD) ||
-                    (HasEffect(Buffs.HindsbaneVenom) && GetBuffRemainingTime(Buffs.HindsbaneVenom) < GCD))
+                if ((HasEffect(Buffs.FlankstungVenom) && GetBuffRemainingTime(Buffs.FlankstungVenom) < GCD) || (HasEffect(Buffs.FlanksbaneVenom) && GetBuffRemainingTime(Buffs.FlanksbaneVenom) < GCD) || (HasEffect(Buffs.HindstungVenom) && GetBuffRemainingTime(Buffs.HindstungVenom) < GCD) || (HasEffect(Buffs.HindsbaneVenom) && GetBuffRemainingTime(Buffs.HindsbaneVenom) < GCD))
                     return true;
 
                 else return false;
