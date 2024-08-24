@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ECommons.DalamudServices;
+using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Extensions;
@@ -20,14 +21,12 @@ namespace XIVSlothComboX.Combos.JobHelpers
     {
         internal static void Init()
         {
-            
-            
-            Service.Framework.Update += CheckCards;
+            Svc.Framework.Update += CheckCards;
         }
 
-           private static void CheckCards(IFramework framework)
+        private static void CheckCards(IFramework framework)
         {
-            if (Service.ClientState.LocalPlayer is null || Service.ClientState.LocalPlayer.ClassJob.Id != 33)
+            if (Svc.ClientState.LocalPlayer is null || Svc.ClientState.LocalPlayer.ClassJob.Id != 33)
                 return;
 
             if (Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.BetweenAreas] || Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.Unconscious])
@@ -41,7 +40,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 DrawnCard = Gauge.DrawnCards[0];
             }
 
-            if (CustomComboFunctions.IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards) && (AST_QuickTargetCards.SelectedRandomMember is null || AST_QuickTargetCards.SelectedRandomMember.IsDead))
+            if (CustomComboFunctions.IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards) && (AST_QuickTargetCards.SelectedRandomMember is null || BetterTargetAvailable()))
             {
                 if (CustomComboFunctions.ActionReady(Play1))
                     AST_QuickTargetCards.Invoke();
@@ -52,9 +51,49 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         }
 
+        private static bool BetterTargetAvailable()
+        {
+            if (AST_QuickTargetCards.SelectedRandomMember is null || AST_QuickTargetCards.SelectedRandomMember.IsDead || CustomComboFunctions.OutOfRange(Balance, AST_QuickTargetCards.SelectedRandomMember))
+                return true;
+
+            var m = AST_QuickTargetCards.SelectedRandomMember as IBattleChara;
+            if ((DrawnCard is CardType.BALANCE && CustomComboFunctions.JobIDs.Melee.Any(x => x == m.ClassJob.Id)) || (DrawnCard is CardType.SPEAR && CustomComboFunctions.JobIDs.Ranged.Any(x => x == m.ClassJob.Id)))
+                return false;
+
+            var targets = new List<IBattleChara>();
+            for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
+            {
+                if (CustomComboFunctions.GetPartySlot(i) is not IBattleChara member) continue;
+                if (member.GameObjectId == AST_QuickTargetCards.SelectedRandomMember.GameObjectId) continue;
+                if (member is null) continue; //Skip nulls/disconnected people
+                if (member.IsDead) continue;
+                if (CustomComboFunctions.OutOfRange(Balance, member)) continue;
+
+                if (CustomComboFunctions.FindEffectOnMember(Buffs.BalanceBuff, member) is not null) continue;
+                if (CustomComboFunctions.FindEffectOnMember(Buffs.SpearBuff, member) is not null) continue;
+
+                if (Config.AST_QuickTarget_SkipDamageDown && CustomComboFunctions.TargetHasDamageDown(member)) continue;
+                if (Config.AST_QuickTarget_SkipRezWeakness && CustomComboFunctions.TargetHasRezWeakness(member)) continue;
+
+                if (member.GetRole() is CombatRole.Healer or CombatRole.Tank) continue;
+
+                targets.Add(member);
+            }
+
+            if (targets.Count == 0) return false;
+
+            if ((DrawnCard is CardType.BALANCE && targets.Any(x => CustomComboFunctions.JobIDs.Melee.Any(y => y == x.ClassJob.Id))) || (DrawnCard is CardType.SPEAR && targets.Any(x => CustomComboFunctions.JobIDs.Ranged.Any(y => y == x.ClassJob.Id))))
+            {
+                AST_QuickTargetCards.SelectedRandomMember = null;
+                return true;
+            }
+
+            return false;
+
+        }
+
         internal class AST_QuickTargetCards : CustomComboFunctions
         {
-
             internal static List<IGameObject> PartyTargets = [];
 
             internal static IGameObject? SelectedRandomMember;
@@ -66,10 +105,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (GetPartySlot(2) is not null)
                     {
                         SetTarget();
-                        // Svc.Log.Debug($"Set card to {SelectedRandomMember.Name}");
+                        Svc.Log.Debug($"Set card to {SelectedRandomMember?.Name}");
                     }
                     else
                     {
+                        Svc.Log.Debug($"Setting card to {LocalPlayer?.Name}");
                         SelectedRandomMember = LocalPlayer;
                     }
                 }
@@ -81,30 +121,22 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             private static bool SetTarget()
             {
-                if (Gauge.DrawnCards[0].Equals(CardType.NONE)) 
-                    return false;
+                if (Gauge.DrawnCards[0].Equals(CardType.NONE)) return false;
+
                 CardType cardDrawn = Gauge.DrawnCards[0];
                 PartyTargets.Clear();
                 for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
                 {
-                    if (GetPartySlot(i) is not IBattleChara member)
-                        continue;
-                    if (member is null) 
-                        continue; //Skip nulls/disconnected people
-                    if (member.IsDead) 
-                        continue;
-                    if (OutOfRange(Balance, member)) 
-                        continue;
+                    if (GetPartySlot(i) is not IBattleChara member) continue;
+                    if (member is null) continue; //Skip nulls/disconnected people
+                    if (member.IsDead) continue;
+                    if (OutOfRange(Balance, member)) continue;
 
-                    if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) 
-                        continue;
-                    if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) 
-                        continue;
+                    if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) continue;
+                    if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) continue;
 
-                    if (Config.AST_QuickTarget_SkipDamageDown && TargetHasDamageDown(member)) 
-                        continue;
-                    if (Config.AST_QuickTarget_SkipRezWeakness && TargetHasRezWeakness(member)) 
-                        continue;
+                    if (Config.AST_QuickTarget_SkipDamageDown && TargetHasDamageDown(member)) continue;
+                    if (Config.AST_QuickTarget_SkipRezWeakness && TargetHasRezWeakness(member)) continue;
 
                     PartyTargets.Add(member);
                 }
@@ -113,18 +145,13 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 {
                     for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
                     {
-                        if (GetPartySlot(i) is not IBattleChara member) 
-                            continue;
-                        if (member is null) 
-                            continue; //Skip nulls/disconnected people
-                        if (member.IsDead) 
-                            continue;
+                        if (GetPartySlot(i) is not IBattleChara member) continue;
+                        if (member is null) continue; //Skip nulls/disconnected people
+                        if (member.IsDead) continue;
                         if (OutOfRange(Balance, member)) continue;
 
-                        if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) 
-                            continue;
-                        if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) 
-                            continue;
+                        if (FindEffectOnMember(Buffs.BalanceBuff, member) is not null) continue;
+                        if (FindEffectOnMember(Buffs.SpearBuff, member) is not null) continue;
 
                         PartyTargets.Add(member);
                     }
@@ -147,8 +174,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     for (int i = 0; i <= PartyTargets.Count - 1; i++)
                     {
                         byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
-                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Melee.Contains(job)) ||
-                            ((cardDrawn is CardType.SPEAR) && JobIDs.Ranged.Contains(job)))
+                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Melee.Contains(job)) || ((cardDrawn is CardType.SPEAR) && JobIDs.Ranged.Contains(job)))
                         {
                             //TargetObject(PartyTargets[i]);
                             SelectedRandomMember = PartyTargets[i];
@@ -159,8 +185,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     for (int i = 0; i <= PartyTargets.Count - 1; i++)
                     {
                         byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
-                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Ranged.Contains(job)) ||
-                            ((cardDrawn is CardType.SPEAR) && JobIDs.Melee.Contains(job)))
+                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Ranged.Contains(job)) || ((cardDrawn is CardType.SPEAR) && JobIDs.Melee.Contains(job)))
                         {
                             //TargetObject(PartyTargets[i]);
                             SelectedRandomMember = PartyTargets[i];
@@ -174,8 +199,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         for (int i = 0; i <= PartyTargets.Count - 1; i++)
                         {
                             byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
-                            if ((cardDrawn is CardType.BALANCE && JobIDs.Tank.Contains(job)) ||
-                                (cardDrawn is CardType.SPEAR && JobIDs.Healer.Contains(job)))
+                            if ((cardDrawn is CardType.BALANCE && JobIDs.Tank.Contains(job)) || (cardDrawn is CardType.SPEAR && JobIDs.Healer.Contains(job)))
                             {
                                 //TargetObject(PartyTargets[i]);
                                 SelectedRandomMember = PartyTargets[i];
@@ -190,7 +214,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         internal static void Dispose()
         {
-            Service.Framework.Update -= CheckCards;
+            Svc.Framework.Update -= CheckCards;
         }
     }
 }
