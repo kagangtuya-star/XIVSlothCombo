@@ -298,13 +298,15 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.MNK_STUseBuffs))
                         {
-                            if (Brotherhood.LevelChecked()
+                            if (IsEnabled(CustomComboPreset.MNK_STUseBrotherhood) 
+                                && Brotherhood.LevelChecked()
                                 && !IsOnCooldown(Brotherhood))
                             {
                                 return Brotherhood;
                             }
 
-                            if (RiddleOfFire.LevelChecked()
+                            if (IsEnabled(CustomComboPreset.MNK_STUseROF)
+                                && RiddleOfFire.LevelChecked()
                                 && !IsOnCooldown(RiddleOfFire))
                             {
                                 return RiddleOfFire;

@@ -434,7 +434,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Reawakend Usage
-                    if (UseReawaken(gauge))
+                    if (IsEnabled(CustomComboPreset.VPR_ST_Reawaken) && UseReawaken(gauge))
                         return Reawaken;
 
                     //Overcap protection
