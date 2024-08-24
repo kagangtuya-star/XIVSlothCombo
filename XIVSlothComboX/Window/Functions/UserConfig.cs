@@ -1788,13 +1788,10 @@ namespace XIVSlothComboX.Window.Functions
 
             #region BARD
 
-            if (preset == CustomComboPreset.BRD_Simple_RagingJaws)
+            if (preset == CustomComboPreset.BRD_Adv_RagingJaws)
                 UserConfig.DrawSliderInt(3, 5, BRD.Config.BRD_RagingJawsRenewTime, "持续时间 (单位：秒)");
 
-            if (preset == CustomComboPreset.BRD_Simple_NoWaste)
-                UserConfig.DrawSliderInt(1, 10, BRD.Config.BRD_NoWasteHPPercentage, "目标血量百分比");
-
-            if (preset == CustomComboPreset.BRD_AoE_Simple_NoWaste)
+            if (preset == CustomComboPreset.BRD_AoE_Adv_NoWaste)
                 UserConfig.DrawSliderInt(1, 10, BRD.Config.BRD_AoENoWasteHPPercentage, "Remaining target HP percentage");
 
             

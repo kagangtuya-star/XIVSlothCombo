@@ -734,15 +734,19 @@ namespace XIVSlothComboX.Combos
         #region BARD
 
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
-        [ConflictingCombos(BRD_ST_SimpleMode)]
+        [ConflictingCombos(BRD_ST_AdvMode)]
         [CustomComboInfo("直线射击 替换 强力射击 选项", "触发直线射击预备状态时，替换强力射击/爆发射击为直线射击/辉煌箭。", BRD.JobID, 0, "", "")]
         BRD_StraightShotUpgrade = 3001,
 
-        [ConflictingCombos(BRD_ST_SimpleMode)]
+        [ConflictingCombos(BRD_ST_AdvMode)]
         [ParentCombo(BRD_StraightShotUpgrade)]
         [CustomComboInfo("Dot选项", "开启此选项可适时插入毒/风箭。", BRD.JobID, 0, "", "")]
         BRD_DoTMaintainance = 3002,
 
+        [ParentCombo(BRD_StraightShotUpgrade)]
+        [CustomComboInfo("Apex Arrow Option", "Replaces Burst Shot with Apex Arrow when gauge is full and Blast Arrow when you are Blast Arrow ready.", BRD.JobID)]
+        BRD_ApexST = 3034,
+        
         [ReplaceSkill(BRD.IronJaws)]
         [ConflictingCombos(BRD_IronJaws_Alternate)]
         [CustomComboInfo("伶牙俐齿续dot模式A", "当目标身上没有毒/风dot时，替换伶牙俐齿为毒/风箭。\n当还未习得伶牙俐齿时会在毒/风箭之间自动切换。", BRD.JobID, 0, "", "")]
@@ -754,12 +758,12 @@ namespace XIVSlothComboX.Combos
         BRD_IronJaws_Alternate = 3004,
 
         [ReplaceSkill(BRD.BurstShot, BRD.QuickNock)]
-        [ConflictingCombos(BRD_ST_SimpleMode)]
+        [ConflictingCombos(BRD_ST_AdvMode)]
         [CustomComboInfo("爆发射击/连珠箭 替换 绝峰箭 选项", "当灵魂之声蓄满时，替换爆发射击/连珠箭为绝峰箭，触发爆破箭预备状态时替换为爆破箭。", BRD.JobID, 0, "", "")]
         BRD_Apex = 3005,
 
         [ReplaceSkill(BRD.Bloodletter)]
-        [ConflictingCombos(BRD_ST_SimpleMode)]
+        [ConflictingCombos(BRD_ST_AdvMode)]
         [CustomComboInfo("单目标能力技插入选项", "在三歌循环中根据cd时间替换失血箭为其他能力技。", BRD.JobID, 0, "", "")]
         BRD_ST_oGCD = 3006,
 
@@ -769,9 +773,11 @@ namespace XIVSlothComboX.Combos
         BRD_AoE_oGCD = 3007,
 
         [ReplaceSkill(BRD.QuickNock, BRD.Ladonsbite)]
-        [ConflictingCombos(BRD_AoE_SimpleMode)]
+        [ConflictingCombos(BRD_AoE_AdvMode)]
         [CustomComboInfo("AOE连击", "影噬箭 可用时把连珠箭/百首龙牙箭替换为 影噬箭。", BRD.JobID, 0, "", "")]
         BRD_AoE_Combo = 3008,
+        
+        
 
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
         [ConflictingCombos(BRD_StraightShotUpgrade, BRD_DoTMaintainance, BRD_Apex, BRD_ST_oGCD, BRD_IronJawsApex)]
@@ -781,15 +787,15 @@ namespace XIVSlothComboX.Combos
             "Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime.", BRD.JobID,
             0, "", ""
         )]
-        BRD_ST_SimpleMode = 3009,
+        BRD_ST_AdvMode = 3009,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
+        [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("简易诗人Dots", "如果目标身上不存在风/毒dot，开启此选项会在连击中加入风/毒箭。", BRD.JobID, 0, "", "")]
-        BRD_Simple_DoT = 3010,
+        BRD_Adv_DoT = 3010,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
+        [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("简易诗人唱歌", "这个选项将诗人的三首歌加入简易诗人功能里", BRD.JobID, 0, "", "")]
-        BRD_Simple_Song = 3011,
+        BRD_Adv_Song = 3011,
 
         [ParentCombo(BRD_AoE_oGCD)]
         [CustomComboInfo("唱歌相关设置", "在AOE连击中加入三首歌循环。", BRD.JobID, 0, "", "")]
@@ -803,87 +809,99 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(BRD.QuickNock, BRD.Ladonsbite)]
         [CustomComboInfo("简易诗人(AOE)", "连珠箭/百首龙牙箭 插入能力技。", BRD.JobID, 0, "", "")]
-        BRD_AoE_SimpleMode = 3015,
+        BRD_AoE_AdvMode = 3015,
 
-        [ParentCombo(BRD_AoE_SimpleMode)]
+        [ParentCombo(BRD_AoE_AdvMode)]
         [CustomComboInfo("简易诗人唱歌(AOE)", "在简单的AOE中插入歌曲。", BRD.JobID, 0, "", "")]
-        BRD_AoE_Simple_Songs = 3016,
+        BRD_AoE_Adv_Songs = 3016,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
-        [CustomComboInfo("简易诗人Buffs", "自动插入Buff技能。", BRD.JobID, 0, "", "")]
-        BRD_Simple_Buffs = 3017,
+        [ParentCombo(BRD_AoE_AdvMode)]
+        [CustomComboInfo("oGcd Option", "Weave Sidewinder, Empyreal arrow, Rain of death, and Pitch perfect when available.", BRD.JobID)]
+        BRD_AoE_Adv_oGCD = 3037,
+        
+        
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("oGcd Option", "Weave Sidewinder, Empyreal arrow, Rain of death, and Pitch perfect when available.", BRD.JobID)]
+        BRD_ST_Adv_oGCD = 3038,
 
-        [ParentCombo(BRD_Simple_Buffs)]
-        [CustomComboInfo("光明神的最终乐章替换设置", "当可用时自动插入光明神的最终乐章。", BRD.JobID, 0, "", "")]
-        BRD_Simple_BuffsRadiant = 3018,
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("Buffs Option", "Adds buffs onto the Advanced Bard feature.", BRD.JobID)]
+        BRD_Adv_Buffs = 3017,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
-        [CustomComboInfo
-        (
-            "防止资源浪费相关选项",
-            "Adds enemy health checking on mobs for buffs, DoTs and Songs.\nThey will not be reapplied if less than specified.", BRD.JobID, 0, "",
-            ""
-        )]
-        BRD_Simple_NoWaste = 3019,
+        [ParentCombo(BRD_Adv_Buffs)]
+        [CustomComboInfo("Buffs - Radiant Option", "Adds Radiant Finale to theBuffs feature.", BRD.JobID)]
+        BRD_Adv_BuffsRadiant = 3018,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("No Waste Option", "Adds enemy health checking on mobs for buffs, DoTs and Songs.\nThey will not be reapplied if less than specified.", BRD.JobID)]
+        BRD_Adv_NoWaste = 3019,
+
+        [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("单体连击打断技能设置", "如果可用，在循环中加入打断技能", BRD.JobID, 0, "", "")]
-        BRD_Simple_Interrupt = 3020,
+        BRD_Adv_Interrupt = 3020,
 
-        [CustomComboInfo("禁用绝峰箭", "不在一键连击中自动替换插入绝峰箭。", BRD.JobID, 0, "", "")]
-        BRD_RemoveApexArrow = 3021,
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("Apex Arrow Option", "Adds Apex Arrow and Blast shot", BRD.JobID)]
+        BRD_ST_ApexArrow = 3021,
+
+        [ParentCombo(BRD_AoE_AdvMode)]
+        [CustomComboInfo("Apex Arrow Option", "Adds Apex Arrow and Blast shot", BRD.JobID)]
+        BRD_Aoe_ApexArrow = 3039,
+        
+        
+
 
         //[ConflictingCombos(BardoGCDSingleTargetFeature)]
         //[ParentCombo(SimpleBardFeature)]
         //[CustomComboInfo("单体简易起手", "在单体一键连击中加入最佳起手技能。\n此选项与其它绝大部分类似选项均有冲突。", BRD.JobID, 0, "", "")]
         //BardSimpleOpener = 3022,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
-        [CustomComboInfo("一键循环异言设置", "将失血箭集中于最佳爆发期", BRD.JobID, 0, "", "")]
-        BRD_Simple_Pooling = 3023,
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("一键循环设置", "将失血箭集中于最佳爆发期", BRD.JobID, 0, "", "")]
+        BRD_Adv_Pooling = 3023,
 
-        [ConflictingCombos(BRD_ST_SimpleMode)]
+        [ConflictingCombos(BRD_ST_AdvMode)]
         [ParentCombo(BRD_IronJaws)]
         [CustomComboInfo("伶牙俐齿替换绝峰箭", "在有条件的情况下，将 绝峰箭 和 爆破箭 添加到 伶牙俐齿 上。", BRD.JobID, 0, "", "")]
         BRD_IronJawsApex = 3024,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
+        [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("简易猛者中续伶牙俐齿", "Enable the snapshotting of DoTs, within the remaining time of Raging Strikes below:", BRD.JobID, 0, "", "")]
-        BRD_Simple_RagingJaws = 3025,
+        BRD_Adv_RagingJaws = 3025,
 
-        [ParentCombo(BRD_Simple_DoT)]
+        [ParentCombo(BRD_Adv_DoT)]
         [CustomComboInfo("只有起手", "你可以自动对新目标释放Dots直到第一次自动刷新(伶牙俐齿)\n即启用本选项后，在第一次自动刷新(伶牙俐齿)后不会对新目标上Dot(包括同一目标上天断Dot后)", BRD.JobID, 0, "", "")]
         BRD_Simple_DoTOpener = 3026,
 
-        [ParentCombo(BRD_AoE_Simple_Songs)]
+        [ParentCombo(BRD_AoE_Adv_Songs)]
         [CustomComboInfo("除外放浪神的小步舞曲", "不使用放浪神的小步舞曲", BRD.JobID, 0, "", "")]
         BRD_AoE_Simple_SongsExcludeWM = 3027,
 
-        [ParentCombo(BRD_ST_SimpleMode)]
+        [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("内丹选项", "当低于此生命值百分比时，使用内丹", BRD.JobID, 0, "", "")]
         BRD_ST_SecondWind = 3028,
 
-        [ParentCombo(BRD_AoE_SimpleMode)]
+        [ParentCombo(BRD_AoE_AdvMode)]
         [CustomComboInfo("内丹选项", "当低于此生命值百分比时，使用内丹", BRD.JobID, 0, "", "")]
         BRD_AoE_SecondWind = 3029,
 
         [Variant]
-        [VariantParent(BRD_ST_SimpleMode, BRD_AoE_SimpleMode)]
+        [VariantParent(BRD_ST_AdvMode, BRD_AoE_AdvMode)]
         [CustomComboInfo("铁壁 选项", "冷却结束时使用多变铁壁", BRD.JobID)]
         BRD_Variant_Rampart = 3030,
 
         [Variant]
-        [VariantParent(BRD_ST_SimpleMode, BRD_AoE_SimpleMode)]
+        [VariantParent(BRD_ST_AdvMode, BRD_AoE_AdvMode)]
         [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", BRD.JobID)]
         BRD_Variant_Cure = 3031,
 
-        [ParentCombo(BRD_AoE_Simple_Songs)]
+        [ParentCombo(BRD_AoE_Adv_Songs)]
         [CustomComboInfo("Simple AoE Buffs Option", "Adds buffs onto the Simple AoE Bard feature.", BRD.JobID)]
-        BRD_AoE_Simple_Buffs = 3032,
+        BRD_AoE_Adv_Buffs = 3032,
 
-        [ParentCombo(BRD_AoE_SimpleMode)]
+        [ParentCombo(BRD_AoE_AdvMode)]
         [CustomComboInfo("Simple AoE No Waste Option", "Adds enemy health checking on targetted mob for songs.\nThey will not be reapplied if less than specified.", BRD.JobID)]
-        BRD_AoE_Simple_NoWaste = 3033,
+        BRD_AoE_Adv_NoWaste = 3033,
         // Last value = 3033
 
         #endregion
