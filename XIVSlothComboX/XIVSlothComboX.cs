@@ -29,6 +29,7 @@ using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 using XIVSlothComboX.Window;
 using XIVSlothComboX.Window.Tabs;
+using XIVSlothComboX.自动类;
 using AST = XIVSlothComboX.Combos.JobHelpers.AST;
 using ObjectKind = Dalamud.Game.ClientState.Objects.Enums.ObjectKind;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
@@ -143,7 +144,7 @@ namespace XIVSlothComboX
             Service.Address = new PluginAddressResolver();
             Service.Address.Setup(Service.SigScanner);
             PresetStorage.Init();
-
+            ConsumableChecker.Init();
 
             Service.ComboCache = new CustomComboCache();
             Service.IconReplacer = new IconReplacer();
@@ -218,18 +219,26 @@ namespace XIVSlothComboX
             {
                 JobID = Service.ClientState.LocalPlayer?.ClassJob?.Id;
                 BlueMageService.PopulateBLUSpells();
-                
+
                 if (Service.Configuration.自动食物)
                 {
-                    AutoItem.自动吃食物((uint)Service.Configuration.自动食物Id);
-                }
-                
-                if (Service.Configuration.自动精炼药)
-                {
-                    AutoItem.自动精炼药();
+                    if (Throttler.Throttle(2000))
+                    {
+                        AutoItem.自动吃食物(Service.Configuration.自动食物Id, Service.Configuration.RequiredFoodHQ);
+                    }
+
                 }
 
-                
+                if (Service.Configuration.自动精炼药)
+                {
+                    if (Throttler.Throttle(2000))
+                    {
+                        AutoItem.自动精炼药();
+                    }
+                  
+                }
+
+
                 if (Service.Configuration.自动精炼)
                 {
                     if (Service.Configuration.只精炼亚力山大)
@@ -265,13 +274,12 @@ namespace XIVSlothComboX
                         {
                             Spiritbond.CloseMateriaMenu();
                         }
-                        
+
                     }
 
                 }
-                
-                
-            
+
+
             }
 
         }

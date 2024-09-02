@@ -54,7 +54,8 @@ namespace XIVSlothComboX.Core
         public bool 只精炼亚力山大 { get; set; } = false;
         
         public bool 自动食物 { get; set; } = false;
-        public int 自动食物Id { get; set; } = 4752;
+        public uint 自动食物Id { get; set; } = 4752;
+        public bool RequiredFoodHQ { get; set; } = false;
         public bool 自动精炼药 { get; set; } = false;
         #endregion
 

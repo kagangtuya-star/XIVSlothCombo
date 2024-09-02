@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Linq;
 using System.Numerics;
 using ImGuiNET;
 using XIVSlothComboX.Attributes;
 using XIVSlothComboX.Services;
+using XIVSlothComboX.自动类;
 
 namespace XIVSlothComboX.Window.Tabs
 {
     internal class Settings : ConfigWindow
     {
+        public static uint RequiredFood = 0;
+        public static uint RequiredPotion = 0;
+        public static bool RequiredFoodHQ = true;
+
         internal static new void Draw()
         {
             PvEFeatures.HasToOpenJob = true;
@@ -171,14 +177,35 @@ namespace XIVSlothComboX.Window.Tabs
                 Service.Configuration.自动食物 = 自动食物;
                 Service.Configuration.Save();
             }
+
             ImGui.SameLine();
-
-            var 自动食物Id = Service.Configuration.自动食物Id;
-
-            if (ImGui.DragInt("食物Id", ref 自动食物Id))
+            if (ImGui.BeginCombo("##foodBuff", RequiredFood == 0 ? "Disabled" : $"{(RequiredFoodHQ ? " " : "")}{ConsumableChecker.Food.FirstOrDefault(x => x.Id == RequiredFood).Name}"))
             {
-                Service.Configuration.自动食物Id = 自动食物Id;
-                Service.Configuration.Save();
+                if (ImGui.Selectable("Disable"))
+                {
+                    Service.Configuration.自动食物Id = 0;
+                    Service.Configuration.RequiredFoodHQ = false;
+                    Service.Configuration.Save();
+                }
+                foreach (var x in ConsumableChecker.GetFood(true))
+                {
+                    if (ImGui.Selectable($"{x.Name}"))
+                    {
+                        Service.Configuration.自动食物Id = x.Id;
+                        Service.Configuration.RequiredFoodHQ = false;
+                        Service.Configuration.Save();
+                    }
+                }
+                foreach (var x in ConsumableChecker.GetFood(true, true))
+                {
+                    if (ImGui.Selectable($" {x.Name}"))
+                    {
+                        Service.Configuration.自动食物Id = x.Id;
+                        Service.Configuration.RequiredFoodHQ = true;
+                        Service.Configuration.Save();
+                    }
+                }
+                ImGui.EndCombo();
             }
 
             #endregion
