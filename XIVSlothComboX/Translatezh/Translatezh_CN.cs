@@ -193,27 +193,27 @@ public class Translatezh_CN
         #region Simple Dancer (AoE)
 
         { "Simple Dancer (AoE) Feature", "简易舞者（AOE）" },
-        { "Single button, AoE. Includes songs, flourishes and overprotections.\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", "等待翻译" },
+        { "Single button, AoE. Includes songs, flourishes and overprotections.\nConflicts with all other non-simple toggles, except 'Dance Step Combo'.", "单按钮，AOE。包括歌曲、花招和过度保护。\n与所有其他非简易切换冲突，除了'舞步连击'。" },
         { "Simple AoE Interrupt Option", "简易AoE中断" },
-        { "Includes an interrupt in the AoE rotation (if your current target can be interrupted).", "在AoE循环中加入中断(伤头)(如果当前目标可被打断)。" },
+        { "Includes an interrupt in the AoE rotation (if your current target can be interrupted).", "在AoE循环中加入中断（如果当前目标可被打断）。" },
         { "Simple AoE Standard Dance Option", "简易标准舞步选项（AOE）" },
-        { "Includes Standard Step (and all steps) in the AoE rotation.", "循环加入标准舞步" },
-        { "Simple AoE Standard Fill Option", "简易标准舞步选项（AOE）" },
-        { "Adds ONLY Standard dance steps and Standard Finish to the AoE rotation.\nStandard Step itself must be initiated manually when using this option.", "等待翻译" },
+        { "Includes Standard Step (and all steps) in the AoE rotation.", "在AoE循环中加入标准舞步（及所有舞步）。" },
+        { "Simple AoE Standard Fill Option", "简易标准舞步填充选项（AOE）" },
+        { "Adds ONLY Standard dance steps and Standard Finish to the AoE rotation.\nStandard Step itself must be initiated manually when using this option.", "仅将标准舞步和标准结束加入AoE循环。\n使用此选项时，标准舞步本身必须手动启动。" },
         { "Simple AoE Technical Dance Option", "简易技巧舞步选项（AOE）" },
-        { "Includes Technical Step, all dance steps and Technical Finish in the AoE rotation.", "循环加入技巧舞步" },
-        { "Simple AoE Tech Fill Option", "简易技巧舞步选项（AOE）" },
-        { "Adds ONLY Technical dance steps and Technical Finish to the AoE rotation.\nTechnical Step itself must be initiated manually when using this option.", "等待翻译" },
+        { "Includes Technical Step, all dance steps and Technical Finish in the AoE rotation.", "在AoE循环中加入技巧舞步、所有舞步和技巧结束。" },
+        { "Simple AoE Tech Fill Option", "简易技巧舞步填充选项（AOE）" },
+        { "Adds ONLY Technical dance steps and Technical Finish to the AoE rotation.\nTechnical Step itself must be initiated manually when using this option.", "仅将技巧舞步和技巧结束加入AoE循环。\n使用此选项时，技巧舞步本身必须手动启动。" },
         { "Simple AoE Tech Devilment Option", "简易AoE技巧进攻之探戈" },
-        { "Includes Devilment in the AoE rotation.\nWill activate only during Technical Finish if you Lv70 or above.", "等待翻译" },
+        { "Includes Devilment in the AoE rotation.\nWill activate only during Technical Finish if you Lv70 or above.", "在AoE循环中加入进攻之探戈。\n仅在技巧结束期间激活（如果你达到70级或以上）。" },
         { "Simple AoE Flourish Option", "简易AoE百花争艳" },
         { "Includes Flourish in the AoE rotation.", "将百花争艳加入AoE循环。" },
         { "Simple AoE Feathers Option", "简易AoE幻扇" },
-        { "Includes feather usage in the AoE rotation.", "等待翻译" },
+        { "Includes feather usage in the AoE rotation.", "在AoE循环中加入幻扇使用。" },
         { "Simple AoE Feather Pooling Option", "简易AoE幻扇囤积" },
-        { "Expends a feather in the next available weave window when capped.", "幻扇将要溢出时使用一次" },
+        { "Expends a feather in the next available weave window when capped.", "在下一个可用的编织窗口中使用一个幻扇（当达到上限时）。" },
         { "Simple AoE Panic Heals Option", "简易AoE紧急恢复" },
-        { "Includes Curing Waltz and Second Wind in the AoE rotation when available and your HP is below the set percentages.", "自身血量低于设定值时使用治疗华尔兹、内丹" },
+        { "Includes Curing Waltz and Second Wind in the AoE rotation when available and your HP is below the set percentages.", "当可用且你的HP低于设定百分比时，在AoE循环中加入治疗华尔兹和内丹。" },
         { "Simple AoE Improvisation Option", "简易AoE即兴表演" },
         { "Includes Improvisation in the AoE rotation when available.", "当即兴表演可用时将其加入AoE循环。" },
 
@@ -227,21 +227,23 @@ public class Translatezh_CN
 
         #region DRAGOON
 
-        { "Replaces True Thrust with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job.", "等待翻译" },
+        { "Replaces True Thrust with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job.", "将真实突刺替换为一键全单体循环。\n这是新手的理想选择。" },
 
         #region Advanced ST Dragoon
 
-        { "Replaces True Thrust with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", "等待翻译" },
-        { "Level 100 Opener", "等待翻译" },
-        { "Adds the Balance opener to the rotation.", "等待翻译" },
+        { "Replaces True Thrust with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", "将真实突刺替换为一键全单体循环。\n如果你想自定义循环，这些功能是理想的选择。" },
+        { "Level 100 Opener", "100级开场" },
+        { "Adds the Balance opener to the rotation.", "将平衡开场加入循环。" },
 
         #region Buffs ST
 
-        { "Adds various buffs to the rotation.", "等待翻译" },
+        { "Adds various buffs to the rotation.", "将各种增益加入循环。" },
         { "Battle Litany Option", "战斗连祷选项" },
-        { "Adds Battle Litany to the rotation.", "等待翻译" },
+        { "Adds Battle Litany to the rotation.", "将战斗连祷加入循环。" },
         { "Lance Charge Option", "猛枪选项" },
-        { "Adds Lance Charge to the rotation.", "等待翻译" },
+        { "Adds Lance Charge to the rotation.", "将猛枪加入循环。" },
+
+        #endregion
 
         #endregion
 
@@ -292,27 +294,26 @@ public class Translatezh_CN
 
         #region Advanced AoE Dragoon
 
-        { "Replaces Doom Spike with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", "等待翻译" },
+        { "Replaces Doom Spike with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", "将末日尖刺替换为一键全AoE循环。\n这些功能是自定义循环的理想选择。" },
 
         #region Buffs AoE
 
-        { "Buffs AoE Option", "等待翻译" },
-        { "Adds Lance Charge and Battle Litany to the rotation.", "等待翻译" },
-        { "Battle Litany AoE Option", "等待翻译" },
-        { "Lance Charge AoE Option", "等待翻译" },
+        { "Buffs AoE Option", "AoE增益选项" },
+        { "Adds Lance Charge and Battle Litany to the rotation.", "将猛枪和战斗连祷加入循环。" },
+        { "Battle Litany AoE Option", "战斗连祷AoE选项" },
+        { "Lance Charge AoE Option", "猛枪AoE选项" },
 
         #endregion
 
         #region cooldowns AoE
 
-        { "Adds Life Surge, onto proper GCDs, to the rotation.", "等待翻译" },
-        { "Adds Rise of the Dragonj to the rotation.", "等待翻译" },
-        { "Wyrmwind Option", "等待翻译" },
+        { "Adds Life Surge, onto proper GCDs, to the rotation.", "将生命激增加入适当的GCD循环。" },
+        { "Wyrmwind Option", "龙风选项" },
 
         #endregion
 
-        { "Low Level Disembowel", "等待翻译" },
-        { "Adds Disembowel combo to the rotation when you are or synced below level 62.", "等待翻译" },
+        { "Low Level Disembowel", "低等级开膛" },
+        { "Adds Disembowel combo to the rotation when you are or synced below level 62.", "当你在或同步到62级以下时，将开膛连击加入循环。" },
 
         #endregion
 
@@ -361,48 +362,48 @@ public class Translatezh_CN
 
         #region Advanced ST
 
-        { "Level 100 Opener Option", "等待翻译" },
-        { "Uses the Balance opener.", "等待翻译" },
-        { "Hot Shot / Air Anchor Option", "等待翻译" },
+        { "Level 100 Opener Option", "100级开场选项" },
+        { "Uses the Balance opener.", "使用平衡开场。" },
+        { "Hot Shot / Air Anchor Option", "热弹/空中锚选项" },
         { "Adds Hot Shot/Air Anchor to the rotation.", "将热弹/空中锚添加到循环中。" },
         { "Reassemble Option", "重新整备选项" },
         { "Adds Reassemble to the rotation.", "将整备添加到循环中。" },
-        { "Hypercharge Option", "超荷" },
+        { "Hypercharge Option", "超荷选项" },
         { "Adds Hypercharge to the rotation.", "将超荷添加到循环中。" },
-        { "Heat Blast / Blazing Shot Option", "等待翻译" },
-        { "Adds Heat Blast or Blazing Shot to the rotation", "等待翻译" },
+        { "Heat Blast / Blazing Shot Option", "热爆/炽焰射击选项" },
+        { "Adds Heat Blast or Blazing Shot to the rotation.", "将热爆或炽焰射击添加到循环中。" },
         { "Rook Autoturret/Automaton Queen Option", "高达选项" },
-        { "Adds Rook Autoturret or Automaton Queen to the rotation.", "等待翻译" },
-        { "Wildfire Option", "野火设置" },
+        { "Adds Rook Autoturret or Automaton Queen to the rotation.", "将高达自动炮塔或自动人形女王添加到循环中。" },
+        { "Wildfire Option", "野火选项" },
         { "Adds Wildfire to the rotation.", "将野火添加到循环中。" },
-        { "Drill Option", "等待翻译" },
+        { "Drill Option", "钻头选项" },
         { "Adds Drill to the rotation.", "将钻头添加到循环中。" },
         { "Barrel Stabilizer Option", "枪管加热选项" },
-        { "Adds Barrel Stabilizer to the rotation.", "将枪管加热添加到旋转中。" },
-        { "Full Metal Field Option", "等待翻译" },
-        { "Adds Full Metal Field to the rotation.", "等待翻译" },
-        { "Chain Saw Option", "[AI]回转飞锯" },
+        { "Adds Barrel Stabilizer to the rotation.", "将枪管加热添加到循环中。" },
+        { "Full Metal Field Option", "全金属领域选项" },
+        { "Adds Full Metal Field to the rotation.", "将全金属领域添加到循环中。" },
+        { "Chain Saw Option", "回转飞锯选项" },
         { "Adds Chain Saw to the rotation.", "将回转飞锯添加到循环中。" },
-        { "Excavator Option", "等待翻译" },
-        { "Adds Excavator to the rotation.", "等待翻译" },
-        { "Rook / Queen Overdrive Option", "等待翻译" },
-        { "Adds Rook or Queen Overdrive to the rotation.", "等待翻译" },
-        { "Head Graze Option", "[AI]头部擦伤选项" },
-        { "Uses Head Graze to interrupt during the rotation, where applicable.", "[AI]在适当的情况下使用头部擦伤来打断旋转。" },
+        { "Excavator Option", "挖掘机选项" },
+        { "Adds Excavator to the rotation.", "将挖掘机添加到循环中。" },
+        { "Rook / Queen Overdrive Option", "高达/女王超频选项" },
+        { "Adds Rook or Queen Overdrive to the rotation.", "将高达或女王超频添加到循环中。" },
+        { "Head Graze Option", "头部擦伤选项" },
+        { "Uses Head Graze to interrupt during the rotation, where applicable.", "在适当的情况下使用头部擦伤来打断循环。" },
         { "Second Wind Option", "内丹选项" },
-        { "Use Second Wind when below the set HP percentage.", "[AI]当低于设置的HP百分比时使用" },
+        { "Use Second Wind when below the set HP percentage.", "当低于设定的HP百分比时使用内丹。" },
 
         #endregion
 
         #region Advanced AoE
 
-        { "Gauss Round / Ricochet \nDouble Check / Checkmate option", "等待翻译" },
-        { "Adds Gauss Round and Ricochet or Double Check and Checkmate to the rotation.", "等待翻译" },
-        { "Flamethrower Option", "[AI]将火焰喷射器添加到旋转中。" },
-        { "Adds Flamethrower to the rotation.", "[AI]将火焰喷射器添加到旋转中。" },
-        { "Bioblaster Option", "[AI]将生物爆破器添加到旋转中。" },
-        { "Adds Bioblaster to the rotation.", "[AI]将生物爆破器添加到旋转中。" },
-        { "Adds Chain Saw to the the rotation.", "[AI]将链锯添加到旋转中。" },
+        { "Gauss Round / Ricochet \nDouble Check / Checkmate option", "高斯回转/跳弹\n双重检查/将军选项" },
+        { "Adds Gauss Round and Ricochet or Double Check and Checkmate to the rotation.", "将高斯回转和跳弹或双重检查和将军添加到循环中。" },
+        { "Flamethrower Option", "火焰喷射器选项" },
+        { "Adds Flamethrower to the rotation.", "将火焰喷射器添加到循环中。" },
+        { "Bioblaster Option", "生物爆破器选项" },
+        { "Adds Bioblaster to the rotation.", "将生物爆破器添加到循环中。" },
+        { "Adds Chain Saw to the the rotation.", "将链锯添加到循环中。" },
 
         #endregion
 
@@ -411,23 +412,24 @@ public class Translatezh_CN
         #endregion
 
         { "Overdrive Feature", "[AI]超档炮塔/人偶替换设置" },
-        { "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", "[AI]在技能可用时，将车式浮空炮塔和后式自走人偶转换为超档车式炮塔和超档自走人偶" },
-        { "Drill/Air Anchor (Hot Shot) Feature", "[AI]钻头、空气锚 (热弹)、回转飞锯根据cd时间互相替换." },
-        { "Big Hitter Feature", "等待翻译" },
-        { "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", "等待翻译" },
+        { "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", "[AI]在技能可用时，将车式浮空炮塔和后式自走人偶转换为超档车式炮塔和超档自走人偶。" },
+        { "Drill/Air Anchor (Hot Shot) Feature", "[AI]钻头、空气锚 (热弹)、回转飞锯根据cd时间互相替换。" },
+        { "Big Hitter Feature", "大打击功能" },
+        { "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", "根据冷却时间替换热弹、钻头、空气锚、回转飞锯和挖掘机。" },
         { "Single Button Heat Blast Feature", "[AI]热冲击一键整合" },
-        { "Turns Heat Blast into Hypercharge when at or above 50 heat.", "等待翻译" },
-        { "Barrel Option", "等待翻译" },
-        { "Adds Barrel Stabilizer to the feature when below 50 Heat Gauge.", "等待翻译" },
-        { "Adds Wildfire to the feature when at or above 50 heat.", "等待翻译" },
+        { "Turns Heat Blast into Hypercharge when at or above 50 heat.", "当热量达到或超过50时，将热冲击变为超荷。" },
+        { "Barrel Option", "枪管选项" },
+        { "Adds Barrel Stabilizer to the feature when below 50 Heat Gauge.", "当热量计低于50时，将枪管稳定器添加到功能中。" },
+        { "Adds Wildfire to the feature when at or above 50 heat.", "当热量达到或超过50时，将野火添加到功能中。" },
         { "Single Button Auto Crossbow Feature", "[AI]自动弩一键整合" },
-        { "Turns Auto Crossbow into Hypercharge when at or above 50 heat.", "等待翻译" },
-        { "Gauss Round / Ricochet\n Double Check / Checkmate Option", "等待翻译" },
-        { "Switches between Auto Crossbow and either Gauss Round and Ricochet or Double Check and Checkmate, depending on cooldown timers.", "等待翻译" },
+        { "Turns Auto Crossbow into Hypercharge when at or above 50 heat.", "当热量达到或超过50时，将自动弩变为超荷。" },
+        { "Gauss Round / Ricochet\n Double Check / Checkmate Option", "高斯回转/跳弹\n双重检查/将军选项" },
+        { "Switches between Auto Crossbow and either Gauss Round and Ricochet or Double Check and Checkmate, depending on cooldown timers.", "根据冷却时间，在自动弩和高斯回转与跳弹或双重检查与将军之间切换。" },
         { "Physical Ranged DPS: Double Dismantle Protection", "[AI]物理远程DPS：双重拆卸保护" },
-        { "Prevents the use of Dismantle when target already has the effect.", "等待翻译" },
+        { "Prevents the use of Dismantle when target already has the effect.", "当目标已经有拆卸效果时，防止使用拆卸。" },
         { "Dismantle - Tactician", "[AI]拆卸-战术家" },
         { "Swap dismantle with tactician when dismantle is on cooldown.", "[AI]当拆卸冷却时，用战术家替换拆卸。" },
+
 
         #endregion
 
@@ -730,152 +732,157 @@ public class Translatezh_CN
 
         #region Yukikaze/Kasha Combos
 
-        { "Yukikaze Combo", "等待翻译" },
-        { "Replace Yukikaze with its combo chain.", "等待翻译" },
-        { "Kasha Combo", "等待翻译" },
-        { "Replace Kasha with its combo chain.", "等待翻译" },
-        { "Gekko Combo", "等待翻译" },
-        { "Replace Gekko with its combo chain.", "等待翻译" },
+        { "Yukikaze Combo", "雪风连击" },
+        { "Replace Yukikaze with its combo chain.", "将雪风替换为其连击链。" },
+        { "Kasha Combo", "花车连击" },
+        { "Replace Kasha with its combo chain.", "将花车替换为其连击链。" },
+        { "Gekko Combo", "月光连击" },
+        { "Replace Gekko with its combo chain.", "将月光替换为其连击链。" },
 
         #endregion
 
         #region Simple ST
 
-        { "Replaces Gekko with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", "等待翻译" },
+        { "Replaces Gekko with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", "将月光替换为一键全单体循环。\n这对新手来说是理想的选择。" },
 
         #endregion
 
         #region Advanced ST
 
-        { "Replaces Gekko with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", "等待翻译" },
-        { "Adds Yukikaze combo to the rotation.", "等待翻译" },
-        { "Adds Kasha combo to the rotation.", "等待翻译" },
-        { "Shinten Option", "等待翻译" },
-        { "Adds Shinten to the rotation", "等待翻译" },
+        { "Replaces Gekko with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", "将月光替换为一键全单体循环。\n如果你想自定义循环，这些功能是理想的选择。" },
+        { "Adds Yukikaze combo to the rotation.", "将雪风连击添加到循环中。" },
+        { "Adds Kasha combo to the rotation.", "将花车连击添加到循环中。" },
+        { "Shinten Option", "震天选项" },
+        { "Adds Shinten to the rotation", "将震天添加到循环中。" },
 
         #region cooldowns on Main Combo
 
         { "CDs on Main Combo", "主连击CD整合" },
-        { "Collection of CD features on main combo.", "等待翻译" },
-        { "Ikishoten Option", "等待翻译" },
-        { "Adds Ikishoten when at or below 50 Kenki.\nWill dump Kenki at 10 seconds left to allow Ikishoten to be used.", "等待翻译" },
-        { "Iaijutsu Option", "等待翻译" },
-        { "Adds Midare: Setsugekka, Higanbana, and Kaeshi: Setsugekka to the rotation.", "等待翻译" },
-        { "Iajutsu movement Option", "等待翻译" },
-        { "Adds Midare: Setsugekka, Higanbana, and Kaeshi: Setsugekka when you're not moving.", "等待翻译" },
-        { "Ogi Namikiri Option", "等待翻译" },
-        { "Adds Ogi Namikiri and Kaeshi: Namikiri to the rotation.", "等待翻译" },
-        { "Ogi Namikiri movement Option", "等待翻译" },
-        { "Adds Ogi Namikiri and Kaeshi: Namikiri when you're not moving.", "等待翻译" },
-        { "Zanshin Option", "等待翻译" },
-        { "Adds Zanshin when ready to the rotation.", "等待翻译" },
-        { "Meikyo Shisui Option", "等待翻译" },
-        { "Adds Meikyo Shisui to the rotation.", "等待翻译" },
-        { "Shoha Option", "等待翻译" },
-        { "Adds Shoha when you have three meditation stacks.", "等待翻译" },
-        { "Senei Option", "等待翻译" },
-        { "Adds Senei to the rotation.", "等待翻译" },
+        { "Collection of CD features on main combo.", "主连击的CD功能集合。" },
+        { "Ikishoten Option", "生生发选项" },
+        { "Adds Ikishoten when at or below 50 Kenki.\nWill dump Kenki at 10 seconds left to allow Ikishoten to be used.", "在剑气50或以下时添加生生发。\n在剩余10秒时倾泻剑气以允许使用生生发。" },
+        { "Iaijutsu Option", "居合术选项" },
+        { "Adds Midare: Setsugekka, Higanbana, and Kaeshi: Setsugekka to the rotation.", "将乱雪月花、彼岸花和返雪月花添加到循环中。" },
+        { "Iajutsu movement Option", "居合术移动选项" },
+        { "Adds Midare: Setsugekka, Higanbana, and Kaeshi: Setsugekka when you're not moving.", "在你不移动时添加乱雪月花、彼岸花和返雪月花。" },
+        { "Ogi Namikiri Option", "奥义浪切选项" },
+        { "Adds Ogi Namikiri and Kaeshi: Namikiri to the rotation.", "将奥义浪切和返浪切添加到循环中。" },
+        { "Ogi Namikiri movement Option", "奥义浪切移动选项" },
+        { "Adds Ogi Namikiri and Kaeshi: Namikiri when you're not moving.", "在你不移动时添加奥义浪切和返浪切。" },
+        { "Zanshin Option", "残心选项" },
+        { "Adds Zanshin when ready to the rotation.", "在准备好时将残心添加到循环中。" },
+        { "Meikyo Shisui Option", "明镜止水选项" },
+        { "Adds Meikyo Shisui to the rotation.", "将明镜止水添加到循环中。" },
+        { "Shoha Option", "照破选项" },
+        { "Adds Shoha when you have three meditation stacks.", "在你有三个冥想层时添加照破。" },
+        { "Senei Option", "千影选项" },
+        { "Adds Senei to the rotation.", "将千影添加到循环中。" },
 
         #endregion
 
-        { "Ranged Uptime Feature", "等待翻译" },
-        { "Adds Enpi to the rotation when you are out of range.", "等待翻译" },
-        { "Adds True North if Meikyo Shisui's buff is on you.", "等待翻译" },
+        { "Ranged Uptime Feature", "远程持续时间功能" },
+        { "Adds Enpi to the rotation when you are out of range.", "当你超出范围时将燕飞添加到循环中。" },
+        { "Adds True North if Meikyo Shisui's buff is on you.", "如果你有明镜止水的增益效果，则添加真北。" },
 
         #endregion
 
         #region AoE Oka Combo
 
-        { "Oka Combo", "等待翻译" },
-        { "Replace Oka with its combo chain.", "等待翻译" },
-        { "Oka Two Target Rotation Feature", "等待翻译" },
-        { "Adds the Yukikaze combo, Mangetsu combo, Senei, Shinten, and Shoha to Oka combo.\nUsed for two targets only and when Lv86 and above.", "将雪风连击、满月连击、千影、侍天和照破加入岡连击中。\n仅适用于两个目标且等级在86级及以上。" },
-        { "Mangetsu Combo", "等待翻译" },
-        { "Replace Mangetsu with its combo chain.", "等待翻译" },
+        { "Oka Combo", "冈连击" },
+        { "Replace Oka with its combo chain.", "将冈替换为其连击链。" },
+        { "Oka Two Target Rotation Feature", "冈双目标循环功能" },
+        { "Adds the Yukikaze combo, Mangetsu combo, Senei, Shinten, and Shoha to Oka combo.\nUsed for two targets only and when Lv86 and above.", "将雪风连击、满月连击、千影、侍天和照破加入冈连击中。\n仅适用于两个目标且等级在86级及以上。" },
+        { "Mangetsu Combo", "满月连击" },
+        { "Replace Mangetsu with its combo chain.", "将满月替换为其连击链。" },
 
+        #endregion
+
+
+
+        #region AoE Combos
+
+        { "Replaces Fuga/Fuko with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", "将风雅替换为一键全AoE循环。\n如果你想自定义循环，这些功能是理想的选择。" },
+        { "Adds Oka combo to the rotation.", "将冈连击添加到循环中。" },
+        { "Kyuten", "九天" },
+        { "Adds Kyuten to the rotation.", "将九天添加到循环中。" },
+        { "Iaijutsu", "居合术" },
+        { "Adds Tenka Goken, Midare: Setsugekka, and Kaeshi: Goken when ready and when you're not moving to the rotation.", "在准备好且不移动时，将天下五剑、乱雪月花和返五剑添加到循环中。" },
+        { "Ikishoten", "生生发" },
+        { "Ogi Namikiri", "奥义浪切" },
+        { "Adds Ogi Namikiri and Kaeshi: Namikiri when ready and when you're not moving to the rotation.", "在准备好且不移动时，将奥义浪切和返浪切添加到循环中。" },
+        { "Zanshin", "残心" },
+        { "Adds Zanshin to the rotation.", "将残心添加到循环中。" },
+        { "Shoha", "照破" },
+        { "Adds Shoha when you have 3 meditation stacks.", "在你有三个冥想层时添加照破。" },
+        { "Guren", "红莲" },
+        { "Adds Guren to the rotation.", "将红莲添加到循环中。" },
+        { "Hagakure", "叶隐" },
+        { "Adds Hagakure to the rotation when there are three Sen.", "在有三个闪时将叶隐添加到循环中。" },
+
+        #endregion
+
+     
         #endregion
 
         #region Simple AoE
 
-        { "Replaces Fugo/Fuko with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", "等待翻译" },
+        { "Replaces Fugo/Fuko with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", "将风雅替换为一键全单体循环。\n这对新手来说是理想的选择。" },
 
         #endregion
 
-        #region AoE Combos
-
-        { "Replaces Fuga/Fuko with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", "等待翻译" },
-        { "Adds Oka combo to the rotation.", "等待翻译" },
-        { "Kyuten", "等待翻译" },
-        { "Adds Kyuten to the rotation.", "等待翻译" },
-        { "Iaijutsu", "等待翻译" },
-        { "Adds Tenka Goken, Midare: Setsugekka, and Kaeshi: Goken when ready and when you're not moving to the rotation.", "等待翻译" },
-        { "Ikishoten", "等待翻译" },
-        { "Ogi Namikiri", "等待翻译" },
-        { "Adds Ogi Namikiri and Kaeshi: Namikiri when ready and when you're not moving to the rotation.", "等待翻译" },
-        { "Zanshin", "等待翻译" },
-        { "Adds Zanshin to the rotation.", "等待翻译" },
-        { "Shoha", "等待翻译" },
-        { "Adds Shoha when you have 3 meditation stacks.", "等待翻译" },
-        { "Guren", "等待翻译" },
-        { "Adds Guren to the rotation.", "等待翻译" },
-        { "Hagakure", "等待翻译" },
-        { "Adds Hagakure to the rotation when there are three Sen.", "等待翻译" },
-        { "Meikyo Shisui", "等待翻译" },
-
-        #endregion
 
         #region Cooldown Features
 
-        { "Jinpu/Shifu Feature", "等待翻译" },
+        { "Jinpu/Shifu Feature", "阵风/士风功能" },
         { "Replace Meikyo Shisui with Jinpu, Shifu, and Yukikaze depending on what is needed.", "根据需要，用阵风、士风和雪风代替明镜止水。" },
 
         #endregion
 
         #region Iaijutsu Features
 
-        { "Iaijutsu Features", "等待翻译" },
-        { "Collection of Iaijutsu Features.", "等待翻译" },
-        { "Iaijutsu to Tsubame-Gaeshi", "等待翻译" },
-        { "Replace Iaijutsu with  Tsubame-gaeshi when Sen is empty.", "等待翻译" },
-        { "Iaijutsu to Shoha", "等待翻译" },
-        { "Replace Iaijutsu with Shoha when meditation is 3.", "等待翻译" },
-        { "Iaijutsu to Ogi Namikiri", "等待翻译" },
-        { "Replace Iaijutsu with Ogi Namikiri and Kaeshi: Namikiri when buffed with Ogi Namikiri Ready.", "等待翻译" },
+        { "Iaijutsu Features", "居合术功能" },
+        { "Collection of Iaijutsu Features.", "居合术功能集合。" },
+        { "Iaijutsu to Tsubame-Gaeshi", "居合术到燕返" },
+        { "Replace Iaijutsu with Tsubame-gaeshi when Sen is empty.", "在闪空时用燕返替换居合术。" },
+        { "Iaijutsu to Shoha", "居合术到照破" },
+        { "Replace Iaijutsu with Shoha when meditation is 3.", "在冥想层数为3时用照破替换居合术。" },
+        { "Iaijutsu to Ogi Namikiri", "居合术到奥义浪切" },
+        { "Replace Iaijutsu with Ogi Namikiri and Kaeshi: Namikiri when buffed with Ogi Namikiri Ready.", "在有奥义浪切准备增益时，用奥义浪切和返浪切替换居合术。" },
 
         #endregion
 
         #region Shinten Features
 
-        { "Shinten to Shoha", "等待翻译" },
-        { "Replace Hissatsu: Shinten with Shoha when Meditation is full.", "等待翻译" },
-        { "Shinten to Senei", "等待翻译" },
-        { "Replace Hissatsu: Shinten with Senei when its cooldown is up.", "等待翻译" },
+        { "Shinten to Shoha", "震天到照破" },
+        { "Replace Hissatsu: Shinten with Shoha when Meditation is full.", "在冥想层数满时用照破替换必杀技：震天。" },
+        { "Shinten to Senei", "震天到千影" },
+        { "Replace Hissatsu: Shinten with Senei when its cooldown is up.", "在冷却结束时用千影替换必杀技：震天。" },
 
         #endregion
 
         #region Kyuten Features
 
-        { "Kyuten to Shoha", "等待翻译" },
-        { "Replace Hissatsu: Kyuten with Shoha when Meditation is full.", "等待翻译" },
-        { "Kyuten to Guren", "等待翻译" },
-        { "Replace Hissatsu: Kyuten with Guren when its cooldown is up.", "等待翻译" },
+        { "Kyuten to Shoha", "九天到照破" },
+        { "Replace Hissatsu: Kyuten with Shoha when Meditation is full.", "在冥想层数满时用照破替换必杀技：九天。" },
+        { "Kyuten to Guren", "九天到红莲" },
+        { "Replace Hissatsu: Kyuten with Guren when its cooldown is up.", "在冷却结束时用红莲替换必杀技：九天。" },
 
         #endregion
 
         #region Other
 
-        { "Gyoten Feature", "等待翻译" },
-        { "Hissatsu: Gyoten becomes Yaten/Gyoten depending on the distance from your target.", "等待翻译" },
-        { "Ikishoten Namikiri Feature", "等待翻译" },
-        { "Replace Ikishoten with Ogi Namikiri and then Kaeshi Namikiri when available.\nIf you have full Meditation stacks, Ikishoten becomes Shoha while you have Ogi Namikiri ready.", "如果可用，用大刀·波尼切替换意气风发，然后再用回返波尼切。\n如果你拥有满的冥想层数，意气风发将变成照破，同时你准备好使用大刀·波尼切。" },
+        { "Gyoten Feature", "御天功能" },
+        { "Hissatsu: Gyoten becomes Yaten/Gyoten depending on the distance from your target.", "必杀技：御天根据你与目标的距离变为夜天/御天。" },
+        { "Ikishoten Namikiri Feature", "意气风发浪切功能" },
+        { "Replace Ikishoten with Ogi Namikiri and then Kaeshi Namikiri when available.\nIf you have full Meditation stacks, Ikishoten becomes Shoha while you have Ogi Namikiri ready.", "如果可用，用奥义浪切替换意气风发，然后再用返浪切。\n如果你拥有满的冥想层数，意气风发将变成照破，同时你准备好使用奥义浪切。" },
 
         #endregion
+
 
         #region variant
 
         #endregion
 
-        #endregion
 
         #region SCHOLAR
 
@@ -1175,17 +1182,16 @@ public class Translatezh_CN
 
         #endregion
 
-        #endregion
 
         #region PvP Combos
 
         #region PvP GLOBAL FEATURES
 
-        { "Emergency Guard Feature", "等待翻译" },
-        { "Uses Guard when your HP is under the set threshold.", "等待翻译" },
-        { "Quick Purify Feature", "等待翻译" },
-        { "Prevent Mash Cancelling Feature", "等待翻译" },
-        { "Stops you cancelling your guard if you're pressing buttons quickly.", "等待翻译" },
+        { "Emergency Guard Feature", "紧急防御功能" },
+        { "Uses Guard when your HP is under the set threshold.", "当你的HP低于设定阈值时使用防御。" },
+        { "Quick Purify Feature", "快速净化功能" },
+        { "Prevent Mash Cancelling Feature", "防止快速按键取消功能" },
+        { "Stops you cancelling your guard if you're pressing buttons quickly.", "如果你快速按键，将防止你取消防御。" },
 
         #endregion
 
@@ -1203,9 +1209,9 @@ public class Translatezh_CN
 
         #region BLACK MAGE
 
-        { "Night Wing Option", "等待翻译" },
-        { "Adds Night Wing to Burst Mode.", "等待翻译" },
-        { "Aetherial Manipulation Option", "等待翻译" },
+        { "Night Wing Option", "夜翼选项" },
+        { "Adds Night Wing to Burst Mode.", "将夜翼添加到爆发模式中。" },
+        { "Aetherial Manipulation Option", "以太操控选项" },
 
         #endregion
 
@@ -1215,123 +1221,124 @@ public class Translatezh_CN
 
         #region DANCER
 
-        { "Adds Curing Waltz to the combo when available, and your HP is at or below the set percentage.", "等待翻译" },
+        { "Adds Curing Waltz to the combo when available, and your HP is at or below the set percentage.", "在可用时将治疗华尔兹加入连击，当你的HP在或低于设定百分比时。" },
 
         #endregion
 
         #region DARK KNIGHT
 
-        { "Plunge Option", "等待翻译" },
-        { "Adds Plunge to Burst Mode.", "等待翻译" },
-        { "Uses Plunge whilst in melee range, and not just as a gap-closer.", "等待翻译" },
+        { "Plunge Option", "突进选项" },
+        { "Adds Plunge to Burst Mode.", "将突进加入爆发模式。" },
+        { "Uses Plunge whilst in melee range, and not just as a gap-closer.", "在近战范围内使用突进，而不仅仅是作为一个接近技能。" },
 
         #endregion
 
         #region DRAGOON
 
-        { "Using Elusive Jump turns Wheeling Thrust Combo into all-in-one burst damage button.", "等待翻译" },
-        { "Adds Geirskogul to Burst Mode.", "等待翻译" },
-        { "Adds Nastrond to Burst Mode.", "等待翻译" },
-        { "Horrid Roar Option", "等待翻译" },
-        { "Adds Horrid Roar to Burst Mode.", "等待翻译" },
-        { "Sustain Chaos Spring Option", "等待翻译" },
-        { "Adds Wyrmwind Thrust to Burst Mode.", "等待翻译" },
-        { "High Jump Weave Option", "等待翻译" },
-        { "Adds High Jump to Burst Mode.", "等待翻译" },
-        { "Elusive Jump Burst Protection Option", "等待翻译" },
-        { "Disables Elusive Jump if Burst is not ready.", "等待翻译" },
+        { "Using Elusive Jump turns Wheeling Thrust Combo into all-in-one burst damage button.", "使用灵巧跳跃将轮回突刺连击变成一键爆发伤害按钮。" },
+        { "Adds Geirskogul to Burst Mode.", "将盖尔斯科古尔加入爆发模式。" },
+        { "Adds Nastrond to Burst Mode.", "将纳斯龙德加入爆发模式。" },
+        { "Horrid Roar Option", "恐怖咆哮选项" },
+        { "Adds Horrid Roar to Burst Mode.", "将恐怖咆哮加入爆发模式。" },
+        { "Sustain Chaos Spring Option", "持续混沌之泉选项" },
+        { "Adds Wyrmwind Thrust to Burst Mode.", "将龙风突刺加入爆发模式。" },
+        { "High Jump Weave Option", "高跳编织选项" },
+        { "Adds High Jump to Burst Mode.", "将高跳加入爆发模式。" },
+        { "Elusive Jump Burst Protection Option", "灵巧跳跃爆发保护选项" },
+        { "Disables Elusive Jump if Burst is not ready.", "如果爆发未准备好，则禁用灵巧跳跃。" },
 
         #endregion
 
         #region GUNBREAKER
 
-        { "Turns Solid Barrel Combo into an all-in-one damage button.", "等待翻译" },
-        { "Gnashing Fang Continuation Feature", "等待翻译" },
-        { "Adds Continuation onto Gnashing Fang.", "等待翻译" },
-        { "Draw And Junction Option", "等待翻译" },
-        { "Adds Draw And Junction to Burst Mode.", "等待翻译" },
-        { "Gnashing Fang Option", "等待翻译" },
-        { "Continuation Option", "等待翻译" },
-        { "Adds Continuation to Burst Mode.", "等待翻译" },
-        { "Weaves Rough Divide when No Mercy Buff is about to expire.", "等待翻译" },
-        { "Junction Cast DPS Option", "等待翻译" },
-        { "Adds Junction Cast (DPS) to Burst Mode.", "等待翻译" },
-        { "Junction Cast Healer Option", "等待翻译" },
-        { "Adds Junction Cast (Healer) to Burst Mode.", "等待翻译" },
-        { "Junction Cast Tank Option", "等待翻译" },
-        { "Adds Junction Cast (Tank) to Burst Mode.", "等待翻译" },
+        { "Turns Solid Barrel Combo into an all-in-one damage button.", "将坚固枪管连击变成一键伤害按钮。" },
+        { "Gnashing Fang Continuation Feature", "咬牙切齿连击功能" },
+        { "Adds Continuation onto Gnashing Fang.", "将连击加入咬牙切齿。" },
+        { "Draw And Junction Option", "抽取与连接选项" },
+        { "Adds Draw And Junction to Burst Mode.", "将抽取与连接加入爆发模式。" },
+        { "Gnashing Fang Option", "咬牙切齿选项" },
+        { "Continuation Option", "连击选项" },
+        { "Adds Continuation to Burst Mode.", "将连击加入爆发模式。" },
+        { "Weaves Rough Divide when No Mercy Buff is about to expire.", "当无情增益即将到期时编织粗暴分裂。" },
+        { "Junction Cast DPS Option", "连接施放DPS选项" },
+        { "Adds Junction Cast (DPS) to Burst Mode.", "将连接施放（DPS）加入爆发模式。" },
+        { "Junction Cast Healer Option", "连接施放治疗选项" },
+        { "Adds Junction Cast (Healer) to Burst Mode.", "将连接施放（治疗）加入爆发模式。" },
+        { "Junction Cast Tank Option", "连接施放坦克选项" },
+        { "Adds Junction Cast (Tank) to Burst Mode.", "将连接施放（坦克）加入爆发模式。" },
 
         #endregion
 
         #region MACHINIST
 
-        { "Alternate Drill Option", "等待翻译" },
-        { "Saves Drill for use after Wildfire.", "等待翻译" },
-        { "Alternate Analysis Option", "等待翻译" },
-        { "Uses Analysis with Air Anchor instead of Chain Saw.", "等待翻译" },
+        { "Alternate Drill Option", "替代钻头选项" },
+        { "Saves Drill for use after Wildfire.", "保存钻头以在野火之后使用。" },
+        { "Alternate Analysis Option", "替代分析选项" },
+        { "Uses Analysis with Air Anchor instead of Chain Saw.", "使用分析与空气锚而不是链锯。" },
 
         #endregion
 
         #region MONK
 
-        { "Turns Phantom Rush Combo into an all-in-one damage button.", "等待翻译" },
-        { "Thunderclap Option", "等待翻译" },
-        { "Riddle of Earth Option", "等待翻译" },
+        { "Turns Phantom Rush Combo into an all-in-one damage button.", "将幻影冲击连击变成一键伤害按钮。" },
+        { "Thunderclap Option", "雷鸣选项" },
+        { "Riddle of Earth Option", "大地之谜选项" },
 
         #endregion
 
         #region NINJA
 
-        { "Uses Three Mudra on Meisui when HP is under the set threshold.", "等待翻译" },
+        { "Uses Three Mudra on Meisui when HP is under the set threshold.", "当HP低于设定阈值时在明水上使用三印。" },
 
         #endregion
 
         #region PALADIN
 
-        { "Shield Bash Option", "等待翻译" },
-        { "Adds Shield Bash to Burst Mode.", "等待翻译" },
-        { "Confiteor Option", "等待翻译" },
-        { "Adds Confiteor to Burst Mode.", "等待翻译" },
+        { "Shield Bash Option", "盾击选项" },
+        { "Adds Shield Bash to Burst Mode.", "将盾击加入爆发模式。" },
+        { "Confiteor Option", "忏悔选项" },
+        { "Adds Confiteor to Burst Mode.", "将忏悔加入爆发模式。" },
 
         #endregion
 
+
         #region PICTOMANCER
 
-        { "Burst Mode", "等待翻译" },
-        { "Turns Fire in Red into an all-in-one damage button.", "等待翻译" },
-        { "Burst Control Option", "等待翻译" },
-        { "Saves high-damaging actions until the target's HP falls below the threshold.", "等待翻译" },
-        { "Tempera Coat Option", "等待翻译" },
-        { "Uses Tempera Coat when HP falls below the threshold during combat.", "等待翻译" },
-        { "Smart Palette Option", "等待翻译" },
-        { "Uses Subtractive Palette when standing still and releases it when moving.", "等待翻译" },
+        { "Burst Mode", "爆发模式" },
+        { "Turns Fire in Red into an all-in-one damage button.", "将红色火焰变成一键全能伤害按钮。" },
+        { "Burst Control Option", "爆发控制选项" },
+        { "Saves high-damaging actions until the target's HP falls below the threshold.", "在目标的HP低于阈值时保存高伤害动作。" },
+        { "Tempera Coat Option", "临时护甲选项" },
+        { "Uses Tempera Coat when HP falls below the threshold during combat.", "在战斗中HP低于阈值时使用临时护甲。" },
+        { "Smart Palette Option", "智能调色板选项" },
+        { "Uses Subtractive Palette when standing still and releases it when moving.", "静止时使用减法调色板，移动时释放。" },
 
         #endregion
 
         #region REAPER
 
-        { "Plentiful Harvest + Immortal Sacrifice Pooling Option", "等待翻译" },
-        { "Pools stacks of Immortal Sacrifice before using Plentiful Harvest.\nAlso holds Plentiful Harvest if Death Warrant is on cooldown.\nSet the value to 3 or below to use Plentiful Harvest as soon as it's available.", "等待翻译" },
-        { "Adds Lemure's Slice to the main combo during the Enshroud burst phase.\nContains burst options.", "等待翻译" },
+        { "Plentiful Harvest + Immortal Sacrifice Pooling Option", "丰收+不朽牺牲囤积选项" },
+        { "Pools stacks of Immortal Sacrifice before using Plentiful Harvest.\nAlso holds Plentiful Harvest if Death Warrant is on cooldown.\nSet the value to 3 or below to use Plentiful Harvest as soon as it's available.", "在使用丰收之前囤积不朽牺牲的层数。\n如果死亡令状在冷却中，也会保留丰收。\n将值设置为3或以下，以便丰收一旦可用就使用。" },
+        { "Adds Lemure's Slice to the main combo during the Enshroud burst phase.\nContains burst options.", "在隐匿爆发阶段将冥界切割加入主连击。\n包含爆发选项。" },
 
         #region RPR Enshrouded Option
 
         #endregion
 
-        { "Adds Arcane Circle to the main combo when under the set HP perecentage.", "等待翻译" },
+        { "Adds Arcane Circle to the main combo when under the set HP perecentage.", "当HP低于设定百分比时，将奥术环加入主连击。" },
 
         #endregion
 
         #region RED MAGE
 
-        { "Prevents Frazzle from being used in Burst Mode.", "等待翻译" },
+        { "Prevents Frazzle from being used in Burst Mode.", "防止在爆发模式中使用虚弱。" },
 
         #endregion
 
         #region SAGE
 
-        { "Pneuma Option", "等待翻译" },
-        { "Adds Pneuma to Burst Mode.", "等待翻译" },
+        { "Pneuma Option", "灵气选项" },
+        { "Adds Pneuma to Burst Mode.", "将灵气加入爆发模式。" },
 
         #endregion
 
@@ -1339,16 +1346,18 @@ public class Translatezh_CN
 
         #region Burst Mode
 
-        { "Chiten Option", "等待翻译" },
-        { "Mineuchi Option", "等待翻译" },
-        { "Adds Mineuchi to Burst Mode.", "等待翻译" },
+        { "Chiten Option", "知天选项" },
+        { "Mineuchi Option", "峰打选项" },
+        { "Adds Mineuchi to Burst Mode.", "将峰打加入爆发模式。" },
 
         #endregion
 
         #region Kasha Features
 
-        { "Kasha Combo Features", "等待翻译" },
-        { "AoE Melee Protection Option", "等待翻译" },
+        { "Kasha Combo Features", "花车连击功能" },
+        { "AoE Melee Protection Option", "AoE近战保护选项" },
+
+        #endregion
 
         #endregion
 
@@ -1356,11 +1365,11 @@ public class Translatezh_CN
 
         #region SCHOLAR
 
-        { "Turns Broil IV into all-in-one damage button.", "等待翻译" },
-        { "Expedient Option", "等待翻译" },
-        { "Biolysis Option", "等待翻译" },
-        { "Adds Biolysis use on cooldown to Burst Mode.", "等待翻译" },
-        { "Deployment Tactics Option", "等待翻译" },
+        { "Turns Broil IV into all-in-one damage button.", "将炙炎IV变成一键全能伤害按钮。" },
+        { "Expedient Option", "迅捷选项" },
+        { "Biolysis Option", "生物分解选项" },
+        { "Adds Biolysis use on cooldown to Burst Mode.", "在爆发模式中添加冷却时使用生物分解。" },
+        { "Deployment Tactics Option", "部署战术选项" },
 
         #endregion
 
@@ -1370,9 +1379,10 @@ public class Translatezh_CN
 
         #region VIPER
 
-        { "Turns Dual Fang Combo into an all-in-one damage button.", "等待翻译" },
+        { "Turns Dual Fang Combo into an all-in-one damage button.", "将双牙连击变成一键全能伤害按钮。" },
 
         #endregion
+
 
         #region WARRIOR
 
@@ -1398,7 +1408,6 @@ public class Translatezh_CN
 
         #endregion
 
-        #endregion
 
     };
 }
