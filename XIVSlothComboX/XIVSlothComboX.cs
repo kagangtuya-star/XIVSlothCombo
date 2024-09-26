@@ -39,7 +39,7 @@ namespace XIVSlothComboX
     /// <summary> Main plugin implementation. </summary>
     public sealed partial class XIVSlothComboX : IDalamudPlugin
     {
-        private const string Command = "/scombo";
+        private const string Command = "/scombox";
 
 
         private readonly ConfigWindow _ConfigWindow;

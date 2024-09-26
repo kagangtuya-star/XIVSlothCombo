@@ -127,6 +127,7 @@ namespace XIVSlothComboX.Window.Functions
                 foreach (var conflict in conflicts)
                 {
                     var comboInfo = Attributes.ContainsKey(conflict) ? Attributes[conflict].CustomComboInfo : conflict.GetAttribute<CustomComboInfoAttribute>();
+                    // var comboInfo = conflict.GetAttribute<CustomComboInfoAttribute>();
                     conflictBuilder.Insert(0, $"{comboInfo.FancyName}");
                     var par2 = conflict;
 
@@ -135,7 +136,7 @@ namespace XIVSlothComboX.Window.Functions
                         var subpar = PresetStorage.GetParent(par2);
                         if (subpar != null)
                         {
-                            conflictBuilder.Insert(0, $"{(Attributes.ContainsKey(subpar.Value) ? Attributes[subpar.Value].CustomComboInfo : subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName)} -> ");
+                            // conflictBuilder.Insert(0, $"{(Attributes.ContainsKey(subpar.Value) ? Attributes[subpar.Value].CustomComboInfo : subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName)} -> ");
                             par2 = subpar!.Value;
                         }
 

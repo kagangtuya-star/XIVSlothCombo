@@ -356,6 +356,35 @@ namespace XIVSlothComboX.Combos.PvE
                             && HasEffect(Buffs.SacredSight)
                             && GetBuffStacks(Buffs.SacredSight) > 0)
                             return OriginalHook(Glare4);
+                        
+                        if (IsEnabled(CustomComboPreset.WHM_ST_MainCombo_Glare4))
+                        {
+
+                            if (GetBuffRemainingTime(Buffs.SacredSight) > 0)
+                            {
+                                if (IsMoving)
+                                {
+                                    return Glare4;
+                                }
+
+                                if (GetBuffStacks(Buffs.SacredSight) >= 3 && GetBuffRemainingTime(Buffs.SacredSight) <= 9)
+                                {
+                                    return Glare4;
+                                }
+
+                                if (GetBuffStacks(Buffs.SacredSight) >= 2 && GetBuffRemainingTime(Buffs.SacredSight) <= 7)
+                                {
+                                    return Glare4;
+                                }
+
+                                if (GetBuffStacks(Buffs.SacredSight) >= 1 && GetBuffRemainingTime(Buffs.SacredSight) <= 3)
+                                {
+                                    return Glare4;
+                                }
+                            }
+
+
+                        }
 
                         if (IsEnabled(CustomComboPreset.WHM_ST_MainCombo_LilyOvercap) && LevelChecked(AfflatusRapture) && (liliesFull || liliesNearlyFull))
                             return AfflatusRapture;
