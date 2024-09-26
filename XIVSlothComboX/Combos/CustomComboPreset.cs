@@ -382,12 +382,7 @@ namespace XIVSlothComboX.Combos
         #region BLACK MAGE
 
         [ReplaceSkill(All.Sleep)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            BLM.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", BLM.JobID, -10)]
         BLM_Advanced_CustomMode = 20120,
 
 
@@ -882,7 +877,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(DNC_AoE_SimpleMode)]
         [ConflictingCombos(DNC_AoE_Simple_SS)]
-        [CustomComboInfo("Simple AoE Standard Fill Option","Adds ONLY Standard dance steps and Standard Finish to the AoE rotation." + "\nStandard Step itself must be initiated manually when using this option.", DNC.JobID, 2)]
+        [CustomComboInfo("Simple AoE Standard Fill Option", "Adds ONLY Standard dance steps and Standard Finish to the AoE rotation." + "\nStandard Step itself must be initiated manually when using this option.", DNC.JobID, 2)]
         DNC_AoE_Simple_StandardFill = 4081,
 
         [ParentCombo(DNC_AoE_SimpleMode)]
@@ -912,7 +907,7 @@ namespace XIVSlothComboX.Combos
         DNC_AoE_Simple_FeatherPooling = 4078,
 
         [ParentCombo(DNC_AoE_SimpleMode)]
-        [CustomComboInfo("Simple AoE Panic Heals Option","Includes Curing Waltz and Second Wind in the AoE rotation when available and your HP is below the set percentages.", DNC.JobID, 9)]
+        [CustomComboInfo("Simple AoE Panic Heals Option", "Includes Curing Waltz and Second Wind in the AoE rotation when available and your HP is below the set percentages.", DNC.JobID, 9)]
         DNC_AoE_Simple_PanicHeals = 4079,
 
         [ParentCombo(DNC_AoE_SimpleMode)]
@@ -937,7 +932,7 @@ namespace XIVSlothComboX.Combos
         #region DARK KNIGHT
 
         [ReplaceSkill(DRK.SyphonStrike)]
-        [CustomComboInfo("自定义循环", "自定义循环",DRK.JobID, -10)]
+        [CustomComboInfo("自定义循环", "自定义循环", DRK.JobID, -10)]
         DRK_Advanced_CustomMode = 50981,
 
 
@@ -977,11 +972,7 @@ namespace XIVSlothComboX.Combos
         DRK_蔑视厌恶 = 50041,
 
         [ParentCombo(DRK_SouleaterCombo)]
-        [CustomComboInfo
-        (
-            "暗影锋防覆盖 设置", "Uses Edge of Shadow if you are above 8,500 mana or Darkside is about to expire (10sec or less)", DRK.JobID, 0,
-            "", ""
-        )]
+        [CustomComboInfo("暗影锋防覆盖 设置", "Uses Edge of Shadow if you are above 8,500 mana or Darkside is about to expire (10sec or less)", DRK.JobID, 0)]
         DRK_ManaOvercap = 5005,
 
         [ReplaceSkill(DRK.精雕怒斩CarveAndSpit, DRK.AbyssalDrain)]
@@ -1085,12 +1076,7 @@ namespace XIVSlothComboX.Combos
         #region DRAGOON
 
         [ReplaceSkill(DRG.VorpalThrust)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            DRG.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", DRG.JobID, -10)]
         DRG_Advanced_CustomMode = 60001,
 
         [ReplaceSkill(DRG.TrueThrust)]
@@ -1325,11 +1311,7 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(GNB.残暴弹BrutalShell)]
         [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            BLM.JobID, -10
-        )]
+            ("自定义循环", "自定义循环", BLM.JobID, -10)]
         GNB_Advanced_CustomMode = 69999,
 
 
@@ -1537,11 +1519,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(MCH_ST_AdvancedMode)]
         [ConflictingCombos(MCH_GaussRoundRicochet, MCH_Heatblast_GaussRound)]
-        [CustomComboInfo
-        (
-            "Gauss Round / Ricochet \nDouble Check / Checkmate option",
-            "Adds Gauss Round and Ricochet or Double Check and Checkmate to the rotation. Will prevent overcapping.", MCH.JobID
-        )]
+        [CustomComboInfo("Gauss Round / Ricochet \nDouble Check / Checkmate option", "Adds Gauss Round and Ricochet or Double Check and Checkmate to the rotation. Will prevent overcapping.", MCH.JobID)]
         MCH_ST_Adv_GaussRicochet = 8104,
 
         [ParentCombo(MCH_ST_AdvancedMode)]
@@ -1669,11 +1647,7 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(MCH.GaussRound, MCH.Ricochet)]
         [ConflictingCombos(MCH_ST_Adv_Opener, MCH_ST_Adv_GaussRicochet, MCH_AoE_Adv_GaussRicochet, MCH_Heatblast_GaussRound)]
-        [CustomComboInfo
-        (
-            "Gauss Round / Ricochet \nDouble Check / Checkmate Feature",
-            "Replace Gauss Round and Ricochet or Double Check and Checkmate with one or the other depending on which has more charges.", MCH.JobID
-        )]
+        [CustomComboInfo("Gauss Round / Ricochet \nDouble Check / Checkmate Feature", "Replace Gauss Round and Ricochet or Double Check and Checkmate with one or the other depending on which has more charges.", MCH.JobID)]
         MCH_GaussRoundRicochet = 8003,
 
         // [ReplaceSkill(MCH.Drill, MCH.AirAnchor, MCH.HotShot)]
@@ -1699,12 +1673,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(MCH_Heatblast)]
         [ConflictingCombos(MCH_ST_Adv_Opener, MCH_ST_Adv_GaussRicochet, MCH_AoE_Adv_GaussRicochet, MCH_GaussRoundRicochet)]
-        [CustomComboInfo
-        (
-            "Gauss Round / Ricochet \nDouble Check / Checkmate Option",
-            "Switches between Heat Blast and either Gauss Round and Ricochet or Double Check and Checkmate, depending on cooldown timers.",
-            MCH.JobID
-        )]
+        [CustomComboInfo("Gauss Round / Ricochet \nDouble Check / Checkmate Option", "Switches between Heat Blast and either Gauss Round and Ricochet or Double Check and Checkmate, depending on cooldown timers.", MCH.JobID)]
         MCH_Heatblast_GaussRound = 8016,
 
         [ReplaceSkill(MCH.AutoCrossbow)]
@@ -1716,11 +1685,11 @@ namespace XIVSlothComboX.Combos
         MCH_AutoCrossbow_AutoBarrel = 8019,
 
         [ParentCombo(MCH_AutoCrossbow)]
-        [CustomComboInfo("Gauss Round / Ricochet\n Double Check / Checkmate Option","Switches between Auto Crossbow and either Gauss Round and Ricochet or Double Check and Checkmate, depending on cooldown timers.",MCH.JobID )]
+        [CustomComboInfo("Gauss Round / Ricochet\n Double Check / Checkmate Option", "Switches between Auto Crossbow and either Gauss Round and Ricochet or Double Check and Checkmate, depending on cooldown timers.", MCH.JobID)]
         MCH_AutoCrossbow_GaussRound = 8020,
 
         [ReplaceSkill(MCH.Dismantle)]
-        [CustomComboInfo("Physical Ranged DPS: Double Dismantle Protection", "Prevents the use of Dismantle when target already has the effect.",MCH.JobID)]
+        [CustomComboInfo("Physical Ranged DPS: Double Dismantle Protection", "Prevents the use of Dismantle when target already has the effect.", MCH.JobID)]
         All_PRanged_Dismantle = 8042,
 
         [ReplaceSkill(MCH.Dismantle)]
@@ -1912,12 +1881,7 @@ namespace XIVSlothComboX.Combos
         NIN_ST_SimpleMode = 10000,
 
         [ParentCombo(NIN_ST_SimpleMode)]
-        [CustomComboInfo
-        (
-            "平衡起手",
-            "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.",
-            NIN.JobID
-        )]
+        [CustomComboInfo("平衡起手", "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.", NIN.JobID)]
         NIN_ST_SimpleMode_BalanceOpener = 10001,
 
         [ReplaceSkill(NIN.DeathBlossom)]
@@ -2041,12 +2005,7 @@ namespace XIVSlothComboX.Combos
 
         [ConflictingCombos(NIN_KassatsuChiJin, NIN_KassatsuTrick)]
         [ParentCombo(NIN_ST_AdvancedMode)]
-        [CustomComboInfo
-        (
-            "平衡起手",
-            "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.",
-            NIN.JobID
-        )]
+        [CustomComboInfo("平衡起手", "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.", NIN.JobID)]
         NIN_ST_AdvancedMode_BalanceOpener = 10029,
 
         [ParentCombo(NIN_ST_AdvancedMode)]
@@ -2233,12 +2192,7 @@ namespace XIVSlothComboX.Combos
         #region PALADIN
 
         [ReplaceSkill(PLD.暴乱剑RiotBlade)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            PLD.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", PLD.JobID, -10)]
         PLD_Advanced_CustomMode = 110001,
 
 
@@ -2657,12 +2611,7 @@ namespace XIVSlothComboX.Combos
         */
 
         [ReplaceSkill(All.Sleep)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            RDM.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", RDM.JobID, -10)]
         RDM_Advanced_CustomMode = 130000,
 
         #region Single Target DPS
@@ -2840,12 +2789,7 @@ namespace XIVSlothComboX.Combos
         */
 
         [ReplaceSkill(All.Repose)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            SGE.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", SGE.JobID, -10)]
         SGE_Advanced_CustomMode = 141001,
 
 
@@ -2962,11 +2906,7 @@ namespace XIVSlothComboX.Combos
         SGE_ST_Heal_Kardia = 14310,
 
         [ParentCombo(SGE_ST_Heal)]
-        [CustomComboInfo
-        (
-            "Eukrasian Diagnosis Option", "Diagnosis becomes Eukrasian Diagnosis if the shield is not applied to the target.", SGE.JobID,
-            313
-        )]
+        [CustomComboInfo("Eukrasian Diagnosis Option", "Diagnosis becomes Eukrasian Diagnosis if the shield is not applied to the target.", SGE.JobID, 313)]
         SGE_ST_Heal_EDiagnosis = 14320,
 
 
@@ -3025,11 +2965,7 @@ namespace XIVSlothComboX.Combos
 
 
         [ParentCombo(SGE_AoE_Heal_EPrognosis)]
-        [CustomComboInfo
-        (
-            "忽略护盾检查，强制整合", "Warning, will force the use of Eukrasia Prognosis, and normal Prognosis will be unavailable.", SGE.JobID,
-            520
-        )]
+        [CustomComboInfo("忽略护盾检查，强制整合", "Warning, will force the use of Eukrasia Prognosis, and normal Prognosis will be unavailable.", SGE.JobID, 520)]
         SGE_AoE_Heal_EPrognosis_IgnoreShield = 14521,
 
         [ParentCombo(SGE_AoE_Heal)]
@@ -3417,12 +3353,7 @@ namespace XIVSlothComboX.Combos
 
 
         [ReplaceSkill(All.Repose)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            SCH.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", SCH.JobID, -10)]
         SCH_Advanced_CustomMode = 161001,
 
 
@@ -3607,21 +3538,11 @@ namespace XIVSlothComboX.Combos
         #region SUMMONER
 
         [ReplaceSkill(All.Sleep)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            SMN.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", SMN.JobID, -10)]
         SMN_Advanced_CustomMode = 170000,
 
         [ReplaceSkill(SMN.Ruin, SMN.Ruin2, SMN.Outburst, SMN.Tridisaster)]
-        [CustomComboInfo
-        (
-            "高级自定义循环开关",
-            "Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes.",
-            SMN.JobID, 1
-        )]
+        [CustomComboInfo("高级自定义循环开关", "Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes.", SMN.JobID, 1)]
         SMN_Advanced_Combo = 17000,
 
 
@@ -3630,11 +3551,7 @@ namespace XIVSlothComboX.Combos
         SMN_Advanced_Combo_DemiSummons_Attacks = 17002,
 
         [ParentCombo(SMN_Advanced_Combo)]
-        [CustomComboInfo
-        (
-            "宝石耀&宝石辉替换", "Adds Gemshine and Precious Brilliance to the single target and AoE combos, respectively.", SMN.JobID, 4, "",
-            ""
-        )]
+        [CustomComboInfo("宝石耀&宝石辉替换", "Adds Gemshine and Precious Brilliance to the single target and AoE combos, respectively.", SMN.JobID, 4)]
         SMN_Advanced_Combo_EgiSummons_Attacks = 17004,
 
 
@@ -3665,17 +3582,8 @@ namespace XIVSlothComboX.Combos
         SMN_CarbuncleReminder = 17010,
 
         [ParentCombo(SMN_Advanced_Combo)]
-        [CustomComboInfo
-        (
-            "循环加入毁绝",
-            "Adds Ruin IV to the single target and AoE combos.\nUses when moving during Garuda Phase and you have no attunement, when moving during Ifrit phase, or when you have no active Egi or Demi summon.",
-            SMN.JobID
-        )]
+        [CustomComboInfo("循环加入毁绝", "Adds Ruin IV to the single target and AoE combos.\nUses when moving during Garuda Phase and you have no attunement, when moving during Ifrit phase, or when you have no active Egi or Demi summon.", SMN.JobID)]
         SMN_Advanced_Combo_Ruin4 = 17011,
-
-        [ParentCombo(SMN_EDFester)]
-        [CustomComboInfo("毁绝替换", "当没有以太超流层数时 自身处于毁绝准备中 并且能量吸收进入冷却，溃烂爆发技能变为毁绝，", SMN.JobID)]
-        SMN_EDFester_Ruin4 = 17013,
 
         [ParentCombo(SMN_Advanced_Combo)]
         [CustomComboInfo("循环加入能量吸收和能量抽取", "将能量系技能在冷却完毕后加入到循环和AOE循环中", SMN.JobID, 1)]
@@ -3743,25 +3651,14 @@ namespace XIVSlothComboX.Combos
 
 
         [ParentCombo(SMN_ESPainflare)]
-        [CustomComboInfo
-        (
-            "毁绝替换痛苦核爆", "Changes Painflare to Ruin IV when out of Aetherflow stacks, Energy Siphon is on cooldown, and Ruin IV is up.",
-            SMN.JobID
-        )]
+        [CustomComboInfo("毁绝替换痛苦核爆", "Changes Painflare to Ruin IV when out of Aetherflow stacks, Energy Siphon is on cooldown, and Ruin IV is up.", SMN.JobID)]
         SMN_ESPainflare_Ruin4 = 17039,
 
 
         [ParentCombo(SMN_Ifrit_Cyclone)]
-        [CustomComboInfo
-        (
-            "深红旋风进阶", "Only uses Crimson Cyclone if you are not moving, or have no remaining Ifrit Attunement charges.", SMN.JobID, 0,
-            "", ""
-        )]
+        [CustomComboInfo("深红旋风进阶", "Only uses Crimson Cyclone if you are not moving, or have no remaining Ifrit Attunement charges.", SMN.JobID, 0)]
         SMN_Ifrit_Cyclone_Option = 17040,
 
-
-        // [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)] [CustomComboInfo("爆发延迟开关", "自定义爆发延迟设置\n适用于咏速套装", SMN.JobID, 2)]
-        // SMN_Advanced_Burst_Delay_Option = 17043,
 
 
         [ParentCombo(SMN_DemiEgiMenu_oGCDPooling)]
@@ -3990,12 +3887,7 @@ namespace XIVSlothComboX.Combos
         #region WARRIOR
 
         [ReplaceSkill(WAR.Maim)]
-        [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            WAR.JobID, -10
-        )]
+        [CustomComboInfo("自定义循环", "自定义循环", WAR.JobID, -10)]
         WAR_Advanced_CustomMode = 180001,
 
         [ReplaceSkill(WAR.StormsPath)]
@@ -4039,11 +3931,7 @@ namespace XIVSlothComboX.Combos
         WAR_AoE_Overpower_Orogeny = 18009,
 
         [ParentCombo(WAR_ST_StormsPath)]
-        [CustomComboInfo
-        (
-            "裂石飞环/地毁人亡", "当兽魂高于50及以上时，将 裂石飞环 加入主连击，地毁人亡 加入AoE连击。\n战嚎时将使用 狂魂/混沌旋风，原初的解放时将使用 裂石飞环/钢铁旋风。\n当 超过设置的仪表盘会释放资源。", WAR.JobID, 0,
-            "", ""
-        )]
+        [CustomComboInfo("裂石飞环/地毁人亡", "当兽魂高于50及以上时，将 裂石飞环 加入主连击，地毁人亡 加入AoE连击。\n战嚎时将使用 狂魂/混沌旋风，原初的解放时将使用 裂石飞环/钢铁旋风。\n当 超过设置的仪表盘会释放资源。", WAR.JobID)]
         WAR_ST_StormsPath_FellCleave = 18011,
 
         [ParentCombo(WAR_ST_StormsPath)]
@@ -4196,38 +4084,21 @@ namespace XIVSlothComboX.Combos
         WHM_AoE_DPS_LilyOvercap = 19193,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo
-        (
-            "Presence of Mind Option", "Adds Presence of Mind to the AoE combo if you are moving or it can be weaved without GCD delay.",
-            WHM.JobID, 24
-        )]
+        [CustomComboInfo("Presence of Mind Option", "Adds Presence of Mind to the AoE combo if you are moving or it can be weaved without GCD delay.", WHM.JobID, 24)]
         WHM_AoE_DPS_PresenceOfMind = 19195,
 
         [ParentCombo(WHM_AoE_DPS)]
-        [CustomComboInfo
-        (
-            "Lucid Dreaming Option",
-            "Adds Lucid Dreaming to the AoE combo when below the set MP value if you are moving or it can be weaved without GCD delay.", WHM.JobID,
-            25
-        )]
+        [CustomComboInfo("Lucid Dreaming Option", "Adds Lucid Dreaming to the AoE combo when below the set MP value if you are moving or it can be weaved without GCD delay.", WHM.JobID, 25)]
         WHM_AoE_DPS_Lucid = 19191,
 
         #endregion
 
         [ReplaceSkill(WHM.AfflatusSolace)]
-        [CustomComboInfo
-        (
-            "Solace into Misery Feature", "Replaces Afflatus Solace with Afflatus Misery when it is ready to be used.", WHM.JobID, 30,
-            "", ""
-        )]
+        [CustomComboInfo("Solace into Misery Feature", "Replaces Afflatus Solace with Afflatus Misery when it is ready to be used.", WHM.JobID, 30)]
         WHM_SolaceMisery = 19000,
 
         [ReplaceSkill(WHM.AfflatusRapture)]
-        [CustomComboInfo
-        (
-            "Rapture into Misery Feature", "Replaces Afflatus Rapture with Afflatus Misery when it is ready to be used.", WHM.JobID, 40,
-            "", ""
-        )]
+        [CustomComboInfo("Rapture into Misery Feature", "Replaces Afflatus Rapture with Afflatus Misery when it is ready to be used.", WHM.JobID, 40)]
         WHM_RaptureMisery = 19001,
 
         #region AoE Heals Feature
@@ -4712,11 +4583,7 @@ namespace XIVSlothComboX.Combos
         #region PvP GLOBAL FEATURES
 
         [PvPCustomCombo]
-        [CustomComboInfo
-        (
-            "Emergency Heals Feature", "Uses Recuperate when your HP is under the set threshold and you have sufficient MP.", ADV.JobID,
-            1
-        )]
+        [CustomComboInfo("Emergency Heals Feature", "Uses Recuperate when your HP is under the set threshold and you have sufficient MP.", ADV.JobID, 1)]
         PvP_EmergencyHeals = 1100000,
 
         [PvPCustomCombo]
@@ -4796,12 +4663,7 @@ namespace XIVSlothComboX.Combos
 
         [PvPCustomCombo]
         [ParentCombo(DNCPvP_BurstMode)]
-        [CustomComboInfo
-        (
-            "刃舞选项",
-            "Adds Honing Dance to the main combo when in melee range (respects global offset).\nThis option prevents early use of Honing Ovation!\nKeep Honing Dance bound to another key if you want to end early.",
-            DNC.JobID
-        )]
+        [CustomComboInfo("刃舞选项", "Adds Honing Dance to the main combo when in melee range (respects global offset).\nThis option prevents early use of Honing Ovation!\nKeep Honing Dance bound to another key if you want to end early.", DNC.JobID)]
         DNCPvP_BurstMode_HoningDance = 114001,
 
         [PvPCustomCombo]
@@ -5030,12 +4892,7 @@ namespace XIVSlothComboX.Combos
 
         [PvPCustomCombo]
         [ParentCombo(RPRPvP_Burst)]
-        [CustomComboInfo
-        (
-            "斩首令选项",
-            "Adds Death Warrant onto the main combo when Plentiful Harvest is ready to use, or when Plentiful Harvest's cooldown is longer than Death Warrant's.\nRespects Immortal Sacrifice Pooling Option.",
-            RPR.JobID
-        )]
+        [CustomComboInfo("斩首令选项", "Adds Death Warrant onto the main combo when Plentiful Harvest is ready to use, or when Plentiful Harvest's cooldown is longer than Death Warrant's.\nRespects Immortal Sacrifice Pooling Option.", RPR.JobID)]
         RPRPvP_Burst_DeathWarrant = 122001,
 
         [PvPCustomCombo]
@@ -5069,11 +4926,7 @@ namespace XIVSlothComboX.Combos
 
         [PvPCustomCombo]
         [ParentCombo(RPRPvP_Burst)]
-        [CustomComboInfo
-        (
-            "远程收获月选项",
-            "Adds Harvest Moon onto the main combo when you're out of melee range, the GCD is not rolling and it's available for use.", RPR.JobID
-        )]
+        [CustomComboInfo("远程收获月选项", "Adds Harvest Moon onto the main combo when you're out of melee range, the GCD is not rolling and it's available for use.", RPR.JobID)]
         RPRPvP_Burst_RangedHarvest = 122007,
 
         [PvPCustomCombo]
@@ -5120,12 +4973,7 @@ namespace XIVSlothComboX.Combos
         #region Burst Mode
 
         [PvPCustomCombo]
-        [CustomComboInfo
-        (
-            "爆发模式",
-            "Adds Meikyo Shisui, Midare: Setsugekka, Ogi Namikiri, Kaeshi: Namikiri and Soten to Meikyo Shisui.\nWill only cast Midare: Setsugekka and Ogi Namikiri when you're not moving.\nWill not use if target is guarding.",
-            SAM.JobID
-        )]
+        [CustomComboInfo("爆发模式", "Adds Meikyo Shisui, Midare: Setsugekka, Ogi Namikiri, Kaeshi: Namikiri and Soten to Meikyo Shisui.\nWill only cast Midare: Setsugekka and Ogi Namikiri when you're not moving.\nWill not use if target is guarding.", SAM.JobID)]
         SAMPvP_BurstMode = 125000,
 
         [PvPCustomCombo]

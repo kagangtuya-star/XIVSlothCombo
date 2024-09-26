@@ -223,6 +223,8 @@ public class Translatezh_CN
 
         #region DARK KNIGHT
 
+        { "Uses Edge of Shadow if you are above 8,500 mana or Darkside is about to expire (10sec or less)", "当你的mp高于8500或暗黑状态即将结束时(剩余持续时间不超过10秒)自动插入暗影锋." },
+
         #endregion
 
         #region DRAGOON
@@ -369,6 +371,8 @@ public class Translatezh_CN
         { "Reassemble Option", "重新整备选项" },
         { "Adds Reassemble to the rotation.", "将整备添加到循环中。" },
         { "Hypercharge Option", "超荷选项" },
+        { "Gauss Round / Ricochet Option", "虹吸弹/弹射选项" },
+        { "Adds Gauss Round and Ricochet to the rotation.\nWill prevent overcapping.", "将虹吸弹和弹射添加到循环中。\n将防止过度堆积。" },
         { "Adds Hypercharge to the rotation.", "将超荷添加到循环中。" },
         { "Heat Blast / Blazing Shot Option", "热爆/炽焰射击选项" },
         { "Adds Heat Blast or Blazing Shot to the rotation.", "将热爆或炽焰射击添加到循环中。" },
@@ -414,6 +418,7 @@ public class Translatezh_CN
         { "Overdrive Feature", "[AI]超档炮塔/人偶替换设置" },
         { "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", "[AI]在技能可用时，将车式浮空炮塔和后式自走人偶转换为超档车式炮塔和超档自走人偶。" },
         { "Drill/Air Anchor (Hot Shot) Feature", "[AI]钻头、空气锚 (热弹)、回转飞锯根据cd时间互相替换。" },
+        { "Replace Gauss Round and Ricochet with one or the other depending on which has more charges.", "[AI]将虹吸弹和弹射替换为一个或其他需要更多充电电能的技能." },
         { "Big Hitter Feature", "大打击功能" },
         { "Replace Hot Shot, Drill, Air Anchor, Chainsaw and Excavator depending on which is on cooldown.", "根据冷却时间替换热弹、钻头、空气锚、回转飞锯和挖掘机。" },
         { "Single Button Heat Blast Feature", "[AI]热冲击一键整合" },
@@ -429,7 +434,6 @@ public class Translatezh_CN
         { "Prevents the use of Dismantle when target already has the effect.", "当目标已经有拆卸效果时，防止使用拆卸。" },
         { "Dismantle - Tactician", "[AI]拆卸-战术家" },
         { "Swap dismantle with tactician when dismantle is on cooldown.", "[AI]当拆卸冷却时，用战术家替换拆卸。" },
-
 
         #endregion
 
@@ -499,7 +503,7 @@ public class Translatezh_CN
         #endregion
 
         #region NINJA
-
+        {"Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work." , "以平衡开场为开始。\n如果您在隐藏开场之前进入战斗，开场将失败。\n同样，在天地人之间移动也会导致开场失败。\n需要您处于非战斗状态，并且大部分冷却时间可用才能正常工作。"  },
         { "Only uses Mug whilst the target has Trick Attack, otherwise will use on cooldown.", "只有在目标存在攻其不备时才使用夺取，否则将在冷却完毕时使用。" },
         { "Tenri Jindo Option", "天理神道选项" },
         { "Adds Tenri Jindo to Advanced Mode.", "将天理神道添加到高级模式中。" },
@@ -694,7 +698,8 @@ public class Translatezh_CN
         #endregion
 
         #region Diagnosis Simple Single Target Heal
-
+        {"Eukrasian Diagnosis Option" , "均衡诊断选项"  },
+        {"Diagnosis becomes Eukrasian Diagnosis if the shield is not applied to the target." , "当所选目标没有盾值时，替换诊断为均衡诊断。"  },
         #endregion
 
         #region Sage Simple AoE Heal
@@ -798,7 +803,6 @@ public class Translatezh_CN
         #endregion
 
 
-
         #region AoE Combos
 
         { "Replaces Fuga/Fuko with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", "将风雅替换为一键全AoE循环。\n如果你想自定义循环，这些功能是理想的选择。" },
@@ -821,7 +825,6 @@ public class Translatezh_CN
 
         #endregion
 
-     
         #endregion
 
         #region Simple AoE
@@ -913,9 +916,13 @@ public class Translatezh_CN
         #endregion
 
         #region SUMMONER
-
-        { "Adds Deathflare, Ahk Morn and Revelation to the single target and AoE combos.", "将龙神迸发、不死鸟迸发和死星核爆添加到单目标和群体技能中。" },
-
+        {"Advanced combo features for a greater degree of customisation.\nAccommodates SpS builds.\nRuin III is left unchanged for mobility purposes." , "[AI]高级连击功能，可实现更高程度的自定义。\n适用于SpS构建。\n为了提高机动性，Ruin III保持不变。"  },
+        {"Adds Deathflare, Ahk Morn and Revelation to the single target and AoE combos." , "将龙神迸发、不死鸟迸发和死星核爆添加到单目标和群体技能中。"  },
+        {"Adds Gemshine and Precious Brilliance to the single target and AoE combos, respectively." , "分别将宝石耀和宝石辉添加到单目标和群体技能中。"  },
+        {"Adds Ruin IV to the single target and AoE combos.\nUses when moving during Garuda Phase and you have no attunement, when moving during Ifrit phase, or when you have no active Egi or Demi summon." , "将毁绝添加到单目标和群体技能中。\n在风神阶段移动且没有调谐时，或在火神阶段移动时，或没有活动的Egi或Demi召唤时使用。"  },
+        {"Changes Painflare to Ruin IV when out of Aetherflow stacks, Energy Siphon is on cooldown, and Ruin IV is up." , "[AI]当以太流堆栈用完、能量虹吸冷却时，将痛苦核爆替换为毁绝 IV。"  },
+        {"Only uses Crimson Cyclone if you are not moving, or have no remaining Ifrit Attunement charges." , "只在未移动或者没有火神对应技能的情况下使用。"  },
+        {"General purpose one-button combo.\nBursts on Bahamut phase.\nSummons Titan, Garuda, then Ifrit.\nSwiftcasts on Slipstream unless drifted." , "[AI]通用单按钮连击。\n在巴哈姆特阶段爆发。\n召唤泰坦、迦楼罗，然后召唤伊弗利特。\n除非漂移，否则在滑流上使用迅捷咏叹。"  },
         #endregion
 
 
@@ -1035,6 +1042,10 @@ public class Translatezh_CN
         { "Adds Afflatus Rapture to the AoE combo when at three Lilies.", "当有三档治疗百合时在AoE循环中插入苦难之心." },
 
         #endregion
+        {"Solace into Misery Feature" , "安慰之心与苦难之心整合 设置"  },
+        {"Replaces Afflatus Solace with Afflatus Misery when it is ready to be used." , "当苦难之心可用时，替换安慰之心为苦难之心."  },
+        {"Rapture into Misery Feature" , "狂喜之心与苦难之心整合 设置"  },
+        {"Replaces Afflatus Rapture with Afflatus Misery when it is ready to be used." , "当苦难之心可用时，替换狂喜之心为苦难之心."  },
 
         #region AoE Heals Feature
 

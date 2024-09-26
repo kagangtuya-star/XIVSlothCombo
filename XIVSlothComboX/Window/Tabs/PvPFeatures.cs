@@ -7,6 +7,7 @@ using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.ImGuiMethods;
 using ImGuiNET;
+using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.Services;
 using XIVSlothComboX.Window.Functions;
@@ -72,48 +73,64 @@ namespace XIVSlothComboX.Window.Tabs
                 }
                 else
                 {
+                    // var id = groupedPresets[OpenJob].First().Info.JobID;
+                    // IDalamudTextureWrap? icon = Icons.GetJobIcon(id);
+                    
                     var id = groupedPresets[OpenJob].First().Info.JobID;
-                    IDalamudTextureWrap? icon = Icons.GetJobIcon(id);
-
-                    using (var headingTab = ImRaii.Child("PvPHeadingTab", new Vector2(ImGui.GetContentRegionAvail().X, icon is null ? 24f.Scale() : (icon.Size.Y / 2f.Scale()) + 4f)))
+                    if (id is ADV.JobID or DOL.JobID or DOH.JobID)
                     {
-                        if (ImGui.Button("Back", new Vector2(0, 24f.Scale())))
-                        {
-                            OpenJob = "";
-                            return;
-                        }
-
-                        ImGui.SameLine();
-                        ImGuiEx.LineCentered(() =>
-                        {
-                            if (icon != null)
-                            {
-                                ImGui.Image(icon.ImGuiHandle, new Vector2(icon.Size.X.Scale(), icon.Size.Y.Scale()) / 2f);
-                                ImGui.SameLine();
-                            }
-                            ImGuiEx.Text($"{OpenJob}");
-                        });
-
+                        id = SCH.JobID;
                     }
 
-                    using (var contents = ImRaii.Child("Contents", new Vector2(0)))
+                    IDalamudTextureWrap? icon = Icons.GetJobIcon(id);
+                    if (icon != null)
                     {
 
-                        try
+                        using (var headingTab = ImRaii.Child("PvPHeadingTab", new Vector2(ImGui.GetContentRegionAvail().X, icon is null ? 24f.Scale() : (icon.Size.Y / 2f).Scale() + 4f)))
                         {
-                            if (ImGui.BeginTabBar($"subTab{OpenJob}", ImGuiTabBarFlags.Reorderable | ImGuiTabBarFlags.AutoSelectNewTabs))
+                            if (ImGui.Button("Back", new Vector2(0, 24f.Scale())))
                             {
-                                if (ImGui.BeginTabItem("Normal"))
-                                {
-                                    DrawHeadingContents(OpenJob, i);
-                                    ImGui.EndTabItem();
-                                }
-
-                                ImGui.EndTabBar();
+                                OpenJob = "";
+                                return;
                             }
-                        }
-                        catch { }
 
+                            ImGui.SameLine();
+                            ImGuiEx.LineCentered
+                            (
+                                () =>
+                                {
+                                    if (icon != null)
+                                    {
+                                        ImGui.Image(icon.ImGuiHandle, new Vector2(icon.Size.X.Scale(), icon.Size.Y.Scale()) / 2f);
+                                        ImGui.SameLine();
+                                    }
+                                    ImGuiEx.Text($"{OpenJob}");
+                                }
+                            );
+
+                        }
+
+                        using (var contents = ImRaii.Child("Contents", new Vector2(0)))
+                        {
+
+                            try
+                            {
+                                if (ImGui.BeginTabBar($"subTab{OpenJob}", ImGuiTabBarFlags.Reorderable | ImGuiTabBarFlags.AutoSelectNewTabs))
+                                {
+                                    if (ImGui.BeginTabItem("Normal"))
+                                    {
+                                        DrawHeadingContents(OpenJob, i);
+                                        ImGui.EndTabItem();
+                                    }
+
+                                    ImGui.EndTabBar();
+                                }
+                            }
+                            catch
+                            {
+                            }
+
+                        }
                     }
                 }
 
