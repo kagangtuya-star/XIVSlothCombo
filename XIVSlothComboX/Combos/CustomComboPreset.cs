@@ -170,11 +170,7 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        //Non-gameplay Features
-        //[CustomComboInfo("输出战斗日志", "将你使用的技能输出到聊天框", ADV.JobID)]
-        //AllOutputCombatLog = 100094,
 
-        // Last value = 100094
 
         #endregion
 
@@ -184,23 +180,17 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(All.Repose)]
         [CustomComboInfo
-        (
-            "自定义循环",
-            "自定义循环",
-            AST.JobID, -10
-        )]
+        ("自定义循环","自定义循环",AST.JobID, -10)]
         AST_Advanced_CustomMode = 10180,
 
         #region DPS
 
-        [ReplaceSkill
-            (AST.Malefic, AST.Malefic2, AST.Malefic3, AST.Malefic4, AST.FallMalefic, AST.Combust, AST.Combust2, AST.Combust3, AST.Gravity, AST.Gravity2)]
+        [ReplaceSkill(AST.Malefic, AST.Malefic2, AST.Malefic3, AST.Malefic4, AST.FallMalefic, AST.Combust, AST.Combust2, AST.Combust3, AST.Gravity, AST.Gravity2)]
         [CustomComboInfo("一键循环", "用以下选项替换煞星或烧灼", AST.JobID, 1)]
         AST_ST_DPS = 1004,
 
         [ParentCombo(AST_ST_DPS)]
-        [CustomComboInfo
-            ("烧灼上线选项", "Adds Combust to the DPS feature if it's not present on current target, or is about to expire.", AST.JobID)]
+        [CustomComboInfo("烧灼上线选项", "Adds Combust to the DPS feature if it's not present on current target, or is about to expire.", AST.JobID)]
         AST_ST_DPS_CombustUptime = 1018,
 
 
@@ -331,11 +321,7 @@ namespace XIVSlothComboX.Combos
 
 
         [ParentCombo(AST_AoE_SimpleHeals_AspectedHelios)]
-        [CustomComboInfo
-        (
-            "Aspected Helios Option", "In Helios mode: Will Cast Aspected Helios when the HoT is missing on yourself."
-                                      + "\nIn Aspected Helios mode: Is considered enabled regardless.", AST.JobID
-        )]
+        [CustomComboInfo("Aspected Helios Option", "In Helios mode: Will Cast Aspected Helios when the HoT is missing on yourself.\nIn Aspected Helios mode: Is considered enabled regardless.", AST.JobID )]
         AST_AoE_SimpleHeals_Aspected = 1053,
 
         [ReplaceSkill(AST.Benefic2)]
@@ -416,69 +402,25 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(BLM.Fire)]
         [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_SimpleMode)]
-        [CustomComboInfo
-        (
-            "Advanced Mode - Single Target",
-            "Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.",
-            BLM.JobID, -9
-        )]
+        [CustomComboInfo("Advanced Mode - Single Target","Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.",BLM.JobID, -9)]
         BLM_ST_AdvancedMode = 2021,
 
         [ParentCombo(BLM_ST_AdvancedMode)]
         [CustomComboInfo("Thunder I/III Option", "Adds Thunder I/Thunder III when the debuff isn't present or is expiring.", BLM.JobID)]
         BLM_ST_Adv_Thunder = 2029,
-
-        [ParentCombo(BLM_ST_Adv_Thunder)]
-        [CustomComboInfo
-        (
-            "Thundercloud Spender Option", "Spends Thundercloud as soon as possible rather than waiting until Thunder is expiring.",
-            BLM.JobID
-        )]
-        BLM_ST_Adv_Thunder_ThunderCloud = 2030,
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Umbral Soul Option", "Uses Transpose/Umbral Soul when no target is selected.", BLM.JobID, 10)]
-        BLM_Adv_UmbralSoul = 2035,
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Movement Options", "Choose options to be used during movement.", BLM.JobID)]
-        BLM_Adv_Movement = 2036,
-
+        
         [ParentCombo(BLM_ST_AdvancedMode)]
         [CustomComboInfo("Triplecast/Swiftcast Option", "Adds Triplecast/Swiftcast to the rotation.", BLM.JobID, -8)]
         BLM_Adv_Casts = 2039,
-
-        [ParentCombo(BLM_Adv_Casts)]
-        [CustomComboInfo("Pool Triplecast Option", "Keep one Triplecast charge for movement.", BLM.JobID)]
-        BLM_Adv_Triplecast_Pooling = 2040,
-
+        
         [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Cooldown Options", "Select which cooldowns to add to the rotation.", BLM.JobID, -8)]
-        BLM_Adv_Cooldowns = 2042,
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo
-        (
-            "Opener Option", "Adds the Lv.90 opener." + "\nWill default to the Standard opener when nothing is selected.", BLM.JobID,
-            -10
-        )]
+        [CustomComboInfo("Opener Option", "Adds the Lv.90 opener." + "\nWill default to the Standard opener when nothing is selected.", BLM.JobID,-10)]
         BLM_Adv_Opener = 2043,
 
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo
-        (
-            "Rotation Option", "Choose which rotation to use." + "\nWill default to the Standard rotation when nothing is selected.",
-            BLM.JobID, -9
-        )]
-        BLM_Adv_Rotation = 2045,
-
+        
         #endregion
 
-
-        [ParentCombo(BLM_ST_SimpleMode)]
-        [CustomComboInfo("雷云功能", "当自身存在雷云状态且目标身上没有dot存在或dot即将结束时，自动插入闪雷/暴雷.", BLM.JobID)]
-        BLM_Thunder = 2006,
-
+        
         [ReplaceSkill(BLM.Flare)]
         [CustomComboInfo("简易 AoE 功能", "将核爆整合为一键AoE循环。", BLM.JobID, -1)]
         BLM_AoE_SimpleMode = 2008,
@@ -487,37 +429,13 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(BLM.Blizzard2, BLM.HighBlizzard2)]
         [ConflictingCombos(BLM_AoE_SimpleMode)]
-        [CustomComboInfo
-        (
-            "Advanced Mode - AoE",
-            "Replaces Blizzard II with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID,
-            -8
-        )]
+        [CustomComboInfo("Advanced Mode - AoE","Replaces Blizzard II with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID,-8)]
         BLM_AoE_AdvancedMode = 2054,
 
         [ParentCombo(BLM_AoE_AdvancedMode)]
         [CustomComboInfo("Thunder Uptime Option", "Adds Thunder II/Thunder IV during Umbral Ice.", BLM.JobID, 1)]
         BLM_AoE_Adv_ThunderUptime = 2055,
-
-        [ParentCombo(BLM_AoE_Adv_ThunderUptime)]
-        [CustomComboInfo("Uptime in Astral Fire", "Maintains uptime during Astral Fire.", BLM.JobID, 1)]
-        BLM_AoE_Adv_ThunderUptime_AstralFire = 2056,
-
-        [ParentCombo(BLM_AoE_AdvancedMode)]
-        [CustomComboInfo("Foul Option", "Adds Foul when available during Astral Fire.", BLM.JobID, 2)]
-        BLM_AoE_Adv_Foul = 2044,
-
-        [ParentCombo(BLM_AoE_AdvancedMode)]
-        [CustomComboInfo("Umbral Soul Option", "Use Transpose/Umbral Soul when no target is selected.", BLM.JobID, 99)]
-        BLM_AoE_Adv_UmbralSoul = 2049,
-
-        [ParentCombo(BLM_AoE_AdvancedMode)]
-        [CustomComboInfo("Cooldown Options", "Select which cooldowns to add to the rotation.", BLM.JobID, 1)]
-        BLM_AoE_Adv_Cooldowns = 2052,
-
-        [ParentCombo(BLM_AoE_SimpleMode)]
-        [CustomComboInfo("秽浊/魔泉 核爆 功能", "当自身处于星极火状态且秽浊可用时插入秽浊，在秽浊后插入魔泉以便再使用一次核爆。", BLM.JobID)]
-        BLM_AoE_Simple_Foul = 2020,
+        
 
         #endregion
 
@@ -566,11 +484,7 @@ namespace XIVSlothComboX.Combos
 
 
         [ReplaceSkill(BLM.AetherialManipulation)]
-        [CustomComboInfo
-        (
-            "Aetherial Manipulation Feature",
-            "Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still.", BLM.JobID
-        )]
+        [CustomComboInfo("Aetherial Manipulation Feature","Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still.", BLM.JobID )]
         BLM_Aetherial_Manipulation = 2046,
 
         #endregion
@@ -586,11 +500,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("苦闷之歌buff强化", "将苦闷之歌用怒发冲冠代替，使苦闷之歌处于怒发冲冠的buff下", BLU.JobID)]
         BLU_BuffedSoT = 70000,
 
-        [BlueInactive
-        (
-            BLU.Whistle, BLU.Tingle, BLU.MoonFlute, BLU.JKick, BLU.TripleTrident, BLU.Nightbloom, BLU.RoseOfDestruction, BLU.FeatherRain,
-            BLU.Bristle, BLU.GlassDance, BLU.Surpanakha, BLU.MatraMagic, BLU.ShockStrike, BLU.PhantomFlurry
-        )]
+        [BlueInactiv(BLU.Whistle, BLU.Tingle, BLU.MoonFlute, BLU.JKick, BLU.TripleTrident, BLU.Nightbloom, BLU.RoseOfDestruction, BLU.FeatherRain,BLU.Bristle, BLU.GlassDance, BLU.Surpanakha, BLU.MatraMagic, BLU.ShockStrike, BLU.PhantomFlurry)]
         [ReplaceSkill(BLU.MoonFlute)]
         [ConflictingCombos(BLU_NewMoonFluteOpener)]
         [CustomComboInfo("月笛开启器", "将满月笛开启器放在月笛或口哨上。", BLU.JobID)]
