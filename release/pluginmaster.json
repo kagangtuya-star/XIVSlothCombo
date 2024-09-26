@@ -12,11 +12,11 @@
     "DalamudApiLevel": 10,
     "LoadPriority": 0,
     "IconUrl": "https://raw.githubusercontent.com/44451516/XIVSlothCombo/main/res/plugin/xivslothcombo.png",
-    "DownloadLinkInstall": "https://github.com/44451516/XIVSlothCombo/blob/CN/release/XIVSlothComboX/latest.zip",
+    "DownloadLinkInstall": "https://raw.githubusercontent.com/44451516/XIVSlothCombo/blob/CN/release/XIVSlothComboX/latest.zip",
     "IsHide": false,
     "IsTestingExclusive": false,
-    "DownloadLinkTesting": "https://github.com/44451516/XIVSlothCombo/blob/CN/release/XIVSlothComboX/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/44451516/XIVSlothCombo/blob/CN/release/XIVSlothComboX/latest.zip",
+    "DownloadLinkTesting": "https://raw.githubusercontent.com/44451516/XIVSlothCombo/blob/CN/release/XIVSlothComboX/latest.zip",
+    "DownloadLinkUpdate": "https://raw.githubusercontent.com/44451516/XIVSlothCombo/blob/CN/release/XIVSlothComboX/latest.zip",
     "DownloadCount": 0,
     "LastUpdated": "1724608643"
   }
