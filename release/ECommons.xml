@@ -73,6 +73,18 @@
             <param name="message">Full text of the command.</param>
             <exception cref="T:System.InvalidOperationException">If you didn't prefixed it with a slash.</exception>
         </member>
+        <member name="M:ECommons.Automation.Chat.ExecuteGeneralAction(System.UInt32)">
+            <summary>
+            Executes General Action by ID via chat.
+            </summary>
+            <param name="generalActionId"></param>
+        </member>
+        <member name="M:ECommons.Automation.Chat.ExecuteAction(System.UInt32)">
+            <summary>
+            Executes Action by ID via chat.
+            </summary>
+            <param name="actionId"></param>
+        </member>
         <member name="M:ECommons.Automation.Chat.SanitiseText(System.String)">
             <summary>
             <para>
@@ -578,6 +590,11 @@
             <param name="copyEvents">Whether to copy events. If true, events from other current configuration will be used, if false - from other.</param>
             <returns></returns>
         </member>
+        <member name="T:ECommons.Automation.NeoTaskManager.Tasks.NeoTasks">
+            <summary>
+            A collection of functions that are very commonly used in various plugins
+            </summary>
+        </member>
         <member name="M:ECommons.Automation.UIInput.ClickHelper.SendClick(System.String,System.IntPtr)">
             <summary>
             Invoke a click by name. Intended for calling clicks via user-entered strings.
@@ -965,6 +982,178 @@
             <param name="language">The language.</param>
             <returns>The ExcelRow in the specified language.</returns>
         </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.String,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="searchPredicate">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="preFilter"></param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.String,System.Boolean},System.Func{``0,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="searchPredicate">Secondary filter to apply to the sheet for which items to display.</param>
+            <param name="preFilter">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.String},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="toName">The format of each item in the combo box.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.String},System.Func{``0,System.String,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="toName">The format of each item in the combo box.</param>
+            <param name="searchPredicate">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.String},System.Func{``0,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="toName">The format of each item in the combo box.</param>
+            <param name="preFilter">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.ExcelSheetCombo``1(System.String,``0@,System.Func{Lumina.Excel.ExcelSheet{``0},System.String},System.Func{``0,System.String},System.Func{``0,System.String,System.Boolean},System.Func{``0,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="getPreview">The format of the initial value in the combo box.</param>
+            <param name="toName">The format of the initial value in the combo box.</param>
+            <param name="searchPredicate">Secondary filter to apply to the sheet for which items to display.</param>
+            <param name="preFilter">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.SearchableCombo``1(System.String,``0@,System.String,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="preview">The format of the initial value in the combo box.</param>
+            <param name="possibilities">The initial excel sheet.</param>
+            <param name="toName">The format of the initial value in the combo box.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.SearchableCombo``1(System.String,``0@,System.String,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.Func{``0,System.String,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="preview">The format of the initial value in the combo box.</param>
+            <param name="possibilities">The initial excel sheet.</param>
+            <param name="toName">The format of each item in the combo box.</param>
+            <param name="searchPredicate">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelCombos.SearchableCombo``1(System.String,``0@,System.String,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.Func{``0,System.String,System.Boolean},System.Func{``0,System.Boolean},ImGuiNET.ImGuiComboFlags)">
+            <summary>
+            Creates a searchable combo box for a given Excel sheet with an optional custom filter.
+            </summary>
+            <typeparam name="T">ExcelSheet</typeparam>
+            <param name="id">ID of the combo box.</param>
+            <param name="selected">Excel row returned when selected.</param>
+            <param name="preview">The format of the initial value in the combo box.</param>
+            <param name="possibilities">The initial excel sheet.</param>
+            <param name="toName">The format of each item in the combo box.</param>
+            <param name="searchPredicate">Secondary filter to apply to the sheet for which items to display.</param>
+            <param name="preFilter">Initial filter to apply to the sheet for which items to display.</param>
+            <param name="flags">Any ImGuiComboFlags</param>
+            <returns>Bool when item is selected.</returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelItemHelper.Get(System.Int32)">
+            <summary>
+            Gets <see cref="T:Lumina.Excel.GeneratedSheets.Item"/> by id or null if not found.
+            </summary>
+            <param name="rowId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelItemHelper.Get(System.UInt32)">
+            <summary>
+            Gets <see cref="T:Lumina.Excel.GeneratedSheets.Item"/> by id or null if not found.
+            </summary>
+            <param name="rowId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelItemHelper.GetName(System.UInt32,System.Boolean)">
+            <summary>
+            Gets item name. If name or item is missing, prints item's ID. Item names are stripped off non-text payloads. Results are cached.
+            </summary>
+            <param name="id"></param>
+            <param name="includeID">Force include ID into text</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ExcelServices.ExcelItemHelper.GetName(Lumina.Excel.GeneratedSheets.Item,System.Boolean)">
+            <summary>
+            Gets item name. If name is missing, prints item's ID. Item names are stripped off non-text payloads. Results are cached.
+            </summary>
+            <param name="item"></param>
+            <param name="includeID"></param>
+            <returns></returns>
+        </member>
         <member name="M:ECommons.ExcelServices.ExcelTerritoryHelper.IsSanctuary(System.UInt32)">
             <summary>
             Checks if territory belongs to main cities, inns, residential areas or houses. 
@@ -1194,6 +1383,24 @@
             <summary>
             Pictomancer 
             </summary>
+        </member>
+        <member name="T:ECommons.EzContextMenu.ContextMenuPrefixRemover">
+            <summary>
+            A helper class to remove context menu prefix that is required by Dalamud. <br></br>
+            While removing prefix, please still make sure to give an user indication that menu item is added by the plugin.
+            </summary>
+        </member>
+        <member name="M:ECommons.EzContextMenu.ContextMenuPrefixRemover.Initialize">
+            <summary>
+            Manual initialization is optional. Initialization will be automatically performed upon first call of <see cref="M:ECommons.EzContextMenu.ContextMenuPrefixRemover.RemovePrefix(Dalamud.Game.Gui.ContextMenu.MenuItem)"/> method.
+            </summary>
+        </member>
+        <member name="M:ECommons.EzContextMenu.ContextMenuPrefixRemover.RemovePrefix(Dalamud.Game.Gui.ContextMenu.MenuItem)">
+            <summary>
+            Call this extension method to remove prefix from menu item.
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
         </member>
         <member name="T:ECommons.EzEventManager.EzFrameworkUpdate">
             <summary>
@@ -1483,6 +1690,106 @@
             <param name="DefaultValue">Default value when creating data that doesn't exists.</param>
             <returns>Whether data could be obtained</returns>
         </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.PlayerCharacterSelf">
+            <summary>
+            Represents the player's own character.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.InDutyPartyMember">
+            <summary>
+            Represents another party member in duty (job agnostic, likely only applicable in PVP).
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.InDutyPCNotInParty">
+            <summary>
+            Represents another player character in duty but not in the party.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.EnemyMalestromPVPPC">
+            <summary>
+            Represents an enemy player character in Maelstrom PVP.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.EnemyAdderPVPPC">
+            <summary>
+            Represents an enemy player character in Adder PVP.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.EnemyFlamesPVPPC">
+            <summary>
+            Represents an enemy player character in Flames PVP.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.HostileNotEngaged">
+            <summary>
+            Represents a hostile character that is not engaged.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.Dead">
+            <summary>
+            Represents a dead character.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.HostileEngagedSelfDamaged">
+            <summary>
+            Represents a hostile character engaged with the player and damaged.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.HostileEngagedOther">
+            <summary>
+            Represents a hostile character engaged with another player.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.HostileEngagedSelfUndamaged">
+            <summary>
+            Represents a hostile character engaged with the player but undamaged.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.FriendlyBattleNPC">
+            <summary>
+            Represents a friendly battle NPC.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.PlayerCharacterChocobo">
+            <summary>
+            Represents the player's own chocobo.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.OtherPlayerCharacterChocobo">
+            <summary>
+            Represents another player's chocobo.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.OtherAlliancePlayerCharacter">
+            <summary>
+            Represents another player character in another alliance.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.AnyPlayerCharacterDead">
+            <summary>
+            Represents any dead player character.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.OutOfDutyandPartyPC">
+            <summary>
+            Represents another player character out of duty and party.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.InDutyPCInPartyTank">
+            <summary>
+            Represents another tank role player character in duty and in party.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.InDutyPCInPartyHealer">
+            <summary>
+            Represents another healer role player character in duty and in party.
+            </summary>
+        </member>
+        <member name="F:ECommons.GameFunctions.NameplateKind.InDutyPCInPartyDPS">
+            <summary>
+            Represents another DPS role player character in duty and in party.
+            </summary>
+        </member>
         <member name="F:ECommons.Gamepad.GamePad.ControllerButtons">
             <summary>
             Dictionary containing a mapping of <see cref="T:Dalamud.Game.ClientState.GamePad.GamepadButtons"/> to Playstation / Xbox button names.
@@ -1705,6 +2012,13 @@
             <param name="senderStruct">Resulting player data</param>
             <returns>Whether operation succeeded</returns>
         </member>
+        <member name="M:ECommons.GenericHelpers.GetNodeByIDChain(FFXIVClientStructs.FFXIV.Component.GUI.AtkResNode*,System.Int32[])">
+            <summary>
+            Gets a node given a chain of node IDs
+            </summary>
+            <param name="node">Root node of the addon</param>
+            <param name="ids">Node IDs (starting from root) to the desired node</param>
+        </member>
         <member name="M:ECommons.GenericHelpers.ExtractText(Lumina.Text.SeString,System.Boolean)">
             <summary>
             Discards any non-text payloads from <see cref="T:Dalamud.Game.Text.SeStringHandling.SeString"/>
@@ -1920,6 +2234,85 @@
             <param name="delayedOperation">When set to true, will schedule the change in next framework update. Useful when you want to modify a collection while iterating over it.</param>
             <returns></returns>
         </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.InputInt(System.Single,System.String,System.Nullable{System.Int32}@,System.Int32,System.Int32,ImGuiNET.ImGuiInputTextFlags)">
+            <summary>
+            An <see cref="M:ImGuiNET.ImGui.InputInt(System.String,System.Int32@)"/> for nullable int. Consists of checkbox and input component that is enabled/disabled based on checkbox state.
+            </summary>
+            <param name="width"></param>
+            <param name="label"></param>
+            <param name="valueNullable"></param>
+            <param name="step"></param>
+            <param name="step_fast"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.Action[],System.Int32,System.Int32)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.String,System.Action[],System.Action@,System.Int32,System.Int32)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.String,System.Action[],System.Int32,System.Int32)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.String,System.Action[],System.Action@,System.Int32,System.Int32)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.Action[],System.Action@,System.Int32,System.Int32)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.String,System.Action[],System.Action@,System.Int32,System.Int32)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Pagination(System.String,System.Action[],System.Action@,System.Int32,System.Int32)">
+            <summary>
+            Splits array of draw actions into few pages.
+            </summary>
+            <param name="id">Unique ID of your paginator. Must be unique on plugin level.</param>
+            <param name="actions">Array of actions to paginate</param>
+            <param name="paginator">Page switcher that you have to draw. May be absent if there's no page.</param>
+            <param name="perPage">How much elements to display per page. If set to 0, it will be automatically calculated as actions.Length / maxPages. If set to 0, maxPages must be more than 0.</param>
+            <param name="maxPages">Maximum amount of pages that are allowed to be displayed. If this amount is reached, new perPage amount will be actions.Length / maxPages.</param>
+            <returns>Array of actions in the selected by user page for you to draw.</returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.TreeNodeCollapsingHeader(System.String,System.Action)">
+            <summary>
+            Another interpretation of <see cref="M:ImGuiNET.ImGui.CollapsingHeader(System.String)"/> but with narrow design and border.
+            </summary>
+            <param name="name"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.PluginAvailabilityIndicator(System.Collections.Generic.IEnumerable{ECommons.ImGuiMethods.ImGuiEx.RequiredPluginInfo},System.String,System.Boolean)">
+            <summary>
+            Draws plugin availability checkmark. Allows to check by name and version. When hovered, will display tooltip with info about which plugins are installed, outdated or missing.
+            </summary>
+            <param name="pluginInfos">RequiredPluginInfos of plugins that are required</param>
+            <param name="prependText">Override first tooltip line if you want</param>
+            <param name="all">Whether to check for all plugins from the list or just one of them</param>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.Nullable{System.Numerics.Vector4},System.String)">
+            <summary>Selectable item made from TreeNode with bullet mark in front</summary>
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.Nullable{System.Numerics.Vector4},System.String,System.Boolean@,ImGuiNET.ImGuiTreeNodeFlags)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.String)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.Nullable{System.Numerics.Vector4},System.String)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.String,System.Boolean@)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.Nullable{System.Numerics.Vector4},System.String)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.Selectable(System.Nullable{System.Numerics.Vector4},System.String,System.Boolean@,ImGuiNET.ImGuiTreeNodeFlags)">
+            <summary>
+            Selectable item made from TreeNode
+            </summary>
+            <param name="color">Text color</param>
+            <param name="id">ImGui ID</param>
+            <param name="selected">Selected state storage field</param>
+            <param name="extraFlags">Extra tree node flags</param>
+            <returns><see langword="true"/> when clicked</returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.TreeNode(System.String,ImGuiNET.ImGuiTreeNodeFlags)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.TreeNode(System.Nullable{System.Numerics.Vector4},System.String,ImGuiNET.ImGuiTreeNodeFlags)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.TreeNode(System.Nullable{System.Numerics.Vector4},System.String,ImGuiNET.ImGuiTreeNodeFlags)">
+            <summary>
+            Just like <see cref="M:ImGuiNET.ImGui.TreeNode(System.String)"/> but with color option and that spans full width by default.
+            </summary>
+            <param name="color"></param>
+            <param name="name"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
         <member name="F:ECommons.ImGuiMethods.ImGuiEx.JobSelectorOption.IncludeBase">
             <summary>
             With this option, base jobs will be included as well.
@@ -1941,6 +2334,68 @@
             <param name="noJobSelectedPreview">Preview value that should be displayed when no job is selected.</param>
             <param name="jobDisplayFilter">Optional extra filter for jobs to be displayed.</param>
             <returns><see langword="true"/> every time <paramref name="selectedJobs"/> is modified.</returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.HelpMarker(System.String,System.Nullable{System.Numerics.Vector4},System.String,System.Boolean)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.InfoMarker(System.String,System.Nullable{System.Numerics.Vector4},System.String,System.Boolean)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.InfoMarker(System.String,System.Nullable{System.Numerics.Vector4},System.String,System.Boolean)">
+            <summary>
+            <see cref="M:Dalamud.Interface.Components.ImGuiComponents.HelpMarker(System.String)"/> but with more options
+            </summary>
+            <param name="helpText"></param>
+            <param name="color"></param>
+            <param name="symbolOverride"></param>
+            <param name="sameLine">Whether to call SameLine before drawing marker</param>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.SliderInt(System.String,System.Int32@,System.Int32,System.Int32,System.String,ImGuiNET.ImGuiSliderFlags)">
+            <summary>
+            <see cref="M:ImGuiNET.ImGui.SliderInt(System.String,System.Int32@,System.Int32,System.Int32)"/> but with double-click to edit support.
+            </summary>
+            <param name="label"></param>
+            <param name="v"></param>
+            <param name="v_min"></param>
+            <param name="v_max"></param>
+            <param name="format"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.SliderInt(System.String,System.Int32@,System.Int32,System.Int32,System.String)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.SliderInt(System.String,System.Int32@,System.Int32,System.Int32,System.String,ImGuiNET.ImGuiSliderFlags)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.SliderInt(System.String,System.Int32@,System.Int32,System.Int32)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.SliderInt(System.String,System.Int32@,System.Int32,System.Int32,System.String,ImGuiNET.ImGuiSliderFlags)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.SliderFloat(System.String,System.Single@,System.Single,System.Single,System.String,ImGuiNET.ImGuiSliderFlags)">
+            <summary>
+            <see cref="M:ImGuiNET.ImGui.SliderFloat(System.String,System.Single@,System.Single,System.Single)"/> but with double-click to edit support.
+            </summary>
+            <param name="label"></param>
+            <param name="v"></param>
+            <param name="v_min"></param>
+            <param name="v_max"></param>
+            <param name="format"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.SliderFloat(System.String,System.Single@,System.Single,System.Single,System.String)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.SliderFloat(System.String,System.Single@,System.Single,System.Single,System.String,ImGuiNET.ImGuiSliderFlags)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.SliderFloat(System.String,System.Single@,System.Single,System.Single)">
+            <inheritdoc cref="M:ECommons.ImGuiMethods.ImGuiEx.SliderFloat(System.String,System.Single@,System.Single,System.Single,System.String,ImGuiNET.ImGuiSliderFlags)"/>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.ActivateIfDoubleClicked">
+            <summary>
+            Activates item when double-clicked. Place after any ImGui Slider component to enable edit on double-click.
+            </summary>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.HoveredAndClicked(System.String,ImGuiNET.ImGuiMouseButton,System.Boolean)">
+            <summary>
+            Checks whether item is hovered and double-clicked. Sets cursor to hand to indicate that it can be clicked.
+            </summary>
+            <param name="tooltip">Optional tooltip</param>
+            <param name="btn">Which button to check</param>
+            <param name="requireCtrl">Whether to require CTRL when clicking</param>
+            <returns></returns>
         </member>
         <member name="M:ECommons.ImGuiMethods.ImGuiEx.ButtonCheckbox(System.String,System.Nullable{System.Boolean}@,System.Nullable{System.Numerics.Vector4},System.Nullable{System.Numerics.Vector4},System.Boolean)">
             <summary>
@@ -2050,6 +2505,23 @@
             </summary>
             <param name="s">Text</param>
         </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.CheckboxWrapped(System.String,System.Boolean@)">
+            <summary>
+            Draws a checkbox that will be on the same line as previous if there is space, otherwise will move to the next line.
+            </summary>
+            <param name="label">Checkbox label</param>
+            <param name="v">Boolean to toggle</param>
+            <remarks><see cref="M:ImGuiNET.ImGui.SameLine"/> does not need to be called just before using this.</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.ButtonWrapped(System.String)">
+            <summary>
+            Draws a button that will be on the same line as previous if there is space, otherwise will move to the next line.
+            </summary>
+            <param name="label">Button label</param>
+            <remarks><see cref="M:ImGuiNET.ImGui.SameLine"/> does not need to be called just before using this.</remarks>
+            <returns></returns>
+        </member>
         <member name="M:ECommons.ImGuiMethods.ImGuiEx.EnumCombo``1(System.String,``0@,System.Collections.Generic.IDictionary{``0,System.String})">
             <summary>
             Draws an easy combo selector for an enum with a search field for long lists.
@@ -2069,6 +2541,26 @@
             <param name="filter">Optional filter</param>
             <param name="names">Optional Name overrides</param>
             <returns></returns>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.PushCursor(System.Numerics.Vector2)">
+            <summary>
+            Move the cursor by the vector relative to the current position
+            </summary>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.PushCursor(System.Single,System.Single)">
+            <summary>
+            Move the cursor by the coordinates relative to the current position
+            </summary>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.PushCursorX(System.Single)">
+            <summary>
+            Move the cursor horizontally x units relative to the current position
+            </summary>
+        </member>
+        <member name="M:ECommons.ImGuiMethods.ImGuiEx.PushCursorY(System.Single)">
+            <summary>
+            Move the cursor vertically y units relative to the current position
+            </summary>
         </member>
         <member name="M:ECommons.ImGuiMethods.ThreadLoadImageHandler.ClearAll">
             <summary>
@@ -2332,6 +2824,29 @@
             and does not contain branching instructions, so it's well suited for use in tight loops as well.
             </remarks>
         </member>
+        <member name="M:ECommons.MathHelpers.MathHelper.GetRelativeAngle(System.Numerics.Vector3,System.Numerics.Vector3)">
+            <summary>
+            Degrees
+            </summary>
+            <param name="origin"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.MathHelpers.MathHelper.GetRelativeAngle(System.Numerics.Vector2,System.Numerics.Vector2)">
+            <summary>
+            Degrees
+            </summary>
+            <param name="origin"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommons.MathHelpers.MathHelper.GetCardinalDirection(System.Single)">
+            <summary>
+            From angle in degrees
+            </summary>
+            <param name="angle">Degrees</param>
+            <returns></returns>
+        </member>
         <member name="M:ECommons.Reflection.DalamudReflector.RegisterOnInstalledPluginsChangedEvents(System.Action[])">
             <summary>
             Registers actions that will be triggered upon any installed plugin state change. Plugin monitoring will begin upon registering any actions.
@@ -2349,6 +2864,34 @@
             <param name="ignoreCache">Whether to disable caching of the plugin and it's context to speed up further searches</param>
             <returns>Whether operation succeeded</returns>
             <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ECommons.Reflection.DalamudReflector.HasRepo(System.String)">
+            <summary>
+            Checks the Dalamud Configuration for the presence of a given repository URL.
+            </summary>
+        </member>
+        <member name="M:ECommons.Reflection.DalamudReflector.AddRepo(System.String,System.Boolean)">
+            <summary>
+            Attempts to add a new repository entry into the Dalamud Configuration. If the repo already exists, nothing is overridden.
+            </summary>
+            <param name="repoURL">The json URL of the repository.</param>
+            <param name="enabled">Set the enabled state, whether plugins from the repo will load in the plugin installer.</param>
+        </member>
+        <member name="M:ECommons.Reflection.DalamudReflector.ReloadPluginMasters">
+            <summary>
+            Reloads the Dalamud Plugin Manager, effectively the same as closing and reopening the Plugin Installer window.
+            </summary>
+        </member>
+        <member name="M:ECommons.Reflection.DalamudReflector.SaveDalamudConfig">
+            <summary>
+            Saves the Dalamud Configuration.
+            </summary>
+        </member>
+        <member name="M:ECommons.Reflection.DalamudReflector.DeleteSharedData(System.String)">
+            <summary>
+            Deletes specified shared data
+            </summary>
+            <param name="name"></param>
         </member>
         <member name="T:ECommons.Reflection.FieldPropertyUnion.IFieldPropertyUnion">
             <summary>
@@ -2521,68 +3064,6 @@
             <param name="target">Instance object that is hosting the method. Pass null if a method is static.</param>
             <returns></returns>
         </member>
-        <member name="T:ECommons.Resources.Lang">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.Context_CryptoDonation">
-            <summary>
-              Looks up a localized string similar to Donate via Cryptocurrency.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.Context_ExploreOtherPlugins">
-            <summary>
-              Looks up a localized string similar to Explore other NightmareXIV plugins.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.Context_JoinDiscord">
-            <summary>
-              Looks up a localized string similar to Join NightmareXIV Discord.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.Context_OneTimeDonate">
-            <summary>
-              Looks up a localized string similar to Donate one-time via Ko-Fi.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.Context_Subscribe">
-            <summary>
-              Looks up a localized string similar to Subscribe on Patreon.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.JoinPatreon">
-            <summary>
-              Looks up a localized string similar to Join Patreon.
-            </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.PatreonButtonTooltip">
-             <summary>
-               Looks up a localized string similar to If you like this plugin, please consider supporting it via NightmareXIV Patreon or via other means! This will help the developer to keep it updated and maintained. And you will get additional benefits, such as priority support, access to private plugins and priority feature requests as well.
-            
-            Left click - to go to Patreon;
-            Right click - see all options.
-             </summary>
-        </member>
-        <member name="P:ECommons.Resources.Lang.SmallPatreonButtonTooltip">
-             <summary>
-               Looks up a localized string similar to If you like this plugin, please consider supporting it.
-            
-            Left click - to go to Patreon;
-            Right click - see other options.
-             </summary>
-        </member>
         <member name="T:ECommons.Schedulers.ThreadPool">
             <summary>
             A helper to let you have your own simple thread pool.
@@ -2594,6 +3075,26 @@
             </summary>
             <param name="task">An action to run.</param>
             <param name="onCompletion">If specified, will be executed after completion of main action. If specified, no errors will be printed in log, instead if any occurs it will be passed into an action as an argument.</param>
+        </member>
+        <member name="M:ECommons.SimpleGui.EzConfigGui.GetWindow``1">
+            <summary>
+            Returns a window from the EzGui WindowSystem.
+            </summary>
+        </member>
+        <member name="M:ECommons.SimpleGui.EzConfigGui.RemoveWindow``1">
+            <summary>
+            Removes a window from the EzGui WindowSystem. Windows are auto-disposed upon plugin unload. This is only needed if you need to manually remove a window prior to plugin unload.
+            </summary>
+        </member>
+        <member name="T:ECommons.SimpleGui.PopupWindow">
+            <summary>
+            Allows creation of single-use popup windows. Disposes itself upon being closed.
+            </summary>
+        </member>
+        <member name="T:ECommons.Singletons.PriorityAttribute">
+            <summary>
+            Sets service creation priority. Default is 0; the less is priority, the later will service be loaded, and earlier - disposed.
+            </summary>
         </member>
         <member name="T:ECommons.Singletons.SingletonServiceManager">
             <summary>
@@ -2776,6 +3277,88 @@
             - Make sure to implement both nint and void* constructors<br></br>
             <b>- Prefer NOT to use indexes; instead, create an array of entries and create internal method to click an item. See RetainerList and SelectString for examples.</b>
             </summary>
+        </member>
+        <member name="P:ECommons.UIHelpers.AddonMasterImplementations.AddonMaster.BannerList.Portraits.ListIndex">
+            <summary>
+            1-based index
+            </summary>
+        </member>
+        <member name="P:ECommons.UIHelpers.AddonMasterImplementations.AddonMaster.BannerList.Portraits.PortraitBroken">
+            <summary>
+            1 = broken <br></br>
+            0 = not broken
+            </summary>
+        </member>
+        <member name="P:ECommons.UIHelpers.AddonMasterImplementations.AddonMaster.BannerList.Portraits.Unk06">
+            <summary>
+            7 = unable to retrieve glamour plate data <br></br>
+            5 = broken portrait <br></br>
+            1 = unbroken portrait and UseAsInstantPortrait is off <br></br>
+            0 = unbroken portrait and UseAsInstantPortrait is on
+            </summary>
+        </member>
+        <member name="P:ECommons.UIHelpers.AddonMasterImplementations.AddonMaster.BannerList.Portraits.UseAsInstantPortrait">
+            <summary>
+            0 = on <br></br>
+            1 = off
+            </summary>
+        </member>
+        <member name="M:ECommons.UIHelpers.AddonMasterImplementations.AddonMaster.Gathering.ExtractNumber">
+            <remarks>
+            Pattern:<br/>
+            <code>\\d+</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match a Unicode digit atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ExtractNumber_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the ExtractNumber method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.ExtractNumber_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ExtractNumber_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ExtractNumber_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ExtractNumber_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ExtractNumber_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ExtractNumber_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ExtractNumber_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ExtractNumber_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IndexOfAnyDigit(System.ReadOnlySpan{System.Char})">
+            <summary>Finds the next index of any character that matches a Unicode digit.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiExceptDigits">
+            <summary>Supports searching for characters in or not in "\0\u0001\u0002\u0003\u0004\u0005\u0006\a\b\t\n\v\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&amp;'()*+,-./:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007f".</summary>
         </member>
     </members>
 </doc>
