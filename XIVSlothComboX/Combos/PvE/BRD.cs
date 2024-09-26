@@ -83,7 +83,11 @@ namespace XIVSlothComboX.Combos.PvE
                 BRD_AoESecondWindThreshold = "BRD_AoESecondWindThreshold",
                 BRD_VariantCure = "BRD_VariantCure";
         }
-
+        internal static class Traits
+        {
+            internal const ushort
+                EnhancedBloodletter = 445;
+        }
         #region Song status
         internal static bool SongIsNotNone(Song value) => value != Song.NONE;
         internal static bool SongIsNone(Song value) => value == Song.NONE;
@@ -428,7 +432,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return EmpyrealArrow;
 
                         if (LevelChecked(PitchPerfect) && songWanderer &&
-                            (gauge.Repertoire == 3 || (gauge.Repertoire == 2 && empyrealCD < 2)))
+                            (gauge.Repertoire == 3 || (LevelChecked(EmpyrealArrow) && gauge.Repertoire == 2 && empyrealCD < 2)))
                             return OriginalHook(PitchPerfect);
 
                         if (ActionReady(Sidewinder))
@@ -450,7 +454,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             uint rainOfDeathCharges = LevelChecked(RainOfDeath) ? GetRemainingCharges(RainOfDeath) : 0;
 
-                            if (LevelChecked(WanderersMinuet))
+                            if (IsEnabled(CustomComboPreset.BRD_AoE_Pooling) && LevelChecked(WanderersMinuet) && TraitLevelChecked(Traits.EnhancedBloodletter))
                             {
                                 if (songWanderer)
                                 {
@@ -485,7 +489,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
-                    bool wideVolleyReady = LevelChecked(WideVolley) && HasEffect(Buffs.HawksEye);
+                    bool wideVolleyReady = LevelChecked(WideVolley) && (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage));
                     bool blastArrowReady = LevelChecked(BlastArrow) && HasEffect(Buffs.BlastArrowReady);
                     bool resonantArrowReady = LevelChecked(ResonantArrow) && HasEffect(Buffs.ResonantArrowReady);
 
@@ -729,7 +733,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return EmpyrealArrow;
 
                         if (LevelChecked(PitchPerfect) && songWanderer &&
-                            (gauge.Repertoire == 3 || (gauge.Repertoire == 2 && empyrealCD < 2)))
+                            (gauge.Repertoire == 3 || (LevelChecked(EmpyrealArrow) && gauge.Repertoire == 2 && empyrealCD < 2)))
                             return OriginalHook(PitchPerfect);
 
                         if (ActionReady(Sidewinder))
@@ -754,7 +758,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             uint bloodletterCharges = GetRemainingCharges(Bloodletter);
 
-                            if (IsEnabled(CustomComboPreset.BRD_Adv_Pooling) && LevelChecked(WanderersMinuet))
+                            if (IsEnabled(CustomComboPreset.BRD_Adv_Pooling) && LevelChecked(WanderersMinuet) && TraitLevelChecked(Traits.EnhancedBloodletter))
                             {
                                 if (songWanderer)
                                 {
@@ -786,7 +790,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
                     //Moved below weaves bc roobert says it is blocking his weaves from happening
-                    if (HasEffect(Buffs.RadiantEncoreReady) && !JustUsed(RadiantFinale) && GetCooldownElapsed(BattleVoice) >= 4.2f && IsEnabled(CustomComboPreset.BRD_Adv_BuffsRadiant))
+                    if (HasEffect(Buffs.RadiantEncoreReady) && !JustUsed(RadiantFinale) && GetCooldownElapsed(RadiantFinale) >= 4.2f && IsEnabled(CustomComboPreset.BRD_Adv_BuffsEncore))
                         return OriginalHook(RadiantEncore);
 
                     if (isEnemyHealthHigh)
@@ -816,7 +820,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.BRD_Adv_DoT))
                         {
                             if (ActionReady(IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_RagingJaws) && HasEffect(Buffs.RagingStrikes) && 
-                            !WasLastAction(IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(40) && windRecast(40))                         
+                            !WasLastAction(IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))                         
                             { 
                                  openerFinished = true;
                                  return IronJaws;
@@ -876,7 +880,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage))
                         return OriginalHook(StraightShot);
 
-                    if (HasEffect(Buffs.ResonantArrowReady) && IsEnabled(CustomComboPreset.BRD_Adv_Buffs))
+                    if (HasEffect(Buffs.ResonantArrowReady) && IsEnabled(CustomComboPreset.BRD_Adv_BuffsResonant))
                         return ResonantArrow;
 
                 }
@@ -932,7 +936,7 @@ namespace XIVSlothComboX.Combos.PvE
             internal static bool inOpener = false;
             internal static bool openerFinished = false;
 
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BRD_AoE_AdvMode;
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BRD_AoE_SimpleMode;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -1054,7 +1058,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return EmpyrealArrow;
 
                         if (LevelChecked(PitchPerfect) && songWanderer &&
-                            (gauge.Repertoire == 3 || (gauge.Repertoire == 2 && empyrealCD < 2)))
+                            (gauge.Repertoire == 3 || (LevelChecked(EmpyrealArrow) && gauge.Repertoire == 2 && empyrealCD < 2)))
                             return OriginalHook(PitchPerfect);
 
                         if (ActionReady(Sidewinder))
@@ -1075,7 +1079,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             uint rainOfDeathCharges = LevelChecked(RainOfDeath) ? GetRemainingCharges(RainOfDeath) : 0;
 
-                            if (LevelChecked(WanderersMinuet))
+                            if (LevelChecked(WanderersMinuet) && TraitLevelChecked(Traits.EnhancedBloodletter))
                             {
                                 if (songWanderer)
                                 {
@@ -1109,7 +1113,7 @@ namespace XIVSlothComboX.Combos.PvE
                         
                     }
 
-                    bool wideVolleyReady = LevelChecked(WideVolley) && HasEffect(Buffs.HawksEye);
+                    bool wideVolleyReady = LevelChecked(WideVolley) && (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage));
                     bool blastArrowReady = LevelChecked(BlastArrow) && HasEffect(Buffs.BlastArrowReady);
                     bool resonantArrowReady = LevelChecked(ResonantArrow) && HasEffect(Buffs.ResonantArrowReady);
 
@@ -1131,7 +1135,7 @@ namespace XIVSlothComboX.Combos.PvE
         }
         internal class BRD_ST_SimpleMode : CustomCombo
         {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BRD_ST_AdvMode;
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BRD_ST_SimpleMode;
             internal static bool inOpener = false;
             internal static bool openerFinished = false;
             internal static byte step = 0;
@@ -1283,7 +1287,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return EmpyrealArrow;
 
                         if (LevelChecked(PitchPerfect) && songWanderer &&
-                            (gauge.Repertoire == 3 || (gauge.Repertoire == 2 && empyrealCD < 2)))
+                            (gauge.Repertoire == 3 || (LevelChecked(EmpyrealArrow) && gauge.Repertoire == 2 && empyrealCD < 2)))
                             return OriginalHook(PitchPerfect);
 
                         if (ActionReady(Sidewinder))
@@ -1304,7 +1308,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             uint bloodletterCharges = GetRemainingCharges(Bloodletter);
 
-                            if (LevelChecked(WanderersMinuet))
+                            if (LevelChecked(WanderersMinuet) && TraitLevelChecked(Traits.EnhancedBloodletter))
                             {
                                 if (songWanderer)
                                 {
@@ -1364,7 +1368,7 @@ namespace XIVSlothComboX.Combos.PvE
                         };
 
                         if (ActionReady(IronJaws) && HasEffect(Buffs.RagingStrikes) &&
-                        !WasLastAction(IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(40) && windRecast(40))
+                        !WasLastAction(IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
                         {
                             openerFinished = true;
                             return IronJaws;

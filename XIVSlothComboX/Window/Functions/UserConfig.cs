@@ -1784,21 +1784,25 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.BRD_Adv_RagingJaws)
                 UserConfig.DrawSliderInt(3, 5, BRD.Config.BRD_RagingJawsRenewTime, "持续时间 (单位：秒)");
 
+            if (preset == CustomComboPreset.BRD_Adv_NoWaste)
+                UserConfig.DrawSliderInt(1, 10, BRD.Config.BRD_NoWasteHPPercentage, "剩余目标 HP 百分比");
+
+
             if (preset == CustomComboPreset.BRD_AoE_Adv_NoWaste)
-                UserConfig.DrawSliderInt(1, 10, BRD.Config.BRD_AoENoWasteHPPercentage, "Remaining target HP percentage");
+                UserConfig.DrawSliderInt(1, 10, BRD.Config.BRD_AoENoWasteHPPercentage, "剩余目标 HP 百分比");
 
 
             if (preset == CustomComboPreset.BRD_ST_SecondWind)
                 UserConfig.DrawSliderInt
                 (
-                    0, 100, BRD.Config.BRD_STSecondWindThreshold, "HP percent threshold to use Second Wind below.", 150,
+                    0, 100, BRD.Config.BRD_STSecondWindThreshold, "低于 HP 百分比阈值时使用内丹.", 150,
                     SliderIncrements.Ones
                 );
 
             if (preset == CustomComboPreset.BRD_AoE_SecondWind)
                 UserConfig.DrawSliderInt
                 (
-                    0, 100, BRD.Config.BRD_AoESecondWindThreshold, "HP percent threshold to use Second Wind below.", 150,
+                    0, 100, BRD.Config.BRD_AoESecondWindThreshold, "低于 HP 百分比阈值时使用内丹.", 150,
                     SliderIncrements.Ones
                 );
 
@@ -2169,6 +2173,11 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawRadioButton(NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 1", $"1. Ten Mudras -> Fuma Shuriken, Raiton/Hyosho Ranryu, Suiton (Doton under Kassatsu).\nChi Mudras -> Fuma Shuriken, Hyoton, Huton.\nJin Mudras -> Fuma Shuriken, Katon/Goka Mekkyaku, Doton", 1);
                 UserConfig.DrawRadioButton(NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 2", $"2. Ten Mudras -> Fuma Shuriken, Hyoton/Hyosho Ranryu, Doton.\nChi Mudras -> Fuma Shuriken, Katon, Suiton.\nJin Mudras -> Fuma Shuriken, Raiton/Goka Mekkyaku, Huton (Doton under Kassatsu).", 2);
             }
+            if (preset == CustomComboPreset.NIN_ST_AdvancedMode)
+            {
+                UserConfig.DrawSliderInt(0, 10, NIN.Config.BurnKazematoi, "Target HP% to dump all pooled Kazematoi below");
+            }
+
 
             if (preset == CustomComboPreset.NIN_ST_AdvancedMode_Bhavacakra)
                 UserConfig.DrawSliderInt(50, 100, NIN.Config.Ninki_BhavaPooling, "Set the minimal amount of Ninki required to have before spending on Bhavacakra.");
@@ -2843,6 +2852,41 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.SAMPvP_KashaFeatures_GapCloser && enabled)
                 UserConfig.DrawSliderInt(0, 100, SAMPvP.Config.SAMPvP_SotenHP, "Use Soten on enemies below selected HP.");
 
+            if (preset == CustomComboPreset.SAM_ST_KashaCombo)
+            {
+                UserConfig.DrawAdditionalBoolChoice(SAM.Config.SAM_Kasha_KenkiOvercap, "Kenki Overcap Protection", "Spends Kenki when at the set value or above.");
+                if (SAM.Config.SAM_Kasha_KenkiOvercap)
+                    UserConfig.DrawSliderInt(25, 100, SAM.Config.SAM_Kasha_KenkiOvercapAmount, "Kenki Amount", sliderIncrement: SliderIncrements.Fives);
+            }
+
+            if (preset == CustomComboPreset.SAM_ST_YukikazeCombo)
+            {
+                UserConfig.DrawAdditionalBoolChoice(SAM.Config.SAM_Yukaze_KenkiOvercap, "Kenki Overcap Protection", "Spends Kenki when at the set value or above.");
+                if (SAM.Config.SAM_Yukaze_KenkiOvercap)
+                    UserConfig.DrawSliderInt(25, 100, SAM.Config.SAM_Yukaze_KenkiOvercapAmount, "Kenki Amount", sliderIncrement: SliderIncrements.Fives);
+            }
+
+            if (preset == CustomComboPreset.SAM_ST_GekkoCombo)
+            {
+                UserConfig.DrawAdditionalBoolChoice(SAM.Config.SAM_Gekko_KenkiOvercap, "Kenki Overcap Protection", "Spends Kenki when at the set value or above.");
+                if (SAM.Config.SAM_Gekko_KenkiOvercap)
+                    UserConfig.DrawSliderInt(25, 100, SAM.Config.SAM_Gekko_KenkiOvercapAmount, "Kenki Amount", sliderIncrement: SliderIncrements.Fives);
+            }
+
+            if (preset == CustomComboPreset.SAM_AoE_OkaCombo)
+            {
+                UserConfig.DrawAdditionalBoolChoice(SAM.Config.SAM_Oka_KenkiOvercap, "Kenki Overcap Protection", "Spends Kenki when at the set value or above.");
+                if (SAM.Config.SAM_Oka_KenkiOvercap)
+                    UserConfig.DrawSliderInt(25, 100, SAM.Config.SAM_Oka_KenkiOvercapAmount, "Kenki Amount", sliderIncrement: SliderIncrements.Fives);
+            }
+
+            if (preset == CustomComboPreset.SAM_AoE_MangetsuCombo)
+            {
+                UserConfig.DrawAdditionalBoolChoice(SAM.Config.SAM_Mangetsu_KenkiOvercap, "Kenki Overcap Protection", "Spends Kenki when at the set value or above.");
+                if (SAM.Config.SAM_Mangetsu_KenkiOvercap)
+                    UserConfig.DrawSliderInt(25, 100, SAM.Config.SAM_Mangetsu_KenkiOvercapAmount, "Kenki Amount", sliderIncrement: SliderIncrements.Fives);
+            }
+
             #endregion
 
             // ====================================================================================
@@ -2867,10 +2911,31 @@ namespace XIVSlothComboX.Window.Functions
             {
                 UserConfig.DrawSliderInt(0, 10000, PCT.Config.PCT_ST_AdvancedMode_LucidOption, "Add Lucid Dreaming when below this MP", sliderIncrement: SliderIncrements.Hundreds);
             }
+
+            if (preset == CustomComboPreset.PCT_AoE_AdvancedMode_HolyinWhite)
+            {
+                UserConfig.DrawSliderInt(0, 5, PCT.Config.PCT_AoE_AdvancedMode_HolyinWhiteOption, "How many charges to keep ready? (0 = Use all)");
+            }
+
             if (preset == CustomComboPreset.PCT_AoE_AdvancedMode_LucidDreaming)
             {
                 UserConfig.DrawSliderInt(0, 10000, PCT.Config.PCT_AoE_AdvancedMode_LucidOption, "Add Lucid Dreaming when below this MP", sliderIncrement: SliderIncrements.Hundreds);
             }
+            if (preset == CustomComboPreset.PCT_ST_AdvancedMode_LandscapeMotif)
+                UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_ST_LandscapeStop, "Health % to stop Drawing Motif");
+            if (preset == CustomComboPreset.PCT_ST_AdvancedMode_CreatureMotif)
+                UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_ST_CreatureStop, "Health % to stop Drawing Motif");
+            if (preset == CustomComboPreset.PCT_ST_AdvancedMode_WeaponMotif)
+                UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_ST_WeaponStop, "Health % to stop Drawing Motif");
+            if (preset == CustomComboPreset.PCT_AoE_AdvancedMode_LandscapeMotif)
+                UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_AoE_LandscapeStop, "Health % to stop Drawing Motif");
+            if (preset == CustomComboPreset.PCT_AoE_AdvancedMode_CreatureMotif)
+                UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_AoE_CreatureStop, "Health % to stop Drawing Motif");
+            if (preset == CustomComboPreset.PCT_AoE_AdvancedMode_WeaponMotif)
+                UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_AoE_WeaponStop, "Health % to stop Drawing Motif");
+
+            if (preset == CustomComboPreset.PCT_Variant_Cure)
+                UserConfig.DrawSliderInt(1, 100, PCT.Config.PCT_VariantCure, "HP% to be at or under", 200);
 
             // PvP
             if (preset == CustomComboPreset.PCTPvP_BurstControl)
@@ -2955,8 +3020,16 @@ namespace XIVSlothComboX.Window.Functions
                 }
             }
 
+            if (preset is CustomComboPreset.SCH_ST_Heal_Esuna)
+                UserConfig.DrawSliderInt(0, 100, SCH.Config.SCH_ST_Heal_EsunaOption, "Stop using when below HP %. Set to Zero to disable this check");
+
+
             if (preset is CustomComboPreset.SCH_AoE_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, SCH.Config.SCH_AoE_LucidOption, "MP Threshold", 150, SliderIncrements.Hundreds);
+
+            if (preset is CustomComboPreset.SCH_AoE_Heal_Lucid)
+                UserConfig.DrawSliderInt(4000, 9500, SCH.Config.SCH_AoE_Heal_LucidOption, "MP Threshold", 150, SliderIncrements.Hundreds);
+
 
             if (preset is CustomComboPreset.SCH_ST_Heal)
             {
@@ -2977,18 +3050,37 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(4000, 9500, SCH.Config.SCH_ST_Heal_LucidOption, "MP Threshold", 150, SliderIncrements.Hundreds);
 
             if (preset is CustomComboPreset.SCH_ST_Heal_Adloquium)
+            {
                 UserConfig.DrawSliderInt
                 (
                     0, 100, SCH.Config.SCH_ST_Heal_AdloquiumOption,
                     "Use Adloquium on targets at or below HP % even if they have Galvanize\n0 = Only ever use Adloquium on targets without Galvanize\n100 = Always use Adloquium"
                 );
+            }
+
 
             if (preset is CustomComboPreset.SCH_ST_Heal_Lustrate)
+            {
                 UserConfig.DrawSliderInt
                 (
                     0, 100, SCH.Config.SCH_ST_Heal_LustrateOption,
                     "Start using when below HP %. Set to 100 to disable this check"
                 );
+
+            }
+
+
+            if (preset is CustomComboPreset.SCH_ST_Heal_Excogitation)
+            {
+                UserConfig.DrawSliderInt(0, 100, SCH.Config.SCH_ST_Heal_ExcogitationOption, "Start using when below HP %. Set to 100 to disable this check");
+                UserConfig.DrawPriorityInput(SCH.Config.SCH_ST_Heals_Priority, 3, 1, $"{SCH.Excogitation.ActionName()} Priority: ");
+            }
+
+            if (preset is CustomComboPreset.SCH_ST_Heal_Protraction)
+            {
+                UserConfig.DrawSliderInt(0, 100, SCH.Config.SCH_ST_Heal_ProtractionOption, "Start using when below HP %. Set to 100 to disable this check");
+                UserConfig.DrawPriorityInput(SCH.Config.SCH_ST_Heals_Priority, 3, 2, $"{SCH.Protraction.ActionName()} Priority: ");
+            }
 
             if (preset is CustomComboPreset.SCH_DeploymentTactics)
             {
@@ -3252,16 +3344,8 @@ namespace XIVSlothComboX.Window.Functions
                 {
                     ImGui.Indent();
                     ImGui.Spacing();
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On 石头/闪光",
-                        "将选项应用于所有 石头和闪光", 3, 0
-                    );
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On 烈风/天辉", "Apply options to Aeros and Dia.", 3,
-                        1
-                    );
+                    UserConfig.DrawHorizontalMultiChoice(WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On 石头/闪光", "将选项应用于所有 石头和闪光", 3, 0);
+                    UserConfig.DrawHorizontalMultiChoice(WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On 烈风/天辉", "Apply options to Aeros and Dia.", 3, 1);
                     UserConfig.DrawHorizontalMultiChoice(WHM.Config.WHM_ST_MainCombo_Adv_Actions, "On 坚石", "Apply options to 坚石", 3, 2);
                     ImGui.Unindent();
                 }
@@ -3286,6 +3370,12 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.WHM_AoE_DPS_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_AoEDPS_Lucid, "设置 MP 值以使此功能正常工作的阈值为或低于该值", 150, SliderIncrements.Hundreds);
+
+            if (preset == CustomComboPreset.WHM_AoE_DPS_PresenceOfMind)
+            {
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEDPS_PresenceOfMindWeave, "只在GCD窗口或者移动中使用", "有BUG先别选");
+
+            }
 
             if (preset == CustomComboPreset.WHM_AoEHeals_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, WHM.Config.WHM_AoEHeals_Lucid, "设置 MP 值以使此功能正常工作的阈值为或低于该值", 150, SliderIncrements.Hundreds);
@@ -3354,6 +3444,12 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.WHM_AoEHeals_Plenary)
             {
                 UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_PlenaryWeave, "只在能力技窗口期插入", "");
+            }
+
+            if (preset == CustomComboPreset.WHM_AoEHeals_Medica2)
+            {
+                UserConfig.DrawRoundedSliderFloat(0f, 6f, WHM.Config.WHM_AoEHeals_MedicaTime, "Buff 续展剩余时间");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_MedicaMO, "小队 UI 鼠标检查", "Check your mouseover target for the Medica II/III buff.\nTo be used in conjunction with Redirect/Reaction/etc.");
             }
 
             #endregion

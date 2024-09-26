@@ -4,6 +4,7 @@ using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
 using System.Collections.Generic;
 using System.Linq;
+using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
@@ -38,7 +39,6 @@ namespace XIVSlothComboX.Combos.PvE
 
             // DPS
             Dosis = 24283,
-            // 注药Dosis = 24283,
             Dosis2 = 24306,
             Dosis3 = 24312,
             EukrasianDosis = 24293,
@@ -123,9 +123,9 @@ namespace XIVSlothComboX.Combos.PvE
                 SGE_ST_DPS_EDosisHPPer = new("SGE_ST_DPS_EDosisHPPer", 10),
                 SGE_ST_DPS_Lucid = new("SGE_ST_DPS_Lucid", 6500),
                 SGE_ST_DPS_Rhizo = new("SGE_ST_DPS_Rhizo"),
+                SGE_ST_DPS_AddersgallProtect = new("SGE_ST_DPS_AddersgallProtect", 3),
                 SGE_AoE_DPS_Lucid = new("SGE_AoE_Phlegma_Lucid", 6500),
                 SGE_AoE_DPS_Rhizo = new("SGE_AoE_DPS_Rhizo"),
-                SGE_ST_DPS_AddersgallProtect = new("SGE_ST_DPS_AddersgallProtect", 3),
                 SGE_AoE_DPS_AddersgallProtect = new("SGE_AoE_DPS_AddersgallProtect", 3);
 
             public static UserFloat
@@ -170,7 +170,6 @@ namespace XIVSlothComboX.Combos.PvE
                 EnhancedKerachole = 375,
                 OffensiveMagicMasteryII = 376;
         }
-
 
         internal class SGE_ST_Custom : CustomCombo
         {
@@ -235,7 +234,6 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
-    
         /*
          * SGE_Kardia
          * Soteria becomes Kardia when Kardia's Buff is not active or Soteria is on cooldown.
@@ -243,6 +241,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_Kardia : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_Kardia;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 => actionID is Soteria && (!HasEffect(Buffs.Kardia) || IsOnCooldown(Soteria)) ? Kardia : actionID;
         }
@@ -255,6 +254,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_Rhizo : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_Rhizo;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 => AddersgallList.Contains(actionID) && ActionReady(Rhizomata) && !Gauge.HasAddersgall() && IsOffCooldown(actionID) ? Rhizomata : actionID;
         }
@@ -268,6 +268,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_DruoTauro : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_TauroDruo;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 => actionID is Taurochole && IsOnCooldown(Taurochole) ? Druochole : actionID;
         }
@@ -279,7 +280,10 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_ZoePneuma : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_ZoePneuma;
+
+         
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+                // => (actionID is Pneuma && ActionReady(Pneuma) && IsOffCooldown(Zoe)) || (actionID is Pneuma && !LevelChecked(Pneuma)) ? Zoe : actionID;
                 => actionID is Pneuma && ActionReady(Pneuma) && IsOffCooldown(Zoe) ? Zoe : actionID;
         }
 
@@ -290,6 +294,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_AoE_DPS : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_AoE_DPS;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (DyskrasiaList.Contains(actionID))
@@ -297,50 +302,41 @@ namespace XIVSlothComboX.Combos.PvE
                     if (!HasEffect(Buffs.Eukrasia))
                     {
                         // Variant Rampart
-                        if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_Rampart) &&
-                            IsEnabled(Variant.VariantRampart) &&
-                            IsOffCooldown(Variant.VariantRampart) &&
-                            CanSpellWeave(actionID))
+                        if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanSpellWeave(actionID))
                             return Variant.VariantRampart;
 
                         // Variant Spirit Dart
                         Status? sustainedDamage = FindTargetEffect(Variant.Debuffs.SustainedDamage);
-                        if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_SpiritDart) &&
-                            IsEnabled(Variant.VariantSpiritDart) &&
-                            (sustainedDamage is null || sustainedDamage?.RemainingTime <= 3) &&
-                            CanSpellWeave(actionID))
+                        if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_SpiritDart) && IsEnabled(Variant.VariantSpiritDart) && (sustainedDamage is null || sustainedDamage?.RemainingTime <= 3) && CanSpellWeave(actionID))
                             return Variant.VariantSpiritDart;
 
                         // Lucid Dreaming
-                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Lucid) &&
-                            ActionReady(All.LucidDreaming) && CanSpellWeave(Dosis) &&
-                            LocalPlayer.CurrentMp <= Config.SGE_AoE_DPS_Lucid)
+                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Lucid) && ActionReady(All.LucidDreaming) && CanSpellWeave(Dosis) && LocalPlayer.CurrentMp <= Config.SGE_AoE_DPS_Lucid)
                             return All.LucidDreaming;
 
                         // Rhizomata
-                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Rhizo) && CanSpellWeave(Dosis) &&
-                            ActionReady(Rhizomata) && Gauge.Addersgall <= Config.SGE_AoE_DPS_Rhizo)
+                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Rhizo) && CanSpellWeave(Dosis) && ActionReady(Rhizomata) && Gauge.Addersgall <= Config.SGE_AoE_DPS_Rhizo)
                             return Rhizomata;
 
                         // Addersgall Protection
-                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_AddersgallProtect) && CanSpellWeave(Dosis) &&
-                            ActionReady(Druochole) && Gauge.Addersgall >= Config.SGE_AoE_DPS_AddersgallProtect)
+                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_AddersgallProtect) && CanSpellWeave(Dosis) && ActionReady(Druochole) && Gauge.Addersgall >= Config.SGE_AoE_DPS_AddersgallProtect)
                             return Druochole;
 
                         //Eukrasia for DoT
                         if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_EDyskrasia))
                         {
-                            if (IsOffCooldown(Eukrasia) &&
-                                !WasLastSpell(EukrasianDyskrasia) && //AoE DoT can be slow to take affect, doesn't apply to target first before others
-                                TraitLevelChecked(Traits.OffensiveMagicMasteryII) &&
-                                HasBattleTarget() &&
-                                InActionRange(Dyskrasia) && //Same range
+                            if (IsOffCooldown(Eukrasia)
+                                && !WasLastSpell(EukrasianDyskrasia)
+                                && //AoE DoT can be slow to take affect, doesn't apply to target first before others
+                                TraitLevelChecked(Traits.OffensiveMagicMasteryII)
+                                && HasBattleTarget()
+                                && InActionRange(Dyskrasia)
+                                && //Same range
                                 DosisList.TryGetValue(OriginalHook(Dosis), out ushort dotDebuffID))
                             {
                                 float dotDebuff = Math.Max(GetDebuffRemainingTime(dotDebuffID), GetDebuffRemainingTime(Debuffs.EukrasianDyskrasia));
                                 float refreshtimer = 3; //Will revisit if it's really needed....SGE_ST_DPS_EDosis_Adv ? Config.SGE_ST_DPS_EDosisThreshold : 3;
-                                if (dotDebuff <= refreshtimer &&
-                                    GetTargetHPPercent() > 10)//Will Revisit if Config is needed Config.SGE_ST_DPS_EDosisHPPer)
+                                if (dotDebuff <= refreshtimer && GetTargetHPPercent() > 10) //Will Revisit if Config is needed Config.SGE_ST_DPS_EDosisHPPer)
                                     return Eukrasia;
                             }
                         }
@@ -348,10 +344,7 @@ namespace XIVSlothComboX.Combos.PvE
                         // Psyche
                         if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Psyche))
                         {
-                            if (ActionReady(Psyche) &&
-                                HasBattleTarget() &&
-                                InActionRange(Psyche) &&
-                                CanSpellWeave(actionID))
+                            if (ActionReady(Psyche) && HasBattleTarget() && InActionRange(Psyche) && CanSpellWeave(actionID))
                                 return Psyche;
                         }
 
@@ -359,9 +352,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Phlegma))
                         {
                             uint PhlegmaID = OriginalHook(Phlegma);
-                            if (ActionReady(PhlegmaID) &&
-                                HasBattleTarget() &&
-                                InActionRange(PhlegmaID))
+                            if (ActionReady(PhlegmaID) && HasBattleTarget() && InActionRange(PhlegmaID))
                                 return PhlegmaID;
                         }
 
@@ -369,10 +360,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Toxikon))
                         {
                             uint ToxikonID = OriginalHook(Toxikon);
-                            if (ActionReady(ToxikonID) &&
-                                HasBattleTarget() &&
-                                InActionRange(ToxikonID) &&
-                                Gauge.HasAddersting())
+                            if (ActionReady(ToxikonID) && HasBattleTarget() && InActionRange(ToxikonID) && Gauge.HasAddersting())
                             {
                                 return ToxikonID;
                             }
@@ -402,29 +390,23 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (ActionFound)
                 {
-                    bool inOpener = IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener) &&
-                                    ActionReady(Psyche) && Dosis3Count < 4 && Gauge.HasAddersting();
+                    bool inOpener = IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener) && ActionReady(Psyche) && Dosis3Count < 4 && Gauge.HasAddersting();
 
                     // Kardia Reminder
-                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Kardia) && LevelChecked(Kardia) &&
-                        FindEffect(Buffs.Kardia) is null)
+                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Kardia) && LevelChecked(Kardia) && FindEffect(Buffs.Kardia) is null)
                         return Kardia;
 
                     if (inOpener)
                     {
-                        if (Dosis3Count is 0 && Toxikon2Count is 0 && 
-                            !HasEffect(Buffs.Eukrasia))
+                        if (Dosis3Count is 0 && Toxikon2Count is 0 && !HasEffect(Buffs.Eukrasia))
                             return Eukrasia;
 
-                        if (Dosis3Count is 0 && Toxikon2Count is 0 &&
-                            HasEffect(Buffs.Eukrasia))
+                        if (Dosis3Count is 0 && Toxikon2Count is 0 && HasEffect(Buffs.Eukrasia))
                             return Toxikon2;
 
                         if (Dosis3Count is 3)
                         {
-                            if (WasLastSpell(Phlegma3) &&
-                                ActionReady(Psyche) &&
-                                CanWeave(actionID))
+                            if (WasLastSpell(Phlegma3) && ActionReady(Psyche) && CanWeave(actionID))
                                 return Psyche;
 
                             if (ActionReady(Phlegma3))
@@ -436,29 +418,23 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     // Lucid Dreaming
-                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Lucid) &&
-                        All.CanUseLucid(actionID, Config.SGE_ST_DPS_Lucid))
+                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Lucid) && All.CanUseLucid(actionID, Config.SGE_ST_DPS_Lucid))
                         return All.LucidDreaming;
 
                     // Variant
-                    if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_Rampart) &&
-                        IsEnabled(Variant.VariantRampart) &&
-                        IsOffCooldown(Variant.VariantRampart) &&
-                        CanSpellWeave(actionID))
+                    if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanSpellWeave(actionID))
                         return Variant.VariantRampart;
 
                     // Rhizomata
-                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Rhizo) && CanSpellWeave(actionID) &&
-                        ActionReady(Rhizomata) && Gauge.Addersgall <= Config.SGE_ST_DPS_Rhizo)
+                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Rhizo) && CanSpellWeave(actionID) && ActionReady(Rhizomata) && Gauge.Addersgall <= Config.SGE_ST_DPS_Rhizo)
                         return Rhizomata;
 
                     // Addersgall Protection
-                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_AddersgallProtect) && CanSpellWeave(Dosis) &&
-                        ActionReady(Druochole) && Gauge.Addersgall >= Config.SGE_ST_DPS_AddersgallProtect)
+                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_AddersgallProtect) && CanSpellWeave(Dosis) && ActionReady(Druochole) && Gauge.Addersgall >= Config.SGE_ST_DPS_AddersgallProtect)
                         return Druochole;
 
                     if (HasBattleTarget() && !HasEffect(Buffs.Eukrasia))
-                    // Buff check Above. Without it, Toxikon and any future option will interfere in the Eukrasia->Eukrasia Dosis combo
+                        // Buff check Above. Without it, Toxikon and any future option will interfere in the Eukrasia->Eukrasia Dosis combo
                     {
                         // Eukrasian Dosis.
                         // If we're too low level to use Eukrasia, we can stop here.
@@ -469,10 +445,7 @@ namespace XIVSlothComboX.Combos.PvE
                             // EDosis will show for half a second if the buff is removed manually or some other act of God
                             if (DosisList.TryGetValue(OriginalHook(actionID), out ushort dotDebuffID))
                             {
-                                if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_SpiritDart) &&
-                                    IsEnabled(Variant.VariantSpiritDart) &&
-                                    GetDebuffRemainingTime(Variant.Debuffs.SustainedDamage) <= 3 &&
-                                    CanSpellWeave(actionID))
+                                if (IsEnabled(CustomComboPreset.SGE_DPS_Variant_SpiritDart) && IsEnabled(Variant.VariantSpiritDart) && GetDebuffRemainingTime(Variant.Debuffs.SustainedDamage) <= 3 && CanSpellWeave(actionID))
                                     return Variant.VariantSpiritDart;
 
                                 // Dosis DoT Debuff
@@ -483,8 +456,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 float refreshtimer = Config.SGE_ST_DPS_EDosis_Adv ? Config.SGE_ST_DPS_EDosisThreshold : 3;
 
-                                if (dotDebuff <= refreshtimer &&
-                                    GetTargetHPPercent() > Config.SGE_ST_DPS_EDosisHPPer)
+                                if (dotDebuff <= refreshtimer && GetTargetHPPercent() > Config.SGE_ST_DPS_EDosisHPPer)
                                     return Eukrasia;
                             }
                         }
@@ -497,10 +469,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         // Psyche
-                        if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Psyche) &&
-                            ActionReady(Psyche) &&
-                            InCombat() &&
-                            CanSpellWeave(actionID))
+                        if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Psyche) && ActionReady(Psyche) && InCombat() && CanSpellWeave(actionID))
                             return Psyche;
 
 
@@ -509,10 +478,13 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             // Psyche
                             if (Config.SGE_ST_DPS_Movement[3] && ActionReady(Psyche)) return Psyche;
+
                             // Toxikon
                             if (Config.SGE_ST_DPS_Movement[0] && LevelChecked(Toxikon) && Gauge.HasAddersting()) return OriginalHook(Toxikon);
+
                             // Dyskrasia
                             if (Config.SGE_ST_DPS_Movement[1] && LevelChecked(Dyskrasia) && InActionRange(Dyskrasia)) return OriginalHook(Dyskrasia);
+
                             // Eukrasia
                             if (Config.SGE_ST_DPS_Movement[2] && LevelChecked(Eukrasia)) return Eukrasia;
                         }
@@ -529,11 +501,12 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_Raise : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_Raise;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                    => actionID is All.Swiftcast && IsOnCooldown(All.Swiftcast) ? Egeiro : actionID;
+                => actionID is All.Swiftcast && IsOnCooldown(All.Swiftcast) ? Egeiro : actionID;
         }
 
-        /* 
+        /*
          * SGE_Eukrasia (Eukrasia combo)
          * Normally after Eukrasia is used and updates the abilities, it becomes disabled
          * This will "combo" the action to user selected action
@@ -541,6 +514,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_Eukrasia : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_Eukrasia;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID is Eukrasia && HasEffect(Buffs.Eukrasia))
@@ -559,14 +533,15 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
-        /* 
+        /*
          * SGE_ST_Heal (Diagnosis Single Target Heal)
-         * Replaces Diagnosis with various Single Target healing options, 
+         * Replaces Diagnosis with various Single Target healing options,
          * Pseudo priority set by various custom user percentages
          */
         internal class SGE_ST_Heal : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_ST_Heal;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID is Diagnosis)
@@ -576,37 +551,33 @@ namespace XIVSlothComboX.Combos.PvE
 
                     IGameObject? healTarget = GetHealTarget(Config.SGE_ST_Heal_Adv && Config.SGE_ST_Heal_UIMouseOver);
 
-                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Esuna) && ActionReady(All.Esuna) &&
-                        GetTargetHPPercent(healTarget) >= Config.SGE_ST_Heal_Esuna &&
-                        HasCleansableDebuff(healTarget))
+                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Esuna) && ActionReady(All.Esuna) && GetTargetHPPercent(healTarget) >= Config.SGE_ST_Heal_Esuna && HasCleansableDebuff(healTarget))
                         return All.Esuna;
 
 
-                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Rhizomata) && ActionReady(Rhizomata) &&
-                        !Gauge.HasAddersgall())
+                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Rhizomata) && ActionReady(Rhizomata) && !Gauge.HasAddersgall())
                         return Rhizomata;
 
-                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Kardia) && LevelChecked(Kardia) &&
-                        FindEffect(Buffs.Kardia) is null &&
-                        FindEffect(Buffs.Kardion, healTarget, LocalPlayer?.GameObjectId) is null)
+                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Kardia) && LevelChecked(Kardia) && FindEffect(Buffs.Kardia) is null && FindEffect(Buffs.Kardion, healTarget, LocalPlayer?.GameObjectId) is null)
                         return Kardia;
 
                     foreach (var prio in Config.SGE_ST_Heals_Priority.Items.OrderBy(x => x))
                     {
                         var index = Config.SGE_ST_Heals_Priority.IndexOf(prio);
-                        var config = JobHelpers.SGE.GetMatchingConfigST(index, out var spell, out bool enabled);
+                        var config = SGEHelper.GetMatchingConfigST(index, out var spell, out bool enabled);
 
                         if (enabled)
                         {
-                            if (GetTargetHPPercent(healTarget) <= config &&
-                                ActionReady(spell))
+                            if (GetTargetHPPercent(healTarget) <= config && ActionReady(spell))
                                 return spell;
                         }
                     }
 
-                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_EDiagnosis) && LevelChecked(Eukrasia) &&
-                        GetTargetHPPercent(healTarget) <= Config.SGE_ST_Heal_EDiagnosisHP &&
-                        (Config.SGE_ST_Heal_EDiagnosisOpts[0] || FindEffectOnMember(Buffs.EukrasianDiagnosis, healTarget) is null) && //Ignore existing shield check
+                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_EDiagnosis)
+                        && LevelChecked(Eukrasia)
+                        && GetTargetHPPercent(healTarget) <= Config.SGE_ST_Heal_EDiagnosisHP
+                        && (Config.SGE_ST_Heal_EDiagnosisOpts[0] || FindEffectOnMember(Buffs.EukrasianDiagnosis, healTarget) is null)
+                        && //Ignore existing shield check
                         (!Config.SGE_ST_Heal_EDiagnosisOpts[1] || FindEffectOnMember(SCH.Buffs.Galvanize, healTarget) is null)) //Galvenize Check
                         return Eukrasia;
 
@@ -616,14 +587,15 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
-        /* 
+        /*
          * SGE_AoE_Heal (Prognosis AoE Heal)
-         * Replaces Prognosis with various AoE healing options, 
+         * Replaces Prognosis with various AoE healing options,
          * Pseudo priority set by various custom user percentages
          */
         internal class SGE_AoE_Heal : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_AoE_Heal;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID is Prognosis)
@@ -631,14 +603,13 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.SGE_AoE_Heal_EPrognosis) && HasEffect(Buffs.Eukrasia))
                         return OriginalHook(Prognosis);
 
-                    if (IsEnabled(CustomComboPreset.SGE_AoE_Heal_Rhizomata) && ActionReady(Rhizomata) &&
-                        !Gauge.HasAddersgall())
+                    if (IsEnabled(CustomComboPreset.SGE_AoE_Heal_Rhizomata) && ActionReady(Rhizomata) && !Gauge.HasAddersgall())
                         return Rhizomata;
 
                     foreach (var prio in Config.SGE_AoE_Heals_Priority.Items.OrderBy(x => x))
                     {
                         var index = Config.SGE_AoE_Heals_Priority.IndexOf(prio);
-                        var config = JobHelpers.SGE.GetMatchingConfigAoE(index, out var spell, out bool enabled);
+                        var config = SGEHelper.GetMatchingConfigAoE(index, out var spell, out bool enabled);
 
                         if (enabled)
                         {
@@ -647,9 +618,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
-                    if (IsEnabled(CustomComboPreset.SGE_AoE_Heal_EPrognosis) && LevelChecked(Eukrasia) &&
-                        (IsEnabled(CustomComboPreset.SGE_AoE_Heal_EPrognosis_IgnoreShield) ||
-                         FindEffect(Buffs.EukrasianPrognosis) is null))
+                    if (IsEnabled(CustomComboPreset.SGE_AoE_Heal_EPrognosis) && LevelChecked(Eukrasia) && (IsEnabled(CustomComboPreset.SGE_AoE_Heal_EPrognosis_IgnoreShield) || FindEffect(Buffs.EukrasianPrognosis) is null))
                         return Eukrasia;
                 }
 
@@ -660,20 +629,18 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_OverProtect : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_OverProtect;
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID is Kerachole && IsEnabled(CustomComboPreset.SGE_OverProtect_Kerachole) && ActionReady(Kerachole))
                 {
-                    if (HasEffectAny(Buffs.Kerachole) ||
-                        (IsEnabled(CustomComboPreset.SGE_OverProtect_SacredSoil) && HasEffectAny(SCH.Buffs.SacredSoil)))
+                    if (HasEffectAny(Buffs.Kerachole) || (IsEnabled(CustomComboPreset.SGE_OverProtect_SacredSoil) && HasEffectAny(SCH.Buffs.SacredSoil)))
                         return SCH.SacredSoil;
                 }
 
-                if (actionID is Panhaima && IsEnabled(CustomComboPreset.SGE_OverProtect_Panhaima) &&
-                    ActionReady(Panhaima) && HasEffectAny(Buffs.Panhaima)) return SCH.SacredSoil;
+                if (actionID is Panhaima && IsEnabled(CustomComboPreset.SGE_OverProtect_Panhaima) && ActionReady(Panhaima) && HasEffectAny(Buffs.Panhaima)) return SCH.SacredSoil;
 
-                if (actionID is Philosophia && IsEnabled(CustomComboPreset.SGE_OverProtect_Philosophia) &&
-                    ActionReady(Philosophia) && HasEffectAny(Buffs.Eudaimonia)) return SCH.Consolation;
+                if (actionID is Philosophia && IsEnabled(CustomComboPreset.SGE_OverProtect_Philosophia) && ActionReady(Philosophia) && HasEffectAny(Buffs.Eudaimonia)) return SCH.Consolation;
 
                 return actionID;
             }

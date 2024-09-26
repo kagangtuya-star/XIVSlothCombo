@@ -122,7 +122,7 @@ namespace XIVSlothComboX.Window.Tabs
 
         private static void DrawHeadingContents(string jobName, int i)
         {
-            foreach (var (preset, info) in groupedPresets[jobName].Where(x => PresetStorage.IsSecret(x.Preset)))
+            foreach (var (preset, info) in groupedPresets[jobName].Where(x => PresetStorage.IsPvP(x.Preset)))
             {
                 InfoBox presetBox = new() { Color = Colors.Grey, BorderThickness = 1f, CurveRadius = 8f, ContentsAction = () => { Presets.DrawPreset(preset, info, ref i); } };
 

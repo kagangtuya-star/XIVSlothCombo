@@ -1,4 +1,5 @@
-﻿using Dalamud.Interface.Colors;
+﻿using System.Collections.Generic;
+using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
 using Dalamud.Utility;
 using ECommons.DalamudServices;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using Dalamud.Interface.Textures;
+using Dalamud.Interface.Utility.Raii;
 using XIVSlothComboX.Attributes;
 using XIVSlothComboX.Combos;
 using XIVSlothComboX.Combos.PvE;
@@ -16,25 +18,63 @@ using XIVSlothComboX.Core;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
+
 namespace XIVSlothComboX.Window.Functions
 {
     internal class Presets : ConfigWindow
     {
+        internal static Dictionary<CustomComboPreset, PresetAttributes> Attributes = new();
+
+        internal class PresetAttributes
+        {
+            public bool IsPvP;
+            public CustomComboPreset[] Conflicts;
+            public CustomComboPreset? Parent;
+            public BlueInactiveAttribute? BlueInactive;
+            public VariantParentAttribute? VariantParent;
+            public BozjaParentAttribute? BozjaParent;
+            public EurekaParentAttribute? EurekaParent;
+            public HoverInfoAttribute? HoverInfo;
+            public ReplaceSkillAttribute? ReplaceSkill;
+            public CustomComboInfoAttribute? CustomComboInfo;
+
+            public PresetAttributes(CustomComboPreset preset)
+            {
+                IsPvP = PresetStorage.IsVariant(preset);
+                Conflicts = PresetStorage.GetConflicts(preset);
+                Parent = PresetStorage.GetParent(preset);
+                BlueInactive = preset.GetAttribute<BlueInactiveAttribute>();
+                VariantParent = preset.GetAttribute<VariantParentAttribute>();
+                BozjaParent = preset.GetAttribute<BozjaParentAttribute>();
+                EurekaParent = preset.GetAttribute<EurekaParentAttribute>();
+                HoverInfo = preset.GetAttribute<HoverInfoAttribute>();
+                ReplaceSkill = preset.GetAttribute<ReplaceSkillAttribute>();
+                CustomComboInfo = preset.GetAttribute<CustomComboInfoAttribute>();
+            }
+        }
+
         internal unsafe static void DrawPreset(CustomComboPreset preset, CustomComboInfoAttribute info, ref int i)
         {
+            if (!Attributes.ContainsKey(preset))
+            {
+                PresetAttributes attributes = new(preset);
+                Attributes[preset] = attributes;
+            }
             var enabled = PresetStorage.IsEnabled(preset);
-            var secret = PresetStorage.IsPvP(preset);
-            var conflicts = PresetStorage.GetConflicts(preset);
-            var parent = PresetStorage.GetParent(preset);
-            var blueAttr = preset.GetAttribute<BlueInactiveAttribute>();
+            var secret = Attributes[preset].IsPvP;
+            var conflicts = Attributes[preset].Conflicts;
+            var parent = Attributes[preset].Parent;
+            var blueAttr = Attributes[preset].BlueInactive;
+            var variantParents = Attributes[preset].VariantParent;
+            var bozjaParents = Attributes[preset].BozjaParent;
+            var eurekaParents = Attributes[preset].EurekaParent;
 
             ImGui.Spacing();
 
-            if (ImGui.Checkbox($"{info.FancyName}###{info.FancyName}{i}", ref enabled))
+            if (ImGui.Checkbox($"{info.FancyName}###{preset}{i}", ref enabled))
             {
                 if (enabled)
                 {
-
                     EnableParentPresets(preset);
                     Service.Configuration.EnabledActions.Add(preset);
                     foreach (var conflict in conflicts)
@@ -42,7 +82,6 @@ namespace XIVSlothComboX.Window.Functions
                         Service.Configuration.EnabledActions.Remove(conflict);
                     }
                 }
-
                 else
                 {
                     Service.Configuration.EnabledActions.Remove(preset);
@@ -51,34 +90,33 @@ namespace XIVSlothComboX.Window.Functions
                 Service.Configuration.Save();
             }
 
-            ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudGrey);
-
             DrawReplaceAttribute(preset);
 
             Vector2 length = new();
-
-            if (i != -1)
+            using (var styleCol = ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudGrey))
             {
-                ImGui.Text($"#{i}: ");
-                length = ImGui.CalcTextSize($"#{i}: ");
-                ImGui.SameLine();
-                ImGui.PushItemWidth(length.Length());
-            }
-
-            ImGui.TextWrapped($"{info.Description}");
-
-            if (preset.GetHoverAttribute() != null)
-            {
-                if (ImGui.IsItemHovered())
+                if (i != -1)
                 {
-                    ImGui.BeginTooltip();
-                    ImGui.TextUnformatted(preset.GetHoverAttribute().HoverText);
-                    ImGui.EndTooltip();
+                    ImGui.Text($"#{i}: ");
+                    length = ImGui.CalcTextSize($"#{i}: ");
+                    ImGui.SameLine();
+                    ImGui.PushItemWidth(length.Length());
+                }
+
+                ImGui.TextWrapped($"{info.Description}");
+
+                if (Attributes[preset].HoverInfo != null)
+                {
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.TextUnformatted(Attributes[preset].HoverInfo.HoverText);
+                        ImGui.EndTooltip();
+                    }
                 }
             }
 
 
-            ImGui.PopStyleColor();
             ImGui.Spacing();
 
             if (conflicts.Length > 0)
@@ -88,20 +126,23 @@ namespace XIVSlothComboX.Window.Functions
                 ImGui.Indent();
                 foreach (var conflict in conflicts)
                 {
-                    var comboInfo = conflict.GetAttribute<CustomComboInfoAttribute>();
+                    var comboInfo = Attributes.ContainsKey(conflict) ? Attributes[conflict].CustomComboInfo : conflict.GetAttribute<CustomComboInfoAttribute>();
                     conflictBuilder.Insert(0, $"{comboInfo.FancyName}");
                     var par2 = conflict;
 
                     while (PresetStorage.GetParent(par2) != null)
                     {
                         var subpar = PresetStorage.GetParent(par2);
-                        conflictBuilder.Insert(0, $"{subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName} -> ");
-                        par2 = subpar!.Value;
+                        if (subpar != null)
+                        {
+                            conflictBuilder.Insert(0, $"{(Attributes.ContainsKey(subpar.Value) ? Attributes[subpar.Value].CustomComboInfo : subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName)} -> ");
+                            par2 = subpar!.Value;
+                        }
 
                     }
 
                     if (!string.IsNullOrEmpty(comboInfo.JobShorthand))
-                    conflictBuilder.Insert(0, $"[{comboInfo.JobShorthand}] ");
+                        conflictBuilder.Insert(0, $"[{comboInfo.JobShorthand}] ");
 
                     ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudRed, CustomComboNS.Functions.CustomComboFunctions.IsEnabled(conflict) ? ImGuiColors.HealerGreen : ImGuiColors.DalamudRed, 1500), $"- {conflictBuilder}");
                     conflictBuilder.Clear();
@@ -115,7 +156,6 @@ namespace XIVSlothComboX.Window.Functions
                 if (blueAttr.Actions.Count > 0)
                 {
                     ImGui.PushStyleColor(ImGuiCol.Text, blueAttr.NoneSet ? ImGuiColors.DPSRed : ImGuiColors.DalamudOrange);
-                    // ImGui.Text($"{(blueAttr.NoneSet ? "No Required Spells Active:" : "Missing active spells:")} {string.Join(", ", blueAttr.Actions.Select(x => ActionWatching.GetActionName(x)))}");
                     ImGui.Text($"{(blueAttr.NoneSet ? "No Required Spells Active:" : "Missing active spells:")} {string.Join(", ", blueAttr.Actions.Select(x => ActionWatching.GetBLUIndex(x) + ActionWatching.GetActionName(x)))}");
                     ImGui.PopStyleColor();
                 }
@@ -128,21 +168,23 @@ namespace XIVSlothComboX.Window.Functions
                 }
             }
 
-            VariantParentAttribute? varientparents = preset.GetAttribute<VariantParentAttribute>();
-            if (varientparents is not null)
+            if (variantParents is not null)
             {
                 ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-                ImGui.TextWrapped($"Part of normal combo{(varientparents.ParentPresets.Length > 1 ? "s" : "")}:");
+                ImGui.TextWrapped($"Part of normal combo{(variantParents.ParentPresets.Length > 1 ? "s" : "")}:");
                 StringBuilder builder = new();
-                foreach (var par in varientparents.ParentPresets)
+                foreach (var par in variantParents.ParentPresets)
                 {
-                    builder.Insert(0, $"{par.GetAttribute<CustomComboInfoAttribute>().FancyName}");
+                    builder.Insert(0, $"{(Attributes.ContainsKey(par) ? Attributes[par].CustomComboInfo.FancyName : par.GetAttribute<CustomComboInfoAttribute>().FancyName)}");
                     var par2 = par;
                     while (PresetStorage.GetParent(par2) != null)
                     {
                         var subpar = PresetStorage.GetParent(par2);
-                        builder.Insert(0, $"{subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName} -> ");
-                        par2 = subpar!.Value;
+                        if (subpar != null)
+                        {
+                            builder.Insert(0, $"{(Attributes.ContainsKey(subpar.Value) ? Attributes[subpar.Value].CustomComboInfo.FancyName : subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName)} -> ");
+                            par2 = subpar!.Value;
+                        }
 
                     }
 
@@ -152,21 +194,23 @@ namespace XIVSlothComboX.Window.Functions
                 ImGui.PopStyleColor();
             }
 
-            BozjaParentAttribute? bozjaparents = preset.GetAttribute<BozjaParentAttribute>();
-            if (bozjaparents is not null)
+            if (bozjaParents is not null)
             {
                 ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-                ImGui.TextWrapped($"Part of normal combo{(varientparents.ParentPresets.Length > 1 ? "s" : "")}:");
+                ImGui.TextWrapped($"Part of normal combo{(variantParents.ParentPresets.Length > 1 ? "s" : "")}:");
                 StringBuilder builder = new();
-                foreach (var par in bozjaparents.ParentPresets)
+                foreach (var par in bozjaParents.ParentPresets)
                 {
-                    builder.Insert(0, $"{par.GetAttribute<CustomComboInfoAttribute>().FancyName}");
+                    builder.Insert(0, $"{(Attributes.ContainsKey(par) ? Attributes[par].CustomComboInfo.FancyName : par.GetAttribute<CustomComboInfoAttribute>().FancyName)}");
                     var par2 = par;
                     while (PresetStorage.GetParent(par2) != null)
                     {
                         var subpar = PresetStorage.GetParent(par2);
-                        builder.Insert(0, $"{subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName} -> ");
-                        par2 = subpar!.Value;
+                        if (subpar != null)
+                        {
+                            builder.Insert(0, $"{(Attributes.ContainsKey(subpar.Value) ? Attributes[subpar.Value].CustomComboInfo.FancyName : subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName)} -> ");
+                            par2 = subpar!.Value;
+                        }
 
                     }
 
@@ -176,21 +220,23 @@ namespace XIVSlothComboX.Window.Functions
                 ImGui.PopStyleColor();
             }
 
-            EurekaParentAttribute? eurekaparents = preset.GetAttribute<EurekaParentAttribute>();
-            if (eurekaparents is not null)
+            if (eurekaParents is not null)
             {
                 ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
-                ImGui.TextWrapped($"Part of normal combo{(varientparents.ParentPresets.Length > 1 ? "s" : "")}:");
+                ImGui.TextWrapped($"Part of normal combo{(variantParents.ParentPresets.Length > 1 ? "s" : "")}:");
                 StringBuilder builder = new();
-                foreach (var par in eurekaparents.ParentPresets)
+                foreach (var par in eurekaParents.ParentPresets)
                 {
-                    builder.Insert(0, $"{par.GetAttribute<CustomComboInfoAttribute>().FancyName}");
+                    builder.Insert(0, $"{(Attributes.ContainsKey(par) ? Attributes[par].CustomComboInfo.FancyName : par.GetAttribute<CustomComboInfoAttribute>().FancyName)}");
                     var par2 = par;
                     while (PresetStorage.GetParent(par2) != null)
                     {
                         var subpar = PresetStorage.GetParent(par2);
-                        builder.Insert(0, $"{subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName} -> ");
-                        par2 = subpar!.Value;
+                        if (subpar != null)
+                        {
+                            builder.Insert(0, $"{(Attributes.ContainsKey(subpar.Value) ? Attributes[subpar.Value].CustomComboInfo.FancyName : subpar?.GetAttribute<CustomComboInfoAttribute>().FancyName)} -> ");
+                            par2 = subpar!.Value;
+                        }
 
                     }
 
@@ -202,23 +248,13 @@ namespace XIVSlothComboX.Window.Functions
 
             UserConfigItems.Draw(preset, enabled);
 
-            if (preset == CustomComboPreset.NIN_ST_SimpleMode_BalanceOpener || preset == CustomComboPreset.NIN_ST_AdvancedMode_BalanceOpener)
-            {
-                ImGui.SetCursorPosX(ImGui.GetCursorPosX() + length.Length());
-                if (ImGui.Button($"Image of rotation###ninrtn{i}"))
-                {
-                    Util.OpenLink("https://i.imgur.com/q3lXeSZ.png");
-                }
-            }
-
             i++;
 
-            var hideChildren = Service.Configuration.HideChildren;
-            var children = presetChildren[preset];
+            var children = presetChildren.ContainsKey(preset) ? presetChildren[preset] : null;
 
-            if (children.Length > 0)
+            if (children != null)
             {
-                if (enabled || !hideChildren)
+                if (enabled || !Service.Configuration.HideChildren)
                 {
                     ImGui.Indent();
 
@@ -226,8 +262,8 @@ namespace XIVSlothComboX.Window.Functions
                     {
                         if (Service.Configuration.HideConflictedCombos)
                         {
-                            var conflictOriginals = PresetStorage.GetConflicts(childPreset);    // Presets that are contained within a ConflictedAttribute
-                            var conflictsSource = PresetStorage.GetAllConflicts();              // Presets with the ConflictedAttribute
+                            var conflictOriginals = PresetStorage.GetConflicts(childPreset); // Presets that are contained within a ConflictedAttribute
+                            var conflictsSource = PresetStorage.GetAllConflicts(); // Presets with the ConflictedAttribute
 
                             if (!conflictsSource.Where(x => x == childPreset || x == preset).Any() || conflictOriginals.Length == 0)
                             {
@@ -247,10 +283,10 @@ namespace XIVSlothComboX.Window.Functions
                                 continue;
                             }
                         }
-
                         else
                         {
                             DrawPreset(childPreset, childInfo, ref i);
+                            continue;
                         }
                     }
 
@@ -266,7 +302,7 @@ namespace XIVSlothComboX.Window.Functions
 
         private static void DrawReplaceAttribute(CustomComboPreset preset)
         {
-            var att = preset.GetReplaceAttribute();
+            var att = Attributes[preset].ReplaceSkill;
             if (att != null)
             {
                 string skills = string.Join(", ", att.ActionNames);
@@ -277,8 +313,7 @@ namespace XIVSlothComboX.Window.Functions
                     ImGui.BeginTooltip();
                     foreach (var icon in att.ActionIcons)
                     {
-                        var gameIconLookup =new  GameIconLookup(icon);
-                        var img = Service.TextureProvider.GetFromGameIcon(gameIconLookup).GetWrapOrEmpty();
+                        var img = Svc.Texture.GetFromGameIcon(new(icon)).GetWrapOrEmpty();
                         ImGui.Image(img.ImGuiHandle, (img.Size / 2f) * ImGui.GetIO().FontGlobalScale);
                         ImGui.SameLine();
                     }

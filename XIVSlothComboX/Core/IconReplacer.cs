@@ -127,7 +127,6 @@ namespace XIVSlothComboX.Core
 
         private ulong IsIconReplaceableDetour(uint actionID)
         {
-            // Service.PluginLog.Error($"IsIconReplaceableDetour");
             return 1;
         }
     };

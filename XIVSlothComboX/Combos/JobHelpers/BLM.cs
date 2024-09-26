@@ -445,7 +445,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
         public static bool HasPolyglotStacks(this BLMGauge gauge) => gauge.PolyglotStacks > 0;
     }
 
-    internal class BLMHelper : BLM
+    internal class BLM : PvE.BLM
     {
         public static float MPAfterCast()
         {

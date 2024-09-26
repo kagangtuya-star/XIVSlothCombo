@@ -449,7 +449,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
                     else
                     {
-                        if (IsSpellActive(WingedReprobation) && IsOffCooldown(WingedReprobation) && !WasLastSpell(WingedReprobation) && !WasLastAbility(FeatherRain) && (!HasEffect(Buffs.WingedReprobation) || FindEffect(Buffs.WingedReprobation).StackCount < 2))
+                        if (IsSpellActive(WingedReprobation) && IsOffCooldown(WingedReprobation) && !WasLastSpell(WingedReprobation) && !WasLastAbility(FeatherRain) && (!HasEffect(Buffs.WingedReprobation) || FindEffect(Buffs.WingedReprobation)?.StackCount < 2))
                             return WingedReprobation;
 
                         if (IsSpellActive(FeatherRain) && IsOffCooldown(FeatherRain))
@@ -459,7 +459,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return SeaShanty;
                     }
 
-                    if (IsSpellActive(WingedReprobation) && IsOffCooldown(WingedReprobation) && !WasLastAbility(ShockStrike) && FindEffect(Buffs.WingedReprobation).StackCount < 2)
+                    if (IsSpellActive(WingedReprobation) && IsOffCooldown(WingedReprobation) && !WasLastAbility(ShockStrike) && FindEffect(Buffs.WingedReprobation)?.StackCount < 2)
                         return WingedReprobation;
 
                     if (IsSpellActive(ShockStrike) && IsOffCooldown(ShockStrike))
@@ -488,7 +488,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsSpellActive(PhantomFlurry) && IsOffCooldown(PhantomFlurry))
                         return PhantomFlurry;
 
-                    if (HasEffect(Buffs.PhantomFlurry) && FindEffect(Buffs.PhantomFlurry).RemainingTime < 2)
+                    if (HasEffect(Buffs.PhantomFlurry) && FindEffect(Buffs.PhantomFlurry)?.RemainingTime < 2)
                         return OriginalHook(PhantomFlurry);
 
                     if (HasEffect(Buffs.MoonFlute))

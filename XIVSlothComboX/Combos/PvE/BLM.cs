@@ -446,7 +446,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (gauge.HasPolyglotStacks())
                         return Foul;
 
-                    if (BLMHelper.DoubleBlizz())
+                    if (JobHelpers.BLM.DoubleBlizz())
                     {
                         if (Fire2.LevelChecked())
                             return OriginalHook(Fire2);

@@ -8,7 +8,7 @@ using XIVSlothComboX.Data;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-    internal class DRGOpenerLogic : DRG
+    internal class DRGOpenerLogic : PvE.DRG
     {
         private static bool HasCooldowns()
         {
@@ -230,35 +230,35 @@ namespace XIVSlothComboX.Combos.JobHelpers
     {
         internal static readonly List<uint> FastLocks =
         [
-            DRG.BattleLitany,
-            DRG.LanceCharge,
-            DRG.LifeSurge,
-            DRG.Geirskogul,
-            DRG.Nastrond,
-            DRG.MirageDive,
-            DRG.WyrmwindThrust,
-            DRG.RiseOfTheDragon,
-            DRG.Starcross,
+            PvE.DRG.BattleLitany,
+            PvE.DRG.LanceCharge,
+            PvE.DRG.LifeSurge,
+            PvE.DRG.Geirskogul,
+            PvE.DRG.Nastrond,
+            PvE.DRG.MirageDive,
+            PvE.DRG.WyrmwindThrust,
+            PvE.DRG.RiseOfTheDragon,
+            PvE.DRG.Starcross,
             PvE.Content.Variant.VariantRampart,
             PvE.All.TrueNorth
         ];
 
         internal static readonly List<uint> MidLocks =
         [
-            DRG.Jump,
-            DRG.HighJump,
-            DRG.DragonfireDive,
+            PvE.DRG.Jump,
+            PvE.DRG.HighJump,
+            PvE.DRG.DragonfireDive,
         ];
 
-        internal static uint SlowLock => DRG.Stardiver;
+        internal static uint SlowLock => PvE.DRG.Stardiver;
 
         internal static bool CanDRGWeave(uint oGCD)
         {
             //GCD Ready - No Weave
-            if (CustomComboFunctions.IsOffCooldown(DRG.TrueThrust))
+            if (CustomComboFunctions.IsOffCooldown(PvE.DRG.TrueThrust))
                 return false;
 
-            var gcdTimer = CustomComboFunctions.GetCooldownRemainingTime(DRG.TrueThrust);
+            var gcdTimer = CustomComboFunctions.GetCooldownRemainingTime(PvE.DRG.TrueThrust);
 
             if (FastLocks.Any(x => x == oGCD) && gcdTimer >= 0.6f)
                 return true;

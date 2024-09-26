@@ -311,7 +311,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (MaleficCount == 1 && CombustCount == 0)
                             return OriginalHook(Combust);
 
-                        if (MaleficCount == 1 && (CombustCount == 1) && ActionReady(Lightspeed) && CanDelayedWeave(actionID))
+                        if (MaleficCount == 1 && (CombustCount == 1) && ActionReady(Lightspeed) && CanDelayedWeave(actionID) && !HasEffect(Buffs.Lightspeed))
                             return OriginalHook(Lightspeed);
 
                         if (MaleficCount == 3 && CanWeave(actionID))
@@ -398,6 +398,12 @@ namespace XIVSlothComboX.Combos.PvE
                         ActionWatching.NumberOfGcdsUsed >= 3)
                         return Divination;
 
+                    //Earthly Star
+                    if (IsEnabled(CustomComboPreset.AST_ST_DPS_EarthlyStar) &&
+                        ActionReady(EarthlyStar) &&
+                        CanSpellWeave(actionID))
+                        return EarthlyStar;
+
                     if (IsEnabled(CustomComboPreset.AST_DPS_Oracle) &&
                         HasEffect(Buffs.Divining) &&
                         CanSpellWeave(actionID))
@@ -408,13 +414,7 @@ namespace XIVSlothComboX.Combos.PvE
                         IsEnabled(CustomComboPreset.AST_DPS_LazyLord) && Gauge.DrawnCrownCard is CardType.LORD &&
                         HasBattleTarget() &&
                         CanDelayedWeave(actionID))
-                        return OriginalHook(MinorArcana);
-
-                    //Earthly Star
-                    if (IsEnabled(CustomComboPreset.AST_ST_DPS_EarthlyStar) &&
-                        ActionReady(EarthlyStar) &&
-                        CanSpellWeave(actionID))
-                        return EarthlyStar;
+                        return OriginalHook(MinorArcana);                                       
 
                     if (HasBattleTarget())
                     {
@@ -514,6 +514,11 @@ namespace XIVSlothComboX.Combos.PvE
                         CanDelayedWeave(actionID) &&
                         ActionWatching.NumberOfGcdsUsed >= 3)
                         return Divination;
+                    //Earthly Star
+                    if (IsEnabled(CustomComboPreset.AST_AOE_DPS_EarthlyStar) && !IsMoving &&
+                        ActionReady(EarthlyStar) &&
+                        CanSpellWeave(actionID))
+                        return EarthlyStar;
 
                     if (IsEnabled(CustomComboPreset.AST_AOE_Oracle) &&
                         HasEffect(Buffs.Divining) &&
@@ -526,13 +531,6 @@ namespace XIVSlothComboX.Combos.PvE
                         HasBattleTarget() &&
                         CanDelayedWeave(actionID))
                         return OriginalHook(MinorArcana);
-
-                    //Earthly Star
-                    if (IsEnabled(CustomComboPreset.AST_AOE_DPS_EarthlyStar) &&
-                        ActionReady(EarthlyStar) &&
-                        CanSpellWeave(actionID))
-                        return EarthlyStar;
-
                 }
                 return actionID;
             }
@@ -577,22 +575,18 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     // Only check for our own HoTs
-                    var aspectedHeliosHoT = FindEffect(Buffs.AspectedBenefic, LocalPlayer, LocalPlayer?.GameObjectId);
-                    var heliosConjunctionHoT = FindEffect(Buffs.AspectedBenefic, LocalPlayer, LocalPlayer?.GameObjectId);
+                    var hotCheck = HeliosConjuction.LevelChecked() ? FindEffect(Buffs.HeliosConjunction, LocalPlayer, LocalPlayer?.GameObjectId) : FindEffect(Buffs.AspectedHelios, LocalPlayer, LocalPlayer?.GameObjectId);
 
                     if ((IsEnabled(CustomComboPreset.AST_AoE_SimpleHeals_Aspected) && NonaspectedMode) || // Helios mode: option must be on
                         !NonaspectedMode) // Aspected mode: option is not required
                     {
                         if ((ActionReady(AspectedHelios)
-                                 && aspectedHeliosHoT is null
-                                 && heliosConjunctionHoT is null)
-                             || HasEffect(Buffs.Horoscope)
+                                 && hotCheck is null)
                              || (HasEffect(Buffs.NeutralSect) && !HasEffect(Buffs.NeutralSectShield)))
                             return OriginalHook(AspectedHelios);
                     }
 
-                    if ((aspectedHeliosHoT is not null || heliosConjunctionHoT is not null)
-                        && (aspectedHeliosHoT?.RemainingTime > 2 || heliosConjunctionHoT?.RemainingTime > 2))
+                    if (hotCheck is not null && hotCheck.RemainingTime > GetActionCastTime(OriginalHook(AspectedHelios)) + 1f)
                         return Helios;
                 }
 

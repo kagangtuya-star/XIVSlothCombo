@@ -777,7 +777,15 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("AOE连击", "影噬箭 可用时把连珠箭/百首龙牙箭替换为 影噬箭。", BRD.JobID, 0, "", "")]
         BRD_AoE_Combo = 3008,
         
-        
+        [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
+        [ConflictingCombos(BRD_ST_AdvMode)]
+        [CustomComboInfo("Simple Mode - Single Target", "Adds every single target ability to one button,\nIf there are DoTs on target, will try to maintain their uptime.", BRD.JobID)]
+        BRD_ST_SimpleMode = 3036,
+
+        [ConflictingCombos(BRD_AoE_Combo, BRD_AoE_AdvMode)]
+        [ReplaceSkill(BRD.QuickNock, BRD.Ladonsbite)]
+        [CustomComboInfo("Simple Mode - AoE", "Weaves oGCDs onto Quick Nock/Ladonsbite.", BRD.JobID)]
+        BRD_AoE_SimpleMode = 3035,
 
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
         [ConflictingCombos(BRD_StraightShotUpgrade, BRD_DoTMaintainance, BRD_Apex, BRD_ST_oGCD, BRD_IronJawsApex)]
@@ -827,11 +835,21 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("Buffs Option", "Adds buffs onto the Advanced Bard feature.", BRD.JobID)]
         BRD_Adv_Buffs = 3017,
+        
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("Resonant Option", "Adds Resonant Arrow to the Rotation after Barrage.", BRD.JobID)]
+        BRD_Adv_BuffsResonant = 3041,
 
         [ParentCombo(BRD_Adv_Buffs)]
         [CustomComboInfo("Buffs - Radiant Option", "Adds Radiant Finale to theBuffs feature.", BRD.JobID)]
         BRD_Adv_BuffsRadiant = 3018,
+        
+  
 
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("Encore Option", "Adds Radiant Encore to the Rotation after Finale.", BRD.JobID)]
+        BRD_Adv_BuffsEncore = 3042,
+            
         [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("No Waste Option", "Adds enemy health checking on mobs for buffs, DoTs and Songs.\nThey will not be reapplied if less than specified.", BRD.JobID)]
         BRD_Adv_NoWaste = 3019,
@@ -859,6 +877,10 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(BRD_ST_AdvMode)]
         [CustomComboInfo("一键循环设置", "将失血箭集中于最佳爆发期", BRD.JobID, 0, "", "")]
         BRD_Adv_Pooling = 3023,
+        
+        [ParentCombo(BRD_AoE_AdvMode)]
+        [CustomComboInfo("Pooling Option", "84+ Pools Rain of death charges to allow for optimum burst phases.", BRD.JobID)]
+        BRD_AoE_Pooling = 3040,
 
         [ConflictingCombos(BRD_ST_AdvMode)]
         [ParentCombo(BRD_IronJaws)]
@@ -1886,21 +1908,23 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-     #region MONK
+        #region MONK
 
-        [ReplaceSkill([MNK.Bootshine])]
-        [CustomComboInfo("Simple Mode - Single Target", "Replaces Bootshine with a one - button full single target rotation.\nThis is ideal for newcomers to the job.", MNK.JobID)]
+        [ReplaceSkill([MNK.Bootshine, MNK.LeapingOpo])]
         [ConflictingCombos(MNK_ST_BeastChakras, MNK_ST_AdvancedMode)]
+        [CustomComboInfo("Simple Mode - Single Target", "Replaces Bootshine with a one - button full single target rotation.\nThis is ideal for newcomers to the job.", MNK.JobID)]
         MNK_ST_SimpleMode = 9004,
 
-        [ReplaceSkill([MNK.ArmOfTheDestroyer])]
+        [ReplaceSkill([MNK.ArmOfTheDestroyer,MNK.ShadowOfTheDestroyer])]
+        [ConflictingCombos(MNK_AOE_AdvancedMode)]
         [CustomComboInfo("Simple Mode - AoE", "Replaces Arm of the Destroyer with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", MNK.JobID)]
         MNK_AOE_SimpleMode = 9003,
 
         #region Monk Advanced ST
+        
         [ReplaceSkill([MNK.Bootshine])]
-        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Bootshine with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MNK.JobID)]
         [ConflictingCombos(MNK_ST_BeastChakras, MNK_ST_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Bootshine with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MNK.JobID)]
         MNK_ST_AdvancedMode = 9005,
 
         [ParentCombo(MNK_ST_AdvancedMode)]
@@ -1957,6 +1981,55 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
+        #region Monk Advanced AOE
+
+        [ReplaceSkill([MNK.ArmOfTheDestroyer, MNK.ShadowOfTheDestroyer])]
+        [ConflictingCombos(MNK_AOE_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - AoE", "Replaces Arm of the Destroyer with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", MNK.JobID)]
+        MNK_AOE_AdvancedMode = 9027,
+        
+        [ParentCombo(MNK_AOE_AdvancedMode)]
+        [CustomComboInfo("Meditation Option", "Adds Meditation to the rotation", MNK.JobID)]
+        MNK_AoEUseMeditation = 9028,
+
+        [ParentCombo(MNK_AOE_AdvancedMode)]
+        [CustomComboInfo("Buffs Option", "Adds selected buffs to the rotation", MNK.JobID)]
+        MNK_AoEUseBuffs = 9029,
+
+        [ParentCombo(MNK_AoEUseBuffs)]
+        [CustomComboInfo("Brotherhood Option", "Adds Brotherhood to the rotation", MNK.JobID)]
+        MNK_AoEUseBrotherhood = 9030,
+
+        [ParentCombo(MNK_AoEUseBuffs)]
+        [CustomComboInfo("Riddle of Wind Option", "Adds Riddle of Wind to the rotation", MNK.JobID)]
+        MNK_AoEUseROW = 9031,
+
+        [ParentCombo(MNK_AoEUseBuffs)]
+        [CustomComboInfo("Riddle of Fire Option", "Adds Riddle of Fire to the rotation", MNK.JobID)]
+        MNK_AoEUseROF = 9032,
+
+        [ParentCombo(MNK_AOE_AdvancedMode)]
+        [CustomComboInfo("Howling Fist Option", "Adds Howling Fist to the rotation", MNK.JobID)]
+        MNK_AoEUseHowlingFist = 9033,
+
+        [ParentCombo(MNK_AOE_AdvancedMode)]
+        [CustomComboInfo("Perfect Balance Option", "Adds Perfect Balance and Masterful Blitz to the rotation", MNK.JobID)]
+        MNK_AoEUsePerfectBalance = 9034,
+
+        [ParentCombo(MNK_AoEUseROW)]
+        [CustomComboInfo("Wind's Reply Option", "Adds Wind's Reply to the rotation", MNK.JobID)]
+        MNK_AoEUseWindsReply = 9035,
+
+        [ParentCombo(MNK_AoEUseROF)]
+        [CustomComboInfo("Fire's Reply Option", "Adds Fire's Reply to the rotation", MNK.JobID)]
+        MNK_AoEUseFiresReply = 9036,
+        
+        [ParentCombo(MNK_AOE_AdvancedMode)]
+        [CustomComboInfo("Combo Heals Option", "Adds Bloodbath and Second Wind to the rotation.", MNK.JobID)]
+        MNK_AoE_ComboHeals = 9037,
+
+        #endregion
+
         #region Monk Beast Chakras
 
         [ConflictingCombos(MNK_ST_AdvancedMode, MNK_ST_SimpleMode)]
@@ -1991,18 +2064,20 @@ namespace XIVSlothComboX.Combos
         #region Variant
 
         [Variant]
-        [VariantParent(MNK_ST_AdvancedMode, MNK_AOE_SimpleMode)]
+        [VariantParent(MNK_ST_SimpleMode,MNK_ST_AdvancedMode, MNK_AOE_SimpleMode,MNK_AOE_AdvancedMode)]
         [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", MNK.JobID)]
         MNK_Variant_Rampart = 9025,
 
         [Variant]
-        [VariantParent(MNK_ST_AdvancedMode, MNK_AOE_SimpleMode)]
+        [VariantParent(MNK_ST_SimpleMode, MNK_ST_AdvancedMode, MNK_AOE_SimpleMode, MNK_AOE_AdvancedMode)]
         [CustomComboInfo("Cure Option", "Use Variant Cure when HP is below set threshold.", MNK.JobID)]
         MNK_Variant_Cure = 9026,
 
         #endregion
-
+        
+        // last value = 9037
         // End Monk
+        
         #endregion
    
 
@@ -2316,7 +2391,7 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(NIN_ST_AdvancedMode_TrueNorth_ArmorCrush)]
         [CustomComboInfo("动态真北选项", "在强点破甲突前面插入一个真北，如果你不在正确的身位上.", NIN.JobID)]
-        NIN_ST_AdvancedMode_TrueNorth_ArmorCrush_Dynamic = 10068,
+        NIN_ST_AdvancedMode_Dynamic = 10068,
 
         [Variant]
         [VariantParent(NIN_ST_SimpleMode, NIN_ST_AdvancedMode, NIN_AoE_SimpleMode, NIN_AoE_AdvancedMode)]
@@ -2675,9 +2750,13 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(RPR_GluttonyBloodSwathe)]
         [CustomComboInfo("Enshroud Combo Option", "Adds Enshroud combo (Void/Cross Reaping, Communio, and Lemure's Slice) on Blood Stalk and Grim Swathe.", RPR.JobID)]
+       
         RPR_GluttonyBloodSwathe_Enshroud = 12202,
 
-        // Last value = 12202
+        [ParentCombo(RPR_GluttonyBloodSwathe)]
+        [CustomComboInfo("Sacrificium only Option", "Adds only Sacrificium on Blood Stalk and Grim Swathe while enshrouded.", RPR.JobID)]
+        RPR_GluttonyBloodSwathe_Sacrificium = 12203,
+        // Last value = 12203
 
         #endregion
 
@@ -2884,6 +2963,9 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("赤复活 设置", "当存在连续咏唱状态或使用即刻咏唱后，将即刻咏唱替换为赤复活.", RDM.JobID, 620)]
         RDM_Raise = 13620,
 
+        [ParentCombo(RDM_Raise)]
+        [CustomComboInfo("Vercure Option", "If Swiftcast is on cooldown, change to Vercure to proc Dualcast.", RDM.JobID, 621)]
+        RDM_Raise_Vercure = 13621,
         #endregion
 
         #region Sections 8 to 9 - Miscellaneous
@@ -3243,6 +3325,10 @@ namespace XIVSlothComboX.Combos
         [ConflictingCombos(SAM_ST_Kasha)]
         [CustomComboInfo("Kasha Combo", "Replace Kasha with its combo chain.", SAM.JobID)]
         SAM_ST_KashaCombo = 15001,
+            
+        [ReplaceSkill(SAM.Gekko)]
+        [CustomComboInfo("Gekko Combo", "Replace Gekko with its combo chain.", SAM.JobID)]
+        SAM_ST_GekkoCombo = 15010,
         #endregion
 
         #region  Simple ST
@@ -3346,10 +3432,13 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Oka Combo", "Replace Oka with its combo chain.", SAM.JobID)]
         SAM_AoE_OkaCombo = 15100,
 
-        [ParentCombo(SAM_AoE_OkaCombo)]
-        [ConflictingCombos(SAM_AoE_Oka)]
-        [CustomComboInfo("Oka Two Target Rotation Feature", "Adds the Yukikaze combo, Mangetsu combo, Senei, Shinten, and Shoha to Oka combo.\nUsed for two targets only and when Lv86 and above.", SAM.JobID)]
-        SAM_AoE_OkaCombo_TwoTarget = 15101,
+        // [ParentCombo(SAM_AoE_OkaCombo)]
+        // [ConflictingCombos(SAM_AoE_Oka)]
+        // [CustomComboInfo("Oka Two Target Rotation Feature", "Adds the Yukikaze combo, Mangetsu combo, Senei, Shinten, and Shoha to Oka combo.\nUsed for two targets only and when Lv86 and above.", SAM.JobID)]
+        // SAM_AoE_OkaCombo_TwoTarget = 15101,
+        [ReplaceSkill(SAM.Mangetsu)]
+        [CustomComboInfo("Mangetsu Combo", "Replace Mangetsu with its combo chain.", SAM.JobID)]
+        SAM_AoE_MangetsuCombo = 15101,
 
         #endregion
 
@@ -3370,7 +3459,6 @@ namespace XIVSlothComboX.Combos
         SAM_AoE_AdvancedMode = 15103,
 
         [ParentCombo(SAM_AoE_AdvancedMode)]
-        [ConflictingCombos(SAM_AoE_OkaCombo_TwoTarget)]
         [CustomComboInfo("Oka Combo", "Adds Oka combo to the rotation.", SAM.JobID)]
         SAM_AoE_Oka = 15104,
 
@@ -3643,6 +3731,15 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("生命活性法 选项", "当目标生命值低于指定值时插入 生命活性法：", SCH.JobID, 5)]
         SCH_ST_Heal_Lustrate = 16264,
 
+        [ParentCombo(SCH_ST_Heal)]
+        [CustomComboInfo("深谋远虑之策", "Use 深谋远虑之策 when target HP%% below:", SCH.JobID, 6)]
+        SCH_ST_Heal_Excogitation = 16038,
+
+        [ParentCombo(SCH_ST_Heal)]
+        [CustomComboInfo("生命回生法", "Use 生命回生法 when target HP%% below:", SCH.JobID, 7)]
+        SCH_ST_Heal_Protraction = 16039,
+
+        
         #endregion
 
         #region Utilities
@@ -3879,7 +3976,7 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(VPR.SteelFangs)]
         [ConflictingCombos(VPR_ST_AdvancedMode)]
-        [CustomComboInfo("Simple Mode - Single Target", "Replaces Steel Fangs with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job.", VPR.JobID)]
+        [CustomComboInfo("Simple Mode - Single Target", "Replaces Steel Fangs with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job.", VPR.JobID, -2)]
         VPR_ST_SimpleMode = 30000,
 
         #region Advanced ST Viper
@@ -3909,12 +4006,9 @@ namespace XIVSlothComboX.Combos
         VPR_ST_Vicewinder = 30006,
 
         [ParentCombo(VPR_ST_CDs)]
-        [CustomComboInfo("Vicewinder Combo", "Adds Swiftskin's Coil and Hunter's Coil to the rotation.", VPR.JobID)]
+        [CustomComboInfo("Vicewinder Combo", "Adds Swiftskin's Coil and Hunter's Coil to the rotation.\nWill automatically swap depending on your position.", VPR.JobID)]
         VPR_ST_VicewinderCombo = 30007,
-        
-        [ParentCombo(VPR_ST_VicewinderCombo)]
-        [CustomComboInfo("Dynamic First Coil", "Uses Hunter's Coil first if you are on the flank, and Swiftskin's Coil first if you are on the rear.\nDefaults to your selection if you are elsewhere.", VPR.JobID)]
-        VPR_ST_DynamicFirstCoil = 30013,
+
         #endregion
 
         [ParentCombo(VPR_ST_AdvancedMode)]
@@ -3952,18 +4046,14 @@ namespace XIVSlothComboX.Combos
         VPR_ST_ComboHeals = 30097,
 
         [ParentCombo(VPR_ST_AdvancedMode)]
-        [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus..\n Only for basic combo. Does NOT care about Vicewinder positionals.", VPR.JobID)]
+        [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus.", VPR.JobID)]
         VPR_TrueNorthDynamic = 30098,
-
-        [ParentCombo(VPR_TrueNorthDynamic)]
-        [CustomComboInfo("Hold True North for Vicewinder", "Will hold the last charge of True North for use with Vicewinder, even when out of position for other Positionals.", VPR.JobID)]
-        VPR_TrueNorthDynamic_HoldCharge = 30099,
 
         #endregion
 
         [ReplaceSkill(VPR.SteelMaw)]
         [ConflictingCombos(VPR_AoE_AdvancedMode)]
-        [CustomComboInfo("Simple Mode - AoE", "Replaces Steel Maw with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job.", VPR.JobID)]
+        [CustomComboInfo("Simple Mode - AoE", "Replaces Steel Maw with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job.", VPR.JobID, -1)]
         VPR_AoE_SimpleMode = 30100,
 
         #region Advanced AoE Viper
@@ -3987,9 +4077,17 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Vicepit", "Adds Vicepit to the rotation.", VPR.JobID)]
         VPR_AoE_Vicepit = 30105,
 
+        [ParentCombo(VPR_AoE_Vicepit)]
+        [CustomComboInfo("Disable Range Check", "Disables the range check for Vicepit, so it will be used even without a target selected.", VPR.JobID)]
+        VPR_AoE_Vicepit_DisableRange = 30111,
+
         [ParentCombo(VPR_AoE_CDs)]
         [CustomComboInfo("Vicepit Combo", "Adds Swiftskin's Den and Hunter's Den to the rotation.", VPR.JobID)]
         VPR_AoE_VicepitCombo = 30106,
+
+        [ParentCombo(VPR_AoE_VicepitCombo)]
+        [CustomComboInfo("Disable Range Check", "Disables the range check for Swiftskin's Den and Hunter's Den, so they will be used even without a target selected.", VPR.JobID)]
+        VPR_AoE_VicepitCombo_DisableRange = 30113,
 
         #endregion
 
@@ -4010,6 +4108,10 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Reawaken", "Adds Reawaken to the rotation.", VPR.JobID)]
         VPR_AoE_Reawaken = 30110,
 
+        [ParentCombo(VPR_AoE_Reawaken)]
+        [CustomComboInfo("Disable Range Check", "Disables the range check for Reawaken, so it will be used even without a target selected.", VPR.JobID)]
+        VPR_AoE_Reawaken_DisableRange = 30114,
+
         [ParentCombo(VPR_AoE_AdvancedMode)]
         [ConflictingCombos(VPR_ReawakenLegacy)]
         [CustomComboInfo("Reawaken Combo", "Adds Generation and Legacy to the rotation.", VPR.JobID)]
@@ -4022,13 +4124,9 @@ namespace XIVSlothComboX.Combos
         #endregion
 
         [ReplaceSkill(VPR.Vicewinder)]
-        [CustomComboInfo("Vicewinder - Coils", "Replaces Vicewinder with Hunter's/Swiftskin's Coils.", VPR.JobID)]
+        [CustomComboInfo("Vicewinder - Coils", "Replaces Vicewinder with Hunter's/Swiftskin's Coils.\nWill automatically swap depending on your position.", VPR.JobID)]
         VPR_VicewinderCoils = 30200,
-        
-        [ParentCombo(VPR_VicewinderCoils)]
-        [CustomComboInfo("Dynamic First Coil", "Uses Hunter's Coil first if you are on the flank, and Swiftskin's Coil first if you are on the rear.\nDefaults to your selection if you are elsewhere.", VPR.JobID)]
-        VPR_DynamicFirstCoil = 30209,
-        
+
         [ParentCombo(VPR_VicewinderCoils)]
         [CustomComboInfo("Dynamic True North Option", "Adds True North when you are not in the correct position for the enhanced potency bonus.", VPR.JobID)]
         VPR_VicewinderCoilsTN = 30208,
@@ -4061,7 +4159,17 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(VPR_VicepitDens)]
         [CustomComboInfo("Include Twin Combo Actions", "Adds Twinfang and Twinblood to the button.", VPR.JobID)]
         VPR_VicepitDens_oGCDs = 30207,
-        
+
+        [Variant]
+        [VariantParent(VPR_ST_SimpleMode, VPR_AoE_SimpleMode, VPR_ST_AdvancedMode, VPR_AoE_AdvancedMode)]
+        [CustomComboInfo("Cure Option", "Use Variant Cure when HP is below set threshold.", VPR.JobID)]
+        VPR_Variant_Cure = 30300,
+
+        [Variant]
+        [VariantParent(VPR_ST_SimpleMode, VPR_AoE_SimpleMode, VPR_ST_AdvancedMode, VPR_AoE_AdvancedMode)]
+        [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", VPR.JobID)]
+        VPR_Variant_Rampart = 30301,
+
         #endregion
         #region WARRIOR
 
@@ -4229,6 +4337,10 @@ namespace XIVSlothComboX.Combos
         WHM_ST_MainCombo_Assize = 19009,
 
         [ParentCombo(WHM_ST_MainCombo)]
+        [CustomComboInfo("闪飒", "Adds 闪飒 to the single target combo when under Sacred Sight", WHM.JobID, 14, "", "")]
+        WHM_ST_MainCombo_GlareIV = 19015,
+        
+        [ParentCombo(WHM_ST_MainCombo)]
         [CustomComboInfo
         (
             "Afflatus Misery Option", "Adds Afflatus Misery to the single target combo when it is ready to be used.", WHM.JobID, 14, "",
@@ -4260,9 +4372,19 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("AoE DPS Feature", "Collection of cooldowns and spell features on Holy/Holy III.", WHM.JobID, 2, "", "")]
         WHM_AoE_DPS = 19190,
 
+        
+        
+        [ParentCombo(WHM_AoE_DPS)]
+        [CustomComboInfo("Swift Holy Pull 'Opener' Option", "Adds a Swiftcast->Holy at the beginning of your AoE rotation.\nRequires you to already be in combat, to have stopped moving, and to not have used Assize yet.", WHM.JobID, 20, "", "")]
+        WHM_AoE_DPS_SwiftHoly = 19197,
+        
         [ParentCombo(WHM_AoE_DPS)]
         [CustomComboInfo("Assize Option", "Adds Assize to the AoE combo.", WHM.JobID, 21, "", "")]
         WHM_AoE_DPS_Assize = 19192,
+        
+        [ParentCombo(WHM_AoE_DPS)]
+        [CustomComboInfo("Glare IV Option", "Adds Glare IV to the AoE combo when under Sacred Sight", WHM.JobID, 22, "", "")]
+        WHM_AoE_DPS_GlareIV = 19196,
 
         [ParentCombo(WHM_AoE_DPS)]
         [CustomComboInfo("Afflatus Misery Option", "Adds Afflatus Misery to the AoE combo when it is ready to be used.", WHM.JobID, 22, "", "")]
@@ -4309,7 +4431,7 @@ namespace XIVSlothComboX.Combos
 
         #region AoE Heals Feature
 
-        [ReplaceSkill(WHM.Medica)]
+        [ReplaceSkill(WHM.Medica1)]
         [CustomComboInfo("Simple Heals (AoE)", "Replaces Medica with a one button AoE healing setup.", WHM.JobID, 4, "", "")]
         WHM_AoEHeals = 19007,
 
@@ -4322,9 +4444,9 @@ namespace XIVSlothComboX.Combos
         WHM_AoEHeals_Misery = 19010,
 
         [ParentCombo(WHM_AoEHeals)]
-        [CustomComboInfo("Thin Air Option", "Uses Thin Air when available.", WHM.JobID, 63, "", "")]
+        [CustomComboInfo("Thin Air Option", "Uses Thin Air when available.", WHM.JobID, 4, "", "")]
         WHM_AoeHeals_ThinAir = 19200,
-
+        
         [ParentCombo(WHM_AoEHeals)]
         [CustomComboInfo("Cure III Option", "Replaces Medica with Cure III when available.", WHM.JobID)]
         WHM_AoEHeals_Cure3 = 19201,
@@ -4340,6 +4462,15 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(WHM_AoEHeals)]
         [CustomComboInfo("Lucid Dreaming Option", "Uses Lucid Dreaming when available.", WHM.JobID)]
         WHM_AoEHeals_Lucid = 19204,
+        
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Medica II Option", "Uses Medica II when current target doesn't have Medica II buff." +
+                                             "\nUpgrades to Medica III when level allows.", WHM.JobID, 1)]
+        WHM_AoEHeals_Medica2 = 19205,
+
+        [ParentCombo(WHM_AoEHeals)]
+        [CustomComboInfo("Divine Caress", "Uses Divine Caress when Divine Grace from Temperance is active.", WHM.JobID, 8)]
+        WHM_AoEHeals_DivineCaress = 19207,
 
         #endregion
 
@@ -4415,7 +4546,7 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-           #region PICTOMANCER
+        #region PICTOMANCER
 
         [ReplaceSkill(PCT.FireInRed)]
         [ConflictingCombos(CombinedAetherhues, PCT_ST_AdvancedMode)]
@@ -4562,7 +4693,7 @@ namespace XIVSlothComboX.Combos
         PCT_AoE_AdvancedMode = 20040,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Prepull Motifs Feature", "Adds missing Motifs to the combo while out of combat.", PCT.JobID)]
+        [CustomComboInfo("Prepull Motifs Feature", "Adds missing Motifs to the combo while out of combat.", PCT.JobID, 1)]
         PCT_AoE_AdvancedMode_PrePullMotifs = 20041,
 
         [ParentCombo(PCT_AoE_AdvancedMode_PrePullMotifs)]
@@ -4570,7 +4701,7 @@ namespace XIVSlothComboX.Combos
         PCT_AoE_AdvancedMode_NoTargetMotifs = 20042,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Starry Muse Burst Feature", $"Adds selected spells below to the burst phase.", PCT.JobID)]
+        [CustomComboInfo("Starry Muse Burst Feature", $"Adds selected spells below to the burst phase.", PCT.JobID, 2)]
         PCT_AoE_AdvancedMode_Burst_Phase = 20043,
 
         [ParentCombo(PCT_AoE_AdvancedMode_Burst_Phase)]
@@ -4594,7 +4725,7 @@ namespace XIVSlothComboX.Combos
         PCT_AoE_AdvancedMode_Burst_BlizzardInCyan = 20048,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Motif Selection Feature", $"Add Selected Motifs to the combo.", PCT.JobID)]
+        [CustomComboInfo("Motif Selection Feature", $"Add Selected Motifs to the combo.", PCT.JobID, 3)]
         PCT_AoE_AdvancedMode_MotifFeature = 20049,
 
         [ParentCombo(PCT_AoE_AdvancedMode_MotifFeature)]
@@ -4610,7 +4741,7 @@ namespace XIVSlothComboX.Combos
         PCT_AoE_AdvancedMode_WeaponMotif = 20052,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Muse Selection Feature", $"Adds Selected Muses to the combo.", PCT.JobID)]
+        [CustomComboInfo("Muse Selection Feature", $"Adds Selected Muses to the combo.", PCT.JobID, 4)]
         PCT_AoE_AdvancedMode_MuseFeature = 20053,
 
         [ParentCombo(PCT_AoE_AdvancedMode_MuseFeature)]
@@ -4626,23 +4757,27 @@ namespace XIVSlothComboX.Combos
         PCT_AoE_AdvancedMode_SteelMuse = 20056,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Mog/Madeen Feature", $"Adds Mog/Madeen to the combo.", PCT.JobID)]
+        [CustomComboInfo("Mog/Madeen Feature", $"Adds Mog/Madeen to the combo.", PCT.JobID, 5)]
         PCT_AoE_AdvancedMode_MogOfTheAges = 20057,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Subtractive Palette Feature", $"Adds Subtractive Palette to the combo.", PCT.JobID)]
+        [CustomComboInfo("Subtractive Palette Feature", $"Adds Subtractive Palette to the combo.", PCT.JobID, 6)]
         PCT_AoE_AdvancedMode_SubtractivePalette = 20058,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Comet in Black Option", $"Adds Comet in Black to the combo.", PCT.JobID)]
+        [CustomComboInfo("Comet in Black Option", $"Adds Comet in Black to the combo.", PCT.JobID, 7)]
         PCT_AoE_AdvancedMode_CometinBlack = 20059,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Hammer Stamp Combo Option", $"Adds Hammer Stamp combo.", PCT.JobID)]
+        [CustomComboInfo("Hammer Stamp Combo Option", $"Adds Hammer Stamp combo.", PCT.JobID, 8)]
         PCT_AoE_AdvancedMode_HammerStampCombo = 20060,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Movement Features", $"Adds selected features to the combo while moving.", PCT.JobID)]
+        [CustomComboInfo("Holy in White Option", $"Adds Holy in White to the combo.", PCT.JobID, 9)]
+        PCT_AoE_AdvancedMode_HolyinWhite = 20068,
+
+        [ParentCombo(PCT_AoE_AdvancedMode)]
+        [CustomComboInfo("Movement Features", $"Adds selected features to the combo while moving.", PCT.JobID, 10)]
         PCT_AoE_AdvancedMode_MovementFeature = 20061,
 
         [ParentCombo(PCT_AoE_AdvancedMode_MovementFeature)]
@@ -4662,11 +4797,11 @@ namespace XIVSlothComboX.Combos
         PCT_AoE_AdvancedMode_SwitfcastOption = 20065,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Blizzard in Cyan Option", $"Adds Blizzard in Cyan to the combo.", PCT.JobID)]
+        [CustomComboInfo("Blizzard in Cyan Option", $"Adds Blizzard in Cyan to the combo.", PCT.JobID, 11)]
         PCT_AoE_AdvancedMode_BlizzardInCyan = 20066,
 
         [ParentCombo(PCT_AoE_AdvancedMode)]
-        [CustomComboInfo("Lucid Dreaming Option", $"Adds Lucid Dreaming to the combo.", PCT.JobID)]
+        [CustomComboInfo("Lucid Dreaming Option", $"Adds Lucid Dreaming to the combo.", PCT.JobID, 12)]
         PCT_AoE_AdvancedMode_LucidDreaming = 20067,
 
         [ReplaceSkill(PCT.FireInRed, PCT.FireIIinRed)]
@@ -4682,11 +4817,23 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("One Button Paint", "Consolidates paint-consuming actions into one button.", PCT.JobID)]
         CombinedPaint = 20004,
 
-
-        // Last value for AoE = 20067
         #endregion
 
+        #region Variant
+
+        [Variant]
+        [VariantParent(PCT_ST_SimpleMode, PCT_AoE_SimpleMode, PCT_ST_AdvancedMode, PCT_AoE_AdvancedMode)]
+        [CustomComboInfo("Cure Option", "Use Variant Cure when HP is below set threshold.", PCT.JobID)]
+        PCT_Variant_Cure = 20100,
+
+        [Variant]
+        [VariantParent(PCT_ST_SimpleMode, PCT_AoE_SimpleMode, PCT_ST_AdvancedMode, PCT_AoE_AdvancedMode)]
+        [CustomComboInfo("Rampart Option", "Use Variant Rampart on cooldown.", PCT.JobID)]
+        PCT_Variant_Rampart = 20101,
+
         #endregion
+
+        #endregion   
 
         // Non-combat
 

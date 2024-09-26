@@ -15,7 +15,7 @@ using JsonConverter = Newtonsoft.Json.JsonConverter;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-    internal class MCHOpenerLogic : MCH
+    internal class MCHOpenerLogic : PvE.MCH
     {
         private static bool HasCooldowns()
         {
@@ -274,10 +274,10 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         internal static uint LastSummonBattery(this MCHGauge gauge)
         {
-            if (!CustomComboFunctions.InCombat() || ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.RookAutoturret)) == 0)
+            if (!CustomComboFunctions.InCombat() || ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(PvE.MCH.RookAutoturret)) == 0)
                 lastBattery = 0;
 
-            if (ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(MCH.RookAutoturret)) > 0)
+            if (ActionWatching.CombatActions.Count(x => x == CustomComboFunctions.OriginalHook(PvE.MCH.RookAutoturret)) > 0)
                 lastBattery = gauge.LastSummonBatteryPower;
 
             return lastBattery;

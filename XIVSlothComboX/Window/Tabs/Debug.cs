@@ -22,7 +22,7 @@ using Action = Lumina.Excel.GeneratedSheets.Action;
 #if DEBUG
 namespace XIVSlothComboX.Window.Tabs
 {
-        internal class Debug : ConfigWindow
+    internal class Debug : ConfigWindow
     {
         public static int debugNum = 0;
 
@@ -159,9 +159,9 @@ namespace XIVSlothComboX.Window.Tabs
                     {
                         var actionStatus = ActionManager.Instance()->GetActionStatus(ActionType.Action, debugSpell.RowId);
                         var icon = Svc.Texture.GetFromGameIcon(new(debugSpell.Icon)).GetWrapOrEmpty().ImGuiHandle;
-                        ImGui.Image(icon, new Vector2(60f.Scale(), 60f.Scale()));
+                        ImGui.Image(icon, new System.Numerics.Vector2(60f.Scale(), 60f.Scale()));
                         ImGui.SameLine();
-                        ImGui.Image(icon, new Vector2(30f.Scale(), 30f.Scale()));
+                        ImGui.Image(icon, new System.Numerics.Vector2(30f.Scale(), 30f.Scale()));
                         CustomStyleText($"Action Status:", $"{actionStatus} ({Svc.Data.GetExcelSheet<LogMessage>().GetRow(actionStatus).Text})");
                         CustomStyleText($"Action Type:", debugSpell.ActionCategory.Value.Name);
                         if (debugSpell.UnlockLink != 0)

@@ -232,8 +232,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     o = Service.TargetManager.FocusTarget;
                     break;
                 case TargetType.UITarget:
-                    // return PartyTargetingService.UITarget;
-                    return Framework.Instance()->GetUIModule()->GetPronounModule()->UiMouseOverTarget;
+                    return PartyTargetingService.UITarget;
+                    // return Framework.Instance()->GetUIModule()->GetPronounModule()->UiMouseOverTarget;
                 case TargetType.FieldTarget:
                     o = Service.TargetManager.MouseOverTarget;
                     break;

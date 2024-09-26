@@ -7,7 +7,7 @@ using XIVSlothComboX.Extensions;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-    internal class DNCOpenerLogic : DNC
+    internal class DNCOpenerLogic : PvE.DNC
     {    
         
         private static uint OpenerLevel => 90;

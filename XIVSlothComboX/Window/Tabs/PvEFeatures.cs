@@ -161,7 +161,7 @@ namespace XIVSlothComboX.Window.Tabs
                                         ImGui.EndTabItem();
                                     }
 
-                                    if (groupedPresets[OpenJob].Any(x => PresetStorage.IsPvP(x.Preset)))
+                                    if (groupedPresets[OpenJob].Any(x => PresetStorage.IsVariant(x.Preset)))
                                     {
                                         if (ImGui.BeginTabItem("下水道"))
                                         {
@@ -200,7 +200,7 @@ namespace XIVSlothComboX.Window.Tabs
 
         private static void DrawVariantContents(string jobName)
         {
-            foreach (var (preset, info) in groupedPresets[jobName].Where(x => PresetStorage.IsPvP(x.Preset)))
+            foreach (var (preset, info) in groupedPresets[jobName].Where(x => PresetStorage.IsVariant(x.Preset)))
             {
                 int i = -1;
                 InfoBox presetBox = new()
@@ -216,8 +216,8 @@ namespace XIVSlothComboX.Window.Tabs
         {
             if (!Messages.PrintBLUMessage(jobName)) return;
 
-            foreach (var (preset, info) in groupedPresets[jobName].Where(x => !PresetStorage.IsSecret(x.Preset) &&
-                                                                              !PresetStorage.IsPvP(x.Preset) &&
+            foreach (var (preset, info) in groupedPresets[jobName].Where(x => !PresetStorage.IsPvP(x.Preset) &&
+                                                                              !PresetStorage.IsVariant(x.Preset) &&
                                                                               !PresetStorage.IsBozja(x.Preset) &&
                                                                               !PresetStorage.IsEureka(x.Preset)))
             {

@@ -379,7 +379,18 @@ namespace XIVSlothComboX.Data
 
             return count;
         }
+        
 
+        public static bool HasDoubleWeaved()
+        {
+            if (CombatActions.Count < 2) 
+                return false;
+            var lastAction = CombatActions.Last();
+            var secondLastAction = CombatActions[^2];
+
+            return (GetAttackType(lastAction) == GetAttackType(secondLastAction) && GetAttackType(lastAction) == ActionAttackType.Ability);
+        }
+        
         public static bool WasLast2ActionsAbilities()
         {
             if (CombatActions.Count < 2) return false;
@@ -473,9 +484,8 @@ namespace XIVSlothComboX.Data
         
         public static void Disable()
         {
-            // ReceiveActionEffectHook.Disable();
-            // SendActionHook?.Disable();
-            // HttpResponseMessageHook?.Disable();
+            ReceiveActionEffectHook.Disable();
+            SendActionHook?.Disable();
             
             Service.Condition.ConditionChange -= ResetActions;
             Service.ClientState.TerritoryChanged -= TerritoryChangedEvent;
@@ -502,15 +512,7 @@ namespace XIVSlothComboX.Data
         public static string GetStatusName(uint id) => StatusSheet.TryGetValue(id, out var status) ? (string)status.Name : "Unknown Status";
 
         
-        public static bool HasDoubleWeaved()
-        {
-            if (CombatActions.Count < 2) 
-                return false;
-            var lastAction = CombatActions.Last();
-            var secondLastAction = CombatActions[^2];
-
-            return (GetAttackType(lastAction) == GetAttackType(secondLastAction) && GetAttackType(lastAction) == ActionAttackType.Ability);
-        }
+     
         
         public static string GetBLUIndex(uint id)
         {

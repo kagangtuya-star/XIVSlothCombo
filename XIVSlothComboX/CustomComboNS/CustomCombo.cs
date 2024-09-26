@@ -46,7 +46,6 @@ namespace XIVSlothComboX.CustomComboNS
         /// <summary> Gets the job ID associated with this combo. </summary>
         protected byte JobID { get;   }
 
-        protected static uint LastPreAction = 0;
     
 
         /// <summary> Performs various checks then attempts to invoke the combo. </summary>

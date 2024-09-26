@@ -123,5 +123,9 @@
 
 	</ItemGroup>
 	
+	<ItemGroup>
+	  <Compile Include="Combos\PvE\WHM.cs.bak" />
+	</ItemGroup>
+	
 
 </Project>

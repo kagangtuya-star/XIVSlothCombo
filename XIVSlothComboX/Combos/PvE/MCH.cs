@@ -160,7 +160,7 @@ namespace XIVSlothComboX.Combos.PvE
         internal class MCH_ST_AdvancedMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_ST_AdvancedMode;
-            internal static MCHOpenerLogic MCHOpener = new();
+            internal static JobHelpers.MCHOpenerLogic MchOpenerLogicOpener = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -183,7 +183,7 @@ namespace XIVSlothComboX.Combos.PvE
                     // Opener for MCH
                     if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener))
                     {
-                        if (MCHOpener.DoFullOpener(ref actionID))
+                        if (MchOpenerLogicOpener.DoFullOpener(ref actionID))
                             return actionID;
                     }
 
