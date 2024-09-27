@@ -8,3 +8,17 @@
 ### 群   号：964392714
 ### 来点好兄弟一起开发
 [爱发电](https://afdian.com/a/a_44451516)
+---
+## 快捷指令 [参考](https://docs.qq.com/doc/DT0tjZm9JTFlqUGJY) [所以指令](https://github.com/44451516/XIVSlothCombo/blob/CN/res/SlothDebug.txt)
+~~~
+//所有选项打钩
+/scombo setall
+//所有选项取消
+/scombo unsetall
+// 逻辑取反
+/scombo toggle SimpleBardFeature
+//启用xx 功能
+/scombo set GunbreakerNoMercyonST
+//取消xx 功能
+/scombo unset SimpleBardFeature
+~~~
