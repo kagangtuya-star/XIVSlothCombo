@@ -45,10 +45,12 @@ namespace XIVSlothComboX.Window.Tabs
             // ImGui.PopStyleColor();
 
        
-            // if (ImGui.Button("想来开发？点击这里"))
-            // {
-            //     Util.OpenLink("https://qm.qq.com/q/eBaUVYbKpi");
-            // }
+            if (ImGui.Button("交流群"))
+            {
+                // Util.OpenLink("https://qm.qq.com/q/eBaUVYbKpi");
+                // 点击链接加入群聊【XIVSlothCombo汉化】：https://qm.qq.com/q/5UdSTydlfi
+                Util.OpenLink("https://qm.qq.com/q/5UdSTydlfi");
+            }
 
             ImGui.Spacing();
             ImGui.Spacing();
