@@ -211,7 +211,7 @@ public class Translatezh_CN
         {"Adds Wyrmwind Thrust to the rotation." , "将天龙点睛添加到循环中。"  },
         #endregion
         {"Ranged Uptime Option" , "超出近战范围选项"  },
-        {"Adds Piercing Talon to the rotation when you are out of melee range." , "当你不在近战范围内时，将穿刺爪添加到技能循环中。"  },
+        {"Adds Piercing Talon to the rotation when you are out of melee range." , "当你不在近战范围内时，将贯穿尖添加到技能循环中。"  },
         {"Combo Heals Option" , "回复设置"  },
         {"Adds Bloodbath and Second Wind to the rotation." , "将浴血和内丹添加到技能循环中。"  },
         {"Dynamic True North Option" , "动态真北"  },

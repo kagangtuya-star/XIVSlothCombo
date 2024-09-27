@@ -18,7 +18,7 @@ namespace XIVSlothComboX.Combos.PvE
         public const byte JobID = 22;
 
         public const uint
-            PiercingTalon = 90,
+            标枪PiercingTalon = 90,
             ElusiveJump = 94,
             LanceCharge = 85,
             BattleLitany = 3557,
@@ -171,8 +171,8 @@ namespace XIVSlothComboX.Combos.PvE
                         return actionID;
 
                     // Piercing Talon Uptime Option
-                    if (LevelChecked(PiercingTalon) && !InMeleeRange() && HasBattleTarget())
-                        return PiercingTalon;
+                    if (LevelChecked(标枪PiercingTalon) && !InMeleeRange() && HasBattleTarget())
+                        return 标枪PiercingTalon;
 
                     if (HasEffect(Buffs.PowerSurge))
                     {
@@ -301,8 +301,8 @@ namespace XIVSlothComboX.Combos.PvE
                             return actionID;
 
                     // Piercing Talon Uptime Option
-                    if (IsEnabled(CustomComboPreset.DRG_ST_RangedUptime) && LevelChecked(PiercingTalon) && !InMeleeRange() && HasBattleTarget())
-                        return PiercingTalon;
+                    if (IsEnabled(CustomComboPreset.DRG_ST_RangedUptime) && LevelChecked(标枪PiercingTalon) && !InMeleeRange() && HasBattleTarget())
+                        return 标枪PiercingTalon;
 
                     if (HasEffect(Buffs.PowerSurge))
                     {
@@ -432,8 +432,8 @@ namespace XIVSlothComboX.Combos.PvE
                         return Variant.VariantRampart;
 
                     // Piercing Talon Uptime Option
-                    if (LevelChecked(PiercingTalon) && !InMeleeRange() && HasBattleTarget())
-                        return PiercingTalon;
+                    if (LevelChecked(标枪PiercingTalon) && !InMeleeRange() && HasBattleTarget())
+                        return 标枪PiercingTalon;
 
                     if (HasEffect(Buffs.PowerSurge))
                     {
@@ -531,8 +531,8 @@ namespace XIVSlothComboX.Combos.PvE
                         return Variant.VariantRampart;
 
                     // Piercing Talon Uptime Option
-                    if (IsEnabled(CustomComboPreset.DRG_AoE_RangedUptime) && LevelChecked(PiercingTalon) && !InMeleeRange() && HasBattleTarget())
-                        return PiercingTalon;
+                    if (IsEnabled(CustomComboPreset.DRG_AoE_RangedUptime) && LevelChecked(标枪PiercingTalon) && !InMeleeRange() && HasBattleTarget())
+                        return 标枪PiercingTalon;
 
                     if (HasEffect(Buffs.PowerSurge))
                     {
