@@ -2207,11 +2207,11 @@ namespace XIVSlothComboX.Combos
         PLD_ST_AdvancedMode_Open = 110034,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("战逃反应 Option", "Adds 战逃反应 to Advanced Mode.", PLD.JobID)]
+        [CustomComboInfo("战逃反应", "添加 战逃反应 到循环.", PLD.JobID)]
         PLD_ST_AdvancedMode_FoF = 11003,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("投盾 Option", "Adds 调停 to Advanced Mode if out of range.", PLD.JobID)]
+        [CustomComboInfo("投盾", "添加 投盾 到循环 在远离近战距离生效", PLD.JobID)]
         PLD_ST_AdvancedMode_ShieldLob = 11004,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
@@ -2247,7 +2247,7 @@ namespace XIVSlothComboX.Combos
         PLD_ST_AdvancedMode_Intervene = 11011,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
-        [CustomComboInfo("赎罪剑 Option", "Adds 赎罪剑 to Advanced Mode", PLD.JobID)]
+        [CustomComboInfo("赎罪剑 Option", "添加 赎罪剑 到自定义循环", PLD.JobID)]
         PLD_ST_AdvancedMode_Atonement = 11012,
 
         [ParentCombo(PLD_ST_AdvancedMode)]

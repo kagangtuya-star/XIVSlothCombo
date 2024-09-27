@@ -34,11 +34,7 @@ namespace XIVSlothComboX.Window.Tabs
             // ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.ParsedPurple);
             // ImGui.PushStyleColor(ImGuiCol.ButtonHovered, ImGuiColors.HealerGreen);
 
-            if (ImGui.Button("爱发电"))
-            {
-                Util.OpenLink("https://afdian.com/a/a_44451516");
-            }  
-            
+         
             if (ImGui.Button("有问题来这里提"))
             {
                 Util.OpenLink("https://docs.qq.com/sheet/DT2JDcGl0SGhKWUFD?tab=BB08J2");
@@ -49,10 +45,10 @@ namespace XIVSlothComboX.Window.Tabs
             // ImGui.PopStyleColor();
 
        
-            if (ImGui.Button("想来开发？点击这里"))
-            {
-                Util.OpenLink("https://qm.qq.com/q/eBaUVYbKpi");
-            }
+            // if (ImGui.Button("想来开发？点击这里"))
+            // {
+            //     Util.OpenLink("https://qm.qq.com/q/eBaUVYbKpi");
+            // }
 
             ImGui.Spacing();
             ImGui.Spacing();

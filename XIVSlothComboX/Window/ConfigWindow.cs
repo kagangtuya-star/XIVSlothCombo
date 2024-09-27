@@ -170,6 +170,12 @@ namespace XIVSlothComboX.Window
                         {
                             OpenWindow = OpenWindowEnum.About;
                         }
+                        
+                        ImGui.Spacing();
+                        if (ImGui.Selectable("爱发电", OpenWindow == OpenWindowEnum.AiFaDian))
+                        {
+                            OpenWindow = OpenWindowEnum.AiFaDian;
+                        }
 
 #if DEBUG
                         ImGui.Spacing();
@@ -208,8 +214,9 @@ namespace XIVSlothComboX.Window
                             case OpenWindowEnum.TimelineEdit:
                                 TimelineEditWindows.Draw();
                                 break;
-                            case OpenWindowEnum.TimelineMain:
-                                TimelineMainWindows.Draw();
+                            
+                            case OpenWindowEnum.AiFaDian:
+                                AiFaDianWindows.Draw();
                                 break;
                             default:
                                 break;
@@ -331,6 +338,7 @@ namespace XIVSlothComboX.Window
             Debug = 5,
             TimelineEdit = 6,
             TimelineMain = 7,
+            AiFaDian = 8,
         }
     }
 }

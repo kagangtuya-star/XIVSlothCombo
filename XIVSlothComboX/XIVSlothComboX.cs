@@ -600,27 +600,64 @@ namespace XIVSlothComboX
                         file.WriteLine($"START ENABLED FEATURES");
 
                         int i = 0;
+                        
+                        file.WriteLine($"测试咯{PresetExtensions.comboInfoCache.Count}");
+                        
+                        foreach (var customComboInfoAttribute in PresetExtensions.comboInfoCache)
+                        {
+                            file.WriteLine($"测试咯1{customComboInfoAttribute.Key} - {customComboInfoAttribute.Value.FancyName}");
+                        }
+                        
+                        foreach (var keyValuePair in ConfigWindow.groupedPresets)
+                        {
+                            
+                            file.WriteLine($"职业：{keyValuePair.Key} ");
+                            foreach (var valueTuple in keyValuePair.Value)
+                            {
+                                file.WriteLine($"{valueTuple.Preset}- {valueTuple.Info.FancyName}");
+                                foreach (var tuple in ConfigWindow.presetChildren[valueTuple.Preset])
+                                {
+                                    file.WriteLine($"   {tuple.Preset}- {tuple.Info.FancyName}");
+                                    ConfigWindow.presetChildren.TryGetValue(tuple.Preset, out var 小小);
+                                    foreach (var valueTuple1 in 小小)
+                                    {
+                                        file.WriteLine($"        {valueTuple1.Preset}- {valueTuple1.Info.FancyName}");
+                                    }
+                                    
+                                }
+
+                            }
+                        }
+                        
+                        
+                        file.WriteLine($"我操你妈1");
                         if (string.IsNullOrEmpty(specificJob))
                         {
+                            file.WriteLine($"我操你妈2");
                             foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.OrderBy(x => x))
                             {
                                 if (int.TryParse(preset.ToString(), out _))
                                 {
                                     i++;
+                                    
+                                    file.WriteLine($"_来了吗1_{(int)preset} - {preset}-{PresetExtensions.comboInfoCache[preset]}");
                                     continue;
                                 }
 
-                                file.WriteLine($"{(int)preset} - {preset}");
+                                file.WriteLine($"_来了吗2_{(int)preset} - {preset}-{PresetExtensions.comboInfoCache[preset]}");
                             }
                         }
-
                         else
                         {
+                            file.WriteLine($"我操你妈3");
                             foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.OrderBy(x => x))
                             {
                                 if (int.TryParse(preset.ToString(), out _))
                                 {
                                     i++;
+                                    
+                                    file.WriteLine($"_来了吗3_{(int)preset} - {preset}-{PresetExtensions.comboInfoCache[preset]}");
+                                    
                                     continue;
                                 }
 
@@ -628,8 +665,10 @@ namespace XIVSlothComboX
                                     || // Job identifier
                                     preset.ToString()[..3].ToLower() == "all"
                                     || // Adds in Globals
-                                    preset.ToString()[..3].ToLower() == "pvp") // Adds in PvP Globals
-                                    file.WriteLine($"{(int)preset} - {preset}");
+                                    preset.ToString()[..3].ToLower() == "pvp") 
+                                    // Adds in PvP Globals
+                                    file.WriteLine($"_来了吗5 {(int)preset} - {preset}");
+                                file.WriteLine($"_来了吗4_{(int)preset} - {preset}-{PresetExtensions.comboInfoCache[preset]}");
                             }
                         }
 
@@ -923,5 +962,9 @@ namespace XIVSlothComboX
 
             Service.Configuration.Save();
         }
+        
+        
     }
+    
+    
 }
