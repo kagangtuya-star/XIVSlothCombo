@@ -12,13 +12,13 @@
 ## 快捷指令 [参考](https://docs.qq.com/doc/DT0tjZm9JTFlqUGJY) [所以指令](https://github.com/44451516/XIVSlothCombo/blob/CN/res/SlothDebug.txt)
 ~~~
 //所有选项打钩
-/scombo setall
+/scombox setall
 //所有选项取消
-/scombo unsetall
+/scombox unsetall
 // 逻辑取反
-/scombo toggle SimpleBardFeature
+/scombox toggle SimpleBardFeature
 //启用xx 功能
-/scombo set GunbreakerNoMercyonST
+/scombox set GunbreakerNoMercyonST
 //取消xx 功能
-/scombo unset SimpleBardFeature
+/scombox unset SimpleBardFeature
 ~~~
