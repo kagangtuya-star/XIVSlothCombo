@@ -5,7 +5,7 @@
     "Punchline": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
     "Description": "Condenses combos and mutually exclusive abilities onto a single button - and then some.",
     "InternalName": "XIVSlothComboX",
-    "AssemblyVersion": "3.2.0.1",
+    "AssemblyVersion": "3.2.0.2",
     "Changelog": "Update APIX",
     "RepoUrl": "https://github.com/44451516/XIVSlothCombo/",
     "ApplicableVersion": "any",

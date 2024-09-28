@@ -1746,7 +1746,7 @@ namespace XIVSlothComboX.Window.Functions
 
 
             if (preset is CustomComboPreset.BLM_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, BLM.Config.BLM_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, BLM.Config.BLM_VariantCure, "HP% 低于", 200);
 
             if (preset is CustomComboPreset.BLM_Adv_Opener)
             {
@@ -1807,7 +1807,7 @@ namespace XIVSlothComboX.Window.Functions
                 );
 
             if (preset == CustomComboPreset.BRD_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, BRD.Config.BRD_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, BRD.Config.BRD_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -1816,7 +1816,7 @@ namespace XIVSlothComboX.Window.Functions
             #region DANCER
 
             if (preset == CustomComboPreset.DNC_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
+                UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "HP% 低于", 200);
 
 
             if (preset == CustomComboPreset.DNC_DT_Simple_SaberDance)
@@ -1890,7 +1890,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(1, 100, DRKPvP.Config.ShadowbringerThreshold, "HP% to be at or above to use Shadowbringer");
 
             if (preset == CustomComboPreset.DRK_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, DRK.Config.DRK_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, DRK.Config.DRK_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -1940,7 +1940,7 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.DRG_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, DRG.Config.DRG_Variant_Cure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, DRG.Config.DRG_Variant_Cure, "HP% 低于", 200);
 
             if (preset == CustomComboPreset.DRG_ST_Litany)
                 UserConfig.DrawSliderInt
@@ -2044,7 +2044,7 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.GNB_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, GNB.Config.GNB_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, GNB.Config.GNB_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -2122,7 +2122,7 @@ namespace XIVSlothComboX.Window.Functions
                 );
 
             if (preset == CustomComboPreset.MCH_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, MCH.Config.MCH_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, MCH.Config.MCH_VariantCure, "HP% 低于", 200);
 
             if (preset == CustomComboPreset.MCH_ST_Adv_QueenOverdrive)
             {
@@ -2174,7 +2174,7 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.MNK_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, MNK.Config.MNK_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, MNK.Config.MNK_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -2248,7 +2248,7 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.NIN_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, NIN.Config.NIN_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, NIN.Config.NIN_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -2305,7 +2305,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice(PLD.Config.PLD_Intervene_MeleeOnly, "近距离限定", "仅在近战范围内使用调停");
 
             if (preset == CustomComboPreset.PLD_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, PLD.Config.PLD_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, PLD.Config.PLD_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -2360,7 +2360,7 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset == CustomComboPreset.RPR_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, RPR.Config.RPR_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, RPR.Config.RPR_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -2592,7 +2592,7 @@ namespace XIVSlothComboX.Window.Functions
                 );
 
             if (preset is CustomComboPreset.RDM_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, RDM.Config.RDM_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, RDM.Config.RDM_VariantCure, "HP% 低于", 200);
 
             if (preset is CustomComboPreset.RDM_ST_MeleeCombo)
             {
@@ -2858,7 +2858,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(50, 85, SAM.Config.SAM_AoE_KenkiOvercapAmount, "Set the Kenki overcap amount for AOE combos.");
 
             if (preset == CustomComboPreset.SAM_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, SAM.Config.SAM_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, SAM.Config.SAM_VariantCure, "HP% 低于", 200);
 
             //PvP
             if (preset == CustomComboPreset.SAMPvP_BurstMode && enabled)
@@ -2950,7 +2950,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_AoE_WeaponStop, "Health % to stop Drawing Motif");
 
             if (preset == CustomComboPreset.PCT_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, PCT.Config.PCT_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, PCT.Config.PCT_VariantCure, "HP% 低于", 200);
 
             // PvP
             if (preset == CustomComboPreset.PCTPvP_BurstControl)
@@ -3206,7 +3206,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(4000, 9500, SMN.Config.SMN_Lucid, "MP小于等于此值时使用.", 150, SliderIncrements.Hundreds);
 
             if (preset == CustomComboPreset.SMN_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, SMN.Config.SMN_VariantCure, "HP% to be at or under", 200);
+                UserConfig.DrawSliderInt(1, 100, SMN.Config.SMN_VariantCure, "HP% 低于", 200);
 
             #endregion
 
@@ -3280,6 +3280,10 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawRadioButton(VPR.Config.VPR_ReawakenLegacyButton, "Replaces Reawaken", "Replaces Reawaken with Full Generation - Legacy combo.", 0);
                 UserConfig.DrawRadioButton(VPR.Config.VPR_ReawakenLegacyButton, "Replaces Steel Fangs", "Replaces Steel Fangs with Full Generation - Legacy combo.", 1);
             }
+            
+            if (preset == CustomComboPreset.VPR_Variant_Cure)
+                UserConfig.DrawSliderInt(1, 100, VPR.Config.VPR_VariantCure, "HP% 低于", 200);
+
 
             #endregion
 
@@ -3308,7 +3312,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(0, 2, WAR.Config.WAR_KeepOnslaughtCharges, "存几层充能？（0 = 用光，一层不留）");
 
             if (preset == CustomComboPreset.WAR_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, WAR.Config.WAR_VariantCure, "存几层充能？（0 = 用光，一层不留）", 200);
+                UserConfig.DrawSliderInt(1, 100, WAR.Config.WAR_VariantCure, "HP% 低于", 200);
 
             if (preset == CustomComboPreset.WAR_ST_StormsPath_FellCleave)
                 UserConfig.DrawSliderInt(50, 100, WAR.Config.WAR_FellCleaveGauge, "最小消耗仪表盘值");
