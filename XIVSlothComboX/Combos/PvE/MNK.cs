@@ -1,15 +1,12 @@
-using System;
 using System.Linq;
 using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Statuses;
 using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
-using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
-using XIVSlothComboX.Extensions;
 using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -140,10 +137,6 @@ namespace XIVSlothComboX.Combos.PvE
                     if (ActionReady(Brotherhood))
                         return Brotherhood;
 
-                    if (ActionReady(RiddleOfFire) &&
-                        CanDelayedWeave(ActionWatching.LastWeaponskill))
-                        return RiddleOfFire;
-
                     if (ActionReady(RiddleOfWind))
                         return RiddleOfWind;
 
@@ -243,8 +236,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (HasEffect(Buffs.WindsRumination) &&
                     LevelChecked(WindsReply) &&
-                    (HasEffect(Buffs.RiddleOfFire) ||
-                     GetBuffRemainingTime(Buffs.WindsRumination) < 4))
+                    HasEffect(Buffs.RiddleOfWind) &&
+                    GetBuffRemainingTime(Buffs.WindsRumination) < 4)
                     return WindsReply;
 
                 // Standard Beast Chakras
@@ -430,8 +423,8 @@ namespace XIVSlothComboX.Combos.PvE
                         IsEnabled(CustomComboPreset.MNK_STUseWindsReply) &&
                         HasEffect(Buffs.WindsRumination) &&
                         LevelChecked(WindsReply) &&
-                        (HasEffect(Buffs.RiddleOfFire) &&
-                         GetBuffRemainingTime(Buffs.WindsRumination) < 4))
+                        HasEffect(Buffs.RiddleOfWind) &&
+                        GetBuffRemainingTime(Buffs.WindsRumination) < 4)
                         return WindsReply;
                 }
 
