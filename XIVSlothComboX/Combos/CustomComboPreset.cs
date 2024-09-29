@@ -3923,7 +3923,7 @@ namespace XIVSlothComboX.Combos
         WAR_ST_StormsPath_PrimalRend = 18008,
 
         [ParentCombo(WAR_ST_StormsPath)]
-        [CustomComboInfo("破坏斧", "在破坏斧状态下，将破坏斧入到暴风斩连击", WAR.JobID)]
+        [CustomComboInfo("尽毁", "在破坏斧状态下，将破坏斧入到暴风斩连击", WAR.JobID)]
         WAR_ST_StormsPath_破坏斧 = 180081,
 
         [ParentCombo(WAR_AoE_Overpower)]

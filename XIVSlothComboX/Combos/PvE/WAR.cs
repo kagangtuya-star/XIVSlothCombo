@@ -37,7 +37,7 @@ namespace XIVSlothComboX.Combos.PvE
             Onslaught = 7386,
             
             原初激震 = 36923,
-            破坏斧 = 36925,
+            尽毁 = 36925,
             
             留空 = 999999;
 
@@ -209,9 +209,9 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         //破坏斧 7.0新增
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.破坏斧Pre) && 破坏斧.LevelChecked())
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.破坏斧Pre) && 尽毁.LevelChecked())
                         {
-                            return 破坏斧;
+                            return 尽毁;
                         }
 
                         if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(原初之魂InnerBeast))
@@ -356,6 +356,17 @@ namespace XIVSlothComboX.Combos.PvE
                             && LevelChecked(SteelCyclone)
                             && (gauge >= decimateGaugeSpend || HasEffect(Buffs.原初的解放InnerRelease) || HasEffect(Buffs.NascentChaos)))
                             return OriginalHook(SteelCyclone);
+                    }
+                    
+                    
+                    if (HasEffect(Buffs.破坏斧Pre) && 尽毁.LevelChecked())
+                    {
+                        return 尽毁;
+                    }
+
+                    if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_原初激震) && HasEffect(Buffs.原初激震Pre) && LevelChecked(原初激震))
+                    {
+                        return 原初激震;
                     }
 
                     if (comboTime > 0)
