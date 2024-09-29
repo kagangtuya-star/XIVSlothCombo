@@ -36,7 +36,7 @@ namespace XIVSlothComboX.Combos.PvE
             PrimalRend = 25753,
             Onslaught = 7386,
             
-            原初激震 = 36923,
+            原初激震 = 36924,
             尽毁 = 36925,
             
             留空 = 999999;
