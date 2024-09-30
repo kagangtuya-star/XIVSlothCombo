@@ -839,10 +839,14 @@ namespace XIVSlothComboX.Combos.PvE
                         //生还 2648
                         if (!HasEffect(418) && !HasEffect(2648))
                         {
-                            unsafe
+                            if (LocalPlayer?.CurrentMount?.Id == 0)
                             {
-                                ActionManager.Instance()->UseAction(ActionType.Action, SummonCarbuncle);
+                                unsafe
+                                {
+                                    ActionManager.Instance()->UseAction(ActionType.Action, SummonCarbuncle);
+                                }
                             }
+                            
                         }
 
                       
