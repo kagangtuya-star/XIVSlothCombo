@@ -832,14 +832,20 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
 
-                    if (carbyPresent == false && LocalPlayer.IsCasting == false)
+                    if (LocalPlayer != null && carbyPresent == false && LocalPlayer.IsCasting == false)
                     {
                         //7.0改成自动召唤了
-                        unsafe
+                        //生还 418
+                        //生还 2648
+                        if (!HasEffect(418) && !HasEffect(2648))
                         {
-                            ActionManager.Instance()->UseAction(ActionType.Action, SummonCarbuncle);
+                            unsafe
+                            {
+                                ActionManager.Instance()->UseAction(ActionType.Action, SummonCarbuncle);
+                            }
                         }
-                        // return SummonCarbuncle;
+
+                      
                     }
                 }
 

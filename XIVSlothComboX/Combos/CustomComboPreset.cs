@@ -848,6 +848,10 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(DNC_DT_SimpleMode)]
         [CustomComboInfo("最后一舞", "最后一舞加入循环", DNC.JobID, 2)]
         DNC_DT_Simple_最后一舞 = 4092,
+        
+        [ParentCombo(DNC_DT_SimpleMode)]
+        [CustomComboInfo("扇舞序", "扇舞序加入循环", DNC.JobID, 2)]
+        DNC_DT_Simple_FanDance = 4093,
 
         // [ParentCombo(DNC_DT_SimpleMode)]
         // [CustomComboInfo("舞步终结", "舞步终结加入循环", DNC.JobID, 2)]
@@ -1462,6 +1466,10 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
+            
+        [CustomComboInfo("命运之环", "命运之环续剑", GNB.JobID)]
+        GNB_FatedCircle = 7404,    
+            
 
         [CustomComboInfo("极光保护机制", "自身身上有极光，将极光变为原初的勇猛", GNB.JobID)]
         GNB_AuroraProtection = 7600,

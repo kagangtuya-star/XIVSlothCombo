@@ -101,7 +101,8 @@ namespace XIVSlothComboX.Combos.PvE
         public static class Config
         {
             public static UserInt DNC_VariantCure = new("DNC_VariantCure"),
-                                  DNC_ST_Tillana = new("DNC_ST_Tillana", 40);
+                                  DNC_ST_Tillana = new("DNC_ST_Tillana", 40),
+                                  DNC_FanDance1_Num = new("DNC_FanDance1_Num", 3);
 
             public const string DNCEspritThreshold_ST = "DNCEspritThreshold_ST"; // Single target Esprit threshold
             public const string DNCEspritThreshold_AoE = "DNCEspritThreshold_AoE"; // AoE Esprit threshold
@@ -222,7 +223,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (canWeave)
                     {
                         // 低等级循环
-                        if (!LevelChecked(扇舞急FanDance3) && gauge.Feathers > 0)
+                        if (!LevelChecked(扇舞急FanDance3) && gauge.Feathers > 0 && IsEnabled(CustomComboPreset.DNC_DT_Simple_FanDance))
                         {
                             return 扇舞序FanDance1;
                         }
@@ -231,7 +232,7 @@ namespace XIVSlothComboX.Combos.PvE
                         //舞娘初始等级为60 扇舞破FanDance2学习等级为56 所以永远为真
                         if (LevelChecked(扇舞破FanDance2))
                         {
-                            int minFeathers = LevelChecked(技巧舞步TechnicalStep) ? (GetCooldownRemainingTime(技巧舞步TechnicalStep) < 5f ? 3 : 3) : 0;
+                            int minFeathers = LevelChecked(技巧舞步TechnicalStep) ? Config.DNC_FanDance1_Num : 0;
 
                             if (LevelChecked(技巧舞步TechnicalStep))
                             {
@@ -252,10 +253,8 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
 
                                         if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
-                                            //注释掉 7.0提拉纳Tillana 可以双插了
-                                            // if (!HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance) && !WasLastAction(提拉纳Tillana))
                                         {
-                                            if (gauge.Feathers > 0)
+                                            if (gauge.Feathers > 0 && IsEnabled(CustomComboPreset.DNC_DT_Simple_FanDance))
                                             {
                                                 if (gauge.Feathers > minFeathers || (HasEffect(Buffs.技巧舞步结束TechnicalFinish)))
                                                 {
@@ -285,7 +284,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 if (IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
                                 {
-                                    if (gauge.Feathers >= 3)
+                                    if (gauge.Feathers >= 3 && IsEnabled(CustomComboPreset.DNC_DT_Simple_FanDance))
                                     {
                                         return 扇舞序FanDance1;
                                     }
@@ -361,7 +360,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return 技巧舞步TechnicalStep;
                         }
 
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD))
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD) && 技巧舞步TechnicalStep.LevelChecked())
                         {
                             if (技巧舞步倒计时 - GCD is > 0 and < 0.9f)
                             {

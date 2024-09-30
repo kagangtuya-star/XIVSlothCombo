@@ -1815,6 +1815,9 @@ namespace XIVSlothComboX.Window.Functions
 
             #region DANCER
 
+            if (preset == CustomComboPreset.DNC_DT_Simple_FanDance)
+                UserConfig.DrawSliderInt(0, 4, DNC.Config.DNC_FanDance1_Num, "保留多少层");
+            
             if (preset == CustomComboPreset.DNC_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "HP% 低于", 200);
 

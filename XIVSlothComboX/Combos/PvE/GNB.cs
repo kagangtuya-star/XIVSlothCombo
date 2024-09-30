@@ -62,7 +62,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 //超高速
                                 超高速ReadyToBlast = 2686,
                                 ReadyToReign = 3840,
-                                ReadyToRaze = 3839;
+                                ReadyToRaze命运之印预备 = 3839;
         }
 
         public static class Debuffs
@@ -1237,7 +1237,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 if (IsEnabled(CustomComboPreset.GNB_AoE_Bloodfest) && gauge.Ammo == 0 && ActionReady(血壤Bloodfest))
                                     return 血壤Bloodfest;
 
-                                if (LevelChecked(续剑Continuation) && (HasEffect(Buffs.ReadyToRaze)))
+                                if (LevelChecked(续剑Continuation) && (HasEffect(Buffs.ReadyToRaze命运之印预备)))
                                 {
                                     return OriginalHook(续剑Continuation);
                                 }
@@ -1298,6 +1298,24 @@ namespace XIVSlothComboX.Combos.PvE
                 protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 {
                     return (actionID is Aurora && HasEffect(Buffs.Aurora)) ? WAR.NascentFlash : actionID;
+                }
+            }
+            
+            
+            internal class GNB_FatedCircle : CustomCombo
+            {
+                protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.GNB_FatedCircle;
+
+                protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+                {
+                    if (CanDelayedWeavePlus(actionID))
+                    {
+                        if (LevelChecked(续剑Continuation) && (HasEffect(Buffs.ReadyToRaze命运之印预备)))
+                        {
+                            return OriginalHook(续剑Continuation);
+                        }
+                    }
+                    return 命运之环FatedCircle;
                 }
             }
         }
