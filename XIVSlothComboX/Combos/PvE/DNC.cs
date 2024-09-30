@@ -240,7 +240,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     && GetCooldownRemainingTime(进攻之探戈Devilment) > 0
                                     && GetCooldownRemainingTime(进攻之探戈Devilment) < 118)
                                 {
-                                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && GetCooldownRemainingTime(技巧舞步TechnicalStep) > 3)
+                                    if (IsEnabled(CustomComboPreset.DNC_DT_Simple_FanDance) && GetCooldownRemainingTime(技巧舞步TechnicalStep) > 3)
                                     {
                                         if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
                                         {
@@ -282,13 +282,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 }
 
-                                if (IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
-                                {
-                                    if (gauge.Feathers >= 3 && IsEnabled(CustomComboPreset.DNC_DT_Simple_FanDance))
-                                    {
-                                        return 扇舞序FanDance1;
-                                    }
-                                }
+                                // if (IsNotEnabled(CustomComboPreset.DNC_DT_Simple_TS))
+                                // {
+                                //     if (gauge.Feathers >= 3 && IsEnabled(CustomComboPreset.DNC_DT_Simple_FanDance))
+                                //     {
+                                //         return 扇舞序FanDance1;
+                                //     }
+                                // }
 
                                 if (HasEffect(Buffs.扇舞_急预备ThreeFoldFanDance))
                                 {
