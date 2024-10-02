@@ -12,13 +12,15 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using ImGuiNET;
 using Lumina.Excel.GeneratedSheets;
 using XIVSlothComboX.Combos;
+using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Extensions;
 using XIVSlothComboX.Services;
 using Status = Dalamud.Game.ClientState.Statuses.Status;
 using Action = Lumina.Excel.GeneratedSheets.Action;
-
+using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
 #if DEBUG
 namespace XIVSlothComboX.Window.Tabs
 {
@@ -245,9 +247,14 @@ namespace XIVSlothComboX.Window.Tabs
                 if (ImGui.CollapsingHeader("自定义"))
                 {
                     ImGui.TextUnformatted($"信息呢");
-                    ImGui.TextUnformatted($"{LocalPlayer}");
-                    ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
-                    ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");
+                    // ImGui.TextUnformatted($"{LocalPlayer}");
+                    // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
+                    // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");
+                    
+                    ImGui.TextUnformatted($"{DRK.血溅Bloodspiller.OriginalHook()}");
+                    ImGui.TextUnformatted($"{DRK.血乱层数()}");
+                    ImGui.TextUnformatted($"{GetCooldownRemainingTime(DRK.血乱Delirium) + GetCooldownRemainingTime(DRK.血溅Bloodspiller)}");
+                    ImGui.TextUnformatted($"{HasEffect(GNB.Buffs.ReadyToRaze命运之印预备)}");
                 }
             }
 

@@ -44,6 +44,7 @@ namespace XIVSlothComboX.Combos.PvE
                           超高速Hypervelocity = 25759,
                           粗分斩RoughDivide = 16154,
                           闪雷弹LightningShot = 16143,
+                          命运之印 = 36936,
                           师心连1FatedBrand = 36937,
                           师心连2ReignOfBeasts = 36938,
                           师心连3NobleBlood = 36939;
@@ -1308,15 +1309,16 @@ namespace XIVSlothComboX.Combos.PvE
 
                 protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 {
-                    if (actionID == 恶魔切DemonSlice)
+                    if (actionID == 命运之环FatedCircle)
                     {
-                        if (CanDelayedWeavePlus(actionID))
+                        if (CanSpellWeavePlus(actionID))
                         {
-                            if (LevelChecked(续剑Continuation) && (HasEffect(Buffs.ReadyToRaze命运之印预备)))
+                            if (LevelChecked(命运之印) && (HasEffect(Buffs.ReadyToRaze命运之印预备)))
                             {
                                 return OriginalHook(续剑Continuation);
                             }
                         }
+                       
                         return 命运之环FatedCircle;
                     }
                     return actionID;
