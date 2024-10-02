@@ -215,6 +215,10 @@ namespace XIVSlothComboX.Window
                                 TimelineEditWindows.Draw();
                                 break;
                             
+                            case OpenWindowEnum.TimelineMain:
+                                TimelineMainWindows.Draw();
+                                break;
+                            
                             case OpenWindowEnum.AiFaDian:
                                 AiFaDianWindows.Draw();
                                 break;

@@ -342,13 +342,22 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     return true;
 
             if (CurrentState == OpenerState.InOpener)
+            {
                 switch (selectedOpener)
                 {
-                    case 0 when DoLlOpener(ref actionID):
-
-                    case 1 when DoSlOpener(ref actionID):
+                    case 0:
+                    {
+                        DoLlOpener(ref actionID);
                         return true;
+                    }
+                    case 1:
+                    {
+                        DoSlOpener(ref actionID);
+                        return true;
+                    }
                 }
+            }
+         
 
             if (!InCombat())
             {

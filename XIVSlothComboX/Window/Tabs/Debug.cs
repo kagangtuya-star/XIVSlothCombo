@@ -246,15 +246,16 @@ namespace XIVSlothComboX.Window.Tabs
                 
                 if (ImGui.CollapsingHeader("自定义"))
                 {
-                    ImGui.TextUnformatted($"信息呢");
+                    // ImGui.TextUnformatted($"信息呢");
                     // ImGui.TextUnformatted($"{LocalPlayer}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");
                     
-                    ImGui.TextUnformatted($"{DRK.血溅Bloodspiller.OriginalHook()}");
-                    ImGui.TextUnformatted($"{DRK.血乱层数()}");
-                    ImGui.TextUnformatted($"{GetCooldownRemainingTime(DRK.血乱Delirium) + GetCooldownRemainingTime(DRK.血溅Bloodspiller)}");
-                    ImGui.TextUnformatted($"{HasEffect(GNB.Buffs.ReadyToRaze命运之印预备)}");
+                    // ImGui.TextUnformatted($"{DRK.血溅Bloodspiller.OriginalHook()}");
+                    // ImGui.TextUnformatted($"{DRK.血乱层数()}");
+                    // ImGui.TextUnformatted($"{GetCooldownRemainingTime(DRK.血乱Delirium) + GetCooldownRemainingTime(DRK.血溅Bloodspiller)}");
+                    // ImGui.TextUnformatted($"{HasEffect(GNB.Buffs.ReadyToRaze命运之印预备)}");
+                    ImGui.TextUnformatted($"安魂祈祷Requiescat:{PLD.安魂祈祷Requiescat.OriginalHook().ActionReady()}");
                 }
             }
 

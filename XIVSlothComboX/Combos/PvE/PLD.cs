@@ -161,7 +161,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (HasBattleTarget())
                     {
-                        if (CanDelayedWeavePlus(actionID, 2.5f, 0.1f))
+                        if (CanSpellWeavePlus(actionID,  0.5f))
                         {
                             if (战逃反映判断(lastComboActionID, comboTime) && LocalPlayer.CurrentMp >= 3000)
                                 return OriginalHook(战逃反应FightOrFlight);
@@ -178,6 +178,16 @@ namespace XIVSlothComboX.Combos.PvE
                                     return OriginalHook(安魂祈祷Requiescat);
                                 }
                             }
+                            
+                            //荣誉之剑
+                            if (安魂祈祷Requiescat.OriginalHook().ActionReady() && 安魂祈祷Requiescat.ActionReady()==false )
+                            {
+                                if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Requiescat))
+                                {
+                                    return 安魂祈祷Requiescat.OriginalHook();
+                                }
+                            }
+
 
 
                             Status? sustainedDamage = FindTargetEffect(Variant.Debuffs.SustainedDamage);
@@ -569,6 +579,20 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(安魂祈祷Requiescat);
                         }
                     }
+                    
+                    if (安魂祈祷Requiescat.OriginalHook().ActionReady())
+                    {
+                        if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) && WasLastAction(战逃反应FightOrFlight))
+                        {
+                            return OriginalHook(安魂祈祷Requiescat);
+                        }
+
+                        if (IsEnabled(CustomComboPreset.PLD_AoE_AdvancedMode_Requiescat) && HasEffect(Buffs.FightOrFlight))
+                        {
+                            return OriginalHook(安魂祈祷Requiescat);
+                        }
+                    }
+                    
 
 
                     // Actions under FoF burst
