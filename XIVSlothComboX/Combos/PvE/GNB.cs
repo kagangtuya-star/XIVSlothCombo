@@ -1308,14 +1308,18 @@ namespace XIVSlothComboX.Combos.PvE
 
                 protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 {
-                    if (CanDelayedWeavePlus(actionID))
+                    if (actionID == 恶魔切DemonSlice)
                     {
-                        if (LevelChecked(续剑Continuation) && (HasEffect(Buffs.ReadyToRaze命运之印预备)))
+                        if (CanDelayedWeavePlus(actionID))
                         {
-                            return OriginalHook(续剑Continuation);
+                            if (LevelChecked(续剑Continuation) && (HasEffect(Buffs.ReadyToRaze命运之印预备)))
+                            {
+                                return OriginalHook(续剑Continuation);
+                            }
                         }
+                        return 命运之环FatedCircle;
                     }
-                    return 命运之环FatedCircle;
+                    return actionID;
                 }
             }
         }
