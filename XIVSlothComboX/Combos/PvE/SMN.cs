@@ -839,7 +839,7 @@ namespace XIVSlothComboX.Combos.PvE
                         //生还 2648
                         if (!HasEffect(418) && !HasEffect(2648))
                         {
-                            if (LocalPlayer?.CurrentMount?.Id == 0)
+                            if (LocalPlayer?.CurrentMount==null)
                             {
                                 unsafe
                                 {

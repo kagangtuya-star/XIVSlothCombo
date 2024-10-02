@@ -241,6 +241,14 @@ namespace XIVSlothComboX.Window.Tabs
                 {
                     ImGui.TextUnformatted($"{string.Join("\n", Service.Configuration.ActiveBLUSpells.Select(x => ActionWatching.GetActionName(x)).OrderBy(x => x))}");
                 }
+                
+                if (ImGui.CollapsingHeader("自定义"))
+                {
+                    ImGui.TextUnformatted($"信息呢");
+                    ImGui.TextUnformatted($"{LocalPlayer}");
+                    ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
+                    ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");
+                }
             }
 
             else
