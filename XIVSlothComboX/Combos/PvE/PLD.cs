@@ -264,14 +264,13 @@ namespace XIVSlothComboX.Combos.PvE
                                 //晚一点放 等安魂祈祷放了先
                                 if (GetCooldownRemainingTime(安魂祈祷Requiescat) > 40)
                                 {
-                                    if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn))
+                                    if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn) && InMeleeRange5())
                                     {
                                         return 厄运流转CircleOfScorn;
                                     }
 
 
-                                    if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_SpiritsWithin) &&
-                                        ActionReady(OriginalHook(深奥之灵SpiritsWithin)))
+                                    if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_SpiritsWithin) && ActionReady(OriginalHook(深奥之灵SpiritsWithin)) && InMeleeRange3())
                                     {
                                         return OriginalHook(深奥之灵SpiritsWithin);
                                     }
@@ -290,7 +289,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_GoringBlade) && ActionReady(沥血剑GoringBlade) &&
-                                HasEffect(Buffs.沥血剑BUFFGoringBladeReady) && InMeleeRange())
+                                HasEffect(Buffs.沥血剑BUFFGoringBladeReady) && InMeleeRange3())
                             {
                                 return 沥血剑GoringBlade;
                             }
@@ -391,10 +390,10 @@ namespace XIVSlothComboX.Combos.PvE
                         // 没用启动战逃反应
                         if (CanSpellWeavePlus(actionID, 0.3f) && IsNotEnabled(CustomComboPreset.PLD_ST_AdvancedMode_FoF) && InMeleeRange())
                         {
-                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn))
+                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn) && InMeleeRange5())
                                 return 厄运流转CircleOfScorn;
 
-                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_SpiritsWithin) && ActionReady(OriginalHook(深奥之灵SpiritsWithin)))
+                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_SpiritsWithin) && ActionReady(OriginalHook(深奥之灵SpiritsWithin)) && InMeleeRange3())
                                 return OriginalHook(深奥之灵SpiritsWithin);
                         }
 
