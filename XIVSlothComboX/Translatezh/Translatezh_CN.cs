@@ -544,21 +544,15 @@ public class Translatezh_CN
         {"Don't use Philosophia when under the effect of someone's Philosophia" , "等待翻译"  },
         #endregion
         #endregion
-        #region SAMURAI
-        #region Yukikaze/Kasha Combos
-        {"Yukikaze Combo" , "雪风连击"  },
-        {"Replace Yukikaze with its combo chain." , "将雪风替换为其连击链。"  },
-        {"Kasha Combo" , "花车连击"  },
-        {"Replace Kasha with its combo chain." , "将花车替换为其连击链。"  },
-        {"Gekko Combo" , "月光连击"  },
-        {"Replace Gekko with its combo chain." , "将月光替换为其连击链。"  },
-        #endregion
-        #region Simple ST
-        {"Replaces Gekko with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "将月光替换为一键全单体循环。\n这对新手来说是理想的选择。"  },
+         #region SAMURAI
+        #region  Simple ST
+        {"Replaces Hakaze/Gyofu with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "等待翻译"  },
         #endregion
         #region Advanced ST
-        {"Replaces Gekko with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "将月光替换为一键全单体循环。\n如果你想自定义循环，这些功能是理想的选择。"  },
+        {"Replaces Hakaze/Gyofu with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "等待翻译"  },
+        {"Yukikaze Combo" , "雪风连击"  },
         {"Adds Yukikaze combo to the rotation." , "将雪风连击添加到循环中。"  },
+        {"Kasha Combo" , "花车连击"  },
         {"Adds Kasha combo to the rotation." , "将花车连击添加到循环中。"  },
         {"Shinten Option" , "震天选项"  },
         {"Adds Shinten to the rotation" , "将震天添加到循环中。"  },
@@ -588,36 +582,36 @@ public class Translatezh_CN
         {"Adds Enpi to the rotation when you are out of range." , "当你超出范围时将燕飞添加到循环中。"  },
         {"Adds True North if Meikyo Shisui's buff is on you." , "如果你有明镜止水的增益效果，则添加真北。"  },
         #endregion
-        #region AoE Oka Combo
+        #region Simple AoE
+        {"Replaces Fuga/Fuko with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "等待翻译"  },
+        #endregion
+        #region AoE Combos
+        {"Replaces Fuga/Fuko with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "将风雅替换为一键全AoE循环。\n如果你想自定义循环，这些功能是理想的选择。"  },
         {"Oka Combo" , "冈连击"  },
+        {"Adds Oka combo to the rotation." , "将冈连击添加到循环中。"  },
+        {"Kyuten Option" , "等待翻译"  },
+        {"Adds Kyuten to the rotation." , "将九天添加到循环中。"  },
+        {"Adds Tenka Goken, Midare: Setsugekka, and Kaeshi: Goken when ready and when you're not moving to the rotation." , "在准备好且不移动时，将天下五剑、乱雪月花和返五剑添加到循环中。"  },
+        {"Adds Ogi Namikiri and Kaeshi: Namikiri when ready and when you're not moving to the rotation." , "在准备好且不移动时，将奥义浪切和返浪切添加到循环中。"  },
+        {"Adds Zanshin to the rotation." , "将残心添加到循环中。"  },
+        {"Adds Shoha when you have 3 meditation stacks." , "在你有三个冥想层时添加照破。"  },
+        {"Guren Option" , "等待翻译"  },
+        {"Adds Guren to the rotation." , "将红莲添加到循环中。"  },
+        {"Hagakure Option" , "等待翻译"  },
+        {"Adds Hagakure to the rotation when there are three Sen." , "在有三个闪时将叶隐添加到循环中。"  },
+        #endregion
+        #region Yukikaze/Kasha/Gekko Combos
+        {"Replace Yukikaze with its combo chain." , "将雪风替换为其连击链。"  },
+        {"Replace Kasha with its combo chain." , "将花车替换为其连击链。"  },
+        {"Gekko Combo" , "月光连击"  },
+        {"Replace Gekko with its combo chain." , "将月光替换为其连击链。"  },
+        #endregion
+        #region AoE Oka Combo
         {"Replace Oka with its combo chain." , "将冈替换为其连击链。"  },
         {"Oka Two Target Rotation Feature" , "冈双目标循环功能"  },
         {"Adds the Yukikaze combo, Mangetsu combo, Senei, Shinten, and Shoha to Oka combo.\nUsed for two targets only and when Lv86 and above." , "将雪风连击、满月连击、千影、侍天和照破加入冈连击中。\n仅适用于两个目标且等级在86级及以上。"  },
         {"Mangetsu Combo" , "满月连击"  },
         {"Replace Mangetsu with its combo chain." , "将满月替换为其连击链。"  },
-        #endregion
-        #region Simple AoE
-        {"Replaces Fugo/Fuko with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "将风雅替换为一键全单体循环。\n这对新手来说是理想的选择。"  },
-        #endregion
-        #region AoE Combos
-        {"Replaces Fuga/Fuko with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "将风雅替换为一键全AoE循环。\n如果你想自定义循环，这些功能是理想的选择。"  },
-        {"Adds Oka combo to the rotation." , "将冈连击添加到循环中。"  },
-        {"Kyuten" , "九天"  },
-        {"Adds Kyuten to the rotation." , "将九天添加到循环中。"  },
-        {"Iaijutsu" , "居合术"  },
-        {"Adds Tenka Goken, Midare: Setsugekka, and Kaeshi: Goken when ready and when you're not moving to the rotation." , "在准备好且不移动时，将天下五剑、乱雪月花和返五剑添加到循环中。"  },
-        {"Ikishoten" , "生生发"  },
-        {"Ogi Namikiri" , "奥义浪切"  },
-        {"Adds Ogi Namikiri and Kaeshi: Namikiri when ready and when you're not moving to the rotation." , "在准备好且不移动时，将奥义浪切和返浪切添加到循环中。"  },
-        {"Zanshin" , "残心"  },
-        {"Adds Zanshin to the rotation." , "将残心添加到循环中。"  },
-        {"Shoha" , "照破"  },
-        {"Adds Shoha when you have 3 meditation stacks." , "在你有三个冥想层时添加照破。"  },
-        {"Guren" , "红莲"  },
-        {"Adds Guren to the rotation." , "将红莲添加到循环中。"  },
-        {"Hagakure" , "叶隐"  },
-        {"Adds Hagakure to the rotation when there are three Sen." , "在有三个闪时将叶隐添加到循环中。"  },
-        {"Meikyo Shisui" , "等待翻译"  },
         #endregion
         #region Cooldown Features
         {"Jinpu/Shifu Feature" , "阵风/士风功能"  },
@@ -651,7 +645,7 @@ public class Translatezh_CN
         {"Ikishoten Namikiri Feature" , "意气风发浪切功能"  },
         {"Replace Ikishoten with Ogi Namikiri and then Kaeshi Namikiri when available.\nIf you have full Meditation stacks, Ikishoten becomes Shoha while you have Ogi Namikiri ready." , "如果可用，用奥义浪切替换意气风发，然后再用返浪切。\n如果你拥有满的冥想层数，意气风发将变成照破，同时你准备好使用奥义浪切。"  },
         #endregion
-        #region variant
+        #region variant 
         #endregion
         #endregion
         #region SCHOLAR
