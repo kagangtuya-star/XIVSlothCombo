@@ -110,7 +110,8 @@ namespace XIVSlothComboX.Services
         internal static WindowSystem WindowSystem { get; set; } = null!;   
         
         internal static IconManager IconManager { get; set; } = null!;
-        
+        [PluginService]
+        internal static IDutyState DutyState { get; private set; } = null!;
         
     }
 }

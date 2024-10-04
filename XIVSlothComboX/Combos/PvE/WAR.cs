@@ -222,11 +222,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 return PrimalRend;
                         }
 
-                        //破坏斧 7.0新增
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.破坏斧Pre) && 尽毁.LevelChecked())
-                        {
-                            return 尽毁;
-                        }
+                      
 
                         if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(原初之魂InnerBeast))
                         {
@@ -241,6 +237,12 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (HasEffect(Buffs.NascentChaos) && !InnerChaos.LevelChecked())
                                 return OriginalHook(Decimate);
+                        }
+                        
+                        //破坏斧 7.0新增
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.破坏斧Pre) && 尽毁.LevelChecked())
+                        {
+                            return 尽毁;
                         }
                     }
 

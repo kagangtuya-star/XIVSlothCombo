@@ -1778,7 +1778,19 @@ namespace XIVSlothComboX.Window.Functions
             #endregion
 
             // ====================================================================================
+            
+            if (preset is CustomComboPreset.BRD_ST_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == BRD.JobID);
 
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
             #region BARD
 
             if (preset == CustomComboPreset.BRD_Adv_RagingJaws)
@@ -2149,6 +2161,20 @@ namespace XIVSlothComboX.Window.Functions
 
             #region MONK
 
+            
+            if (preset is CustomComboPreset.MNK_ST_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == MNK.JobID);
+
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
+            
             if (preset == CustomComboPreset.MNK_ST_ComboHeals)
             {
                 UserConfig.DrawSliderInt(0, 100, MNK.Config.MNK_ST_SecondWind_Threshold,
@@ -2316,6 +2342,19 @@ namespace XIVSlothComboX.Window.Functions
 
             #region REAPER
 
+            if (preset is CustomComboPreset.RPR_ST_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == RPR.JobID);
+
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
+            
             if (preset == CustomComboPreset.RPR_ST_AdvancedMode && enabled)
             {
                 UserConfig.DrawHorizontalRadioButton(RPR.Config.RPR_Positional, "优先背部[Rear First]", "First positional: Gallows.", 0);
@@ -2615,8 +2654,8 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.SGE_ST_DPS)
                 UserConfig.DrawAdditionalBoolChoice
                 (
-                    SGE.Config.SGE_ST_DPS_Adv, $"Apply all selected options to {SGE.Dosis2.ActionName()}",
-                    $"{SGE.Dosis.ActionName()} & {SGE.Dosis3.ActionName()} will behave normally."
+                    SGE.Config.SGE_ST_DPS_Adv, $"[有BUG不要用]将所有选定选项应用于 {SGE.Dosis2.ActionName()}",
+                    $"{SGE.Dosis.ActionName()} & {SGE.Dosis3.ActionName()} 将正常运行。"
                 );
 
             if (preset is CustomComboPreset.SGE_ST_DPS_EDosis)
@@ -2834,15 +2873,27 @@ namespace XIVSlothComboX.Window.Functions
             // ====================================================================================
 
             #region SAMURAI
+            if (preset is CustomComboPreset.SAM_ST_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == SAM.JobID);
 
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
+            
             if (preset == CustomComboPreset.SAM_ST_CDs_Iaijutsu)
             {
                 UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_ST_Higanbana_Threshold, "Stop using Higanbana on targets below this HP % (0% = always use).", 150, SliderIncrements.Ones);
             }
             if (preset == CustomComboPreset.SAM_ST_ComboHeals)
             {
-                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_STSecondWindThreshold, "HP percent threshold to use Second Wind below (0 = Disabled)", 150, SliderIncrements.Ones);
-                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_STBloodbathThreshold, "HP percent threshold to use Bloodbath (0 = Disabled)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_STSecondWindThreshold, "使用内丹的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 100, SAM.Config.SAM_STBloodbathThreshold, "使用浴血的生命值百分比临界点 (0 = 禁用)", 150, SliderIncrements.Ones);
             }
 
             if (preset == CustomComboPreset.SAM_AoE_ComboHeals)
@@ -2911,6 +2962,19 @@ namespace XIVSlothComboX.Window.Functions
 
             #region PICTOMANCER
 
+            if (preset is CustomComboPreset.PCT_ST_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == PCT.JobID);
+
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
+            
             if (preset == CustomComboPreset.CombinedAetherhues)
             {
                 UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Both Single Target & AoE", $"Replaces both {PCT.FireInRed.ActionName()} & {PCT.FireIIinRed.ActionName()}", 0);

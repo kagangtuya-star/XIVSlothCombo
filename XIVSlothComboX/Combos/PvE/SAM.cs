@@ -119,6 +119,63 @@ namespace XIVSlothComboX.Combos.PvE
                 SAM_Oka_KenkiOvercap = new(nameof(SAM_Oka_KenkiOvercap)),
                 SAM_Mangetsu_KenkiOvercap = new(nameof(SAM_Mangetsu_KenkiOvercap));
         }
+        internal class SAM_ST_CustomMode : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_ST_CustomMode;
+
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID is Jinpu)
+                {
+                    if (CustomTimelineIsEnable())
+                    {
+                        double? seconds = -9999d;
+
+                        if (InCombat())
+                        {
+                            seconds = CombatEngageDuration().TotalSeconds;
+                        }
+                        else
+                        {
+                            var timeRemaining = Countdown.TimeRemaining();
+                            if (timeRemaining != null)
+                            {
+                                seconds = -timeRemaining;
+                            }
+                        }
+
+                        foreach (var customAction in 药品轴)
+                        {
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                Useitem(customAction.ActionId);
+                            }
+                        }
+
+
+                        foreach (var customAction in 时间轴)
+                        {
+                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                return customAction.ActionId;
+                            }
+                        }
+
+
+                        int index = ActionWatching.CustomList.Count;
+                        if (index < 序列轴.Count)
+                        {
+                            var newActionId = 序列轴[index].ActionId;
+                            return newActionId;
+                        }
+                    }
+                }
+
+
+                return actionID;
+            }
+        }
 
         internal class SAM_ST_YukikazeCombo : CustomCombo
         {

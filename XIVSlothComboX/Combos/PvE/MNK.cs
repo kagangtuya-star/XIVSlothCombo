@@ -4,9 +4,11 @@ using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Statuses;
 using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
+using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Extensions;
 using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -81,6 +83,64 @@ namespace XIVSlothComboX.Combos.PvE
             MNK_AoE_Bloodbath_Threshold = new("MNK_AoE_BloodbathThreshold", 40),
             MNK_SelectedOpener = new("MNK_SelectedOpener"),
             MNK_VariantCure = new("MNK_Variant_Cure");
+    }
+
+    internal class MNK_ST_Custom : CustomCombo
+    {
+        protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MNK_ST_CustomMode;
+
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID is TrueStrike)
+            {
+                if (CustomTimelineIsEnable())
+                {
+                    double? seconds = -9999d;
+
+                    if (InCombat())
+                    {
+                        seconds = CombatEngageDuration().TotalSeconds;
+                    }
+                    else
+                    {
+                        var timeRemaining = Countdown.TimeRemaining();
+                        if (timeRemaining != null)
+                        {
+                            seconds = -timeRemaining;
+                        }
+                    }
+
+                    foreach (var customAction in 药品轴)
+                    {
+                        if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                        {
+                            Useitem(customAction.ActionId);
+                        }
+                    }
+
+
+                    foreach (var customAction in 时间轴)
+                    {
+                        if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                        {
+                            return customAction.ActionId;
+                        }
+                    }
+
+
+                    int index = ActionWatching.CustomList.Count;
+                    if (index < 序列轴.Count)
+                    {
+                        var newActionId = 序列轴[index].ActionId;
+                        return newActionId;
+                    }
+                }
+            }
+
+
+            return actionID;
+        }
     }
 
     internal class MNK_ST_SimpleMode : CustomCombo

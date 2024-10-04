@@ -619,7 +619,13 @@ namespace XIVSlothComboX.Combos
         #endregion
 
         #region BARD
+        #region 自定义循环
 
+        [ReplaceSkill(BRD.StraightShot)]
+        [CustomComboInfo("自定义循环", "自定义循环", BRD.JobID)]
+        BRD_ST_CustomMode = 30361,
+
+        #endregion
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
         [ConflictingCombos(BRD_ST_AdvMode)]
         [CustomComboInfo("Simple Mode - Single Target", "Adds every single target ability to one button,\nIf there are DoTs on target, will try to maintain their uptime.", BRD.JobID, 1)]
@@ -1315,7 +1321,7 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(GNB.残暴弹BrutalShell)]
         [CustomComboInfo
-            ("自定义循环", "自定义循环", BLM.JobID, -10)]
+            ("自定义循环", "自定义循环", GNB.JobID, -10)]
         GNB_Advanced_CustomMode = 69999,
 
 
@@ -1710,6 +1716,14 @@ namespace XIVSlothComboX.Combos
 
         #region MONK
 
+        #region 自定义循环
+
+        [ReplaceSkill(MNK.TrueStrike)]
+        [CustomComboInfo("自定义循环", "自定义循环", MNK.JobID)]
+        MNK_ST_CustomMode = 90041,
+
+        #endregion
+        
         [ReplaceSkill([MNK.Bootshine, MNK.LeapingOpo])]
         [ConflictingCombos(MNK_ST_BeastChakras, MNK_ST_AdvancedMode)]
         [CustomComboInfo("Simple Mode - Single Target", "Replaces Bootshine with a one - button full single target rotation.\nThis is ideal for newcomers to the job.", MNK.JobID)]
@@ -2333,6 +2347,13 @@ namespace XIVSlothComboX.Combos
 
         #region REAPER
 
+        #region 自定义循环
+
+        [ReplaceSkill(RPR.WaxingSlice)]
+        [CustomComboInfo("自定义循环", "自定义循环", RPR.JobID)]
+        RPR_ST_CustomMode = 1200001,
+
+        #endregion
         #region Simple ST
 
         [ReplaceSkill(RPR.Slice)]
@@ -3073,8 +3094,14 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-         #region SAMURAI
+        #region SAMURAI
+        #region 自定义循环
 
+        [ReplaceSkill(SAM.Jinpu)]
+        [CustomComboInfo("自定义循环", "自定义循环", SAM.JobID)]
+        SAM_ST_CustomMode = 150021,
+
+        #endregion
         #region  Simple ST
 
         [ReplaceSkill(SAM.Hakaze, SAM.Gyofu)]
@@ -4217,6 +4244,13 @@ namespace XIVSlothComboX.Combos
 
         #region PICTOMANCER
 
+        #region 自定义循环
+
+        [ReplaceSkill(All.Sleep)]
+        [CustomComboInfo("自定义循环", "自定义循环", PCT.JobID)]
+        PCT_ST_CustomMode = 2000001,
+
+        #endregion
         [ReplaceSkill(PCT.FireInRed)]
         [ConflictingCombos(CombinedAetherhues, PCT_ST_AdvancedMode)]
         [CustomComboInfo("Simple Mode - Single Target", "Consolidates the single target rotation into one button, ideal for newcomers.", PCT.JobID)]
