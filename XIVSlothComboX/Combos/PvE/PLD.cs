@@ -218,14 +218,14 @@ namespace XIVSlothComboX.Combos.PvE
                                 if (GetCooldownRemainingTime(战逃反应FightOrFlight) > 20 &&
                                     GetCooldownRemainingTime(战逃反应FightOrFlight) < 40)
                                 {
-                                    if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn))
+                                    if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_CircleOfScorn) && ActionReady(厄运流转CircleOfScorn)&& InMeleeRange5())
                                     {
                                         return 厄运流转CircleOfScorn;
                                     }
 
 
                                     if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_SpiritsWithin) &&
-                                        ActionReady(OriginalHook(深奥之灵SpiritsWithin)))
+                                        ActionReady(OriginalHook(深奥之灵SpiritsWithin))&& InMeleeRange3())
                                     {
                                         return OriginalHook(深奥之灵SpiritsWithin);
                                     }
