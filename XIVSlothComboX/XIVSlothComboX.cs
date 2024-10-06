@@ -188,6 +188,7 @@ namespace XIVSlothComboX
             KillRedundantIDs();
             HandleConflictedCombos();
             Service.IconManager = new IconManager();
+            
         }
 
         private void OnDutyRecommenced(object? sender, ushort e)
