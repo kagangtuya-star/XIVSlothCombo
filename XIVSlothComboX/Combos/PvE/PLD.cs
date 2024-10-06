@@ -246,14 +246,22 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (!InMeleeRange() && !HasEffect(Buffs.Requiescat))
                         {
-                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_ShieldLob)
-                                && 投盾ShieldLob.LevelChecked()
-                                && ((圣灵HolySpirit.LevelChecked() && GetResourceCost(圣灵HolySpirit) > LocalPlayer.CurrentMp)
-                                    || (!圣灵HolySpirit.LevelChecked())
-                                    || IsMoving))
+                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_NoMeleeRange_HolySpirit))
                             {
-                                return 投盾ShieldLob;
+                                if ((圣灵HolySpirit.LevelChecked() && GetResourceCost(圣灵HolySpirit) > LocalPlayer.CurrentMp)&& !IsMoving)
+                                {
+                                    return 圣灵HolySpirit;
+                                }
                             }
+                            
+                            if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_NoMeleeRange_ShieldLob))
+                            {
+                                if (投盾ShieldLob.LevelChecked())
+                                {
+                                    return 投盾ShieldLob;
+                                }
+                            }
+                            
                         }
 
 

@@ -2214,9 +2214,18 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("战逃反应", "添加 战逃反应 到循环.", PLD.JobID)]
         PLD_ST_AdvancedMode_FoF = 11003,
 
+        
         [ParentCombo(PLD_ST_AdvancedMode)]
+        [CustomComboInfo("远离选项", "下面子选项在远离的时候且没有[安魂祈祷buff]生效", PLD.JobID)]
+        PLD_ST_AdvancedMode_NoMeleeRange = 11004,
+        
+        [ParentCombo(PLD_ST_AdvancedMode_NoMeleeRange)]
         [CustomComboInfo("投盾", "添加 投盾 到循环 在远离近战距离生效", PLD.JobID)]
-        PLD_ST_AdvancedMode_ShieldLob = 11004,
+        PLD_ST_AdvancedMode_NoMeleeRange_ShieldLob = 110041,
+        
+        [ParentCombo(PLD_ST_AdvancedMode_NoMeleeRange)]
+        [CustomComboInfo("圣灵", "添加 圣灵 到循环 在远离近战距离生效", PLD.JobID)]
+        PLD_ST_AdvancedMode_NoMeleeRange_HolySpirit = 110042,
 
         [ParentCombo(PLD_ST_AdvancedMode)]
         [CustomComboInfo("厄运流转选项", "添加 厄运流转 到自定义循环.", PLD.JobID)]
