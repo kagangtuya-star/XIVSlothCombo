@@ -248,7 +248,7 @@ namespace XIVSlothComboX.Window.Tabs
                 if (ImGui.CollapsingHeader("自定义"))
                 {
                     // ImGui.TextUnformatted($"信息呢");
-                    // ImGui.TextUnformatted($"{LocalPlayer}");
+                    ImGui.TextUnformatted($"{GetResourceCost(PLD.圣灵HolySpirit)}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");
                     
