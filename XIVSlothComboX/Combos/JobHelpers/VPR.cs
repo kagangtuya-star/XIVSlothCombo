@@ -109,8 +109,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(Vicewinder) && OpenerStep == 3) OpenerStep++;
                     else if (OpenerStep == 3) actionID = Vicewinder;
 
-                    if (WasLastAction(HuntersCoil) && OpenerStep == 4) OpenerStep++;
-                    else if (OpenerStep == 4) actionID = HuntersCoil;
+                    if (WasLastAction(猛袭喷蛇HuntersCoil) && OpenerStep == 4) OpenerStep++;
+                    else if (OpenerStep == 4) actionID = 猛袭喷蛇HuntersCoil;
 
                     if (WasLastAction(TwinfangBite) && OpenerStep == 5) OpenerStep++;
                     else if (OpenerStep == 5) actionID = TwinfangBite;
@@ -118,8 +118,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(TwinbloodBite) && OpenerStep == 6) OpenerStep++;
                     else if (OpenerStep == 6) actionID = TwinbloodBite;
 
-                    if (WasLastAction(SwiftskinsCoil) && OpenerStep == 7) OpenerStep++;
-                    else if (OpenerStep == 7) actionID = SwiftskinsCoil;
+                    if (WasLastAction(极速盘蛇SwiftskinsCoil) && OpenerStep == 7) OpenerStep++;
+                    else if (OpenerStep == 7) actionID = 极速盘蛇SwiftskinsCoil;
 
                     if (WasLastAction(TwinbloodBite) && OpenerStep == 8) OpenerStep++;
                     else if (OpenerStep == 8) actionID = TwinbloodBite;
@@ -193,8 +193,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(UncoiledTwinblood) && OpenerStep == 31) OpenerStep++;
                     else if (OpenerStep == 31) actionID = UncoiledTwinblood;
 
-                    if (WasLastAction(HuntersCoil) && OpenerStep == 32) OpenerStep++;
-                    else if (OpenerStep == 32) actionID = HuntersCoil;
+                    if (WasLastAction(猛袭喷蛇HuntersCoil) && OpenerStep == 32) OpenerStep++;
+                    else if (OpenerStep == 32) actionID = 猛袭喷蛇HuntersCoil;
 
                     if (WasLastAction(TwinfangBite) && OpenerStep == 33) OpenerStep++;
                     else if (OpenerStep == 33) actionID = TwinfangBite;
@@ -202,8 +202,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(TwinbloodBite) && OpenerStep == 34) OpenerStep++;
                     else if (OpenerStep == 34) actionID = TwinbloodBite;
 
-                    if (WasLastAction(SwiftskinsCoil) && OpenerStep == 35) OpenerStep++;
-                    else if (OpenerStep == 35) actionID = SwiftskinsCoil;
+                    if (WasLastAction(极速盘蛇SwiftskinsCoil) && OpenerStep == 35) OpenerStep++;
+                    else if (OpenerStep == 35) actionID = 极速盘蛇SwiftskinsCoil;
 
                     if (WasLastAction(TwinbloodBite) && OpenerStep == 36) OpenerStep++;
                     else if (OpenerStep == 36) actionID = TwinbloodBite;

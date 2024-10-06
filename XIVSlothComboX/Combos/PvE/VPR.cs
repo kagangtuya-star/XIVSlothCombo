@@ -6,6 +6,7 @@ using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
+using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -17,7 +18,7 @@ namespace XIVSlothComboX.Combos.PvE
             ReavingFangs = 34607,
             ReavingMaw = 34615,
             Vicewinder = 34620,
-            HuntersCoil = 34621,
+            猛袭喷蛇HuntersCoil = 34621,
             HuntersDen = 34624,
             HuntersSnap = 39166,
             Vicepit = 34623,
@@ -28,7 +29,7 @@ namespace XIVSlothComboX.Combos.PvE
             Slither = 34646,
             SteelFangs = 34606,
             SteelMaw = 34614,
-            SwiftskinsCoil = 34622,
+            极速盘蛇SwiftskinsCoil = 34622,
             SwiftskinsDen = 34625,
             Twinblood = 35922,
             Twinfang = 35921,
@@ -198,13 +199,15 @@ namespace XIVSlothComboX.Combos.PvE
                     //Vicewinder Combo
                     if (!HasEffect(Buffs.Reawakened) && LevelChecked(Vicewinder) && InMeleeRange())
                     {
-                        // Swiftskin's Coil
-                        if ((VicewinderReady && (!OnTargetsFlank() || !TargetNeedsPositionals())) || HuntersCoilReady)
-                            return SwiftskinsCoil;
-
                         // Hunter's Coil
                         if ((VicewinderReady && (!OnTargetsRear() || !TargetNeedsPositionals())) || SwiftskinsCoilReady)
-                            return HuntersCoil;
+                            return 猛袭喷蛇HuntersCoil;
+                        
+                        // Swiftskin's Coil
+                        if ((VicewinderReady && (!OnTargetsFlank() || !TargetNeedsPositionals())) || HuntersCoilReady)
+                            return 极速盘蛇SwiftskinsCoil;
+
+                       
                     }
 
                     //Reawakend Usage
@@ -243,12 +246,14 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (gauge.AnguineTribute is 3)
                                 return OriginalHook(ReavingFangs);
+                            
+                            
+                            if (gauge.AnguineTribute is 1)
+                                return OriginalHook(极速盘蛇SwiftskinsCoil);
 
                             if (gauge.AnguineTribute is 2)
-                                return OriginalHook(HuntersCoil);
+                                return OriginalHook(猛袭喷蛇HuntersCoil);
 
-                            if (gauge.AnguineTribute is 1)
-                                return OriginalHook(SwiftskinsCoil);
                         }
 
                         //With Ouroboros
@@ -261,10 +266,10 @@ namespace XIVSlothComboX.Combos.PvE
                                 return OriginalHook(ReavingFangs);
 
                             if (gauge.AnguineTribute is 3)
-                                return OriginalHook(HuntersCoil);
+                                return OriginalHook(猛袭喷蛇HuntersCoil);
 
                             if (gauge.AnguineTribute is 2)
-                                return OriginalHook(SwiftskinsCoil);
+                                return OriginalHook(极速盘蛇SwiftskinsCoil);
 
                             if (gauge.AnguineTribute is 1)
                                 return OriginalHook(Reawaken);
@@ -451,13 +456,30 @@ namespace XIVSlothComboX.Combos.PvE
                         IsEnabled(CustomComboPreset.VPR_ST_VicewinderCombo) && 
                         !HasEffect(Buffs.Reawakened) && LevelChecked(Vicewinder) && InMeleeRange())
                     {
+                        if (IsEnabled(CustomComboPreset.VPR_ST_VicewinderCombo1))
+                        {
+                            if (VicewinderReady || SwiftskinsCoilReady && !HasEffect(Buffs.HuntersInstinct))
+                            {
+                                return 猛袭喷蛇HuntersCoil;
+                            }
+
+                            if (VicewinderReady || HuntersCoilReady && !HasEffect(Buffs.HuntersInstinct))
+                            {
+                                return 极速盘蛇SwiftskinsCoil;
+                            } 
+                        }
+                      
+
+                        
+                        if ((VicewinderReady && (!OnTargetsRear() || !TargetNeedsPositionals())) || SwiftskinsCoilReady)
+                        {
+                            return 猛袭喷蛇HuntersCoil;
+                        }
+                        
                         // Swiftskin's Coil
                         if ((VicewinderReady && (!OnTargetsFlank() || !TargetNeedsPositionals())) || HuntersCoilReady)
-                            return SwiftskinsCoil;
-
-                        // Hunter's Coil
-                        if ((VicewinderReady && (!OnTargetsRear() || !TargetNeedsPositionals())) || SwiftskinsCoilReady)
-                            return HuntersCoil;
+                            return 极速盘蛇SwiftskinsCoil;
+                        
                     }
 
                     //Reawakend Usage
@@ -502,10 +524,10 @@ namespace XIVSlothComboX.Combos.PvE
                                 return OriginalHook(ReavingFangs);
 
                             if (gauge.AnguineTribute is 2)
-                                return OriginalHook(HuntersCoil);
+                                return OriginalHook(猛袭喷蛇HuntersCoil);
 
                             if (gauge.AnguineTribute is 1)
-                                return OriginalHook(SwiftskinsCoil);
+                                return OriginalHook(极速盘蛇SwiftskinsCoil);
                         }
 
                         //With Ouroboros
@@ -518,10 +540,10 @@ namespace XIVSlothComboX.Combos.PvE
                                 return OriginalHook(ReavingFangs);
 
                             if (gauge.AnguineTribute is 3)
-                                return OriginalHook(HuntersCoil);
+                                return OriginalHook(猛袭喷蛇HuntersCoil);
 
                             if (gauge.AnguineTribute is 2)
-                                return OriginalHook(SwiftskinsCoil);
+                                return OriginalHook(极速盘蛇SwiftskinsCoil);
 
                             if (gauge.AnguineTribute is 1)
                                 return OriginalHook(Reawaken);
@@ -1037,11 +1059,11 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         // Swiftskin's Coil
                         if ((VicewinderReady && (!OnTargetsFlank() || !TargetNeedsPositionals())) || HuntersCoilReady)
-                            return SwiftskinsCoil;
+                            return 极速盘蛇SwiftskinsCoil;
 
                         // Hunter's Coil
                         if ((VicewinderReady && (!OnTargetsRear() || !TargetNeedsPositionals())) || SwiftskinsCoilReady)
-                            return HuntersCoil;
+                            return 猛袭喷蛇HuntersCoil;
                     }
                 }
                 return actionID;
@@ -1124,10 +1146,10 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(ReavingFangs);
 
                         if (gauge.AnguineTribute is 2)
-                            return OriginalHook(HuntersCoil);
+                            return OriginalHook(猛袭喷蛇HuntersCoil);
 
                         if (gauge.AnguineTribute is 1)
-                            return OriginalHook(SwiftskinsCoil);
+                            return OriginalHook(极速盘蛇SwiftskinsCoil);
                     }
 
                     if (TraitLevelChecked(Traits.EnhancedSerpentsLineage))
@@ -1139,10 +1161,10 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(ReavingFangs);
 
                         if (gauge.AnguineTribute is 3)
-                            return OriginalHook(HuntersCoil);
+                            return OriginalHook(猛袭喷蛇HuntersCoil);
 
                         if (gauge.AnguineTribute is 2)
-                            return OriginalHook(SwiftskinsCoil);
+                            return OriginalHook(极速盘蛇SwiftskinsCoil);
 
                         if (gauge.AnguineTribute is 1)
                             return OriginalHook(Reawaken);

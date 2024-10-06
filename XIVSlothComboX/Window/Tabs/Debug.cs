@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Numerics;
+using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Interface.Colors;
@@ -255,7 +256,9 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"{DRK.血乱层数()}");
                     // ImGui.TextUnformatted($"{GetCooldownRemainingTime(DRK.血乱Delirium) + GetCooldownRemainingTime(DRK.血溅Bloodspiller)}");
                     // ImGui.TextUnformatted($"{HasEffect(GNB.Buffs.ReadyToRaze命运之印预备)}");
-                    ImGui.TextUnformatted($"安魂祈祷Requiescat:{PLD.安魂祈祷Requiescat.OriginalHook().ActionReady()}");
+                    // ImGui.TextUnformatted($"安魂祈祷Requiescat:{PLD.安魂祈祷Requiescat.OriginalHook().ActionReady()}");
+                    VPRGauge? gauge = GetJobGauge<VPRGauge>();
+                    ImGui.TextUnformatted($"VPRGauge:{gauge.DreadCombo}");
                 }
             }
 

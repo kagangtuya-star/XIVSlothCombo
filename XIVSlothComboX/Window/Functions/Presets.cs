@@ -121,7 +121,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (conflicts.Length > 0)
             {
-                ImGui.TextColored(ImGuiColors.DalamudRed, "Conflicts with:");
+                ImGui.TextColored(ImGuiColors.DalamudRed, "冲突:");
                 StringBuilder conflictBuilder = new();
                 ImGui.Indent();
                 foreach (var conflict in conflicts)

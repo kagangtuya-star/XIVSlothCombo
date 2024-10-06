@@ -382,55 +382,21 @@ namespace XIVSlothComboX.Combos
         #region BLACK MAGE
 
         [ReplaceSkill(All.Sleep)]
-        [CustomComboInfo("自定义循环", "自定义循环", BLM.JobID, -10)]
+        [CustomComboInfo("自定义循环", "自定义循环", BLM.JobID, -99)]
         BLM_Advanced_CustomMode = 20120,
 
 
-        [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_AdvancedMode, BLM_ST_AdvancedMode)]
-        [CustomComboInfo("标准循环", "将崩溃整合为一键单体标准循环。", BLM.JobID, -3)]
-        BLM_ST_SimpleMode = 2012,
-
-        #region Advanced ST
-
         [ReplaceSkill(BLM.Fire)]
-        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_SimpleMode)]
-        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID, -9)]
-        BLM_ST_AdvancedMode = 2021,
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Thunder I/III Option", "Adds Thunder I/Thunder III when the debuff isn't present or is expiring.", BLM.JobID)]
-        BLM_ST_Adv_Thunder = 2029,
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Triplecast/Swiftcast Option", "Adds Triplecast/Swiftcast to the rotation.", BLM.JobID, -8)]
-        BLM_Adv_Casts = 2039,
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Opener Option", "Adds the Lv.90 opener." + "\nWill default to the Standard opener when nothing is selected.", BLM.JobID, -10)]
-        BLM_Adv_Opener = 2043,
-
-        #endregion
-
-
-        [ReplaceSkill(BLM.Flare)]
-        [CustomComboInfo("简易 AoE 功能", "将核爆整合为一键AoE循环。", BLM.JobID, -1)]
-        BLM_AoE_SimpleMode = 2008,
-
-        #region Advanced AoE
-
+        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_AdvancedMode, BLM_ST_AdvancedMode)]
+        [CustomComboInfo("标准循环", "将崩溃整合为一键单体标准循环。", BLM.JobID,  -10)]
+        BLM_ST_SimpleMode = 2012,
+        
+        
         [ReplaceSkill(BLM.Blizzard2, BLM.HighBlizzard2)]
-        [ConflictingCombos(BLM_AoE_SimpleMode)]
-        [CustomComboInfo("Advanced Mode - AoE", "Replaces Blizzard II with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID, -8)]
-        BLM_AoE_AdvancedMode = 2054,
-
-        [ParentCombo(BLM_AoE_AdvancedMode)]
-        [CustomComboInfo("Thunder Uptime Option", "Adds Thunder II/Thunder IV during Umbral Ice.", BLM.JobID, 1)]
-        BLM_AoE_Adv_ThunderUptime = 2055,
-
-        #endregion
-
-
+        [CustomComboInfo("简易 AoE 功能", "将核爆整合为一键AoE循环。", BLM.JobID, -8)]
+        BLM_AoE_SimpleMode = 2008,
+        
+        
         #region Variant
 
         [Variant]
@@ -449,6 +415,22 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
+        #region Advanced ST
+
+        [ReplaceSkill(BLM.Fire)]
+        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_SimpleMode)]
+        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID, -9)]
+        BLM_ST_AdvancedMode = 2021,
+
+  
+        
+
+        [ParentCombo(BLM_ST_AdvancedMode)]
+        [CustomComboInfo("Opener Option", "Adds the Lv.90 opener." + "\nWill default to the Standard opener when nothing is selected.", BLM.JobID, -10)]
+        BLM_Adv_Opener = 2043,
+
+        #endregion
+        
         #region Miscellaneous
 
         [ReplaceSkill(BLM.Transpose)]
@@ -3745,6 +3727,10 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(VPR_ST_CDs)]
         [CustomComboInfo("Vicewinder Combo", "Adds Swiftskin's Coil and Hunter's Coil to the rotation.\nWill automatically swap depending on your position.", VPR.JobID)]
         VPR_ST_VicewinderCombo = 30007,
+        
+        [ParentCombo(VPR_ST_VicewinderCombo)]
+        [CustomComboInfo("BUFF优先", "会先补BUFF", VPR.JobID)]
+        VPR_ST_VicewinderCombo1 = 300071,
 
         #endregion
 
