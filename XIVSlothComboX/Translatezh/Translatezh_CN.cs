@@ -694,7 +694,7 @@ public class Translatezh_CN
         {"Adds Uncoiled Twinfang and Uncoiled Twinblood to the rotation." , "将飞蛇连尾击和飞蛇乱尾击添加到循环中。"  },
         {"Reawaken" , "祖灵降临"  },
         {"Adds Reawaken to the rotation." , "将祖灵降临添加到循环中。"  },
-        {"Reawaken Combo" , "复苏连击"  },
+        {"Reawaken Combo" , "祖灵连击"  },
         {"Adds Generation and Legacy to the rotation." , "将祖灵之牙和祖灵之蛇添加到循环中。"  },
         {"Adds Writhing Snap to the rotation when you are out of melee range." , "当你处于近战范围之外时，将飞蛇之牙添加到循环中。"  },
         {"Add Uncoiled Fury" , "添加飞蛇之尾"  },
@@ -715,7 +715,7 @@ public class Translatezh_CN
         #endregion
         {"Disables the range check for Reawaken, so it will be used even without a target selected." , "禁用祖灵降临的距离检查，即使没有选定目标也会使用它。"  },
         #endregion
-        {"Vicewinder - Coils" , "反曲之蛇 - 激活的后续2个连击"  },
+        {"Vicewinder - Coils" , "强碎灵蛇 - 激活的后续2个连击"  },
         {"Replaces Vicewinder with Hunter's/Swiftskin's Coils.\nWill automatically swap depending on your position." , "将强碎灵蛇替换为猛袭盘蛇/疾速盘蛇。\n根据你的站位自动切换。"  },
         {"Vicepit - Dens" , "强碎灵蝰 - 激活的后续2个连击"  },
         {"Replaces Vicepit with Hunter's/Swiftskin's Dens." , "将强碎灵蝰替换为猛袭盘蝰/疾速盘蝰。"  },

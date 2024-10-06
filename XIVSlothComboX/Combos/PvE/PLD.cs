@@ -244,7 +244,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return 圣灵HolySpirit;
                         }
 
-                        if (!InMeleeRange() && !HasEffect(Buffs.Requiescat))
+                        if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_NoMeleeRange)&&!InMeleeRange() && !HasEffect(Buffs.Requiescat))
                         {
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_NoMeleeRange_HolySpirit))
                             {
