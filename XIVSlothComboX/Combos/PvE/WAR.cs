@@ -21,10 +21,10 @@ namespace XIVSlothComboX.Combos.PvE
             StormsEye = 45,
             Tomahawk = 46,
             原初之魂InnerBeast = 49,
-            SteelCyclone = 51,
+            钢铁旋风SteelCyclone = 51,
             战壕Infuriate = 52,
             裂石飞环FellCleave = 3549,
-            Decimate = 3550,
+            地毁人亡Decimate = 3550,
             Upheaval = 7387,
             原初的解放InnerRelease = 7389,
             RawIntuition = 3551,
@@ -236,7 +236,7 @@ namespace XIVSlothComboX.Combos.PvE
 
 
                             if (HasEffect(Buffs.NascentChaos) && !InnerChaos.LevelChecked())
-                                return OriginalHook(Decimate);
+                                return OriginalHook(地毁人亡Decimate);
                         }
                         
                         //破坏斧 7.0新增
@@ -369,9 +369,9 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         if (IsEnabled(CustomComboPreset.WAR_AoE_Overpower_Decimate)
-                            && LevelChecked(SteelCyclone)
+                            && LevelChecked(钢铁旋风SteelCyclone)
                             && (gauge >= decimateGaugeSpend || HasEffect(Buffs.原初的解放InnerRelease) || HasEffect(Buffs.NascentChaos)))
-                            return OriginalHook(SteelCyclone);
+                            return OriginalHook(钢铁旋风SteelCyclone);
                     }
                     
                     
@@ -424,7 +424,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID == 原初之魂InnerBeast || actionID == SteelCyclone)
+                if (actionID == 原初之魂InnerBeast || actionID == 钢铁旋风SteelCyclone)
                 {
                     if (LevelChecked(PrimalRend) && HasEffect(Buffs.PrimalRendReady))
                         return PrimalRend;
@@ -443,7 +443,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
             {
-                if (actionID is 原初之魂InnerBeast or 裂石飞环FellCleave or SteelCyclone or Decimate)
+                if (actionID is 原初之魂InnerBeast or 裂石飞环FellCleave or 钢铁旋风SteelCyclone or 地毁人亡Decimate)
                 {
                     var rageGauge = GetJobGauge<WARGauge>();
                     var rageThreshold = PluginConfiguration.GetCustomIntValue(Config.WAR_InfuriateRange);

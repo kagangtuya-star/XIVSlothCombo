@@ -3971,7 +3971,7 @@ namespace XIVSlothComboX.Combos
         WAR_ST_StormsPath_RangedUptime = 18016,
 
 
-        [ReplaceSkill(WAR.裂石飞环FellCleave, WAR.Decimate)]
+        [ReplaceSkill(WAR.裂石飞环FellCleave, WAR.地毁人亡Decimate)]
         [CustomComboInfo("战壕与裂石飞环/地毁人亡整合", "小于等于设置距离时，将裂石飞环/地毁人亡整合到战壕", WAR.JobID)]
         WAR_InfuriateFellCleave = 18018,
 

@@ -138,7 +138,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
             return chara.CurrentHp;
         }
 
-        public static float PlayerHealthPercentageHp() => (float)LocalPlayer.CurrentHp / LocalPlayer.MaxHp * 100;
+        public static float PlayerHealthPercentageHp() => (float)LocalPlayer?.CurrentHp / LocalPlayer.MaxHp * 100;
 
         public static bool HasBattleTarget() => (CurrentTarget as IBattleNpc)?.BattleNpcKind is BattleNpcSubKind.Enemy or (BattleNpcSubKind)1;
 
