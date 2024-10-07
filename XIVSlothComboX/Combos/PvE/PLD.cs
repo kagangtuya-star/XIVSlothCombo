@@ -430,6 +430,10 @@ namespace XIVSlothComboX.Combos.PvE
                             // Service.ChatGui.PrintError("圣灵4");
                             return 圣灵HolySpirit;
                         }
+                        if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && (HasEffect(Buffs.赎罪剑Atonement1BUFF)))
+                        {
+                            return 赎罪剑Atonement.OriginalHook();
+                        }
 
 
                         // Base combo
@@ -440,11 +444,10 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (lastComboActionID is 暴乱剑RiotBlade && 战女神之怒RageOfHalone.LevelChecked())
                             {
-                                if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) &&
-                                    (HasEffect(Buffs.赎罪剑Atonement1BUFF) ||
-                                     HasEffect(Buffs.赎罪剑Atonement2BUFF)
-                                    ))
+                                if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_Atonement) && (HasEffect(Buffs.赎罪剑Atonement2BUFF)))
+                                {
                                     return 赎罪剑Atonement.OriginalHook();
+                                }
 
                                 if ((IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_HolySpirit)
                                      && HasEffect(Buffs.DivineMight)

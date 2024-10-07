@@ -3613,9 +3613,6 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("循环加入灼热之光", "在循环和AOE循环中加入灼热之光\n冷却完毕立刻使用", SMN.JobID, 9)]
         SMN_SearingLight = 17018,
 
-        [ParentCombo(SMN_SearingLight)]
-        [CustomComboInfo("灼热之光爆发设置", "只在亚神召唤中使用灼热之光\n进阶选项在 高级能力技选项下\n不适用咏速套装", SMN.JobID, 0, "")]
-        SMN_SearingLight_Burst = 170181, // Genesis, why must you be like this -K
 
         [ParentCombo(SMN_Advanced_Combo)]
         [CustomComboInfo("循环中加入亚神召唤", "循环和AOE循环中加入 龙神召唤 不死鸟召唤", SMN.JobID, 10)]

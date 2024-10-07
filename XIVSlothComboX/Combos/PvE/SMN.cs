@@ -396,9 +396,9 @@ namespace XIVSlothComboX.Combos.PvE
                         // Searing Light
                         if (IsEnabled(CustomComboPreset.SMN_SearingLight) && 灼热之光SearingLight.ActionReady())
                         {
-                            if ((在什么阶段用爆发 is 0 or 1 && OriginalHook(Ruin) == 星极脉冲AstralImpulse) ||
+                            if ((在什么阶段用爆发 is 0 or 1 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or UmbralImpulse) ||
                                 (在什么阶段用爆发 == 2 && OriginalHook(Ruin) == 灵泉之炎FountainOfFire) ||
-                                (在什么阶段用爆发 == 3 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire) ||
+                                (在什么阶段用爆发 == 3 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or UmbralImpulse) ||
                                 (在什么阶段用爆发 == 4))
                             {
                                 if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_SearingLight_STOnly)))
@@ -418,20 +418,24 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Attacks))
                             {
-                                if (IsOffCooldown(OriginalHook(龙神迸发EnkindleBahamut)) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
-                                    LevelChecked(龙神召唤SummonBahamut))
+                                if (IsOffCooldown(OriginalHook(龙神迸发EnkindleBahamut)) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 && LevelChecked(龙神召唤SummonBahamut))
+                                {
                                     return OriginalHook(龙神迸发EnkindleBahamut);
+                                }
 
-                                if (IsOffCooldown(死星核爆) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 && LevelChecked(死星核爆) &&
-                                    OriginalHook(Ruin) is 星极脉冲AstralImpulse)
+                                if (IsOffCooldown(死星核爆) && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 && LevelChecked(死星核爆) && OriginalHook(Ruin) is 星极脉冲AstralImpulse)
+                                {
                                     return OriginalHook(星极超流AstralFlow);
+                                }
                             }
 
                             // Demi Nuke 2: Electric Boogaloo
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Rekindle))
                             {
                                 if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
+                                {
                                     return OriginalHook(星极超流AstralFlow);
+                                }
                             }
                         }
 
@@ -485,7 +489,9 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (IsSolarBahamutReady)
                                     {
                                         if (Sunflare.ActionReady())
+                                        {
                                             return OriginalHook(星极超流AstralFlow);
+                                        }
 
                                         if (IsOffCooldown(OriginalHook(EnkindleSolarBahamut)) &&
                                             LevelChecked(SummonSolarBahamut))
@@ -495,8 +501,10 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (IsOffCooldown(OriginalHook(龙神迸发EnkindleBahamut)) && LevelChecked(龙神召唤SummonBahamut))
                                         return OriginalHook(龙神迸发EnkindleBahamut);
 
-                                    if (死星核爆.ActionReady())
+                                    if (死星核爆.ActionReady()&& OriginalHook(Ruin) != 灵泉之炎FountainOfFire)
+                                    {
                                         return OriginalHook(星极超流AstralFlow);
+                                    }
                                 }
                             }
 
@@ -504,7 +512,9 @@ namespace XIVSlothComboX.Combos.PvE
                             if (IsEnabled(CustomComboPreset.SMN_Advanced_Combo_DemiSummons_Rekindle))
                             {
                                 if (IsOffCooldown(Rekindle) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
+                                {
                                     return OriginalHook(星极超流AstralFlow);
+                                }
                             }
                         }
 
@@ -599,10 +609,11 @@ namespace XIVSlothComboX.Combos.PvE
                                     return All.Swiftcast;
                             }
 
-                            if (IsEnabled(CustomComboPreset.SMN_Garuda_Slipstream) &&
-                                ((HasEffect(Buffs.螺旋气流GarudasFavor) && HasEffect(All.Buffs.Swiftcast)) ||
-                                 (gauge.Attunement == 0))) // Astral Flow if Swiftcast is not ready throughout Garuda
+                            // Astral Flow if Swiftcast is not ready throughout Garuda
+                            if (IsEnabled(CustomComboPreset.SMN_Garuda_Slipstream) && (HasEffect(Buffs.螺旋气流GarudasFavor) && HasEffect(All.Buffs.Swiftcast)) || gauge.Attunement == 0)
+                            {
                                 return OriginalHook(星极超流AstralFlow);
+                            }
                         }
 
                         // Swiftcast Ifrit Feature (Conditions to allow for SpS Ruins to still be under the effect of Swiftcast)

@@ -184,7 +184,17 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener))
                     {
                         if (MchOpenerLogicOpener.DoFullOpener(ref actionID))
+                        {
+                            // if (actionID is Wildfire && CanDelayedWeave(actionID))
+                            // {
+                            //     return actionID;
+                            // }
+                            // else
+                            // {
+                            //     return actionID;
+                            // }
                             return actionID;
+                        }
                     }
 
                     // Interrupt
