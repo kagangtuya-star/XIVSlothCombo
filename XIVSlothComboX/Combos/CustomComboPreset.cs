@@ -604,7 +604,7 @@ namespace XIVSlothComboX.Combos
         #region 自定义循环
 
         [ReplaceSkill(BRD.StraightShot)]
-        [CustomComboInfo("自定义循环", "自定义循环", BRD.JobID)]
+        [CustomComboInfo("自定义循环", "自定义循环", BRD.JobID, -999)]
         BRD_ST_CustomMode = 30361,
 
         #endregion
@@ -686,11 +686,11 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("诗人唱歌", "这个选项将诗人的三首歌加入循环", BRD.JobID)]
         BRD_Adv_Song = 3011,
 
-        [ReplaceSkill(BRD.Barrage)]
+        [ReplaceSkill(BRD.纷乱箭Barrage)]
         [CustomComboInfo("Buff技能设置", "将猛者强击/战斗之声整合至纷乱箭。", BRD.JobID)]
         BRD_Buffs = 3013,
 
-        [ReplaceSkill(BRD.WanderersMinuet)]
+        [ReplaceSkill(BRD.放浪神的小步舞曲WanderersMinuet)]
         [CustomComboInfo("一键唱歌", "根据CD，将另外两首歌加入放浪神的小步舞曲.", BRD.JobID)]
         BRD_OneButtonSongs = 3014,
 
@@ -3637,7 +3637,7 @@ namespace XIVSlothComboX.Combos
         SMN_Raise = 17027,
 
         [ParentCombo(SMN_Advanced_Combo)]
-        [CustomComboInfo("循环加入苏生之炎", "循环 AOE循环中 加入苏生之炎", SMN.JobID, 13)]
+        [CustomComboInfo("循环加入苏生之炎", "循环 循环中 加入苏生之炎", SMN.JobID, 13)]
         SMN_Advanced_Combo_DemiSummons_Rekindle = 17028,
 
         [ReplaceSkill(SMN.毁绝Ruin4)]
