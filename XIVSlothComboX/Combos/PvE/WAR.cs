@@ -48,7 +48,7 @@ namespace XIVSlothComboX.Combos.PvE
                 SurgingTempest = 2677,
                 NascentChaos = 1897,
                 PrimalRendReady = 2624,
-                破坏斧Pre = 3834,
+                尽毁Pre = 3834,
                 原初激震Pre = 3901,
                 Berserk = 86;
         }
@@ -148,13 +148,13 @@ namespace XIVSlothComboX.Combos.PvE
                         && gauge <= infuriateGauge
                         && CanWeave(actionID))
                     {
-                        if (GetCooldownRemainingTime(战壕Infuriate) == 0)
+                        if (GetCooldownRemainingTime(战壕Infuriate) < 1)
                         {
                             return 战壕Infuriate;
                         }
                         
                         
-                        if (!HasEffect(Buffs.原初的解放InnerRelease))
+                        if (!HasEffect(Buffs.原初的解放InnerRelease)&& RaidBuff.爆发期())
                         {
                             return 战壕Infuriate;
                         }
@@ -240,7 +240,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                         
                         //破坏斧 7.0新增
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.破坏斧Pre) && 尽毁.LevelChecked())
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.尽毁Pre) && 尽毁.LevelChecked())
                         {
                             return 尽毁;
                         }
@@ -375,7 +375,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
                     
                     
-                    if (HasEffect(Buffs.破坏斧Pre) && 尽毁.LevelChecked())
+                    if (HasEffect(Buffs.尽毁Pre) && 尽毁.LevelChecked())
                     {
                         return 尽毁;
                     }

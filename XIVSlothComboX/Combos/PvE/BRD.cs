@@ -854,9 +854,15 @@ namespace XIVSlothComboX.Combos.PvE
                         float radiantFinaleDuration = GetBuffRemainingTime(Buffs.RadiantFinale);
                         int ragingJawsRenewTime = PluginConfiguration.GetCustomIntValue(Config.BRD_RagingJawsRenewTime);
 
-                        DotRecast poisonRecast = delegate(int duration) { return (venomous && venomRemaining < duration) || (caustic && causticRemaining < duration); };
+                        DotRecast poisonRecast = delegate(int duration)
+                        {
+                            return (venomous && venomRemaining < duration) || (caustic && causticRemaining < duration);
+                        };
 
-                        DotRecast windRecast = delegate(int duration) { return (windbite && windRemaining < duration) || (stormbite && stormRemaining < duration); };
+                        DotRecast windRecast = delegate(int duration)
+                        {
+                            return (windbite && windRemaining < duration) || (stormbite && stormRemaining < duration);
+                        };
 
                         if (IsEnabled(CustomComboPreset.BRD_Adv_DoT))
                         {

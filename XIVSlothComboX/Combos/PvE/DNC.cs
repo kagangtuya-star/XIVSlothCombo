@@ -345,8 +345,6 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     return 标准舞步StandardStep.OriginalHook();
                                 }
-
-
                             }
                         }
                     }
@@ -355,19 +353,24 @@ namespace XIVSlothComboX.Combos.PvE
                     // Simple DT Tech (activates dance with no target, or when target is over HP% threshold)
                     if (IsEnabled(CustomComboPreset.DNC_DT_Simple_TS) && !HasEffect(Buffs.标准舞步预备StandardStep))
                     {
-                        if (技巧舞步倒计时 - GCD <= 0 || 技巧舞步TechnicalStep.ActionReady())
+                        if (技巧舞步TechnicalStep.LevelChecked())
                         {
-                            return 技巧舞步TechnicalStep;
-                        }
-
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD) && 技巧舞步TechnicalStep.LevelChecked())
-                        {
-                            if (技巧舞步倒计时 - GCD is > 0 and < 0.9f)
+                            if (技巧舞步倒计时 - GCD <= 0 || 技巧舞步TechnicalStep.ActionReady())
                             {
                                 return 技巧舞步TechnicalStep;
                             }
 
+                            if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD) )
+                            {
+                                if (技巧舞步倒计时 - GCD is > 0 and < 0.9f)
+                                {
+                                    return 技巧舞步TechnicalStep;
+                                }
+
+                            }
                         }
+
+                    
                     }
 
 

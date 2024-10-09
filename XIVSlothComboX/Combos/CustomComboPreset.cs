@@ -387,15 +387,21 @@ namespace XIVSlothComboX.Combos
 
 
         [ReplaceSkill(BLM.Fire)]
-        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_AdvancedMode, BLM_ST_AdvancedMode)]
         [CustomComboInfo("标准循环", "将崩溃整合为一键单体标准循环。", BLM.JobID,  -10)]
-        BLM_ST_SimpleMode = 2012,
+        BLM_ST_SimpleMode = 2012,  
+        
+        [ParentCombo(BLM_ST_SimpleMode)]
+        [CustomComboInfo("黑魔纹", "将黑魔纹添加到一键单体标准循环。", BLM.JobID,  -10)]
+        BLM_ST_SimpleMode_LeyLines = 2013,
         
         
         [ReplaceSkill(BLM.Blizzard2, BLM.HighBlizzard2)]
         [CustomComboInfo("简易 AoE 功能", "将核爆整合为一键AoE循环。", BLM.JobID, -8)]
         BLM_AoE_SimpleMode = 2008,
         
+        [ParentCombo(BLM_AoE_SimpleMode)]
+        [CustomComboInfo("黑魔纹", "将黑魔纹添加到一键单体标准循环。", BLM.JobID,  -10)]
+        BLM_AoE_SimpleMode_LeyLines = 2009,
         
         #region Variant
 
@@ -414,22 +420,7 @@ namespace XIVSlothComboX.Combos
         BLM_Variant_Cure = 2034,
 
         #endregion
-
-        #region Advanced ST
-
-        [ReplaceSkill(BLM.Fire)]
-        [ConflictingCombos(BLM_Scathe_Xeno, BLM_ST_SimpleMode)]
-        [CustomComboInfo("Advanced Mode - Single Target", "Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", BLM.JobID, -9)]
-        BLM_ST_AdvancedMode = 2021,
-
-  
         
-
-        [ParentCombo(BLM_ST_AdvancedMode)]
-        [CustomComboInfo("Opener Option", "Adds the Lv.90 opener." + "\nWill default to the Standard opener when nothing is selected.", BLM.JobID, -10)]
-        BLM_Adv_Opener = 2043,
-
-        #endregion
         
         #region Miscellaneous
 
@@ -437,7 +428,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("灵极魂/星灵移位功能", "当灵极魂可用时将星灵移位替换为灵极魂。", BLM.JobID)]
         BLM_UmbralSoul = 2001,
 
-        [ReplaceSkill(BLM.LeyLines)]
+        [ReplaceSkill(BLM.黑魔纹LeyLines)]
         [CustomComboInfo("魔纹步功能", "使用黑魔纹后将其替换为魔纹步。", BLM.JobID)]
         BLM_Between_The_LeyLines = 2002,
 
@@ -447,7 +438,6 @@ namespace XIVSlothComboX.Combos
 
 
         [ReplaceSkill(BLM.Scathe)]
-        [ConflictingCombos(BLM_ST_SimpleMode, BLM_ST_AdvancedMode)]
         [CustomComboInfo("异言功能", "当异言可用时替换崩溃为异言。", BLM.JobID)]
         BLM_Scathe_Xeno = 2004,
 
@@ -3940,7 +3930,7 @@ namespace XIVSlothComboX.Combos
         WAR_ST_StormsPath_PrimalRend = 18008,
 
         [ParentCombo(WAR_ST_StormsPath)]
-        [CustomComboInfo("尽毁", "在破坏斧状态下，将破坏斧入到暴风斩连击", WAR.JobID)]
+        [CustomComboInfo("尽毁", "在尽毁预备状态中，将尽毁入到暴风斩连击", WAR.JobID)]
         WAR_ST_StormsPath_破坏斧 = 180081,
 
         [ParentCombo(WAR_AoE_Overpower)]

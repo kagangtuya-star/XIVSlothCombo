@@ -25,7 +25,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (!CustomComboFunctions.ActionReady(All.LucidDreaming) &&
                 Config.BLM_Advanced_OpenerSelection == 1)
                 return false;
-            if (!CustomComboFunctions.ActionReady(LeyLines))
+            if (!CustomComboFunctions.ActionReady(黑魔纹LeyLines))
                 return false;
 
             return true;
@@ -144,8 +144,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Amplifier) && OpenerStep == 5) OpenerStep++;
                     else if (OpenerStep == 5) actionID = Amplifier;
 
-                    if (CustomComboFunctions.WasLastAction(LeyLines) && OpenerStep == 6) OpenerStep++;
-                    else if (OpenerStep == 6) actionID = LeyLines;
+                    if (CustomComboFunctions.WasLastAction(黑魔纹LeyLines) && OpenerStep == 6) OpenerStep++;
+                    else if (OpenerStep == 6) actionID = 黑魔纹LeyLines;
 
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 0 && OpenerStep == 7) OpenerStep++;
                     else if (OpenerStep == 7) actionID = Fire4;
@@ -191,7 +191,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     if (((actionID == Triplecast && CustomComboFunctions.GetRemainingCharges(Triplecast) < 2) ||
                         (actionID == Amplifier && CustomComboFunctions.IsOnCooldown(Amplifier)) ||
-                        (actionID == LeyLines && CustomComboFunctions.IsOnCooldown(LeyLines)) ||
+                        (actionID == 黑魔纹LeyLines && CustomComboFunctions.IsOnCooldown(黑魔纹LeyLines)) ||
                         (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                         (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                         (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
@@ -224,8 +224,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Amplifier) && OpenerStep == 6) OpenerStep++;
                     else if (OpenerStep == 6) actionID = Amplifier;
 
-                    if (CustomComboFunctions.WasLastAction(LeyLines) && OpenerStep == 7) OpenerStep++;
-                    else if (OpenerStep == 7) actionID = LeyLines;
+                    if (CustomComboFunctions.WasLastAction(黑魔纹LeyLines) && OpenerStep == 7) OpenerStep++;
+                    else if (OpenerStep == 7) actionID = 黑魔纹LeyLines;
 
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 0 && OpenerStep == 8) OpenerStep++;
                     else if (OpenerStep == 8) actionID = Fire4;
@@ -296,7 +296,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (((actionID == Triplecast && CustomComboFunctions.GetRemainingCharges(Triplecast) < 2) ||
                     (actionID == Amplifier && CustomComboFunctions.IsOnCooldown(Amplifier)) ||
-                    (actionID == LeyLines && CustomComboFunctions.IsOnCooldown(LeyLines)) ||
+                    (actionID == 黑魔纹LeyLines && CustomComboFunctions.IsOnCooldown(黑魔纹LeyLines)) ||
                     (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
@@ -334,8 +334,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(Amplifier) && OpenerStep == 5) OpenerStep++;
                 else if (OpenerStep == 5) actionID = Amplifier;
 
-                if (CustomComboFunctions.WasLastAction(LeyLines) && OpenerStep == 6) OpenerStep++;
-                else if (OpenerStep == 6) actionID = LeyLines;
+                if (CustomComboFunctions.WasLastAction(黑魔纹LeyLines) && OpenerStep == 6) OpenerStep++;
+                else if (OpenerStep == 6) actionID = 黑魔纹LeyLines;
 
                 if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 0 && OpenerStep == 7) OpenerStep++;
                 else if (OpenerStep == 7) actionID = Fire4;
@@ -387,7 +387,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (((actionID == Triplecast && CustomComboFunctions.GetRemainingCharges(Triplecast) < 2) ||
                     (actionID == Amplifier && CustomComboFunctions.IsOnCooldown(Amplifier)) ||
-                    (actionID == LeyLines && CustomComboFunctions.IsOnCooldown(LeyLines)) ||
+                    (actionID == 黑魔纹LeyLines && CustomComboFunctions.IsOnCooldown(黑魔纹LeyLines)) ||
                     (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||

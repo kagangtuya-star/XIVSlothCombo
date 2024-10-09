@@ -30,7 +30,7 @@ namespace XIVSlothComboX.Combos.PvE
             Manafont = 158,
             Freeze = 159,
             Flare = 162,
-            LeyLines = 3573,
+            黑魔纹LeyLines = 3573,
             Sharpcast = 3574,
             Blizzard4 = 3576,
             Fire4 = 3577,
@@ -236,9 +236,13 @@ namespace XIVSlothComboX.Combos.PvE
                         return Xenoglossy.LevelChecked() ? Xenoglossy : Foul;
                 }
 
-                if (CanSpellWeave(actionID) && ActionReady(LeyLines))
-                    return LeyLines;
+                if (IsEnabled(CustomComboPreset.BLM_ST_SimpleMode_LeyLines))
+                {
+                    if (CanSpellWeave(actionID) && ActionReady(黑魔纹LeyLines))
+                        return 黑魔纹LeyLines;
+                }
 
+           
                 if (gauge.InAstralFire)
                 {
 
@@ -379,9 +383,11 @@ namespace XIVSlothComboX.Combos.PvE
                     if (gauge.HasPolyglotStacks())
                         return Foul;
                 }
-
-                if (canWeave && ActionReady(LeyLines))
-                    return LeyLines;
+                if (IsEnabled(CustomComboPreset.BLM_AoE_SimpleMode_LeyLines))
+                {
+                    if (canWeave && ActionReady(黑魔纹LeyLines))
+                        return 黑魔纹LeyLines;
+                }
 
                 if (gauge.InAstralFire)
                 {
@@ -520,7 +526,7 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Between_The_LeyLines;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level) =>
-                actionID is LeyLines && HasEffect(Buffs.LeyLines) && LevelChecked(BetweenTheLines)
+                actionID is 黑魔纹LeyLines && HasEffect(Buffs.LeyLines) && LevelChecked(BetweenTheLines)
                     ? BetweenTheLines
                     : actionID;
         }

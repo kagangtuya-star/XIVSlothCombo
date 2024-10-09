@@ -1748,27 +1748,7 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.BLM_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, BLM.Config.BLM_VariantCure, "HP% 低于", 200);
 
-            if (preset is CustomComboPreset.BLM_Adv_Opener)
-            {
-
-            }
-
-
-            // if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
-            //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderUptime, "刷新雷电前剩余的秒数");
-            //
-            // if (preset is CustomComboPreset.BLM_ST_Adv_Thunder)
-            //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_ST_Adv_ThunderHP, "停止使用雷云的目标HP％");
-            //
-            // if (preset is CustomComboPreset.BLM_AoE_Adv_ThunderUptime)
-            //     UserConfig.DrawSliderInt(0, 5, BLM.Config.BLM_AoE_Adv_ThunderHP, "停止使用雷云的目标HP％");
-            //
-            // if (preset is CustomComboPreset.BLM_ST_Adv_Thunder_ThunderCloud)
-            // {
-            //     UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_ThunderCloud, "只在更快的施法后（编织窗口）", "", 0);
-            //     UserConfig.DrawHorizontalRadioButton(BLM.Config.BLM_Adv_ThunderCloud, "尽快使用", "", 1);
-            // }
-
+            
             #endregion
 
             // ====================================================================================
