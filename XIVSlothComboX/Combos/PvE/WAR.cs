@@ -33,7 +33,7 @@ namespace XIVSlothComboX.Combos.PvE
             NascentFlash = 16464,
             InnerChaos = 16465,
             Orogeny = 25752,
-            PrimalRend = 25753,
+            蛮荒崩裂PrimalRend = 25753,
             Onslaught = 7386,
             
             原初激震 = 36924,
@@ -153,12 +153,10 @@ namespace XIVSlothComboX.Combos.PvE
                             return 战壕Infuriate;
                         }
                         
-                        
-                        if (!HasEffect(Buffs.原初的解放InnerRelease)&& RaidBuff.爆发期())
+                        if (!HasEffect(Buffs.原初的解放InnerRelease) && RaidBuff.爆发期())
                         {
                             return 战壕Infuriate;
                         }
-
                       
                     }
 
@@ -212,17 +210,6 @@ namespace XIVSlothComboX.Combos.PvE
                             }
                         }
 
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend) && HasEffect(Buffs.PrimalRendReady) && LevelChecked(PrimalRend))
-                        {
-                            if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange)
-                                && !IsMoving
-                                && (GetTargetDistance() <= 1 || GetBuffRemainingTime(Buffs.PrimalRendReady) <= 10))
-                                return PrimalRend;
-                            if (IsNotEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange))
-                                return PrimalRend;
-                        }
-
-                      
 
                         if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_FellCleave) && LevelChecked(原初之魂InnerBeast))
                         {
@@ -239,11 +226,22 @@ namespace XIVSlothComboX.Combos.PvE
                                 return OriginalHook(地毁人亡Decimate);
                         }
                         
-                        //破坏斧 7.0新增
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && HasEffect(Buffs.尽毁Pre) && 尽毁.LevelChecked())
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend) && HasEffect(Buffs.PrimalRendReady) && LevelChecked(蛮荒崩裂PrimalRend))
+                        {
+                            if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange)
+                                && !IsMoving
+                                && (GetTargetDistance() <= 1 || GetBuffRemainingTime(Buffs.PrimalRendReady) <= 10))
+                                return 蛮荒崩裂PrimalRend;
+                            if (IsNotEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange))
+                                return 蛮荒崩裂PrimalRend;
+                        }
+                        
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_破坏斧) && 尽毁.LevelChecked() && HasEffect(Buffs.尽毁Pre))
                         {
                             return 尽毁;
                         }
+                        
+                       
                     }
 
                     if (comboTime > 0)
@@ -359,13 +357,13 @@ namespace XIVSlothComboX.Combos.PvE
                                 return Orogeny;
                         }
 
-                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend) && HasEffect(Buffs.PrimalRendReady) && LevelChecked(PrimalRend))
+                        if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend) && HasEffect(Buffs.PrimalRendReady) && LevelChecked(蛮荒崩裂PrimalRend))
                         {
                             if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange)
                                 && (GetTargetDistance() <= 3 || GetBuffRemainingTime(Buffs.PrimalRendReady) <= 10))
-                                return PrimalRend;
+                                return 蛮荒崩裂PrimalRend;
                             if (IsNotEnabled(CustomComboPreset.WAR_ST_StormsPath_PrimalRend_CloseRange))
-                                return PrimalRend;
+                                return 蛮荒崩裂PrimalRend;
                         }
 
                         if (IsEnabled(CustomComboPreset.WAR_AoE_Overpower_Decimate)
@@ -374,12 +372,12 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(钢铁旋风SteelCyclone);
                     }
                     
-                    
-                    if (HasEffect(Buffs.尽毁Pre) && 尽毁.LevelChecked())
+                    if (尽毁.LevelChecked() && HasEffect(Buffs.尽毁Pre))
                     {
                         return 尽毁;
                     }
 
+              
                     if (IsEnabled(CustomComboPreset.WAR_ST_StormsPath_原初激震) && HasEffect(Buffs.原初激震Pre) && LevelChecked(原初激震))
                     {
                         return 原初激震;
@@ -426,8 +424,8 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID == 原初之魂InnerBeast || actionID == 钢铁旋风SteelCyclone)
                 {
-                    if (LevelChecked(PrimalRend) && HasEffect(Buffs.PrimalRendReady))
-                        return PrimalRend;
+                    if (LevelChecked(蛮荒崩裂PrimalRend) && HasEffect(Buffs.PrimalRendReady))
+                        return 蛮荒崩裂PrimalRend;
 
                     // Fell Cleave or Decimate
                     return OriginalHook(actionID);
@@ -470,8 +468,14 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is Berserk or 原初的解放InnerRelease)
                 {
-                    if (LevelChecked(PrimalRend) && HasEffect(Buffs.PrimalRendReady))
-                        return PrimalRend;
+                    if (LevelChecked(蛮荒崩裂PrimalRend) && HasEffect(Buffs.PrimalRendReady))
+                    {
+                        return 蛮荒崩裂PrimalRend;
+                    }
+                    if (尽毁.LevelChecked() && HasEffect(Buffs.尽毁Pre))
+                    {
+                        return 尽毁;
+                    }
                 }
 
                 return actionID;

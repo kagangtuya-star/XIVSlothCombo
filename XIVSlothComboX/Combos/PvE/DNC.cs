@@ -214,7 +214,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0)
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0 && !WasLastAction(进攻之探戈Devilment))
                         {
                             return 百花争艳Flourish;
                         }
@@ -360,7 +360,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 return 技巧舞步TechnicalStep;
                             }
 
-                            if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD) )
+                            if (IsEnabled(CustomComboPreset.DNC_DT_Simple_GCD))
                             {
                                 if (技巧舞步倒计时 - GCD is > 0 and < 0.9f)
                                 {
@@ -370,7 +370,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
                         }
 
-                    
+
                     }
 
 
