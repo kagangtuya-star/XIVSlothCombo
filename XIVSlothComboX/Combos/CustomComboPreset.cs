@@ -612,7 +612,7 @@ namespace XIVSlothComboX.Combos
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
         [ConflictingCombos(BRD_ST_SimpleMode)]
         [CustomComboInfo("高级模式-单目标", "Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime.", BRD.JobID, 3)]
-        BRD_ST_AdvMode = 3009,
+            BRD_ST_AdvMode = 3009,
 
 
 
@@ -637,13 +637,13 @@ namespace XIVSlothComboX.Combos
         BRD_ApexST = 3034,
 
 
-        [ReplaceSkill(BRD.IronJaws)]
+        [ReplaceSkill(BRD.伶牙俐齿IronJaws)]
         [ConflictingCombos(BRD_IronJaws_Alternate)]
         [CustomComboInfo("伶牙俐齿续dot模式A", "当目标身上没有毒/风dot时，替换伶牙俐齿为毒/风箭。\n当还未习得伶牙俐齿时会在毒/风箭之间自动切换。", BRD.JobID)]
         BRD_IronJaws = 3003,
 
 
-        [ReplaceSkill(BRD.IronJaws)]
+        [ReplaceSkill(BRD.伶牙俐齿IronJaws)]
         [ConflictingCombos(BRD_IronJaws)]
         [CustomComboInfo("伶牙俐齿续dot模式B", "当目标身上没有毒/风dot时，替换伶牙俐齿为毒/风箭。 \n伶牙俐齿仅会在风/毒dot即将结束时复现。", BRD.JobID)]
         BRD_IronJaws_Alternate = 3004,
@@ -669,7 +669,7 @@ namespace XIVSlothComboX.Combos
 
 
         [ParentCombo(BRD_ST_AdvMode)]
-        [CustomComboInfo("诗人Dots", "如果目标身上不存在风/毒dot，开启此选项会在连击中加入风/毒箭。", BRD.JobID)]
+        [CustomComboInfo("诗人Dots", "如果目标身上不存在风/毒dot，开启此选项会在连击中加入风/毒箭。", BRD.JobID,1)]
         BRD_Adv_DoT = 3010,
 
         [ParentCombo(BRD_ST_AdvMode)]
@@ -744,9 +744,14 @@ namespace XIVSlothComboX.Combos
         [ParentCombo(BRD_IronJaws)]
         [CustomComboInfo("伶牙俐齿替换绝峰箭", "在有条件的情况下，将 绝峰箭 和 爆破箭 添加到 伶牙俐齿 上。", BRD.JobID)]
         BRD_IronJawsApex = 3024,
+        
+        
+        [ParentCombo(BRD_ST_AdvMode)]
+        [CustomComboInfo("伶牙俐齿", "目标没有伶牙俐齿加上", BRD.JobID,2)]
+        BRD_Adv_IronJaws = 3026,
 
         [ParentCombo(BRD_ST_AdvMode)]
-        [CustomComboInfo("简易猛者中续伶牙俐齿", "Enable the snapshotting of DoTs, within the remaining time of Raging Strikes below:", BRD.JobID)]
+        [CustomComboInfo("简易猛者中续伶牙俐齿", "Enable the snapshotting of DoTs, within the remaining time of Raging Strikes below:", BRD.JobID,3)]
         BRD_Adv_RagingJaws = 3025,
 
 

@@ -18,19 +18,19 @@ namespace XIVSlothComboX.Combos.PvE
         public const uint
             HeavyShot = 97,
             StraightShot = 98,
-            VenomousBite = 100,
+            毒咬箭VenomousBite = 100,
             RagingStrikes = 101,
             QuickNock = 106,
             纷乱箭Barrage = 107,
             Bloodletter = 110,
-            Windbite = 113,
+            风蚀箭Windbite = 113,
             贤者的叙事谣MagesBallad = 114,
             军神的赞美歌ArmysPaeon = 116,
             RainOfDeath = 117,
             BattleVoice = 118,
             九天连箭EmpyrealArrow = 3558,
             放浪神的小步舞曲WanderersMinuet = 3559,
-            IronJaws = 3560,
+            伶牙俐齿IronJaws = 3560,
             Sidewinder = 3562,
             完美音调PitchPerfect = 7404,
             Troubadour = 7405,
@@ -69,9 +69,9 @@ namespace XIVSlothComboX.Combos.PvE
         public static class Debuffs
         {
             public const ushort
-                VenomousBite = 124,
-                Windbite = 129,
-                CausticBite = 1200,
+                毒VenomousBite = 124,
+                风Windbite = 129,
+                烈毒咬箭CausticBite = 1200,
                 Stormbite = 1201;
         }
 
@@ -170,23 +170,23 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (IsEnabled(CustomComboPreset.BRD_DoTMaintainance))
                     {
-                        bool venomous = TargetHasEffect(Debuffs.VenomousBite);
-                        bool windbite = TargetHasEffect(Debuffs.Windbite);
-                        bool caustic = TargetHasEffect(Debuffs.CausticBite);
+                        bool venomous = TargetHasEffect(Debuffs.毒VenomousBite);
+                        bool windbite = TargetHasEffect(Debuffs.风Windbite);
+                        bool caustic = TargetHasEffect(Debuffs.烈毒咬箭CausticBite);
                         bool stormbite = TargetHasEffect(Debuffs.Stormbite);
-                        float venomRemaining = GetDebuffRemainingTime(Debuffs.VenomousBite);
-                        float windRemaining = GetDebuffRemainingTime(Debuffs.Windbite);
-                        float causticRemaining = GetDebuffRemainingTime(Debuffs.CausticBite);
+                        float venomRemaining = GetDebuffRemainingTime(Debuffs.毒VenomousBite);
+                        float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
+                        float causticRemaining = GetDebuffRemainingTime(Debuffs.烈毒咬箭CausticBite);
                         float stormRemaining = GetDebuffRemainingTime(Debuffs.Stormbite);
 
                         if (InCombat())
                         {
-                            if (LevelChecked(IronJaws) && ((venomous && venomRemaining < 4) || (caustic && causticRemaining < 4)) || (windbite && windRemaining < 4) || (stormbite && stormRemaining < 4))
-                                return IronJaws;
-                            if (!LevelChecked(IronJaws) && venomous && venomRemaining < 4)
-                                return VenomousBite;
-                            if (!LevelChecked(IronJaws) && windbite && windRemaining < 4)
-                                return Windbite;
+                            if (LevelChecked(伶牙俐齿IronJaws) && ((venomous && venomRemaining < 4) || (caustic && causticRemaining < 4)) || (windbite && windRemaining < 4) || (stormbite && stormRemaining < 4))
+                                return 伶牙俐齿IronJaws;
+                            if (!LevelChecked(伶牙俐齿IronJaws) && venomous && venomRemaining < 4)
+                                return 毒咬箭VenomousBite;
+                            if (!LevelChecked(伶牙俐齿IronJaws) && windbite && windRemaining < 4)
+                                return 风蚀箭Windbite;
                         }
                     }
 
@@ -214,48 +214,48 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is IronJaws)
+                if (actionID is 伶牙俐齿IronJaws)
                 {
 
-                    if (!LevelChecked(IronJaws))
+                    if (!LevelChecked(伶牙俐齿IronJaws))
                     {
-                        Status? venomous = FindTargetEffect(Debuffs.VenomousBite);
-                        Status? windbite = FindTargetEffect(Debuffs.Windbite);
-                        float venomRemaining = GetDebuffRemainingTime(Debuffs.VenomousBite);
-                        float windRemaining = GetDebuffRemainingTime(Debuffs.Windbite);
+                        Status? venomous = FindTargetEffect(Debuffs.毒VenomousBite);
+                        Status? windbite = FindTargetEffect(Debuffs.风Windbite);
+                        float venomRemaining = GetDebuffRemainingTime(Debuffs.毒VenomousBite);
+                        float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
 
                         if (venomous is not null && windbite is not null)
                         {
-                            if (LevelChecked(VenomousBite) && venomRemaining < windRemaining)
-                                return VenomousBite;
-                            if (LevelChecked(Windbite))
-                                return Windbite;
+                            if (LevelChecked(毒咬箭VenomousBite) && venomRemaining < windRemaining)
+                                return 毒咬箭VenomousBite;
+                            if (LevelChecked(风蚀箭Windbite))
+                                return 风蚀箭Windbite;
                         }
 
-                        if (LevelChecked(VenomousBite) && (!LevelChecked(Windbite) || windbite is not null))
-                            return VenomousBite;
-                        if (LevelChecked(Windbite))
-                            return Windbite;
+                        if (LevelChecked(毒咬箭VenomousBite) && (!LevelChecked(风蚀箭Windbite) || windbite is not null))
+                            return 毒咬箭VenomousBite;
+                        if (LevelChecked(风蚀箭Windbite))
+                            return 风蚀箭Windbite;
                     }
 
                     if (!LevelChecked(Stormbite))
                     {
-                        bool venomous = TargetHasEffect(Debuffs.VenomousBite);
-                        bool windbite = TargetHasEffect(Debuffs.Windbite);
+                        bool venomous = TargetHasEffect(Debuffs.毒VenomousBite);
+                        bool windbite = TargetHasEffect(Debuffs.风Windbite);
 
-                        if (LevelChecked(IronJaws) && venomous && windbite)
-                            return IronJaws;
-                        if (LevelChecked(VenomousBite) && windbite)
-                            return VenomousBite;
-                        if (LevelChecked(Windbite))
-                            return Windbite;
+                        if (LevelChecked(伶牙俐齿IronJaws) && venomous && windbite)
+                            return 伶牙俐齿IronJaws;
+                        if (LevelChecked(毒咬箭VenomousBite) && windbite)
+                            return 毒咬箭VenomousBite;
+                        if (LevelChecked(风蚀箭Windbite))
+                            return 风蚀箭Windbite;
                     }
 
-                    bool caustic = TargetHasEffect(Debuffs.CausticBite);
+                    bool caustic = TargetHasEffect(Debuffs.烈毒咬箭CausticBite);
                     bool stormbite = TargetHasEffect(Debuffs.Stormbite);
 
-                    if (LevelChecked(IronJaws) && caustic && stormbite)
-                        return IronJaws;
+                    if (LevelChecked(伶牙俐齿IronJaws) && caustic && stormbite)
+                        return 伶牙俐齿IronJaws;
                     if (LevelChecked(CausticBite) && stormbite)
                         return CausticBite;
                     if (LevelChecked(Stormbite))
@@ -282,52 +282,52 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is IronJaws)
+                if (actionID is 伶牙俐齿IronJaws)
                 {
-                    if (!LevelChecked(IronJaws))
+                    if (!LevelChecked(伶牙俐齿IronJaws))
                     {
-                        Status? venomous = FindTargetEffect(Debuffs.VenomousBite);
-                        Status? windbite = FindTargetEffect(Debuffs.Windbite);
+                        Status? venomous = FindTargetEffect(Debuffs.毒VenomousBite);
+                        Status? windbite = FindTargetEffect(Debuffs.风Windbite);
 
                         if (venomous is not null && windbite is not null)
                         {
-                            float venomRemaining = GetDebuffRemainingTime(Debuffs.VenomousBite);
-                            float windRemaining = GetDebuffRemainingTime(Debuffs.Windbite);
+                            float venomRemaining = GetDebuffRemainingTime(Debuffs.毒VenomousBite);
+                            float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
 
-                            if (LevelChecked(VenomousBite) && venomRemaining < windRemaining)
-                                return VenomousBite;
-                            if (LevelChecked(Windbite))
-                                return Windbite;
+                            if (LevelChecked(毒咬箭VenomousBite) && venomRemaining < windRemaining)
+                                return 毒咬箭VenomousBite;
+                            if (LevelChecked(风蚀箭Windbite))
+                                return 风蚀箭Windbite;
                         }
 
-                        if (LevelChecked(VenomousBite) && (!LevelChecked(Windbite) || windbite is not null))
-                            return VenomousBite;
-                        if (LevelChecked(Windbite))
-                            return Windbite;
+                        if (LevelChecked(毒咬箭VenomousBite) && (!LevelChecked(风蚀箭Windbite) || windbite is not null))
+                            return 毒咬箭VenomousBite;
+                        if (LevelChecked(风蚀箭Windbite))
+                            return 风蚀箭Windbite;
                     }
 
                     if (!LevelChecked(Stormbite))
                     {
-                        bool venomous = TargetHasEffect(Debuffs.VenomousBite);
-                        bool windbite = TargetHasEffect(Debuffs.Windbite);
-                        float venomRemaining = GetDebuffRemainingTime(Debuffs.VenomousBite);
-                        float windRemaining = GetDebuffRemainingTime(Debuffs.Windbite);
+                        bool venomous = TargetHasEffect(Debuffs.毒VenomousBite);
+                        bool windbite = TargetHasEffect(Debuffs.风Windbite);
+                        float venomRemaining = GetDebuffRemainingTime(Debuffs.毒VenomousBite);
+                        float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
 
-                        if (LevelChecked(IronJaws) && venomous && windbite && (venomRemaining < 4 || windRemaining < 4))
-                            return IronJaws;
-                        if (LevelChecked(VenomousBite) && windbite)
-                            return VenomousBite;
-                        if (LevelChecked(Windbite))
-                            return Windbite;
+                        if (LevelChecked(伶牙俐齿IronJaws) && venomous && windbite && (venomRemaining < 4 || windRemaining < 4))
+                            return 伶牙俐齿IronJaws;
+                        if (LevelChecked(毒咬箭VenomousBite) && windbite)
+                            return 毒咬箭VenomousBite;
+                        if (LevelChecked(风蚀箭Windbite))
+                            return 风蚀箭Windbite;
                     }
 
-                    bool caustic = TargetHasEffect(Debuffs.CausticBite);
+                    bool caustic = TargetHasEffect(Debuffs.烈毒咬箭CausticBite);
                     bool stormbite = TargetHasEffect(Debuffs.Stormbite);
-                    float causticRemaining = GetDebuffRemainingTime(Debuffs.CausticBite);
+                    float causticRemaining = GetDebuffRemainingTime(Debuffs.烈毒咬箭CausticBite);
                     float stormRemaining = GetDebuffRemainingTime(Debuffs.Stormbite);
 
-                    if (LevelChecked(IronJaws) && caustic && stormbite && (causticRemaining < 4 || stormRemaining < 4))
-                        return IronJaws;
+                    if (LevelChecked(伶牙俐齿IronJaws) && caustic && stormbite && (causticRemaining < 4 || stormRemaining < 4))
+                        return 伶牙俐齿IronJaws;
                     if (LevelChecked(CausticBite) && stormbite)
                         return CausticBite;
                     if (LevelChecked(Stormbite))
@@ -634,6 +634,9 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BRD_ST_AdvMode;
             internal static bool inOpener = false;
+            /// <summary>
+            /// 这个好像没什么卵用
+            /// </summary>
             internal static bool openerFinished = false;
             internal static byte step = 0;
             internal static byte subStep = 0;
@@ -842,13 +845,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (isEnemyHealthHigh)
                     {
-                        bool venomous = TargetHasEffect(Debuffs.VenomousBite);
-                        bool windbite = TargetHasEffect(Debuffs.Windbite);
-                        bool caustic = TargetHasEffect(Debuffs.CausticBite);
+                        bool venomous = TargetHasEffect(Debuffs.毒VenomousBite);
+                        bool windbite = TargetHasEffect(Debuffs.风Windbite);
+                        bool caustic = TargetHasEffect(Debuffs.烈毒咬箭CausticBite);
                         bool stormbite = TargetHasEffect(Debuffs.Stormbite);
-                        float venomRemaining = GetDebuffRemainingTime(Debuffs.VenomousBite);
-                        float windRemaining = GetDebuffRemainingTime(Debuffs.Windbite);
-                        float causticRemaining = GetDebuffRemainingTime(Debuffs.CausticBite);
+                        float venomRemaining = GetDebuffRemainingTime(Debuffs.毒VenomousBite);
+                        float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
+                        float causticRemaining = GetDebuffRemainingTime(Debuffs.烈毒咬箭CausticBite);
                         float stormRemaining = GetDebuffRemainingTime(Debuffs.Stormbite);
                         float ragingStrikesDuration = GetBuffRemainingTime(Buffs.RagingStrikes);
                         float radiantFinaleDuration = GetBuffRemainingTime(Buffs.RadiantFinale);
@@ -866,40 +869,44 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.BRD_Adv_DoT))
                         {
-                            if (ActionReady(IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_RagingJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
-                            {
-                                openerFinished = true;
-                                return IronJaws;
-                            }
 
                             if (LevelChecked(Stormbite) && !stormbite)
                                 return Stormbite;
                             if (LevelChecked(CausticBite) && !caustic)
                                 return CausticBite;
-                            if (LevelChecked(Windbite) && !windbite && !LevelChecked(Stormbite))
-                                return Windbite;
-                            if (LevelChecked(VenomousBite) && !venomous && !LevelChecked(CausticBite))
-                                return VenomousBite;
+                            if (LevelChecked(风蚀箭Windbite) && !windbite && !LevelChecked(Stormbite))
+                                return 风蚀箭Windbite;
+                            if (LevelChecked(毒咬箭VenomousBite) && !venomous && !LevelChecked(CausticBite))
+                                return 毒咬箭VenomousBite;
 
-                            if (ActionReady(IronJaws) && poisonRecast(4) && windRecast(4))
-                            {
-                                openerFinished = true;
-                                return IronJaws;
-                            }
-                            if (!LevelChecked(IronJaws))
+                           
+                            if (!LevelChecked(伶牙俐齿IronJaws))
                             {
                                 if (windbite && windRemaining < 4)
                                 {
                                     openerFinished = true;
-                                    return Windbite;
+                                    return 风蚀箭Windbite;
                                 }
 
                                 if (venomous && venomRemaining < 4)
                                 {
                                     openerFinished = true;
-                                    return VenomousBite;
+                                    return 毒咬箭VenomousBite;
                                 }
                             }
+                        }
+                        
+                        if (ActionReady(伶牙俐齿IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_IronJaws) && poisonRecast(4) && windRecast(4))
+                        {
+                            openerFinished = true;
+                            return 伶牙俐齿IronJaws;
+                        }
+                        
+                        
+                        if (ActionReady(伶牙俐齿IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_RagingJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
+                        {
+                            openerFinished = true;
+                            return 伶牙俐齿IronJaws;
                         }
                     }
 
@@ -1378,13 +1385,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (isEnemyHealthHigh)
                     {
-                        bool venomous = TargetHasEffect(Debuffs.VenomousBite);
-                        bool windbite = TargetHasEffect(Debuffs.Windbite);
-                        bool caustic = TargetHasEffect(Debuffs.CausticBite);
+                        bool venomous = TargetHasEffect(Debuffs.毒VenomousBite);
+                        bool windbite = TargetHasEffect(Debuffs.风Windbite);
+                        bool caustic = TargetHasEffect(Debuffs.烈毒咬箭CausticBite);
                         bool stormbite = TargetHasEffect(Debuffs.Stormbite);
-                        float venomRemaining = GetDebuffRemainingTime(Debuffs.VenomousBite);
-                        float windRemaining = GetDebuffRemainingTime(Debuffs.Windbite);
-                        float causticRemaining = GetDebuffRemainingTime(Debuffs.CausticBite);
+                        float venomRemaining = GetDebuffRemainingTime(Debuffs.毒VenomousBite);
+                        float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
+                        float causticRemaining = GetDebuffRemainingTime(Debuffs.烈毒咬箭CausticBite);
                         float stormRemaining = GetDebuffRemainingTime(Debuffs.Stormbite);
                         float ragingStrikesDuration = GetBuffRemainingTime(Buffs.RagingStrikes);
                         float radiantFinaleDuration = GetBuffRemainingTime(Buffs.RadiantFinale);
@@ -1394,38 +1401,38 @@ namespace XIVSlothComboX.Combos.PvE
 
                         DotRecast windRecast = delegate(int duration) { return (windbite && windRemaining < duration) || (stormbite && stormRemaining < duration); };
 
-                        if (ActionReady(IronJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
+                        if (ActionReady(伶牙俐齿IronJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
                         {
                             openerFinished = true;
-                            return IronJaws;
+                            return 伶牙俐齿IronJaws;
                         }
 
                         if (LevelChecked(Stormbite) && !stormbite)
                             return Stormbite;
                         if (LevelChecked(CausticBite) && !caustic)
                             return CausticBite;
-                        if (LevelChecked(Windbite) && !windbite && !LevelChecked(Stormbite))
-                            return Windbite;
-                        if (LevelChecked(VenomousBite) && !venomous && !LevelChecked(CausticBite))
-                            return VenomousBite;
+                        if (LevelChecked(风蚀箭Windbite) && !windbite && !LevelChecked(Stormbite))
+                            return 风蚀箭Windbite;
+                        if (LevelChecked(毒咬箭VenomousBite) && !venomous && !LevelChecked(CausticBite))
+                            return 毒咬箭VenomousBite;
 
-                        if (ActionReady(IronJaws) && poisonRecast(4) && windRecast(4))
+                        if (ActionReady(伶牙俐齿IronJaws) && poisonRecast(4) && windRecast(4))
                         {
                             openerFinished = true;
-                            return IronJaws;
+                            return 伶牙俐齿IronJaws;
                         }
-                        if (!LevelChecked(IronJaws))
+                        if (!LevelChecked(伶牙俐齿IronJaws))
                         {
                             if (windbite && windRemaining < 4)
                             {
                                 openerFinished = true;
-                                return Windbite;
+                                return 风蚀箭Windbite;
                             }
 
                             if (venomous && venomRemaining < 4)
                             {
                                 openerFinished = true;
-                                return VenomousBite;
+                                return 毒咬箭VenomousBite;
                             }
                         }
 

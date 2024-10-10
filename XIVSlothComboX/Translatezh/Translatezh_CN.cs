@@ -106,7 +106,7 @@ public class Translatezh_CN
         {"Adds every single target ability to one button,\nIf there are DoTs on target, will try to maintain their uptime." , "将所有单目标技能添加到一个按钮中，\n如果目标身上有DoT效果，将尝试保持它们的持续时间。"  },
         {"Simple Mode - AoE" , "简单模式 - AoE"  },
         {"Weaves oGCDs onto Quick Nock/Ladonsbite." , "将非GCD技能编织到连珠箭/百首龙牙箭中。"  },
-        {"Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime." , "将所有单目标技能添加到一个按钮中，\n如果目标身上有DoT效果，Simple Bard将尝试保持它们的持续时间。"  },
+        {"Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime." , "如果目标身上有DoT效果，Simple Bard将尝试保持它们的持续时间。"  },
         {"Apex Arrow Option" , "绝峰箭选项"  },
         {"Replaces Burst Shot with Apex Arrow when gauge is full and Blast Arrow when you are Blast Arrow ready." , "当能量槽满时，用绝峰箭替换爆裂爆发射击，当你准备好爆破箭时，用爆破箭替换。"  },
         {"oGcd Option" , "非GCD选项"  },
