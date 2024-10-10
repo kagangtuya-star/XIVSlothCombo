@@ -163,8 +163,14 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (CanSpellWeavePlus(actionID,  0.5f))
                         {
-                            if (战逃反映判断(lastComboActionID, comboTime) && LocalPlayer?.CurrentMp >= 3000)
-                                return OriginalHook(战逃反应FightOrFlight);
+                            if (战逃反映判断(lastComboActionID, comboTime))
+                            {
+                                if (安魂祈祷Requiescat.LevelChecked() && LocalPlayer?.CurrentMp >= 3000)
+                                {
+                                    return OriginalHook(战逃反应FightOrFlight);
+                                }
+
+                            }
 
                             if (ActionReady(安魂祈祷Requiescat))
                             {
@@ -473,6 +479,12 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_FoF) && ActionReady(战逃反应FightOrFlight))
                 {
+
+                    if (安魂祈祷Requiescat.LevelChecked() == false)
+                    {
+                        return true;
+                    }
+
                     //  战逃内 打三下赎罪剑
                     if (GetBuffRemainingTime(Buffs.赎罪剑Atonement1BUFF) >= 14)
                     {
