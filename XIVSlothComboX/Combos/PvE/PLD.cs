@@ -169,6 +169,10 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     return OriginalHook(战逃反应FightOrFlight);
                                 }
+                                else
+                                {
+                                    return OriginalHook(战逃反应FightOrFlight);
+                                }
 
                             }
 
