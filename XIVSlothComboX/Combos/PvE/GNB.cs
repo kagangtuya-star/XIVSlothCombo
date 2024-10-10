@@ -1281,7 +1281,10 @@ namespace XIVSlothComboX.Combos.PvE
                                 return 命运之环FatedCircle;
                             }
 
-                            return 恶魔杀DemonSlaughter;
+                            if (恶魔杀DemonSlaughter.LevelChecked())
+                            {
+                                return 恶魔杀DemonSlaughter;
+                            }
                         }
 
                         return 恶魔切DemonSlice;
