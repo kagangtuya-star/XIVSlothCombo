@@ -620,7 +620,7 @@ namespace XIVSlothComboX.Combos
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
         [ConflictingCombos(BRD_ST_SimpleMode)]
         [CustomComboInfo("高级模式-单目标", "Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime.", BRD.JobID, 3)]
-            BRD_ST_AdvMode = 3009,
+        BRD_ST_AdvMode = 3009,
 
 
 
@@ -629,7 +629,15 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("高级模式-AOE", "连珠箭/百首龙牙箭 插入能力技。", BRD.JobID, 4)]
         BRD_AoE_AdvMode = 3015,
 
-
+        [ParentCombo(BRD_AoE_AdvMode)]
+        [CustomComboInfo("Resonant Option", "Adds Resonant Arrow to the Rotation after Barrage.", BRD.JobID)]
+        BRD_AoE_BuffsResonant = 30411,
+        
+        
+        [ParentCombo(BRD_AoE_AdvMode)]
+        [CustomComboInfo("Encore Option", "Adds Radiant Encore to the Rotation after Finale.", BRD.JobID)]
+        BRD_AoE_BuffsEncore = 30421,
+        
         [ReplaceSkill(BRD.HeavyShot, BRD.BurstShot)]
         [ConflictingCombos(BRD_ST_AdvMode, BRD_ST_SimpleMode)]
         [CustomComboInfo("直线射击 替换 强力射击 选项", "触发直线射击预备状态时，替换强力射击/爆发射击为直线射击/辉煌箭。", BRD.JobID, 5)]
@@ -782,8 +790,8 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("治疗 选项", "在下水道使用治疗当HP低于某个值", BRD.JobID)]
         BRD_Variant_Cure = 3031,
 
-        [ParentCombo(BRD_AoE_Adv_Songs)]
-        [CustomComboInfo("Simple AoE Buffs Option", "Adds buffs onto the Simple AoE Bard feature.", BRD.JobID)]
+        [ParentCombo(BRD_AoE_AdvMode)]
+        [CustomComboInfo("Simple AoE Buffs Option", "纷乱箭、猛者、战斗之声、光明神", BRD.JobID,1)]
         BRD_AoE_Adv_Buffs = 3032,
 
         [ParentCombo(BRD_AoE_AdvMode)]
