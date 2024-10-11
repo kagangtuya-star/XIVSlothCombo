@@ -2358,7 +2358,7 @@ namespace XIVSlothComboX.Combos
         #endregion
         #region Simple ST
 
-        [ReplaceSkill(RPR.Slice)]
+        [ReplaceSkill(RPR.切割Slice)]
         [ConflictingCombos(RPR_ST_AdvancedMode)]
         [CustomComboInfo("Simple Mode - Single Target", "Replaces Slice with a one-button full single target rotation.\nThis is ideal for newcomers to the job.", RPR.JobID)]
         RPR_ST_SimpleMode = 12000,
@@ -2367,7 +2367,7 @@ namespace XIVSlothComboX.Combos
 
         #region Advanced ST
 
-        [ReplaceSkill(RPR.Slice)]
+        [ReplaceSkill(RPR.切割Slice)]
         [CustomComboInfo("Advanced Mode - Single Target", "Replaces Slice with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation.", RPR.JobID)]
         RPR_ST_AdvancedMode = 12001,
 
@@ -2548,7 +2548,7 @@ namespace XIVSlothComboX.Combos
 
         #region Blood Stalk/Grim Swathe Combo Section
 
-        [ReplaceSkill(RPR.BloodStalk, RPR.GrimSwathe)]
+        [ReplaceSkill(RPR.隐匿挥割BloodStalk, RPR.GrimSwathe)]
         [CustomComboInfo("Gluttony on Blood Stalk/Grim Swathe Feature", "Blood Stalk and Grim Swathe will turn into Gluttony when it is available.", RPR.JobID)]
         RPR_GluttonyBloodSwathe = 12200,
 
@@ -2577,7 +2577,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Regress Feature", "Changes both Hell's Ingress and Hell's Egress turn into Regress when Threshold is active.", RPR.JobID)]
         RPR_Regress = 12301,
 
-        [ReplaceSkill(RPR.Slice, RPR.SpinningScythe, RPR.ShadowOfDeath, RPR.Harpe, RPR.BloodStalk)]
+        [ReplaceSkill(RPR.切割Slice, RPR.SpinningScythe, RPR.死亡之影ShadowOfDeath, RPR.Harpe, RPR.隐匿挥割BloodStalk)]
         [CustomComboInfo("Soulsow Reminder Feature", "Adds Soulsow to the skills selected below when out of combat. \nWill also add Soulsow to Harpe when in combat and no target is selected.", RPR.JobID)]
         RPR_Soulsow = 12302,
 
@@ -2586,11 +2586,11 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Harpe Harvest Moon Feature", "Replaces Harpe with Harvest Moon when you are in combat with Soulsow active.", RPR.JobID)]
         RPR_Soulsow_HarpeHarvestMoon = 12303,
 
-        [ReplaceSkill(RPR.Enshroud)]
+        [ReplaceSkill(RPR.夜游魂衣Enshroud)]
         [CustomComboInfo("Enshroud Protection Feature", "Turns Enshroud into Gibbet/Gallows to protect Soul Reaver waste.", RPR.JobID)]
         RPR_EnshroudProtection = 12306,
 
-        [ReplaceSkill(RPR.Gibbet, RPR.Gallows, RPR.Guillotine)]
+        [ReplaceSkill(RPR.绞决Gibbet, RPR.缢杀Gallows, RPR.Guillotine)]
         [CustomComboInfo("Communio on Gibbet/Gallows and Guillotine Feature", "Adds Communio to Gibbet/Gallows and Guillotine.", RPR.JobID)]
         RPR_CommunioOnGGG = 12307,
 
@@ -2598,7 +2598,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Lemure's Slice/Scythe Option", "Adds Lemure's Slice to Gibbet/Gallows and Lemure's Scythe to Guillotine.", RPR.JobID)]
         RPR_LemureOnGGG = 12308,
 
-        [ReplaceSkill(RPR.Enshroud)]
+        [ReplaceSkill(RPR.夜游魂衣Enshroud)]
         [CustomComboInfo("Enshroud to Communio Feature", "Turns Enshroud to Communio when available to use.", RPR.JobID)]
         RPR_EnshroudCommunio = 12309,
 

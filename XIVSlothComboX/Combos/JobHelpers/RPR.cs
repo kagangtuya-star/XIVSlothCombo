@@ -22,7 +22,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (!ActionReady(ArcaneCircle))
                     return false;
 
-                if (!ActionReady(Gluttony))
+                if (!ActionReady(暴食Gluttony))
                     return false;
 
                 return true;
@@ -82,8 +82,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
                 {
-                    if (WasLastAction(ShadowOfDeath) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
-                    else if (PrePullStep == 1) actionID = ShadowOfDeath;
+                    if (WasLastAction(死亡之影ShadowOfDeath) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
+                    else if (PrePullStep == 1) actionID = 死亡之影ShadowOfDeath;
 
                     if (ActionWatching.CombatActions.Count > 2 && InCombat())
                         CurrentState = OpenerState.FailedOpener;
@@ -107,8 +107,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(ArcaneCircle) && OpenerStep == 2) OpenerStep++;
                     else if (OpenerStep == 2) actionID = ArcaneCircle;
 
-                    if (WasLastAction(Gluttony) && OpenerStep == 3) OpenerStep++;
-                    else if (OpenerStep == 3) actionID = Gluttony;
+                    if (WasLastAction(暴食Gluttony) && OpenerStep == 3) OpenerStep++;
+                    else if (OpenerStep == 3) actionID = 暴食Gluttony;
 
                     if (WasLastAction(ExecutionersGibbet) && OpenerStep == 4) OpenerStep++;
                     else if (OpenerStep == 4) actionID = ExecutionersGibbet;
@@ -116,11 +116,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(ExecutionersGallows) && OpenerStep == 5) OpenerStep++;
                     else if (OpenerStep == 5) actionID = ExecutionersGallows;
 
-                    if (WasLastAction(PlentifulHarvest) && OpenerStep == 6) OpenerStep++;
-                    else if (OpenerStep == 6) actionID = PlentifulHarvest;
+                    if (WasLastAction(大丰收PlentifulHarvest) && OpenerStep == 6) OpenerStep++;
+                    else if (OpenerStep == 6) actionID = 大丰收PlentifulHarvest;
 
-                    if (WasLastAction(Enshroud) && OpenerStep == 7) OpenerStep++;
-                    else if (OpenerStep == 7) actionID = Enshroud;
+                    if (WasLastAction(夜游魂衣Enshroud) && OpenerStep == 7) OpenerStep++;
+                    else if (OpenerStep == 7) actionID = 夜游魂衣Enshroud;
 
                     if (WasLastAction(VoidReaping) && OpenerStep == 8) OpenerStep++;
                     else if (OpenerStep == 8) actionID = VoidReaping;
@@ -155,19 +155,19 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(UnveiledGibbet) && OpenerStep == 18) OpenerStep++;
                     else if (OpenerStep == 18) actionID = UnveiledGibbet;
 
-                    if (WasLastAction(Gibbet) && OpenerStep == 19) OpenerStep++;
-                    else if (OpenerStep == 19) actionID = Gibbet;
+                    if (WasLastAction(绞决Gibbet) && OpenerStep == 19) OpenerStep++;
+                    else if (OpenerStep == 19) actionID = 绞决Gibbet;
 
-                    if (WasLastAction(ShadowOfDeath) && OpenerStep == 20) OpenerStep++;
-                    else if (OpenerStep == 20) actionID = ShadowOfDeath;
+                    if (WasLastAction(死亡之影ShadowOfDeath) && OpenerStep == 20) OpenerStep++;
+                    else if (OpenerStep == 20) actionID = 死亡之影ShadowOfDeath;
 
-                    if (WasLastAction(Slice) && OpenerStep == 21) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == 21) actionID = Slice;
+                    if (WasLastAction(切割Slice) && OpenerStep == 21) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == 21) actionID = 切割Slice;
 
                     if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
                         CurrentState = OpenerState.FailedOpener;
 
-                    if (((actionID == SoulSlice && GetRemainingCharges(SoulSlice) == 0) || (actionID == ArcaneCircle && IsOnCooldown(ArcaneCircle)) || (actionID == Gluttony && IsOnCooldown(Gluttony))) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    if (((actionID == SoulSlice && GetRemainingCharges(SoulSlice) == 0) || (actionID == ArcaneCircle && IsOnCooldown(ArcaneCircle)) || (actionID == 暴食Gluttony && IsOnCooldown(暴食Gluttony))) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                     {
                         CurrentState = OpenerState.FailedOpener;
                         return false;
@@ -211,7 +211,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
         {
             public unsafe static bool IsComboExpiring(float Times)
             {
-                float GCD = GetCooldown(Slice).CooldownTotal * Times;
+                float GCD = GetCooldown(切割Slice).CooldownTotal * Times;
 
                 if (ActionManager.Instance()->Combo.Timer != 0 && ActionManager.Instance()->Combo.Timer < GCD)
                     return true;
@@ -221,7 +221,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             public static bool IsBuffExpiring(float Times)
             {
-                float GCD = GetCooldown(Slice).CooldownTotal * Times;
+                float GCD = GetCooldown(切割Slice).CooldownTotal * Times;
 
                 if ((HasEffect(Buffs.EnhancedGallows) && GetBuffRemainingTime(Buffs.EnhancedGallows) < GCD) || (HasEffect(Buffs.EnhancedGibbet) && GetBuffRemainingTime(Buffs.EnhancedGibbet) < GCD))
                     return true;
@@ -231,7 +231,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             public static bool IsDebuffExpiring(float Times)
             {
-                float GCD = GetCooldown(Slice).CooldownTotal * Times;
+                float GCD = GetCooldown(切割Slice).CooldownTotal * Times;
 
                 if (TargetHasEffect(Debuffs.DeathsDesign) && GetDebuffRemainingTime(Debuffs.DeathsDesign) < GCD)
                     return true;
@@ -241,12 +241,12 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             public static bool UseEnshroud(RPRGauge gauge)
             {
-                float GCD = GetCooldown(Slice).CooldownTotal;
+                float GCD = GetCooldown(切割Slice).CooldownTotal;
 
-                if (LevelChecked(Enshroud) && (gauge.Shroud >= 50 || HasEffect(Buffs.IdealHost)) && !HasEffect(Buffs.SoulReaver) && !HasEffect(Buffs.Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.Enshrouded))
+                if (LevelChecked(夜游魂衣Enshroud) && (gauge.Shroud >= 50 || HasEffect(Buffs.IdealHost)) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.夜游魂Enshrouded))
                 {
                     // Before Plentiful Harvest 
-                    if (!LevelChecked(PlentifulHarvest))
+                    if (!LevelChecked(大丰收PlentifulHarvest))
                         return true;
 
                     // Shroud in Arcane Circle 
@@ -254,11 +254,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         return true;
 
                     // Prep for double Enshroud
-                    if (LevelChecked(PlentifulHarvest) && GetCooldownRemainingTime(ArcaneCircle) <= (GCD * 2) + 1.5)
+                    if (LevelChecked(大丰收PlentifulHarvest) && GetCooldownRemainingTime(ArcaneCircle) <= (GCD * 2) + 1.5)
                         return true;
 
                     //2nd part of Double Enshroud
-                    if (LevelChecked(PlentifulHarvest) && WasLastWeaponskill(PlentifulHarvest))
+                    if (LevelChecked(大丰收PlentifulHarvest) && WasLastWeaponskill(大丰收PlentifulHarvest))
                         return true;
 
                     //Natural Odd Minute Shrouds
@@ -274,17 +274,17 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             public static bool UseShadowOfDeath()
             {
-                float GCD = GetCooldown(Slice).CooldownTotal;
+                float GCD = GetCooldown(切割Slice).CooldownTotal;
 
-                if (LevelChecked(ShadowOfDeath) && !HasEffect(Buffs.SoulReaver) && !HasEffect(Buffs.Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.ImmortalSacrifice) && !IsComboExpiring(1) && !JustUsed(Perfectio) && !JustUsed(ShadowOfDeath))
+                if (LevelChecked(死亡之影ShadowOfDeath) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.ImmortalSacrifice) && !IsComboExpiring(1) && !JustUsed(Perfectio) && !JustUsed(死亡之影ShadowOfDeath))
                 {
-                    if (LevelChecked(PlentifulHarvest) && HasEffect(Buffs.Enshrouded) && GetCooldownRemainingTime(ArcaneCircle) <= (GCD * 2) + 1.5 && JustUsed(Enshroud))
+                    if (LevelChecked(大丰收PlentifulHarvest) && HasEffect(Buffs.夜游魂Enshrouded) && GetCooldownRemainingTime(ArcaneCircle) <= (GCD * 2) + 1.5 && JustUsed(夜游魂衣Enshroud))
                         return true;
 
-                    if (LevelChecked(PlentifulHarvest) && HasEffect(Buffs.Enshrouded) && ((GetCooldownRemainingTime(ArcaneCircle) <= GCD) || IsOffCooldown(ArcaneCircle)) && (JustUsed(VoidReaping) || JustUsed(CrossReaping)))
+                    if (LevelChecked(大丰收PlentifulHarvest) && HasEffect(Buffs.夜游魂Enshrouded) && ((GetCooldownRemainingTime(ArcaneCircle) <= GCD) || IsOffCooldown(ArcaneCircle)) && (JustUsed(VoidReaping) || JustUsed(CrossReaping)))
                         return true;
 
-                    if (!HasEffect(Buffs.Enshrouded) && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.DeathsDesign) <= 8) || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.DeathsDesign) <= Config.RPR_SoDRefreshRange)) && ((GetCooldownRemainingTime(ArcaneCircle) > GCD * 8) || IsOffCooldown(ArcaneCircle) || !LevelChecked(ArcaneCircle)))
+                    if (!HasEffect(Buffs.夜游魂Enshrouded) && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.DeathsDesign) <= 8) || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.DeathsDesign) <= Config.RPR_SoDRefreshRange)) && ((GetCooldownRemainingTime(ArcaneCircle) > GCD * 8) || IsOffCooldown(ArcaneCircle) || !LevelChecked(ArcaneCircle)))
                         return true;
 
                 }
