@@ -458,12 +458,12 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (IsEnabled(CustomComboPreset.VPR_ST_VicewinderCombo1))
                         {
-                            if (VicewinderReady || SwiftskinsCoilReady && !HasEffect(Buffs.HuntersInstinct))
+                            if ((VicewinderReady || SwiftskinsCoilReady) && !HasEffect(Buffs.HuntersInstinct))
                             {
                                 return 猛袭喷蛇HuntersCoil;
                             }
 
-                            if (VicewinderReady || HuntersCoilReady && !HasEffect(Buffs.HuntersInstinct))
+                            if ((VicewinderReady || HuntersCoilReady) && !HasEffect(Buffs.HuntersInstinct))
                             {
                                 return 极速盘蛇SwiftskinsCoil;
                             } 

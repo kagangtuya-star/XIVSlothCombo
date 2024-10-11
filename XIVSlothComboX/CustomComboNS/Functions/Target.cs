@@ -225,8 +225,10 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static bool TargetNeedsPositionals()
         {
-            if (!HasBattleTarget()) return false;
-            if (TargetHasEffectAny(3808)) return false; // Directional Disregard Effect (Patch 7.01)
+            if (!HasBattleTarget()) 
+                return false;
+            if (TargetHasEffectAny(3808)) 
+                return false; // Directional Disregard Effect (Patch 7.01)
             if (ActionWatching.BNpcSheet.TryGetValue(CurrentTarget.DataId, out var bnpc) && !bnpc.Unknown10)
                 return true;
             return false;
