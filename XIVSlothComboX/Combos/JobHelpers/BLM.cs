@@ -14,13 +14,13 @@ namespace XIVSlothComboX.Combos.JobHelpers
     {
         private static bool HasCooldowns()
         {
-            if (CustomComboFunctions.GetRemainingCharges(Triplecast) < 2)
+            if (CustomComboFunctions.GetRemainingCharges(三连咏唱Triplecast) < 2)
                 return false;
             if (!CustomComboFunctions.ActionReady(Manafont))
                 return false;
             if (!CustomComboFunctions.ActionReady(All.Swiftcast))
                 return false;
-            if (!CustomComboFunctions.ActionReady(Amplifier))
+            if (!CustomComboFunctions.ActionReady(详述Amplifier))
                 return false;
             if (!CustomComboFunctions.ActionReady(All.LucidDreaming) &&
                 Config.BLM_Advanced_OpenerSelection == 1)
@@ -132,8 +132,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.LocalPlayer.CastActionId == Thunder3 && OpenerStep == 1) OpenerStep++;
                     else if (OpenerStep == 1) actionID = Thunder3;
 
-                    if (CustomComboFunctions.WasLastAction(Triplecast) && OpenerStep == 2) OpenerStep++;
-                    else if (OpenerStep == 2) actionID = Triplecast;
+                    if (CustomComboFunctions.WasLastAction(三连咏唱Triplecast) && OpenerStep == 2) OpenerStep++;
+                    else if (OpenerStep == 2) actionID = 三连咏唱Triplecast;
 
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 2 && OpenerStep == 3) OpenerStep++;
                     else if (OpenerStep == 3) actionID = Fire4;
@@ -141,8 +141,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 1 && OpenerStep == 4) OpenerStep++;
                     else if (OpenerStep == 4) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(Amplifier) && OpenerStep == 5) OpenerStep++;
-                    else if (OpenerStep == 5) actionID = Amplifier;
+                    if (CustomComboFunctions.WasLastAction(详述Amplifier) && OpenerStep == 5) OpenerStep++;
+                    else if (OpenerStep == 5) actionID = 详述Amplifier;
 
                     if (CustomComboFunctions.WasLastAction(黑魔纹LeyLines) && OpenerStep == 6) OpenerStep++;
                     else if (OpenerStep == 6) actionID = 黑魔纹LeyLines;
@@ -156,11 +156,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Fire4) && OpenerStep == 9) OpenerStep++;
                     else if (OpenerStep == 9) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(Triplecast) && OpenerStep == 10) OpenerStep++;
-                    else if (OpenerStep == 10) actionID = Triplecast;
+                    if (CustomComboFunctions.WasLastAction(三连咏唱Triplecast) && OpenerStep == 10) OpenerStep++;
+                    else if (OpenerStep == 10) actionID = 三连咏唱Triplecast;
 
-                    if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 11) OpenerStep++;
-                    else if (OpenerStep == 11) actionID = Despair;
+                    if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 11) OpenerStep++;
+                    else if (OpenerStep == 11) actionID = 绝望Despair;
 
                     if (CustomComboFunctions.WasLastAction(Manafont) && OpenerStep == 12) OpenerStep++;
                     else if (OpenerStep == 12) actionID = Manafont;
@@ -171,14 +171,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Sharpcast) && OpenerStep == 14) OpenerStep++;
                     else if (OpenerStep == 14) actionID = Sharpcast;
 
-                    if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 15) OpenerStep++;
-                    else if (OpenerStep == 15) actionID = Despair;
+                    if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 15) OpenerStep++;
+                    else if (OpenerStep == 15) actionID = 绝望Despair;
 
                     if (CustomComboFunctions.WasLastAction(Blizzard3) && OpenerStep == 16) OpenerStep++;
                     else if (OpenerStep == 16) actionID = Blizzard3;
 
-                    if (CustomComboFunctions.WasLastAction(Xenoglossy) && OpenerStep == 17) OpenerStep++;
-                    else if (OpenerStep == 17) actionID = Xenoglossy;
+                    if (CustomComboFunctions.WasLastAction(异言Xenoglossy) && OpenerStep == 17) OpenerStep++;
+                    else if (OpenerStep == 17) actionID = 异言Xenoglossy;
 
                     if (CustomComboFunctions.WasLastAction(Paradox) && OpenerStep == 18) OpenerStep++;
                     else if (OpenerStep == 18) actionID = Paradox;
@@ -189,14 +189,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Thunder3) && OpenerStep == 20) CurrentState = OpenerState.OpenerFinished;
                     else if (OpenerStep == 20) actionID = Thunder3;
 
-                    if (((actionID == Triplecast && CustomComboFunctions.GetRemainingCharges(Triplecast) < 2) ||
-                        (actionID == Amplifier && CustomComboFunctions.IsOnCooldown(Amplifier)) ||
+                    if (((actionID == 三连咏唱Triplecast && CustomComboFunctions.GetRemainingCharges(三连咏唱Triplecast) < 2) ||
+                        (actionID == 详述Amplifier && CustomComboFunctions.IsOnCooldown(详述Amplifier)) ||
                         (actionID == 黑魔纹LeyLines && CustomComboFunctions.IsOnCooldown(黑魔纹LeyLines)) ||
                         (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                         (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                         (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
                         (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
-                        (actionID == Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                        (actionID == 异言Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                     {
                         CurrentState = OpenerState.FailedOpener;
                         return false;
@@ -212,8 +212,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.LocalPlayer.CastActionId == Fire4 && OpenerStep == 2) OpenerStep++;
                     else if (OpenerStep == 2) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(Triplecast) && OpenerStep == 3) OpenerStep++;
-                    else if (OpenerStep == 3) actionID = Triplecast;
+                    if (CustomComboFunctions.WasLastAction(三连咏唱Triplecast) && OpenerStep == 3) OpenerStep++;
+                    else if (OpenerStep == 3) actionID = 三连咏唱Triplecast;
 
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 2 && OpenerStep == 4) OpenerStep++;
                     else if (OpenerStep == 4) actionID = Fire4;
@@ -221,8 +221,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 1 && OpenerStep == 5) OpenerStep++;
                     else if (OpenerStep == 5) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(Amplifier) && OpenerStep == 6) OpenerStep++;
-                    else if (OpenerStep == 6) actionID = Amplifier;
+                    if (CustomComboFunctions.WasLastAction(详述Amplifier) && OpenerStep == 6) OpenerStep++;
+                    else if (OpenerStep == 6) actionID = 详述Amplifier;
 
                     if (CustomComboFunctions.WasLastAction(黑魔纹LeyLines) && OpenerStep == 7) OpenerStep++;
                     else if (OpenerStep == 7) actionID = 黑魔纹LeyLines;
@@ -230,14 +230,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 0 && OpenerStep == 8) OpenerStep++;
                     else if (OpenerStep == 8) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(Triplecast) && OpenerStep == 9) OpenerStep++;
-                    else if (OpenerStep == 9) actionID = Triplecast;
+                    if (CustomComboFunctions.WasLastAction(三连咏唱Triplecast) && OpenerStep == 9) OpenerStep++;
+                    else if (OpenerStep == 9) actionID = 三连咏唱Triplecast;
 
                     if (CustomComboFunctions.WasLastAction(All.LucidDreaming) && OpenerStep == 10) OpenerStep++;
                     else if (OpenerStep == 10) actionID = All.LucidDreaming;
 
-                    if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 11) OpenerStep++;
-                    else if (OpenerStep == 11) actionID = Despair;
+                    if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 11) OpenerStep++;
+                    else if (OpenerStep == 11) actionID = 绝望Despair;
 
                     if (CustomComboFunctions.WasLastAction(Manafont) && OpenerStep == 12) OpenerStep++;
                     else if (OpenerStep == 12) actionID = Manafont;
@@ -248,8 +248,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(Sharpcast) && OpenerStep == 14) OpenerStep++;
                     else if (OpenerStep == 14) actionID = Sharpcast;
 
-                    if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 15) OpenerStep++;
-                    else if (OpenerStep == 15) actionID = Despair;
+                    if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 15) OpenerStep++;
+                    else if (OpenerStep == 15) actionID = 绝望Despair;
 
                     if (CustomComboFunctions.WasLastAction(Transpose) && OpenerStep == 16) OpenerStep++;
                     else if (OpenerStep == 16) actionID = Transpose;
@@ -260,8 +260,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(All.Swiftcast) && OpenerStep == 18) OpenerStep++;
                     else if (OpenerStep == 18) actionID = All.Swiftcast;
 
-                    if (CustomComboFunctions.WasLastAction(Xenoglossy) && OpenerStep == 19) OpenerStep++;
-                    else if (OpenerStep == 19) actionID = Xenoglossy;
+                    if (CustomComboFunctions.WasLastAction(异言Xenoglossy) && OpenerStep == 19) OpenerStep++;
+                    else if (OpenerStep == 19) actionID = 异言Xenoglossy;
 
                     if ((CustomComboFunctions.LocalPlayer.CastActionId == Thunder3 || CustomComboFunctions.WasLastAction(Thunder3)) && OpenerStep == 20) OpenerStep++;
                     else if (OpenerStep == 20) actionID = Thunder3;
@@ -284,8 +284,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if ((CustomComboFunctions.LocalPlayer.CastActionId == Fire4 || CustomComboFunctions.WasLastAction(Fire4)) && OpenerStep == 26 && ActionWatching.CombatActions.Count == 26) OpenerStep++;
                     else if (OpenerStep == 26) actionID = Fire4;
 
-                    if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 27) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == 27) actionID = Despair;
+                    if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 27) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == 27) actionID = 绝望Despair;
                 }
 
                 if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
@@ -294,14 +294,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.GetResourceCost(actionID) > CustomComboFunctions.LocalPlayer.CurrentMp && ActionWatching.TimeSinceLastAction.TotalSeconds >= 2)
                     CurrentState = OpenerState.FailedOpener;
 
-                if (((actionID == Triplecast && CustomComboFunctions.GetRemainingCharges(Triplecast) < 2) ||
-                    (actionID == Amplifier && CustomComboFunctions.IsOnCooldown(Amplifier)) ||
+                if (((actionID == 三连咏唱Triplecast && CustomComboFunctions.GetRemainingCharges(三连咏唱Triplecast) < 2) ||
+                    (actionID == 详述Amplifier && CustomComboFunctions.IsOnCooldown(详述Amplifier)) ||
                     (actionID == 黑魔纹LeyLines && CustomComboFunctions.IsOnCooldown(黑魔纹LeyLines)) ||
                     (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
                     (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
-                    (actionID == Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    (actionID == 异言Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;
@@ -322,8 +322,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.LocalPlayer.CastActionId == Thunder3 && OpenerStep == 1) OpenerStep++;
                 else if (OpenerStep == 1) actionID = Thunder3;
 
-                if (CustomComboFunctions.WasLastAction(Triplecast) && OpenerStep == 2) OpenerStep++;
-                else if (OpenerStep == 2) actionID = Triplecast;
+                if (CustomComboFunctions.WasLastAction(三连咏唱Triplecast) && OpenerStep == 2) OpenerStep++;
+                else if (OpenerStep == 2) actionID = 三连咏唱Triplecast;
 
                 if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 2 && OpenerStep == 3) OpenerStep++;
                 else if (OpenerStep == 3) actionID = Fire4;
@@ -331,8 +331,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(Fire4) && CustomComboFunctions.GetBuffStacks(Buffs.Triplecast) == 1 && OpenerStep == 4) OpenerStep++;
                 else if (OpenerStep == 4) actionID = Fire4;
 
-                if (CustomComboFunctions.WasLastAction(Amplifier) && OpenerStep == 5) OpenerStep++;
-                else if (OpenerStep == 5) actionID = Amplifier;
+                if (CustomComboFunctions.WasLastAction(详述Amplifier) && OpenerStep == 5) OpenerStep++;
+                else if (OpenerStep == 5) actionID = 详述Amplifier;
 
                 if (CustomComboFunctions.WasLastAction(黑魔纹LeyLines) && OpenerStep == 6) OpenerStep++;
                 else if (OpenerStep == 6) actionID = 黑魔纹LeyLines;
@@ -346,11 +346,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(Fire4) && OpenerStep == 9) OpenerStep++;
                 else if (OpenerStep == 9) actionID = Fire4;
 
-                if (CustomComboFunctions.WasLastAction(Triplecast) && OpenerStep == 10) OpenerStep++;
-                else if (OpenerStep == 10) actionID = Triplecast;
+                if (CustomComboFunctions.WasLastAction(三连咏唱Triplecast) && OpenerStep == 10) OpenerStep++;
+                else if (OpenerStep == 10) actionID = 三连咏唱Triplecast;
 
-                if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 11) OpenerStep++;
-                else if (OpenerStep == 11) actionID = Despair;
+                if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 11) OpenerStep++;
+                else if (OpenerStep == 11) actionID = 绝望Despair;
 
                 if (CustomComboFunctions.WasLastAction(Manafont) && OpenerStep == 12) OpenerStep++;
                 else if (OpenerStep == 12) actionID = Manafont;
@@ -361,14 +361,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(Sharpcast) && OpenerStep == 14) OpenerStep++;
                 else if (OpenerStep == 14) actionID = Sharpcast;
 
-                if (CustomComboFunctions.WasLastAction(Despair) && OpenerStep == 15) OpenerStep++;
-                else if (OpenerStep == 15) actionID = Despair;
+                if (CustomComboFunctions.WasLastAction(绝望Despair) && OpenerStep == 15) OpenerStep++;
+                else if (OpenerStep == 15) actionID = 绝望Despair;
 
                 if (CustomComboFunctions.WasLastAction(Blizzard3) && OpenerStep == 16) OpenerStep++;
                 else if (OpenerStep == 16) actionID = Blizzard3;
 
-                if (CustomComboFunctions.WasLastAction(Xenoglossy) && OpenerStep == 17) OpenerStep++;
-                else if (OpenerStep == 17) actionID = Xenoglossy;
+                if (CustomComboFunctions.WasLastAction(异言Xenoglossy) && OpenerStep == 17) OpenerStep++;
+                else if (OpenerStep == 17) actionID = 异言Xenoglossy;
 
                 if (CustomComboFunctions.WasLastAction(Paradox) && OpenerStep == 18) OpenerStep++;
                 else if (OpenerStep == 18) actionID = Paradox;
@@ -385,14 +385,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.GetResourceCost(actionID) > CustomComboFunctions.LocalPlayer.CurrentMp && ActionWatching.TimeSinceLastAction.TotalSeconds >= 2)
                     CurrentState = OpenerState.FailedOpener;
 
-                if (((actionID == Triplecast && CustomComboFunctions.GetRemainingCharges(Triplecast) < 2) ||
-                    (actionID == Amplifier && CustomComboFunctions.IsOnCooldown(Amplifier)) ||
+                if (((actionID == 三连咏唱Triplecast && CustomComboFunctions.GetRemainingCharges(三连咏唱Triplecast) < 2) ||
+                    (actionID == 详述Amplifier && CustomComboFunctions.IsOnCooldown(详述Amplifier)) ||
                     (actionID == 黑魔纹LeyLines && CustomComboFunctions.IsOnCooldown(黑魔纹LeyLines)) ||
                     (actionID == All.LucidDreaming && CustomComboFunctions.IsOnCooldown(All.LucidDreaming)) ||
                     (actionID == Manafont && CustomComboFunctions.IsOnCooldown(Manafont)) ||
                     (actionID == Sharpcast && CustomComboFunctions.GetRemainingCharges(Sharpcast) < 1) ||
                     (actionID == All.Swiftcast && CustomComboFunctions.IsOnCooldown(All.Swiftcast)) ||
-                    (actionID == Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    (actionID == 异言Xenoglossy && Svc.Gauges.Get<BLMGauge>().PolyglotStacks < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;
@@ -468,7 +468,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         public static bool DoubleBlizz()
         {
-            var spells = ActionWatching.CombatActions.Where(x => ActionWatching.GetAttackType(x) == ActionWatching.ActionAttackType.Spell && x != CustomComboFunctions.OriginalHook(Thunder) && x != CustomComboFunctions.OriginalHook(Thunder2)).ToList();
+            var spells = ActionWatching.CombatActions.Where(x => ActionWatching.GetAttackType(x) == ActionWatching.ActionAttackType.Spell && x != CustomComboFunctions.OriginalHook(闪雷Thunder) && x != CustomComboFunctions.OriginalHook(Thunder2)).ToList();
             if (spells.Count < 1) return false;
 
             var firstSpell = spells[^1];

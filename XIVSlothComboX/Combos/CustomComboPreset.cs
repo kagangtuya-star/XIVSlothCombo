@@ -395,6 +395,14 @@ namespace XIVSlothComboX.Combos
         BLM_ST_SimpleMode_LeyLines = 2013,
         
         
+        [ParentCombo(BLM_ST_SimpleMode)]
+        [CustomComboInfo("闪雷", "将闪雷添加到一键单体标准循环。", BLM.JobID,  -10)]
+        BLM_ST_SimpleMode_Thunder = 2014,
+        
+        [ParentCombo(BLM_ST_SimpleMode)]
+        [CustomComboInfo("三连咏唱", "将三连咏唱添加到一键单体标准循环。", BLM.JobID,  -10)]
+        BLM_ST_SimpleMode_Triplecast = 2015,
+        
         [ReplaceSkill(BLM.Blizzard2, BLM.HighBlizzard2)]
         [CustomComboInfo("简易 AoE 功能", "将核爆整合为一键AoE循环。", BLM.JobID, -8)]
         BLM_AoE_SimpleMode = 2008,
