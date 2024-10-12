@@ -43,6 +43,7 @@ namespace XIVSlothComboX
 
 
         private readonly ConfigWindow _ConfigWindow;
+        private readonly TargetHelper _TargetHelper;
         internal static XIVSlothComboX P = null!;
         internal WindowSystem _WindowSystem;
         private static uint? jobID;
@@ -153,9 +154,11 @@ namespace XIVSlothComboX
             AST.Init();
 
             _ConfigWindow = new();
+            _TargetHelper = new();
+            
             _WindowSystem = new();
             _WindowSystem.AddWindow(_ConfigWindow);
-
+            _WindowSystem.AddWindow(_TargetHelper);
 
             // Service.Interface.UiBuilder.OpenMainUi += OnOpenConfigUi;
             Service.Interface.UiBuilder.OpenConfigUi += OnOpenConfigUi;
@@ -221,12 +224,13 @@ namespace XIVSlothComboX
         }
 
 
-        private static unsafe void OnFrameworkUpdate(IFramework framework)
+        private  unsafe void OnFrameworkUpdate(IFramework framework)
         {
             if (Service.ClientState.LocalPlayer is not null)
             {
                 JobID = Service.ClientState.LocalPlayer?.ClassJob?.Id;
                 BlueMageService.PopulateBLUSpells();
+                _TargetHelper.Draw();
 
                 if (Service.Configuration.自动食物)
                 {

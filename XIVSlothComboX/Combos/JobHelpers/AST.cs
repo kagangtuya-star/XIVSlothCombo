@@ -35,11 +35,12 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 DrawnCard = Gauge.DrawnCards[0];
             }
 
-            if (CustomComboFunctions.IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards) &&
-                (AST_QuickTargetCards.SelectedRandomMember is null || BetterTargetAvailable()))
+            if (CustomComboFunctions.IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards) && (AST_QuickTargetCards.SelectedRandomMember is null || BetterTargetAvailable()))
             {
                 if (CustomComboFunctions.ActionReady(Play1))
+                {
                     AST_QuickTargetCards.Invoke();
+                }
             }
 
             if (DrawnCard == CardType.NONE)
@@ -49,14 +50,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         private static bool BetterTargetAvailable()
         {
-            if (AST_QuickTargetCards.SelectedRandomMember is null ||
-                AST_QuickTargetCards.SelectedRandomMember.IsDead ||
-                CustomComboFunctions.OutOfRange(Balance, AST_QuickTargetCards.SelectedRandomMember))
+            if (AST_QuickTargetCards.SelectedRandomMember is null || AST_QuickTargetCards.SelectedRandomMember.IsDead || CustomComboFunctions.OutOfRange(Balance, AST_QuickTargetCards.SelectedRandomMember))
                 return true;
 
             var m = AST_QuickTargetCards.SelectedRandomMember as IBattleChara;
-            if ((DrawnCard is CardType.BALANCE && CustomComboFunctions.JobIDs.Melee.Any(x => x == m.ClassJob.Id)) ||
-                (DrawnCard is CardType.SPEAR && CustomComboFunctions.JobIDs.Ranged.Any(x => x == m.ClassJob.Id)))
+            if ((DrawnCard is CardType.BALANCE && CustomComboFunctions.JobIDs.Melee.Any(x => x == m.ClassJob.Id)) || (DrawnCard is CardType.SPEAR && CustomComboFunctions.JobIDs.Ranged.Any(x => x == m.ClassJob.Id)))
                 return false;
 
             var targets = new List<IBattleChara>();
@@ -80,8 +78,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
             }
 
             if (targets.Count == 0) return false;
-            if ((DrawnCard is CardType.BALANCE && targets.Any(x => CustomComboFunctions.JobIDs.Melee.Any(y => y == x.ClassJob.Id))) ||
-                (DrawnCard is CardType.SPEAR && targets.Any(x => CustomComboFunctions.JobIDs.Ranged.Any(y => y == x.ClassJob.Id))))
+
+            if ((DrawnCard is CardType.BALANCE && targets.Any(x => CustomComboFunctions.JobIDs.Melee.Any(y => y == x.ClassJob.Id))) || (DrawnCard is CardType.SPEAR && targets.Any(x => CustomComboFunctions.JobIDs.Ranged.Any(y => y == x.ClassJob.Id))))
             {
                 AST_QuickTargetCards.SelectedRandomMember = null;
                 return true;
@@ -93,7 +91,6 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         internal class AST_QuickTargetCards : CustomComboFunctions
         {
-
             internal static List<IGameObject> PartyTargets = [];
 
             internal static IGameObject? SelectedRandomMember;
@@ -122,6 +119,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             private static bool SetTarget()
             {
                 if (Gauge.DrawnCards[0].Equals(CardType.NONE)) return false;
+
                 CardType cardDrawn = Gauge.DrawnCards[0];
                 PartyTargets.Clear();
                 for (int i = 1; i <= 8; i++) //Checking all 8 available slots and skipping nulls & DCs
@@ -173,8 +171,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     for (int i = 0; i <= PartyTargets.Count - 1; i++)
                     {
                         byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
-                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Melee.Contains(job)) ||
-                            ((cardDrawn is CardType.SPEAR) && JobIDs.Ranged.Contains(job)))
+                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Melee.Contains(job)) || ((cardDrawn is CardType.SPEAR) && JobIDs.Ranged.Contains(job)))
                         {
                             //TargetObject(PartyTargets[i]);
                             SelectedRandomMember = PartyTargets[i];
@@ -185,8 +182,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     for (int i = 0; i <= PartyTargets.Count - 1; i++)
                     {
                         byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
-                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Ranged.Contains(job)) ||
-                            ((cardDrawn is CardType.SPEAR) && JobIDs.Melee.Contains(job)))
+                        if (((cardDrawn is CardType.BALANCE) && JobIDs.Ranged.Contains(job)) || ((cardDrawn is CardType.SPEAR) && JobIDs.Melee.Contains(job)))
                         {
                             //TargetObject(PartyTargets[i]);
                             SelectedRandomMember = PartyTargets[i];
@@ -195,15 +191,26 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     }
 
                     //Give cards to healers/tanks if backup is turned on
-                    if (IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards_TargetExtra))
+                    if (IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards_TargetExtra1))
                     {
                         for (int i = 0; i <= PartyTargets.Count - 1; i++)
                         {
                             byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
-                            if ((cardDrawn is CardType.BALANCE && JobIDs.Tank.Contains(job)) ||
-                                (cardDrawn is CardType.SPEAR && JobIDs.Healer.Contains(job)))
+                            if (cardDrawn is CardType.BALANCE && JobIDs.Tank.Contains(job))
                             {
-                                //TargetObject(PartyTargets[i]);
+                                SelectedRandomMember = PartyTargets[i];
+                                return true;
+                            }
+                        }
+                    }
+
+                    if (IsEnabled(CustomComboPreset.AST_Cards_QuickTargetCards_TargetExtra2))
+                    {
+                        for (int i = 0; i <= PartyTargets.Count - 1; i++)
+                        {
+                            byte job = PartyTargets[i] is IBattleChara ? (byte)(PartyTargets[i] as IBattleChara).ClassJob.Id : (byte)0;
+                            if (cardDrawn is CardType.SPEAR && JobIDs.Healer.Contains(job))
+                            {
                                 SelectedRandomMember = PartyTargets[i];
                                 return true;
                             }

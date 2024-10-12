@@ -2,6 +2,7 @@
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Party;
 using Dalamud.Plugin.Services;
+using ECommons.DalamudServices;
 using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.CustomComboNS.Functions
@@ -9,11 +10,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
     internal abstract partial class CustomComboFunctions
     {
         /// <summary> Checks if player is in a party </summary>
-        public static bool IsInParty() => (Service.PartyList.PartyId > 0);
+        public static bool IsInParty() => (Svc.Party.PartyId > 0);
 
         /// <summary> Gets the party list </summary>
         /// <returns> Current party list. </returns>
-        public static IPartyList GetPartyMembers() => Service.PartyList;
+        public static IPartyList GetPartyMembers() => Svc.Party;
 
         public unsafe static IGameObject? GetPartySlot(int slot)
         {
@@ -32,8 +33,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     _ => GetTarget(TargetType.Self),
                 };
                 ulong i = PartyTargetingService.GetObjectID(o);
-                return Service.ObjectTable.Where(x => x.GameObjectId == i).Any()
-                    ? Service.ObjectTable.Where(x => x.GameObjectId == i).First()
+                return Svc.Objects.Where(x => x.GameObjectId == i).Any()
+                    ? Svc.Objects.Where(x => x.GameObjectId == i).First()
                     : null;
             }
 

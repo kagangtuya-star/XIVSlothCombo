@@ -370,8 +370,12 @@ namespace XIVSlothComboX.Combos
         AST_Cards_QuickTargetCards = 1029,
 
         [ParentCombo(AST_Cards_QuickTargetCards)]
-        [CustomComboInfo("将坦克和奶妈加入自动发牌目标选择", "如果没有 DPS 可选时选择坦克和奶妈", AST.JobID)]
-        AST_Cards_QuickTargetCards_TargetExtra = 1031,
+        [CustomComboInfo("将坦克加入自动发牌目标选择", "如果没有 DPS 可选时选择坦克", AST.JobID)]
+        AST_Cards_QuickTargetCards_TargetExtra1 = 1033,
+        
+        [ParentCombo(AST_Cards_QuickTargetCards)]
+        [CustomComboInfo("将奶妈加入自动发牌目标选择", "如果没有 DPS 可选时选择`奶妈", AST.JobID)]
+        AST_Cards_QuickTargetCards_TargetExtra2 = 1034,
 
         #endregion
 

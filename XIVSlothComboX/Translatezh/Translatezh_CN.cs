@@ -29,7 +29,7 @@ public class Translatezh_CN
         #region ASTROLOGIAN
         #region DPS
         {"Adds Combust to the DPS feature if it's not present on current target, or is about to expire." , "将烧灼（续DoT）加入输出循环。"  },
-        {"Weaves your card (best used with Quick Target Cards)" , "[AI]自动发卡（最好与快速定位目标发卡一起使用）"  },
+        {"Weaves your card (best used with Quick Target Cards)" , "自动发卡（最好与快速定位目标发卡一起使用）"  },
         {"Oracle Option" , "神谕选项"  },
         {"Adds Oracle after Divination" , "在占卜之后添加神谕。"  },
         {"Use the Balance opener." , "使用平衡开场。"  },

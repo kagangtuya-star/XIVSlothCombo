@@ -253,8 +253,11 @@ namespace XIVSlothComboX.Window.Tabs
                 if (ImGui.CollapsingHeader("自定义"))
                 {
                     
-                    ImGui.TextUnformatted($"厄运流转CircleOfScorn-{ActionReady(PLD.厄运流转CircleOfScorn)}");
-                    ImGui.TextUnformatted($"深奥之灵SpiritsWithin-{ActionReady(PLD.深奥之灵SpiritsWithin.OriginalHook())}");
+                    // ImGui.TextUnformatted($"厄运流转CircleOfScorn-{ActionReady(PLD.厄运流转CircleOfScorn)}");
+                    // ImGui.TextUnformatted($"深奥之灵SpiritsWithin-{ActionReady(PLD.深奥之灵SpiritsWithin.OriginalHook())}");
+                    ImGui.TextUnformatted($"GetPartySlot1-{CustomComboFunctions.GetPartySlot(1)?.Name}");
+                    ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
+                    ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
                     // ImGui.TextUnformatted($"{GetResourceCost(PLD.圣灵HolySpirit)}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");
