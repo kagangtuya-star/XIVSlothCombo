@@ -143,7 +143,7 @@ namespace XIVSlothComboX.Window.Tabs
 
                 if (ImGui.BeginPopup(编辑窗口))
                 {
-                    ImGui.InputTextWithHint("", "请输入名字", ref saveAs, 30);
+                    ImGui.InputTextWithHint("", "请输入名字", ref saveAs, 100);
 
                     if (ImGui.Button("保存".Loc()))
                     {
