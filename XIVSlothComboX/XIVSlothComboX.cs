@@ -643,10 +643,10 @@ namespace XIVSlothComboX
                         }
                         
                         
-                        file.WriteLine($"我操你妈1");
+                        file.WriteLine($"测试1");
                         if (string.IsNullOrEmpty(specificJob))
                         {
-                            file.WriteLine($"我操你妈2");
+                            file.WriteLine($"测试2");
                             foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.OrderBy(x => x))
                             {
                                 if (int.TryParse(preset.ToString(), out _))
@@ -662,7 +662,7 @@ namespace XIVSlothComboX
                         }
                         else
                         {
-                            file.WriteLine($"我操你妈3");
+                            file.WriteLine($"测试3");
                             foreach (CustomComboPreset preset in Service.Configuration.EnabledActions.OrderBy(x => x))
                             {
                                 if (int.TryParse(preset.ToString(), out _))
