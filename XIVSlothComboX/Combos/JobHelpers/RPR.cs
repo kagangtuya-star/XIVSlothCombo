@@ -16,10 +16,10 @@ namespace XIVSlothComboX.Combos.JobHelpers
         {
             private static bool HasCooldowns()
             {
-                if (GetRemainingCharges(SoulSlice) < 2)
+                if (GetRemainingCharges(灵魂切割SoulSlice) < 2)
                     return false;
 
-                if (!ActionReady(ArcaneCircle))
+                if (!ActionReady(神秘环ArcaneCircle))
                     return false;
 
                 if (!ActionReady(暴食Gluttony))
@@ -101,11 +101,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (currentState == OpenerState.InOpener)
                 {
-                    if (WasLastAction(SoulSlice) && OpenerStep == 1) OpenerStep++;
-                    else if (OpenerStep == 1) actionID = SoulSlice;
+                    if (WasLastAction(灵魂切割SoulSlice) && OpenerStep == 1) OpenerStep++;
+                    else if (OpenerStep == 1) actionID = 灵魂切割SoulSlice;
 
-                    if (WasLastAction(ArcaneCircle) && OpenerStep == 2) OpenerStep++;
-                    else if (OpenerStep == 2) actionID = ArcaneCircle;
+                    if (WasLastAction(神秘环ArcaneCircle) && OpenerStep == 2) OpenerStep++;
+                    else if (OpenerStep == 2) actionID = 神秘环ArcaneCircle;
 
                     if (WasLastAction(暴食Gluttony) && OpenerStep == 3) OpenerStep++;
                     else if (OpenerStep == 3) actionID = 暴食Gluttony;
@@ -143,14 +143,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(LemuresSlice) && OpenerStep == 14) OpenerStep++;
                     else if (OpenerStep == 14) actionID = LemuresSlice;
 
-                    if (WasLastAction(Communio) && OpenerStep == 15) OpenerStep++;
-                    else if (OpenerStep == 15) actionID = Communio;
+                    if (WasLastAction(团契Communio) && OpenerStep == 15) OpenerStep++;
+                    else if (OpenerStep == 15) actionID = 团契Communio;
 
-                    if (WasLastAction(Perfectio) && OpenerStep == 16) OpenerStep++;
-                    else if (OpenerStep == 16) actionID = Perfectio;
+                    if (WasLastAction(完人Perfectio) && OpenerStep == 16) OpenerStep++;
+                    else if (OpenerStep == 16) actionID = 完人Perfectio;
 
-                    if (WasLastAction(SoulSlice) && OpenerStep == 17) OpenerStep++;
-                    else if (OpenerStep == 17) actionID = SoulSlice;
+                    if (WasLastAction(灵魂切割SoulSlice) && OpenerStep == 17) OpenerStep++;
+                    else if (OpenerStep == 17) actionID = 灵魂切割SoulSlice;
 
                     if (WasLastAction(UnveiledGibbet) && OpenerStep == 18) OpenerStep++;
                     else if (OpenerStep == 18) actionID = UnveiledGibbet;
@@ -167,7 +167,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
                         CurrentState = OpenerState.FailedOpener;
 
-                    if (((actionID == SoulSlice && GetRemainingCharges(SoulSlice) == 0) || (actionID == ArcaneCircle && IsOnCooldown(ArcaneCircle)) || (actionID == 暴食Gluttony && IsOnCooldown(暴食Gluttony))) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                    if (((actionID == 灵魂切割SoulSlice && GetRemainingCharges(灵魂切割SoulSlice) == 0) || (actionID == 神秘环ArcaneCircle && IsOnCooldown(神秘环ArcaneCircle)) || (actionID == 暴食Gluttony && IsOnCooldown(暴食Gluttony))) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                     {
                         CurrentState = OpenerState.FailedOpener;
                         return false;
@@ -223,7 +223,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
                 float GCD = GetCooldown(切割Slice).CooldownTotal * Times;
 
-                if ((HasEffect(Buffs.EnhancedGallows) && GetBuffRemainingTime(Buffs.EnhancedGallows) < GCD) || (HasEffect(Buffs.EnhancedGibbet) && GetBuffRemainingTime(Buffs.EnhancedGibbet) < GCD))
+                if ((HasEffect(Buffs.缢杀效果提高EnhancedGallows) && GetBuffRemainingTime(Buffs.缢杀效果提高EnhancedGallows) < GCD) || (HasEffect(Buffs.绞决效果提高EnhancedGibbet) && GetBuffRemainingTime(Buffs.绞决效果提高EnhancedGibbet) < GCD))
                     return true;
 
                 else return false;
@@ -233,7 +233,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
                 float GCD = GetCooldown(切割Slice).CooldownTotal * Times;
 
-                if (TargetHasEffect(Debuffs.DeathsDesign) && GetDebuffRemainingTime(Debuffs.DeathsDesign) < GCD)
+                if (TargetHasEffect(Debuffs.死亡烙印DeathsDesign) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) < GCD)
                     return true;
 
                 else return false;
@@ -243,7 +243,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
                 float GCD = GetCooldown(切割Slice).CooldownTotal;
 
-                if (LevelChecked(夜游魂衣Enshroud) && (gauge.Shroud >= 50 || HasEffect(Buffs.IdealHost)) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.夜游魂Enshrouded))
+                if (LevelChecked(夜游魂衣Enshroud) && (gauge.Shroud >= 50 || HasEffect(Buffs.IdealHost)) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.完人预备PerfectioParata) && !HasEffect(Buffs.夜游魂Enshrouded))
                 {
                     // Before Plentiful Harvest 
                     if (!LevelChecked(大丰收PlentifulHarvest))
@@ -254,7 +254,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         return true;
 
                     // Prep for double Enshroud
-                    if (LevelChecked(大丰收PlentifulHarvest) && GetCooldownRemainingTime(ArcaneCircle) <= (GCD * 2) + 1.5)
+                    if (LevelChecked(大丰收PlentifulHarvest) && GetCooldownRemainingTime(神秘环ArcaneCircle) <= (GCD * 2) + 1.5)
                         return true;
 
                     //2nd part of Double Enshroud
@@ -262,7 +262,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         return true;
 
                     //Natural Odd Minute Shrouds
-                    if (!HasEffect(Buffs.ArcaneCircle) && !IsDebuffExpiring(5) && GetCooldownRemainingTime(ArcaneCircle) is >= 50 and <= 65)
+                    if (!HasEffect(Buffs.ArcaneCircle) && !IsDebuffExpiring(5) && GetCooldownRemainingTime(神秘环ArcaneCircle) is >= 50 and <= 65)
                         return true;
 
                     // Correction for 2 min windows 
@@ -276,15 +276,31 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
                 float GCD = GetCooldown(切割Slice).CooldownTotal;
 
-                if (LevelChecked(死亡之影ShadowOfDeath) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.ImmortalSacrifice) && !IsComboExpiring(1) && !JustUsed(Perfectio) && !JustUsed(死亡之影ShadowOfDeath))
+                if (LevelChecked(死亡之影ShadowOfDeath) 
+                    && !HasEffect(Buffs.妖异之镰SoulReaver) 
+                    // && !HasEffect(Buffs.处刑人Executioner) 
+                    // && !HasEffect(Buffs.完人预备PerfectioParata) 
+                    && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) 
+                    && !IsComboExpiring(1) && 
+                    !JustUsed(完人Perfectio) && 
+                    !JustUsed(死亡之影ShadowOfDeath))
                 {
-                    if (LevelChecked(大丰收PlentifulHarvest) && HasEffect(Buffs.夜游魂Enshrouded) && GetCooldownRemainingTime(ArcaneCircle) <= (GCD * 2) + 1.5 && JustUsed(夜游魂衣Enshroud))
+                    if (LevelChecked(大丰收PlentifulHarvest) 
+                        && HasEffect(Buffs.夜游魂Enshrouded) 
+                        && GetCooldownRemainingTime(神秘环ArcaneCircle) <= (GCD * 2) + 1.5 
+                        && JustUsed(夜游魂衣Enshroud))
                         return true;
 
-                    if (LevelChecked(大丰收PlentifulHarvest) && HasEffect(Buffs.夜游魂Enshrouded) && ((GetCooldownRemainingTime(ArcaneCircle) <= GCD) || IsOffCooldown(ArcaneCircle)) && (JustUsed(VoidReaping) || JustUsed(CrossReaping)))
+                    if (LevelChecked(大丰收PlentifulHarvest) 
+                        && HasEffect(Buffs.夜游魂Enshrouded) 
+                        && ((GetCooldownRemainingTime(神秘环ArcaneCircle) <= GCD) || IsOffCooldown(神秘环ArcaneCircle)) 
+                        && (JustUsed(VoidReaping) || JustUsed(CrossReaping)))
                         return true;
 
-                    if (!HasEffect(Buffs.夜游魂Enshrouded) && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.DeathsDesign) <= 8) || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.DeathsDesign) <= Config.RPR_SoDRefreshRange)) && ((GetCooldownRemainingTime(ArcaneCircle) > GCD * 8) || IsOffCooldown(ArcaneCircle) || !LevelChecked(ArcaneCircle)))
+                    if (!HasEffect(Buffs.夜游魂Enshrouded)
+                        && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= 8)
+                            || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= Config.RPR_SoDRefreshRange))
+                        && ((GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 8) || IsOffCooldown(神秘环ArcaneCircle) || !LevelChecked(神秘环ArcaneCircle)))
                         return true;
 
                 }

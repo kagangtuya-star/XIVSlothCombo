@@ -16,10 +16,10 @@ namespace XIVSlothComboX.Combos.PvE
         public const uint
             // Single Target
             切割Slice = 24373,
-            WaxingSlice = 24374,
-            InfernalSlice = 24375,
+            增盈切割WaxingSlice = 24374,
+            地狱切割InfernalSlice = 24375,
             死亡之影ShadowOfDeath = 24378,
-            SoulSlice = 24380,
+            灵魂切割SoulSlice = 24380,
             // AoE
             SpinningScythe = 24376,
             NightmareScythe = 24377,
@@ -40,34 +40,34 @@ namespace XIVSlothComboX.Combos.PvE
             GrimSwathe = 24392,
             暴食Gluttony = 24393,
             // Sacrifice
-            ArcaneCircle = 24405,
+            神秘环ArcaneCircle = 24405,
             大丰收PlentifulHarvest = 24385,
             // Enshroud
             夜游魂衣Enshroud = 24394,
-            Communio = 24398,
+            团契Communio = 24398,
             LemuresSlice = 24399,
             LemuresScythe = 24400,
             VoidReaping = 24395,
             CrossReaping = 24396,
             GrimReaping = 24397,
             Sacrificium = 36969,
-            Perfectio = 36973,
+            完人Perfectio = 36973,
             // Miscellaneous
             HellsIngress = 24401,
             HellsEgress = 24402,
             Regress = 24403,
-            Harpe = 24386,
-            Soulsow = 24387,
-            HarvestMoon = 24388;
+            勾刃Harpe = 24386,
+            播魂种Soulsow = 24387,
+            收获月HarvestMoon = 24388;
 
         public static class Buffs
         {
             public const ushort
                 妖异之镰SoulReaver = 2587,
-                ImmortalSacrifice = 2592,
+                死亡祭品ImmortalSacrifice = 2592,
                 ArcaneCircle = 2599,
-                EnhancedGibbet = 2588,
-                EnhancedGallows = 2589,
+                绞决效果提高EnhancedGibbet = 2588,
+                缢杀效果提高EnhancedGallows = 2589,
                 虚无收割效果提高EnhancedVoidReaping = 2590,
                 交错收割效果提高EnhancedCrossReaping = 2591,
                 EnhancedHarpe = 2845,
@@ -78,13 +78,13 @@ namespace XIVSlothComboX.Combos.PvE
                 IdealHost = 3905,
                 Oblatio = 3857,
                 处刑人Executioner = 3858,
-                PerfectioParata = 3860;
+                完人预备PerfectioParata = 3860;
         }
 
         public static class Debuffs
         {
             public const ushort
-                DeathsDesign = 2586;
+                死亡烙印DeathsDesign = 2586;
         }
 
         public static class Config
@@ -113,7 +113,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is WaxingSlice)
+                if (actionID is 增盈切割WaxingSlice)
                 {
                     if (CustomTimelineIsEnable())
                     {
@@ -191,8 +191,8 @@ namespace XIVSlothComboX.Combos.PvE
                         return actionID;
 
                     //Arcane Circle
-                    if (CanDelayedWeave(ActionWatching.LastWeaponskill) && LevelChecked(ArcaneCircle) && ((LevelChecked(夜游魂衣Enshroud) && JustUsed(死亡之影ShadowOfDeath) && IsOffCooldown(ArcaneCircle)) || (!LevelChecked(夜游魂衣Enshroud) && IsOffCooldown(ArcaneCircle))))
-                        return ArcaneCircle;
+                    if (CanDelayedWeave(ActionWatching.LastWeaponskill) && LevelChecked(神秘环ArcaneCircle) && ((LevelChecked(夜游魂衣Enshroud) && JustUsed(死亡之影ShadowOfDeath) && IsOffCooldown(神秘环ArcaneCircle)) || (!LevelChecked(夜游魂衣Enshroud) && IsOffCooldown(神秘环ArcaneCircle))))
+                        return 神秘环ArcaneCircle;
 
                     //All Weaves
                     if (CanWeave(ActionWatching.LastWeaponskill))
@@ -202,10 +202,10 @@ namespace XIVSlothComboX.Combos.PvE
                             return 夜游魂衣Enshroud;
 
                         //Gluttony/Bloodstalk
-                        if (gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.ImmortalSacrifice) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.PerfectioParata) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3) && GetCooldownRemainingTime(ArcaneCircle) > GCD * 3)
+                        if (gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.完人预备PerfectioParata) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3) && GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 3)
                         {
                             //Gluttony
-                            if (!JustUsed(Perfectio) && ActionReady(暴食Gluttony))
+                            if (!JustUsed(完人Perfectio) && ActionReady(暴食Gluttony))
                             {
                                 if (trueNorthReady)
                                     return All.TrueNorth;
@@ -232,32 +232,32 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Ranged Attacks
-                    if (!InMeleeRange() && LevelChecked(Harpe) && HasBattleTarget())
+                    if (!InMeleeRange() && LevelChecked(勾刃Harpe) && HasBattleTarget())
                     {
                         //Communio
-                        if (HasEffect(Buffs.夜游魂Enshrouded) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(Communio))
-                            return Communio;
+                        if (HasEffect(Buffs.夜游魂Enshrouded) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(团契Communio))
+                            return 团契Communio;
 
-                        return (HasEffect(Buffs.Soulsow) && LevelChecked(HarvestMoon))
-                            ? HarvestMoon
-                            : Harpe;
+                        return (HasEffect(Buffs.Soulsow) && LevelChecked(收获月HarvestMoon))
+                            ? 收获月HarvestMoon
+                            : 勾刃Harpe;
                     }
 
                     //Shadow Of Death
                     if (JobHelpers.RPR.RPRHelpers.UseShadowOfDeath())
                         return 死亡之影ShadowOfDeath;
 
-                    if (TargetHasEffect(Debuffs.DeathsDesign))
+                    // if (TargetHasEffect(Debuffs.死亡烙印DeathsDesign))
                     {
                         //Perfectio
-                        if (HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(1))
-                            return OriginalHook(Communio);
+                        if (HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(1))
+                            return OriginalHook(团契Communio);
 
                         //Gibbet/Gallows
                         if (LevelChecked(绞决Gibbet) && !HasEffect(Buffs.夜游魂Enshrouded) && (HasEffect(Buffs.妖异之镰SoulReaver) || HasEffect(Buffs.处刑人Executioner)))
                         {
                             //Gibbet
-                            if (HasEffect(Buffs.EnhancedGibbet))
+                            if (HasEffect(Buffs.绞决效果提高EnhancedGibbet))
                             {
                                 if (trueNorthDynReady && !OnTargetsFlank())
                                     return All.TrueNorth;
@@ -266,7 +266,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                             //Gallows
-                            if (HasEffect(Buffs.EnhancedGallows) || (!HasEffect(Buffs.EnhancedGibbet) && !HasEffect(Buffs.EnhancedGallows)))
+                            if (HasEffect(Buffs.缢杀效果提高EnhancedGallows) || (!HasEffect(Buffs.绞决效果提高EnhancedGibbet) && !HasEffect(Buffs.缢杀效果提高EnhancedGallows)))
                             {
                                 if (trueNorthDynReady && !OnTargetsRear())
                                     return All.TrueNorth;
@@ -276,15 +276,17 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         //Plentiful Harvest
-                        if (LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && HasEffect(Buffs.ImmortalSacrifice) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(Communio)))
+                        if (LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && HasEffect(Buffs.死亡祭品ImmortalSacrifice) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(团契Communio)))
                             return 大丰收PlentifulHarvest;
 
                         //Enshroud Combo
                         if (HasEffect(Buffs.夜游魂Enshrouded))
                         {
                             //Communio
-                            if (gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(Communio))
-                                return Communio;
+                            if (gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(团契Communio))
+                            {
+                                return 团契Communio;
+                            }
 
                             //Void Reaping
                             if (HasEffect(Buffs.虚无收割效果提高EnhancedVoidReaping))
@@ -296,8 +298,8 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         //Soul Slice
-                        if (gauge.Soul <= 50 && ActionReady(SoulSlice) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3) && !JustUsed(Perfectio) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.ImmortalSacrifice))
-                            return SoulSlice;
+                        if (gauge.Soul <= 50 && ActionReady(灵魂切割SoulSlice) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3) && !JustUsed(完人Perfectio) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.完人预备PerfectioParata) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice))
+                            return 灵魂切割SoulSlice;
                     }
 
                     //Healing
@@ -310,11 +312,11 @@ namespace XIVSlothComboX.Combos.PvE
                     //1-2-3 Combo
                     if (comboTime > 0)
                     {
-                        if (lastComboMove == OriginalHook(切割Slice) && LevelChecked(WaxingSlice))
-                            return OriginalHook(WaxingSlice);
+                        if (lastComboMove == OriginalHook(切割Slice) && LevelChecked(增盈切割WaxingSlice))
+                            return OriginalHook(增盈切割WaxingSlice);
 
-                        if (lastComboMove == OriginalHook(WaxingSlice) && LevelChecked(InfernalSlice))
-                            return OriginalHook(InfernalSlice);
+                        if (lastComboMove == OriginalHook(增盈切割WaxingSlice) && LevelChecked(地狱切割InfernalSlice))
+                            return OriginalHook(地狱切割InfernalSlice);
                     }
                     return OriginalHook(切割Slice);
                 }
@@ -338,17 +340,23 @@ namespace XIVSlothComboX.Combos.PvE
 
                 // Prevent the dynamic true north option from using the last charge
                 if (IsEnabled(CustomComboPreset.RPR_ST_TrueNorthDynamic) && IsEnabled(CustomComboPreset.RPR_ST_TrueNorthDynamic_HoldCharge) && GetRemainingCharges(All.TrueNorth) < 2 && trueNorthReady)
+                {
                     trueNorthDynReady = false;
+                }
 
                 if (actionID is 切割Slice)
                 {
                     //Variant Cure
                     if (IsEnabled(CustomComboPreset.RPR_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= GetOptionValue(Config.RPR_VariantCure))
+                    {
                         return Variant.VariantCure;
+                    }
 
                     //Variant Rampart
                     if (IsEnabled(CustomComboPreset.RPR_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
+                    {
                         return Variant.VariantRampart;
+                    }
 
                     //RPR Opener
                     if (IsEnabled(CustomComboPreset.RPR_ST_Opener))
@@ -358,8 +366,8 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Arcane Circle
-                    if (IsEnabled(CustomComboPreset.RPR_ST_CDs) && IsEnabled(CustomComboPreset.RPR_ST_ArcaneCircle) && CanDelayedWeave(ActionWatching.LastWeaponskill) && LevelChecked(ArcaneCircle) && ((LevelChecked(夜游魂衣Enshroud) && JustUsed(死亡之影ShadowOfDeath) && IsOffCooldown(ArcaneCircle)) || (!LevelChecked(夜游魂衣Enshroud) && IsOffCooldown(ArcaneCircle))))
-                        return ArcaneCircle;
+                    if (IsEnabled(CustomComboPreset.RPR_ST_CDs) && IsEnabled(CustomComboPreset.RPR_ST_ArcaneCircle) && CanDelayedWeave(ActionWatching.LastWeaponskill) && LevelChecked(神秘环ArcaneCircle) && ((LevelChecked(夜游魂衣Enshroud) && JustUsed(死亡之影ShadowOfDeath) && IsOffCooldown(神秘环ArcaneCircle)) || (!LevelChecked(夜游魂衣Enshroud) && IsOffCooldown(神秘环ArcaneCircle))))
+                        return 神秘环ArcaneCircle;
 
                     //All Weaves
                     if (CanWeave(ActionWatching.LastWeaponskill))
@@ -368,14 +376,15 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             //Enshroud
                             if (IsEnabled(CustomComboPreset.RPR_ST_Enshroud) && JobHelpers.RPR.RPRHelpers.UseEnshroud(gauge))
+                            {
                                 return 夜游魂衣Enshroud;
+                            }
 
                             //Gluttony/Bloodstalk
-                            if (gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.ImmortalSacrifice) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.PerfectioParata) && (GetCooldownRemainingTime(ArcaneCircle) > GCD * 3 || !LevelChecked(ArcaneCircle)) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3))
-
+                            if (gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.完人预备PerfectioParata) && (GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 3 || !LevelChecked(神秘环ArcaneCircle)) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3))
                             {
                                 //Gluttony
-                                if (IsEnabled(CustomComboPreset.RPR_ST_Gluttony) && !JustUsed(Perfectio) && ActionReady(暴食Gluttony))
+                                if (IsEnabled(CustomComboPreset.RPR_ST_Gluttony) && !JustUsed(完人Perfectio) && ActionReady(暴食Gluttony))
                                 {
                                     if (IsEnabled(CustomComboPreset.RPR_ST_TrueNorthDynamic) && trueNorthReady)
                                         return All.TrueNorth;
@@ -403,32 +412,34 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Ranged Attacks
-                    if (IsEnabled(CustomComboPreset.RPR_ST_RangedFiller) && !InMeleeRange() && LevelChecked(Harpe) && HasBattleTarget())
+                    if (IsEnabled(CustomComboPreset.RPR_ST_RangedFiller) && !InMeleeRange() && LevelChecked(勾刃Harpe) && HasBattleTarget())
                     {
                         //Communio
-                        if (HasEffect(Buffs.夜游魂Enshrouded) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(Communio))
-                            return Communio;
+                        if (HasEffect(Buffs.夜游魂Enshrouded) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(团契Communio))
+                        {
+                            return 团契Communio;
+                        }
 
-                        return (IsEnabled(CustomComboPreset.RPR_ST_RangedFillerHarvestMoon) && HasEffect(Buffs.Soulsow) && LevelChecked(HarvestMoon))
-                            ? HarvestMoon
-                            : Harpe;
+                        return (IsEnabled(CustomComboPreset.RPR_ST_RangedFillerHarvestMoon) && HasEffect(Buffs.Soulsow) && LevelChecked(收获月HarvestMoon))
+                            ? 收获月HarvestMoon
+                            : 勾刃Harpe;
                     }
 
                     //Shadow Of Death
                     if (IsEnabled(CustomComboPreset.RPR_ST_SoD) && JobHelpers.RPR.RPRHelpers.UseShadowOfDeath() && enemyHP > Config.RPR_SoDThreshold)
                         return 死亡之影ShadowOfDeath;
 
-                    if (TargetHasEffect(Debuffs.DeathsDesign))
+                    // if (TargetHasEffect(Debuffs.死亡烙印DeathsDesign))
                     {
                         //Perfectio
-                        if (IsEnabled(CustomComboPreset.RPR_ST_Perfectio) && HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(1))
-                            return OriginalHook(Communio);
+                        if (IsEnabled(CustomComboPreset.RPR_ST_Perfectio) && HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(1))
+                            return OriginalHook(团契Communio);
 
                         //Gibbet/Gallows
                         if (IsEnabled(CustomComboPreset.RPR_ST_GibbetGallows) && LevelChecked(绞决Gibbet) && !HasEffect(Buffs.夜游魂Enshrouded) && (HasEffect(Buffs.妖异之镰SoulReaver) || HasEffect(Buffs.处刑人Executioner)))
                         {
                             //Gibbet
-                            if (HasEffect(Buffs.EnhancedGibbet) || (PositionalChoice is 1 && !HasEffect(Buffs.EnhancedGibbet) && !HasEffect(Buffs.EnhancedGallows)))
+                            if (HasEffect(Buffs.绞决效果提高EnhancedGibbet) || (PositionalChoice is 1 && !HasEffect(Buffs.绞决效果提高EnhancedGibbet) && !HasEffect(Buffs.缢杀效果提高EnhancedGallows)))
                             {
                                 if (IsEnabled(CustomComboPreset.RPR_ST_TrueNorthDynamic) && trueNorthDynReady && !OnTargetsFlank())
                                     return All.TrueNorth;
@@ -437,7 +448,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                             //Gallows
-                            if (HasEffect(Buffs.EnhancedGallows) || (PositionalChoice is 0 && !HasEffect(Buffs.EnhancedGibbet) && !HasEffect(Buffs.EnhancedGallows)))
+                            if (HasEffect(Buffs.缢杀效果提高EnhancedGallows) || (PositionalChoice is 0 && !HasEffect(Buffs.绞决效果提高EnhancedGibbet) && !HasEffect(Buffs.缢杀效果提高EnhancedGallows)))
                             {
                                 if (IsEnabled(CustomComboPreset.RPR_ST_TrueNorthDynamic) && trueNorthDynReady && !OnTargetsRear())
                                     return All.TrueNorth;
@@ -447,15 +458,15 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         //Plentiful Harvest
-                        if (IsEnabled(CustomComboPreset.RPR_ST_CDs) && IsEnabled(CustomComboPreset.RPR_ST_PlentifulHarvest) && LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && HasEffect(Buffs.ImmortalSacrifice) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(Communio)))
+                        if (IsEnabled(CustomComboPreset.RPR_ST_CDs) && IsEnabled(CustomComboPreset.RPR_ST_PlentifulHarvest) && LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && HasEffect(Buffs.死亡祭品ImmortalSacrifice) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(团契Communio)))
                             return 大丰收PlentifulHarvest;
 
                         //Enshroud Combo
                         if (HasEffect(Buffs.夜游魂Enshrouded))
                         {
                             //Communio
-                            if (IsEnabled(CustomComboPreset.RPR_ST_Communio) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(Communio))
-                                return Communio;
+                            if (IsEnabled(CustomComboPreset.RPR_ST_Communio) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && LevelChecked(团契Communio))
+                                return 团契Communio;
 
                             //Void Reaping
                             if (IsEnabled(CustomComboPreset.RPR_ST_Reaping) && HasEffect(Buffs.虚无收割效果提高EnhancedVoidReaping))
@@ -467,8 +478,8 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         //Soul Slice
-                        if (IsEnabled(CustomComboPreset.RPR_ST_SoulSlice) && gauge.Soul <= 50 && ActionReady(SoulSlice) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3) && !JustUsed(Perfectio) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && !HasEffect(Buffs.ImmortalSacrifice))
-                            return SoulSlice;
+                        if (IsEnabled(CustomComboPreset.RPR_ST_SoulSlice) && gauge.Soul <= 50 && ActionReady(灵魂切割SoulSlice) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3) && !JustUsed(完人Perfectio) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.完人预备PerfectioParata) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice))
+                            return 灵魂切割SoulSlice;
                     }
 
                     //Healing
@@ -484,11 +495,11 @@ namespace XIVSlothComboX.Combos.PvE
                     //1-2-3 Combo
                     if (comboTime > 0)
                     {
-                        if (lastComboMove == OriginalHook(切割Slice) && LevelChecked(WaxingSlice))
-                            return OriginalHook(WaxingSlice);
+                        if (lastComboMove == OriginalHook(切割Slice) && LevelChecked(增盈切割WaxingSlice))
+                            return OriginalHook(增盈切割WaxingSlice);
 
-                        if (lastComboMove == OriginalHook(WaxingSlice) && LevelChecked(InfernalSlice))
-                            return OriginalHook(InfernalSlice);
+                        if (lastComboMove == OriginalHook(增盈切割WaxingSlice) && LevelChecked(地狱切割InfernalSlice))
+                            return OriginalHook(地狱切割InfernalSlice);
                     }
                     return OriginalHook(切割Slice);
                 }
@@ -513,39 +524,39 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.RPR_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
                         return Variant.VariantRampart;
 
-                    if (LevelChecked(WhorlOfDeath) && GetDebuffRemainingTime(Debuffs.DeathsDesign) < 6 && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner))
+                    if (LevelChecked(WhorlOfDeath) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) < 6 && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner))
                         return WhorlOfDeath;
 
-                    if (TargetHasEffect(Debuffs.DeathsDesign))
+                    // if (TargetHasEffect(Debuffs.死亡烙印DeathsDesign))
                     {
-                        if (HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio))
-                            return OriginalHook(Communio);
+                        if (HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio))
+                            return OriginalHook(团契Communio);
 
-                        if (HasEffect(Buffs.ImmortalSacrifice) && LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.处刑人Executioner) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(Communio)))
+                        if (HasEffect(Buffs.死亡祭品ImmortalSacrifice) && LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.处刑人Executioner) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(团契Communio)))
                             return 大丰收PlentifulHarvest;
 
                         if (CanWeave(actionID))
                         {
-                            if (LevelChecked(ArcaneCircle) && ((GetCooldownRemainingTime(ArcaneCircle) <= GCD + 0.25) || ActionReady(ArcaneCircle)))
-                                return ArcaneCircle;
+                            if (LevelChecked(神秘环ArcaneCircle) && ((GetCooldownRemainingTime(神秘环ArcaneCircle) <= GCD + 0.25) || ActionReady(神秘环ArcaneCircle)))
+                                return 神秘环ArcaneCircle;
 
                             if (!HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.处刑人Executioner) && ActionReady(夜游魂衣Enshroud) && (gauge.Shroud >= 50 || HasEffect(Buffs.IdealHost)) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(6))
                                 return 夜游魂衣Enshroud;
 
-                            if (LevelChecked(暴食Gluttony) && gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.ImmortalSacrifice) && ((GetCooldownRemainingTime(暴食Gluttony) <= GetCooldownRemainingTime(切割Slice) + 0.25) || ActionReady(暴食Gluttony)))
+                            if (LevelChecked(暴食Gluttony) && gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && ((GetCooldownRemainingTime(暴食Gluttony) <= GetCooldownRemainingTime(切割Slice) + 0.25) || ActionReady(暴食Gluttony)))
                                 return 暴食Gluttony;
 
-                            if (LevelChecked(GrimSwathe) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.ImmortalSacrifice) && !HasEffect(Buffs.处刑人Executioner) && gauge.Soul >= 50 && (!LevelChecked(暴食Gluttony) || (LevelChecked(暴食Gluttony) && (gauge.Soul is 100 || GetCooldownRemainingTime(暴食Gluttony) > GCD * 5))))
+                            if (LevelChecked(GrimSwathe) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && !HasEffect(Buffs.处刑人Executioner) && gauge.Soul >= 50 && (!LevelChecked(暴食Gluttony) || (LevelChecked(暴食Gluttony) && (gauge.Soul is 100 || GetCooldownRemainingTime(暴食Gluttony) > GCD * 5))))
                                 return GrimSwathe;
                         }
 
-                        if (!HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && ActionReady(SoulScythe) && gauge.Soul <= 50)
+                        if (!HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.完人预备PerfectioParata) && ActionReady(SoulScythe) && gauge.Soul <= 50)
                             return SoulScythe;
 
                         if (HasEffect(Buffs.夜游魂Enshrouded))
                         {
-                            if (gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && ActionReady(Communio))
-                                return Communio;
+                            if (gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && ActionReady(团契Communio))
+                                return 团契Communio;
 
                             if (gauge.LemureShroud is 2 && gauge.VoidShroud is 1 && HasEffect(Buffs.Oblatio))
                                 return OriginalHook(暴食Gluttony);
@@ -590,42 +601,42 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.RPR_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
                         return Variant.VariantRampart;
 
-                    if (IsEnabled(CustomComboPreset.RPR_AoE_WoD) && LevelChecked(WhorlOfDeath) && GetDebuffRemainingTime(Debuffs.DeathsDesign) < 6 && !HasEffect(Buffs.妖异之镰SoulReaver) && enemyHP > Config.RPR_WoDThreshold)
+                    if (IsEnabled(CustomComboPreset.RPR_AoE_WoD) && LevelChecked(WhorlOfDeath) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) < 6 && !HasEffect(Buffs.妖异之镰SoulReaver) && enemyHP > Config.RPR_WoDThreshold)
                         return WhorlOfDeath;
 
-                    if (TargetHasEffect(Debuffs.DeathsDesign))
+                    // if (TargetHasEffect(Debuffs.死亡烙印DeathsDesign))
                     {
-                        if (IsEnabled(CustomComboPreset.RPR_AoE_Perfectio) && HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio))
-                            return OriginalHook(Communio);
+                        if (IsEnabled(CustomComboPreset.RPR_AoE_Perfectio) && HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio))
+                            return OriginalHook(团契Communio);
 
                         if (IsEnabled(CustomComboPreset.RPR_AoE_CDs))
                         {
-                            if (IsEnabled(CustomComboPreset.RPR_AoE_PlentifulHarvest) && HasEffect(Buffs.ImmortalSacrifice) && LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.夜游魂Enshrouded) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(Communio)))
+                            if (IsEnabled(CustomComboPreset.RPR_AoE_PlentifulHarvest) && HasEffect(Buffs.死亡祭品ImmortalSacrifice) && LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.夜游魂Enshrouded) && (GetBuffRemainingTime(Buffs.BloodsownCircle) <= 1 || JustUsed(团契Communio)))
                                 return 大丰收PlentifulHarvest;
 
                             if (CanWeave(actionID))
                             {
-                                if (IsEnabled(CustomComboPreset.RPR_AoE_ArcaneCircle) && LevelChecked(ArcaneCircle) && ((GetCooldownRemainingTime(ArcaneCircle) <= GCD + 0.25) || ActionReady(ArcaneCircle)))
-                                    return ArcaneCircle;
+                                if (IsEnabled(CustomComboPreset.RPR_AoE_ArcaneCircle) && LevelChecked(神秘环ArcaneCircle) && ((GetCooldownRemainingTime(神秘环ArcaneCircle) <= GCD + 0.25) || ActionReady(神秘环ArcaneCircle)))
+                                    return 神秘环ArcaneCircle;
 
                                 if (IsEnabled(CustomComboPreset.RPR_AoE_Enshroud) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.夜游魂Enshrouded) && ActionReady(夜游魂衣Enshroud) && (gauge.Shroud >= 50 || HasEffect(Buffs.IdealHost)) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(6))
                                     return 夜游魂衣Enshroud;
 
-                                if (IsEnabled(CustomComboPreset.RPR_AoE_Gluttony) && LevelChecked(暴食Gluttony) && gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.ImmortalSacrifice) && ((GetCooldownRemainingTime(暴食Gluttony) <= GetCooldownRemainingTime(切割Slice) + 0.25) || ActionReady(暴食Gluttony)))
+                                if (IsEnabled(CustomComboPreset.RPR_AoE_Gluttony) && LevelChecked(暴食Gluttony) && gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && ((GetCooldownRemainingTime(暴食Gluttony) <= GetCooldownRemainingTime(切割Slice) + 0.25) || ActionReady(暴食Gluttony)))
                                     return 暴食Gluttony;
 
-                                if (IsEnabled(CustomComboPreset.RPR_AoE_GrimSwathe) && LevelChecked(GrimSwathe) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.ImmortalSacrifice) && gauge.Soul >= 50 && (!LevelChecked(暴食Gluttony) || (LevelChecked(暴食Gluttony) && (gauge.Soul is 100 || GetCooldownRemainingTime(暴食Gluttony) > GCD * 5))))
+                                if (IsEnabled(CustomComboPreset.RPR_AoE_GrimSwathe) && LevelChecked(GrimSwathe) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && gauge.Soul >= 50 && (!LevelChecked(暴食Gluttony) || (LevelChecked(暴食Gluttony) && (gauge.Soul is 100 || GetCooldownRemainingTime(暴食Gluttony) > GCD * 5))))
                                     return GrimSwathe;
                             }
                         }
 
-                        if (IsEnabled(CustomComboPreset.RPR_AoE_SoulScythe) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.PerfectioParata) && ActionReady(SoulScythe) && gauge.Soul <= 50)
+                        if (IsEnabled(CustomComboPreset.RPR_AoE_SoulScythe) && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.完人预备PerfectioParata) && ActionReady(SoulScythe) && gauge.Soul <= 50)
                             return SoulScythe;
 
                         if (HasEffect(Buffs.夜游魂Enshrouded))
                         {
-                            if (IsEnabled(CustomComboPreset.RPR_AoE_Communio) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && ActionReady(Communio))
-                                return Communio;
+                            if (IsEnabled(CustomComboPreset.RPR_AoE_Communio) && gauge.LemureShroud is 1 && gauge.VoidShroud is 0 && ActionReady(团契Communio))
+                                return 团契Communio;
 
                             if (IsEnabled(CustomComboPreset.RPR_AoE_Sacrificium) && gauge.LemureShroud is 2 && gauge.VoidShroud is 1 && HasEffect(Buffs.Oblatio) && CanWeave(actionID))
                                 return OriginalHook(暴食Gluttony);
@@ -675,13 +686,13 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     if (IsEnabled(CustomComboPreset.RPR_GluttonyBloodSwathe_Enshroud))
                     {
-                        if (HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio))
-                            return OriginalHook(Communio);
+                        if (HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio))
+                            return OriginalHook(团契Communio);
 
                         if (HasEffect(Buffs.夜游魂Enshrouded))
                         {
-                            if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(Communio))
-                                return Communio;
+                            if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(团契Communio))
+                                return 团契Communio;
 
                             if (gauge.LemureShroud is 2 && gauge.VoidShroud is 1 && HasEffect(Buffs.Oblatio))
                                 return OriginalHook(暴食Gluttony);
@@ -712,13 +723,13 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (IsEnabled(CustomComboPreset.RPR_GluttonyBloodSwathe_Enshroud))
                     {
-                        if (HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio))
-                            return OriginalHook(Communio);
+                        if (HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio))
+                            return OriginalHook(团契Communio);
 
                         if (HasEffect(Buffs.夜游魂Enshrouded))
                         {
-                            if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(Communio))
-                                return Communio;
+                            if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(团契Communio))
+                                return 团契Communio;
 
                             if (gauge.LemureShroud is 2 && gauge.VoidShroud is 1 && HasEffect(Buffs.Oblatio))
                                 return OriginalHook(暴食Gluttony);
@@ -745,10 +756,10 @@ namespace XIVSlothComboX.Combos.PvE
                     
                     if (IsEnabled(CustomComboPreset.RPR_GluttonyBloodSwathe_BloodSwatheCombo) && (HasEffect(Buffs.妖异之镰SoulReaver) || HasEffect(Buffs.处刑人Executioner)) && LevelChecked(绞决Gibbet))
                     {
-                        if (HasEffect(Buffs.EnhancedGibbet))
+                        if (HasEffect(Buffs.绞决效果提高EnhancedGibbet))
                             return OriginalHook(绞决Gibbet);
 
-                        if (HasEffect(Buffs.EnhancedGallows) || (!HasEffect(Buffs.EnhancedGibbet) && !HasEffect(Buffs.EnhancedGallows)))
+                        if (HasEffect(Buffs.缢杀效果提高EnhancedGallows) || (!HasEffect(Buffs.绞决效果提高EnhancedGibbet) && !HasEffect(Buffs.缢杀效果提高EnhancedGallows)))
                             return OriginalHook(缢杀Gallows);
                     }
                 }
@@ -762,9 +773,9 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID is ArcaneCircle)
+                if (actionID is 神秘环ArcaneCircle)
                 {
-                    if (HasEffect(Buffs.ImmortalSacrifice) && LevelChecked(大丰收PlentifulHarvest))
+                    if (HasEffect(Buffs.死亡祭品ImmortalSacrifice) && LevelChecked(大丰收PlentifulHarvest))
                         return 大丰收PlentifulHarvest;
                 }
                 return actionID;
@@ -790,9 +801,9 @@ namespace XIVSlothComboX.Combos.PvE
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 var soulSowOptions = PluginConfiguration.GetCustomBoolArrayValue(Config.RPR_SoulsowOptions);
-                bool soulsowReady = LevelChecked(Soulsow) && !HasEffect(Buffs.Soulsow);
+                bool soulsowReady = LevelChecked(播魂种Soulsow) && !HasEffect(Buffs.Soulsow);
 
-                return (((soulSowOptions.Length > 0) && ((actionID is Harpe && soulSowOptions[0]) || (actionID is 切割Slice && soulSowOptions[1]) || (actionID is SpinningScythe && soulSowOptions[2]) || (actionID is 死亡之影ShadowOfDeath && soulSowOptions[3]) || (actionID is 隐匿挥割BloodStalk && soulSowOptions[4])) && soulsowReady && !InCombat()) || (IsEnabled(CustomComboPreset.RPR_Soulsow_Combat) && actionID is Harpe && !HasBattleTarget())) ? Soulsow : actionID;
+                return (((soulSowOptions.Length > 0) && ((actionID is 勾刃Harpe && soulSowOptions[0]) || (actionID is 切割Slice && soulSowOptions[1]) || (actionID is SpinningScythe && soulSowOptions[2]) || (actionID is 死亡之影ShadowOfDeath && soulSowOptions[3]) || (actionID is 隐匿挥割BloodStalk && soulSowOptions[4])) && soulsowReady && !InCombat()) || (IsEnabled(CustomComboPreset.RPR_Soulsow_Combat) && actionID is 勾刃Harpe && !HasBattleTarget())) ? 播魂种Soulsow : actionID;
             }
         }
 
@@ -811,10 +822,10 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (HasEffect(Buffs.妖异之镰SoulReaver))
                     {
-                        if (HasEffect(Buffs.EnhancedGibbet))
+                        if (HasEffect(Buffs.绞决效果提高EnhancedGibbet))
                             return OriginalHook(绞决Gibbet);
 
-                        if (HasEffect(Buffs.EnhancedGallows) || (!HasEffect(Buffs.EnhancedGibbet) && !HasEffect(Buffs.EnhancedGallows)))
+                        if (HasEffect(Buffs.缢杀效果提高EnhancedGallows) || (!HasEffect(Buffs.绞决效果提高EnhancedGibbet) && !HasEffect(Buffs.缢杀效果提高EnhancedGallows)))
                             return OriginalHook(缢杀Gallows);
                     }
                 }
@@ -832,8 +843,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID is 绞决Gibbet or 缢杀Gallows && HasEffect(Buffs.夜游魂Enshrouded))
                 {
-                    if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(Communio))
-                        return Communio;
+                    if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(团契Communio))
+                        return 团契Communio;
 
                     if (IsEnabled(CustomComboPreset.RPR_LemureOnGGG) && gauge.VoidShroud >= 2 && LevelChecked(LemuresSlice) && CanWeave(actionID))
                         return OriginalHook(隐匿挥割BloodStalk);
@@ -841,8 +852,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID is Guillotine && HasEffect(Buffs.夜游魂Enshrouded))
                 {
-                    if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(Communio))
-                        return Communio;
+                    if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(团契Communio))
+                        return 团契Communio;
 
                     if (IsEnabled(CustomComboPreset.RPR_LemureOnGGG) && gauge.VoidShroud >= 2 && LevelChecked(LemuresScythe) && CanWeave(actionID))
                         return OriginalHook(GrimSwathe);
@@ -860,11 +871,11 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is 夜游魂衣Enshroud)
                 {
-                    if (HasEffect(Buffs.PerfectioParata) && LevelChecked(Perfectio))
-                        return OriginalHook(Communio);
+                    if (HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio))
+                        return OriginalHook(团契Communio);
 
-                    if (HasEffect(Buffs.夜游魂Enshrouded) && LevelChecked(Communio))
-                        return Communio;
+                    if (HasEffect(Buffs.夜游魂Enshrouded) && LevelChecked(团契Communio))
+                        return 团契Communio;
                 }
                 return actionID;
             }

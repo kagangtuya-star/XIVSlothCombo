@@ -259,9 +259,17 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (IsEnabled(CustomComboPreset.PLD_ST_AdvancedMode_NoMeleeRange_HolySpirit))
                             {
-                                if ((圣灵HolySpirit.LevelChecked() && LocalPlayer?.CurrentMp >= GetResourceCost(圣灵HolySpirit) && !IsMoving))
+                                if ((圣灵HolySpirit.LevelChecked() && LocalPlayer?.CurrentMp >= GetResourceCost(圣灵HolySpirit) ))
                                 {
-                                    return 圣灵HolySpirit;
+                                    if (HasEffect(Buffs.DivineMight))
+                                    {
+                                        return 圣灵HolySpirit;
+                                    }
+                                    
+                                    if (!IsMoving)
+                                    {
+                                        return 圣灵HolySpirit;
+                                    }
                                 }
                             }
 

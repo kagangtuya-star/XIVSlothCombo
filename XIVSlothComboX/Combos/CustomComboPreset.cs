@@ -2355,7 +2355,7 @@ namespace XIVSlothComboX.Combos
 
         #region 自定义循环
 
-        [ReplaceSkill(RPR.WaxingSlice)]
+        [ReplaceSkill(RPR.增盈切割WaxingSlice)]
         [CustomComboInfo("自定义循环", "自定义循环", RPR.JobID)]
         RPR_ST_CustomMode = 1200001,
 
@@ -2573,7 +2573,7 @@ namespace XIVSlothComboX.Combos
 
         #region Miscellaneous
 
-        [ReplaceSkill(RPR.ArcaneCircle)]
+        [ReplaceSkill(RPR.神秘环ArcaneCircle)]
         [CustomComboInfo("Arcane Circle Harvest Feature", "Replaces Arcane Circle with Plentiful Harvest when you have stacks of Immortal Sacrifice.", RPR.JobID)]
         RPR_ArcaneCirclePlentifulHarvest = 12300,
 
@@ -2581,11 +2581,11 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Regress Feature", "Changes both Hell's Ingress and Hell's Egress turn into Regress when Threshold is active.", RPR.JobID)]
         RPR_Regress = 12301,
 
-        [ReplaceSkill(RPR.切割Slice, RPR.SpinningScythe, RPR.死亡之影ShadowOfDeath, RPR.Harpe, RPR.隐匿挥割BloodStalk)]
+        [ReplaceSkill(RPR.切割Slice, RPR.SpinningScythe, RPR.死亡之影ShadowOfDeath, RPR.勾刃Harpe, RPR.隐匿挥割BloodStalk)]
         [CustomComboInfo("Soulsow Reminder Feature", "Adds Soulsow to the skills selected below when out of combat. \nWill also add Soulsow to Harpe when in combat and no target is selected.", RPR.JobID)]
         RPR_Soulsow = 12302,
 
-        [ReplaceSkill(RPR.Harpe)]
+        [ReplaceSkill(RPR.勾刃Harpe)]
         [ParentCombo(RPR_Soulsow)]
         [CustomComboInfo("Harpe Harvest Moon Feature", "Replaces Harpe with Harvest Moon when you are in combat with Soulsow active.", RPR.JobID)]
         RPR_Soulsow_HarpeHarvestMoon = 12303,
@@ -2610,7 +2610,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("True North Feature", "Adds True North when under Gluttony and if Gibbet/Gallows options are selected to replace those skills.", RPR.JobID, 0)]
         RPR_TrueNorthEnshroud = 12310,
 
-        [ReplaceSkill(RPR.Harpe)]
+        [ReplaceSkill(RPR.勾刃Harpe)]
         [ParentCombo(RPR_Soulsow)]
         [CustomComboInfo("Soulsow Reminder during Combat", "Adds Soulsow to Harpe during combat when no target is selected.", RPR.JobID)]
         RPR_Soulsow_Combat = 12311,
