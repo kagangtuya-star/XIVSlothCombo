@@ -205,18 +205,12 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         public static unsafe bool Useitem(uint itemId)
         {
             uint a4 = 65535;
-
             if (IsUseItem == false)
                 return false;
 
             if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId + 1000000) != 0)
                 return false;
-
-            if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId) != 0)
-                return false;
-
-            // InventoryManager.Instance()->GetEmptySlotsInBag()
-
+            
             if (InventoryManager.Instance()->GetInventoryItemCount(itemId, true) > 0)
             {
                 return ActionManager.Instance()->UseAction(ActionType.Item, itemId + 1000000, LocalPlayer.GameObjectId, a4);

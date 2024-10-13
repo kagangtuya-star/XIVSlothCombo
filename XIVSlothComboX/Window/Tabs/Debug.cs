@@ -42,7 +42,7 @@ namespace XIVSlothComboX.Window.Tabs
 
         internal unsafe static new void Draw()
         {
-            DebugCombo? comboClass = new();
+            // DebugCombo? comboClass = new();
             IPlayerCharacter? LocalPlayer = Svc.ClientState.LocalPlayer;
             uint[] statusBlacklist = { 360, 361, 362, 363, 364, 365, 366, 367, 368 }; // Duration will not be displayed for these status effects
 
@@ -252,12 +252,17 @@ namespace XIVSlothComboX.Window.Tabs
 
                 if (ImGui.CollapsingHeader("自定义"))
                 {
-                    
+                    ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
+
+                    // ImGui.TextUnformatted($"Count-{ActionWatching.CustomList.Count}");
+                    // ImGui.TextUnformatted($"aGetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
+                    // ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
+
                     // ImGui.TextUnformatted($"厄运流转CircleOfScorn-{ActionReady(PLD.厄运流转CircleOfScorn)}");
                     // ImGui.TextUnformatted($"深奥之灵SpiritsWithin-{ActionReady(PLD.深奥之灵SpiritsWithin.OriginalHook())}");
-                    ImGui.TextUnformatted($"GetPartySlot1-{CustomComboFunctions.GetPartySlot(1)?.Name}");
-                    ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
-                    ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
+                    // ImGui.TextUnformatted($"GetPartySlot1-{CustomComboFunctions.GetPartySlot(1)?.Name}");
+                    // ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
+                    // ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
                     // ImGui.TextUnformatted($"{GetResourceCost(PLD.圣灵HolySpirit)}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount}");
                     // ImGui.TextUnformatted($"{LocalPlayer?.CurrentMount==null}");

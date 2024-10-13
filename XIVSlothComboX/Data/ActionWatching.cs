@@ -255,7 +255,7 @@ namespace XIVSlothComboX.Data
                 {
                     ActionTimestamps[actionId] = Environment.TickCount64;
                 }
-                CheckForChangedTarget(actionId, ref targetObjectId);
+                CheckForChangedTarget(actionId, ref targetObjectId, actionType);
                 SendActionHook!.Original(targetObjectId, actionType, actionId, sequence, a5, a6, a7, a8, a9);
                 TimeLastActionUsed = DateTime.Now;
                 ActionType = actionType;
@@ -267,31 +267,31 @@ namespace XIVSlothComboX.Data
             }
         }
 
-        private static unsafe void CheckForChangedTarget(uint actionId, ref ulong targetObjectId)
+        private static unsafe void CheckForChangedTarget(uint actionId, ref ulong targetObjectId, byte actionType)
         {
-            // Service.ChatGui.PrintError($"[CheckForChangedTarget]");
-
-
+            // Service.ChatGui.PrintError($"{targetObjectId} -> {actionId} ->{actionType}");
             if (CustomComboFunctions.CustomTimelineIsEnable())
             {
-                CustomAction? customAction = CustomComboFunctions.CustomTimelineFindBy时间轴(actionId);
-
-                if (customAction != null)
+                if (actionType == (byte)FFXIVClientStructs.FFXIV.Client.Game.ActionType.Action)
                 {
-                    int targetType = customAction.TargetType;
-                    if (targetType != -1)
+                    CustomAction? customAction = CustomComboFunctions.CustomTimelineFindBy时间轴(actionId);
+
+                    if (customAction != null)
                     {
-                        var gameObject = CustomComboFunctions.GetPartySlot(targetType);
-                        if (gameObject != null)
+                        int targetType = customAction.TargetType;
+                        if (targetType != -1)
                         {
-                            // targetObjectId = gameObject.ObjectId;
-                            targetObjectId = gameObject.GameObjectId;
+                            var gameObject = CustomComboFunctions.GetPartySlot(targetType);
+                            if (gameObject != null)
+                            {
+                                targetObjectId = gameObject.GameObjectId;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    CustomList.Add(actionId);
+                    else
+                    {
+                        CustomList.Add(actionId);
+                    }
                 }
             }
 
