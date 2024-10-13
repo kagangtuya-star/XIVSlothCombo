@@ -122,23 +122,23 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(夜游魂衣Enshroud) && OpenerStep == 7) OpenerStep++;
                     else if (OpenerStep == 7) actionID = 夜游魂衣Enshroud;
 
-                    if (WasLastAction(VoidReaping) && OpenerStep == 8) OpenerStep++;
-                    else if (OpenerStep == 8) actionID = VoidReaping;
+                    if (WasLastAction(虚无收割VoidReaping) && OpenerStep == 8) OpenerStep++;
+                    else if (OpenerStep == 8) actionID = 虚无收割VoidReaping;
 
                     if (WasLastAction(Sacrificium) && OpenerStep == 9) OpenerStep++;
                     else if (OpenerStep == 9) actionID = Sacrificium;
 
-                    if (WasLastAction(CrossReaping) && OpenerStep == 10) OpenerStep++;
-                    else if (OpenerStep == 10) actionID = CrossReaping;
+                    if (WasLastAction(交错收割CrossReaping) && OpenerStep == 10) OpenerStep++;
+                    else if (OpenerStep == 10) actionID = 交错收割CrossReaping;
 
                     if (WasLastAction(LemuresSlice) && OpenerStep == 11) OpenerStep++;
                     else if (OpenerStep == 11) actionID = LemuresSlice;
 
-                    if (WasLastAction(VoidReaping) && OpenerStep == 12) OpenerStep++;
-                    else if (OpenerStep == 12) actionID = VoidReaping;
+                    if (WasLastAction(虚无收割VoidReaping) && OpenerStep == 12) OpenerStep++;
+                    else if (OpenerStep == 12) actionID = 虚无收割VoidReaping;
 
-                    if (WasLastAction(CrossReaping) && OpenerStep == 13) OpenerStep++;
-                    else if (OpenerStep == 13) actionID = CrossReaping;
+                    if (WasLastAction(交错收割CrossReaping) && OpenerStep == 13) OpenerStep++;
+                    else if (OpenerStep == 13) actionID = 交错收割CrossReaping;
 
                     if (WasLastAction(LemuresSlice) && OpenerStep == 14) OpenerStep++;
                     else if (OpenerStep == 14) actionID = LemuresSlice;
@@ -278,9 +278,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (LevelChecked(死亡之影ShadowOfDeath) 
                     && !HasEffect(Buffs.妖异之镰SoulReaver) 
-                    // && !HasEffect(Buffs.处刑人Executioner) 
+                    && !HasEffect(Buffs.处刑人Executioner) 
                     // && !HasEffect(Buffs.完人预备PerfectioParata) 
-                    && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) 
+                    // && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) 
                     && !IsComboExpiring(1) && 
                     !JustUsed(完人Perfectio) && 
                     !JustUsed(死亡之影ShadowOfDeath))
@@ -294,7 +294,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (LevelChecked(大丰收PlentifulHarvest) 
                         && HasEffect(Buffs.夜游魂Enshrouded) 
                         && ((GetCooldownRemainingTime(神秘环ArcaneCircle) <= GCD) || IsOffCooldown(神秘环ArcaneCircle)) 
-                        && (JustUsed(VoidReaping) || JustUsed(CrossReaping)))
+                        && (JustUsed(虚无收割VoidReaping) || JustUsed(交错收割CrossReaping)))
                         return true;
 
                     if (!HasEffect(Buffs.夜游魂Enshrouded)
