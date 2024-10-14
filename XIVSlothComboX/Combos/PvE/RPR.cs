@@ -65,7 +65,7 @@ namespace XIVSlothComboX.Combos.PvE
             public const ushort
                 妖异之镰SoulReaver = 2587,
                 死亡祭品ImmortalSacrifice = 2592,
-                ArcaneCircle = 2599,
+                神秘环ArcaneCircle = 2599,
                 绞决效果提高EnhancedGibbet = 2588,
                 缢杀效果提高EnhancedGallows = 2589,
                 虚无收割效果提高EnhancedVoidReaping = 2590,

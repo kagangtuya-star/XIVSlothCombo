@@ -250,7 +250,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         return true;
 
                     // Shroud in Arcane Circle 
-                    if (HasEffect(Buffs.ArcaneCircle))
+                    if (HasEffect(Buffs.神秘环ArcaneCircle))
                         return true;
 
                     // Prep for double Enshroud
@@ -262,11 +262,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                         return true;
 
                     //Natural Odd Minute Shrouds
-                    if (!HasEffect(Buffs.ArcaneCircle) && !IsDebuffExpiring(5) && GetCooldownRemainingTime(神秘环ArcaneCircle) is >= 50 and <= 65)
+                    if (!HasEffect(Buffs.神秘环ArcaneCircle) && !IsDebuffExpiring(5) && GetCooldownRemainingTime(神秘环ArcaneCircle) is >= 50 and <= 65)
                         return true;
 
                     // Correction for 2 min windows 
-                    if (!HasEffect(Buffs.ArcaneCircle) && !IsDebuffExpiring(5) && gauge.Soul >= 90)
+                    if (!HasEffect(Buffs.神秘环ArcaneCircle) && !IsDebuffExpiring(5) && gauge.Soul >= 90)
                         return true;
                 }
                 return false;
@@ -285,6 +285,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     !JustUsed(完人Perfectio) && 
                     !JustUsed(死亡之影ShadowOfDeath))
                 {
+                    if (GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) > 20)
+                    {
+                        return false;
+                    }
+                    
                     if (LevelChecked(大丰收PlentifulHarvest) 
                         && HasEffect(Buffs.夜游魂Enshrouded) 
                         && GetCooldownRemainingTime(神秘环ArcaneCircle) <= (GCD * 2) + 1.5 

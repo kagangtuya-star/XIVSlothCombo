@@ -27,7 +27,7 @@ namespace XIVSlothComboX.Combos.PvE
             HighJump = 16478,
             MirageDive = 7399,
             BloodOfTheDragon = 3553,
-            Stardiver = 16480,
+            坠星冲Stardiver = 16480,
             CoerthanTorment = 16477,
             DoomSpike = 86,
             SonicThrust = 7397,
@@ -50,7 +50,7 @@ namespace XIVSlothComboX.Combos.PvE
             RiseOfTheDragon = 36953,
             LanceBarrage = 36954,
             SpiralBlow = 36955,
-            Starcross = 36956;
+            渡星冲Starcross = 36956;
 
         protected static DRGGauge? Gauge = GetJobGauge<DRGGauge>();
 
@@ -205,12 +205,12 @@ namespace XIVSlothComboX.Combos.PvE
                             return WyrmwindThrust;
 
                         //StarDiver Feature
-                        if (ActionReady(Stardiver) && AnimationLock.CanDRGWeave(Stardiver) && Gauge.IsLOTDActive && !IsMoving)
-                            return Stardiver;
+                        if (ActionReady(坠星冲Stardiver) && AnimationLock.CanDRGWeave(坠星冲Stardiver) && Gauge.IsLOTDActive && !IsMoving)
+                            return 坠星冲Stardiver;
 
                         //Starcross Feature
-                        if (LevelChecked(Starcross) && AnimationLock.CanDRGWeave(Starcross) && HasEffect(Buffs.StarcrossReady))
-                            return Starcross;
+                        if (LevelChecked(渡星冲Starcross) && AnimationLock.CanDRGWeave(渡星冲Starcross) && HasEffect(Buffs.StarcrossReady))
+                            return 渡星冲Starcross;
 
                         //Rise of the Dragon Feature
                         if (LevelChecked(RiseOfTheDragon) && AnimationLock.CanDRGWeave(RiseOfTheDragon) && HasEffect(Buffs.DragonsFlight))
@@ -340,12 +340,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 return WyrmwindThrust;
 
                             //StarDiver Feature
-                            if (IsEnabled(CustomComboPreset.DRG_ST_Stardiver) && ActionReady(Stardiver) && AnimationLock.CanDRGWeave(Stardiver) && Gauge.IsLOTDActive && (!IsEnabled(CustomComboPreset.DRG_ST_Stardiver_Movement) || (IsEnabled(CustomComboPreset.DRG_ST_Stardiver_Movement) && !IsMoving)))
-                                return Stardiver;
+                            if (IsEnabled(CustomComboPreset.DRG_ST_Stardiver) && ActionReady(坠星冲Stardiver) && AnimationLock.CanDRGWeave(坠星冲Stardiver) && Gauge.IsLOTDActive && (!IsEnabled(CustomComboPreset.DRG_ST_Stardiver_Movement) || (IsEnabled(CustomComboPreset.DRG_ST_Stardiver_Movement) && !IsMoving)))
+                                return 坠星冲Stardiver;
 
                             //Starcross Feature
-                            if (IsEnabled(CustomComboPreset.DRG_ST_Starcross) && LevelChecked(Starcross) && AnimationLock.CanDRGWeave(Starcross) && HasEffect(Buffs.StarcrossReady))
-                                return Starcross;
+                            if (IsEnabled(CustomComboPreset.DRG_ST_Starcross) && LevelChecked(渡星冲Starcross) && AnimationLock.CanDRGWeave(渡星冲Starcross) && HasEffect(Buffs.StarcrossReady))
+                                return 渡星冲Starcross;
 
                             //Rise of the Dragon Feature
                             if (IsEnabled(CustomComboPreset.DRG_ST_Dives_RiseOfTheDragon) && AnimationLock.CanDRGWeave(RiseOfTheDragon) && HasEffect(Buffs.DragonsFlight))
@@ -466,12 +466,12 @@ namespace XIVSlothComboX.Combos.PvE
                             return DragonfireDive;
 
                         //StarDiver Feature
-                        if (ActionReady(Stardiver) && AnimationLock.CanDRGWeave(Stardiver) && Gauge.IsLOTDActive && !IsMoving)
-                            return Stardiver;
+                        if (ActionReady(坠星冲Stardiver) && AnimationLock.CanDRGWeave(坠星冲Stardiver) && Gauge.IsLOTDActive && !IsMoving)
+                            return 坠星冲Stardiver;
 
                         //Starcross Feature
-                        if (LevelChecked(Starcross) && AnimationLock.CanDRGWeave(Starcross) && HasEffect(Buffs.StarcrossReady))
-                            return OriginalHook(Stardiver);
+                        if (LevelChecked(渡星冲Starcross) && AnimationLock.CanDRGWeave(渡星冲Starcross) && HasEffect(Buffs.StarcrossReady))
+                            return OriginalHook(坠星冲Stardiver);
 
                         //Rise of the Dragon Feature
                         if (LevelChecked(RiseOfTheDragon) && AnimationLock.CanDRGWeave(RiseOfTheDragon) && HasEffect(Buffs.DragonsFlight))
@@ -570,12 +570,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 return DragonfireDive;
 
                             //StarDiver Feature
-                            if (IsEnabled(CustomComboPreset.DRG_AoE_Stardiver) && ActionReady(Stardiver) && AnimationLock.CanDRGWeave(Stardiver) && Gauge.IsLOTDActive && (!IsEnabled(CustomComboPreset.DRG_AoE_Stardiver_Movement) || (IsEnabled(CustomComboPreset.DRG_AoE_Stardiver_Movement) && !IsMoving)))
-                                return Stardiver;
+                            if (IsEnabled(CustomComboPreset.DRG_AoE_Stardiver) && ActionReady(坠星冲Stardiver) && AnimationLock.CanDRGWeave(坠星冲Stardiver) && Gauge.IsLOTDActive && (!IsEnabled(CustomComboPreset.DRG_AoE_Stardiver_Movement) || (IsEnabled(CustomComboPreset.DRG_AoE_Stardiver_Movement) && !IsMoving)))
+                                return 坠星冲Stardiver;
 
                             //Starcross Feature
-                            if (IsEnabled(CustomComboPreset.DRG_AoE_Starcross) && LevelChecked(Starcross) && AnimationLock.CanDRGWeave(Starcross) && HasEffect(Buffs.StarcrossReady))
-                                return OriginalHook(Stardiver);
+                            if (IsEnabled(CustomComboPreset.DRG_AoE_Starcross) && LevelChecked(渡星冲Starcross) && AnimationLock.CanDRGWeave(渡星冲Starcross) && HasEffect(Buffs.StarcrossReady))
+                                return OriginalHook(坠星冲Stardiver);
 
                             //Rise of the Dragon Feature
                             if (IsEnabled(CustomComboPreset.DRG_AoE_RiseOfTheDragon) && LevelChecked(RiseOfTheDragon) && AnimationLock.CanDRGWeave(RiseOfTheDragon) && HasEffect(Buffs.DragonsFlight))

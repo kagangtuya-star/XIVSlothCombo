@@ -3637,7 +3637,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("即刻咏唱三神技能选项", "使用三神技能时自动使用即刻", SMN.JobID, 8)]
         SMN_DemiEgiMenu_SwiftcastEgi = 17023,
 
-        [CustomComboInfo("亚神技能替换亚神召唤", "龙神迸发 不死鸟迸发 死星核爆 可用时替换掉 对应的亚神召唤", SMN.JobID, 11)]
+        [CustomComboInfo("亚神技能替换亚神召唤", "龙神迸发、不死鸟迸发、烈日龙神迸发，死星核爆、星极超流、烈日核爆可用时替换掉对应的亚神召唤", SMN.JobID, 11)]
         SMN_DemiAbilities = 17024,
 
         [ParentCombo(SMN_Advanced_Combo_EDFester)]

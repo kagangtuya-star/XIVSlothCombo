@@ -94,7 +94,7 @@ namespace XIVSlothComboX.Combos.PvE
             灵泉之炎FountainOfFire = 16514, // Single target Phoenix GCD
             炼狱之炎BrandOfPurgatory = 16515, // AoE Phoenix GCD
             Rekindle = 25830, // Healing oGCD Phoenix
-            EnkindlePhoenix = 16516,
+            不死鸟迸发EnkindlePhoenix = 16516,
 
             // Shared summon abilities  星极超流 AstralFlow
             星极超流AstralFlow = 25822,
@@ -125,9 +125,9 @@ namespace XIVSlothComboX.Combos.PvE
             以太蓄能Aethercharge = 25800,
             //灼热之光 SearingLight
             灼热之光SearingLight = 25801,
-            EnkindleSolarBahamut = 36998,
+            烈日龙神迸发EnkindleSolarBahamut = 36998,
             SummonSolarBahamut = 36992,
-            Sunflare = 36996,
+            烈日核爆Sunflare = 36996,
             UmbralImpulse = 36994, //Single target Solar Bahamut GCD
             UmbralFlare = 36995, //AoE Solar Bahamut GCD
             灼热的闪光SearingFlash = 36991;
@@ -488,14 +488,14 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     if (IsSolarBahamutReady)
                                     {
-                                        if (Sunflare.ActionReady())
+                                        if (烈日核爆Sunflare.ActionReady())
                                         {
                                             return OriginalHook(星极超流AstralFlow);
                                         }
 
-                                        if (IsOffCooldown(OriginalHook(EnkindleSolarBahamut)) &&
+                                        if (IsOffCooldown(OriginalHook(烈日龙神迸发EnkindleSolarBahamut)) &&
                                             LevelChecked(SummonSolarBahamut))
-                                            return OriginalHook(EnkindleSolarBahamut);
+                                            return OriginalHook(烈日龙神迸发EnkindleSolarBahamut);
                                     }
 
                                     if (IsOffCooldown(OriginalHook(龙神迸发EnkindleBahamut)) && LevelChecked(龙神召唤SummonBahamut))
@@ -900,16 +900,20 @@ namespace XIVSlothComboX.Combos.PvE
                             OriginalHook(Ruin) is 星极脉冲AstralImpulse)
                             return OriginalHook(龙神迸发EnkindleBahamut);
 
-                        if (IsOffCooldown(EnkindlePhoenix) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
-                            return OriginalHook(EnkindlePhoenix);
+                        if (IsOffCooldown(不死鸟迸发EnkindlePhoenix) && OriginalHook(Ruin) is 灵泉之炎FountainOfFire)
+                            return OriginalHook(不死鸟迸发EnkindlePhoenix);
+                        
+                        if (IsOffCooldown(烈日龙神迸发EnkindleSolarBahamut) && OriginalHook(Ruin) is UmbralImpulse)
+                            return OriginalHook(烈日龙神迸发EnkindleSolarBahamut);
 
                         if ((OriginalHook(星极超流AstralFlow) is 死星核爆 && GetCooldownRemainingTime(灼热之光SearingLight) is >= 10 &&
                              IsOffCooldown(死星核爆)) ||
+                            
                             (OriginalHook(星极超流AstralFlow) is Rekindle && IsOffCooldown(Rekindle)))
                             return OriginalHook(星极超流AstralFlow);
 
-                        if (OriginalHook(星极超流AstralFlow) is Sunflare && IsOffCooldown(Sunflare))
-                            return OriginalHook(Sunflare);
+                        if (OriginalHook(星极超流AstralFlow) is 烈日核爆Sunflare && IsOffCooldown(烈日核爆Sunflare))
+                            return OriginalHook(烈日核爆Sunflare);
                     }
                 }
 
