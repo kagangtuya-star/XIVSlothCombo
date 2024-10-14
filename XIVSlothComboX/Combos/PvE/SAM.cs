@@ -308,7 +308,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (OptimalMeikyo())
                                 return MeikyoShisui;
-                            if (GetCooldownRemainingTime(MeikyoShisui) <= GCD * 3  && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
+                            if (GetCooldownRemainingTime(MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
                                 return MeikyoShisui;
                         }
 
@@ -480,7 +480,6 @@ namespace XIVSlothComboX.Combos.PvE
                 float shintenTreshhold = Config.SAM_ST_ExecuteThreshold;
                 float HiganbanaThreshold = Config.SAM_ST_Higanbana_Threshold;
                 float GCD = GetCooldown(Hakaze).CooldownTotal;
-                int MeikyoUsed = ActionWatching.CombatActions.Count(x => x == MeikyoShisui);
 
                 if (actionID is Hakaze or Gyofu)
                 {
@@ -500,66 +499,13 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (SAMOpener.DoFullOpener(ref actionID))
                             return actionID;
-                        //Meikyo to start before combat
-                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs) && IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui) && ActionReady(MeikyoShisui) && !InCombat())
-                            return MeikyoShisui;
-                        if (CanWeave(ActionWatching.LastWeaponskill) && IsEnabled(CustomComboPreset.SAM_ST_CDs) && IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && ActionReady(MeikyoShisui) && OptimalMeikyo())
-                            return MeikyoShisui;
                     }
 
-                    if (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri) && gauge.Kaeshi == Kaeshi.NAMIKIRI)
-                    {
-                        return OriginalHook(OgiNamikiri);
-                    }
-
-                    if (IsEnabled(CustomComboPreset.SAM_ST_CDs) && HasEffect(Buffs.Fugetsu) && HasEffect(Buffs.Fuka))
-                    {
-                        //Ogi Namikiri Features
-                        /*
-                            IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri):
-
-                            检查 CustomComboPreset.SAM_ST_CDs_OgiNamikiri 是否启用。如果这个预设未启用，整个条件语句将返回 false
-                            (!IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) || (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) && !IsMoving)):
-
-                            检查 CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement 是否未启用，或者如果启用了，则检查玩家是否未移动
-                            具体来说：
-                            如果 CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement 未启用，条件为 true
-                            如果 CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement 启用，且玩家未移动 (!IsMoving)，条件为 true
-                            ActionReady(OgiNamikiri):
-
-                            检查 OgiNamikiri 动作是否准备就绪。如果动作未准备好，整个条件语句将返回 false
-                            (JustUsed(Higanbana, 5f) || GetBuffRemainingTime(Buffs.OgiNamikiriReady) <= GCD):
-
-                            检查以下两个条件之一是否为真：
-                            Higanbana 动作是否在过去的 5 秒内使用过 (JustUsed(Higanbana, 5f))
-                            Buffs.OgiNamikiriReady 的剩余时间是否小于或等于全局冷却时间 (GCD)
-                            (gauge.Kaeshi == Kaeshi.NAMIKIRI || HasEffect(Buffs.OgiNamikiriReady)):
-
-                            检查以下两个条件之一是否为真：
-                            gauge.Kaeshi 是否等于 Kaeshi.NAMIKIRI。
-                            玩家是否拥有 Buffs.OgiNamikiriReady 效果 (HasEffect(Buffs.OgiNamikiriReady))
-                            如果上述所有条件都满足，则执行 return OriginalHook(OgiNamikiri);
-                        
-                        */
-                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri) && (!IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) || (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) && !IsMoving)) && ActionReady(OgiNamikiri) /* && (JustUsed(Higanbana, 5f) || GetBuffRemainingTime(Buffs.OgiNamikiriReady) <= GCD) */ && (gauge.Kaeshi == Kaeshi.NAMIKIRI || HasEffect(Buffs.OgiNamikiriReady)))
-                            return OriginalHook(OgiNamikiri);
-
-                        // Iaijutsu Features
-                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu) && LevelChecked(Iaijutsu))
-                        {
-                            if (HasEffect(Buffs.TsubameReady) || HasEffect(Buffs.TendoKaeshiSetsugekkaReady) || HasEffect(Buffs.TendoKaeshiGokenReady))
-                                return OriginalHook(TsubameGaeshi);
-
-                            // if (LevelChecked(TsubameGaeshi) && HasEffect(Buffs.TsubameReady))
-                            // {
-                            //     if (GetCooldownRemainingTime(Senei) > 33 || threeSen)
-                            //         return OriginalHook(TsubameGaeshi);
-                            // }
-
-                            if ((!IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) || (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) && !IsMoving)) && ((oneSen && enemyHP > HiganbanaThreshold && GetDebuffRemainingTime(Debuffs.Higanbana) <= 10 /* && JustUsed(Gekko, 3f) && JustUsed(MeikyoShisui, 15f) */) || (twoSen && !LevelChecked(MidareSetsugekka)) || (threeSen && (LevelChecked(MidareSetsugekka) && !HasEffect(Buffs.TsubameReady)))))
-                                return OriginalHook(Iaijutsu);
-                        }
-                    }
+                    //Meikyo to start before combat
+                    if (IsEnabled(CustomComboPreset.SAM_ST_CDs) &&
+                        IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) &&
+                        !HasEffect(Buffs.MeikyoShisui) && ActionReady(MeikyoShisui) && !InCombat())
+                        return MeikyoShisui;
 
                     //oGCDs
                     if (CanWeave(ActionWatching.LastWeaponskill))
@@ -567,10 +513,11 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.SAM_ST_CDs))
                         {
                             //Meikyo Features
-                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && ActionReady(MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui) && !HasEffect(Buffs.Tendo))
+                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && ActionReady(MeikyoShisui))
                             {
-                                //Meikyo Features must have SETSU
-                                if (/* GetCooldownRemainingTime(MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && */  (gauge.Sen.HasFlag(Sen.SETSU) || MeikyoUsed is 0)) //Overcap protection for scuffed runs
+                                if (OptimalMeikyo())
+                                    return MeikyoShisui;
+                                if (GetCooldownRemainingTime(MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
                                     return MeikyoShisui;
                             }
 
@@ -586,11 +533,17 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                             //Senei Features
-                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Senei) && gauge.Kenki >= 25 && ActionReady(Senei) && HasEffect(Buffs.Fugetsu))
+                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Senei) &&
+                                gauge.Kenki >= 25 && ActionReady(Senei) &&
+                                HasEffect(Buffs.Fugetsu) && HasEffect(Buffs.Fuka))
                                 return Senei;
 
                             //Zanshin Usage
-                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Zanshin) && LevelChecked(Zanshin) && gauge.Kenki >= 50 && CanWeave(actionID) && HasEffect(Buffs.ZanshinReady) /* && (JustUsed(Higanbana, 7f) || GetBuffRemainingTime(Buffs.ZanshinReady) <= 6) */)
+                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Zanshin) &&
+                                LevelChecked(Zanshin) && gauge.Kenki >= 50 &&
+                                CanWeave(actionID) && HasEffect(Buffs.ZanshinReady) &&
+                                (JustUsed(Higanbana, 7f) ||
+                                GetBuffRemainingTime(Buffs.ZanshinReady) <= 6))
                                 return Zanshin;
 
                             if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Shoha) &&
@@ -609,6 +562,40 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.SAM_ST_RangedUptime) &&
                         LevelChecked(Enpi) && !InMeleeRange() && HasBattleTarget())
                         return Enpi;
+
+                    if (IsEnabled(CustomComboPreset.SAM_ST_CDs) &&
+                        HasEffect(Buffs.Fugetsu) && HasEffect(Buffs.Fuka))
+                    {
+                        //Ogi Namikiri Features
+                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri) &&
+                            (!IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) ||
+                            (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) && !IsMoving)) &&
+                            ActionReady(OgiNamikiri) && (JustUsed(Higanbana, 5f) || GetBuffRemainingTime(Buffs.OgiNamikiriReady) <= GCD) &&
+                            (gauge.Kaeshi == Kaeshi.NAMIKIRI || HasEffect(Buffs.OgiNamikiriReady)))
+                            return OriginalHook(OgiNamikiri);
+
+                        // Iaijutsu Features
+                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu) && LevelChecked(Iaijutsu))
+                        {
+                            if (HasEffect(Buffs.TendoKaeshiSetsugekkaReady))
+                                return OriginalHook(TsubameGaeshi);
+
+                            if (LevelChecked(TsubameGaeshi) && HasEffect(Buffs.TsubameReady))
+                            {
+                                if (GetCooldownRemainingTime(Senei) > 33 ||
+                                    threeSen)
+                                    return OriginalHook(TsubameGaeshi);
+                            }
+
+                            if ((!IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) ||
+                                (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) && !IsMoving)) &&
+                                ((oneSen && enemyHP > HiganbanaThreshold && GetDebuffRemainingTime(Debuffs.Higanbana) <= 19 && JustUsed(Gekko, 3f) && JustUsed(MeikyoShisui, 15f)) ||
+                                (twoSen && !LevelChecked(MidareSetsugekka)) ||
+                                (threeSen &&
+                                (LevelChecked(MidareSetsugekka) && !HasEffect(Buffs.TsubameReady)))))
+                                return OriginalHook(Iaijutsu);
+                        }
+                    }
 
                     if (HasEffect(Buffs.MeikyoShisui))
                     {
@@ -829,7 +816,7 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (!IsMoving && (OriginalHook(Iaijutsu) is TenkaGoken or TendoGoken))
                             return OriginalHook(Iaijutsu);
-                        
+
                         if (!IsMoving && LevelChecked(TendoGoken) && (OriginalHook(Iaijutsu) is TendoGoken))
                             return OriginalHook(Iaijutsu);
 
@@ -925,7 +912,8 @@ namespace XIVSlothComboX.Combos.PvE
                             ActionReady(Shoha) && gauge.MeditationStacks is 3)
                             return Shoha;
 
-                        if (IsEnabled(CustomComboPreset.SAM_AoE_MeikyoShisui) && ActionReady(MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui) && !HasEffect(Buffs.Tendo))
+                        if (IsEnabled(CustomComboPreset.SAM_AoE_MeikyoShisui) &&
+                            ActionReady(MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui))
                             return MeikyoShisui;
                     }
 
@@ -939,12 +927,11 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (IsEnabled(CustomComboPreset.SAM_AoE_TenkaGoken) && LevelChecked(TenkaGoken))
                     {
-                        if (!IsMoving && (OriginalHook(Iaijutsu) is TenkaGoken or TendoGoken))
+                        if (!IsMoving && (OriginalHook(Iaijutsu) is TenkaGoken))
                             return OriginalHook(Iaijutsu);
                         
                         if (!IsMoving && LevelChecked(TendoGoken) && (OriginalHook(Iaijutsu) is TendoGoken))
                             return OriginalHook(Iaijutsu);
-
 
                         if (LevelChecked(TsubameGaeshi) && (HasEffect(Buffs.KaeshiGokenReady) || HasEffect(Buffs.TendoKaeshiGokenReady)))
                             return OriginalHook(TsubameGaeshi);
@@ -973,7 +960,8 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (lastComboMove is Fuko or Fuga && LevelChecked(Mangetsu))
                         {
-                            if (IsNotEnabled(CustomComboPreset.SAM_AoE_Oka) || !gauge.Sen.HasFlag(Sen.GETSU) || GetBuffRemainingTime(Buffs.Fugetsu) < GetBuffRemainingTime(Buffs.Fuka) || !HasEffect(Buffs.Fugetsu) || !LevelChecked(Oka))
+                            if (IsNotEnabled(CustomComboPreset.SAM_AoE_Oka) ||
+                                !gauge.Sen.HasFlag(Sen.GETSU) || GetBuffRemainingTime(Buffs.Fugetsu) < GetBuffRemainingTime(Buffs.Fuka) || !HasEffect(Buffs.Fugetsu))
                                 return Mangetsu;
 
                             if (IsEnabled(CustomComboPreset.SAM_AoE_Oka) &&
