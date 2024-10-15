@@ -89,6 +89,22 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
             return true;
         }
+        
+        public static bool InMeleeRange(float distance)
+        {
+            if (LocalPlayer?.TargetObject == null)
+                return false;
+
+            float targetDistance = GetTargetDistance();
+
+            if (targetDistance == 0)
+                return true;
+
+            if (targetDistance > distance )
+                return false;
+
+            return true;
+        }
 
         /// <summary> Gets a value indicating target's HP Percent. CurrentTarget is default unless specified </summary>
         /// <returns> Double indicating percentage. </returns>

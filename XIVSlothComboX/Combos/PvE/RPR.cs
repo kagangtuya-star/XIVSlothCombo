@@ -366,8 +366,15 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Arcane Circle
-                    if (IsEnabled(CustomComboPreset.RPR_ST_CDs) && IsEnabled(CustomComboPreset.RPR_ST_ArcaneCircle) && CanDelayedWeave(ActionWatching.LastWeaponskill) && LevelChecked(神秘环ArcaneCircle) && ((LevelChecked(夜游魂衣Enshroud) && JustUsed(死亡之影ShadowOfDeath) && IsOffCooldown(神秘环ArcaneCircle)) || (!LevelChecked(夜游魂衣Enshroud) && IsOffCooldown(神秘环ArcaneCircle))))
+                    if (IsEnabled(CustomComboPreset.RPR_ST_CDs)
+                        && IsEnabled(CustomComboPreset.RPR_ST_ArcaneCircle)
+                        && CanDelayedWeave(ActionWatching.LastWeaponskill) 
+                        && LevelChecked(神秘环ArcaneCircle) 
+                        && (LevelChecked(夜游魂衣Enshroud) && 神秘环ArcaneCircle.ActionReady()) || 
+                        (!LevelChecked(夜游魂衣Enshroud) && 神秘环ArcaneCircle.ActionReady()))
+                    {
                         return 神秘环ArcaneCircle;
+                    }
 
                     //All Weaves
                     if (CanWeave(ActionWatching.LastWeaponskill))

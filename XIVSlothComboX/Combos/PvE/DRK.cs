@@ -373,6 +373,18 @@ namespace XIVSlothComboX.Combos.PvE
                                         }
                                     }
                                 }
+                                
+                                if (gauge.Blood >= 70 && 血乱层数() >= 3)
+                                {
+                                    //再不打要溢出了
+                                    return 血溅Bloodspiller.OriginalHook();
+                                }
+                                
+                                if (gauge.Blood >= 80 && 血乱层数() >= 2)
+                                {
+                                    //再不打要溢出了
+                                    return 血溅Bloodspiller.OriginalHook();
+                                }
 
                                 //对团辅
                                 if (GetCooldownRemainingTime(LivingShadow) >= 40)

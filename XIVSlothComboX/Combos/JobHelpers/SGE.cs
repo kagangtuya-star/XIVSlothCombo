@@ -36,7 +36,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     enabled = IsEnabled(CustomComboPreset.SGE_ST_Heal_Krasis);
                     return Config.SGE_ST_Heal_Krasis;
                 case 6:
-                    action = Druochole;
+                    action = 灵橡清汁Druochole;
                     enabled = IsEnabled(CustomComboPreset.SGE_ST_Heal_Druochole) && Gauge.HasAddersgall();
                     return Config.SGE_ST_Heal_Druochole;
             }

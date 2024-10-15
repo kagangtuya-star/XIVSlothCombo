@@ -2851,7 +2851,7 @@ namespace XIVSlothComboX.Combos
         SGE_ST_DPS_Movement = 14130,
 
         [ParentCombo(SGE_ST_DPS)]
-        [CustomComboInfo("发炎 选项", "使用发炎如果它可用并且在距离内", SGE.JobID, 111)]
+        [CustomComboInfo("发炎 选项", "使用发炎如果它可用并且在距离内,他只有快溢出的时候才会用", SGE.JobID, 111)]
         SGE_ST_DPS_Phlegma = 14140,
 
         [ParentCombo(SGE_ST_DPS)]
@@ -2863,18 +2863,18 @@ namespace XIVSlothComboX.Combos
         SGE_ST_DPS_Rhizo = 14160,
 
         [ParentCombo(SGE_ST_DPS)]
-        [CustomComboInfo("精神干预 Option", "Weaves(?) Psych when available.", SGE.JobID, 112)]
+        [CustomComboInfo("心神风息", "在能力技窗口插入心神风息", SGE.JobID, 112)]
         SGE_ST_DPS_Psyche = 14008,
 
         [ParentCombo(SGE_ST_DPS)]
-        [CustomComboInfo("Addersgall Overflow Protection", "Weaves Druochole when Addersgall gauge is greater than or equal to the specified value.", SGE.JobID, 123)]
+        [CustomComboInfo("豆子防溢出", "当豆子>=指定值时，在能力窗口使用灵橡清汁", SGE.JobID, 123)]
         SGE_ST_DPS_AddersgallProtect = 14054,
 
         #endregion
 
         #region AoE DPS Feature
 
-        [ReplaceSkill(SGE.Phlegma, SGE.Phlegma2, SGE.Phlegma3)]
+        [ReplaceSkill(SGE.Phlegma, SGE.Phlegma2, SGE.发炎Phlegma3)]
         [CustomComboInfo("AoE DPS连击", "", SGE.JobID, 200)]
         SGE_AoE_DPS = 14200,
 
@@ -3031,11 +3031,11 @@ namespace XIVSlothComboX.Combos
 
         #region Misc Healing
 
-        [ReplaceSkill(SGE.Taurochole, SGE.Druochole, SGE.Ixochole, SGE.Kerachole)]
+        [ReplaceSkill(SGE.Taurochole, SGE.灵橡清汁Druochole, SGE.Ixochole, SGE.Kerachole)]
         [CustomComboInfo("根素 设置", "蛇胆不满时插入根素", SGE.JobID, 600)]
         SGE_Rhizo = 14600,
 
-        [ReplaceSkill(SGE.Druochole)]
+        [ReplaceSkill(SGE.灵橡清汁Druochole)]
         [CustomComboInfo("替换灵橡清汁为白牛清汁 设置", "当白牛青汁可用时，替换灵橡清汁为白牛清汁.", SGE.JobID, 700)]
         SGE_DruoTauro = 14700,
 

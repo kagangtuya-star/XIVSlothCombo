@@ -509,7 +509,7 @@ public class Translatezh_CN
         #endregion
         #region SAGE
         #region Single Target DPS Feature
-        {"Use the Balance opener from level 56+." , "从56级开始使用平衡开场。"  },
+        {"Use the Balance opener from level 56+." , "从56级开始使用The Balance开场。"  },
         {"Weaves(?) Psych when available." , "等待翻译"  },
         {"Addersgall Overflow Protection" , "等待翻译"  },
         {"Weaves Druochole when Addersgall gauge is greater than or equal to the specified value." , "等待翻译"  },

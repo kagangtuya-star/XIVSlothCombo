@@ -24,7 +24,7 @@ namespace XIVSlothComboX.Combos.PvE
             Diagnosis = 24284,
             Prognosis = 24286,
             Physis = 24288,
-            Druochole = 24296,
+            灵橡清汁Druochole = 24296,
             Kerachole = 24298,
             Ixochole = 24299,
             Pepsis = 24301,
@@ -46,14 +46,14 @@ namespace XIVSlothComboX.Combos.PvE
             EukrasianDosis3 = 24314,
             Phlegma = 24289,
             Phlegma2 = 24307,
-            Phlegma3 = 24313,
+            发炎Phlegma3 = 24313,
             Dyskrasia = 24297,
             Dyskrasia2 = 24315,
             Toxikon = 24304,
             Toxikon2 = 24316,
             Pneuma = 24318,
             EukrasianDyskrasia = 37032,
-            Psyche = 37033,
+            心神风息Psyche = 37033,
 
             // Buffs
             Soteria = 24294,
@@ -68,7 +68,7 @@ namespace XIVSlothComboX.Combos.PvE
 
         // Action Groups
         internal static readonly List<uint>
-            AddersgallList = [Taurochole, Druochole, Ixochole, Kerachole],
+            AddersgallList = [Taurochole, 灵橡清汁Druochole, Ixochole, Kerachole],
             DyskrasiaList = [Dyskrasia, Dyskrasia2];
 
         // Action Buffs
@@ -270,7 +270,7 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_TauroDruo;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                => actionID is Taurochole && IsOnCooldown(Taurochole) ? Druochole : actionID;
+                => actionID is Taurochole && IsOnCooldown(Taurochole) ? 灵橡清汁Druochole : actionID;
         }
 
         /*
@@ -319,8 +319,8 @@ namespace XIVSlothComboX.Combos.PvE
                             return Rhizomata;
 
                         // Addersgall Protection
-                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_AddersgallProtect) && CanSpellWeave(Dosis) && ActionReady(Druochole) && Gauge.Addersgall >= Config.SGE_AoE_DPS_AddersgallProtect)
-                            return Druochole;
+                        if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_AddersgallProtect) && CanSpellWeave(Dosis) && ActionReady(灵橡清汁Druochole) && Gauge.Addersgall >= Config.SGE_AoE_DPS_AddersgallProtect)
+                            return 灵橡清汁Druochole;
 
                         //Eukrasia for DoT
                         if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_EDyskrasia))
@@ -344,8 +344,8 @@ namespace XIVSlothComboX.Combos.PvE
                         // Psyche
                         if (IsEnabled(CustomComboPreset.SGE_AoE_DPS_Psyche))
                         {
-                            if (ActionReady(Psyche) && HasBattleTarget() && InActionRange(Psyche) && CanSpellWeave(actionID))
-                                return Psyche;
+                            if (ActionReady(心神风息Psyche) && HasBattleTarget() && InActionRange(心神风息Psyche) && CanSpellWeave(actionID))
+                                return 心神风息Psyche;
                         }
 
                         //Phlegma
@@ -390,7 +390,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (ActionFound)
                 {
-                    bool inOpener = IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener) && ActionReady(Psyche) && Dosis3Count < 4 && Gauge.HasAddersting();
+                    bool inOpener = IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener) && ActionReady(心神风息Psyche) && Dosis3Count < 4 && Gauge.HasAddersting();
 
                     // Kardia Reminder
                     if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Kardia) && LevelChecked(Kardia) && FindEffect(Buffs.Kardia) is null)
@@ -406,11 +406,11 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (Dosis3Count is 3)
                         {
-                            if (WasLastSpell(Phlegma3) && ActionReady(Psyche) && CanWeave(actionID))
-                                return Psyche;
+                            if (WasLastSpell(发炎Phlegma3) && ActionReady(心神风息Psyche) && CanWeave(actionID))
+                                return 心神风息Psyche;
 
-                            if (ActionReady(Phlegma3))
-                                return Phlegma3;
+                            if (ActionReady(发炎Phlegma3))
+                                return 发炎Phlegma3;
                         }
 
                         if (Dosis3Count > 0 && Toxikon2Count > 0)
@@ -430,8 +430,8 @@ namespace XIVSlothComboX.Combos.PvE
                         return Rhizomata;
 
                     // Addersgall Protection
-                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_AddersgallProtect) && CanSpellWeave(Dosis) && ActionReady(Druochole) && Gauge.Addersgall >= Config.SGE_ST_DPS_AddersgallProtect)
-                        return Druochole;
+                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_AddersgallProtect) && CanSpellWeave(Dosis) && ActionReady(灵橡清汁Druochole) && Gauge.Addersgall >= Config.SGE_ST_DPS_AddersgallProtect)
+                        return 灵橡清汁Druochole;
 
                     if (HasBattleTarget() && !HasEffect(Buffs.Eukrasia))
                         // Buff check Above. Without it, Toxikon and any future option will interfere in the Eukrasia->Eukrasia Dosis combo
@@ -465,19 +465,24 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Phlegma) && InCombat())
                         {
                             uint phlegma = OriginalHook(Phlegma);
-                            if (InActionRange(phlegma) && ActionReady(phlegma)) return phlegma;
+                            if (InActionRange(phlegma) && GetCooldownRemainingTime(phlegma) < 5)
+                            {
+                                return phlegma;
+                            }
                         }
 
                         // Psyche
-                        if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Psyche) && ActionReady(Psyche) && InCombat() && CanSpellWeave(actionID))
-                            return Psyche;
+                        if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Psyche) && ActionReady(心神风息Psyche) && InCombat() && CanSpellWeave(actionID))
+                            return 心神风息Psyche;
 
 
                         // Movement Options
                         if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Movement) && InCombat() && IsMoving)
                         {
-                            // Psyche
-                            if (Config.SGE_ST_DPS_Movement[3] && ActionReady(Psyche)) return Psyche;
+                            // phlegma 发炎
+                            uint phlegma = OriginalHook(Phlegma);
+                            if (Config.SGE_ST_DPS_Movement[3] && ActionReady(phlegma) && InMeleeRange(6f)) 
+                                return phlegma;
 
                             // Toxikon
                             if (Config.SGE_ST_DPS_Movement[0] && LevelChecked(Toxikon) && Gauge.HasAddersting()) return OriginalHook(Toxikon);
@@ -486,7 +491,8 @@ namespace XIVSlothComboX.Combos.PvE
                             if (Config.SGE_ST_DPS_Movement[1] && LevelChecked(Dyskrasia) && InActionRange(Dyskrasia)) return OriginalHook(Dyskrasia);
 
                             // Eukrasia
-                            if (Config.SGE_ST_DPS_Movement[2] && LevelChecked(Eukrasia)) return Eukrasia;
+                            if (Config.SGE_ST_DPS_Movement[2] && LevelChecked(Eukrasia))
+                                return Eukrasia;
                         }
                     }
                 }

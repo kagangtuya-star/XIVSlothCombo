@@ -252,9 +252,9 @@ namespace XIVSlothComboX.Window.Tabs
 
                 if (ImGui.CollapsingHeader("自定义"))
                 {
-                    ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
+                    // ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
 
-                    // ImGui.TextUnformatted($"Count-{ActionWatching.CustomList.Count}");
+                    ImGui.TextUnformatted($"CooldownTotal切割Slice-{GetCooldown(RPR.切割Slice).CooldownTotal}");
                     // ImGui.TextUnformatted($"aGetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
                     // ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
 

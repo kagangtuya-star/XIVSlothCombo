@@ -285,11 +285,15 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     !JustUsed(完人Perfectio) && 
                     !JustUsed(死亡之影ShadowOfDeath))
                 {
-                    if (GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) > 20)
+                    if (GetCooldownRemainingTime(神秘环ArcaneCircle) < (GCD * 2) )
                     {
-                        return false;
+                        if (GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) > 20)
+                        {
+                            return false;
+                        }
                     }
                     
+                    //神秘纹快好了 打
                     if (LevelChecked(大丰收PlentifulHarvest) 
                         && HasEffect(Buffs.夜游魂Enshrouded) 
                         && GetCooldownRemainingTime(神秘环ArcaneCircle) <= (GCD * 2) + 1.5 

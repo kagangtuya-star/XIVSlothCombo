@@ -2349,7 +2349,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.RPR_ST_SoD && enabled)
             {
-                UserConfig.DrawSliderInt(4, 8, RPR.Config.RPR_SoDRefreshRange, "在死亡烙印还剩多少秒时刷新.", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(1, 30, RPR.Config.RPR_SoDRefreshRange, "在死亡烙印还剩多少秒时刷新.", 150, SliderIncrements.Ones);
                 UserConfig.DrawSliderInt(0, 5, RPR.Config.RPR_SoDThreshold, "设置在多少hp百分比下，不需要刷新死亡烙印buff.", 150, SliderIncrements.Ones);
 
             }
@@ -2640,31 +2640,31 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.SGE_ST_DPS_EDosis)
             {
-                UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_DPS_EDosisHPPer, "Stop using at Enemy HP %. Set to Zero to disable this check");
+                UserConfig.DrawSliderInt(0, 100, SGE.Config.SGE_ST_DPS_EDosisHPPer, "在敌人 HP % 时停止使用。设置为零可禁用此检查。");
 
-                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_DPS_EDosis_Adv, "Advanced Options", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(SGE.Config.SGE_ST_DPS_EDosis_Adv, "高级设置", "", isConditionalChoice: true);
                 if (SGE.Config.SGE_ST_DPS_EDosis_Adv)
                 {
                     ImGui.Indent();
                     UserConfig.DrawRoundedSliderFloat
                     (
                         0, 4, SGE.Config.SGE_ST_DPS_EDosisThreshold,
-                        "Seconds remaining before reapplying the DoT. Set to Zero to disable this check.", digits: 1
+                        "重新使用 DoT 前的剩余秒数。设置为 “0”可禁用此检查。", digits: 1
                     );
                     ImGui.Unindent();
                 }
             }
 
             if (preset is CustomComboPreset.SGE_ST_DPS_Lucid)
-                UserConfig.DrawSliderInt(4000, 9500, SGE.Config.SGE_ST_DPS_Lucid, "MP Threshold", 150, SliderIncrements.Hundreds);
+                UserConfig.DrawSliderInt(4000, 9500, SGE.Config.SGE_ST_DPS_Lucid, "MP 阈值", 150, SliderIncrements.Hundreds);
 
 
             if (preset is CustomComboPreset.SGE_ST_DPS_Rhizo)
-                UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_ST_DPS_Rhizo, "Addersgall Threshold", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_ST_DPS_Rhizo, "蛇胆阈值", 150, SliderIncrements.Ones);
 
 
             if (preset is CustomComboPreset.SGE_ST_DPS_AddersgallProtect)
-                UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_ST_DPS_AddersgallProtect, "Addersgall Threshold", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_ST_DPS_AddersgallProtect, "蛇胆阈值", 150, SliderIncrements.Ones);
 
 
             if (preset is CustomComboPreset.SGE_ST_DPS_Movement)
@@ -2686,19 +2686,20 @@ namespace XIVSlothComboX.Window.Functions
                 );
                 UserConfig.DrawHorizontalMultiChoice
                 (
-                    SGE.Config.SGE_ST_DPS_Movement, SGE.Psyche.ActionName(), $"Use {SGE.Psyche.ActionName()}.", 4,
+                    SGE.Config.SGE_ST_DPS_Movement, SGE.Phlegma.ActionName(), $"Use {SGE.Phlegma.ActionName()}.", 4,
                     3
                 );
+                
             }
 
             if (preset is CustomComboPreset.SGE_AoE_DPS_Lucid)
                 UserConfig.DrawSliderInt(4000, 9500, SGE.Config.SGE_AoE_DPS_Lucid, "MP Threshold", 150, SliderIncrements.Hundreds);
 
             if (preset is CustomComboPreset.SGE_AoE_DPS_Rhizo)
-                UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_AoE_DPS_Rhizo, "Addersgall Threshold", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(0, 1, SGE.Config.SGE_AoE_DPS_Rhizo, "蛇胆阈值", 150, SliderIncrements.Ones);
 
             if (preset is CustomComboPreset.SGE_AoE_DPS_AddersgallProtect)
-                UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_AoE_DPS_AddersgallProtect, "Addersgall Threshold", 150, SliderIncrements.Ones);
+                UserConfig.DrawSliderInt(1, 3, SGE.Config.SGE_AoE_DPS_AddersgallProtect, "蛇胆阈值", 150, SliderIncrements.Ones);
 
 
             if (preset is CustomComboPreset.SGE_ST_Heal)
@@ -2785,9 +2786,9 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt
                 (
                     0, 100, SGE.Config.SGE_ST_Heal_Druochole,
-                    $"Use {SGE.Druochole.ActionName()} when Target HP is at or below set percentage"
+                    $"Use {SGE.灵橡清汁Druochole.ActionName()} when Target HP is at or below set percentage"
                 );
-                UserConfig.DrawPriorityInput(SGE.Config.SGE_ST_Heals_Priority, 7, 6, $"{SGE.Druochole.ActionName()} Priority: ");
+                UserConfig.DrawPriorityInput(SGE.Config.SGE_ST_Heals_Priority, 7, 6, $"{SGE.灵橡清汁Druochole.ActionName()} Priority: ");
             }
 
             if (preset is CustomComboPreset.SGE_ST_Heal_EDiagnosis)
