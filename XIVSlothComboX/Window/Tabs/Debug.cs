@@ -254,7 +254,9 @@ namespace XIVSlothComboX.Window.Tabs
                 {
                     // ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
 
-                    ImGui.TextUnformatted($"CooldownTotal切割Slice-{GetCooldown(RPR.切割Slice).CooldownTotal}");
+                    ImGui.TextUnformatted($"CooldownRemaining-{GetCooldown(DNC.喷泉Fountain).CooldownRemaining }");
+                    ImGui.TextUnformatted($"TotalCastTime-{LocalPlayer.TotalCastTime}");
+                    ImGui.TextUnformatted($"CurrentCastTime-{LocalPlayer.CurrentCastTime}");
                     // ImGui.TextUnformatted($"aGetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
                     // ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
 

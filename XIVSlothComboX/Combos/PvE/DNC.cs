@@ -191,8 +191,23 @@ namespace XIVSlothComboX.Combos.PvE
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
 
-                    // Devilment & Flourish
-                    if (canWeave)
+                    bool devilmentReady = IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment) && 进攻之探戈Devilment.ActionReady() ;
+
+                    if (devilmentReady)
+                    {
+                        if (WasLastAction(四色技巧舞步结束TechnicalFinish4))
+                        {
+                            return 进攻之探戈Devilment;
+                        }
+                        
+                        if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
+                        {
+                            return 进攻之探戈Devilment;
+                        } 
+                    }
+                    
+                    // Devilment
+                    if (CanWeave(actionID))
                     {
                         bool flourishReady = InCombat()
                                              && 百花争艳Flourish.ActionReady()
@@ -200,19 +215,6 @@ namespace XIVSlothComboX.Combos.PvE
                                              && !HasEffect(Buffs.扇舞_终FourFoldFanDance)
                                              && !HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry)
                                              && !HasEffect(Buffs.非对称投掷_百花争艳FlourishingFlow);
-
-                        bool devilmentReady = 进攻之探戈Devilment.ActionReady() && IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment);
-
-                        if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
-                        {
-                            return 进攻之探戈Devilment;
-                        }
-
-                        if (WasLastAction(四色技巧舞步结束TechnicalFinish4))
-                        {
-                            return 进攻之探戈Devilment;
-                        }
-
 
                         if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0 && !WasLastAction(进攻之探戈Devilment))
                         {
@@ -538,6 +540,22 @@ namespace XIVSlothComboX.Combos.PvE
                         && !HasEffect(Buffs.标准舞步预备StandardStep))
                         return 技巧舞步TechnicalStep;
 
+                    
+                    bool devilmentReady = IsEnabled(CustomComboPreset.DNC_AoE_Simple_Devilment) && 进攻之探戈Devilment.ActionReady() ;
+
+                    if (devilmentReady)
+                    {
+                        if (WasLastAction(四色技巧舞步结束TechnicalFinish4))
+                        {
+                            return 进攻之探戈Devilment;
+                        }
+                        
+                        if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
+                        {
+                            return 进攻之探戈Devilment;
+                        } 
+                    }
+                    
                     if (canWeave)
                     {
                         bool flourishReady = LevelChecked(百花争艳Flourish)
@@ -546,13 +564,7 @@ namespace XIVSlothComboX.Combos.PvE
                                              && !HasEffect(Buffs.扇舞_终FourFoldFanDance)
                                              && !HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry)
                                              && !HasEffect(Buffs.非对称投掷_百花争艳FlourishingFlow);
-                        bool devilmentReady = LevelChecked(进攻之探戈Devilment) && IsOffCooldown(进攻之探戈Devilment);
-
-                        // Simple AoE Tech Devilment
-                        if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_Devilment)
-                            && devilmentReady
-                            && (HasEffect(Buffs.技巧舞步结束TechnicalFinish) || !LevelChecked(技巧舞步TechnicalStep)))
-                            return 进攻之探戈Devilment;
+                        
                         if (IsEnabled(CustomComboPreset.DNC_AoE_Simple_Flourish) && flourishReady)
                             return 百花争艳Flourish;
                     }
