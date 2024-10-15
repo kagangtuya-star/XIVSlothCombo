@@ -149,7 +149,7 @@ namespace XIVSlothComboX.Combos.PvE
                         && gauge <= infuriateGauge
                         && CanWeave(actionID))
                     {
-                        if (GetCooldownRemainingTime(战壕Infuriate) < 1)
+                        if (GetCooldownRemainingTime(战壕Infuriate) < 6)
                         {
                             return 战壕Infuriate;
                         }

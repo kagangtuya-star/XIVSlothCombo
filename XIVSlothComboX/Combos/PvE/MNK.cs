@@ -10,140 +10,140 @@ using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
+
 namespace XIVSlothComboX.Combos.PvE
 {
     internal class MNK
-{
-    public const byte ClassID = 2;
-    public const byte JobID = 20;
-
-    public const uint
-        Bootshine = 53,
-        TrueStrike = 54,
-        SnapPunch = 56,
-        Meditation = 36940,
-        SteelPeak = 25761,
-        TwinSnakes = 61,
-        ArmOfTheDestroyer = 62,
-        Demolish = 66,
-        Mantra = 65,
-        DragonKick = 74,
-        Rockbreaker = 70,
-        Thunderclap = 25762,
-        HowlingFist = 25763,
-        FourPointFury = 16473,
-        PerfectBalance = 69,
-        FormShift = 4262,
-        TheForbiddenChakra = 3547,
-        MasterfulBlitz = 25764,
-        RiddleOfEarth = 7394,
-        EarthsReply = 36944,
-        RiddleOfFire = 7395,
-        Brotherhood = 7396,
-        RiddleOfWind = 25766,
-        EnlightenedMeditation = 36943,
-        Enlightenment = 16474,
-        SixSidedStar = 16476,
-        ShadowOfTheDestroyer = 25767,
-        RisingPhoenix = 25768,
-        WindsReply = 36949,
-        ForbiddenMeditation = 36942,
-        LeapingOpo = 36945,
-        RisingRaptor = 36946,
-        PouncingCoeurl = 36947,
-        TrueNorth = 7546,
-        ElixirBurst = 36948,
-        FiresReply = 36950;
-
-    protected static MNKGauge Gauge => GetJobGauge<MNKGauge>();
-
-    protected static class Buffs
     {
-        public const ushort
-            TwinSnakes = 101,
-            OpoOpoForm = 107,
-            RaptorForm = 108,
-            CoeurlForm = 109,
-            PerfectBalance = 110,
-            RiddleOfFire = 1181,
-            RiddleOfWind = 2687,
-            FormlessFist = 2513,
-            TrueNorth = 1250,
-            WindsRumination = 3842,
-            FiresRumination = 3843,
-            Brotherhood = 1185;
-    }
+        public const byte ClassID = 2;
+        public const byte JobID = 20;
 
-    public static class Config
-    {
-        public static UserInt
-            MNK_ST_SecondWind_Threshold = new("MNK_ST_SecondWindThreshold", 25),
-            MNK_ST_Bloodbath_Threshold = new("MNK_ST_BloodbathThreshold", 40),
-            MNK_AoE_SecondWind_Threshold = new("MNK_AoE_SecondWindThreshold", 25),
-            MNK_AoE_Bloodbath_Threshold = new("MNK_AoE_BloodbathThreshold", 40),
-            MNK_SelectedOpener = new("MNK_SelectedOpener"),
-            MNK_VariantCure = new("MNK_Variant_Cure");
-    }
+        public const uint
+            Bootshine = 53,
+            TrueStrike = 54,
+            SnapPunch = 56,
+            Meditation = 36940,
+            SteelPeak = 25761,
+            TwinSnakes = 61,
+            ArmOfTheDestroyer = 62,
+            Demolish = 66,
+            Mantra = 65,
+            DragonKick = 74,
+            Rockbreaker = 70,
+            Thunderclap = 25762,
+            HowlingFist = 25763,
+            FourPointFury = 16473,
+            PerfectBalance = 69,
+            FormShift = 4262,
+            TheForbiddenChakra = 3547,
+            MasterfulBlitz = 25764,
+            RiddleOfEarth = 7394,
+            EarthsReply = 36944,
+            RiddleOfFire = 7395,
+            Brotherhood = 7396,
+            RiddleOfWind = 25766,
+            EnlightenedMeditation = 36943,
+            Enlightenment = 16474,
+            SixSidedStar = 16476,
+            ShadowOfTheDestroyer = 25767,
+            RisingPhoenix = 25768,
+            WindsReply = 36949,
+            ForbiddenMeditation = 36942,
+            LeapingOpo = 36945,
+            RisingRaptor = 36946,
+            PouncingCoeurl = 36947,
+            TrueNorth = 7546,
+            ElixirBurst = 36948,
+            FiresReply = 36950;
 
-    internal class MNK_ST_Custom : CustomCombo
-    {
-        protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MNK_ST_CustomMode;
+        protected static MNKGauge Gauge => GetJobGauge<MNKGauge>();
 
-
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        protected static class Buffs
         {
-            if (actionID is TrueStrike)
+            public const ushort
+                TwinSnakes = 101,
+                OpoOpoForm = 107,
+                RaptorForm = 108,
+                CoeurlForm = 109,
+                PerfectBalance = 110,
+                RiddleOfFire = 1181,
+                RiddleOfWind = 2687,
+                FormlessFist = 2513,
+                TrueNorth = 1250,
+                WindsRumination = 3842,
+                FiresRumination = 3843,
+                Brotherhood = 1185;
+        }
+
+        public static class Config
+        {
+            public static UserInt
+                MNK_ST_SecondWind_Threshold = new("MNK_ST_SecondWindThreshold", 25),
+                MNK_ST_Bloodbath_Threshold = new("MNK_ST_BloodbathThreshold", 40),
+                MNK_AoE_SecondWind_Threshold = new("MNK_AoE_SecondWindThreshold", 25),
+                MNK_AoE_Bloodbath_Threshold = new("MNK_AoE_BloodbathThreshold", 40),
+                MNK_SelectedOpener = new("MNK_SelectedOpener"),
+                MNK_VariantCure = new("MNK_Variant_Cure");
+        }
+
+        internal class MNK_ST_Custom : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MNK_ST_CustomMode;
+
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (CustomTimelineIsEnable())
+                if (actionID is TrueStrike)
                 {
-                    double? seconds = -9999d;
+                    if (CustomTimelineIsEnable())
+                    {
+                        double? seconds = -9999d;
 
-                    if (InCombat())
-                    {
-                        seconds = CombatEngageDuration().TotalSeconds;
-                    }
-                    else
-                    {
-                        var timeRemaining = Countdown.TimeRemaining();
-                        if (timeRemaining != null)
+                        if (InCombat())
                         {
-                            seconds = -timeRemaining;
+                            seconds = CombatEngageDuration().TotalSeconds;
                         }
-                    }
-
-                    foreach (var customAction in 药品轴)
-                    {
-                        if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                        else
                         {
-                            Useitem(customAction.ActionId);
+                            var timeRemaining = Countdown.TimeRemaining();
+                            if (timeRemaining != null)
+                            {
+                                seconds = -timeRemaining;
+                            }
                         }
-                    }
 
-
-                    foreach (var customAction in 时间轴)
-                    {
-                        if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                        foreach (var customAction in 药品轴)
                         {
-                            return customAction.ActionId;
+                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                Useitem(customAction.ActionId);
+                            }
                         }
-                    }
 
 
-                    int index = ActionWatching.CustomList.Count;
-                    if (index < 序列轴.Count)
-                    {
-                        var newActionId = 序列轴[index].ActionId;
-                        return newActionId;
+                        foreach (var customAction in 时间轴)
+                        {
+                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                            {
+                                return customAction.ActionId;
+                            }
+                        }
+
+
+                        int index = ActionWatching.CustomList.Count;
+                        if (index < 序列轴.Count)
+                        {
+                            var newActionId = 序列轴[index].ActionId;
+                            return newActionId;
+                        }
                     }
                 }
+
+
+                return actionID;
             }
-
-
-            return actionID;
         }
-    }
-
-    internal class MNK_ST_SimpleMode : CustomCombo
+          internal class MNK_ST_SimpleMode : CustomCombo
     {
         internal static MNKOpenerLogic MNKOpener = new();
 
@@ -158,7 +158,7 @@ namespace XIVSlothComboX.Combos.PvE
             int raptorChakra = Gauge.BeastChakra.Count(x => x == BeastChakra.RAPTOR);
             int coeurlChakra = Gauge.BeastChakra.Count(x => x == BeastChakra.COEURL);
             float GCD = GetCooldown(OriginalHook(Bootshine)).CooldownTotal;
-            
+
             if (actionID is Bootshine or LeapingOpo)
             {
                 if (MNKOpener.DoFullOpener(ref actionID, 0))
@@ -180,11 +180,10 @@ namespace XIVSlothComboX.Combos.PvE
                     PlayerHealthPercentageHp() <= Config.MNK_VariantCure)
                     return Variant.VariantCure;
 
-                
                 if (ActionReady(RiddleOfFire) &&
                     CanDelayedWeave(ActionWatching.LastWeaponskill))
                     return RiddleOfFire;
-                
+
                 // OGCDs
                 if (CanWeave(ActionWatching.LastWeaponskill))
                 {
@@ -203,9 +202,8 @@ namespace XIVSlothComboX.Combos.PvE
                     //Perfect Balance
                     if (ActionReady(PerfectBalance) &&
                         !HasEffect(Buffs.PerfectBalance) &&
-                            !HasEffect(Buffs.FormlessFist))
+                        !HasEffect(Buffs.FormlessFist))
                     {
-                        
                         // Odd window
                         if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
                             !JustUsed(PerfectBalance, 20) &&
@@ -323,7 +321,7 @@ namespace XIVSlothComboX.Combos.PvE
             int raptorChakra = Gauge.BeastChakra.Count(x => x == BeastChakra.RAPTOR);
             int coeurlChakra = Gauge.BeastChakra.Count(x => x == BeastChakra.COEURL);
             float GCD = GetCooldown(OriginalHook(Bootshine)).CooldownTotal;
-            
+
             if (actionID is Bootshine or LeapingOpo)
             {
                 if (IsEnabled(CustomComboPreset.MNK_STUseOpener))
@@ -479,7 +477,7 @@ namespace XIVSlothComboX.Combos.PvE
                          GetBuffRemainingTime(Buffs.FiresRumination) < 4))
                         return FiresReply;
 
-                    if (IsEnabled(CustomComboPreset.MNK_STUseROW) && 
+                    if (IsEnabled(CustomComboPreset.MNK_STUseROW) &&
                         IsEnabled(CustomComboPreset.MNK_STUseWindsReply) &&
                         HasEffect(Buffs.WindsRumination) &&
                         LevelChecked(WindsReply) &&
@@ -532,7 +530,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (ActionReady(Brotherhood))
                         return Brotherhood;
-                    
+
                     if (ActionReady(RiddleOfWind))
                         return RiddleOfWind;
 
@@ -842,5 +840,6 @@ namespace XIVSlothComboX.Combos.PvE
     }
 
     #endregion
-}
+
+    }
 }
