@@ -191,23 +191,29 @@ namespace XIVSlothComboX.Combos.PvE
                         return gauge.CompletedSteps < 4 ? gauge.NextStep : 四色技巧舞步结束TechnicalFinish4;
 
 
-                    bool devilmentReady = IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment) && 进攻之探戈Devilment.ActionReady() ;
-
-                    if (devilmentReady)
+                    // if (CanWeave(actionID,0.6f))
+                    // if (CanSpellWeavePlus(actionID,0.6f))
                     {
-                        if (WasLastAction(四色技巧舞步结束TechnicalFinish4))
+                        bool devilmentReady = IsEnabled(CustomComboPreset.DNC_DT_Simple_Devilment) && 进攻之探戈Devilment.ActionReady() ;
+
+                        if (devilmentReady)
                         {
-                            return 进攻之探戈Devilment;
-                        }
+                            if (WasLastAction(四色技巧舞步结束TechnicalFinish4))
+                            {
+                                return 进攻之探戈Devilment;
+                            }
                         
-                        if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
-                        {
-                            return 进攻之探戈Devilment;
-                        } 
+                            if (devilmentReady && (techBurst || !LevelChecked(技巧舞步TechnicalStep)))
+                            {
+                                return 进攻之探戈Devilment;
+                            } 
+                        }  
                     }
+
+                   
                     
                     // Devilment
-                    if (CanWeave(actionID))
+                    if (canWeave)
                     {
                         bool flourishReady = InCombat()
                                              && 百花争艳Flourish.ActionReady()
@@ -216,7 +222,11 @@ namespace XIVSlothComboX.Combos.PvE
                                              && !HasEffect(Buffs.对称投掷_百花争艳FlourishingSymmetry)
                                              && !HasEffect(Buffs.非对称投掷_百花争艳FlourishingFlow);
 
-                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0 && !WasLastAction(进攻之探戈Devilment))
+                        if (IsEnabled(CustomComboPreset.DNC_DT_Simple_Flourish) && flourishReady && GetCooldownRemainingTime(进攻之探戈Devilment) > 0 && 技巧舞步倒计时 > 0 
+                            && !WasLastAction(进攻之探戈Devilment)
+                            && !WasLastAction(四色技巧舞步结束TechnicalFinish4_0)
+                            && !WasLastAction(四色技巧舞步结束TechnicalFinish4)
+                            )
                         {
                             return 百花争艳Flourish;
                         }
