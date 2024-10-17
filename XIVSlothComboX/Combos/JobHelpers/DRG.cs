@@ -262,11 +262,11 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
                 return false;
             }
-            
-            if (CustomComboFunctions.WasLastAction(DRG.渡星冲Starcross))
-            {
-                return false;
-            }
+            //
+            // if (CustomComboFunctions.WasLastAction(DRG.渡星冲Starcross))
+            // {
+            //     return false;
+            // }
 
 
             var gcdTimer = CustomComboFunctions.GetCooldownRemainingTime(PvE.DRG.TrueThrust);
