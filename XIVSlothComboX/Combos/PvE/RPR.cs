@@ -388,10 +388,18 @@ namespace XIVSlothComboX.Combos.PvE
                             }
 
                             //Gluttony/Bloodstalk
-                            if (gauge.Soul >= 50 && !HasEffect(Buffs.夜游魂Enshrouded) && !HasEffect(Buffs.妖异之镰SoulReaver) && !HasEffect(Buffs.处刑人Executioner) && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) && !HasEffect(Buffs.IdealHost) && !HasEffect(Buffs.完人预备PerfectioParata) && (GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 3 || !LevelChecked(神秘环ArcaneCircle)) && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3))
+                            if (gauge.Soul >= 50 
+                                && !HasEffect(Buffs.夜游魂Enshrouded)
+                                && !HasEffect(Buffs.妖异之镰SoulReaver) 
+                                && !HasEffect(Buffs.处刑人Executioner) 
+                                && !HasEffect(Buffs.死亡祭品ImmortalSacrifice)
+                                && !HasEffect(Buffs.IdealHost) 
+                                && !HasEffect(Buffs.完人预备PerfectioParata) 
+                                && (GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 3 || !LevelChecked(神秘环ArcaneCircle)) 
+                                && !JobHelpers.RPR.RPRHelpers.IsComboExpiring(3))
                             {
                                 //Gluttony
-                                if (IsEnabled(CustomComboPreset.RPR_ST_Gluttony) && !JustUsed(完人Perfectio) && ActionReady(暴食Gluttony))
+                                if (IsEnabled(CustomComboPreset.RPR_ST_Gluttony)  && ActionReady(暴食Gluttony))
                                 {
                                     if (IsEnabled(CustomComboPreset.RPR_ST_TrueNorthDynamic) && trueNorthReady)
                                         return All.TrueNorth;
