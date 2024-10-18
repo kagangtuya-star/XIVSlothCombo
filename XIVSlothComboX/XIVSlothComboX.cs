@@ -778,6 +778,13 @@ namespace XIVSlothComboX
                             autoActionId = WAR.StormsPath;
                             break;
                         }
+                        
+                        
+                        case SGE.JobID:
+                        {
+                            autoActionId = SGE.Dosis2;
+                            break;
+                        }
 
                         case DNC.JobID:
                         {
@@ -788,6 +795,12 @@ namespace XIVSlothComboX
                         case MCH.JobID:
                         {
                             autoActionId = MCH.SplitShot;
+                            break;
+                        }
+                        
+                        case RPR.JobID:
+                        {
+                            autoActionId = RPR.切割Slice;
                             break;
                         }
                     }

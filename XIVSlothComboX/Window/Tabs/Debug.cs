@@ -252,11 +252,20 @@ namespace XIVSlothComboX.Window.Tabs
 
                 if (ImGui.CollapsingHeader("自定义"))
                 {
+                    
+                    float GCD = GetCooldown(RPR.切割Slice).CooldownTotal * 3;
+                    var JobHelpers = ActionManager.Instance()->Combo.Timer != 0 && ActionManager.Instance()->Combo.Timer < GCD;
+                      
+                    
+                    ImGui.TextUnformatted($"JobHelpers-{JobHelpers}");
+                    ImGui.TextUnformatted($"Timer-{ActionManager.Instance()->Combo.Timer}");
+                    ImGui.TextUnformatted($"GCD-{GCD}");
+                    
                     // ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
 
-                    ImGui.TextUnformatted($"CooldownRemaining-{GetCooldown(DNC.喷泉Fountain).CooldownRemaining }");
-                    ImGui.TextUnformatted($"TotalCastTime-{LocalPlayer.TotalCastTime}");
-                    ImGui.TextUnformatted($"CurrentCastTime-{LocalPlayer.CurrentCastTime}");
+                    // ImGui.TextUnformatted($"CooldownRemaining-{GetCooldown(DNC.喷泉Fountain).CooldownRemaining }");
+                    // ImGui.TextUnformatted($"TotalCastTime-{LocalPlayer.TotalCastTime}");
+                    // ImGui.TextUnformatted($"CurrentCastTime-{LocalPlayer.CurrentCastTime}");
                     // ImGui.TextUnformatted($"aGetPartySlot2-{CustomComboFunctions.GetPartySlot(2)?.Name}");
                     // ImGui.TextUnformatted($"GetPartySlot2-{CustomComboFunctions.GetPartySlot(3)?.Name}");
 
