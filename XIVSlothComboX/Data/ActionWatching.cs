@@ -9,6 +9,7 @@ using ECommons.GameFunctions;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using Lumina.Excel.GeneratedSheets;
+using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Services;
@@ -287,12 +288,23 @@ namespace XIVSlothComboX.Data
                 SendActionHook!.Original(targetObjectId, actionType, actionId, sequence, a5, a6, a7, a8, a9);
                 TimeLastActionUsed = DateTime.Now;
                 ActionType = actionType;
+                
+                UpdateHelpers(actionId);
+
             }
             catch (Exception ex)
             {
                 // Dalamud.Logging.PluginLog.Error(ex, "SendActionDetour");
                 SendActionHook!.Original(targetObjectId, actionType, actionId, sequence, a5, a6, a7, a8, a9);
             }
+        }
+
+        private static void UpdateHelpers(uint actionId)
+        {
+            if (actionId is NIN.Ten or NIN.Chi or NIN.Jin or NIN.TenCombo or NIN.ChiCombo or NIN.JinCombo)
+                Combos.JobHelpers.NIN.NINHelper.InMudra = true;
+            else
+                Combos.JobHelpers.NIN.NINHelper.InMudra = false;
         }
 
         private static unsafe void CheckForChangedTarget(uint actionId, ref ulong targetObjectId, byte actionType)

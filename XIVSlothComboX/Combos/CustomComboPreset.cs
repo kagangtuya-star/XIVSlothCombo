@@ -1894,23 +1894,27 @@ namespace XIVSlothComboX.Combos
 
         #region NINJA
 
+        [ReplaceSkill(NIN.GustSlash)]
+        [CustomComboInfo("自定义循环", "自定义循环", NIN.JobID, -10)]
+        NIN_Advanced_CustomMode = 1000001,
+            
         [ReplaceSkill(NIN.SpinningEdge)]
         [ConflictingCombos(NIN_ArmorCrushCombo, NIN_ST_AdvancedMode, NIN_KassatsuChiJin, NIN_KassatsuTrick)]
-        [CustomComboInfo("下忍模式 - 单目标", "将双刃旋替换为一键单目标连击。\n一键输出，下忍的理想之选。", NIN.JobID)]
+        [CustomComboInfo("简单模式 - 单目标", "将双刃旋替换为一键单目标连击。\n一键输出，下忍的理想之选。", NIN.JobID)]
         NIN_ST_SimpleMode = 10000,
 
         [ParentCombo(NIN_ST_SimpleMode)]
-        [CustomComboInfo("平衡起手", "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.", NIN.JobID)]
+        [CustomComboInfo("Balance起手", "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.", NIN.JobID,0)]
         NIN_ST_SimpleMode_BalanceOpener = 10001,
 
         [ReplaceSkill(NIN.DeathBlossom)]
         [ConflictingCombos(NIN_AoE_AdvancedMode)]
-        [CustomComboInfo("下忍模式 - AoE", "将血雨飞花替换为一键AOE连击", NIN.JobID)]
+        [CustomComboInfo("简单模式 - AoE", "将血雨飞花替换为一键AOE连击", NIN.JobID)]
         NIN_AoE_SimpleMode = 10002,
 
         [ReplaceSkill(NIN.SpinningEdge)]
         [ConflictingCombos(NIN_ST_SimpleMode)]
-        [CustomComboInfo("上忍模式 - 单目标", "将双刃旋替换为一键单目标连击。\n自定义循环，上忍的理想之选。", NIN.JobID)]
+        [CustomComboInfo("高级模式 - 单目标", "将双刃旋替换为一键单目标连击。\n自定义循环，上忍的理想之选。", NIN.JobID)]
         NIN_ST_AdvancedMode = 10003,
 
         [ParentCombo(NIN_ST_AdvancedMode)]
@@ -1918,7 +1922,7 @@ namespace XIVSlothComboX.Combos
         NIN_ST_AdvancedMode_RangedUptime = 10004,
 
         [ParentCombo(NIN_ST_AdvancedMode)]
-        [CustomComboInfo("夺取", "将 夺取 加入上忍模式循环", NIN.JobID)]
+        [CustomComboInfo("夺取", "将 夺取 加入 模式循环", NIN.JobID)]
         NIN_ST_AdvancedMode_Mug = 10005,
 
         [ConflictingCombos(NIN_ST_AdvancedMode_Mug_AlignBefore)]
@@ -1944,7 +1948,7 @@ namespace XIVSlothComboX.Combos
         NIN_ST_AdvancedMode_TrickAttack_Delayed = 10010,
 
         [ParentCombo(NIN_ST_AdvancedMode)]
-        [CustomComboInfo("忍术 选项", "将 忍术 加入上忍循环", NIN.JobID)]
+        [CustomComboInfo("忍术 选项", "将 忍术 加入循环", NIN.JobID)]
         NIN_ST_AdvancedMode_Ninjitsus = 10011,
 
         [ParentCombo(NIN_ST_AdvancedMode_Ninjitsus)]
@@ -1963,9 +1967,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("使用 水遁", "使用忍术释放 水遁", NIN.JobID)]
         NIN_ST_AdvancedMode_Ninjitsus_Suiton = 10015,
 
-        [ParentCombo(NIN_ST_AdvancedMode_Ninjitsus)]
-        [CustomComboInfo("使用 风遁", "使用忍术释放 风遁", NIN.JobID)]
-        NIN_ST_AdvancedMode_Ninjitsus_Huton = 10016,
+
 
         [ParentCombo(NIN_ST_AdvancedMode)]
         [CustomComboInfo("断绝/梦幻三段", "将 断绝/梦幻三段 加入一键循环", NIN.JobID)]
@@ -1980,14 +1982,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo($"使用 冰晶乱流之术", "使用 生杀予夺 释放 冰晶乱流之术", NIN.JobID)]
         NIN_ST_AdvancedMode_Kassatsu_HyoshoRaynryu = 10019,
 
-        [ParentCombo(NIN_ST_AdvancedMode)]
-        [CustomComboInfo("强甲破点突 选项", "将 强甲破点突 加入一键循环", NIN.JobID)] //Has Config
-        NIN_ST_AdvancedMode_ArmorCrush = 10020,
-
-        [ParentCombo(NIN_ST_AdvancedMode)]
-        [CustomComboInfo("风来刃 选项", "将 风来刃 加入一键循环", NIN.JobID)]
-        NIN_ST_AdvancedMode_Huraijin = 10021,
-
+        
         [ParentCombo(NIN_ST_AdvancedMode)]
         [CustomComboInfo("六道轮回 选项", "将 六道轮回 加入一键循环", NIN.JobID)] //Has Config
         NIN_ST_AdvancedMode_Bhavacakra = 10022,
@@ -2024,7 +2019,7 @@ namespace XIVSlothComboX.Combos
 
         [ConflictingCombos(NIN_KassatsuChiJin, NIN_KassatsuTrick)]
         [ParentCombo(NIN_ST_AdvancedMode)]
-        [CustomComboInfo("平衡起手", "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.", NIN.JobID)]
+        [CustomComboInfo("Balance起手", "Starts with the Balance opener.\nDoes pre-pull first, if you enter combat before hiding the opener will fail.\nLikewise, moving during TCJ will cause the opener to fail too.\nRequires you to be out of combat with majority of your cooldowns available for it to work.", NIN.JobID,0)]
         NIN_ST_AdvancedMode_BalanceOpener = 10029,
 
         [ParentCombo(NIN_ST_AdvancedMode)]
@@ -2049,7 +2044,7 @@ namespace XIVSlothComboX.Combos
 
         [ReplaceSkill(NIN.DeathBlossom)]
         [ConflictingCombos(NIN_AoE_SimpleMode)]
-        [CustomComboInfo("上忍模式 - AoE", "将血雨飞花替换为一键群体连击。\n自定义循环，上忍的理想之选。", NIN.JobID)]
+        [CustomComboInfo("高级模式 - AoE", "将血雨飞花替换为一键群体连击。\n自定义循环，上忍的理想之选。", NIN.JobID)]
         NIN_AoE_AdvancedMode = 10035,
 
         [ParentCombo(NIN_AoE_AdvancedMode)]
@@ -2061,7 +2056,7 @@ namespace XIVSlothComboX.Combos
         NIN_AoE_AdvancedMode_AssassinateDWAD = 10036,
 
         [ParentCombo(NIN_AoE_AdvancedMode)]
-        [CustomComboInfo("忍术 选项", "将 忍术 加入上忍循环", NIN.JobID)]
+        [CustomComboInfo("忍术 选项", "将 忍术 加入循环", NIN.JobID)]
         NIN_AoE_AdvancedMode_Ninjitsus = 10037,
 
         [ParentCombo(NIN_AoE_AdvancedMode_Ninjitsus)]
@@ -2076,9 +2071,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("使用 土遁", "使用忍术释放 土遁", NIN.JobID)]
         NIN_AoE_AdvancedMode_Ninjitsus_Doton = 10040,
 
-        [ParentCombo(NIN_AoE_AdvancedMode_Ninjitsus)]
-        [CustomComboInfo("使用 风遁", "使用忍术释放 风遁", NIN.JobID)]
-        NIN_AoE_AdvancedMode_Ninjitsus_Huton = 10041,
+
 
         [ConflictingCombos(NIN_KassatsuTrick, NIN_KassatsuChiJin)]
         [ParentCombo(NIN_AoE_AdvancedMode)]
@@ -2136,10 +2129,7 @@ namespace XIVSlothComboX.Combos
         NIN_ArmorCrushCombo = 10053,
 
         [ConflictingCombos
-        (
-            NIN_ST_AdvancedMode_BalanceOpener, NIN_ST_AdvancedMode_BalanceOpener, NIN_ST_AdvancedMode_Kassatsu,
-            NIN_AoE_AdvancedMode_Kassatsu, NIN_KassatsuChiJin
-        )]
+        (NIN_ST_AdvancedMode_BalanceOpener, NIN_ST_AdvancedMode_BalanceOpener, NIN_ST_AdvancedMode_Kassatsu,NIN_AoE_AdvancedMode_Kassatsu, NIN_KassatsuChiJin)]
         [ReplaceSkill(NIN.Kassatsu)]
         [CustomComboInfo("攻其不备 替换 生杀予夺", "隐遁状态下或发动水遁之术后，使用 攻其不备 替换 生杀予夺.\n推荐同时使用冷却CD监视插件.", NIN.JobID)]
         NIN_KassatsuTrick = 10054,
@@ -2149,10 +2139,7 @@ namespace XIVSlothComboX.Combos
         NIN_TCJMeisui = 10055,
 
         [ConflictingCombos
-        (
-            NIN_ST_AdvancedMode_BalanceOpener, NIN_ST_AdvancedMode_BalanceOpener, NIN_KassatsuTrick, NIN_ST_AdvancedMode_Kassatsu,
-            NIN_AoE_AdvancedMode_Kassatsu
-        )]
+        (NIN_ST_AdvancedMode_BalanceOpener, NIN_ST_AdvancedMode_BalanceOpener, NIN_KassatsuTrick, NIN_ST_AdvancedMode_Kassatsu, NIN_AoE_AdvancedMode_Kassatsu)]
         [ReplaceSkill(NIN.Chi)]
         [CustomComboInfo("生杀予夺 地之印/人之印 开关", "发动 生杀予夺 后，使用 人之印 替换 地之印.", NIN.JobID)]
         NIN_KassatsuChiJin = 10056,
@@ -2161,11 +2148,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("隐遁 替换 夺取/攻其不备", "战斗状态下用 夺取 替换 隐遁，隐遁状态下用 攻其不备 替换 隐遁", NIN.JobID)]
         NIN_HideMug = 10057,
 
-        [ReplaceSkill(NIN.AeolianEdge)]
-        [CustomComboInfo("旋风刃 替换为 忍术", "此功能效果无效：当使用任意结印时，将 旋风刃 Combo 替换为 忍术。", NIN.JobID)]
-        NIN_AeolianNinjutsu = 10058,
-
-
+        
 
         [ReplaceSkill(NIN.Ten, NIN.Chi, NIN.Jin)]
         [CustomComboInfo("简化忍术", "简化忍术结印的操作.", NIN.JobID)]

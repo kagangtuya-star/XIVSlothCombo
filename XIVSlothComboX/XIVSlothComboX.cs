@@ -183,6 +183,7 @@ namespace XIVSlothComboX
 
             Service.Framework.Update += OnFrameworkUpdate;
             Service.DutyState.DutyRecommenced += OnDutyRecommenced;
+            Service.ClientState.TerritoryChanged += OnTerritoryChanged;
 
 
             autoToken = autoTokenSource.Token; // 开关绑
@@ -192,6 +193,11 @@ namespace XIVSlothComboX
             HandleConflictedCombos();
             Service.IconManager = new IconManager();
             
+        }
+
+        private void OnTerritoryChanged(ushort obj)
+        {
+            CustomComboFunctions.InitCustomTimeline();
         }
 
         private void OnDutyRecommenced(object? sender, ushort e)
@@ -357,6 +363,8 @@ namespace XIVSlothComboX
             Service.CommandManager.RemoveHandler(Command);
             Service.Framework.Update -= OnFrameworkUpdate;
             Service.DutyState.DutyRecommenced -= OnDutyRecommenced;
+            Service.ClientState.TerritoryChanged -= OnTerritoryChanged;
+            
             Service.Interface.UiBuilder.OpenConfigUi -= OnOpenConfigUi;
             Service.Interface.UiBuilder.Draw -= DrawUI;
 

@@ -1955,7 +1955,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt
                 (
                     0, 100, DRG.Config.DRG_AoE_LitanyHP,
-                    "Stop Using When Target HP% is at or Below (Set to 0 to Disable This Check)"
+                    "当目标 HP% 达到或低于时停止使用（设为 0 可禁用此检查）"
                 );
 
             if (preset == CustomComboPreset.DRG_AoE_Lance)
@@ -2192,6 +2192,19 @@ namespace XIVSlothComboX.Window.Functions
 
             #region NINJA
 
+            if (preset is CustomComboPreset.NIN_Advanced_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == NIN.JobID);
+
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
+            
             if (preset == CustomComboPreset.NIN_Simple_Mudras)
             {
                 UserConfig.DrawRadioButton(NIN.Config.NIN_SimpleMudra_Choice, "Mudra Path Set 1", $"1. Ten Mudras -> Fuma Shuriken, Raiton/Hyosho Ranryu, Suiton (Doton under Kassatsu).\nChi Mudras -> Fuma Shuriken, Hyoton, Huton.\nJin Mudras -> Fuma Shuriken, Katon/Goka Mekkyaku, Doton", 1);

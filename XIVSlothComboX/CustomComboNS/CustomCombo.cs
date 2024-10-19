@@ -32,7 +32,7 @@ namespace XIVSlothComboX.CustomComboNS
                 _ => 0xFF,
             };
 
-            InitCustomTimeline();
+            // InitCustomTimeline();
 
             // StartTimer();
         }

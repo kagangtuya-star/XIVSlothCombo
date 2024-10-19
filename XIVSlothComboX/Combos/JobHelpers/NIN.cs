@@ -1,4 +1,5 @@
-﻿using Dalamud.Game.ClientState.Conditions;
+﻿using System;
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using ECommons.DalamudServices;
 using XIVSlothComboX.Combos.JobHelpers.Enums;
@@ -7,7 +8,7 @@ using XIVSlothComboX.Extensions;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-       internal class NIN
+    internal class NIN
     {
         internal class NINHelper : PvE.NIN
         {
