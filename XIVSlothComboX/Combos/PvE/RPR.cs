@@ -389,14 +389,18 @@ namespace XIVSlothComboX.Combos.PvE
                     //All Weaves
                     if (CanWeave(ActionWatching.LastWeaponskill))
                     {
-                        //Arcane Cirlce
-                        if (LevelChecked(ArcaneCircle) &&
-                            ((LevelChecked(Enshroud) && JustUsed(ShadowOfDeath) && IsOffCooldown(ArcaneCircle)) ||
-                             (!LevelChecked(Enshroud) && IsOffCooldown(ArcaneCircle))))
-                            return ArcaneCircle;
+                 
                         
                         if (IsEnabled(CustomComboPreset.RPR_ST_CDs))
                         {
+                            
+                            //Arcane Cirlce
+                            if (IsEnabled(CustomComboPreset.RPR_ST_ArcaneCircle) &&
+                                LevelChecked(ArcaneCircle) &&
+                                ((LevelChecked(Enshroud) && JustUsed(ShadowOfDeath) && IsOffCooldown(ArcaneCircle)) ||
+                                 (!LevelChecked(Enshroud) && IsOffCooldown(ArcaneCircle))))
+                                return ArcaneCircle;
+                            
                             //Enshroud
                             if (IsEnabled(CustomComboPreset.RPR_ST_Enshroud) && JobHelpers.RPR.RPRHelpers.UseEnshroud(gauge))
                             {
