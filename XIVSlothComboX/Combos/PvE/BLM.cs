@@ -1,13 +1,14 @@
 using System;
+using System.Collections.Generic;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Statuses;
-using System.Collections.Generic;
 using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
+using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -20,6 +21,7 @@ namespace XIVSlothComboX.Combos.PvE
             Fire = 141,
             Blizzard = 142,
             闪雷Thunder = 144,
+            Thunder = 144,
             Fire2 = 147,
             Transpose = 149,
             Fire3 = 152,
@@ -31,25 +33,46 @@ namespace XIVSlothComboX.Combos.PvE
             Freeze = 159,
             Flare = 162,
             黑魔纹LeyLines = 3573,
+            LeyLines = 3573,
             Sharpcast = 3574,
             Blizzard4 = 3576,
             Fire4 = 3577,
             BetweenTheLines = 7419,
             Thunder4 = 7420,
             三连咏唱Triplecast = 7421,
+            Triplecast = 7421,
+            Foul = 7422,
             秽浊Foul = 7422,
             Thunder2 = 7447,
             绝望Despair = 16505,
+            Despair = 16505,
             UmbralSoul = 16506,
             异言Xenoglossy = 16507,
+            Xenoglossy = 16507,
             Blizzard2 = 25793,
             HighFire2 = 25794,
             HighBlizzard2 = 25795,
             详述Amplifier = 25796,
+            Amplifier = 25796,
             Paradox = 25797,
             HighThunder = 36986,
             HighThunder2 = 36987,
             FlareStar = 36989;
+
+
+        // Debuff Pairs of Actions and Debuff
+        public static readonly Dictionary<uint, ushort>
+            ThunderList = new()
+            {
+                { Thunder, Debuffs.Thunder },
+                { Thunder2, Debuffs.Thunder2 },
+                { Thunder3, Debuffs.Thunder3 },
+                { Thunder4, Debuffs.Thunder4 },
+                { HighThunder, Debuffs.HighThunder },
+                { HighThunder2, Debuffs.HighThunder2 }
+            };
+
+        protected static BLMGauge gauge = GetJobGauge<BLMGauge>();
 
         public static class Buffs
         {
@@ -91,27 +114,26 @@ namespace XIVSlothComboX.Combos.PvE
             public const int MaxMP = 10000;
 
             public const int AllMPSpells = 800; //"ALL MP" spell. Only caring about the absolute minimum.
-            public static int FireI => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(Fire));
-            public static int FlareAoE => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(Flare));
-            public static int FireAoE => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(Fire2));
-            public static int FireIII => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(Fire3));
-            public static int BlizzardAoE => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(Blizzard2));
-            public static int BlizzardI => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(Blizzard));
-            public static int Freeze => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(BLM.Freeze));
-            public static int Despair => CustomComboFunctions.GetResourceCost(CustomComboFunctions.OriginalHook(BLM.绝望Despair));
-        }
 
-        // Debuff Pairs of Actions and Debuff
-        public static readonly Dictionary<uint, ushort>
-            ThunderList = new()
-            {
-                { 闪雷Thunder, Debuffs.Thunder },
-                { Thunder2, Debuffs.Thunder2 },
-                { Thunder3, Debuffs.Thunder3 },
-                { Thunder4, Debuffs.Thunder4 },
-                { HighThunder, Debuffs.HighThunder },
-                { HighThunder2, Debuffs.HighThunder2 }
-            };
+            public static int FireI => GetResourceCost(OriginalHook(Fire));
+
+            public static int FlareAoE => GetResourceCost(OriginalHook(Flare));
+
+            public static int FireAoE => GetResourceCost(OriginalHook(Fire2));
+
+            public static int FireIII => GetResourceCost(OriginalHook(Fire3));
+
+            public static int BlizzardAoE =>
+                GetResourceCost(OriginalHook(Blizzard2));
+
+            public static int BlizzardI =>
+                GetResourceCost(OriginalHook(Blizzard));
+
+            public static int Freeze => GetResourceCost(OriginalHook(BLM.Freeze));
+
+            public static int Despair =>
+                GetResourceCost(OriginalHook(BLM.Despair));
+        }
 
         public static class Config
         {
@@ -183,19 +205,28 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
+
         internal class BLM_ST_SimpleMode : CustomCombo
         {
+            internal static BLMOpenerLogic BLMOpener = new();
+
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_ST_SimpleMode;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 if (actionID != Fire) return actionID;
 
-                var gauge = GetJobGauge<BLMGauge>();
-                var maxPolyglot = TraitLevelChecked(Traits.EnhancedPolyglotII) ? 3 : TraitLevelChecked(Traits.EnhancedPolyglot) ? 2 : 1;
-                var maxPolyglotCD = maxPolyglot * 30000;
-                var remainingPolyglotCD = Math.Max(0, (maxPolyglot - gauge.PolyglotStacks) * 30000 + (gauge.EnochianTimer - 30000));
-                var curMp = LocalPlayer.CurrentMp;
+                int maxPolyglot = TraitLevelChecked(Traits.EnhancedPolyglotII) ? 3 :
+                    TraitLevelChecked(Traits.EnhancedPolyglot) ? 2 : 1;
+                int maxPolyglotCD = maxPolyglot * 30000;
+
+                int remainingPolyglotCD = Math.Max
+                (
+                    0,
+                    (maxPolyglot - gauge.PolyglotStacks) * 30000 + (gauge.EnochianTimer - 30000)
+                );
+                uint curMp = LocalPlayer.CurrentMp;
+
                 int nextMpGain = gauge.UmbralIceStacks switch
                 {
                     0 => 0,
@@ -204,10 +235,13 @@ namespace XIVSlothComboX.Combos.PvE
                     3 => 10000,
                     _ => 0
                 };
-                var thunderDebuff = FindEffect(ThunderList[OriginalHook(闪雷Thunder)], CurrentTarget, LocalPlayer.GameObjectId);
-                var elementTimer = gauge.ElementTimeRemaining / 1000f;
-                var gcdsInTimer = Math.Floor(elementTimer / GetActionCastTime(Fire));
-                var canSwiftB3 = IsOffCooldown(All.Swiftcast) || ActionReady(三连咏唱Triplecast) || GetBuffStacks(Buffs.Triplecast) > 0;
+
+                Status? thunderDebuff =
+                    FindEffect(ThunderList[OriginalHook(Thunder)], CurrentTarget, LocalPlayer.GameObjectId);
+                float elementTimer = gauge.ElementTimeRemaining / 1000f;
+                double gcdsInTimer = Math.Floor(elementTimer / GetActionCastTime(Fire));
+
+                bool canSwiftB3 = IsOffCooldown(All.Swiftcast) || ActionReady(Triplecast) || GetBuffStacks(Buffs.Triplecast) > 0;
 
                 if (IsEnabled(CustomComboPreset.BLM_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.BLM_VariantCure)
                     return Variant.VariantCure;
@@ -215,68 +249,63 @@ namespace XIVSlothComboX.Combos.PvE
                 if (IsEnabled(CustomComboPreset.BLM_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanSpellWeave(actionID))
                     return Variant.VariantRampart;
 
+                if (BLMOpener.DoFullOpener(ref actionID))
+                    return actionID;
+
                 if (IsEnabled(CustomComboPreset.BLM_ST_SimpleMode_Thunder))
                 {
+                   
                     if (HasEffect(Buffs.Thunderhead) && gcdsInTimer > 1)
-                    {
                         if (thunderDebuff is null || thunderDebuff.RemainingTime < 3)
-                            return OriginalHook(闪雷Thunder);
-                    }
+                            return OriginalHook(Thunder); 
                 }
-                
-             
-                if (ActionReady(详述Amplifier) && remainingPolyglotCD >= 20000 && CanSpellWeave(ActionWatching.LastSpell))
-                    return 详述Amplifier;
+
+
+                if (ActionReady(Amplifier) && remainingPolyglotCD >= 20000 && CanSpellWeave(ActionWatching.LastSpell))
+                    return Amplifier;
 
                 if (remainingPolyglotCD < 6000 && gcdsInTimer > 2 && gauge.HasPolyglotStacks())
-                    return 异言Xenoglossy.LevelChecked() ? 异言Xenoglossy : 秽浊Foul;
+                    return Xenoglossy.LevelChecked() ? Xenoglossy : Foul;
 
                 if (IsMoving)
                 {
-                    if (ActionReady(详述Amplifier) && gauge.PolyglotStacks < maxPolyglot)
-                        return 详述Amplifier;
+                    if (ActionReady(Amplifier) && gauge.PolyglotStacks < maxPolyglot)
+                        return Amplifier;
 
                     if (gauge.HasPolyglotStacks())
-                        return 异言Xenoglossy.LevelChecked() ? 异言Xenoglossy : 秽浊Foul;
+                        return Xenoglossy.LevelChecked() ? Xenoglossy : Foul;
                 }
 
-                if (IsEnabled(CustomComboPreset.BLM_ST_SimpleMode_LeyLines))
-                {
-                    if (CanSpellWeave(actionID) && ActionReady(黑魔纹LeyLines))
-                        return 黑魔纹LeyLines;
-                }
+                if (IsEnabled(CustomComboPreset.BLM_ST_SimpleMode_LeyLines) && CanSpellWeave(actionID) && ActionReady(LeyLines))
+                    return LeyLines;
 
-           
                 if (gauge.InAstralFire)
                 {
-
                     if (gauge.IsParadoxActive && gcdsInTimer < 2 && curMp >= MP.FireI)
                         return Paradox;
 
                     if (HasEffect(Buffs.Firestarter))
-                    {
                         if (gcdsInTimer < 2 || curMp < MP.FireI || WasLastAbility(Transpose))
                             return Fire3;
-                    }
 
-                    if (curMp < MP.FireI && 绝望Despair.LevelChecked() && curMp >= MP.Despair)
+                    if (curMp < MP.FireI && Despair.LevelChecked() && curMp >= MP.Despair)
                     {
                         if (IsEnabled(CustomComboPreset.BLM_ST_SimpleMode_Triplecast))
                         {
-                            if (ActionReady(三连咏唱Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0)
-                                return 三连咏唱Triplecast;
+                            if (ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0)
+                                return Triplecast;  
                         }
-                        return 绝望Despair;
+                      
+
+                        return Despair;
                     }
 
                     if (curMp == 0 && FlareStar.LevelChecked() && gauge.AstralSoulStacks == 6)
                         return FlareStar;
 
                     if (Fire4.LevelChecked())
-                    {
                         if (gcdsInTimer > 1 && curMp >= MP.FireI)
                             return Fire4;
-                    }
 
                     if (curMp >= MP.FireI)
                         return Fire;
@@ -289,14 +318,14 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (ActionReady(Transpose))
                         return Transpose;
-
                 }
+
                 if (gauge.InUmbralIce)
                 {
                     if (ActionReady(Blizzard3) && gauge.UmbralIceStacks < 3 && TraitLevelChecked(Traits.UmbralHeart))
                     {
-                        if (ActionReady(三连咏唱Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0)
-                            return 三连咏唱Triplecast;
+                        if (ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0)
+                            return Triplecast;
 
                         if (GetBuffStacks(Buffs.Triplecast) == 0 && IsOffCooldown(All.Swiftcast))
                             return All.Swiftcast;
@@ -312,7 +341,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return Paradox;
 
                     if (gauge.HasPolyglotStacks())
-                        return 异言Xenoglossy.LevelChecked() ? 异言Xenoglossy : 秽浊Foul;
+                        return Xenoglossy.LevelChecked() ? Xenoglossy : Foul;
 
                     if (curMp + nextMpGain >= 7500 && (LocalPlayer.CastActionId == Blizzard || WasLastSpell(Blizzard) || WasLastSpell(Blizzard4)))
                     {
@@ -322,10 +351,167 @@ namespace XIVSlothComboX.Combos.PvE
                         return Fire;
                     }
 
-                    if ((curMp + nextMpGain <= 10000 || curMp < 7500))
+                    if (curMp + nextMpGain <= 10000 || curMp < 7500)
                         return Blizzard;
 
                     if (ActionReady(Transpose) && CanSpellWeave(ActionWatching.LastSpell))
+                        return Transpose;
+
+                    if (Fire3.LevelChecked())
+                        return Fire3;
+                }
+
+                if (Blizzard3.LevelChecked())
+                    return Blizzard3;
+
+                return actionID;
+            }
+        }
+
+        internal class BLM_ST_AdvancedMode : CustomCombo
+        {
+            internal static BLMOpenerLogic BLMOpener = new();
+
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_ST_AdvancedMode;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID != Fire) return actionID;
+
+                int maxPolyglot = TraitLevelChecked(Traits.EnhancedPolyglotII) ? 3 :
+                    TraitLevelChecked(Traits.EnhancedPolyglot) ? 2 : 1;
+                int maxPolyglotCD = maxPolyglot * 30000;
+
+                int remainingPolyglotCD = Math.Max
+                (
+                    0,
+                    (maxPolyglot - gauge.PolyglotStacks) * 30000 + (gauge.EnochianTimer - 30000)
+                );
+                uint curMp = LocalPlayer.CurrentMp;
+
+                int nextMpGain = gauge.UmbralIceStacks switch
+                {
+                    0 => 0,
+                    1 => 2500,
+                    2 => 5000,
+                    3 => 10000,
+                    _ => 0
+                };
+
+                Status? thunderDebuff =
+                    FindEffect(ThunderList[OriginalHook(Thunder)], CurrentTarget, LocalPlayer.GameObjectId);
+                float elementTimer = gauge.ElementTimeRemaining / 1000f;
+                double gcdsInTimer = Math.Floor(elementTimer / GetActionCastTime(Fire));
+
+                bool canSwiftB3 = IsOffCooldown(All.Swiftcast) || ActionReady(Triplecast) || GetBuffStacks(Buffs.Triplecast) > 0;
+
+                if (IsEnabled(CustomComboPreset.BLM_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.BLM_VariantCure)
+                    return Variant.VariantCure;
+
+                if (IsEnabled(CustomComboPreset.BLM_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanSpellWeave(actionID))
+                    return Variant.VariantRampart;
+
+                if (IsEnabled(CustomComboPreset.BLM_ST_Opener))
+                    if (BLMOpener.DoFullOpener(ref actionID))
+                        return actionID;
+
+                if (HasEffect(Buffs.Thunderhead) && gcdsInTimer > 1)
+                    if (thunderDebuff is null || thunderDebuff.RemainingTime < 3)
+                        return OriginalHook(Thunder);
+
+                if (ActionReady(Amplifier) && remainingPolyglotCD >= 20000 && CanSpellWeave(ActionWatching.LastSpell))
+                    return Amplifier;
+
+                if (IsEnabled(CustomComboPreset.BLM_ST_UsePolyglot) && remainingPolyglotCD < 6000 && gcdsInTimer > 2 && gauge.HasPolyglotStacks())
+                    return Xenoglossy.LevelChecked()
+                        ? Xenoglossy
+                        : Foul;
+
+                if (IsMoving)
+                {
+                    if (IsEnabled(CustomComboPreset.BLM_ST_Amplifier) && ActionReady(Amplifier) && gauge.PolyglotStacks < maxPolyglot)
+                        return Amplifier;
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_UsePolyglotMoving) && gauge.HasPolyglotStacks())
+                        return Xenoglossy.LevelChecked()
+                            ? Xenoglossy
+                            : Foul;
+                }
+
+                if (IsEnabled(CustomComboPreset.BLM_ST_LeyLines) && CanSpellWeave(actionID) && ActionReady(LeyLines))
+                    return LeyLines;
+
+                if (gauge.InAstralFire)
+                {
+                    if (gauge.IsParadoxActive && gcdsInTimer < 2 && curMp >= MP.FireI)
+                        return Paradox;
+
+                    if (HasEffect(Buffs.Firestarter))
+                        if (gcdsInTimer < 2 || curMp < MP.FireI || WasLastAbility(Transpose))
+                            return Fire3;
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_Despair) && curMp < MP.FireI && Despair.LevelChecked() && curMp >= MP.Despair)
+                    {
+                        if (IsEnabled(CustomComboPreset.BLM_ST_Triplecast) && ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0)
+                            return Triplecast;
+
+                        return Despair;
+                    }
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_Flarestar) && curMp == 0 && FlareStar.LevelChecked() && gauge.AstralSoulStacks == 6)
+                        return FlareStar;
+
+                    if (Fire4.LevelChecked())
+                        if (gcdsInTimer > 1 && curMp >= MP.FireI)
+                            return Fire4;
+
+                    if (curMp >= MP.FireI)
+                        return Fire;
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_Manafont) && ActionReady(Manafont))
+                        return Manafont;
+
+                    if (ActionReady(Blizzard3) && !canSwiftB3)
+                        return Blizzard3;
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_Transpose) && ActionReady(Transpose))
+                        return Transpose;
+                }
+
+                if (gauge.InUmbralIce)
+                {
+                    if (ActionReady(Blizzard3) && gauge.UmbralIceStacks < 3 && TraitLevelChecked(Traits.UmbralHeart))
+                    {
+                        if (IsEnabled(CustomComboPreset.BLM_ST_Triplecast) && ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0)
+                            return Triplecast;
+
+                        if (IsEnabled(CustomComboPreset.BLM_ST_Swiftcast) && GetBuffStacks(Buffs.Triplecast) == 0 && IsOffCooldown(All.Swiftcast))
+                            return All.Swiftcast;
+
+                        if (HasEffect(All.Buffs.Swiftcast) || GetBuffStacks(Buffs.Triplecast) > 0)
+                            return Blizzard3;
+                    }
+
+                    if (Blizzard4.LevelChecked() && gauge.UmbralHearts < 3 && TraitLevelChecked(Traits.UmbralHeart))
+                        return Blizzard4;
+
+                    if (gauge.IsParadoxActive)
+                        return Paradox;
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_UsePolyglot) && gauge.HasPolyglotStacks())
+                        return Xenoglossy.LevelChecked()
+                            ? Xenoglossy
+                            : Foul;
+
+                    if (curMp + nextMpGain >= 7500 && (LocalPlayer.CastActionId == Blizzard || WasLastSpell(Blizzard) || WasLastSpell(Blizzard4)))
+                        return Fire3.LevelChecked()
+                            ? Fire3
+                            : Fire;
+
+                    if (curMp + nextMpGain <= 10000 || curMp < 7500)
+                        return Blizzard;
+
+                    if (IsEnabled(CustomComboPreset.BLM_ST_Transpose) && ActionReady(Transpose) && CanSpellWeave(ActionWatching.LastSpell))
                         return Transpose;
 
                     if (Fire3.LevelChecked())
@@ -347,11 +533,17 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is not (Blizzard2 or HighBlizzard2)) return actionID;
 
-                var gauge = GetJobGauge<BLMGauge>();
-                var maxPolyglot = TraitLevelChecked(Traits.EnhancedPolyglotII) ? 3 : TraitLevelChecked(Traits.EnhancedPolyglot) ? 2 : 1;
-                var maxPolyglotCD = maxPolyglot * 30000;
-                var remainingPolyglotCD = Math.Max(0, (maxPolyglot - gauge.PolyglotStacks) * 30000 + (gauge.EnochianTimer - 30000));
-                var curMp = LocalPlayer.CurrentMp;
+                int maxPolyglot = TraitLevelChecked(Traits.EnhancedPolyglotII) ? 3 :
+                    TraitLevelChecked(Traits.EnhancedPolyglot) ? 2 : 1;
+                int maxPolyglotCD = maxPolyglot * 30000;
+
+                int remainingPolyglotCD = Math.Max
+                (
+                    0,
+                    (maxPolyglot - gauge.PolyglotStacks) * 30000 + (gauge.EnochianTimer - 30000)
+                );
+                uint curMp = LocalPlayer.CurrentMp;
+
                 int nextMpGain = gauge.UmbralIceStacks switch
                 {
                     0 => 0,
@@ -360,11 +552,14 @@ namespace XIVSlothComboX.Combos.PvE
                     3 => 10000,
                     _ => 0
                 };
-                var thunderDebuff = FindEffect(ThunderList[OriginalHook(Thunder2)], CurrentTarget, LocalPlayer.GameObjectId);
-                var elementTimer = gauge.ElementTimeRemaining / 1000f;
-                var gcdsInTimer = Math.Floor(elementTimer / GetActionCastTime(ActionWatching.LastSpell));
-                var canSwiftF = TraitLevelChecked(Traits.AspectMasteryIII) && (IsOffCooldown(All.Swiftcast) || ActionReady(三连咏唱Triplecast) || GetBuffStacks(Buffs.Triplecast) > 0);
-                var canWeave = CanSpellWeave(ActionWatching.LastSpell);
+
+                Status? thunderDebuff =
+                    FindEffect(ThunderList[OriginalHook(Thunder2)], CurrentTarget, LocalPlayer.GameObjectId);
+                float elementTimer = gauge.ElementTimeRemaining / 1000f;
+                double gcdsInTimer = Math.Floor(elementTimer / GetActionCastTime(ActionWatching.LastSpell));
+
+                bool canSwiftF = TraitLevelChecked(Traits.AspectMasteryIII) && (IsOffCooldown(All.Swiftcast) || ActionReady(Triplecast) || GetBuffStacks(Buffs.Triplecast) > 0);
+                bool canWeave = CanSpellWeave(ActionWatching.LastSpell);
 
                 if (IsEnabled(CustomComboPreset.BLM_Variant_Cure) && IsEnabled(Variant.VariantCure) && PlayerHealthPercentageHp() <= Config.BLM_VariantCure)
                     return Variant.VariantCure;
@@ -373,27 +568,27 @@ namespace XIVSlothComboX.Combos.PvE
                     return Variant.VariantRampart;
 
                 if (HasEffect(Buffs.Thunderhead) && gcdsInTimer > 1 && Thunder2.LevelChecked())
-                {
                     if (thunderDebuff is null || thunderDebuff.RemainingTime < 3)
                         return OriginalHook(Thunder2);
-                }
 
-                if (ActionReady(详述Amplifier) && remainingPolyglotCD >= 20000 && canWeave)
-                    return 详述Amplifier;
+                if (ActionReady(Amplifier) && remainingPolyglotCD >= 20000 && canWeave)
+                    return Amplifier;
 
                 if (IsMoving)
                 {
-                    if (ActionReady(详述Amplifier) && gauge.PolyglotStacks < maxPolyglot)
-                        return 详述Amplifier;
+                    if (ActionReady(Amplifier) && gauge.PolyglotStacks < maxPolyglot)
+                        return Amplifier;
 
                     if (gauge.HasPolyglotStacks())
-                        return 秽浊Foul;
+                        return Foul;
                 }
+
                 if (IsEnabled(CustomComboPreset.BLM_AoE_SimpleMode_LeyLines))
                 {
-                    if (canWeave && ActionReady(黑魔纹LeyLines))
-                        return 黑魔纹LeyLines;
+                    if (canWeave && ActionReady(LeyLines))
+                        return LeyLines;
                 }
+              
 
                 if (gauge.InAstralFire)
                 {
@@ -405,17 +600,15 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (Flare.LevelChecked() && curMp >= MP.FlareAoE)
                     {
-                        if (ActionReady(三连咏唱Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0 && canWeave)
-                            return 三连咏唱Triplecast;
+                        if (ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0 && canWeave)
+                            return Triplecast;
 
                         return Flare;
                     }
 
                     if (Fire2.LevelChecked())
-                    {
                         if (gcdsInTimer > 1 && curMp >= MP.FireAoE)
                             return OriginalHook(Fire2);
-                    }
 
                     if (ActionReady(Manafont))
                         return Manafont;
@@ -425,11 +618,17 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (ActionReady(Blizzard2) && TraitLevelChecked(Traits.AspectMasteryIII))
                         return OriginalHook(Blizzard2);
-
                 }
+
                 if (gauge.InUmbralIce)
                 {
-                    if (ActionWatching.WhichOfTheseActionsWasLast(OriginalHook(Fire2), OriginalHook(Freeze), OriginalHook(Flare), OriginalHook(FlareStar)) == OriginalHook(Freeze) && FlareStar.LevelChecked())
+                    if (ActionWatching.WhichOfTheseActionsWasLast
+                        (
+                            OriginalHook(Fire2), OriginalHook(Freeze),
+                            OriginalHook(Flare), OriginalHook(FlareStar)
+                        )
+                        == OriginalHook(Freeze)
+                        && FlareStar.LevelChecked())
                     {
                         if (ActionReady(Transpose) && canWeave)
                             return Transpose;
@@ -439,8 +638,8 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (ActionReady(OriginalHook(Blizzard2)) && gauge.UmbralIceStacks < 3 && TraitLevelChecked(Traits.AspectMasteryIII))
                     {
-                        if (ActionReady(三连咏唱Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0 && canWeave)
-                            return 三连咏唱Triplecast;
+                        if (ActionReady(Triplecast) && GetBuffStacks(Buffs.Triplecast) == 0 && canWeave)
+                            return Triplecast;
 
                         if (GetBuffStacks(Buffs.Triplecast) == 0 && IsOffCooldown(All.Swiftcast) && canWeave)
                             return All.Swiftcast;
@@ -456,13 +655,11 @@ namespace XIVSlothComboX.Combos.PvE
                         return Freeze;
 
                     if (gauge.HasPolyglotStacks())
-                        return 秽浊Foul;
+                        return Foul;
 
-                    if (JobHelpers.BLM.DoubleBlizz())
-                    {
+                    if (BLMHelper.DoubleBlizz())
                         if (Fire2.LevelChecked())
                             return OriginalHook(Fire2);
-                    }
 
                     if (curMp < LocalPlayer.MaxMp)
                         return Freeze.LevelChecked() ? OriginalHook(Freeze) : OriginalHook(Blizzard2);
@@ -485,20 +682,24 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Variant_Raise;
 
-            protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level) =>
-                (actionID is All.Swiftcast && HasEffect(All.Buffs.Swiftcast) && IsEnabled(Variant.VariantRaise))
+            protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
+            {
+                return actionID is All.Swiftcast && HasEffect(All.Buffs.Swiftcast) && IsEnabled(Variant.VariantRaise)
                     ? Variant.VariantRaise
                     : actionID;
+            }
         }
 
         internal class BLM_Scathe_Xeno : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Scathe_Xeno;
 
-            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level) =>
-                (actionID is Scathe && LevelChecked(异言Xenoglossy) && GetJobGauge<BLMGauge>().HasPolyglotStacks())
-                    ? 异言Xenoglossy
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return actionID is Scathe && LevelChecked(Xenoglossy) && GetJobGauge<BLMGauge>().HasPolyglotStacks()
+                    ? Xenoglossy
                     : actionID;
+            }
         }
 
         internal class BLM_Blizzard_1to3 : CustomCombo
@@ -521,40 +722,48 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Fire_1to3;
 
-            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level) =>
-                (actionID is Fire && ((LevelChecked(Fire3) && !GetJobGauge<BLMGauge>().InAstralFire) || HasEffect(Buffs.Firestarter)))
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return actionID is Fire && ((LevelChecked(Fire3) && !GetJobGauge<BLMGauge>().InAstralFire) || HasEffect(Buffs.Firestarter))
                     ? Fire3
                     : actionID;
+            }
         }
 
         internal class BLM_Between_The_LeyLines : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Between_The_LeyLines;
 
-            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level) =>
-                actionID is 黑魔纹LeyLines && HasEffect(Buffs.LeyLines) && LevelChecked(BetweenTheLines)
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return actionID is LeyLines && HasEffect(Buffs.LeyLines) && LevelChecked(BetweenTheLines)
                     ? BetweenTheLines
                     : actionID;
+            }
         }
 
         internal class BLM_Aetherial_Manipulation : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Aetherial_Manipulation;
 
-            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level) =>
-                actionID is AetherialManipulation && ActionReady(BetweenTheLines) && HasEffect(Buffs.LeyLines) && !HasEffect(Buffs.CircleOfPower) && !IsMoving
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return actionID is AetherialManipulation && ActionReady(BetweenTheLines) && HasEffect(Buffs.LeyLines) && !HasEffect(Buffs.CircleOfPower) && !IsMoving
                     ? BetweenTheLines
                     : actionID;
+            }
         }
 
         internal class BLM_UmbralSoul : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_UmbralSoul;
 
-            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level) =>
-                actionID is Transpose && GetJobGauge<BLMGauge>().InUmbralIce && LevelChecked(UmbralSoul)
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return actionID is Transpose && GetJobGauge<BLMGauge>().InUmbralIce && LevelChecked(UmbralSoul)
                     ? UmbralSoul
                     : actionID;
+            }
         }
     }
 }

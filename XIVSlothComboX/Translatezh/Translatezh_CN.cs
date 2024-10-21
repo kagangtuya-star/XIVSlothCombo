@@ -76,49 +76,59 @@ public class Translatezh_CN
         #endregion
         #endregion
         #region BLACK MAGE
-        #region Advanced ST
-        {"Advanced Mode - Single Target" , "高级模式 - 单目标"  },
-        {"Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "用一个完整的单目标循环替代火焰。\n如果您想自定义循环，这些功能非常理想。"  },
-        {"Thunder I/III Option" , "雷霆I/III选项"  },
-        {"Adds Thunder I/Thunder III when the debuff isn't present or is expiring." , "当无法触发雷霆debuff或debuff即将结束时，添加雷霆I/III。"  },
-        {"Triplecast/Swiftcast Option" , "三连咏唱/迅连咏唱选项"  },
-        {"Adds Triplecast/Swiftcast to the rotation." , "将三连咏唱/迅连咏唱添加到循环中。"  },
-        {"Opener Option" , "开场选项"  },
-        {"Adds the Lv.90 opener.\nWill default to the Standard opener when nothing is selected." , "添加90级开场技能。\n如果没有选择任何内容，将默认使用标准开场技能。"  },
-        #endregion
-        #region Advanced AoE
-        {"Advanced Mode - AoE" , "高级模式 - AoE"  },
-        {"Replaces Blizzard II with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "[AI]用一个完整的单键AoE循环替代暴风雪II。\n如果您想自定义循环，这些功能非常理想。"  },
-        {"Thunder Uptime Option" , "[AI]雷霆持续时间选项"  },
-        {"Adds Thunder II/Thunder IV during Umbral Ice." , "[AI]在幽暗冰期间添加雷霆II/雷霆IV。"  },
-        #endregion
         #region Variant
         #endregion
         #region Miscellaneous
         {"Aetherial Manipulation Feature" , "以太步功能"  },
         {"Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still." , "[AI]当你没有激活的灵脉并且静止不动时，用Between the Lines替代以太步。"  },
+        {"Advanced Mode - Single Target" , "高级模式 - 单目标"  },
+        {"Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "用一个完整的单目标循环替代火焰。\n如果您想自定义循环，这些功能非常理想。"  },
+        {"Level 100 Opener" , "100级开场"  },
+        {"Adds the Balance opener to the rotation." , "将the Balance起手加入循环。"  },
+        {"Use Foul / Xenoglossy" , "等待翻译"  },
+        {"Add Foul / Xenoglossy to the rotation." , "等待翻译"  },
+        {"Use Foul / Xenoglossy for movement" , "等待翻译"  },
+        {"Add Foul / Xenoglossy to the rotation as movement option." , "等待翻译"  },
+        {"Use Amplifier" , "等待翻译"  },
+        {"Add Amplifier to the rotation." , "等待翻译"  },
+        {"Use Leylines" , "黑魔纹"  },
+        {"Add Leylines to the rotation." , "等待翻译"  },
+        {"Use Despair" , "等待翻译"  },
+        {"Add Despair to the rotation." , "等待翻译"  },
+        {"Use Swiftcast" , "等待翻译"  },
+        {"Add Swiftcast to the rotation." , "等待翻译"  },
+        {"Use Triplecast" , "等待翻译"  },
+        {"Add Triplecast to the rotation." , "等待翻译"  },
+        {"Use Flarestar" , "耀星"  },
+        {"Add Flarestar to the rotation." , "等待翻译"  },
+        {"Use Manafont" , "等待翻译"  },
+        {"Add Manafont to the rotation." , "等待翻译"  },
+        {"Use Transpose" , "等待翻译"  },
+        {"Add Transpose to the rotation." , "等待翻译"  },
         #endregion
         #endregion
         #region BLUE MAGE
         #endregion
         #region BARD
+        #region 自定义循环
+        #endregion
         {"Simple Mode - Single Target" , "简单模式 - 单目标"  },
         {"Adds every single target ability to one button,\nIf there are DoTs on target, will try to maintain their uptime." , "将所有单目标技能添加到一个按钮中，\n如果目标身上有DoT效果，将尝试保持它们的持续时间。"  },
         {"Simple Mode - AoE" , "简单模式 - AoE"  },
         {"Weaves oGCDs onto Quick Nock/Ladonsbite." , "将非GCD技能编织到连珠箭/百首龙牙箭中。"  },
         {"Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime." , "如果目标身上有DoT效果，Simple Bard将尝试保持它们的持续时间。"  },
+        {"Resonant Option" , "共鸣箭选项"  },
+        {"Adds Resonant Arrow to the Rotation after Barrage." , "在纷乱箭之后将共鸣箭添加到循环中。"  },
+        {"Encore Option" , "光明神的返场余音选项"  },
+        {"Adds Radiant Encore to the Rotation after Finale." , "在光明神的最终乐章之后将光明神的返场余音添加到循环中。"  },
         {"Apex Arrow Option" , "绝峰箭选项"  },
         {"Replaces Burst Shot with Apex Arrow when gauge is full and Blast Arrow when you are Blast Arrow ready." , "当能量槽满时，用绝峰箭替换爆裂爆发射击，当你准备好爆破箭时，用爆破箭替换。"  },
         {"oGcd Option" , "非GCD选项"  },
         {"Weave Sidewinder, Empyreal arrow, Rain of death, and Pitch perfect when available." , "在可用时编织侧风诱导箭、九天连箭、死亡箭雨和完美音调。"  },
         {"Buffs Option" , "增益选项"  },
         {"Adds buffs onto the Advanced Bard feature." , "将增益效果添加到高级吟游诗人功能中。"  },
-        {"Resonant Option" , "共鸣箭选项"  },
-        {"Adds Resonant Arrow to the Rotation after Barrage." , "在纷乱箭之后将共鸣箭添加到循环中。"  },
         {"Buffs - Radiant Option" , "增益 - 光明神选项"  },
         {"Adds Radiant Finale to theBuffs feature." , "将光明神的最终乐章添加到增益效果中"  },
-        {"Encore Option" , "光明神的返场余音选项"  },
-        {"Adds Radiant Encore to the Rotation after Finale." , "在光明神的最终乐章之后将光明神的返场余音添加到循环中。"  },
         {"No Waste Option" , "无浪费选项"  },
         {"Adds enemy health checking on mobs for buffs, DoTs and Songs.\nThey will not be reapplied if less than specified." , "对敌方生命值进行检查，为增益效果、DoT效果和歌曲效果。\n如果生命值低于指定值，则不会重新应用。"  },
         {"Adds Apex Arrow and Blast shot" , "添加绝峰箭和爆发射击。"  },
@@ -126,7 +136,6 @@ public class Translatezh_CN
         {"84+ Pools Rain of death charges to allow for optimum burst phases." , "积累84+死亡箭雨充能以允许最佳爆发阶段。"  },
         {"Enable the snapshotting of DoTs, within the remaining time of Raging Strikes below:" , "在猛者强击剩余时间内启用DoT快照："  },
         {"Simple AoE Buffs Option" , "简单AoE增益选项"  },
-        {"Adds buffs onto the Simple AoE Bard feature." , "将增益效果添加到简单AoE吟游诗人功能中。"  },
         {"AoE No Waste Option" , "AoE无浪费选项"  },
         {"Adds enemy health checking on targetted mob for songs.\nThey will not be reapplied if less than specified." , "等待翻译"  },
         #endregion
@@ -171,8 +180,6 @@ public class Translatezh_CN
         {"Replaces True Thrust with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job." , "将精准刺替换为一键全单体循环。\n这是新手的理想选择。"  },
         #region Advanced ST Dragoon
         {"Replaces True Thrust with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "将精准刺替换为一键全单体循环。\n如果你想自定义循环，这些功能是理想的选择。"  },
-        {"Level 100 Opener" , "100级开场"  },
-        {"Adds the Balance opener to the rotation." , "将the Balance起手加入循环。"  },
         #region Buffs ST
         {"Adds various buffs to the rotation." , "将各种增益加入循环。"  },
         {"Battle Litany Option" , "战斗连祷选项"  },
@@ -219,6 +226,7 @@ public class Translatezh_CN
         #endregion
         {"Replaces Doom Spike with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job." , "将死天枪刺替换为一键AoE技能循环。\n这是新手最理想的选项。"  },
         #region Advanced AoE Dragoon
+        {"Advanced Mode - AoE" , "高级模式 - AoE"  },
         {"Replaces Doom Spike with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "将死天枪替换为一键全AoE循环。\n这些功能是自定义循环的理想选择。"  },
         #region Buffs AoE
         {"Buffs AoE Option" , "AoE增益选项"  },
@@ -326,10 +334,13 @@ public class Translatezh_CN
         {"Swap dismantle with tactician when dismantle is on cooldown." , "[AI]当武装解除冷却时，用策动替换拆卸。"  },
         #endregion
         #region MONK
+        #region 自定义循环
+        #endregion
         {"Replaces Bootshine with a one - button full single target rotation.\nThis is ideal for newcomers to the job." , "将正拳替换为一键式全单体循环。\n这是新手最理想的选项。"  },
         {"Replaces Arm of the Destroyer with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "将灭绝替换为一键式全单体循环。\n这是新手最理想的选项。"  },
         #region Monk Advanced ST
         {"Replaces Bootshine with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation." , "将正拳替换为一键式全单体循环。\n这些功能适合你自定义技能循环。"  },
+        {"Opener Option" , "开场选项"  },
         {"Uses selected opener" , "使用选定的开场技能"  },
         {"Meditation Option" , "冥想选项"  },
         {"Adds Meditation to the rotation" , "将冥想添加到技能循环中"  },
@@ -387,6 +398,8 @@ public class Translatezh_CN
         #region PALADIN
         #endregion
         #region REAPER
+        #region 自定义循环
+        #endregion
         #region Simple ST
         {"Replaces Slice with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "将切割替换为一键式全单体循环。\n这是新手最理想的选项。"  },
         #endregion
@@ -510,11 +523,10 @@ public class Translatezh_CN
         #region SAGE
         #region Single Target DPS Feature
         {"Use the Balance opener from level 56+." , "从56级开始使用The Balance开场。"  },
-        {"Weaves(?) Psych when available." , "等待翻译"  },
-        {"Addersgall Overflow Protection" , "等待翻译"  },
-        {"Weaves Druochole when Addersgall gauge is greater than or equal to the specified value." , "等待翻译"  },
         #endregion
         #region AoE DPS Feature
+        {"Addersgall Overflow Protection" , "等待翻译"  },
+        {"Weaves Druochole when Addersgall gauge is greater than or equal to the specified value." , "等待翻译"  },
         {"Psyche Option" , "等待翻译"  },
         {"Weaves Psyche if available." , "等待翻译"  },
         #endregion
@@ -544,7 +556,9 @@ public class Translatezh_CN
         {"Don't use Philosophia when under the effect of someone's Philosophia" , "等待翻译"  },
         #endregion
         #endregion
-         #region SAMURAI
+        #region SAMURAI
+        #region 自定义循环
+        #endregion
         #region  Simple ST
         {"Replaces Hakaze/Gyofu with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "将刃风/晓风替换为一键式单体循环。\n这是新手的理想选择。"  },
         #endregion
@@ -814,6 +828,8 @@ public class Translatezh_CN
         {"Use Variant Spirit Dart whenever the debuff is not present or less than 3s." , "在多变精神镖Debuff时间少于 3 秒时使用"  },
         #endregion
         #region PICTOMANCER
+        #region 自定义循环
+        #endregion
         {"Consolidates the single target rotation into one button, ideal for newcomers." , "将单体目标的循环整合到一个按键，非常适合新手。"  },
         {"Consolidates the AoE rotation into one button, ideal for newcomers." , "将范围伤害循环整合到一个按键，非常适合新手。"  },
         #region ST
