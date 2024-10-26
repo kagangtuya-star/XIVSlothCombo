@@ -1615,7 +1615,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.AST_AOE_AutoDraw)
             {
-                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_AOE_DPS_OverwriteCards, "Overwrite Non-DPS Cards", "Will draw even if you have healing cards remaining.");
+                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_AOE_DPS_OverwriteCards, "没有输出卡", "即使你还有其他卡，也会使用");
             }
 
             if (preset is CustomComboPreset.AST_ST_SimpleHeals)
@@ -1722,7 +1722,7 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.AST_DPS_AutoDraw)
             {
-                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_DPS_OverwriteCards, "Overwrite Non-DPS Cards", "Will draw even if you have healing cards remaining.");
+                UserConfig.DrawAdditionalBoolChoice(AST.Config.AST_ST_DPS_OverwriteCards, "没有输出卡", "即使你还有其他卡，也会使用");
             }
 
             #endregion

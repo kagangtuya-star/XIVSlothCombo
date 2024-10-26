@@ -1,5 +1,4 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
-using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
@@ -7,7 +6,7 @@ using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 using static XIVSlothComboX.CustomComboNS.Functions.CustomComboFunctions;
-using static XIVSlothComboX.Combos.JobHelpers.RPR;
+
 namespace XIVSlothComboX.Combos.PvE
 {
     internal class RPR
@@ -204,6 +203,12 @@ namespace XIVSlothComboX.Combos.PvE
                     //All Weaves
                     if (CanWeave(ActionWatching.LastWeaponskill))
                     {
+                        //Arcane Cirlce
+                        if (LevelChecked(ArcaneCircle) &&
+                            ((LevelChecked(Enshroud) && IsOffCooldown(ArcaneCircle)) ||
+                             (!LevelChecked(Enshroud) && IsOffCooldown(ArcaneCircle))))
+                            return ArcaneCircle;
+                        
                         //Enshroud
                         if (JobHelpers.RPR.RPRHelpers.UseEnshroud(Gauge))
                             return 夜游魂衣Enshroud;
@@ -389,7 +394,6 @@ namespace XIVSlothComboX.Combos.PvE
                     //All Weaves
                     if (CanWeave(ActionWatching.LastWeaponskill))
                     {
-                 
                         
                         if (IsEnabled(CustomComboPreset.RPR_ST_CDs))
                         {
@@ -397,9 +401,9 @@ namespace XIVSlothComboX.Combos.PvE
                             //Arcane Cirlce
                             if (IsEnabled(CustomComboPreset.RPR_ST_ArcaneCircle) &&
                                 LevelChecked(ArcaneCircle) &&
-                                ((LevelChecked(Enshroud) && JustUsed(ShadowOfDeath) && IsOffCooldown(ArcaneCircle)) ||
-                                 (!LevelChecked(Enshroud) && IsOffCooldown(ArcaneCircle))))
-                                return ArcaneCircle;
+                                ((LevelChecked(夜游魂衣Enshroud) && ArcaneCircle.ActionReady()) ||
+                                 (!LevelChecked(夜游魂衣Enshroud) && ArcaneCircle.ActionReady())))
+                                return 神秘环ArcaneCircle;
                             
                             //Enshroud
                             if (IsEnabled(CustomComboPreset.RPR_ST_Enshroud) && JobHelpers.RPR.RPRHelpers.UseEnshroud(gauge))

@@ -85,7 +85,7 @@ namespace XIVSlothComboX.Combos.PvE
                 HoroscopeHelios = 1891,
                 NeutralSect = 1892,
                 NeutralSectShield = 1921,
-                Divination = 1878,
+                占卜Divination = 1878,
                 LordOfCrownsDrawn = 2054,
                 LadyOfCrownsDrawn = 2055,
                 ClarifyingDraw = 2713,
@@ -306,7 +306,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (IsEnabled(CustomComboPreset.AST_DPS_Divination)
                                 && ActionReady(Divination)
-                                && !HasEffectAny(Buffs.Divination)
+                                && !HasEffectAny(Buffs.占卜Divination)
                                 && //Overwrite protection
                                 GetTargetHPPercent() > Config.AST_DPS_DivinationOption
                                 && CanWeave(actionID))
@@ -349,7 +349,17 @@ namespace XIVSlothComboX.Combos.PvE
 
                     //Play Card
                     if (IsEnabled(CustomComboPreset.AST_DPS_AutoPlay) && ActionReady(Play1) && Gauge.DrawnCards[0] is not CardType.NONE && CanSpellWeave(actionID) && spellsSinceDraw >= Config.AST_ST_DPS_Play_SpeedSetting)
-                        return OriginalHook(Play1);
+                    {
+                        if (HasEffect(Buffs.占卜Divination))
+                        {
+                            return OriginalHook(Play1);
+                        }
+
+                        if (GetCooldownRemainingTime(Divination) < 3f && AstralDraw.OriginalHook().ActionReady())
+                        {
+                            return OriginalHook(Play1);
+                        }
+                    }
 
                     //Card Draw
                     if (IsEnabled(CustomComboPreset.AST_DPS_AutoDraw) && ActionReady(OriginalHook(AstralDraw)) && (Gauge.DrawnCards.All(x => x is CardType.NONE) || (DrawnCard == CardType.NONE && Config.AST_ST_DPS_OverwriteCards)) && CanDelayedWeave(actionID))
@@ -358,7 +368,7 @@ namespace XIVSlothComboX.Combos.PvE
                     //Divination
                     if (IsEnabled(CustomComboPreset.AST_DPS_Divination)
                         && ActionReady(Divination)
-                        && !HasEffectAny(Buffs.Divination)
+                        && !HasEffectAny(Buffs.占卜Divination)
                         && //Overwrite protection
                         GetTargetHPPercent() > Config.AST_DPS_DivinationOption
                         && CanDelayedWeave(actionID)
@@ -440,7 +450,7 @@ namespace XIVSlothComboX.Combos.PvE
                     //Divination
                     if (IsEnabled(CustomComboPreset.AST_AOE_Divination)
                         && ActionReady(Divination)
-                        && !HasEffectAny(Buffs.Divination)
+                        && !HasEffectAny(Buffs.占卜Divination)
                         && //Overwrite protection
                         GetTargetHPPercent() > Config.AST_AOE_DivinationOption
                         && CanDelayedWeave(actionID)

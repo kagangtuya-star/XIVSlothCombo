@@ -277,46 +277,40 @@ namespace XIVSlothComboX.Combos.JobHelpers
             {
                 float GCD = GetCooldown(切割Slice).CooldownTotal;
 
-                if (LevelChecked(死亡之影ShadowOfDeath) 
-                    && !HasEffect(Buffs.妖异之镰SoulReaver) 
-                    && !HasEffect(Buffs.处刑人Executioner) 
+                if (LevelChecked(死亡之影ShadowOfDeath)
+                    && !HasEffect(Buffs.妖异之镰SoulReaver)
+                    && !HasEffect(Buffs.处刑人Executioner)
                     // && !HasEffect(Buffs.完人预备PerfectioParata) 
                     // && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) 
-                    && !IsComboExpiring(3) &&!JustUsed(死亡之影ShadowOfDeath))
+                    && !IsComboExpiring(3)
+                    && !JustUsed(死亡之影ShadowOfDeath))
                 {
-                    if (GetCooldownRemainingTime(神秘环ArcaneCircle) < (GCD * 2) )
+                    if (GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) > 30)
                     {
-                        if (GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) > 20)
-                        {
-                            return false;
-                        }
+                        return false;
                     }
-                    
                     //神秘纹快好了 打
-                    if (LevelChecked(大丰收PlentifulHarvest) 
-                        && HasEffect(Buffs.夜游魂Enshrouded) 
-                        && GetCooldownRemainingTime(神秘环ArcaneCircle) <= (GCD * 2) + 1.5 
+                    if (LevelChecked(大丰收PlentifulHarvest)
+                        && HasEffect(Buffs.夜游魂Enshrouded)
+                        && GetCooldownRemainingTime(神秘环ArcaneCircle) <= (GCD * 2) + 1.5
                         && JustUsed(夜游魂衣Enshroud))
                         return true;
 
-                    if (LevelChecked(大丰收PlentifulHarvest) 
-                        && HasEffect(Buffs.夜游魂Enshrouded) 
-                        && ((GetCooldownRemainingTime(神秘环ArcaneCircle) <= GCD) || IsOffCooldown(神秘环ArcaneCircle)) 
+                    if (LevelChecked(大丰收PlentifulHarvest)
+                        && HasEffect(Buffs.夜游魂Enshrouded)
+                        && ((GetCooldownRemainingTime(神秘环ArcaneCircle) <= GCD) || IsOffCooldown(神秘环ArcaneCircle))
                         && (JustUsed(虚无收割VoidReaping) || JustUsed(交错收割CrossReaping)))
                         return true;
 
-                    if (LevelChecked(大丰收PlentifulHarvest) && !HasEffect(Buffs.夜游魂Enshrouded)
-                                                          && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= 8)
-                                                              || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= Config.RPR_SoDRefreshRange))
-                                                          && ((GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 8) || IsOffCooldown(神秘环ArcaneCircle) ))
+                    if (LevelChecked(大丰收PlentifulHarvest)
+                        && !HasEffect(Buffs.夜游魂Enshrouded)
+                        && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= 8)
+                            || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= Config.RPR_SoDRefreshRange))
+                        && ((GetCooldownRemainingTime(神秘环ArcaneCircle) > GCD * 8) || IsOffCooldown(神秘环ArcaneCircle)))
                         return true;
-                    
+
                     //below lvl 88 use
-                    if (!LevelChecked(大丰收PlentifulHarvest) &&
-                        ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) &&
-                          GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= 8) ||
-                         (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) &&
-                          GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= Config.RPR_SoDRefreshRange)))
+                    if (!LevelChecked(大丰收PlentifulHarvest) && ((IsEnabled(CustomComboPreset.RPR_ST_SimpleMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= 8) || (IsEnabled(CustomComboPreset.RPR_ST_AdvancedMode) && GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) <= Config.RPR_SoDRefreshRange)))
                         return true;
 
                 }
