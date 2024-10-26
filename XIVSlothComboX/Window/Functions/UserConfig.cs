@@ -3466,7 +3466,7 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.WHM_STHeals_Esuna)
                 UserConfig.DrawSliderInt(0, 100, WHM.Config.WHM_STHeals_Esuna, "当生命值低于％时停止使用。将其设置为零以禁用此检查");
 
-            if (preset == CustomComboPreset.WHM_AoeHeals_ThinAir)
+            if (preset == CustomComboPreset.WHM_AoEHeals_ThinAir)
                 UserConfig.DrawSliderInt(0, 1, WHM.Config.WHM_AoEHeals_ThinAir, "存几层充能？（0 = 用光，一层不留）");
 
             if (preset == CustomComboPreset.WHM_AoEHeals_Cure3)
@@ -3529,7 +3529,7 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.WHM_AoEHeals_Medica2)
             {
                 UserConfig.DrawRoundedSliderFloat(0f, 6f, WHM.Config.WHM_AoEHeals_MedicaTime, "Buff 续展剩余时间");
-                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_MedicaMO, "小队 UI 鼠标检查", "Check your mouseover target for the Medica II/III buff.\nTo be used in conjunction with Redirect/Reaction/etc.");
+                UserConfig.DrawAdditionalBoolChoice(WHM.Config.WHM_AoEHeals_MedicaMO, "小队 UI 鼠标检查", "检查你的鼠标指向目标是否有 医技/医养 增益效果。");
             }
 
             #endregion

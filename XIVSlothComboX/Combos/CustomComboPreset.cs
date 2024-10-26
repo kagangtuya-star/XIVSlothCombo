@@ -4179,12 +4179,13 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(WHM_AoEHeals)]
         [CustomComboInfo("Thin Air Option", "Uses Thin Air when available.", WHM.JobID, 4)]
-        WHM_AoeHeals_ThinAir = 19200,
+        WHM_AoEHeals_ThinAir = 19200,
 
         [ParentCombo(WHM_AoEHeals)]
         [CustomComboInfo("Cure III Option", "Replaces Medica with Cure III when available.", WHM.JobID)]
         WHM_AoEHeals_Cure3 = 19201,
-
+        
+        
         [ParentCombo(WHM_AoEHeals)]
         [CustomComboInfo("Assize Option", "Uses Assize when available.", WHM.JobID)]
         WHM_AoEHeals_Assize = 19202,

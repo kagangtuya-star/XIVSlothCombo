@@ -258,9 +258,12 @@ namespace XIVSlothComboX.Window.Tabs
                     var JobHelpers = ActionManager.Instance()->Combo.Timer != 0 && ActionManager.Instance()->Combo.Timer < GCD;
                       
                     
-                    ImGui.TextUnformatted($"JobHelpers-{JobHelpers}");
-                    ImGui.TextUnformatted($"Timer-{ActionManager.Instance()->Combo.Timer}");
-                    ImGui.TextUnformatted($"GCD-{GCD}");
+                    // ImGui.TextUnformatted($"JobHelpers-{JobHelpers}");
+                    // ImGui.TextUnformatted($"Timer-{ActionManager.Instance()->Combo.Timer}");
+                    // ImGui.TextUnformatted($"GCD-{GCD}");
+                    var healTarget = GetHealTarget(WHM.Config.WHM_AoEHeals_MedicaMO);
+                    ImGui.TextUnformatted($"healTarget-{healTarget?.Name}");
+                    ImGui.TextUnformatted($"GCD-{FindEffect(WHM.Buffs.Medica3, healTarget, LocalPlayer?.GameObjectId)?.RemainingTime}");
                     
                     // ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
 

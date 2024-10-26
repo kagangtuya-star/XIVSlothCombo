@@ -782,7 +782,7 @@ public class Translatezh_CN
         {"Rapture into Misery Feature" , "狂喜之心与苦难之心整合 设置"  },
         {"Replaces Afflatus Rapture with Afflatus Misery when it is ready to be used." , "当苦难之心可用时，替换狂喜之心为苦难之心."  },
         #region AoE Heals Feature
-        {"Simple Heals (AoE)" , "简单治疗（范围）"  },
+        {"Simple Heals (AoE)" , "简单治疗（AOE）"  },
         {"Replaces Medica with a one button AoE healing setup." , "将医治替换为单键范围治疗设置。"  },
         {"Afflatus Rapture Option" , "狂喜咏叹选项"  },
         {"Uses Afflatus Rapture when available." , "可用时使用狂喜咏叹。"  },
@@ -795,8 +795,8 @@ public class Translatezh_CN
         {"Plenary Indulgence Option" , "全大赦选项"  },
         {"Uses Plenary Indulgence when available." , "可用时使用全大赦。"  },
         {"Uses Lucid Dreaming when available." , "可用时使用清醒梦。"  },
-        {"Medica II Option" , "医治II选项"  },
-        {"Uses Medica II when current target doesn't have Medica II buff.\nUpgrades to Medica III when level allows." , "当当前目标没有医治II增益时使用医治II。\n达到相应等级时升级为医治III。"  },
+        {"Medica II Option" , "医技选项"  },
+        {"Uses Medica II when current target doesn't have Medica II buff.\nUpgrades to Medica III when level allows." , "当前目标没有医技BUFF时使用医技。\n达到相应等级时升级为医养。"  },
         {"Divine Caress" , "神圣抚慰"  },
         {"Uses Divine Caress when Divine Grace from Temperance is active." , "当节制的神圣恩典激活时使用神圣抚慰。"  },
         #endregion

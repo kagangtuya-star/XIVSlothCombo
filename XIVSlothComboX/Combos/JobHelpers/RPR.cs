@@ -283,7 +283,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     // && !HasEffect(Buffs.完人预备PerfectioParata) 
                     // && !HasEffect(Buffs.死亡祭品ImmortalSacrifice) 
                     && !IsComboExpiring(3)
-                    && !JustUsed(死亡之影ShadowOfDeath))
+                    // && !JustUsed(死亡之影ShadowOfDeath)
+                    )
                 {
                     if (GetDebuffRemainingTime(Debuffs.死亡烙印DeathsDesign) > 30)
                     {
