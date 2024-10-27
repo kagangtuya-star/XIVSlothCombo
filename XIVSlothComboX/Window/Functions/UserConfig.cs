@@ -2418,66 +2418,45 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.RDM_ST_oGCD)
             {
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    RDM.Config.RDM_ST_oGCD_OnAction_Adv, "Advanced Action Options.",
-                    "Changes which action this option will replace.", isConditionalChoice: true
-                );
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_OnAction_Adv, "高级操作选项", "更改此选项将替换的操作。", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_oGCD_OnAction_Adv)
                 {
-                    ImGui.Indent();
-                    ImGui.Spacing();
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        RDM.Config.RDM_ST_oGCD_OnAction, "Jolts", "", 4, 0,
-                        descriptionColor: ImGuiColors.DalamudYellow
-                    );
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        RDM.Config.RDM_ST_oGCD_OnAction, "Fleche", "", 4, 1,
-                        descriptionColor: ImGuiColors.DalamudYellow
-                    );
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        RDM.Config.RDM_ST_oGCD_OnAction, "Riposte", "", 4, 2,
-                        descriptionColor: ImGuiColors.DalamudYellow
-                    );
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        RDM.Config.RDM_ST_oGCD_OnAction, "Reprise", "", 4, 3,
-                        descriptionColor: ImGuiColors.DalamudYellow
-                    );
+                    ImGui.Indent(); ImGui.Spacing();
+                    UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, $"{RDM.Jolt.ActionName()}", "", 4, 0, descriptionColor: ImGuiColors.DalamudYellow);
+                    UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, $"{RDM.Fleche.ActionName()}", "", 4, 1, descriptionColor: ImGuiColors.DalamudYellow);
+                    UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, $"{RDM.Riposte.ActionName()}", "", 4, 2, descriptionColor: ImGuiColors.DalamudYellow);
+                    UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_ST_oGCD_OnAction, $"{RDM.Reprise.ActionName()}", "", 4, 3, descriptionColor: ImGuiColors.DalamudYellow);
                     ImGui.Unindent();
                 }
 
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Fleche, "Fleche", "");
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_ContraSixte, "Contra Sixte", "");
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Engagement, "Engagement", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Fleche, $"{RDM.Fleche.ActionName()}", "");
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_ContraSixte, $"{RDM.ContreSixte.ActionName()}", "");
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Engagement, $"{RDM.Engagement.ActionName()}", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_oGCD_Engagement)
                 {
-                    ImGui.Indent();
-                    ImGui.Spacing();
-                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Engagement_Pooling, "Pool one charge for manual use.", "");
+                    ImGui.Indent(); ImGui.Spacing();
+                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Engagement_Pooling, "保留一层用于手动使用。", "");
                     ImGui.Unindent();
                 }
-
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps, "Corp-a-Corps", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps, $"{RDM.Corpsacorps.ActionName()}", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_oGCD_CorpACorps)
                 {
-                    ImGui.Indent();
-                    ImGui.Spacing();
-                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps_Melee, "Use only in melee range.", "");
-                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps_Pooling, "Pool one charge for manual use.", "");
+                    ImGui.Indent(); ImGui.Spacing();
+                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps_Melee, "仅在近战范围内使用。", "");
+                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_CorpACorps_Pooling, "保留一层用于手动使用。", "");
                     ImGui.Unindent();
                 }
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_ViceOfThorns, $"{RDM.ViceOfThorns.ActionName()}", "");
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_oGCD_Prefulgence, $"{RDM.Prefulgence.ActionName()}", "");
+
             }
 
             if (preset is CustomComboPreset.RDM_ST_MeleeCombo)
             {
                 UserConfig.DrawAdditionalBoolChoice
                 (
-                    RDM.Config.RDM_ST_MeleeCombo_Adv, "Advanced Action Options",
-                    "Changes which action this option will replace.", isConditionalChoice: true
+                    RDM.Config.RDM_ST_MeleeCombo_Adv, "高级操作选项",
+                    "更改此选项将替换的操作。", isConditionalChoice: true
                 );
                 if (RDM.Config.RDM_ST_MeleeCombo_Adv)
                 {
@@ -2485,12 +2464,12 @@ namespace XIVSlothComboX.Window.Functions
                     ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_ST_MeleeCombo_OnAction, "Jolts", "", 2, 0,
+                        RDM.Config.RDM_ST_MeleeCombo_OnAction, $"{RDM.Jolt.ActionName()}", "", 2, 0,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_ST_MeleeCombo_OnAction, "Riposte", "", 2, 1,
+                        RDM.Config.RDM_ST_MeleeCombo_OnAction, $"{RDM.Riposte.ActionName()}", "", 2, 1,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     ImGui.Unindent();
@@ -2499,28 +2478,24 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset is CustomComboPreset.RDM_ST_MeleeFinisher)
             {
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    RDM.Config.RDM_ST_MeleeFinisher_Adv, "Advanced Action Options",
-                    "Changes which action this option will replace.", isConditionalChoice: true
-                );
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_MeleeFinisher_Adv, "高级操作选项", "更改此选项将替换的操作。", isConditionalChoice: true);
                 if (RDM.Config.RDM_ST_MeleeFinisher_Adv)
                 {
                     ImGui.Indent();
                     ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_ST_MeleeFinisher_OnAction, "Jolts", "", 3, 0,
+                        RDM.Config.RDM_ST_MeleeFinisher_OnAction, $"{RDM.Jolt.ActionName()}", "", 3, 0,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_ST_MeleeFinisher_OnAction, "Riposte", "", 3, 1,
+                        RDM.Config.RDM_ST_MeleeFinisher_OnAction, $"{RDM.Riposte.ActionName()}", "", 3, 1,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_ST_MeleeFinisher_OnAction, "VerAero & VerThunder", "", 3, 2,
+                        RDM.Config.RDM_ST_MeleeFinisher_OnAction, $"{RDM.Veraero.ActionName()} & {RDM.Verthunder.ActionName()}", "", 3, 2,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     ImGui.Unindent();
@@ -2530,89 +2505,71 @@ namespace XIVSlothComboX.Window.Functions
             if (preset is CustomComboPreset.RDM_ST_Lucid)
                 UserConfig.DrawSliderInt
                 (
-                    0, 10000, RDM.Config.RDM_ST_Lucid_Threshold, "Add Lucid Dreaming when below this MP",
+                    0, 10000, RDM.Config.RDM_ST_Lucid_Threshold, "在 MP 低于此值时添加醒梦",
                     sliderIncrement: SliderIncrements.Hundreds
                 );
 
             // AoE
             if (preset is CustomComboPreset.RDM_AoE_oGCD)
             {
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Fleche, "Fleche", "");
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_ContraSixte, "Contra Sixte", "");
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Engagement, "Engagement", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Fleche, $"{RDM.Fleche.ActionName()}", "");
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_ContraSixte, $"{RDM.ContreSixte.ActionName()}", "");
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Engagement, $"{RDM.Engagement.ActionName()}", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_oGCD_Engagement)
                 {
                     ImGui.Indent();
                     ImGui.Spacing();
-                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Engagement_Pooling, "Pool one charge for manual use.", "");
+                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_Engagement_Pooling, "为手动使用储存一个充能。", "");
+
                     ImGui.Unindent();
                 }
 
-                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps, "Corp-a-Corps", "", isConditionalChoice: true);
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps, $"{RDM.Corpsacorps.ActionName()}", "", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_oGCD_CorpACorps)
                 {
                     ImGui.Indent();
                     ImGui.Spacing();
-                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps_Melee, "Use only in melee range.", "");
-                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps_Pooling, "Pool one charge for manual use.", "");
+                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps_Melee, "仅在近战范围内使用。", "");
+                    UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_oGCD_CorpACorps_Pooling, "为手动使用储存一个充能。", "");
                     ImGui.Unindent();
                 }
             }
 
             if (preset is CustomComboPreset.RDM_AoE_MeleeCombo)
             {
-                UserConfig.DrawSliderInt
-                (
-                    3, 8, RDM.Config.RDM_AoE_MoulinetRange,
-                    "Range to use first Moulinet; no range restrictions after first Moulinet", sliderIncrement: SliderIncrements.Ones
-                );
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    RDM.Config.RDM_AoE_MeleeCombo_Adv, "Advanced Action Options",
-                    "Changes which action this option will replace.", isConditionalChoice: true
-                );
+                UserConfig.DrawSliderInt(3, 8, RDM.Config.RDM_AoE_MoulinetRange,$"第一次 {RDM.Moulinet.ActionName()} 使用的范围；第一次 {RDM.Moulinet.ActionName()} 之后没有范围限制", sliderIncrement: SliderIncrements.Ones);
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_MeleeCombo_Adv, "高级操作选项", "更改此选项将替换的操作。", isConditionalChoice: true);
+
                 if (RDM.Config.RDM_AoE_MeleeCombo_Adv)
                 {
                     ImGui.Indent();
                     ImGui.Spacing();
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        RDM.Config.RDM_AoE_MeleeCombo_OnAction, "Scatter/Impact", "", 2, 0,
-                        descriptionColor: ImGuiColors.DalamudYellow
-                    );
-                    UserConfig.DrawHorizontalMultiChoice
-                    (
-                        RDM.Config.RDM_AoE_MeleeCombo_OnAction, "Moulinet", "", 2, 1,
-                        descriptionColor: ImGuiColors.DalamudYellow
-                    );
+                    UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeCombo_OnAction, $"{RDM.Scatter.ActionName()} / {RDM.Impact.ActionName()}", "", 2, 0,descriptionColor: ImGuiColors.DalamudYellow);
+                    UserConfig.DrawHorizontalMultiChoice(RDM.Config.RDM_AoE_MeleeCombo_OnAction, $"{RDM.Moulinet.ActionName()}", "", 2, 1, descriptionColor: ImGuiColors.DalamudYellow);
                     ImGui.Unindent();
                 }
             }
 
             if (preset is CustomComboPreset.RDM_AoE_MeleeFinisher)
             {
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    RDM.Config.RDM_AoE_MeleeFinisher_Adv, "Advanced Action Options",
-                    "Changes which action this option will replace.", isConditionalChoice: true
-                );
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_AoE_MeleeFinisher_Adv, "高级操作选项", "更改此选项将替换的操作。", isConditionalChoice: true);
                 if (RDM.Config.RDM_AoE_MeleeFinisher_Adv)
                 {
                     ImGui.Indent();
                     ImGui.Spacing();
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_AoE_MeleeFinisher_OnAction, "Scatter/Impact", "", 3, 0,
+                        RDM.Config.RDM_AoE_MeleeFinisher_OnAction, $"{RDM.Scatter.ActionName()} / {RDM.Impact.ActionName()}", "", 3, 0,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_AoE_MeleeFinisher_OnAction, "Moulinet", "", 3, 1,
+                        RDM.Config.RDM_AoE_MeleeFinisher_OnAction, $"{RDM.Moulinet.ActionName()}", "", 3, 1,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     UserConfig.DrawHorizontalMultiChoice
                     (
-                        RDM.Config.RDM_AoE_MeleeFinisher_OnAction, "VerAero II & VerThunder II", "", 3, 2,
+                        RDM.Config.RDM_AoE_MeleeFinisher_OnAction, $"{RDM.Veraero2.ActionName()} / {RDM.Verthunder2.ActionName()}", "", 3, 2,
                         descriptionColor: ImGuiColors.DalamudYellow
                     );
                     ImGui.Unindent();
@@ -2620,22 +2577,14 @@ namespace XIVSlothComboX.Window.Functions
             }
 
             if (preset is CustomComboPreset.RDM_AoE_Lucid)
-                UserConfig.DrawSliderInt
-                (
-                    0, 10000, RDM.Config.RDM_AoE_Lucid_Threshold, "Add Lucid Dreaming when below this MP",
-                    sliderIncrement: SliderIncrements.Hundreds
-                );
+                UserConfig.DrawSliderInt( 0, 10000, RDM.Config.RDM_AoE_Lucid_Threshold, "在 MP 低于此值时添加醒梦",sliderIncrement: SliderIncrements.Hundreds);
 
             if (preset is CustomComboPreset.RDM_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, RDM.Config.RDM_VariantCure, "HP% 低于", 200);
 
             if (preset is CustomComboPreset.RDM_ST_MeleeCombo)
             {
-                UserConfig.DrawAdditionalBoolChoice
-                (
-                    RDM.Config.RDM_ST_MeleeEnforced, "Enforced Melee Check",
-                    "Once the melee combo has started, don't switch away even if target is out of range."
-                );
+                UserConfig.DrawAdditionalBoolChoice(RDM.Config.RDM_ST_MeleeEnforced, "强制近战检查", "一旦近战连击开始，即使目标超出范围也不要切换。");
             }
 
             #endregion

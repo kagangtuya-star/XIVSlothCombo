@@ -505,14 +505,14 @@ public class Translatezh_CN
         #region AoE DPS
         #endregion
         #region QoL
-        {"Vercure Option" , "等待翻译"  },
-        {"If Swiftcast is on cooldown, change to Vercure to proc Dualcast." , "等待翻译"  },
+        {"Vercure Option", "赤治疗 选项"},
+        {"If Swiftcast is on cooldown, change to Vercure to proc Dualcast.", "如果即刻咏唱在冷却中，切换到赤治疗以触发连续咏唱。"},
         #endregion
         #region Sections 8 to 9 - Miscellaneous
         {"Use Variant Rampart on cooldown. Replaces Jolts." , "在冷却时使用Variant Rampart。替代Jolts技能。"  },
         {"Turn Swiftcast into Variant Raise whenever you have the Swiftcast or Dualcast buffs." , "当你拥有Swiftcast或Dualcast增益时，将其转化为Variant Raise。"  },
         {"Use Variant Cure when HP is below set threshold. Replaces Jolts." , "当HP低于设定阈值时使用Variant Cure。替代Jolts技能。"  },
-        {"Cure on Vercure Option" , "在Vercure选项上使用Cure技能。"  },
+        {"Cure on Vercure Option" , "在赤治疗选项上使用Cure技能。"  },
         {"Replaces Vercure with Variant Cure." , "用Variant Cure替代Vercure技能。"  },
         {"Embolden Overlap Protection" , "等待翻译"  },
         {"Disables Embolden when buffed by another Red Mage's Embolden." , "等待翻译"  },
