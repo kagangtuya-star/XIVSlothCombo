@@ -47,7 +47,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         public static bool HasPrePullCooldowns()
         {
-            if (CustomComboFunctions.GetRemainingCharges(MeikyoShisui) < 2)
+            if (CustomComboFunctions.GetRemainingCharges(明镜止水MeikyoShisui) < 2)
                 return false;
 
             if (CustomComboFunctions.GetRemainingCharges(All.TrueNorth) < 2)
@@ -115,7 +115,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
             {
                 if (CustomComboFunctions.HasEffect(Buffs.MeikyoShisui) && PrePullStep == 1) PrePullStep++;
-                else if (PrePullStep == 1) actionID = MeikyoShisui;
+                else if (PrePullStep == 1) actionID = 明镜止水MeikyoShisui;
 
                 if (CustomComboFunctions.HasEffect(All.Buffs.TrueNorth) && PrePullStep == 2) currentState = OpenerState.InOpener;
                 else if (PrePullStep == 2) actionID = All.TrueNorth;
@@ -157,8 +157,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (CustomComboFunctions.WasLastAction(TendoKaeshiSetsugekka) && OpenerStep == 7) OpenerStep++;
                 else if (OpenerStep == 7) actionID = TendoKaeshiSetsugekka;
 
-                if (CustomComboFunctions.WasLastAction(MeikyoShisui) && OpenerStep == 8) OpenerStep++;
-                else if (OpenerStep == 8) actionID = MeikyoShisui;
+                if (CustomComboFunctions.WasLastAction(明镜止水MeikyoShisui) && OpenerStep == 8) OpenerStep++;
+                else if (OpenerStep == 8) actionID = 明镜止水MeikyoShisui;
 
                 if (CustomComboFunctions.WasLastAction(Gekko) && OpenerStep == 9) OpenerStep++;
                 else if (OpenerStep == 9) actionID = Gekko;
@@ -211,7 +211,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (((actionID == Senei && CustomComboFunctions.IsOnCooldown(Senei)) ||
                    (actionID == Ikishoten && CustomComboFunctions.IsOnCooldown(Ikishoten)) ||
-                   (actionID == MeikyoShisui && CustomComboFunctions.GetRemainingCharges(MeikyoShisui) < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                   (actionID == 明镜止水MeikyoShisui && CustomComboFunctions.GetRemainingCharges(明镜止水MeikyoShisui) < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;

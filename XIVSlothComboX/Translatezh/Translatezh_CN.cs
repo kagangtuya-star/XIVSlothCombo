@@ -76,35 +76,69 @@ public class Translatezh_CN
         #endregion
         #endregion
         #region BLACK MAGE
-        #region Variant
-        #endregion
-        #region Miscellaneous
-        {"Aetherial Manipulation Feature" , "以太步功能"  },
-        {"Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still." , "[AI]当你没有激活的灵脉并且静止不动时，用Between the Lines替代以太步。"  },
+        {"Simple Mode - Single Target" , "简单模式 - 单目标"  },
+        {"Replaces Fire with a full one-button single target rotation.\nThis is the ideal option for newcomers to the job." , "等待翻译"  },
+        {"Simple Mode - AoE" , "简单模式 - AoE"  },
+        {"Replaces Blizzard II with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job." , "等待翻译"  },
+        #region Single Target - Advanced
         {"Advanced Mode - Single Target" , "高级模式 - 单目标"  },
         {"Replaces Fire with a full one-button single target rotation.\nThese features are ideal if you want to customize the rotation." , "用一个完整的单目标循环替代火焰。\n如果您想自定义循环，这些功能非常理想。"  },
         {"Level 100 Opener" , "100级开场"  },
         {"Adds the Balance opener to the rotation." , "将the Balance起手加入循环。"  },
-        {"Use Foul / Xenoglossy" , "等待翻译"  },
-        {"Add Foul / Xenoglossy to the rotation." , "等待翻译"  },
-        {"Use Foul / Xenoglossy for movement" , "等待翻译"  },
-        {"Add Foul / Xenoglossy to the rotation as movement option." , "等待翻译"  },
         {"Use Amplifier" , "等待翻译"  },
         {"Add Amplifier to the rotation." , "等待翻译"  },
         {"Use Leylines" , "黑魔纹"  },
         {"Add Leylines to the rotation." , "等待翻译"  },
-        {"Use Despair" , "等待翻译"  },
-        {"Add Despair to the rotation." , "等待翻译"  },
+        {"Use Foul / Xenoglossy" , "等待翻译"  },
+        {"Add Foul / Xenoglossy to the rotation." , "等待翻译"  },
+        {"Use Foul / Xenoglossy for movement" , "等待翻译"  },
+        {"Add Foul / Xenoglossy to the rotation as movement option." , "等待翻译"  },
         {"Use Swiftcast" , "等待翻译"  },
         {"Add Swiftcast to the rotation." , "等待翻译"  },
         {"Use Triplecast" , "等待翻译"  },
         {"Add Triplecast to the rotation." , "等待翻译"  },
-        {"Use Flarestar" , "耀星"  },
-        {"Add Flarestar to the rotation." , "等待翻译"  },
         {"Use Manafont" , "等待翻译"  },
         {"Add Manafont to the rotation." , "等待翻译"  },
         {"Use Transpose" , "等待翻译"  },
         {"Add Transpose to the rotation." , "等待翻译"  },
+        {"Use Thunder" , "等待翻译"  },
+        {"Add Thunder to the rotation." , "等待翻译"  },
+        {"Use Despair" , "等待翻译"  },
+        {"Add Despair to the rotation." , "等待翻译"  },
+        {"Use Flarestar" , "耀星"  },
+        {"Add Flarestar to the rotation." , "等待翻译"  },
+        #endregion
+        #region AoE - Advanced
+        {"Advanced Mode - AoE" , "高级模式 - AoE"  },
+        {"Replaces Blizzard II with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "等待翻译"  },
+        {"Use Foul" , "等待翻译"  },
+        {"Add Foul to the rotation." , "等待翻译"  },
+        {"Use Foul for movement" , "等待翻译"  },
+        {"Add Foul to the rotation as movement option." , "等待翻译"  },
+        {"Use Flare" , "等待翻译"  },
+        {"Add Flare to the rotation." , "等待翻译"  },
+        #endregion
+        #region Variant
+        {"Rampart Option" , "多变铁壁选项"  },
+        {"Use Variant Rampart on cooldown." , "多变铁壁冷却好使用"  },
+        {"Raise Option" , "等待翻译"  },
+        {"Turn Swiftcast into Variant Raise whenever you have the Swiftcast buff." , "等待翻译"  },
+        {"Cure Option" , "治疗选项"  },
+        {"Use Variant Cure when HP is below set threshold." , "当HP低于设定值时使用多变治疗"  },
+        #endregion
+        #region Miscellaneous
+        {"Umbral Soul/Transpose Feature" , "等待翻译"  },
+        {"Replaces Transpose with Umbral Soul when Umbral Soul is available." , "等待翻译"  },
+        {"Between the Ley Lines Feature" , "等待翻译"  },
+        {"Replaces Ley Lines with Between the Lines when Ley Lines is active." , "等待翻译"  },
+        {"Blizzard I/III Feature" , "等待翻译"  },
+        {"Replaces Blizzard I with Blizzard III when out of Umbral Ice." , "等待翻译"  },
+        {"Xenoglossy Feature" , "等待翻译"  },
+        {"Replaces Scathe with Xenoglossy when available." , "等待翻译"  },
+        {"Fire I/III Feature" , "等待翻译"  },
+        {"Replaces Fire I with Fire III outside of Astral Fire or when Firestarter is up." , "等待翻译"  },
+        {"Aetherial Manipulation Feature" , "以太步功能"  },
+        {"Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still." , "[AI]当你没有激活的灵脉并且静止不动时，用Between the Lines替代以太步。"  },
         #endregion
         #endregion
         #region BLUE MAGE
@@ -112,9 +146,7 @@ public class Translatezh_CN
         #region BARD
         #region 自定义循环
         #endregion
-        {"Simple Mode - Single Target" , "简单模式 - 单目标"  },
         {"Adds every single target ability to one button,\nIf there are DoTs on target, will try to maintain their uptime." , "将所有单目标技能添加到一个按钮中，\n如果目标身上有DoT效果，将尝试保持它们的持续时间。"  },
-        {"Simple Mode - AoE" , "简单模式 - AoE"  },
         {"Weaves oGCDs onto Quick Nock/Ladonsbite." , "将非GCD技能编织到连珠箭/百首龙牙箭中。"  },
         {"Adds every single target ability to one button,\nIf there are DoTs on target, Simple Bard will try to maintain their uptime." , "如果目标身上有DoT效果，Simple Bard将尝试保持它们的持续时间。"  },
         {"Resonant Option" , "共鸣箭选项"  },
@@ -226,7 +258,6 @@ public class Translatezh_CN
         #endregion
         {"Replaces Doom Spike with a full one-button AoE rotation.\nThis is the ideal option for newcomers to the job." , "将死天枪刺替换为一键AoE技能循环。\n这是新手最理想的选项。"  },
         #region Advanced AoE Dragoon
-        {"Advanced Mode - AoE" , "高级模式 - AoE"  },
         {"Replaces Doom Spike with a full one-button AoE rotation.\nThese features are ideal if you want to customize the rotation." , "将死天枪替换为一键全AoE循环。\n这些功能是自定义循环的理想选择。"  },
         #region Buffs AoE
         {"Buffs AoE Option" , "AoE增益选项"  },
@@ -244,10 +275,6 @@ public class Translatezh_CN
         #endregion
         {"Lance Charge to Battle Litany Feature" , "猛枪整合到战斗连祷"  },
         {"Turns Lance Charge into Battle Litany when the former is on cooldown." , "猛枪冷却完毕后整合至战斗连祷"  },
-        {"Cure Option" , "治疗选项"  },
-        {"Use Variant Cure when HP is below set threshold." , "当HP低于设定值时使用多变治疗"  },
-        {"Rampart Option" , "多变铁壁选项"  },
-        {"Use Variant Rampart on cooldown." , "多变铁壁冷却好使用"  },
         #endregion
         #region GUNBREAKER
         #region ST
@@ -505,8 +532,8 @@ public class Translatezh_CN
         #region AoE DPS
         #endregion
         #region QoL
-        {"Vercure Option", "赤治疗 选项"},
-        {"If Swiftcast is on cooldown, change to Vercure to proc Dualcast.", "如果即刻咏唱在冷却中，切换到赤治疗以触发连续咏唱。"},
+        {"Vercure Option" , "赤治疗 选项"  },
+        {"If Swiftcast is on cooldown, change to Vercure to proc Dualcast." , "如果即刻咏唱在冷却中，切换到赤治疗以触发连续咏唱。"  },
         #endregion
         #region Sections 8 to 9 - Miscellaneous
         {"Use Variant Rampart on cooldown. Replaces Jolts." , "在冷却时使用Variant Rampart。替代Jolts技能。"  },
@@ -559,7 +586,7 @@ public class Translatezh_CN
         #region SAMURAI
         #region 自定义循环
         #endregion
-        #region  Simple ST
+           #region  Simple ST
         {"Replaces Hakaze/Gyofu with a one-button full single target rotation.\nThis is ideal for newcomers to the job." , "将刃风/晓风替换为一键式单体循环。\n这是新手的理想选择。"  },
         #endregion
         #region Advanced ST
@@ -635,31 +662,45 @@ public class Translatezh_CN
         {"Iaijutsu Features" , "居合术功能"  },
         {"Collection of Iaijutsu Features." , "居合术功能集合。"  },
         {"Iaijutsu to Tsubame-Gaeshi" , "居合术到燕返"  },
-        {"Replace Iaijutsu with  Tsubame-gaeshi when Sen is empty." , "当没有闪时，将居合术替换为燕回返。"  },
+        {"Replace Iaijutsu with Tsubame-gaeshi when appropriate." , "等待翻译"  },
         {"Iaijutsu to Shoha" , "居合术到照破"  },
         {"Replace Iaijutsu with Shoha when meditation is 3." , "当有3档剑压时用照破替换居合术。"  },
         {"Iaijutsu to Ogi Namikiri" , "居合术到奥义斩浪"  },
         {"Replace Iaijutsu with Ogi Namikiri and Kaeshi: Namikiri when buffed with Ogi Namikiri Ready." , "在有奥义斩浪预备状态中时，用奥义斩浪和回返斩浪替换居合术。"  },
         #endregion
         #region Shinten Features
+        {"Shinten Features" , "等待翻译"  },
+        {"Collection of Hissatsu: Shinten Features." , "等待翻译"  },
         {"Shinten to Shoha" , "震天到照破"  },
         {"Replace Hissatsu: Shinten with Shoha when Meditation is full." , "在有3档剑压时用照破替换震天。"  },
         {"Shinten to Senei" , "震天到闪影"  },
         {"Replace Hissatsu: Shinten with Senei when its cooldown is up." , "在冷却结束时用闪影替换震天。"  },
+        {"Shinten to Zanshin" , "等待翻译"  },
+        {"Replace Hissatsu: Shinten with Zanshin when usable." , "等待翻译"  },
         #endregion
         #region Kyuten Features
+        {"Kyuten Features" , "等待翻译"  },
+        {"Collection of Hissatsu: Kyuten Features." , "等待翻译"  },
         {"Kyuten to Shoha" , "九天到照破"  },
         {"Replace Hissatsu: Kyuten with Shoha when Meditation is full." , "在有3档剑压时用照破替换九天。"  },
         {"Kyuten to Guren" , "九天到红莲"  },
         {"Replace Hissatsu: Kyuten with Guren when its cooldown is up." , "在冷却结束时用红莲替换九天。"  },
+        {"Kyuten to Zanshin" , "等待翻译"  },
+        {"Replace Hissatsu: Kyuten with Zanshin when usable." , "等待翻译"  },
+        #endregion
+        #region Ikishoten Features
+        {"Ikishoten Features" , "等待翻译"  },
+        {"Collection of Ikishoten Features." , "等待翻译"  },
+        {"Ikishoten to Namikiri" , "等待翻译"  },
+        {"Replace Ikishoten with Ogi Namikiri & Kaeshi Namikiri when available." , "等待翻译"  },
+        {"Ikishoten to Shoha" , "等待翻译"  },
+        {"Replace Ikishoten with Shoha when Meditation is full before Ogi Namikiri." , "等待翻译"  },
         #endregion
         #region Other
         {"Gyoten Feature" , "御天功能"  },
         {"Hissatsu: Gyoten becomes Yaten/Gyoten depending on the distance from your target." , "必杀技：晓天根据你与目标的距离变为夜天/晓天。"  },
-        {"Ikishoten Namikiri Feature" , "意气冲天-斩浪"  },
-        {"Replace Ikishoten with Ogi Namikiri and then Kaeshi Namikiri when available.\nIf you have full Meditation stacks, Ikishoten becomes Shoha while you have Ogi Namikiri ready." , "当技能可用时，先后用奥义斩浪、回返斩浪替换意气冲天。\n当你在奥义斩浪预备状态时，如果有3档剑压，意气冲天变为照破。"  },
         #endregion
-        #region variant 
+        #region variant
         #endregion
         #endregion
         #region SCHOLAR

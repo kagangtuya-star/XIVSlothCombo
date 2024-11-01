@@ -42,7 +42,7 @@ namespace XIVSlothComboX.Combos.PvE
             Hagakure = 7495,
             Guren = 7496,
             Senei = 16481,
-            MeikyoShisui = 7499,
+            明镜止水MeikyoShisui = 7499,
             Seigan = 7501,
             ThirdEye = 7498,
             Iaijutsu = 7867,
@@ -295,19 +295,19 @@ namespace XIVSlothComboX.Combos.PvE
                         return actionID;
 
                     //Meikyo to start before combat
-                    if (!HasEffect(Buffs.MeikyoShisui) && ActionReady(MeikyoShisui) && !InCombat())
-                        return MeikyoShisui;
+                    if (!HasEffect(Buffs.MeikyoShisui) && ActionReady(明镜止水MeikyoShisui) && !InCombat())
+                        return 明镜止水MeikyoShisui;
 
                     //oGCDs
                     if (CanWeave(ActionWatching.LastWeaponskill))
                     {
                         //Meikyo Features
-                        if (ActionReady(MeikyoShisui))
+                        if (ActionReady(明镜止水MeikyoShisui))
                         {
                             if (OptimalMeikyo())
-                                return MeikyoShisui;
-                            if (GetCooldownRemainingTime(MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
-                                return MeikyoShisui;
+                                return 明镜止水MeikyoShisui;
+                            if (GetCooldownRemainingTime(明镜止水MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
+                                return 明镜止水MeikyoShisui;
                         }
 
                         //Ikishoten Features
@@ -361,7 +361,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     return OriginalHook(TsubameGaeshi);
                             }
 
-                            if (!IsMoving && ((oneSen && enemyHP >= 1 && ((GetDebuffRemainingTime(Debuffs.Higanbana) <= 19 && JustUsed(Gekko, 3f) && JustUsed(MeikyoShisui, 15f)) || !TargetHasEffect(Debuffs.Higanbana)) || (twoSen && !LevelChecked(MidareSetsugekka)) || (threeSen && (LevelChecked(MidareSetsugekka) && !HasEffect(Buffs.TsubameReady))))))
+                            if (!IsMoving && ((oneSen && enemyHP >= 1 && ((GetDebuffRemainingTime(Debuffs.Higanbana) <= 19 && JustUsed(Gekko, 3f) && JustUsed(明镜止水MeikyoShisui, 15f)) || !TargetHasEffect(Debuffs.Higanbana)) || (twoSen && !LevelChecked(MidareSetsugekka)) || (threeSen && (LevelChecked(MidareSetsugekka) && !HasEffect(Buffs.TsubameReady))))))
                                 return OriginalHook(Iaijutsu);
                         }
                     }
@@ -408,12 +408,12 @@ namespace XIVSlothComboX.Combos.PvE
 
             public static bool OptimalMeikyo()
             {
-                int MeikyoUsed = ActionWatching.CombatActions.Count(x => x == MeikyoShisui);
+                int MeikyoUsed = ActionWatching.CombatActions.Count(x => x == 明镜止水MeikyoShisui);
                 bool oneSen = OriginalHook(Iaijutsu) is Higanbana;
                 bool twoSen = OriginalHook(Iaijutsu) is TenkaGoken or TendoGoken;
                 bool threeSen = OriginalHook(Iaijutsu) is MidareSetsugekka or TendoSetsugekka;
 
-                if (ActionReady(MeikyoShisui))
+                if (ActionReady(明镜止水MeikyoShisui))
                 {
                     var usedMeikyo = MeikyoUsed % 15;
                     //NOTE: Opener Meikyos don't count here for some reason per testing. On 6min, Meikyos 6 & 7 are used, so loop resets at 8.
@@ -479,8 +479,8 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Meikyo to start before combat
-                    if (IsEnabled(CustomComboPreset.SAM_ST_CDs) && IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui) && ActionReady(MeikyoShisui) && !InCombat())
-                        return MeikyoShisui;
+                    if (IsEnabled(CustomComboPreset.SAM_ST_CDs) && IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui) && ActionReady(明镜止水MeikyoShisui) && !InCombat())
+                        return 明镜止水MeikyoShisui;
 
                     //oGCDs
                     if (CanWeave(ActionWatching.LastWeaponskill))
@@ -488,12 +488,13 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.SAM_ST_CDs))
                         {
                             //Meikyo Features
-                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && ActionReady(MeikyoShisui))
+                            if (IsEnabled(CustomComboPreset.SAM_ST_CDs_MeikyoShisui) && ActionReady(明镜止水MeikyoShisui))
                             {
                                 if (OptimalMeikyo())
-                                    return MeikyoShisui;
-                                if (GetCooldownRemainingTime(MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
-                                    return MeikyoShisui;
+                                    return 明镜止水MeikyoShisui;
+                                
+                                if (GetCooldownRemainingTime(明镜止水MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
+                                    return 明镜止水MeikyoShisui;
                             }
 
                             //Ikishoten Features
@@ -537,14 +538,18 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (HasEffect(Buffs.TendoKaeshiSetsugekkaReady))
                                 return OriginalHook(TsubameGaeshi);
-
                             if (LevelChecked(TsubameGaeshi) && HasEffect(Buffs.TsubameReady))
                             {
-                                if (GetCooldownRemainingTime(Senei) > 33 || threeSen)
+                                if (GetCooldownRemainingTime(Senei) > 33 ||
+                                    threeSen)
                                     return OriginalHook(TsubameGaeshi);
                             }
 
-                            if ((!IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) || (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) && !IsMoving)) && ((oneSen && enemyHP > HiganbanaThreshold && ((GetDebuffRemainingTime(Debuffs.Higanbana) <= 19 && JustUsed(Gekko, 3f) && JustUsed(MeikyoShisui, 15f)) || !TargetHasEffect(Debuffs.Higanbana)) || (twoSen && !LevelChecked(MidareSetsugekka)) || (threeSen && (LevelChecked(MidareSetsugekka) && !HasEffect(Buffs.TsubameReady))))))
+                            if ((!IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) ||
+                                 (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu_Movement) && !IsMoving)) &&
+                                ((oneSen && enemyHP > HiganbanaThreshold && GetDebuffRemainingTime(Debuffs.Higanbana) <= 19 && JustUsed(Gekko, 3f) && JustUsed(明镜止水MeikyoShisui, 15f)) ||
+                                 (twoSen && !LevelChecked(MidareSetsugekka)) ||
+                                 (threeSen && (LevelChecked(MidareSetsugekka) && !HasEffect(Buffs.TsubameReady)))))
                                 return OriginalHook(Iaijutsu);
                         }
                     }
@@ -601,12 +606,12 @@ namespace XIVSlothComboX.Combos.PvE
 
             public static bool OptimalMeikyo()
             {
-                int MeikyoUsed = ActionWatching.CombatActions.Count(x => x == MeikyoShisui);
+                int MeikyoUsed = ActionWatching.CombatActions.Count(x => x == 明镜止水MeikyoShisui);
                 bool oneSen = OriginalHook(Iaijutsu) is Higanbana;
                 bool twoSen = OriginalHook(Iaijutsu) is TenkaGoken or TendoGoken;
                 bool threeSen = OriginalHook(Iaijutsu) is MidareSetsugekka or TendoSetsugekka;
 
-                if (ActionReady(MeikyoShisui))
+                if (ActionReady(明镜止水MeikyoShisui))
                 {
                     var usedMeikyo = MeikyoUsed % 15;
                     //NOTE: Opener Meikyos don't count here for some reason per testing. On 6min, Meikyos 6 & 7 are used, so loop resets at 8.
@@ -625,9 +630,11 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (usedMeikyo is 2 or 9 && threeSen)
                             return true;
-                        if (usedMeikyo is 4 or 11 && twoSen)
+                        if (usedMeikyo is 4 or 11 &&
+                            twoSen)
                             return true;
-                        if (usedMeikyo is 6 or 13 && oneSen)
+                        if (usedMeikyo is 6 or 13 &&
+                            oneSen)
                             return true;
                     }
 
@@ -734,8 +741,8 @@ namespace XIVSlothComboX.Combos.PvE
                         if (ActionReady(Shoha) && gauge.MeditationStacks is 3)
                             return Shoha;
 
-                        if (ActionReady(MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui))
-                            return MeikyoShisui;
+                        if (ActionReady(明镜止水MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui))
+                            return 明镜止水MeikyoShisui;
                     }
 
                     if (LevelChecked(Zanshin) && HasEffect(Buffs.ZanshinReady) && gauge.Kenki >= 50)
@@ -831,8 +838,8 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.SAM_AoE_Shoha) && ActionReady(Shoha) && gauge.MeditationStacks is 3)
                             return Shoha;
 
-                        if (IsEnabled(CustomComboPreset.SAM_AoE_MeikyoShisui) && ActionReady(MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui))
-                            return MeikyoShisui;
+                        if (IsEnabled(CustomComboPreset.SAM_AoE_MeikyoShisui) && ActionReady(明镜止水MeikyoShisui) && !HasEffect(Buffs.MeikyoShisui))
+                            return 明镜止水MeikyoShisui;
                     }
 
                     if (IsEnabled(CustomComboPreset.SAM_AoE_Zanshin) && LevelChecked(Zanshin) && HasEffect(Buffs.ZanshinReady) && gauge.Kenki >= 50)
@@ -896,7 +903,7 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 SAMGauge? gauge = GetJobGauge<SAMGauge>();
 
-                if (actionID is MeikyoShisui)
+                if (actionID is 明镜止水MeikyoShisui)
                 {
                     if (HasEffect(Buffs.MeikyoShisui))
                     {
@@ -909,7 +916,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (!gauge.Sen.HasFlag(Sen.SETSU))
                             return Yukikaze;
                     }
-                    return MeikyoShisui;
+                    return 明镜止水MeikyoShisui;
                 }
                 return actionID;
             }
@@ -925,22 +932,33 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID is Iaijutsu)
                 {
-                    if (IsEnabled(CustomComboPreset.SAM_Iaijutsu_Shoha) && ActionReady(Shoha) && gauge.MeditationStacks is 3 && CanWeave(actionID))
+                    bool canAddShoha = IsEnabled(CustomComboPreset.SAM_Iaijutsu_Shoha) &&
+                                       ActionReady(Shoha) &&
+                                       gauge.MeditationStacks is 3;
+
+                    if (canAddShoha && CanWeave(actionID))
                         return Shoha;
 
-                    if (IsEnabled(CustomComboPreset.SAM_Iaijutsu_OgiNamikiri) && LevelChecked(OgiNamikiri) && HasEffect(Buffs.OgiNamikiriReady))
+                    if (IsEnabled(CustomComboPreset.SAM_Iaijutsu_OgiNamikiri) && (
+                            (LevelChecked(OgiNamikiri) && HasEffect(Buffs.OgiNamikiriReady)) ||
+                            gauge.Kaeshi == Kaeshi.NAMIKIRI))
                         return OriginalHook(OgiNamikiri);
 
-                    if (IsEnabled(CustomComboPreset.SAM_Iaijutsu_TsubameGaeshi) && ((LevelChecked(TsubameGaeshi) && HasEffect(Buffs.TsubameReady)) || (LevelChecked(TendoKaeshiSetsugekka) && HasEffect(Buffs.TendoKaeshiSetsugekkaReady))))
+                    if (IsEnabled(CustomComboPreset.SAM_Iaijutsu_TsubameGaeshi) && (
+                            (LevelChecked(TsubameGaeshi) && (HasEffect(Buffs.TsubameReady) || HasEffect(Buffs.KaeshiGokenReady))) ||
+                            (LevelChecked(TendoKaeshiSetsugekka) && (HasEffect(Buffs.TendoKaeshiSetsugekkaReady) || HasEffect(Buffs.TendoKaeshiGokenReady)))))
                         return OriginalHook(TsubameGaeshi);
+
+                    if (canAddShoha)
+                        return Shoha;
                 }
                 return actionID;
             }
         }
 
-        internal class SAM_Shinten_Shoha : CustomCombo
+        internal class SAM_Shinten : CustomCombo
         {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_Shinten_Shoha;
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_Shinten;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -948,19 +966,28 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID is Shinten)
                 {
-                    if (IsEnabled(CustomComboPreset.SAM_Shinten_Shoha_Senei) && ActionReady(Senei))
-                        return Senei;
+                    if (IsEnabled(CustomComboPreset.SAM_Shinten))
+                    {
+                        if (IsEnabled(CustomComboPreset.SAM_Shinten_Senei) &&
+                            ActionReady(Senei))
+                            return Senei;
 
-                    if (gauge.MeditationStacks is 3 && ActionReady(Shoha))
-                        return Shoha;
+                        if (IsEnabled(CustomComboPreset.SAM_Shinten_Zanshin) && 
+                            HasEffect(Buffs.ZanshinReady))
+                            return Zanshin;
+
+                        if (IsEnabled(CustomComboPreset.SAM_Shinten_Shoha) &&
+                            ActionReady(Shoha) && gauge.MeditationStacks is 3)
+                            return Shoha;
+                    }
                 }
                 return actionID;
             }
         }
 
-        internal class SAM_Kyuten_Shoha_Guren : CustomCombo
+        internal class SAM_Kyuten : CustomCombo
         {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_Kyuten_Shoha;
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_Kyuten;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -968,10 +995,16 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID is Kyuten)
                 {
-                    if (IsEnabled(CustomComboPreset.SAM_Kyuten_Shoha_Guren) && ActionReady(Guren))
+                    if (IsEnabled(CustomComboPreset.SAM_Kyuten_Guren) &&
+                        ActionReady(Guren))
                         return Guren;
 
-                    if (gauge.MeditationStacks is 3 && ActionReady(Shoha))
+                    if (IsEnabled(CustomComboPreset.SAM_Kyuten_Zanshin) && 
+                        HasEffect(Buffs.ZanshinReady))
+                        return Zanshin;
+
+                    if (IsEnabled(CustomComboPreset.SAM_Kyuten_Shoha) && 
+                        gauge.MeditationStacks is 3 && ActionReady(Shoha))
                         return Shoha;
                 }
 
@@ -979,9 +1012,9 @@ namespace XIVSlothComboX.Combos.PvE
             }
         }
 
-        internal class SAM_Ikishoten_OgiNamikiri : CustomCombo
+        internal class SAM_Ikishoten : CustomCombo
         {
-            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_Ikishoten_OgiNamikiri;
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SAM_Ikishoten;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -989,8 +1022,19 @@ namespace XIVSlothComboX.Combos.PvE
 
                 if (actionID is Ikishoten)
                 {
-                    if ((LevelChecked(OgiNamikiri) && HasEffect(Buffs.OgiNamikiriReady)) || gauge.Kaeshi == Kaeshi.NAMIKIRI)
-                        return OriginalHook(OgiNamikiri);
+                    if (IsEnabled(CustomComboPreset.SAM_Ikishoten))
+                    {
+                        if (IsEnabled(CustomComboPreset.SAM_Ikishoten_Shoha) &&
+                            ActionReady(Shoha) &&
+                            HasEffect(Buffs.OgiNamikiriReady) &&
+                            gauge.MeditationStacks is 3)
+                            return Shoha;
+
+                        if (IsEnabled(CustomComboPreset.SAM_Ikishoten_Namikiri) && 
+                            (LevelChecked(OgiNamikiri) && HasEffect(Buffs.OgiNamikiriReady)) || 
+                            gauge.Kaeshi == Kaeshi.NAMIKIRI)
+                            return OriginalHook(OgiNamikiri);
+                    }
                 }
                 return actionID;
             }
