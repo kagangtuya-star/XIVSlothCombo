@@ -554,6 +554,10 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Aetherial Manipulation Feature", "Replaces Aetherial Manipulation with Between the Lines when you are out of active Ley Lines and standing still.", BLM.JobID)]
         BLM_Aetherial_Manipulation = 2055,        
   
+        [ReplaceSkill(BLM.Triplecast)]
+        [CustomComboInfo("Triplecast Protection", "Replaces Triplecast with Savage Blade when u already have triplecast active.", BLM.JobID)]
+        BLM_TriplecastProtection = 2056,
+        
         #endregion
 
         // Last value = 2034
@@ -2660,10 +2664,10 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Soulsow Reminder Feature", "Adds Soulsow to the skills selected below when out of combat. \nWill also add Soulsow to Harpe when in combat and no target is selected.", RPR.JobID)]
         RPR_Soulsow = 12302,
 
-        [ReplaceSkill(RPR.勾刃Harpe)]
-        [ParentCombo(RPR_Soulsow)]
-        [CustomComboInfo("Harpe Harvest Moon Feature", "Replaces Harpe with Harvest Moon when you are in combat with Soulsow active.", RPR.JobID)]
-        RPR_Soulsow_HarpeHarvestMoon = 12303,
+        // [ReplaceSkill(RPR.勾刃Harpe)]
+        // [ParentCombo(RPR_Soulsow)]
+        // [CustomComboInfo("Harpe Harvest Moon Feature", "Replaces Harpe with Harvest Moon when you are in combat with Soulsow active.", RPR.JobID)]
+        // RPR_Soulsow_HarpeHarvestMoon = 12303,
 
         [ReplaceSkill(RPR.夜游魂衣Enshroud)]
         [CustomComboInfo("Enshroud Protection Feature", "Turns Enshroud into Gibbet/Gallows to protect Soul Reaver waste.", RPR.JobID)]
@@ -4363,7 +4367,7 @@ namespace XIVSlothComboX.Combos
         PCT_ST_CustomMode = 2000001,
 
         #endregion
-        [ReplaceSkill(PCT.FireInRed)]
+        [ReplaceSkill(PCT.火炎之红FireInRed)]
         [ConflictingCombos(CombinedAetherhues, PCT_ST_AdvancedMode)]
         [CustomComboInfo("Simple Mode - Single Target", "Consolidates the single target rotation into one button, ideal for newcomers.", PCT.JobID)]
         PCT_ST_SimpleMode = 20000,
@@ -4375,7 +4379,7 @@ namespace XIVSlothComboX.Combos
 
         #region ST
 
-        [ReplaceSkill(PCT.FireInRed)]
+        [ReplaceSkill(PCT.火炎之红FireInRed)]
         [ConflictingCombos(CombinedAetherhues, PCT_ST_SimpleMode)]
         [CustomComboInfo("Advanced Mode - Single Target", $"Replaces Fire in Red with a one-button full single target rotation.\nThese features are ideal if you want to customize the rotation.", PCT.JobID)]
         PCT_ST_AdvancedMode = 20005,
@@ -4619,12 +4623,12 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("Lucid Dreaming Option", $"Adds Lucid Dreaming to the combo.", PCT.JobID, 12)]
         PCT_AoE_AdvancedMode_LucidDreaming = 20067,
 
-        [ReplaceSkill(PCT.FireInRed, PCT.FireIIinRed)]
+        [ReplaceSkill(PCT.火炎之红FireInRed, PCT.FireIIinRed)]
         [ConflictingCombos(PCT_ST_SimpleMode, PCT_AoE_SimpleMode)]
         [CustomComboInfo("Combined Aetherhues Feature", "Merges aetherhue actions for specific target types into a single button.", PCT.JobID)]
         CombinedAetherhues = 20002,
 
-        [ReplaceSkill(PCT.CreatureMotif, PCT.WeaponMotif, PCT.LandscapeMotif)]
+        [ReplaceSkill(PCT.动物彩绘CreatureMotif, PCT.武器彩绘WeaponMotif, PCT.风景彩绘LandscapeMotif)]
         [CustomComboInfo("One Button Motifs", "Merges Motifs and Muses into a single button.", PCT.JobID)]
         CombinedMotifs = 20003,
 

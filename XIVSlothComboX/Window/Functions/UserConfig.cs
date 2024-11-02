@@ -2943,8 +2943,8 @@ namespace XIVSlothComboX.Window.Functions
             
             if (preset == CustomComboPreset.CombinedAetherhues)
             {
-                UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Both Single Target & AoE", $"Replaces both {PCT.FireInRed.ActionName()} & {PCT.FireIIinRed.ActionName()}", 0);
-                UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Single Target Only", $"Replace only {PCT.FireInRed.ActionName()}", 1);
+                UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Both Single Target & AoE", $"Replaces both {PCT.火炎之红FireInRed.ActionName()} & {PCT.FireIIinRed.ActionName()}", 0);
+                UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "Single Target Only", $"Replace only {PCT.火炎之红FireInRed.ActionName()}", 1);
                 UserConfig.DrawRadioButton(PCT.Config.CombinedAetherhueChoices, "AoE Only", $"Replace only {PCT.FireIIinRed.ActionName()}", 2);
             }
 
@@ -2983,7 +2983,10 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(0, 10, PCT.Config.PCT_AoE_WeaponStop, "Health % to stop Drawing Motif");
 
             if (preset == CustomComboPreset.PCT_Variant_Cure)
-                UserConfig.DrawSliderInt(1, 100, PCT.Config.PCT_VariantCure, "HP% 低于", 200);
+                UserConfig.DrawSliderInt(1, 100, PCT.Config.PCT_VariantCure, "HP% 低于", 200);  
+            
+            if (preset == CustomComboPreset.PCT_ST_AdvancedMode_SubtractivePalette)
+                UserConfig.DrawSliderInt(1, 100, PCT.Config.PCT_SubtractivePalette, "大于等于多少时候用", 200);
 
             // PvP
             if (preset == CustomComboPreset.PCTPvP_BurstControl)
@@ -2991,6 +2994,8 @@ namespace XIVSlothComboX.Window.Functions
 
             if (preset == CustomComboPreset.PCTPvP_TemperaCoat)
                 UserConfig.DrawSliderInt(1, 100, PCTPvP.Config.PCTPvP_TemperaHP, "Player HP%", 200);
+            
+     
 
             #endregion
 

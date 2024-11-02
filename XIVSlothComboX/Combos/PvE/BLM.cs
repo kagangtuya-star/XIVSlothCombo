@@ -854,5 +854,18 @@ namespace XIVSlothComboX.Combos.PvE
                     : actionID;
             }
         }
+        
+        internal class BLM_TriplecastProtection : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_TriplecastProtection;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID is Triplecast && HasEffect(Buffs.Triplecast))
+                    return OriginalHook(11);
+
+                return actionID;
+            }
+        }
     }
 }

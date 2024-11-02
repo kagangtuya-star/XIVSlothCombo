@@ -14,28 +14,28 @@ namespace XIVSlothComboX.Combos.PvE
         public const byte JobID = 42;
 
         public const uint
-            BlizzardinCyan = 34653,
-            StoneinYellow = 34654,
+            冰结之蓝青BlizzardinCyan = 34653,
+            飞石之纯黄StoneinYellow = 34654,
             BlizzardIIinCyan = 34659,
             ClawMotif = 34666,
             ClawedMuse = 34672,
             CometinBlack = 34663,
-            CreatureMotif = 34689,
-            FireInRed = 34650,
-            AeroInGreen = 34651,
+            动物彩绘CreatureMotif = 34689,
+            火炎之红FireInRed = 34650,
+            疾风之绿AeroInGreen = 34651,
             WaterInBlue = 34652,
             FireIIinRed = 34656,
             AeroIIinGreen = 34657,
             HammerMotif = 34668,
             WingedMuse = 34671,
             StrikingMuse = 34674,
-            StarryMuse = 34675,
+            星空构想StarryMuse = 34675,
             HammerStamp = 34678,
             HammerBrush = 34679,
             PolishingHammer = 34680,
             HolyInWhite = 34662,
             StarrySkyMotif = 34669,
-            LandscapeMotif = 34691,
+            风景彩绘LandscapeMotif = 34691,
             LivingMuse = 35347,
             MawMotif = 34667,
             MogoftheAges = 34676,
@@ -43,16 +43,16 @@ namespace XIVSlothComboX.Combos.PvE
             PomMuse = 34670,
             RainbowDrip = 34688,
             RetributionoftheMadeen = 34677,
-            ScenicMuse = 35349,
+            风景构想ScenicMuse = 35349,
             Smudge = 34684,
-            StarPrism = 34681,
+            天星棱光StarPrism = 34681,
             SteelMuse = 35348,
-            SubtractivePalette = 34683,
+            减色混合SubtractivePalette = 34683,
             StoneIIinYellow = 34660,
             ThunderIIinMagenta = 34661,
             ThunderinMagenta = 34655,
             WaterinBlue = 34652,
-            WeaponMotif = 34690,
+            武器彩绘WeaponMotif = 34690,
             WingMotif = 34665;
 
         public static class Buffs
@@ -62,8 +62,8 @@ namespace XIVSlothComboX.Combos.PvE
                 RainbowBright = 3679,
                 HammerTime = 3680,
                 MonochromeTones = 3691,
-                StarryMuse = 3685,
-                Hyperphantasia = 3688,
+                星空构想StarryMuse = 3685,
+                绘灵幻景Hyperphantasia = 3688,
                 Inspiration = 3689,
                 SubtractiveSpectrum = 3690,
                 Starstruck = 3681;
@@ -86,7 +86,9 @@ namespace XIVSlothComboX.Combos.PvE
                 PCT_ST_WeaponStop = new("PCT_ST_WeaponStop"),
                 PCT_AoE_WeaponStop = new("PCT_AoE_WeaponStop"),
                 PCT_ST_LandscapeStop = new("PCT_ST_LandscapeStop"),
-                PCT_AoE_LandscapeStop = new("PCT_AoE_LandscapeStop");
+                PCT_AoE_LandscapeStop = new("PCT_AoE_LandscapeStop"),
+                PCT_SubtractivePalette = new("PCT_SubtractivePalette",100)
+                ;
 
             public static UserBool
                 CombinedMotifsMog = new("CombinedMotifsMog"),
@@ -163,7 +165,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
             {
-                if (actionID is FireInRed)
+                if (actionID is 火炎之红FireInRed)
                 {
                     var gauge = GetJobGauge<PCTGauge>();
                     bool canWeave = CanSpellWeave(ActionWatching.LastSpell) || CanSpellWeave(actionID);
@@ -180,40 +182,40 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (!InCombat() || InCombat() && CurrentTarget == null)
                     {
-                        if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
-                            return OriginalHook(CreatureMotif);
-                        if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
-                            return OriginalHook(WeaponMotif);
-                        if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.StarryMuse))
-                            return OriginalHook(LandscapeMotif);
+                        if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                            return OriginalHook(动物彩绘CreatureMotif);
+                        if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                            return OriginalHook(武器彩绘WeaponMotif);
+                        if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.星空构想StarryMuse))
+                            return OriginalHook(风景彩绘LandscapeMotif);
                     }
 
                     // Lvl 100 Opener
-                    if (StarPrism.LevelChecked())
+                    if (天星棱光StarPrism.LevelChecked())
                     {
                         if (PCTOpenerLvl100.DoFullOpener(ref actionID))
                             return actionID;
                     }
                     // Lvl 92 Opener
-                    else if (!StarPrism.LevelChecked() && RainbowDrip.LevelChecked())
+                    else if (!天星棱光StarPrism.LevelChecked() && RainbowDrip.LevelChecked())
                     {
                         if (PCTOpenerLvl92.DoFullOpener(ref actionID))
                             return actionID;
                     }
                     // Lvl 90 Opener
-                    else if (!StarPrism.LevelChecked() && !RainbowDrip.LevelChecked() && CometinBlack.LevelChecked())
+                    else if (!天星棱光StarPrism.LevelChecked() && !RainbowDrip.LevelChecked() && CometinBlack.LevelChecked())
                     {
                         if (PCTOpenerLvl90.DoFullOpener(ref actionID))
                             return actionID;
                     }
                     // Lvl 80 Opener
-                    else if (!StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && HolyInWhite.LevelChecked())
+                    else if (!天星棱光StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && HolyInWhite.LevelChecked())
                     {
                         if (PCTOpenerLvl80.DoFullOpener(ref actionID))
                             return actionID;
                     }
                     // Lvl 70 Opener
-                    else if (!StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && !HolyInWhite.LevelChecked() && StarryMuse.LevelChecked())
+                    else if (!天星棱光StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && !HolyInWhite.LevelChecked() && 星空构想StarryMuse.LevelChecked())
                     {
                         if (PCTOpenerLvl70.DoFullOpener(ref actionID))
                             return actionID;
@@ -224,9 +226,9 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         // ScenicMuse
 
-                        if (ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(ScenicMuse))
+                        if (风景构想ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(风景构想ScenicMuse))
                         {
-                            return OriginalHook(ScenicMuse);
+                            return OriginalHook(风景构想ScenicMuse);
                         }
 
                         // LivingMuse
@@ -235,7 +237,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (HasCharges(OriginalHook(LivingMuse)))
                             {
-                                if (!ScenicMuse.LevelChecked() || GetCooldown(ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
+                                if (!风景构想ScenicMuse.LevelChecked() || GetCooldown(风景构想ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
                                 {
                                     return OriginalHook(LivingMuse);
                                 }
@@ -244,14 +246,14 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // SteelMuse
 
-                        if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !ScenicMuse.LevelChecked()))
+                        if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(风景构想ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !风景构想ScenicMuse.LevelChecked()))
                         {
                             return OriginalHook(SteelMuse);
                         }
 
                         // MogoftheAges
 
-                        if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && IsOffCooldown(OriginalHook(MogoftheAges)) && (GetCooldownRemainingTime(StarryMuse) >= 60 || !ScenicMuse.LevelChecked()))
+                        if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && IsOffCooldown(OriginalHook(MogoftheAges)) && (GetCooldownRemainingTime(星空构想StarryMuse) >= 60 || !风景构想ScenicMuse.LevelChecked()))
                         {
                             return OriginalHook(MogoftheAges);
                         }
@@ -265,25 +267,31 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // SubtractivePalette
 
-                        if (SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
+                        if (减色混合SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
                         {
                             if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= 50)
                             {
-                                return SubtractivePalette;
+                                return 减色混合SubtractivePalette;
                             }
                         }
                     }
 
+                   
+
+
                     // Swiftcast Motifs
                     if (HasEffect(All.Buffs.Swiftcast))
                     {
-                        if (!gauge.CreatureMotifDrawn && CreatureMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
-                            return OriginalHook(CreatureMotif);
-                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.StarryMuse))
+                        if (!gauge.CreatureMotifDrawn && 动物彩绘CreatureMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse))
+                            return OriginalHook(动物彩绘CreatureMotif);
+                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.星空构想StarryMuse))
                             return OriginalHook(HammerMotif);
-                        if (!gauge.LandscapeMotifDrawn && LandscapeMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
-                            return OriginalHook(LandscapeMotif);
+                        if (!gauge.LandscapeMotifDrawn && 风景彩绘LandscapeMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse))
+                            return OriginalHook(风景彩绘LandscapeMotif);
                     }
+                    
+                    
+                    
 
                     // IsMoving logic
                     if (IsMoving && InCombat())
@@ -294,7 +302,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (CometinBlack.LevelChecked() && gauge.Paint >= 1 && HasEffect(Buffs.MonochromeTones))
                             return OriginalHook(CometinBlack);
 
-                        if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) <= 3f)
+                        if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) <= 3f)
                             return RainbowDrip;
 
                         if (HolyInWhite.LevelChecked() && gauge.Paint >= 1)
@@ -302,20 +310,22 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Prepare for Burst
-                    if (GetCooldownRemainingTime(ScenicMuse) <= 20)
+                    if (GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
                     {
-                        if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
-                            return OriginalHook(LandscapeMotif);
+                        if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
+                            return OriginalHook(风景彩绘LandscapeMotif);
 
-                        if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
-                            return OriginalHook(CreatureMotif);
+                        if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                            return OriginalHook(动物彩绘CreatureMotif);
 
-                        if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
-                            return OriginalHook(WeaponMotif);
+                        if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                            return OriginalHook(武器彩绘WeaponMotif);
                     }
+                    
+                   
 
                     // Burst 
-                    if (HasEffect(Buffs.StarryMuse))
+                    if (HasEffect(Buffs.星空构想StarryMuse))
                     {
 
                         if (CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0)
@@ -325,44 +335,44 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(HammerStamp);
 
                         if (HasEffect(Buffs.Starstruck) || HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) <= 3f)
-                            return StarPrism;
+                            return 天星棱光StarPrism;
 
-                        if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) <= 3f)
+                        if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) <= 3f)
                             return RainbowDrip;
 
 
                     }
 
-                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.StarryMuse))
+                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.星空构想StarryMuse))
                         return RainbowDrip;
 
-                    if (CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(StarryMuse) > 30f)
+                    if (CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(星空构想StarryMuse) > 30f)
                         return OriginalHook(CometinBlack);
 
                     if (HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
                         return OriginalHook(HammerStamp);
 
-                    if (!HasEffect(Buffs.StarryMuse))
+                    if (!HasEffect(Buffs.星空构想StarryMuse))
                     {
                         // LandscapeMotif
 
-                        if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(ScenicMuse) <= 20)
+                        if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
                         {
-                            return OriginalHook(LandscapeMotif);
+                            return OriginalHook(风景彩绘LandscapeMotif);
                         }
 
                         // CreatureMotif
 
-                        if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
+                        if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
                         {
-                            return OriginalHook(CreatureMotif);
+                            return OriginalHook(动物彩绘CreatureMotif);
                         }
 
                         // WeaponMotif
 
-                        if (WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
+                        if (武器彩绘WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
                         {
-                            return OriginalHook(WeaponMotif);
+                            return OriginalHook(武器彩绘WeaponMotif);
                         }
                     }
 
@@ -371,7 +381,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return All.LucidDreaming;
 
                     if (BlizzardIIinCyan.LevelChecked() && HasEffect(Buffs.SubtractivePalette))
-                        return OriginalHook(BlizzardinCyan);
+                        return OriginalHook(冰结之蓝青BlizzardinCyan);
                 }
 
                 return actionID;
@@ -390,7 +400,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
             {
-                if (actionID is FireInRed)
+                if (actionID is 火炎之红FireInRed)
                 {
                     var gauge = GetJobGauge<PCTGauge>();
                     bool canWeave = CanSpellWeave(ActionWatching.LastSpell) || CanSpellWeave(actionID);
@@ -412,12 +422,14 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (!InCombat() || (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_NoTargetMotifs) && InCombat() && CurrentTarget == null))
                         {
-                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
-                                return OriginalHook(CreatureMotif);
-                            if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
-                                return OriginalHook(WeaponMotif);
-                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.StarryMuse))
-                                return OriginalHook(LandscapeMotif);
+                            if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                                return OriginalHook(动物彩绘CreatureMotif);
+                            
+                            if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                                return OriginalHook(武器彩绘WeaponMotif);
+                            
+                            if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.星空构想StarryMuse))
+                                return OriginalHook(风景彩绘LandscapeMotif);
                         }
                     }
 
@@ -425,31 +437,31 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.PCT_ST_Advanced_Openers))
                     {
                         // Lvl 100 Opener
-                        if (StarPrism.LevelChecked())
+                        if (天星棱光StarPrism.LevelChecked())
                         {
                             if (PCTOpenerLvl100.DoFullOpener(ref actionID))
                                 return actionID;
                         }
                         // Lvl 92 Opener
-                        else if (!StarPrism.LevelChecked() && RainbowDrip.LevelChecked())
+                        else if (!天星棱光StarPrism.LevelChecked() && RainbowDrip.LevelChecked())
                         {
                             if (PCTOpenerLvl92.DoFullOpener(ref actionID))
                                 return actionID;
                         }
                         // Lvl 90 Opener
-                        else if (!StarPrism.LevelChecked() && !RainbowDrip.LevelChecked() && CometinBlack.LevelChecked())
+                        else if (!天星棱光StarPrism.LevelChecked() && !RainbowDrip.LevelChecked() && CometinBlack.LevelChecked())
                         {
                             if (PCTOpenerLvl90.DoFullOpener(ref actionID))
                                 return actionID;
                         }
                         // Lvl 80 Opener
-                        else if (!StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && HolyInWhite.LevelChecked())
+                        else if (!天星棱光StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && HolyInWhite.LevelChecked())
                         {
                             if (PCTOpenerLvl80.DoFullOpener(ref actionID))
                                 return actionID;
                         }
                         // Lvl 70 Opener
-                        else if (!StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && !HolyInWhite.LevelChecked() && StarryMuse.LevelChecked())
+                        else if (!天星棱光StarPrism.LevelChecked() && !CometinBlack.LevelChecked() && !HolyInWhite.LevelChecked() && 星空构想StarryMuse.LevelChecked())
                         {
                             if (PCTOpenerLvl70.DoFullOpener(ref actionID))
                                 return actionID;
@@ -462,9 +474,9 @@ namespace XIVSlothComboX.Combos.PvE
                         // ScenicMuse
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_ScenicMuse))
                         {
-                            if (ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(ScenicMuse))
+                            if (风景构想ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(风景构想ScenicMuse))
                             {
-                                return OriginalHook(ScenicMuse);
+                                return OriginalHook(风景构想ScenicMuse);
                             }
                         }
 
@@ -475,7 +487,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (HasCharges(OriginalHook(LivingMuse)))
                                 {
-                                    if (!ScenicMuse.LevelChecked() || GetCooldown(ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
+                                    if (!风景构想ScenicMuse.LevelChecked() || GetCooldown(风景构想ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
                                     {
                                         return OriginalHook(LivingMuse);
                                     }
@@ -486,7 +498,7 @@ namespace XIVSlothComboX.Combos.PvE
                         // SteelMuse
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SteelMuse))
                         {
-                            if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !ScenicMuse.LevelChecked()))
+                            if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(风景构想ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !风景构想ScenicMuse.LevelChecked()))
                             {
                                 return OriginalHook(SteelMuse);
                             }
@@ -495,20 +507,20 @@ namespace XIVSlothComboX.Combos.PvE
                         // MogoftheAges
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_MogOfTheAges))
                         {
-                            if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && IsOffCooldown(OriginalHook(MogoftheAges)) && (GetCooldownRemainingTime(StarryMuse) >= 60 || !ScenicMuse.LevelChecked()))
+                            if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && IsOffCooldown(OriginalHook(MogoftheAges)) && (GetCooldownRemainingTime(星空构想StarryMuse) >= 60 || !风景构想ScenicMuse.LevelChecked()))
                             {
                                 return OriginalHook(MogoftheAges);
                             }
                         }
 
-                        // SubtractivePalette
+                        // SubtractivePalette 减色混合
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SubtractivePalette))
                         {
-                            if (SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
+                            if (减色混合SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
                             {
-                                if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= 50)
+                                if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= Config.PCT_SubtractivePalette)
                                 {
-                                    return SubtractivePalette;
+                                    return 减色混合SubtractivePalette;
                                 }
                             }
                         }
@@ -517,12 +529,15 @@ namespace XIVSlothComboX.Combos.PvE
                     // Swiftcast Motifs
                     if (HasEffect(All.Buffs.Swiftcast))
                     {
-                        if (!gauge.CreatureMotifDrawn && CreatureMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse) && GetTargetHPPercent() > creatureStop)
-                            return OriginalHook(CreatureMotif);
-                        if (!gauge.WeaponMotifDrawn && WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.StarryMuse) && GetTargetHPPercent() > weaponStop)
-                            return OriginalHook(WeaponMotif);
-                        if (!gauge.LandscapeMotifDrawn && LandscapeMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse) && GetTargetHPPercent() > landscapeStop)
-                            return OriginalHook(LandscapeMotif);
+                        if (!gauge.CreatureMotifDrawn && 动物彩绘CreatureMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse) && GetTargetHPPercent() > creatureStop)
+                            return OriginalHook(动物彩绘CreatureMotif);
+                        
+                        if (!gauge.WeaponMotifDrawn && 武器彩绘WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.星空构想StarryMuse) && GetTargetHPPercent() > weaponStop)
+                            return OriginalHook(武器彩绘WeaponMotif);
+                        
+                        
+                        if (!gauge.LandscapeMotifDrawn && 风景彩绘LandscapeMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse) && GetTargetHPPercent() > landscapeStop)
+                            return OriginalHook(风景彩绘LandscapeMotif);
 
                     }
 
@@ -537,32 +552,35 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_RainbowDrip))
                         {
-                            if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) <= 3f)
+                            if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) <= 3f)
                                 return RainbowDrip;
                         }
 
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_MovementOption_HolyInWhite) && HolyInWhite.LevelChecked() && gauge.Paint >= 1)
                             return OriginalHook(HolyInWhite);
 
-                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SwitfcastOption) && ActionReady(All.Swiftcast) && ((LevelChecked(CreatureMotif) && !gauge.CreatureMotifDrawn) || (LevelChecked(WeaponMotif) && !gauge.WeaponMotifDrawn) || (LevelChecked(LandscapeMotif) && !gauge.LandscapeMotifDrawn)))
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_SwitfcastOption) && ActionReady(All.Swiftcast) && ((LevelChecked(动物彩绘CreatureMotif) && !gauge.CreatureMotifDrawn) || (LevelChecked(武器彩绘WeaponMotif) && !gauge.WeaponMotifDrawn) || (LevelChecked(风景彩绘LandscapeMotif) && !gauge.LandscapeMotifDrawn)))
                             return All.Swiftcast;
                     }
 
                     //Prepare for Burst
-                    if (GetCooldownRemainingTime(ScenicMuse) <= 20)
+                    if (GetCooldownRemainingTime(风景构想ScenicMuse) <= 20 && !HasEffect(Buffs.绘灵幻景Hyperphantasia))
                     {
-                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LandscapeMotif) && LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetTargetHPPercent() > landscapeStop)
-                            return OriginalHook(LandscapeMotif);
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LandscapeMotif) && 风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetTargetHPPercent() > landscapeStop)
+                            return OriginalHook(风景彩绘LandscapeMotif);
 
-                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CreatureMotif) && CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && GetTargetHPPercent() > creatureStop)
-                            return OriginalHook(CreatureMotif);
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CreatureMotif) && 动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && GetTargetHPPercent() > creatureStop)
+                            return OriginalHook(动物彩绘CreatureMotif);
 
-                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_WeaponMotif) && WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime) && GetTargetHPPercent() > weaponStop)
-                            return OriginalHook(WeaponMotif);
+                        if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_WeaponMotif) && 武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime) && GetTargetHPPercent() > weaponStop)
+                            return OriginalHook(武器彩绘WeaponMotif);
                     }
+                    
+                    
+                  
 
                     // Burst 
-                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_Phase) && HasEffect(Buffs.StarryMuse))
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_Phase) && HasEffect(Buffs.星空构想StarryMuse))
                     {
 
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_CometInBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0)
@@ -574,62 +592,62 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_StarPrism))
                         {
                             if (HasEffect(Buffs.Starstruck) || HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) <= 3f)
-                                return StarPrism;
+                                return 天星棱光StarPrism;
                         }
 
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_Burst_RainbowDrip))
                         {
-                            if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) <= 3f)
+                            if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) <= 3f)
                                 return RainbowDrip;
                         }
 
                     }
 
-                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.StarryMuse))
+                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.星空构想StarryMuse))
                         return RainbowDrip;
 
-                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CometinBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(StarryMuse) > 30f)
+                    if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CometinBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(星空构想StarryMuse) > 30f)
                         return OriginalHook(CometinBlack);
 
                     if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_HammerStampCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
                         return OriginalHook(HammerStamp);
 
-                    if (!HasEffect(Buffs.StarryMuse))
+                    if (!HasEffect(Buffs.星空构想StarryMuse) && !HasEffect(Buffs.绘灵幻景Hyperphantasia))
                     {
                         // LandscapeMotif
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LandscapeMotif) && GetTargetHPPercent() > landscapeStop)
                         {
-                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(ScenicMuse) <= 20)
+                            if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
                             {
-                                return OriginalHook(LandscapeMotif);
+                                return OriginalHook(风景彩绘LandscapeMotif);
                             }
                         }
 
                         // CreatureMotif
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_CreatureMotif) && GetTargetHPPercent() > creatureStop)
                         {
-                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
+                            if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
                             {
-                                return OriginalHook(CreatureMotif);
+                                return OriginalHook(动物彩绘CreatureMotif);
                             }
                         }
 
                         // WeaponMotif
                         if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_WeaponMotif) && GetTargetHPPercent() > weaponStop)
                         {
-                            if (WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
+                            if (武器彩绘WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
                             {
-                                return OriginalHook(WeaponMotif);
+                                return OriginalHook(武器彩绘WeaponMotif);
                             }
                         }
                     }
-
+                    
 
                     if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_LucidDreaming) && All.LucidDreaming.LevelChecked() && ActionReady(All.LucidDreaming) && CanSpellWeave(actionID) && LocalPlayer.CurrentMp <= Config.PCT_ST_AdvancedMode_LucidOption)
                         return All.LucidDreaming;
 
                     if (IsEnabled(CustomComboPreset.PCT_ST_AdvancedMode_BlizzardInCyan) && BlizzardIIinCyan.LevelChecked() && HasEffect(Buffs.SubtractivePalette))
-                        return OriginalHook(BlizzardinCyan);
+                        return OriginalHook(冰结之蓝青BlizzardinCyan);
                 }
 
                 return actionID;
@@ -660,12 +678,12 @@ namespace XIVSlothComboX.Combos.PvE
 
                     if (!InCombat() || InCombat() && CurrentTarget == null)
                     {
-                        if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
-                            return OriginalHook(CreatureMotif);
-                        if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
-                            return OriginalHook(WeaponMotif);
-                        if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.StarryMuse))
-                            return OriginalHook(LandscapeMotif);
+                        if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                            return OriginalHook(动物彩绘CreatureMotif);
+                        if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                            return OriginalHook(武器彩绘WeaponMotif);
+                        if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.星空构想StarryMuse))
+                            return OriginalHook(风景彩绘LandscapeMotif);
                     }
 
 
@@ -678,7 +696,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (HasCharges(OriginalHook(LivingMuse)))
                             {
-                                if (!ScenicMuse.LevelChecked() || GetCooldown(ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
+                                if (!风景构想ScenicMuse.LevelChecked() || GetCooldown(风景构想ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
                                 {
                                     return OriginalHook(LivingMuse);
                                 }
@@ -687,21 +705,21 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // ScenicMuse
 
-                        if (ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(ScenicMuse))
+                        if (风景构想ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(风景构想ScenicMuse))
                         {
-                            return OriginalHook(ScenicMuse);
+                            return OriginalHook(风景构想ScenicMuse);
                         }
 
                         // SteelMuse
 
-                        if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !ScenicMuse.LevelChecked()))
+                        if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(风景构想ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !风景构想ScenicMuse.LevelChecked()))
                         {
                             return OriginalHook(SteelMuse);
                         }
 
                         // MogoftheAges
 
-                        if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && (IsOffCooldown(OriginalHook(MogoftheAges)) || !ScenicMuse.LevelChecked()))
+                        if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && (IsOffCooldown(OriginalHook(MogoftheAges)) || !风景构想ScenicMuse.LevelChecked()))
                         {
                             return OriginalHook(MogoftheAges);
                         }
@@ -712,21 +730,21 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
                         // Subtractive Palette
-                        if (SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
+                        if (减色混合SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
                         {
-                            if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= 50)
-                                return SubtractivePalette;
+                            if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= Config.PCT_SubtractivePalette)
+                                return 减色混合SubtractivePalette;
                         }
                     }
 
                     if (HasEffect(All.Buffs.Swiftcast))
                     {
-                        if (!gauge.CreatureMotifDrawn && CreatureMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
-                            return OriginalHook(CreatureMotif);
-                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.StarryMuse))
+                        if (!gauge.CreatureMotifDrawn && 动物彩绘CreatureMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse))
+                            return OriginalHook(动物彩绘CreatureMotif);
+                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.星空构想StarryMuse))
                             return OriginalHook(HammerMotif);
-                        if (!gauge.LandscapeMotifDrawn && LandscapeMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse))
-                            return OriginalHook(LandscapeMotif);
+                        if (!gauge.LandscapeMotifDrawn && 风景彩绘LandscapeMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse))
+                            return OriginalHook(风景彩绘LandscapeMotif);
                     }
 
                     if (IsMoving && InCombat())
@@ -737,7 +755,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (CometinBlack.LevelChecked() && gauge.Paint >= 1 && HasEffect(Buffs.MonochromeTones))
                             return OriginalHook(CometinBlack);
 
-                        if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) < 3))
+                        if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) < 3))
                             return RainbowDrip;
 
                         if (HolyInWhite.LevelChecked() && gauge.Paint >= 1)
@@ -746,20 +764,20 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     //Prepare for Burst
-                    if (GetCooldownRemainingTime(ScenicMuse) <= 20)
+                    if (GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
                     {
-                        if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
-                            return OriginalHook(LandscapeMotif);
+                        if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
+                            return OriginalHook(风景彩绘LandscapeMotif);
 
-                        if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
-                            return OriginalHook(CreatureMotif);
+                        if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                            return OriginalHook(动物彩绘CreatureMotif);
 
-                        if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
-                            return OriginalHook(WeaponMotif);
+                        if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                            return OriginalHook(武器彩绘WeaponMotif);
                     }
 
                     // Burst 
-                    if (HasEffect(Buffs.StarryMuse))
+                    if (HasEffect(Buffs.星空构想StarryMuse))
                     {
                         // Check for CometInBlack
                         if (CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0)
@@ -771,32 +789,32 @@ namespace XIVSlothComboX.Combos.PvE
 
                         // Check for Starstruck
                         if (HasEffect(Buffs.Starstruck) || (HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) < 3))
-                            return StarPrism;
+                            return 天星棱光StarPrism;
 
                         // Check for RainbowBright
-                        if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) < 3))
+                        if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) < 3))
                             return RainbowDrip;
                     }
 
-                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.StarryMuse))
+                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.星空构想StarryMuse))
                         return RainbowDrip;
 
-                    if (CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(StarryMuse) > 60)
+                    if (CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(星空构想StarryMuse) > 60)
                         return OriginalHook(CometinBlack);
 
                     if (HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
                         return OriginalHook(HammerStamp);
 
-                    if (!HasEffect(Buffs.StarryMuse))
+                    if (!HasEffect(Buffs.星空构想StarryMuse))
                     {
-                        if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(ScenicMuse) <= 20)
-                            return OriginalHook(LandscapeMotif);
+                        if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
+                            return OriginalHook(风景彩绘LandscapeMotif);
 
-                        if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
-                            return OriginalHook(CreatureMotif);
+                        if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
+                            return OriginalHook(动物彩绘CreatureMotif);
 
-                        if (WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
-                            return OriginalHook(WeaponMotif);
+                        if (武器彩绘WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
+                            return OriginalHook(武器彩绘WeaponMotif);
                     }
                     //Saves one Charge of White paint for movement/Black paint.
                     if (HolyInWhite.LevelChecked() && gauge.Paint >= 2)
@@ -839,12 +857,12 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (!InCombat() || (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_NoTargetMotifs) && InCombat() && CurrentTarget == null))
                         {
-                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
-                                return OriginalHook(CreatureMotif);
-                            if (WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
-                                return OriginalHook(WeaponMotif);
-                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.StarryMuse))
-                                return OriginalHook(LandscapeMotif);
+                            if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn)
+                                return OriginalHook(动物彩绘CreatureMotif);
+                            if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
+                                return OriginalHook(武器彩绘WeaponMotif);
+                            if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.星空构想StarryMuse))
+                                return OriginalHook(风景彩绘LandscapeMotif);
                         }
                     }
 
@@ -858,7 +876,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (HasCharges(OriginalHook(LivingMuse)))
                                 {
-                                    if (!ScenicMuse.LevelChecked() || GetCooldown(ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
+                                    if (!风景构想ScenicMuse.LevelChecked() || GetCooldown(风景构想ScenicMuse).CooldownRemaining > GetCooldownChargeRemainingTime(LivingMuse))
                                     {
                                         return OriginalHook(LivingMuse);
                                     }
@@ -869,16 +887,16 @@ namespace XIVSlothComboX.Combos.PvE
                         // ScenicMuse
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_ScenicMuse))
                         {
-                            if (ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(ScenicMuse))
+                            if (风景构想ScenicMuse.LevelChecked() && gauge.LandscapeMotifDrawn && gauge.WeaponMotifDrawn && IsOffCooldown(风景构想ScenicMuse))
                             {
-                                return OriginalHook(ScenicMuse);
+                                return OriginalHook(风景构想ScenicMuse);
                             }
                         }
 
                         // SteelMuse
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SteelMuse))
                         {
-                            if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !ScenicMuse.LevelChecked()))
+                            if (SteelMuse.LevelChecked() && !HasEffect(Buffs.HammerTime) && gauge.WeaponMotifDrawn && HasCharges(OriginalHook(SteelMuse)) && (GetCooldown(SteelMuse).CooldownRemaining < GetCooldown(风景构想ScenicMuse).CooldownRemaining || GetRemainingCharges(SteelMuse) == GetMaxCharges(SteelMuse) || !风景构想ScenicMuse.LevelChecked()))
                             {
                                 return OriginalHook(SteelMuse);
                             }
@@ -887,7 +905,7 @@ namespace XIVSlothComboX.Combos.PvE
                         // MogoftheAges
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_MogOfTheAges))
                         {
-                            if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && (IsOffCooldown(OriginalHook(MogoftheAges)) || !ScenicMuse.LevelChecked()))
+                            if (MogoftheAges.LevelChecked() && (gauge.MooglePortraitReady || gauge.MadeenPortraitReady) && (IsOffCooldown(OriginalHook(MogoftheAges)) || !风景构想ScenicMuse.LevelChecked()))
                             {
                                 return OriginalHook(MogoftheAges);
                             }
@@ -895,22 +913,22 @@ namespace XIVSlothComboX.Combos.PvE
 
 
                         // Subtractive Palette
-                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SubtractivePalette) && SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SubtractivePalette) && 减色混合SubtractivePalette.LevelChecked() && !HasEffect(Buffs.SubtractivePalette) && !HasEffect(Buffs.MonochromeTones))
                         {
-                            if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= 50)
-                                return SubtractivePalette;
+                            if (HasEffect(Buffs.SubtractiveSpectrum) || gauge.PalleteGauge >= Config.PCT_SubtractivePalette)
+                                return 减色混合SubtractivePalette;
                         }
                     }
 
 
                     if (HasEffect(All.Buffs.Swiftcast))
                     {
-                        if (!gauge.CreatureMotifDrawn && CreatureMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse) && GetTargetHPPercent() > creatureStop)
-                            return OriginalHook(CreatureMotif);
-                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.StarryMuse) && GetTargetHPPercent() > weaponStop)
+                        if (!gauge.CreatureMotifDrawn && 动物彩绘CreatureMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse) && GetTargetHPPercent() > creatureStop)
+                            return OriginalHook(动物彩绘CreatureMotif);
+                        if (!gauge.WeaponMotifDrawn && HammerMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !HasEffect(Buffs.星空构想StarryMuse) && GetTargetHPPercent() > weaponStop)
                             return OriginalHook(HammerMotif);
-                        if (!gauge.LandscapeMotifDrawn && LandscapeMotif.LevelChecked() && !HasEffect(Buffs.StarryMuse) && GetTargetHPPercent() > landscapeStop)
-                            return OriginalHook(LandscapeMotif);
+                        if (!gauge.LandscapeMotifDrawn && 风景彩绘LandscapeMotif.LevelChecked() && !HasEffect(Buffs.星空构想StarryMuse) && GetTargetHPPercent() > landscapeStop)
+                            return OriginalHook(风景彩绘LandscapeMotif);
                     }
 
                     if (IsMoving && InCombat())
@@ -923,32 +941,32 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_RainbowDrip))
                         {
-                            if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) < 3))
+                            if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) < 3))
                                 return RainbowDrip;
                         }
 
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_MovementOption_HolyInWhite) && HolyInWhite.LevelChecked() && gauge.Paint >= 1)
                             return OriginalHook(HolyInWhite);
 
-                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SwitfcastOption) && ActionReady(All.Swiftcast) && ((LevelChecked(CreatureMotif) && !gauge.CreatureMotifDrawn) || (LevelChecked(WeaponMotif) && !gauge.WeaponMotifDrawn) || (LevelChecked(LandscapeMotif) && !gauge.LandscapeMotifDrawn)))
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_SwitfcastOption) && ActionReady(All.Swiftcast) && ((LevelChecked(动物彩绘CreatureMotif) && !gauge.CreatureMotifDrawn) || (LevelChecked(武器彩绘WeaponMotif) && !gauge.WeaponMotifDrawn) || (LevelChecked(风景彩绘LandscapeMotif) && !gauge.LandscapeMotifDrawn)))
                             return All.Swiftcast;
                     }
 
                     //Prepare for Burst
-                    if (GetCooldownRemainingTime(ScenicMuse) <= 20)
+                    if (GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
                     {
-                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LandscapeMotif) && LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetTargetHPPercent() > landscapeStop)
-                            return OriginalHook(LandscapeMotif);
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LandscapeMotif) && 风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetTargetHPPercent() > landscapeStop)
+                            return OriginalHook(风景彩绘LandscapeMotif);
 
-                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CreatureMotif) && CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && GetTargetHPPercent() > creatureStop)
-                            return OriginalHook(CreatureMotif);
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CreatureMotif) && 动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && GetTargetHPPercent() > creatureStop)
+                            return OriginalHook(动物彩绘CreatureMotif);
 
-                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_WeaponMotif) && WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime) && GetTargetHPPercent() > weaponStop)
-                            return OriginalHook(WeaponMotif);
+                        if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_WeaponMotif) && 武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime) && GetTargetHPPercent() > weaponStop)
+                            return OriginalHook(武器彩绘WeaponMotif);
                     }
 
                     // Burst 
-                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_Phase) && HasEffect(Buffs.StarryMuse))
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_Phase) && HasEffect(Buffs.星空构想StarryMuse))
                     {
                         // Check for CometInBlack
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_CometInBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0)
@@ -962,51 +980,51 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_StarPrism))
                         {
                             if (HasEffect(Buffs.Starstruck) || (HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) < 3))
-                                return StarPrism;
+                                return 天星棱光StarPrism;
                         }
 
                         // Check for RainbowBright
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_Burst_RainbowDrip))
                         {
-                            if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.StarryMuse) < 3))
+                            if (HasEffect(Buffs.RainbowBright) || (HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) < 3))
                                 return RainbowDrip;
                         }
                     }
 
-                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_HolyinWhite) && !HasEffect(Buffs.StarryMuse) && !HasEffect(Buffs.MonochromeTones))
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_HolyinWhite) && !HasEffect(Buffs.星空构想StarryMuse) && !HasEffect(Buffs.MonochromeTones))
                     {
                         if (gauge.Paint > Config.PCT_AoE_AdvancedMode_HolyinWhiteOption || (Config.PCT_AoE_AdvancedMode_HolyinWhiteOption == 5 && gauge.Paint == 5 && !HasEffect(Buffs.HammerTime) && (HasEffect(Buffs.RainbowBright) || WasLastSpell(AeroIIinGreen) || WasLastSpell(StoneIIinYellow))))
                             return OriginalHook(HolyInWhite);
                     }
 
-                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.StarryMuse))
+                    if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.星空构想StarryMuse))
                         return RainbowDrip;
 
-                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CometinBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(StarryMuse) > 60)
+                    if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CometinBlack) && CometinBlack.LevelChecked() && HasEffect(Buffs.MonochromeTones) && gauge.Paint > 0 && GetCooldownRemainingTime(星空构想StarryMuse) > 60)
                         return OriginalHook(CometinBlack);
 
                     if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_HammerStampCombo) && HammerStamp.LevelChecked() && HasEffect(Buffs.HammerTime))
                         return OriginalHook(HammerStamp);
 
 
-                    if (!HasEffect(Buffs.StarryMuse))
+                    if (!HasEffect(Buffs.星空构想StarryMuse))
                     {
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_LandscapeMotif) && GetTargetHPPercent() > landscapeStop)
                         {
-                            if (LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(ScenicMuse) <= 20)
-                                return OriginalHook(LandscapeMotif);
+                            if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && GetCooldownRemainingTime(风景构想ScenicMuse) <= 20)
+                                return OriginalHook(风景彩绘LandscapeMotif);
                         }
 
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_CreatureMotif) && GetTargetHPPercent() > creatureStop)
                         {
-                            if (CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
-                                return OriginalHook(CreatureMotif);
+                            if (动物彩绘CreatureMotif.LevelChecked() && !gauge.CreatureMotifDrawn && (HasCharges(LivingMuse) || GetCooldownChargeRemainingTime(LivingMuse) <= 8))
+                                return OriginalHook(动物彩绘CreatureMotif);
                         }
 
                         if (IsEnabled(CustomComboPreset.PCT_AoE_AdvancedMode_WeaponMotif) && GetTargetHPPercent() > weaponStop)
                         {
-                            if (WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
-                                return OriginalHook(WeaponMotif);
+                            if (武器彩绘WeaponMotif.LevelChecked() && !HasEffect(Buffs.HammerTime) && !gauge.WeaponMotifDrawn && (HasCharges(SteelMuse) || GetCooldownChargeRemainingTime(SteelMuse) <= 8))
+                                return OriginalHook(武器彩绘WeaponMotif);
                         }
                     }
 
@@ -1029,10 +1047,10 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 int choice = Config.CombinedAetherhueChoices;
 
-                if (actionID == FireInRed && choice is 0 or 1)
+                if (actionID == 火炎之红FireInRed && choice is 0 or 1)
                 {
                     if (HasEffect(Buffs.SubtractivePalette))
-                        return OriginalHook(BlizzardinCyan);
+                        return OriginalHook(冰结之蓝青BlizzardinCyan);
                 }
 
                 if (actionID == FireIIinRed && choice is 0 or 2)
@@ -1053,7 +1071,7 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 var gauge = GetJobGauge<PCTGauge>();
 
-                if (actionID == CreatureMotif)
+                if (actionID == 动物彩绘CreatureMotif)
                 {
                     if ((Config.CombinedMotifsMog && gauge.MooglePortraitReady) || (Config.CombinedMotifsMadeen && gauge.MadeenPortraitReady) && IsOffCooldown(OriginalHook(MogoftheAges)))
                         return OriginalHook(MogoftheAges);
@@ -1062,7 +1080,7 @@ namespace XIVSlothComboX.Combos.PvE
                         return OriginalHook(LivingMuse);
                 }
 
-                if (actionID == WeaponMotif)
+                if (actionID == 武器彩绘WeaponMotif)
                 {
                     if (Config.CombinedMotifsWeapon && HasEffect(Buffs.HammerTime))
                         return OriginalHook(HammerStamp);
@@ -1071,10 +1089,10 @@ namespace XIVSlothComboX.Combos.PvE
                         return OriginalHook(SteelMuse);
                 }
 
-                if (actionID == LandscapeMotif)
+                if (actionID == 风景彩绘LandscapeMotif)
                 {
                     if (gauge.LandscapeMotifDrawn)
-                        return OriginalHook(ScenicMuse);
+                        return OriginalHook(风景构想ScenicMuse);
                 }
 
                 return actionID;

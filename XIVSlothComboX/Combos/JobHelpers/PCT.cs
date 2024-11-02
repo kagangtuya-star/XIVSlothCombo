@@ -21,7 +21,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         private static bool HasCooldowns()
         {
-            if (!CustomComboFunctions.ActionReady(StarryMuse))
+            if (!CustomComboFunctions.ActionReady(星空构想StarryMuse))
                 return false;
 
             if (CustomComboFunctions.GetRemainingCharges(LivingMuse) < 3)
@@ -146,13 +146,13 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.LocalPlayer.CastActionId == CustomComboFunctions.OriginalHook(CreatureMotif) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = CustomComboFunctions.OriginalHook(CreatureMotif);
+                if (CustomComboFunctions.LocalPlayer.CastActionId == CustomComboFunctions.OriginalHook(动物彩绘CreatureMotif) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = CustomComboFunctions.OriginalHook(动物彩绘CreatureMotif);
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StarryMuse;
+                if (CustomComboFunctions.WasLastAction(星空构想StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 星空构想StarryMuse;
 
                 adjustedStep++;
 
@@ -161,18 +161,18 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = SubtractivePalette;
+                if (CustomComboFunctions.WasLastAction(减色混合SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 减色混合SubtractivePalette;
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
 
                 adjustedStep++;
 
@@ -196,8 +196,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StarPrism) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StarPrism;
+                if (CustomComboFunctions.WasLastAction(天星棱光StarPrism) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 天星棱光StarPrism;
 
                 adjustedStep++;
 
@@ -275,7 +275,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (CustomComboFunctions.GetRemainingCharges(SteelMuse) < 2)
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(ScenicMuse))
+            if (!CustomComboFunctions.ActionReady(风景构想ScenicMuse))
                 return false;
 
             if (CustomComboFunctions.GetRemainingCharges(LivingMuse) < 2)
@@ -397,13 +397,13 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.LocalPlayer.CastActionId == CustomComboFunctions.OriginalHook(CreatureMotif) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = CustomComboFunctions.OriginalHook(CreatureMotif);
+                if (CustomComboFunctions.LocalPlayer.CastActionId == CustomComboFunctions.OriginalHook(动物彩绘CreatureMotif) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = CustomComboFunctions.OriginalHook(动物彩绘CreatureMotif);
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StarryMuse;
+                if (CustomComboFunctions.WasLastAction(星空构想StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 星空构想StarryMuse;
 
                 adjustedStep++;
 
@@ -412,18 +412,18 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = SubtractivePalette;
+                if (CustomComboFunctions.WasLastAction(减色混合SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 减色混合SubtractivePalette;
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
 
                 adjustedStep++;
 
@@ -447,8 +447,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(FireInRed) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = FireInRed;
+                if (CustomComboFunctions.WasLastAction(火炎之红FireInRed) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 火炎之红FireInRed;
 
                 adjustedStep++;
 
@@ -526,7 +526,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (CustomComboFunctions.GetRemainingCharges(SteelMuse) < 2)
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(ScenicMuse))
+            if (!CustomComboFunctions.ActionReady(风景构想ScenicMuse))
                 return false;
 
             if (CustomComboFunctions.GetRemainingCharges(LivingMuse) < 2)
@@ -608,8 +608,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
             {
-                if (CustomComboFunctions.WasLastAction(FireInRed) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
-                else if (PrePullStep == 1) actionID = FireInRed;
+                if (CustomComboFunctions.WasLastAction(火炎之红FireInRed) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
+                else if (PrePullStep == 1) actionID = 火炎之红FireInRed;
 
                 if (!HasMotifs())
                     return false;
@@ -641,8 +641,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (!isEarlyOpenerEnabled)
                 {
-                    if (CustomComboFunctions.WasLastAction(AeroInGreen) && OpenerStep == 2) OpenerStep++;
-                    else if (OpenerStep == 2) actionID = AeroInGreen;
+                    if (CustomComboFunctions.WasLastAction(疾风之绿AeroInGreen) && OpenerStep == 2) OpenerStep++;
+                    else if (OpenerStep == 2) actionID = 疾风之绿AeroInGreen;
                 }
 
                 int adjustedStep = isEarlyOpenerEnabled ? 2 : 3;
@@ -657,8 +657,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StarryMuse;
+                if (CustomComboFunctions.WasLastAction(星空构想StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 星空构想StarryMuse;
 
                 adjustedStep++;
 
@@ -687,8 +687,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = SubtractivePalette;
+                if (CustomComboFunctions.WasLastAction(减色混合SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 减色混合SubtractivePalette;
 
                 adjustedStep++;
 
@@ -704,18 +704,18 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
-                    else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                    if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
+                    else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                    if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
                 }
                 else
                 {
-                    if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
-                    else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                    if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
+                    else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
 
                     adjustedStep++;
 
@@ -729,8 +729,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                    if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
                 }
 
                 Svc.Log.Debug($"TimeSinceLastAction: {ActionWatching.TimeSinceLastAction.TotalSeconds}, OpenerStep: {OpenerStep}");
@@ -794,7 +794,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (!CustomComboFunctions.ActionReady(SteelMuse))
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(ScenicMuse))
+            if (!CustomComboFunctions.ActionReady(风景构想ScenicMuse))
                 return false;
 
             if (!CustomComboFunctions.ActionReady(LivingMuse))
@@ -876,8 +876,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
             {
-                if (CustomComboFunctions.WasLastAction(FireInRed) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
-                else if (PrePullStep == 1) actionID = FireInRed;
+                if (CustomComboFunctions.WasLastAction(火炎之红FireInRed) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
+                else if (PrePullStep == 1) actionID = 火炎之红FireInRed;
 
                 if (!HasMotifs())
                     return false;
@@ -902,8 +902,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (!isEarlyOpenerEnabled)
                 {
-                    if (CustomComboFunctions.WasLastAction(AeroInGreen) && OpenerStep == 2) OpenerStep++;
-                    else if (OpenerStep == 2) actionID = AeroInGreen;
+                    if (CustomComboFunctions.WasLastAction(疾风之绿AeroInGreen) && OpenerStep == 2) OpenerStep++;
+                    else if (OpenerStep == 2) actionID = 疾风之绿AeroInGreen;
                 }
 
                 int adjustedStep = isEarlyOpenerEnabled ? 2 : 3;
@@ -918,8 +918,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StarryMuse;
+                if (CustomComboFunctions.WasLastAction(星空构想StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 星空构想StarryMuse;
 
                 adjustedStep++;
 
@@ -972,8 +972,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = SubtractivePalette;
+                if (CustomComboFunctions.WasLastAction(减色混合SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 减色混合SubtractivePalette;
 
                 adjustedStep++;
 
@@ -984,18 +984,18 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
-                    else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                    if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
+                    else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                    if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
                 }
                 else
                 {
-                    if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
-                    else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                    if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
+                    else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
 
                     adjustedStep++;
 
@@ -1004,8 +1004,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                    if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
                 }
 
 
@@ -1070,7 +1070,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             if (!CustomComboFunctions.ActionReady(SteelMuse))
                 return false;
 
-            if (!CustomComboFunctions.ActionReady(ScenicMuse))
+            if (!CustomComboFunctions.ActionReady(风景构想ScenicMuse))
                 return false;
 
             if (CustomComboFunctions.GetRemainingCharges(LivingMuse) < 2)
@@ -1150,8 +1150,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             if (CurrentState == OpenerState.PrePull && PrePullStep > 0)
             {
-                if (CustomComboFunctions.WasLastAction(FireInRed) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
-                else if (PrePullStep == 1) actionID = FireInRed;
+                if (CustomComboFunctions.WasLastAction(火炎之红FireInRed) && PrePullStep == 1) CurrentState = OpenerState.InOpener;
+                else if (PrePullStep == 1) actionID = 火炎之红FireInRed;
 
                 if (!HasMotifs())
                     return false;
@@ -1176,8 +1176,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 if (!isEarlyOpenerEnabled)
                 {
-                    if (CustomComboFunctions.WasLastAction(AeroInGreen) && OpenerStep == 2) OpenerStep++;
-                    else if (OpenerStep == 2) actionID = AeroInGreen;
+                    if (CustomComboFunctions.WasLastAction(疾风之绿AeroInGreen) && OpenerStep == 2) OpenerStep++;
+                    else if (OpenerStep == 2) actionID = 疾风之绿AeroInGreen;
                 }
 
                 int adjustedStep = isEarlyOpenerEnabled ? 2 : 3;
@@ -1192,8 +1192,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = StarryMuse;
+                if (CustomComboFunctions.WasLastAction(星空构想StarryMuse) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 星空构想StarryMuse;
 
                 adjustedStep++;
 
@@ -1222,8 +1222,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                 adjustedStep++;
 
-                if (CustomComboFunctions.WasLastAction(SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
-                else if (OpenerStep == adjustedStep) actionID = SubtractivePalette;
+                if (CustomComboFunctions.WasLastAction(减色混合SubtractivePalette) && OpenerStep == adjustedStep) OpenerStep++;
+                else if (OpenerStep == adjustedStep) actionID = 减色混合SubtractivePalette;
 
                 adjustedStep++;
 
@@ -1234,18 +1234,18 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
-                    else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                    if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) OpenerStep++;
+                    else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                    if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
                 }
                 else
                 {
-                    if (CustomComboFunctions.WasLastAction(StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
-                    else if (OpenerStep == adjustedStep) actionID = StoneinYellow;
+                    if (CustomComboFunctions.WasLastAction(飞石之纯黄StoneinYellow) && OpenerStep == adjustedStep) OpenerStep++;
+                    else if (OpenerStep == adjustedStep) actionID = 飞石之纯黄StoneinYellow;
 
                     adjustedStep++;
 
@@ -1254,8 +1254,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
                     adjustedStep++;
 
-                    if (CustomComboFunctions.WasLastAction(BlizzardinCyan) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
-                    else if (OpenerStep == adjustedStep) actionID = BlizzardinCyan;
+                    if (CustomComboFunctions.WasLastAction(冰结之蓝青BlizzardinCyan) && OpenerStep == adjustedStep) CurrentState = OpenerState.OpenerFinished;
+                    else if (OpenerStep == adjustedStep) actionID = 冰结之蓝青BlizzardinCyan;
                 }
 
                 Svc.Log.Debug($"TimeSinceLastAction: {ActionWatching.TimeSinceLastAction.TotalSeconds}, OpenerStep: {OpenerStep}");

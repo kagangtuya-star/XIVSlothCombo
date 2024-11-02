@@ -306,6 +306,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (OptimalMeikyo())
                                 return 明镜止水MeikyoShisui;
+                            
                             if (GetCooldownRemainingTime(明镜止水MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
                                 return 明镜止水MeikyoShisui;
                         }
@@ -493,7 +494,8 @@ namespace XIVSlothComboX.Combos.PvE
                                 if (OptimalMeikyo())
                                     return 明镜止水MeikyoShisui;
                                 
-                                if (GetCooldownRemainingTime(明镜止水MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
+                                if (GetCooldownRemainingTime(明镜止水MeikyoShisui) <= GCD * 3 
+                                    && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
                                     return 明镜止水MeikyoShisui;
                             }
 

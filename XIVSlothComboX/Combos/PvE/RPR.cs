@@ -859,15 +859,50 @@ namespace XIVSlothComboX.Combos.PvE
                 if (actionID is 夜游魂衣Enshroud)
                 {
                     if (IsEnabled(CustomComboPreset.RPR_TrueNorthEnshroud) && GetBuffStacks(Buffs.妖异之镰SoulReaver) is 2 && trueNorthReady && CanDelayedWeave(切割Slice))
+                    {
                         return All.TrueNorth;
+                    }
 
+
+
+                    if (HasEffect(Buffs.完人预备PerfectioParata) && LevelChecked(完人Perfectio))
+                    {
+                        return OriginalHook(团契Communio);
+                    }
+                    
+                    RPRGauge gauge = GetJobGauge<RPRGauge>();
+                    
+                    if (HasEffect(Buffs.夜游魂Enshrouded))
+                    {
+                        
+                        if (gauge.LemureShroud == 1 && gauge.VoidShroud == 0 && LevelChecked(团契Communio))
+                            return 团契Communio;
+
+                        if (gauge.LemureShroud is 2 && gauge.VoidShroud is 1 && HasEffect(Buffs.Oblatio))
+                            return OriginalHook(暴食Gluttony);
+
+                        if (gauge.VoidShroud >= 2 && LevelChecked(LemuresSlice))
+                            return OriginalHook(隐匿挥割BloodStalk);
+
+                        if (HasEffect(Buffs.虚无收割效果提高EnhancedVoidReaping))
+                            return OriginalHook(绞决Gibbet);
+
+                        if (HasEffect(Buffs.交错收割效果提高EnhancedCrossReaping) ||
+                            (!HasEffect(Buffs.交错收割效果提高EnhancedCrossReaping) && !HasEffect(Buffs.虚无收割效果提高EnhancedVoidReaping)))
+                            return OriginalHook(缢杀Gallows);
+                    }
+                    
                     if (HasEffect(Buffs.妖异之镰SoulReaver))
                     {
                         if (HasEffect(Buffs.绞决效果提高EnhancedGibbet))
+                        {
                             return OriginalHook(绞决Gibbet);
+                        }
 
                         if (HasEffect(Buffs.缢杀效果提高EnhancedGallows) || (!HasEffect(Buffs.绞决效果提高EnhancedGibbet) && !HasEffect(Buffs.缢杀效果提高EnhancedGallows)))
+                        {
                             return OriginalHook(缢杀Gallows);
+                        }
                     }
                 }
                 return actionID;
