@@ -243,7 +243,11 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_Kardia;
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-                => actionID is Soteria && (!HasEffect(Buffs.Kardia) || IsOnCooldown(Soteria)) ? Kardia : actionID;
+            {
+                return actionID is Soteria && (!HasEffect(Buffs.Kardia) || IsOnCooldown(Soteria))
+                    ? Kardia
+                    : actionID;
+            }
         }
 
         /*
@@ -281,7 +285,7 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_ZoePneuma;
 
-         
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
                 // => (actionID is Pneuma && ActionReady(Pneuma) && IsOffCooldown(Zoe)) || (actionID is Pneuma && !LevelChecked(Pneuma)) ? Zoe : actionID;
                 => actionID is Pneuma && ActionReady(Pneuma) && IsOffCooldown(Zoe) ? Zoe : actionID;
@@ -379,44 +383,26 @@ namespace XIVSlothComboX.Combos.PvE
         internal class SGE_ST_DPS : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_ST_DPS;
-            internal static int Dosis3Count => ActionWatching.CombatActions.Count(x => x == Dosis3);
 
-            internal static int Toxikon2Count => ActionWatching.CombatActions.Count(x => x == Toxikon2);
-
-
+            internal static JobHelpers.SGE.SGEOpenerLogic SGEOpener = new();
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 bool ActionFound = actionID is Dosis2 || (!Config.SGE_ST_DPS_Adv && DosisList.ContainsKey(actionID));
 
                 if (ActionFound)
                 {
-                    bool inOpener = IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener) && ActionReady(心神风息Psyche) && Dosis3Count < 4 && Gauge.HasAddersting();
 
                     // Kardia Reminder
                     if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Kardia) && LevelChecked(Kardia) && FindEffect(Buffs.Kardia) is null)
                         return Kardia;
-
-                    if (inOpener)
+                    
+                    // Opener for SGE
+                    if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener))
                     {
-                        if (Dosis3Count is 0 && Toxikon2Count is 0 && !HasEffect(Buffs.Eukrasia))
-                            return Eukrasia;
-
-                        if (Dosis3Count is 0 && Toxikon2Count is 0 && HasEffect(Buffs.Eukrasia))
-                            return Toxikon2;
-
-                        if (Dosis3Count is 3)
-                        {
-                            if (WasLastSpell(发炎Phlegma3) && ActionReady(心神风息Psyche) && CanWeave(actionID))
-                                return 心神风息Psyche;
-
-                            if (ActionReady(发炎Phlegma3))
-                                return 发炎Phlegma3;
-                        }
-
-                        if (Dosis3Count > 0 && Toxikon2Count > 0)
-                            return Dosis3;
+                        if (SGEOpener.DoFullOpener(ref actionID))
+                            return actionID;
                     }
-
+                    
                     // Lucid Dreaming
                     if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Lucid) && All.CanUseLucid(actionID, Config.SGE_ST_DPS_Lucid))
                         return All.LucidDreaming;
@@ -481,7 +467,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             // phlegma 发炎
                             uint phlegma = OriginalHook(Phlegma);
-                            if (Config.SGE_ST_DPS_Movement[3] && ActionReady(phlegma) && InMeleeRange(6f)) 
+                            if (Config.SGE_ST_DPS_Movement[3] && ActionReady(phlegma) && InMeleeRange(6f))
                                 return phlegma;
 
                             // Toxikon
@@ -560,23 +546,20 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Esuna) && ActionReady(All.Esuna) && GetTargetHPPercent(healTarget) >= Config.SGE_ST_Heal_Esuna && HasCleansableDebuff(healTarget))
                         return All.Esuna;
 
-
-                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Rhizomata) && ActionReady(Rhizomata) && !Gauge.HasAddersgall())
+                    if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Rhizomata) && ActionReady(Rhizomata) && !HasAddersgall(Gauge))
                         return Rhizomata;
 
                     if (IsEnabled(CustomComboPreset.SGE_ST_Heal_Kardia) && LevelChecked(Kardia) && FindEffect(Buffs.Kardia) is null && FindEffect(Buffs.Kardion, healTarget, LocalPlayer?.GameObjectId) is null)
                         return Kardia;
 
-                    foreach (var prio in Config.SGE_ST_Heals_Priority.Items.OrderBy(x => x))
+                    foreach (int prio in Config.SGE_ST_Heals_Priority.Items.OrderBy(x => x))
                     {
-                        var index = Config.SGE_ST_Heals_Priority.IndexOf(prio);
-                        var config = SGEHelper.GetMatchingConfigST(index, out var spell, out bool enabled);
+                        int index = Config.SGE_ST_Heals_Priority.IndexOf(prio);
+                        int config = JobHelpers.SGE.SGEHelper.GetMatchingConfigST(index, out uint spell, out bool enabled);
 
                         if (enabled)
-                        {
                             if (GetTargetHPPercent(healTarget) <= config && ActionReady(spell))
                                 return spell;
-                        }
                     }
 
                     if (IsEnabled(CustomComboPreset.SGE_ST_Heal_EDiagnosis)
@@ -586,7 +569,6 @@ namespace XIVSlothComboX.Combos.PvE
                         && //Ignore existing shield check
                         (!Config.SGE_ST_Heal_EDiagnosisOpts[1] || FindEffectOnMember(SCH.Buffs.Galvanize, healTarget) is null)) //Galvenize Check
                         return Eukrasia;
-
                 }
 
                 return actionID;
@@ -615,7 +597,7 @@ namespace XIVSlothComboX.Combos.PvE
                     foreach (var prio in Config.SGE_AoE_Heals_Priority.Items.OrderBy(x => x))
                     {
                         var index = Config.SGE_AoE_Heals_Priority.IndexOf(prio);
-                        var config = SGEHelper.GetMatchingConfigAoE(index, out var spell, out bool enabled);
+                        var config = JobHelpers.SGE.SGEHelper.GetMatchingConfigAoE(index, out var spell, out bool enabled);
 
                         if (enabled)
                         {

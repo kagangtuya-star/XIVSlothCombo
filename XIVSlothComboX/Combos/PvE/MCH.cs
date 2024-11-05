@@ -1,13 +1,12 @@
 using Dalamud.Game.ClientState.JobGauge.Types;
 using ECommons.DalamudServices;
-using XIVSlothComboX.Combos.JobHelpers;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
-
+using static XIVSlothComboX.Combos.JobHelpers.MCHHelpers;
 namespace XIVSlothComboX.Combos.PvE
 {
     internal class MCH
@@ -25,11 +24,14 @@ namespace XIVSlothComboX.Combos.PvE
             GaussRound = 2874,
             Ricochet = 2890,
             整备Reassemble = 2876,
+            Reassemble = 2876,
             钻头Drill = 16498,
+            Drill = 16498,
             HotShot = 2872,
             AirAnchor = 16500,
             Hypercharge = 17209,
             热冲击HeatBlast = 7410,
+            HeatBlast = 7410,
             SpreadShot = 2870,
             Scattergun = 25786,
             AutoCrossbow = 16497,
@@ -39,6 +41,7 @@ namespace XIVSlothComboX.Combos.PvE
             QueenOverdrive = 16502,
             Tactician = 16889,
             ChainSaw = 25788,
+            Chainsaw = 25788,
             BioBlaster = 16499,
             BarrelStabilizer = 7414,
             Wildfire = 2878,
@@ -160,7 +163,11 @@ namespace XIVSlothComboX.Combos.PvE
         internal class MCH_ST_AdvancedMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.MCH_ST_AdvancedMode;
-            internal static JobHelpers.MCHOpenerLogic MchOpenerLogicOpener = new();
+            internal static MCHOpenerLogic100 MCHOpener100 = new();
+            internal static MCHOpenerLogic96 MCHOpener96 = new();
+            internal static MCHOpenerLogic92 MCHOpener92 = new();
+            internal static MCHOpenerLogic90 MCHOpener90 = new();
+            
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -180,21 +187,32 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.MCH_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart) && CanWeave(actionID))
                         return Variant.VariantRampart;
 
-                    // Opener for MCH
-                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener))
+                    // Opener for MCH 90
+                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener) && !LevelChecked(CheckMate))
                     {
-                        if (MchOpenerLogicOpener.DoFullOpener(ref actionID))
-                        {
-                            // if (actionID is Wildfire && CanDelayedWeave(actionID))
-                            // {
-                            //     return actionID;
-                            // }
-                            // else
-                            // {
-                            //     return actionID;
-                            // }
+                        if (MCHOpener90.DoFullOpener(ref actionID))
                             return actionID;
-                        }
+                    }
+
+                    // Opener for MCH 92
+                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener) && LevelChecked(CheckMate) && !LevelChecked(Excavator))
+                    {
+                        if (MCHOpener92.DoFullOpener(ref actionID))
+                            return actionID;
+                    }
+
+                    // Opener for MCH 96
+                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener) && LevelChecked(Excavator) && !LevelChecked(FullMetalField))
+                    {
+                        if (MCHOpener96.DoFullOpener(ref actionID))
+                            return actionID;
+                    }
+
+                    // Opener for MCH 100
+                    if (IsEnabled(CustomComboPreset.MCH_ST_Adv_Opener) && LevelChecked(FullMetalField))
+                    {
+                        if (MCHOpener100.DoFullOpener(ref actionID))
+                            return actionID;
                     }
 
                     // Interrupt
