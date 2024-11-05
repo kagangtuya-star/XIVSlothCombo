@@ -196,7 +196,7 @@ namespace XIVSlothComboX.Combos.PvE
                     var Burs_HP = PluginConfiguration.GetCustomIntValue(Config.DRK_Burs_HP) * 10000;
                     var combatTotalSeconds = CombatEngageDuration().TotalSeconds;
 
-                    if (InCombat())
+                    // if (InCombat())
                     {
                         // oGCDs
                         // if (CanDelayedWeavePlus(actionID))

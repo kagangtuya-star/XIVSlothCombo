@@ -159,7 +159,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
 
-                    if (HasBattleTarget())
+                    // if (HasBattleTarget())
                     {
                         if (CanSpellWeavePlus(actionID, 0.5f))
                         {
@@ -508,6 +508,11 @@ namespace XIVSlothComboX.Combos.PvE
 
                     //  战逃内 赎罪剑 2 3 圣灵
                     if (GetBuffRemainingTime(Buffs.DivineMight) >= 14 && GetBuffRemainingTime(Buffs.赎罪剑Atonement2BUFF) >= 14)
+                    {
+                        return true;
+                    }
+                    
+                    if (WasLastSpell(赎罪剑Atonement3) && lastComboActionId == 暴乱剑RiotBlade && comboTime >= 16)
                     {
                         return true;
                     }
