@@ -91,7 +91,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         private static bool HasCooldowns()
         {
-            if (GetRemainingCharges(PerfectBalance) < 2)
+            if (GetRemainingCharges(震脚PerfectBalance) < 2)
                 return false;
 
             if (!ActionReady(Brotherhood))
@@ -169,9 +169,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     return true;
                 }
 
-                if (WasLastAction(PerfectBalance) && GetRemainingCharges(PerfectBalance) is 1 && OpenerStep == 1)
+                if (WasLastAction(震脚PerfectBalance) && GetRemainingCharges(震脚PerfectBalance) is 1 && OpenerStep == 1)
                     OpenerStep++;
-                else if (OpenerStep == 1) actionID = PerfectBalance;
+                else if (OpenerStep == 1) actionID = 震脚PerfectBalance;
 
                 if (WasLastWeaponskill(TwinSnakes) && OpenerStep == 2) OpenerStep++;
                 else if (OpenerStep == 2) actionID = TwinSnakes;
@@ -209,9 +209,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (WasLastWeaponskill(LeapingOpo) && OpenerStep == 13) OpenerStep++;
                 else if (OpenerStep == 13) actionID = LeapingOpo;
 
-                if (WasLastAction(PerfectBalance) && GetRemainingCharges(PerfectBalance) is 0 && OpenerStep == 14)
+                if (WasLastAction(震脚PerfectBalance) && GetRemainingCharges(震脚PerfectBalance) is 0 && OpenerStep == 14)
                     OpenerStep++;
-                else if (OpenerStep == 14) actionID = PerfectBalance;
+                else if (OpenerStep == 14) actionID = 震脚PerfectBalance;
 
                 if (WasLastWeaponskill(DragonKick) && OpenerStep == 15) OpenerStep++;
                 else if (OpenerStep == 15) actionID = DragonKick;
@@ -231,7 +231,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
                     CurrentState = OpenerState.FailedOpener;
 
-                if (((actionID == PerfectBalance && GetRemainingCharges(PerfectBalance) == 0) || (actionID is RiddleOfFire && IsOnCooldown(RiddleOfFire)) || (actionID is RiddleOfWind && IsOnCooldown(RiddleOfWind)) || (actionID is Brotherhood && IsOnCooldown(Brotherhood)))
+                if (((actionID == 震脚PerfectBalance && GetRemainingCharges(震脚PerfectBalance) == 0) || (actionID is RiddleOfFire && IsOnCooldown(RiddleOfFire)) || (actionID is RiddleOfWind && IsOnCooldown(RiddleOfWind)) || (actionID is Brotherhood && IsOnCooldown(Brotherhood)))
                     && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     Svc.Log.Debug($"Failed at {actionID}");
@@ -260,9 +260,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     return true;
                 }
 
-                if (WasLastAction(PerfectBalance) && GetRemainingCharges(PerfectBalance) is 1 && OpenerStep == 1)
+                if (WasLastAction(震脚PerfectBalance) && GetRemainingCharges(震脚PerfectBalance) is 1 && OpenerStep == 1)
                     OpenerStep++;
-                else if (OpenerStep == 1) actionID = PerfectBalance;
+                else if (OpenerStep == 1) actionID = 震脚PerfectBalance;
 
                 if (WasLastWeaponskill(LeapingOpo) && OpenerStep == 2) OpenerStep++;
                 else if (OpenerStep == 2) actionID = LeapingOpo;
@@ -300,9 +300,9 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (WasLastWeaponskill(LeapingOpo) && OpenerStep == 13) OpenerStep++;
                 else if (OpenerStep == 13) actionID = LeapingOpo;
 
-                if (WasLastAction(PerfectBalance) && GetRemainingCharges(PerfectBalance) is 0 && OpenerStep == 14)
+                if (WasLastAction(震脚PerfectBalance) && GetRemainingCharges(震脚PerfectBalance) is 0 && OpenerStep == 14)
                     OpenerStep++;
-                else if (OpenerStep == 14) actionID = PerfectBalance;
+                else if (OpenerStep == 14) actionID = 震脚PerfectBalance;
 
                 if (WasLastWeaponskill(DragonKick) && OpenerStep == 15) OpenerStep++;
                 else if (OpenerStep == 15) actionID = DragonKick;
@@ -322,7 +322,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
                     CurrentState = OpenerState.FailedOpener;
 
-                if (((actionID == PerfectBalance && GetRemainingCharges(PerfectBalance) == 0) || (actionID is RiddleOfFire && IsOnCooldown(RiddleOfFire)) || (actionID is RiddleOfWind && IsOnCooldown(RiddleOfWind)) || (actionID is Brotherhood && IsOnCooldown(Brotherhood)))
+                if (((actionID == 震脚PerfectBalance && GetRemainingCharges(震脚PerfectBalance) == 0) || (actionID is RiddleOfFire && IsOnCooldown(RiddleOfFire)) || (actionID is RiddleOfWind && IsOnCooldown(RiddleOfWind)) || (actionID is Brotherhood && IsOnCooldown(Brotherhood)))
                     && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     Svc.Log.Debug($"Failed at {actionID}");

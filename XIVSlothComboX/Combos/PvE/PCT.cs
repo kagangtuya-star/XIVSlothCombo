@@ -104,47 +104,9 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is All.Sleep)
                 {
-                    if (CustomTimelineIsEnable())
+                    if (OnOpenerCustomActionAction(out var customActionActionId))
                     {
-                        double? seconds = -9999d;
-
-                        if (InCombat())
-                        {
-                            seconds = CombatEngageDuration().TotalSeconds;
-                        }
-                        else
-                        {
-                            var timeRemaining = Countdown.TimeRemaining();
-                            if (timeRemaining != null)
-                            {
-                                seconds = -timeRemaining;
-                            }
-                        }
-
-                        foreach (var customAction in 药品轴)
-                        {
-                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                Useitem(customAction.ActionId);
-                            }
-                        }
-
-
-                        foreach (var customAction in 时间轴)
-                        {
-                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                return customAction.ActionId;
-                            }
-                        }
-
-
-                        int index = ActionWatching.CustomList.Count;
-                        if (index < 序列轴.Count)
-                        {
-                            var newActionId = 序列轴[index].ActionId;
-                            return newActionId;
-                        }
+                        return customActionActionId;
                     }
                 }
 
@@ -186,6 +148,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return OriginalHook(动物彩绘CreatureMotif);
                         if (武器彩绘WeaponMotif.LevelChecked() && !gauge.WeaponMotifDrawn && !HasEffect(Buffs.HammerTime))
                             return OriginalHook(武器彩绘WeaponMotif);
+                        
                         if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn && !HasEffect(Buffs.星空构想StarryMuse))
                             return OriginalHook(风景彩绘LandscapeMotif);
                     }
@@ -339,8 +302,6 @@ namespace XIVSlothComboX.Combos.PvE
 
                         if (HasEffect(Buffs.RainbowBright) || HasEffect(Buffs.RainbowBright) && GetBuffRemainingTime(Buffs.星空构想StarryMuse) <= 3f)
                             return RainbowDrip;
-
-
                     }
 
                     if (HasEffect(Buffs.RainbowBright) && !HasEffect(Buffs.星空构想StarryMuse))
@@ -1109,6 +1070,30 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     if (HasEffect(Buffs.MonochromeTones))
                         return CometinBlack;
+                }
+
+                return actionID;
+            }
+        }
+        
+        
+        internal class PCT_ONE_LandscapeMotif : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.PCT_ONE_LandscapeMotif;
+
+            protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
+            {
+                if (actionID == 风景彩绘LandscapeMotif)
+                {
+                    if (HasEffect(Buffs.星空构想StarryMuse))
+                    {
+                        if (HasEffect(Buffs.Starstruck) || HasEffect(Buffs.Starstruck) && GetBuffRemainingTime(Buffs.Starstruck) <= 3f)
+                            return 天星棱光StarPrism;
+                    }
+                    
+                    var gauge = GetJobGauge<PCTGauge>();
+                    if (风景彩绘LandscapeMotif.LevelChecked() && !gauge.LandscapeMotifDrawn)
+                        return OriginalHook(风景彩绘LandscapeMotif);
                 }
 
                 return actionID;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
@@ -104,7 +105,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                     {
                         地面轴.Add(customAction);
                         break;
-                    } 
+                    }
                     case CustomType.强制插入:
                     {
                         强制插入轴.Add(customAction);
@@ -204,13 +205,18 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static unsafe bool Useitem(uint itemId)
         {
+            if (HasEffect(All.Buffs.生还))
+            {
+                return false;
+            }
+            
             uint a4 = 65535;
             if (IsUseItem == false)
                 return false;
 
             if (ActionManager.Instance()->GetActionStatus(ActionType.Item, itemId + 1000000) != 0)
                 return false;
-            
+
             if (InventoryManager.Instance()->GetInventoryItemCount(itemId, true) > 0)
             {
                 return ActionManager.Instance()->UseAction(ActionType.Item, itemId + 1000000, LocalPlayer.GameObjectId, a4);
@@ -221,6 +227,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static unsafe void Use地面技能(CustomAction customAction)
         {
+            if (HasEffect(All.Buffs.生还))
+            {
+                return ;
+            }
+            
             if (customAction.ActionId.ActionReady())
             {
                 System.Numerics.Vector3 vector3 = new Vector3();
@@ -235,12 +246,148 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static unsafe void AutoUseAction(uint ActionId)
         {
+            if (HasEffect(All.Buffs.生还))
+            {
+                return ;
+            }
+            
             if (ActionId.ActionReady())
             {
                 ActionManager.Instance()->UseAction(ActionType.Action, ActionId);
             }
         }
 
+        public static bool OnOpenerCustomActionAction(out uint customActionActionId)
+        {
+            customActionActionId = All.Repose;
+            if (CustomTimelineIsEnable())
+            {
+                double? seconds = -9999d;
+
+                if (InCombat())
+                {
+                    seconds = CombatEngageDuration().TotalSeconds;
+                }
+                else
+                {
+                    var timeRemaining = Countdown.TimeRemaining();
+                    if (timeRemaining != null)
+                    {
+                        seconds = -timeRemaining;
+                    }
+                }
+
+                foreach (var customAction in 药品轴)
+                {
+                    if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                    {
+                        if (CanWeave(All.飞斧))
+                        {
+                            Useitem(customAction.ActionId);
+                        }
+                    }
+                }
+
+                foreach (var customAction in 地面轴)
+                {
+                    if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                    {
+                        if (CanWeave(All.飞斧))
+                        {
+                            Use地面技能(customAction);
+                        }
+                    }
+                }
+
+                foreach (var customAction in 时间轴)
+                {
+                    if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
+                    {
+                        switch (customAction.CustomActionTypeSub)
+                        {
+                            case CustomTypeSub.默认:
+                            {
+                                if (CanWeave(All.飞斧))
+                                {
+                                    AutoUseAction(customAction.ActionId);
+                                }
+                                break;
+                            }
+
+                            case CustomTypeSub.强制:
+                            {
+                                AutoUseAction(customAction.ActionId);
+                                break;
+                            }
+
+                            case CustomTypeSub.能力技窗口:
+                            {
+                                if (CanWeave(All.飞斧))
+                                {
+                                    customActionActionId = customAction.ActionId;
+                                    return true;
+                                }
+                                break;
+                            }
+
+                            case CustomTypeSub.能力技窗口后半:
+                            {
+                                if (CanDelayedWeavePlus(All.飞斧))
+                                {
+                                    customActionActionId = customAction.ActionId;
+                                    return true;
+                                }
+                                break;
+                            }
+
+                            case CustomTypeSub.长期替换:
+                            {
+                                customActionActionId = customAction.ActionId;
+                                return true;
+                            }
+                        }
+
+
+                    }
+                }
+
+                int index = ActionWatching.CustomList.Count;
+                if (index < 序列轴.Count)
+                {
+                    byte customActionTypeSub = 序列轴[index].CustomActionTypeSub;
+                    var newActionId = 序列轴[index].ActionId;
+                    switch (customActionTypeSub)
+                    {
+                        case CustomTypeSub.默认:
+                        {
+                            customActionActionId = newActionId;
+                            return true;
+                        }
+
+                        case CustomTypeSub.能力技窗口:
+                        {
+                            if (CanWeave(All.飞斧))
+                            {
+                                customActionActionId = newActionId;
+                                return true;
+                            }
+                            break;
+                        }
+
+                        case CustomTypeSub.能力技窗口后半:
+                        {
+                            if (CanSpellWeavePlus(All.飞斧))
+                            {
+                                customActionActionId = newActionId;
+                                return true;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
 
         // public static long DateTimeToLongTimeStamp(DateTime dateTime)
         // {

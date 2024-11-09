@@ -1884,7 +1884,15 @@ namespace XIVSlothComboX.Combos
 
         [ParentCombo(MNK_ST_AdvancedMode)]
         [CustomComboInfo("Combo Heals Option", "Adds Bloodbath and Second Wind to the rotation.", MNK.JobID)]
-        MNK_ST_ComboHeals = 9018,
+        MNK_ST_ComboHeals = 9018,    
+        
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("震脚功能", "震脚添加到循环.", MNK.JobID)]
+        MNK_ST_PerfectBalance = 90231,
+        
+        [ParentCombo(MNK_ST_AdvancedMode)]
+        [CustomComboInfo("必杀技功能", "必杀技添加到循环.", MNK.JobID)]
+        MNK_ST_MasterfulBlitz = 90232,
 
         #endregion
 
@@ -1960,7 +1968,7 @@ namespace XIVSlothComboX.Combos
 
         #endregion
 
-        [ReplaceSkill(MNK.PerfectBalance)]
+        [ReplaceSkill(MNK.震脚PerfectBalance)]
         [CustomComboInfo("Perfect Balance Feature", "Perfect Balance becomes Masterful Blitz while you have 3 Beast Chakra.", MNK.JobID)]
         MNK_PerfectBalance = 9023,
 
@@ -4637,6 +4645,12 @@ namespace XIVSlothComboX.Combos
         CombinedPaint = 20004,
 
         #endregion
+        
+        
+        
+        [ReplaceSkill(PCT.风景彩绘LandscapeMotif)]
+        [CustomComboInfo("风景彩绘整合", "天星棱光、星空彩绘、风景彩绘", PCT.JobID)]
+        PCT_ONE_LandscapeMotif = 20035,
 
         #region Variant
 

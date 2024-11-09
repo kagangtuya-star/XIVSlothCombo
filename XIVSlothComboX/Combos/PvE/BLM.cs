@@ -148,6 +148,26 @@ namespace XIVSlothComboX.Combos.PvE
                 BLM_AoE_Triplecast_ChargeTime = new("BLM_AoE_Triplecast_ChargeTime");
         }
 
+        
+        internal class BLM_ST_Custom : CustomCombo
+        {
+            protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_Advanced_CustomMode;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                if (actionID is All.Sleep)
+                {
+                    if (OnOpenerCustomActionAction(out var customActionActionId))
+                    {
+                        return customActionActionId;
+                    }
+                }
+
+
+                return actionID;
+            }
+        }
+        
         internal class BLM_ST_SimpleMode : CustomCombo
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BLM_ST_SimpleMode;

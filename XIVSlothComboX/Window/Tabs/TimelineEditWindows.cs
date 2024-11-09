@@ -39,9 +39,9 @@ namespace XIVSlothComboX.Window.Tabs
         static float UseTimeEnd = 0f;
         static int TargetType = 0;
         static int CustomActionType = 1;
+        static int CustomActionTypeSub = 0;
 
         static int removeIndex = -1;
-
 
         static int addIndex = -1;
 
@@ -271,6 +271,7 @@ namespace XIVSlothComboX.Window.Tabs
                     UseActionX = customAction.Vector3.X;
                     UseActionY = customAction.Vector3.Y;
                     UseActionZ = customAction.Vector3.Z;
+                    CustomActionTypeSub = customAction.CustomActionTypeSub;
 
                     addIndex = -1;
                     editIndex = i;
@@ -395,6 +396,7 @@ namespace XIVSlothComboX.Window.Tabs
             ImGui.DragFloat("释放最晚时间", ref UseTimeEnd, 0.1f, 0, 30 * 60);
             ImGui.SliderInt("目标类别", ref TargetType, 0, 20);
             ImGui.SliderInt("技能类别", ref CustomActionType, 1, 5);
+            ImGui.SliderInt("替换类别", ref CustomActionTypeSub, 0, 3);
             ImGui.DragFloat("X", ref UseActionX, 0.1f, -99999, 9999);
             ImGui.DragFloat("Y", ref UseActionY, 0.1f, -99999, 9999);
             ImGui.DragFloat("Z", ref UseActionZ, 0.1f, -99999, 9999);

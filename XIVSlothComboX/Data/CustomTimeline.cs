@@ -47,7 +47,8 @@ public class CustomAction
     /// </summary>
     public int TargetType;
 
-    public byte CustomActionType = CustomType.序列;
+    public byte CustomActionType = Data.CustomType.序列;
+    public byte CustomActionTypeSub = Data.CustomTypeSub.默认;
 
     public Vector3 Vector3 = new();
 }
@@ -63,3 +64,14 @@ internal static class CustomType
 }
 
 
+internal static class CustomTypeSub
+{
+    internal const byte
+        长期替换 = 1,
+        能力技窗口 = 2,
+        能力技窗口后半 = 3,
+        //自动 强制 不管是不是GCD
+        强制 = 4,
+        //0自动，默认再能力技窗口
+        默认 = 0;
+}

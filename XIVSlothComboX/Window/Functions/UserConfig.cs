@@ -2616,6 +2616,19 @@ namespace XIVSlothComboX.Window.Functions
 
             #region SAGE
 
+            if (preset is CustomComboPreset.SGE_Advanced_CustomMode)
+            {
+                List<CustomTimeline> customTimelineList =
+                    PluginConfiguration.CustomTimelineList.FindAll(CustomTimeline => CustomTimeline.JobId == SGE.JobID);
+
+
+                for (var i = 0; i < customTimelineList.Count; i++)
+                {
+                    CustomTimeline customTimeline = customTimelineList[i];
+                    UserConfig.DrawCustom(customTimeline, customTimelineList);
+                }
+            }
+            
             if (preset is CustomComboPreset.SGE_ST_DPS)
                 UserConfig.DrawAdditionalBoolChoice
                 (

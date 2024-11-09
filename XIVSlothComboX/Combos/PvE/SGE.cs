@@ -11,6 +11,7 @@ using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
+using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -179,59 +180,15 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is All.Repose)
                 {
-                    if (CustomTimelineIsEnable())
+                    if (OnOpenerCustomActionAction(out var customActionActionId))
                     {
-                        double? seconds = -9999d;
-
-                        if (InCombat())
-                        {
-                            seconds = CombatEngageDuration().TotalSeconds;
-                        }
-                        else
-                        {
-                            var timeRemaining = Countdown.TimeRemaining();
-                            if (timeRemaining != null)
-                            {
-                                seconds = -timeRemaining;
-                            }
-                        }
-
-                        foreach (var customAction in 药品轴)
-                        {
-                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                Useitem(customAction.ActionId);
-                            }
-                        }
-
-                        foreach (var customAction in 地面轴)
-                        {
-                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                Use地面技能(customAction);
-                            }
-                        }
-
-                        foreach (var customAction in 时间轴)
-                        {
-                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                return customAction.ActionId;
-                            }
-                        }
-
-                        int index = ActionWatching.CustomList.Count;
-                        if (index < 序列轴.Count)
-                        {
-                            var newActionId = 序列轴[index].ActionId;
-                            return newActionId;
-                        }
+                        return customActionActionId;
                     }
                 }
-
-
                 return actionID;
             }
+
+            
         }
 
         /*
@@ -385,6 +342,7 @@ namespace XIVSlothComboX.Combos.PvE
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.SGE_ST_DPS;
 
             internal static JobHelpers.SGE.SGEOpenerLogic SGEOpener = new();
+
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
                 bool ActionFound = actionID is Dosis2 || (!Config.SGE_ST_DPS_Adv && DosisList.ContainsKey(actionID));
@@ -395,14 +353,14 @@ namespace XIVSlothComboX.Combos.PvE
                     // Kardia Reminder
                     if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Kardia) && LevelChecked(Kardia) && FindEffect(Buffs.Kardia) is null)
                         return Kardia;
-                    
+
                     // Opener for SGE
                     if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Opener))
                     {
                         if (SGEOpener.DoFullOpener(ref actionID))
                             return actionID;
                     }
-                    
+
                     // Lucid Dreaming
                     if (IsEnabled(CustomComboPreset.SGE_ST_DPS_Lucid) && All.CanUseLucid(actionID, Config.SGE_ST_DPS_Lucid))
                         return All.LucidDreaming;

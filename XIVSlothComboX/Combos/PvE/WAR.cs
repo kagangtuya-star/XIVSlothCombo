@@ -80,35 +80,9 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is WAR.Maim)
                 {
-
-                    if (CustomTimelineIsEnable())
+                    if (OnOpenerCustomActionAction(out var customActionActionId))
                     {
-                        var seconds = CombatEngageDuration().TotalSeconds;
-
-                        foreach (var customAction in 药品轴)
-                        {
-                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                Useitem(customAction.ActionId);
-                            }
-                        }
-
-
-                        foreach (var customAction in 时间轴)
-                        {
-                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                return customAction.ActionId;
-                            }
-                        }
-
-
-                        int index = ActionWatching.CustomList.Count;
-                        if (index < 序列轴.Count)
-                        {
-                            var newActionId = 序列轴[index].ActionId;
-                            return newActionId;
-                        }
+                        return customActionActionId;
                     }
                 }
 

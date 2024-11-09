@@ -406,8 +406,8 @@ public class Translatezh_CN
         {"Coeurl Option" , "虎震脚选项"  },
         {"Replace Snap Punch/Pouncing Coeurl with Demolish." , "将连击/腾跃虎替换为破碎拳。"  },
         #endregion
-        {"Perfect Balance Feature" , "无我功能"  },
-        {"Perfect Balance becomes Masterful Blitz while you have 3 Beast Chakra." , "当拥有3个兽魂震脚时，无我变为斗魂旋风脚。"  },
+        {"Perfect Balance Feature" , "震脚功能"  },
+        {"Perfect Balance becomes Masterful Blitz while you have 3 Beast Chakra." , "当拥有3个兽魂震脚时，震脚变为斗魂旋风脚。"  },
         {"Riddle of Fire/Brotherhood Feature" , "红莲极意/义结金兰功能"  },
         {"Replaces Riddle of Fire with Brotherhood when Riddle of Fire is on cooldown." , "当红莲极意冷却时，将其替换为义结金兰。"  },
         #region Variant

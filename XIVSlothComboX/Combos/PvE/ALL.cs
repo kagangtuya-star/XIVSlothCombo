@@ -9,6 +9,7 @@ namespace XIVSlothComboX.Combos.PvE
         public const byte JobID = 0;
 
         public const uint
+            飞斧 = 46,
             Rampart = 7531,
             SecondWind = 7541,
             TrueNorth = 7546,
@@ -38,11 +39,13 @@ namespace XIVSlothComboX.Combos.PvE
             LegSweep = 7863,
             Repose = 16560,
             Sprint = 3;
+        
         private const uint
             IsleSprint = 31314;
 
         public static class Buffs
         {
+
             public const ushort
                 Weakness = 43,
                 Medicated = 49,
@@ -52,6 +55,7 @@ namespace XIVSlothComboX.Combos.PvE
                 Peloton = 1199,
                 LucidDreaming = 1204,
                 TrueNorth = 1250,
+                生还 = 48,
                 Sprint = 50;
         }
 

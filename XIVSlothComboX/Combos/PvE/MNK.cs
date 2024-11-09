@@ -33,10 +33,10 @@ namespace XIVSlothComboX.Combos.PvE
             Thunderclap = 25762,
             HowlingFist = 25763,
             FourPointFury = 16473,
-            PerfectBalance = 69,
+            震脚PerfectBalance = 69,
             FormShift = 4262,
             TheForbiddenChakra = 3547,
-            MasterfulBlitz = 25764,
+            必杀技MasterfulBlitz = 25764,
             RiddleOfEarth = 7394,
             EarthsReply = 36944,
             RiddleOfFire = 7395,
@@ -95,47 +95,9 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 if (actionID is TrueStrike)
                 {
-                    if (CustomTimelineIsEnable())
+                    if (OnOpenerCustomActionAction(out var customActionActionId))
                     {
-                        double? seconds = -9999d;
-
-                        if (InCombat())
-                        {
-                            seconds = CombatEngageDuration().TotalSeconds;
-                        }
-                        else
-                        {
-                            var timeRemaining = Countdown.TimeRemaining();
-                            if (timeRemaining != null)
-                            {
-                                seconds = -timeRemaining;
-                            }
-                        }
-
-                        foreach (var customAction in 药品轴)
-                        {
-                            if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                Useitem(customAction.ActionId);
-                            }
-                        }
-
-
-                        foreach (var customAction in 时间轴)
-                        {
-                            if (customAction.ActionId.ActionReady() && customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
-                            {
-                                return customAction.ActionId;
-                            }
-                        }
-
-
-                        int index = ActionWatching.CustomList.Count;
-                        if (index < 序列轴.Count)
-                        {
-                            var newActionId = 序列轴[index].ActionId;
-                            return newActionId;
-                        }
+                        return customActionActionId;
                     }
                 }
 
@@ -200,28 +162,28 @@ namespace XIVSlothComboX.Combos.PvE
                         return RiddleOfWind;
 
                     //Perfect Balance
-                    if (ActionReady(PerfectBalance) &&
+                    if (ActionReady(震脚PerfectBalance) &&
                         !HasEffect(Buffs.PerfectBalance) &&
                         !HasEffect(Buffs.FormlessFist))
                     {
                         // Odd window
                         if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
-                            !JustUsed(PerfectBalance, 20) &&
+                            !JustUsed(震脚PerfectBalance, 20) &&
                             HasEffect(Buffs.RiddleOfFire) &&
                             !HasEffect(Buffs.Brotherhood))
-                            return PerfectBalance;
+                            return 震脚PerfectBalance;
 
                         // Even window
                         if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
                             (GetCooldownRemainingTime(Brotherhood) <= GCD * 3 || HasEffect(Buffs.Brotherhood)) &&
                             (GetCooldownRemainingTime(RiddleOfFire) <= GCD * 3 || HasEffect(Buffs.RiddleOfFire)))
-                            return PerfectBalance;
+                            return 震脚PerfectBalance;
 
                         // Low level
                         if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
                             ((HasEffect(Buffs.RiddleOfFire) && !LevelChecked(Brotherhood)) ||
                              !LevelChecked(RiddleOfFire)))
-                            return PerfectBalance;
+                            return 震脚PerfectBalance;
                     }
 
                     if (PlayerHealthPercentageHp() <= 25 &&
@@ -244,10 +206,10 @@ namespace XIVSlothComboX.Combos.PvE
                         : OriginalHook(Bootshine);
 
                 // Masterful Blitz
-                if (LevelChecked(MasterfulBlitz) &&
+                if (LevelChecked(必杀技MasterfulBlitz) &&
                     !HasEffect(Buffs.PerfectBalance) &&
-                    !IsOriginal(MasterfulBlitz))
-                    return OriginalHook(MasterfulBlitz);
+                    !IsOriginal(必杀技MasterfulBlitz))
+                    return OriginalHook(必杀技MasterfulBlitz);
 
                 // Perfect Balance
                 if (HasEffect(Buffs.PerfectBalance))
@@ -374,28 +336,34 @@ namespace XIVSlothComboX.Combos.PvE
 
                     //Perfect Balance
                     if (IsEnabled(CustomComboPreset.MNK_STUsePerfectBalance) &&
-                        ActionReady(PerfectBalance) &&
+                        ActionReady(震脚PerfectBalance) &&
                         !HasEffect(Buffs.PerfectBalance) &&
                         !HasEffect(Buffs.FormlessFist))
                     {
                         // Odd window
-                        if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
-                            !JustUsed(PerfectBalance, 20) &&
-                            HasEffect(Buffs.RiddleOfFire) &&
-                            !HasEffect(Buffs.Brotherhood))
-                            return PerfectBalance;
 
-                        // Even window
-                        if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
-                            (GetCooldownRemainingTime(Brotherhood) <= GCD * 3 || HasEffect(Buffs.Brotherhood)) &&
-                            (GetCooldownRemainingTime(RiddleOfFire) <= GCD * 3 || HasEffect(Buffs.RiddleOfFire)))
-                            return PerfectBalance;
+                        if (IsEnabled(CustomComboPreset.MNK_ST_PerfectBalance))
+                        {
+                            if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
+                                !JustUsed(震脚PerfectBalance, 20) &&
+                                HasEffect(Buffs.RiddleOfFire) &&
+                                !HasEffect(Buffs.Brotherhood))
+                                return 震脚PerfectBalance;
 
-                        // Low level
-                        if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
-                            ((HasEffect(Buffs.RiddleOfFire) && !LevelChecked(Brotherhood)) ||
-                             !LevelChecked(RiddleOfFire)))
-                            return PerfectBalance;
+                            // Even window
+                            if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
+                                (GetCooldownRemainingTime(Brotherhood) <= GCD * 3 || HasEffect(Buffs.Brotherhood)) &&
+                                (GetCooldownRemainingTime(RiddleOfFire) <= GCD * 3 || HasEffect(Buffs.RiddleOfFire)))
+                                return 震脚PerfectBalance;
+
+                            // Low level
+                            if ((JustUsed(OriginalHook(Bootshine)) || JustUsed(DragonKick)) &&
+                                ((HasEffect(Buffs.RiddleOfFire) && !LevelChecked(Brotherhood)) ||
+                                 !LevelChecked(RiddleOfFire)))
+                                return 震脚PerfectBalance;  
+                        }
+
+                       
                     }
 
                     if (IsEnabled(CustomComboPreset.MNK_ST_ComboHeals))
@@ -424,10 +392,12 @@ namespace XIVSlothComboX.Combos.PvE
                 if (IsEnabled(CustomComboPreset.MNK_STUsePerfectBalance))
                 {
                     // Masterful Blitz
-                    if (LevelChecked(MasterfulBlitz) &&
-                        !HasEffect(Buffs.PerfectBalance) &&
-                        !IsOriginal(MasterfulBlitz))
-                        return OriginalHook(MasterfulBlitz);
+
+                    if (IsEnabled(CustomComboPreset.MNK_ST_MasterfulBlitz))
+                    {
+                        if (LevelChecked(必杀技MasterfulBlitz) && !HasEffect(Buffs.PerfectBalance) && !IsOriginal(必杀技MasterfulBlitz))
+                            return OriginalHook(必杀技MasterfulBlitz);
+                    }
 
                     // Perfect Balance
                     if (HasEffect(Buffs.PerfectBalance))
@@ -534,15 +504,15 @@ namespace XIVSlothComboX.Combos.PvE
                     if (ActionReady(RiddleOfWind))
                         return RiddleOfWind;
 
-                    if (ActionReady(PerfectBalance) &&
+                    if (ActionReady(震脚PerfectBalance) &&
                         !HasEffect(Buffs.PerfectBalance))
 
-                        if (GetRemainingCharges(PerfectBalance) == GetMaxCharges(PerfectBalance) ||
-                            GetCooldownRemainingTime(PerfectBalance) <= 4 ||
+                        if (GetRemainingCharges(震脚PerfectBalance) == GetMaxCharges(震脚PerfectBalance) ||
+                            GetCooldownRemainingTime(震脚PerfectBalance) <= 4 ||
                             HasEffect(Buffs.Brotherhood) ||
                             (HasEffect(Buffs.RiddleOfFire) && GetBuffRemainingTime(Buffs.RiddleOfFire) < 10) ||
                             (GetCooldownRemainingTime(RiddleOfFire) < 4 && GetCooldownRemainingTime(Brotherhood) < 8))
-                            return PerfectBalance;
+                            return 震脚PerfectBalance;
 
                     if (Gauge.Chakra >= 5 &&
                         LevelChecked(HowlingFist) &&
@@ -563,9 +533,9 @@ namespace XIVSlothComboX.Combos.PvE
                     return FiresReply;
 
                 // Masterful Blitz
-                if (LevelChecked(MasterfulBlitz) && !HasEffect(Buffs.PerfectBalance) &&
-                    OriginalHook(MasterfulBlitz) != MasterfulBlitz)
-                    return OriginalHook(MasterfulBlitz);
+                if (LevelChecked(必杀技MasterfulBlitz) && !HasEffect(Buffs.PerfectBalance) &&
+                    OriginalHook(必杀技MasterfulBlitz) != 必杀技MasterfulBlitz)
+                    return OriginalHook(必杀技MasterfulBlitz);
 
                 // Perfect Balance
                 if (HasEffect(Buffs.PerfectBalance))
@@ -660,7 +630,7 @@ namespace XIVSlothComboX.Combos.PvE
                     }
 
                     if (IsEnabled(CustomComboPreset.MNK_AoEUsePerfectBalance) &&
-                        ActionReady(PerfectBalance) &&
+                        ActionReady(震脚PerfectBalance) &&
                         !HasEffect(Buffs.PerfectBalance))
 
                         // Use Perfect Balance if:
@@ -669,12 +639,12 @@ namespace XIVSlothComboX.Combos.PvE
                         // 3. During Brotherhood.
                         // 4. During Riddle of Fire.
                         // 5. Prepare Masterful Blitz for the Riddle of Fire & Brotherhood window.
-                        if (GetRemainingCharges(PerfectBalance) == GetMaxCharges(PerfectBalance) ||
-                            GetCooldownRemainingTime(PerfectBalance) <= 4 ||
+                        if (GetRemainingCharges(震脚PerfectBalance) == GetMaxCharges(震脚PerfectBalance) ||
+                            GetCooldownRemainingTime(震脚PerfectBalance) <= 4 ||
                             HasEffect(Buffs.Brotherhood) ||
                             (HasEffect(Buffs.RiddleOfFire) && GetBuffRemainingTime(Buffs.RiddleOfFire) < 10) ||
                             (GetCooldownRemainingTime(RiddleOfFire) < 4 && GetCooldownRemainingTime(Brotherhood) < 8))
-                            return PerfectBalance;
+                            return 震脚PerfectBalance;
 
                     if (IsEnabled(CustomComboPreset.MNK_AoEUseHowlingFist) &&
                         Gauge.Chakra >= 5 &&
@@ -710,10 +680,10 @@ namespace XIVSlothComboX.Combos.PvE
                 // Masterful Blitz
                 if (IsEnabled(CustomComboPreset.MNK_AoEUsePerfectBalance))
                 {
-                    if (LevelChecked(MasterfulBlitz) &&
+                    if (LevelChecked(必杀技MasterfulBlitz) &&
                         !HasEffect(Buffs.PerfectBalance) &&
-                        OriginalHook(MasterfulBlitz) != MasterfulBlitz)
-                        return OriginalHook(MasterfulBlitz);
+                        OriginalHook(必杀技MasterfulBlitz) != 必杀技MasterfulBlitz)
+                        return OriginalHook(必杀技MasterfulBlitz);
 
                     // Perfect Balance
                     if (HasEffect(Buffs.PerfectBalance))
@@ -766,9 +736,9 @@ namespace XIVSlothComboX.Combos.PvE
 
         protected override uint Invoke(uint actionID, uint lastComboActionID, float comboTime, byte level)
         {
-            if (actionID is PerfectBalance &&
-                OriginalHook(MasterfulBlitz) != MasterfulBlitz && LevelChecked(MasterfulBlitz))
-                return OriginalHook(MasterfulBlitz);
+            if (actionID is 震脚PerfectBalance &&
+                OriginalHook(必杀技MasterfulBlitz) != 必杀技MasterfulBlitz && LevelChecked(必杀技MasterfulBlitz))
+                return OriginalHook(必杀技MasterfulBlitz);
 
             return actionID;
         }
