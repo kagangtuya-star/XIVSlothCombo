@@ -14,7 +14,6 @@
 
 	<PropertyGroup>
 		<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
-		<DalamudDevPlugins>F:\下载\latestAPI11\</DalamudDevPlugins>
 		<AssemblyName>XIVSlothComboX</AssemblyName>
 		<RootNamespace>XIVSlothComboX</RootNamespace>
 		<PackageId>XIVSlothComboX</PackageId>
