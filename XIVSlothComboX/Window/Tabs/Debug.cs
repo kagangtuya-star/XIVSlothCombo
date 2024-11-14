@@ -263,7 +263,10 @@ namespace XIVSlothComboX.Window.Tabs
                     // ImGui.TextUnformatted($"GCD-{GCD}");
                     var healTarget = GetHealTarget(WHM.Config.WHM_AoEHeals_MedicaMO);
                     ImGui.TextUnformatted($"healTarget-{healTarget?.Name}");
-                    ImGui.TextUnformatted($"GCD-{FindEffect(WHM.Buffs.Medica3, healTarget, LocalPlayer?.GameObjectId)?.RemainingTime}");
+                    ImGui.TextUnformatted($"CanWeave-{CanWeave(SGE.Dosis,0.5d)}");
+                    ImGui.TextUnformatted($"CanSpellWeave-{CanSpellWeave(SGE.Dosis,0.5d)}");
+                    ImGui.TextUnformatted($"GCD {!HasEffect(All.Buffs.生还)}");
+                    ImGui.TextUnformatted($"GetCooldown  {GetCooldown(SGE.Dosis).CooldownRemaining}");
                     
                     // ImGui.TextUnformatted($"GetActionStatus-{ActionManager.Instance()->GetActionStatus(ActionType.Item, 29492+ 1000000)}");
 

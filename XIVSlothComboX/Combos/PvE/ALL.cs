@@ -55,7 +55,7 @@ namespace XIVSlothComboX.Combos.PvE
                 Peloton = 1199,
                 LucidDreaming = 1204,
                 TrueNorth = 1250,
-                生还 = 48,
+                生还 = 418,
                 Sprint = 50;
         }
 

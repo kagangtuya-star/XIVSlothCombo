@@ -387,6 +387,11 @@ namespace XIVSlothComboX.Combos.PvE
                         }
                     }
 
+                    if (GetBuffRemainingTime(Buffs.流星舞预备FlourishingStarfall) is > 0 and <= 3)
+                    {
+                        return 流星舞StarfallDance;
+                    }
+                    
 
                     if (LevelChecked(剑舞SaberDance) && IsEnabled(CustomComboPreset.DNC_DT_Simple_SaberDance))
                     {
@@ -452,12 +457,8 @@ namespace XIVSlothComboX.Combos.PvE
                         return 流星舞StarfallDance;
                     }
 
-                    if (GetBuffRemainingTime(Buffs.流星舞预备FlourishingStarfall) is > 0 and <= 3)
-                    {
-                        return 流星舞StarfallDance;
-                    }
-
-
+              
+                    
                     if (LevelChecked(喷泉Fountain) && lastComboMove is 瀑泻Cascade && comboTime is < 2 and > 0)
                     {
                         return 喷泉Fountain;

@@ -246,11 +246,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
         public static unsafe void AutoUseAction(uint ActionId)
         {
-            if (HasEffect(All.Buffs.生还))
+            if (HasEffect(All.Buffs.生还) == true)
             {
-                return ;
+                return;
             }
-            
+
             if (ActionId.ActionReady())
             {
                 ActionManager.Instance()->UseAction(ActionType.Action, ActionId);
@@ -281,7 +281,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 {
                     if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                     {
-                        if (CanWeave(All.飞斧))
+                        if (CanSpellWeave(All.飞斧,0.5d))
                         {
                             Useitem(customAction.ActionId);
                         }
@@ -292,7 +292,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 {
                     if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                     {
-                        if (CanWeave(All.飞斧))
+                        if (CanSpellWeave(All.飞斧,0.5d))
                         {
                             Use地面技能(customAction);
                         }
@@ -307,22 +307,30 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                         {
                             case CustomTypeSub.默认:
                             {
-                                if (CanWeave(All.飞斧))
+                                if (CanSpellWeave(All.飞斧,0.5d))
+                                {
+                                    // Service.ChatGui.PrintError($"1 {customAction.ActionId} {HasEffect(All.Buffs.生还)}");
+                                    {
+                                        // Service.ChatGui.PrintError($"22222 {customAction.ActionId}");
+                                        AutoUseAction(customAction.ActionId);
+                                    }
+                                }
+
+                               
+                                break;
+                            }
+
+                            case CustomTypeSub.强制:
+                            {
                                 {
                                     AutoUseAction(customAction.ActionId);
                                 }
                                 break;
                             }
 
-                            case CustomTypeSub.强制:
-                            {
-                                AutoUseAction(customAction.ActionId);
-                                break;
-                            }
-
                             case CustomTypeSub.能力技窗口:
                             {
-                                if (CanWeave(All.飞斧))
+                                if (CanSpellWeave(All.飞斧))
                                 {
                                     customActionActionId = customAction.ActionId;
                                     return true;
@@ -366,7 +374,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
                         case CustomTypeSub.能力技窗口:
                         {
-                            if (CanWeave(All.飞斧))
+                            if (CanSpellWeave(All.飞斧))
                             {
                                 customActionActionId = newActionId;
                                 return true;
