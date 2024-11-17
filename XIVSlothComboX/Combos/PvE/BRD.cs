@@ -468,7 +468,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (LevelChecked(RainOfDeath) && (九天连箭empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
+                        if (LevelChecked(RainOfDeath) && !WasLastAction(RainOfDeath) && (九天连箭empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
                         {
                             uint rainOfDeathCharges = LevelChecked(RainOfDeath) ? GetRemainingCharges(RainOfDeath) : 0;
 
@@ -490,7 +490,7 @@ namespace XIVSlothComboX.Combos.PvE
                             else if (rainOfDeathCharges > 0)
                                 return OriginalHook(RainOfDeath);
                         }
-                       
+
                         // healing - please move if not appropriate priority
                         if (IsEnabled(CustomComboPreset.BRD_AoE_SecondWind))
                         {
@@ -498,7 +498,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 return All.SecondWind;
                         }
                     }
-                    
+
                     //Moved Below ogcds as it was preventing them from happening. 
                     if (HasEffect(Buffs.RadiantEncoreReady) && !JustUsed(光明神的最终乐章RadiantFinale) && GetCooldownElapsed(战斗之声BattleVoice) >= 4.2f && IsEnabled(CustomComboPreset.BRD_AoE_BuffsEncore))
                         return OriginalHook(光明神的返场余音RadiantEncore);
@@ -597,10 +597,12 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.BRD_ST_AdvMode;
             internal static bool inOpener = false;
+
             /// <summary>
             /// 这个好像没什么卵用
             /// </summary>
             internal static bool openerFinished = false;
+
             internal static byte step = 0;
             internal static byte subStep = 0;
             internal static bool usedStraightShotReady = false;
@@ -670,7 +672,7 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     if (songTimerInSeconds <= 3 && gauge.Repertoire > 0) // Spend any repertoire before switching to next song
                                         return OriginalHook(完美音调PitchPerfect);
-                                    
+
                                     if (songTimerInSeconds <= 3 && balladReady) // Move to Mage's Ballad if <= 3 seconds left on song
                                         return 贤者的叙事谣MagesBallad;
                                 }
@@ -772,7 +774,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (ActionReady(Bloodletter) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
+                        if (ActionReady(Bloodletter) && !(WasLastAction(Bloodletter) || WasLastAction(HeartbreakShot)) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
                         {
                             uint bloodletterCharges = GetRemainingCharges(Bloodletter);
 
@@ -820,15 +822,9 @@ namespace XIVSlothComboX.Combos.PvE
                         float radiantFinaleDuration = GetBuffRemainingTime(Buffs.RadiantFinale);
                         int ragingJawsRenewTime = PluginConfiguration.GetCustomIntValue(Config.BRD_RagingJawsRenewTime);
 
-                        DotRecast poisonRecast = delegate(int duration)
-                        {
-                            return (venomous && venomRemaining < duration) || (caustic && causticRemaining < duration);
-                        };
+                        DotRecast poisonRecast = delegate(int duration) { return (venomous && venomRemaining < duration) || (caustic && causticRemaining < duration); };
 
-                        DotRecast windRecast = delegate(int duration)
-                        {
-                            return (windbite && windRemaining < duration) || (stormbite && stormRemaining < duration);
-                        };
+                        DotRecast windRecast = delegate(int duration) { return (windbite && windRemaining < duration) || (stormbite && stormRemaining < duration); };
 
                         if (IsEnabled(CustomComboPreset.BRD_Adv_DoT))
                         {
@@ -842,7 +838,7 @@ namespace XIVSlothComboX.Combos.PvE
                             if (LevelChecked(毒咬箭VenomousBite) && !venomous && !LevelChecked(CausticBite))
                                 return 毒咬箭VenomousBite;
 
-                           
+
                             if (!LevelChecked(伶牙俐齿IronJaws))
                             {
                                 if (windbite && windRemaining < 4)
@@ -858,14 +854,14 @@ namespace XIVSlothComboX.Combos.PvE
                                 }
                             }
                         }
-                        
+
                         if (ActionReady(伶牙俐齿IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_IronJaws) && poisonRecast(4) && windRecast(4))
                         {
                             openerFinished = true;
                             return 伶牙俐齿IronJaws;
                         }
-                        
-                        
+
+
                         if (ActionReady(伶牙俐齿IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_RagingJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
                         {
                             openerFinished = true;
@@ -1089,7 +1085,8 @@ namespace XIVSlothComboX.Combos.PvE
                             else return Sidewinder;
                         }
 
-                        if (LevelChecked(RainOfDeath) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
+                        // if (LevelChecked(RainOfDeath) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
+                        if (LevelChecked(RainOfDeath) && !WasLastAction(RainOfDeath) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
                         {
                             uint rainOfDeathCharges = LevelChecked(RainOfDeath) ? GetRemainingCharges(RainOfDeath) : 0;
 
@@ -1312,7 +1309,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (ActionReady(Bloodletter) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
+                        if (ActionReady(Bloodletter) && !(WasLastAction(Bloodletter) || WasLastAction(HeartbreakShot)) && (empyrealCD > 1 || !LevelChecked(九天连箭EmpyrealArrow)))
                         {
                             uint bloodletterCharges = GetRemainingCharges(Bloodletter);
 
