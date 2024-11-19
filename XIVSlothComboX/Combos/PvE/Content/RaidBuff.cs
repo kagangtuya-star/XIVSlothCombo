@@ -31,27 +31,26 @@ public class RaidBuff
             return true;
         }
 
-        if (CustomComboFunctions.HasEffect(灼热之光))
+        if (CustomComboFunctions.HasEffectAny(灼热之光))
         {
             return true;
         }
 
-        if (CustomComboFunctions.HasEffect(技巧舞步结束TechnicalFinish))
+        if (CustomComboFunctions.HasEffectAny(技巧舞步结束TechnicalFinish))
         {
             return true;
         }
 
-
-        if (CustomComboFunctions.HasEffect(星空))
+        if (CustomComboFunctions.HasEffectAny(星空))
             return true;
 
-        if (CustomComboFunctions.HasEffect(占卜))
+        if (CustomComboFunctions.HasEffectAny(占卜))
             return true;
 
-        if (CustomComboFunctions.HasEffect(义结金兰))
+        if (CustomComboFunctions.HasEffectAny(义结金兰))
             return true;
 
-        if (CustomComboFunctions.HasEffect(战斗连祷))
+        if (CustomComboFunctions.HasEffectAny(战斗连祷))
             return true;
 
 

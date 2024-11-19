@@ -312,12 +312,11 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group) && combatTotalSeconds > burstDelayGCD)
+                        if (IsEnabled(CustomComboPreset.DRK_MainComboCDs_Group))
                         {
                             if (IsEnabled(CustomComboPreset.DRK_蔑视厌恶))
                             {
-                                
-                                if (GetBuffRemainingTime(Buffs.Scorn) is > 0 and <= 3)
+                                if (GetBuffRemainingTime(Buffs.Scorn) is > 0 and <= 4)
                                 {
                                     return 蔑视厌恶Disesteem;
                                 }
