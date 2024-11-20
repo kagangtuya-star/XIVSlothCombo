@@ -5,6 +5,7 @@ using Dalamud.Game.ClientState.Statuses;
 using XIVSlothComboX.Combos.PvE.Content;
 using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
+using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
 using XIVSlothComboX.Extensions;
 
@@ -51,11 +52,11 @@ namespace XIVSlothComboX.Combos.PvE
         public static class Buffs
         {
             public const ushort
-                RagingStrikes = 125,
-                Barrage = 128,
+                强者猛击RagingStrikes = 125,
+                纷乱箭 = 128,
                 MagesBallad = 135,
                 ArmysPaeon = 137,
-                BattleVoice = 141,
+                战斗之声BattleVoice = 141,
                 WanderersMinuet = 865,
                 Troubadour = 1934,
                 BlastArrowReady = 2692,
@@ -162,7 +163,7 @@ namespace XIVSlothComboX.Combos.PvE
                             return BlastArrow;
                     }
 
-                    if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage))
+                    if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.纷乱箭))
                         return OriginalHook(StraightShot);
                 }
 
@@ -430,13 +431,13 @@ namespace XIVSlothComboX.Combos.PvE
                         if (canWeaveBuffs && ActionReady(猛者强击RagingStrikes) && (HasEffect(Buffs.RadiantFinale) || !LevelChecked(光明神的最终乐章RadiantFinale)))
                             return 猛者强击RagingStrikes;
 
-                        if (canWeaveBuffs && ActionReady(纷乱箭Barrage) && HasEffect(Buffs.RagingStrikes))
+                        if (canWeaveBuffs && ActionReady(纷乱箭Barrage) && HasEffect(Buffs.强者猛击RagingStrikes))
                         {
                             if (LevelChecked(光明神的最终乐章RadiantFinale) && HasEffect(Buffs.RadiantFinale))
                                 return 纷乱箭Barrage;
-                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.BattleVoice))
+                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.战斗之声BattleVoice))
                                 return 纷乱箭Barrage;
-                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.RagingStrikes))
+                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.强者猛击RagingStrikes))
                                 return 纷乱箭Barrage;
 
                         }
@@ -460,7 +461,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (songWanderer)
                             {
-                                if ((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
+                                if ((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
                                     return Sidewinder;
                             }
                             else return Sidewinder;
@@ -476,7 +477,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (songWanderer)
                                 {
-                                    if (((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && rainOfDeathCharges > 0) || rainOfDeathCharges > 2)
+                                    if (((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && rainOfDeathCharges > 0) || rainOfDeathCharges > 2)
                                         return OriginalHook(RainOfDeath);
                                 }
 
@@ -503,7 +504,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (HasEffect(Buffs.RadiantEncoreReady) && !JustUsed(光明神的最终乐章RadiantFinale) && GetCooldownElapsed(战斗之声BattleVoice) >= 4.2f && IsEnabled(CustomComboPreset.BRD_AoE_BuffsEncore))
                         return OriginalHook(光明神的返场余音RadiantEncore);
 
-                    bool wideVolleyReady = LevelChecked(WideVolley) && (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage));
+                    bool wideVolleyReady = LevelChecked(WideVolley) && (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.纷乱箭));
                     bool blastArrowReady = LevelChecked(BlastArrow) && HasEffect(Buffs.BlastArrowReady);
                     bool resonantArrowReady = LevelChecked(共鸣箭ResonantArrow) && HasEffect(Buffs.ResonantArrowReady);
 
@@ -652,8 +653,6 @@ namespace XIVSlothComboX.Combos.PvE
                             bool balladReady = IsOffCooldown(贤者的叙事谣MagesBallad);
                             bool paeonReady = IsOffCooldown(军神的赞美歌ArmysPaeon);
 
-                            if (ActionReady(九天连箭EmpyrealArrow) && JustUsed(放浪神的小步舞曲WanderersMinuet))
-                                return 九天连箭EmpyrealArrow;
 
                             if (canWeave)
                             {
@@ -679,14 +678,9 @@ namespace XIVSlothComboX.Combos.PvE
 
                                 if (songMage)
                                 {
-
                                     // Move to Army's Paeon if <= 3 seconds left on song
                                     if (songTimerInSeconds <= 3 && paeonReady)
                                     {
-                                        // Special case for Empyreal Arrow: it must be cast before you change to it to avoid drift!
-                                        if (ActionReady(九天连箭EmpyrealArrow))
-                                            return 九天连箭EmpyrealArrow;
-
                                         return 军神的赞美歌ArmysPaeon;
                                     }
                                 }
@@ -735,13 +729,13 @@ namespace XIVSlothComboX.Combos.PvE
                             return 猛者强击RagingStrikes;
 
                         //removed requirement to not have hawks eye, it is better to maybe lose 60 potency than allow it to drift a 1000 potency gain out of the window
-                        if (canWeaveBuffs && barrageReady && HasEffect(Buffs.RagingStrikes))
+                        if (canWeaveBuffs && barrageReady && HasEffect(Buffs.强者猛击RagingStrikes))
                         {
                             if (LevelChecked(光明神的最终乐章RadiantFinale) && HasEffect(Buffs.RadiantFinale))
                                 return 纷乱箭Barrage;
-                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.BattleVoice))
+                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.战斗之声BattleVoice))
                                 return 纷乱箭Barrage;
-                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.RagingStrikes))
+                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.强者猛击RagingStrikes))
                                 return 纷乱箭Barrage;
                         }
                     }
@@ -753,8 +747,6 @@ namespace XIVSlothComboX.Combos.PvE
                         float ragingCD = GetCooldownRemainingTime(猛者强击RagingStrikes);
                         float radiantCD = GetCooldownRemainingTime(光明神的最终乐章RadiantFinale);
 
-                        if (ActionReady(九天连箭EmpyrealArrow))
-                            return 九天连箭EmpyrealArrow;
 
                         if (LevelChecked(完美音调PitchPerfect) && songWanderer && (gauge.Repertoire == 3 || (LevelChecked(九天连箭EmpyrealArrow) && gauge.Repertoire == 2 && empyrealCD < 2)))
                             return OriginalHook(完美音调PitchPerfect);
@@ -765,7 +757,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (songWanderer)
                                 {
-                                    if ((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
+                                    if ((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
                                         return Sidewinder;
                                 }
                                 else return Sidewinder;
@@ -782,7 +774,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (songWanderer)
                                 {
-                                    if (((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && bloodletterCharges > 0) || bloodletterCharges > 2)
+                                    if (((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && bloodletterCharges > 0) || bloodletterCharges > 2)
                                         return OriginalHook(Bloodletter);
                                 }
 
@@ -803,6 +795,17 @@ namespace XIVSlothComboX.Combos.PvE
                             if (PlayerHealthPercentageHp() <= PluginConfiguration.GetCustomIntValue(Config.BRD_STSecondWindThreshold) && ActionReady(All.SecondWind))
                                 return All.SecondWind;
                         }
+
+                        if (ActionReady(九天连箭EmpyrealArrow) && HasEffect(Buffs.战斗之声BattleVoice) && HasEffect(Buffs.强者猛击RagingStrikes))
+                        {
+                            return 九天连箭EmpyrealArrow;
+                        }
+
+                        if (ActionReady(九天连箭EmpyrealArrow) && GetCooldownRemainingTime(战斗之声BattleVoice) >= 10)
+                        {
+                            return 九天连箭EmpyrealArrow;
+                        }
+
                     }
                     //Moved below weaves bc roobert says it is blocking his weaves from happening
                     if (HasEffect(Buffs.RadiantEncoreReady) && !JustUsed(光明神的最终乐章RadiantFinale) && GetCooldownElapsed(光明神的最终乐章RadiantFinale) >= 4.2f && IsEnabled(CustomComboPreset.BRD_Adv_BuffsEncore))
@@ -818,7 +821,7 @@ namespace XIVSlothComboX.Combos.PvE
                         float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
                         float causticRemaining = GetDebuffRemainingTime(Debuffs.烈毒咬箭CausticBite);
                         float stormRemaining = GetDebuffRemainingTime(Debuffs.Stormbite);
-                        float ragingStrikesDuration = GetBuffRemainingTime(Buffs.RagingStrikes);
+                        float ragingStrikesDuration = GetBuffRemainingTime(Buffs.强者猛击RagingStrikes);
                         float radiantFinaleDuration = GetBuffRemainingTime(Buffs.RadiantFinale);
                         int ragingJawsRenewTime = PluginConfiguration.GetCustomIntValue(Config.BRD_RagingJawsRenewTime);
 
@@ -862,7 +865,7 @@ namespace XIVSlothComboX.Combos.PvE
                         }
 
 
-                        if (ActionReady(伶牙俐齿IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_RagingJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
+                        if (ActionReady(伶牙俐齿IronJaws) && IsEnabled(CustomComboPreset.BRD_Adv_RagingJaws) && HasEffect(Buffs.强者猛击RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
                         {
                             openerFinished = true;
                             return 伶牙俐齿IronJaws;
@@ -882,12 +885,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 return ApexArrow;
                             if (songMage && gauge.SoulVoice >= 80 && songTimerInSeconds > 18 && songTimerInSeconds < 22)
                                 return ApexArrow;
-                            if (songWanderer && HasEffect(Buffs.RagingStrikes) && HasEffect(Buffs.BattleVoice) && (HasEffect(Buffs.RadiantFinale) || !LevelChecked(光明神的最终乐章RadiantFinale)) && gauge.SoulVoice >= 80)
+                            if (songWanderer && HasEffect(Buffs.强者猛击RagingStrikes) && HasEffect(Buffs.战斗之声BattleVoice) && (HasEffect(Buffs.RadiantFinale) || !LevelChecked(光明神的最终乐章RadiantFinale)) && gauge.SoulVoice >= 80)
                                 return ApexArrow;
                         }
                     }
 
-                    if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage))
+                    if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.纷乱箭))
                         return OriginalHook(StraightShot);
 
                     if (HasEffect(Buffs.ResonantArrowReady) && IsEnabled(CustomComboPreset.BRD_Adv_BuffsResonant))
@@ -1048,13 +1051,13 @@ namespace XIVSlothComboX.Combos.PvE
                         if (canWeaveBuffs && ActionReady(猛者强击RagingStrikes) && (HasEffect(Buffs.RadiantFinale) || !LevelChecked(光明神的最终乐章RadiantFinale)))
                             return 猛者强击RagingStrikes;
 
-                        if (canWeaveBuffs && ActionReady(纷乱箭Barrage) && HasEffect(Buffs.RagingStrikes))
+                        if (canWeaveBuffs && ActionReady(纷乱箭Barrage) && HasEffect(Buffs.强者猛击RagingStrikes))
                         {
                             if (LevelChecked(光明神的最终乐章RadiantFinale) && HasEffect(Buffs.RadiantFinale))
                                 return 纷乱箭Barrage;
-                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.BattleVoice))
+                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.战斗之声BattleVoice))
                                 return 纷乱箭Barrage;
-                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.RagingStrikes))
+                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.强者猛击RagingStrikes))
                                 return 纷乱箭Barrage;
 
                         }
@@ -1078,7 +1081,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (songWanderer)
                             {
-                                if ((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
+                                if ((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
                                     return Sidewinder;
 
                             }
@@ -1094,7 +1097,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (songWanderer)
                                 {
-                                    if (((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && rainOfDeathCharges > 0) || rainOfDeathCharges > 2)
+                                    if (((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && rainOfDeathCharges > 0) || rainOfDeathCharges > 2)
                                         return OriginalHook(RainOfDeath);
                                 }
 
@@ -1119,7 +1122,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                     }
 
-                    bool wideVolleyReady = LevelChecked(WideVolley) && (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage));
+                    bool wideVolleyReady = LevelChecked(WideVolley) && (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.纷乱箭));
                     bool blastArrowReady = LevelChecked(BlastArrow) && HasEffect(Buffs.BlastArrowReady);
                     bool resonantArrowReady = LevelChecked(共鸣箭ResonantArrow) && HasEffect(Buffs.ResonantArrowReady);
 
@@ -1274,13 +1277,13 @@ namespace XIVSlothComboX.Combos.PvE
                             return 猛者强击RagingStrikes;
 
                         //removed requirement to not have hawks eye, it is better to maybe lose 60 potency than allow it to drift a 1000 potency gain out of the window
-                        if (canWeaveBuffs && barrageReady && HasEffect(Buffs.RagingStrikes))
+                        if (canWeaveBuffs && barrageReady && HasEffect(Buffs.强者猛击RagingStrikes))
                         {
                             if (LevelChecked(光明神的最终乐章RadiantFinale) && HasEffect(Buffs.RadiantFinale))
                                 return 纷乱箭Barrage;
-                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.BattleVoice))
+                            else if (LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.战斗之声BattleVoice))
                                 return 纷乱箭Barrage;
-                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.RagingStrikes))
+                            else if (!LevelChecked(战斗之声BattleVoice) && HasEffect(Buffs.强者猛击RagingStrikes))
                                 return 纷乱箭Barrage;
                         }
                     }
@@ -1302,7 +1305,7 @@ namespace XIVSlothComboX.Combos.PvE
                         {
                             if (songWanderer)
                             {
-                                if ((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
+                                if ((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)))
                                     return Sidewinder;
                             }
                             else return Sidewinder;
@@ -1317,7 +1320,7 @@ namespace XIVSlothComboX.Combos.PvE
                             {
                                 if (songWanderer)
                                 {
-                                    if (((HasEffect(Buffs.RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && bloodletterCharges > 0) || bloodletterCharges > 2)
+                                    if (((HasEffect(Buffs.强者猛击RagingStrikes) || ragingCD > 10) && (HasEffect(Buffs.战斗之声BattleVoice) || battleVoiceCD > 10 || !LevelChecked(战斗之声BattleVoice)) && (HasEffect(Buffs.RadiantFinale) || radiantCD > 10 || !LevelChecked(光明神的最终乐章RadiantFinale)) && bloodletterCharges > 0) || bloodletterCharges > 2)
                                         return OriginalHook(Bloodletter);
                                 }
 
@@ -1353,7 +1356,7 @@ namespace XIVSlothComboX.Combos.PvE
                         float windRemaining = GetDebuffRemainingTime(Debuffs.风Windbite);
                         float causticRemaining = GetDebuffRemainingTime(Debuffs.烈毒咬箭CausticBite);
                         float stormRemaining = GetDebuffRemainingTime(Debuffs.Stormbite);
-                        float ragingStrikesDuration = GetBuffRemainingTime(Buffs.RagingStrikes);
+                        float ragingStrikesDuration = GetBuffRemainingTime(Buffs.强者猛击RagingStrikes);
                         float radiantFinaleDuration = GetBuffRemainingTime(Buffs.RadiantFinale);
                         int ragingJawsRenewTime = 5;
 
@@ -1361,7 +1364,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                         DotRecast windRecast = delegate(int duration) { return (windbite && windRemaining < duration) || (stormbite && stormRemaining < duration); };
 
-                        if (ActionReady(伶牙俐齿IronJaws) && HasEffect(Buffs.RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
+                        if (ActionReady(伶牙俐齿IronJaws) && HasEffect(Buffs.强者猛击RagingStrikes) && !WasLastAction(伶牙俐齿IronJaws) && ragingStrikesDuration < ragingJawsRenewTime && poisonRecast(35) && windRecast(35))
                         {
                             openerFinished = true;
                             return 伶牙俐齿IronJaws;
@@ -1409,10 +1412,10 @@ namespace XIVSlothComboX.Combos.PvE
                             return ApexArrow;
                         if (songMage && gauge.SoulVoice >= 80 && songTimerInSeconds > 18 && songTimerInSeconds < 22)
                             return ApexArrow;
-                        if (songWanderer && HasEffect(Buffs.RagingStrikes) && HasEffect(Buffs.BattleVoice) && (HasEffect(Buffs.RadiantFinale) || !LevelChecked(光明神的最终乐章RadiantFinale)) && gauge.SoulVoice >= 80)
+                        if (songWanderer && HasEffect(Buffs.强者猛击RagingStrikes) && HasEffect(Buffs.战斗之声BattleVoice) && (HasEffect(Buffs.RadiantFinale) || !LevelChecked(光明神的最终乐章RadiantFinale)) && gauge.SoulVoice >= 80)
                             return ApexArrow;
                     }
-                    if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.Barrage))
+                    if (HasEffect(Buffs.HawksEye) || HasEffect(Buffs.纷乱箭))
                         return OriginalHook(StraightShot);
 
                     if (HasEffect(Buffs.ResonantArrowReady))

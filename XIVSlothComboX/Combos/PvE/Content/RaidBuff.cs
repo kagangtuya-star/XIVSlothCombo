@@ -21,6 +21,7 @@ public class RaidBuff
         罐毒之术 = 3849,
         受伤加重 = 638,
         技巧舞步结束TechnicalFinish = 1822,
+        战斗之声 = 141,
         留空 = 0;
 
 
@@ -51,6 +52,9 @@ public class RaidBuff
             return true;
 
         if (CustomComboFunctions.HasEffectAny(战斗连祷))
+            return true;
+        
+        if (CustomComboFunctions.HasEffectAny(战斗之声))
             return true;
 
 
