@@ -30,7 +30,7 @@ jobs:
       run: |
         Invoke-WebRequest -Uri https://raw.githubusercontent.com/ottercorp/dalamud-distrib/refs/heads/main/stg/latest.zip -OutFile latest.zip
         Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"   
-        Expand-Archive -Force latest.zip "$env:AppData\xivlauncher\Addon\Hooks\dev\"  
+        Expand-Archive -Force latest.zip "E:\Games\FFVIX\Dalamud6.0\XIVLauncher\addon\Hooks\10.0.0.16\"  
     - name: Build
       run: |
         dotnet restore -r win ${{ env.SOLUTION_NAME }}.sln
