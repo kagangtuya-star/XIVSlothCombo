@@ -284,11 +284,18 @@ namespace XIVSlothComboX.Combos.PvE
 
                                             if (IsEnabled(CustomComboPreset.DRK_ShadowbringerBurst))
                                             {
-                                                
                                                 if (gauge.ShadowTimeRemaining is > 0 and <= 10_000)
                                                 {
                                                     return Shadowbringer暗影使者;
                                                 }
+                                                
+                                                if (GetCooldownRemainingTime(Shadowbringer暗影使者) == 0)
+                                                {
+                                                    if (GetCooldownRemainingTime(LivingShadow) >= 50 && GetCooldownRemainingTime(LivingShadow) < 70)
+                                                    {
+                                                        return 0;
+                                                    }
+                                                } 
                                             }
                                         }
                                     }
