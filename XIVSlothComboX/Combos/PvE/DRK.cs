@@ -287,7 +287,7 @@ namespace XIVSlothComboX.Combos.PvE
                                                 
                                                 if (gauge.ShadowTimeRemaining is > 0 and <= 10_000)
                                                 {
-                                                    return 0;
+                                                    return Shadowbringer暗影使者;
                                                 }
                                             }
                                         }
