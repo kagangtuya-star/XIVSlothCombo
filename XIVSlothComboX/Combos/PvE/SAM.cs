@@ -266,7 +266,7 @@ namespace XIVSlothComboX.Combos.PvE
                         //Meikyo Features
                         if (ActionReady(明镜止水MeikyoShisui))
                         {
-                            if (OptimalMeikyo())
+                            if (UseMeikyo())
                                 return 明镜止水MeikyoShisui;
                             
                             if (GetCooldownRemainingTime(明镜止水MeikyoShisui) <= GCD * 3 && ComboTimer is 0 && !HasEffect(Buffs.MeikyoShisui)) //Overcap protection for scuffed runs
@@ -369,40 +369,47 @@ namespace XIVSlothComboX.Combos.PvE
                 return actionID;
             }
 
-            public static bool OptimalMeikyo()
+            public static bool UseMeikyo()
             {
-                int MeikyoUsed = ActionWatching.CombatActions.Count(x => x == 明镜止水MeikyoShisui);
-                bool oneSen = OriginalHook(Iaijutsu) is Higanbana;
-                bool twoSen = OriginalHook(Iaijutsu) is TenkaGoken or TendoGoken;
-                bool threeSen = OriginalHook(Iaijutsu) is MidareSetsugekka or TendoSetsugekka;
+                
+                int usedMeikyo = SAMHelper.MeikyoUsed % 15;
 
-                if (ActionReady(明镜止水MeikyoShisui))
+                if (ActionReady(明镜止水MeikyoShisui) && !SAMHelper.ComboStarted)
                 {
-                    var usedMeikyo = MeikyoUsed % 15;
-                    //NOTE: Opener Meikyos don't count here for some reason per testing. On 6min, Meikyos 6 & 7 are used, so loop resets at 8.
-
-                    if (GetCooldownRemainingTime(Ikishoten) is > 49 and < 71) //1min windows
-                    {
-                        if (usedMeikyo is 1 or 8 && threeSen)
-                            return true;
-                        if (usedMeikyo is 3 or 10 && twoSen)
-                            return true;
-                        if (usedMeikyo is 5 or 12 && oneSen)
-                            return true;
-                    }
-
-                    if (GetCooldownRemainingTime(Ikishoten) > 80) //2min windows
-                    {
-                        if (usedMeikyo is 2 or 9 && threeSen)
-                            return true;
-                        if (usedMeikyo is 4 or 11 && twoSen)
-                            return true;
-                        if (usedMeikyo is 6 or 13 && oneSen)
-                            return true;
-                    }
-
-                    if (usedMeikyo is 7 or 14 && !HasEffect(Buffs.MeikyoShisui))
+                    //if no opener/before lvl 100
+                    if ((IsNotEnabled(CustomComboPreset.SAM_ST_Opener) || !LevelChecked(TendoSetsugekka)) &&
+                        SAMHelper.MeikyoUsed < 2 && !HasEffect(Buffs.MeikyoShisui) && !HasEffect(Buffs.TsubameReady))
                         return true;
+
+                    if (SAMHelper.MeikyoUsed >= 2)
+                    {
+                        if (GetCooldownRemainingTime(Ikishoten) is > 45 and < 71) //1min windows
+                        {
+                            if (usedMeikyo is 1 or 8 && SAMHelper.SenCount is 3)
+                                return true;
+
+                            if (usedMeikyo is 3 or 10 && SAMHelper.SenCount is 2)
+                                return true;
+
+                            if (usedMeikyo is 5 or 12 && SAMHelper.SenCount is 1)
+                                return true;
+                        }
+
+                        if (GetCooldownRemainingTime(Ikishoten) > 80) //2min windows
+                        {
+                            if (usedMeikyo is 2 or 9 && SAMHelper.SenCount is 3)
+                                return true;
+
+                            if (usedMeikyo is 4 or 11 && SAMHelper.SenCount is 2)
+                                return true;
+
+                            if (usedMeikyo is 6 or 13 && SAMHelper.SenCount is 1)
+                                return true;
+                        }
+
+                        if (usedMeikyo is 7 or 14 && !HasEffect(Buffs.MeikyoShisui))
+                            return true;
+                    }
                 }
                 return false;
             }

@@ -5,12 +5,16 @@ using XIVSlothComboX.Combos.JobHelpers.Enums;
 using XIVSlothComboX.Combos.PvE;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Data;
+using System.Linq;
 
 namespace XIVSlothComboX.Combos.JobHelpers
 {
-       internal class SAMHelper : SAM
+    internal class SAMHelper : SAM
     {
+        
+        internal static int MeikyoUsed => ActionWatching.CombatActions.Count(x => x == 明镜止水MeikyoShisui);
         internal static int SenCount => GetSenCount();
+
         private static int GetSenCount()
         {
             var gauge = CustomComboFunctions.GetJobGauge<SAMGauge>();
@@ -21,12 +25,26 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             return senCount;
         }
+        
+        private static int getMeikyoUsed()
+        {
+            var gauge = CustomComboFunctions.GetJobGauge<SAMGauge>();
+            var senCount = 0;
+            if (gauge.HasGetsu) senCount++;
+            if (gauge.HasSetsu) senCount++;
+            if (gauge.HasKa) senCount++;
+
+            return senCount;
+        }
+
         internal static bool ComboStarted => GetComboStarted();
+
         private unsafe static bool GetComboStarted()
         {
             var comboAction = ActionManager.Instance()->Combo.Action;
             if (comboAction == CustomComboFunctions.OriginalHook(Hakaze) || comboAction == CustomComboFunctions.OriginalHook(Jinpu) || comboAction == CustomComboFunctions.OriginalHook(Shifu))
                 return true;
+
             return false;
         }
     }
@@ -70,10 +88,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
         public OpenerState CurrentState
         {
-            get
-            {
-                return currentState;
-            }
+            get { return currentState; }
             set
             {
                 if (value != currentState)
@@ -209,9 +224,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
                 if (ActionWatching.TimeSinceLastAction.TotalSeconds >= 5)
                     CurrentState = OpenerState.FailedOpener;
 
-                if (((actionID == Senei && CustomComboFunctions.IsOnCooldown(Senei)) ||
-                   (actionID == Ikishoten && CustomComboFunctions.IsOnCooldown(Ikishoten)) ||
-                   (actionID == 明镜止水MeikyoShisui && CustomComboFunctions.GetRemainingCharges(明镜止水MeikyoShisui) < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
+                if (((actionID == Senei && CustomComboFunctions.IsOnCooldown(Senei)) || (actionID == Ikishoten && CustomComboFunctions.IsOnCooldown(Ikishoten)) || (actionID == 明镜止水MeikyoShisui && CustomComboFunctions.GetRemainingCharges(明镜止水MeikyoShisui) < 1)) && ActionWatching.TimeSinceLastAction.TotalSeconds >= 3)
                 {
                     CurrentState = OpenerState.FailedOpener;
                     return false;
