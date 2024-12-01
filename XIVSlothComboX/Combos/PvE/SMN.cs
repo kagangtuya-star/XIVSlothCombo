@@ -352,16 +352,19 @@ namespace XIVSlothComboX.Combos.PvE
                         // Searing Light
                         if (IsEnabled(CustomComboPreset.SMN_SearingLight) && 灼热之光SearingLight.ActionReady())
                         {
-                            if ((在什么阶段用爆发 is 0 or 1 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or UmbralImpulse) ||
-                                (在什么阶段用爆发 == 2 && OriginalHook(Ruin) == 灵泉之炎FountainOfFire) ||
-                                (在什么阶段用爆发 == 3 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or UmbralImpulse) ||
-                                (在什么阶段用爆发 == 4))
+                            if (DemiAttackCount >= 延迟几个GCD打爆发)
                             {
-                                if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_SearingLight_STOnly)))
-                                    return 灼热之光SearingLight;
-                            }
+                                if ((在什么阶段用爆发 is 0 or 1 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or UmbralImpulse) ||
+                                    (在什么阶段用爆发 == 2 && OriginalHook(Ruin) == 灵泉之炎FountainOfFire) ||
+                                    (在什么阶段用爆发 == 3 && OriginalHook(Ruin) is 星极脉冲AstralImpulse or 灵泉之炎FountainOfFire or UmbralImpulse) ||
+                                    (在什么阶段用爆发 == 4))
+                                {
+                                    if (STCombo || (AoECombo && IsNotEnabled(CustomComboPreset.SMN_SearingLight_STOnly)))
+                                        return 灼热之光SearingLight;
+                                }
 
-                            else return 灼热之光SearingLight;
+                                else return 灼热之光SearingLight;
+                            }
                         }
                     }
 
@@ -806,7 +809,7 @@ namespace XIVSlothComboX.Combos.PvE
                         //生还 2648
                         if (!HasEffect(418) && !HasEffect(2648))
                         {
-                            if (LocalPlayer?.CurrentMount==null)
+                            if (LocalPlayer.CurrentMount==null)
                             {
                                 unsafe
                                 {
