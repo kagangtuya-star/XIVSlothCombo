@@ -94,7 +94,8 @@ namespace XIVSlothComboX.Combos.PvE
                 DRK_MPManagement = new("DrkMPManagement", 3000),
                 DRK_VariantCure = new("DRKVariantCure", 50),
                 DRK_Burs_HP = new("DRK_Burs_HP", 30),
-                DRK_KeepPlungeCharges = new("DrkKeepPlungeCharges", 0);
+                DRK_KeepPlungeCharges = new("DrkKeepPlungeCharges", 0),
+                DRK_BloodGaugeOvercap = new("DRK_BloodGaugeOvercap", 90);
 
             public static UserFloat
                 DRK_Burst_Delay = new("DRK_Burst_Delay", 5f),
@@ -450,7 +451,7 @@ namespace XIVSlothComboX.Combos.PvE
 
                             if (lastComboMove == SyphonStrike && LevelChecked(Souleater))
                             {
-                                if (IsEnabled(CustomComboPreset.DRK_BloodGaugeOvercap) && LevelChecked(血溅Bloodspiller.OriginalHook()) && gauge.Blood >= 90)
+                                if (IsEnabled(CustomComboPreset.DRK_BloodGaugeOvercap) && LevelChecked(血溅Bloodspiller.OriginalHook()) && gauge.Blood >= Config.DRK_BloodGaugeOvercap)
                                 {
                                     return 血溅Bloodspiller.OriginalHook();
                                 }

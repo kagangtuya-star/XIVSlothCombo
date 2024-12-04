@@ -1109,7 +1109,7 @@ namespace XIVSlothComboX.Combos
         DRK_AoE_ManaOvercap = 5015,
 
         [ParentCombo(DRK_SouleaterCombo)]
-        [CustomComboInfo("暗血量表溢出特性", "当你的暗血不低于80时，将血溅整合到主连击。", DRK.JobID)]
+        [CustomComboInfo("暗血量表溢出特性", "当你的暗血不低于多少时，将血溅整合到主连击。", DRK.JobID)]
         DRK_BloodGaugeOvercap = 5016,
 
         [ParentCombo(DRK_MainComboCDs_Group)]

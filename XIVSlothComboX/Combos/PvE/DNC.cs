@@ -5,7 +5,6 @@ using XIVSlothComboX.Core;
 using XIVSlothComboX.CustomComboNS;
 using XIVSlothComboX.CustomComboNS.Functions;
 using XIVSlothComboX.Extensions;
-using XIVSlothComboX.Services;
 
 namespace XIVSlothComboX.Combos.PvE
 {
@@ -102,7 +101,8 @@ namespace XIVSlothComboX.Combos.PvE
         {
             public static UserInt DNC_VariantCure = new("DNC_VariantCure"),
                                   DNC_ST_Tillana = new("DNC_ST_Tillana", 40),
-                                  DNC_FanDance1_Num = new("DNC_FanDance1_Num", 3);
+                                  DNC_FanDance1_Num = new("DNC_FanDance1_Num", 3),
+                                  DNC_SaberDance = new("DNC_SaberDance", 50);
 
             public const string DNCEspritThreshold_ST = "DNCEspritThreshold_ST"; // Single target Esprit threshold
             public const string DNCEspritThreshold_AoE = "DNCEspritThreshold_AoE"; // AoE Esprit threshold
@@ -135,7 +135,7 @@ namespace XIVSlothComboX.Combos.PvE
         {
             protected internal override CustomComboPreset Preset { get; } = CustomComboPreset.DNC_DT_SimpleMode;
 
-            internal static JobHelpers.DNCOpenerLogic DncOpenerLogic = new();
+            internal static DNCOpenerLogic DncOpenerLogic = new();
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
@@ -403,7 +403,7 @@ namespace XIVSlothComboX.Combos.PvE
                             }
                         }
 
-                        if (gauge.Esprit >= 50)
+                        if (gauge.Esprit >= Config.DNC_SaberDance)
                         {
                             return 剑舞SaberDance;
                         }

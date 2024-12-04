@@ -1833,12 +1833,16 @@ namespace XIVSlothComboX.Window.Functions
             if (preset == CustomComboPreset.DNC_DT_Simple_FanDance)
                 UserConfig.DrawSliderInt(0, 4, DNC.Config.DNC_FanDance1_Num, "保留多少层");
             
+            
+            if (preset == CustomComboPreset.DNC_DT_Simple_SaberDance)
+                UserConfig.DrawSliderInt(50, 100, DNC.Config.DNC_SaberDance, "伶俐>=使用剑舞");
+            
             if (preset == CustomComboPreset.DNC_Variant_Cure)
                 UserConfig.DrawSliderInt(1, 100, DNC.Config.DNC_VariantCure, "HP% 低于", 200);
 
 
             if (preset == CustomComboPreset.DNC_DT_Simple_SaberDance)
-                UserConfig.DrawSliderInt(0, 100, DNC.Config.DNC_ST_Tillana, "提拉那伶俐不超过多少使用", 200);
+                UserConfig.DrawSliderInt(0, 100, DNC.Config.DNC_ST_Tillana, "伶俐<=使用提拉那", 200);
 
 
             #region Simple AoE Sliders
@@ -1899,6 +1903,9 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawSliderInt(0, 100, DRK.Config.DRK_Burs_HP, "目标低于多少血量打出所有的血溅(单位万)", 150);
             }
 
+            if (preset == CustomComboPreset.DRK_BloodGaugeOvercap)
+                UserConfig.DrawSliderInt(50, 100, DRK.Config.DRK_BloodGaugeOvercap, ">=多少使用血溅");
+            
 
             if (preset == CustomComboPreset.DRK_EoSPooling && enabled)
                 UserConfig.DrawSliderInt(0, 3000, DRK.Config.DRK_MPManagement, "保留多少MP (0 = 全部使用)", 150, SliderIncrements.Thousands);
