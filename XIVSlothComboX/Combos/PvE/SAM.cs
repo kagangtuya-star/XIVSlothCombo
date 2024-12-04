@@ -501,9 +501,13 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.SAM_ST_CDs) && HasEffect(Buffs.Fugetsu) && HasEffect(Buffs.Fuka))
                     {
                         //Ogi Namikiri Features
-                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri) && (!IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) || (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) && !IsMoving)) && ActionReady(OgiNamikiri) && (((JustUsed(Higanbana, 5f) || GetDebuffRemainingTime(Debuffs.Higanbana) > 30) && HasEffect(Buffs.OgiNamikiriReady)) || GetBuffRemainingTime(Buffs.OgiNamikiriReady) <= GCD) && (gauge.Kaeshi == Kaeshi.NAMIKIRI || HasEffect(Buffs.OgiNamikiriReady)))
+                        if (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri) && 
+                            (!IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) || 
+                             (IsEnabled(CustomComboPreset.SAM_ST_CDs_OgiNamikiri_Movement) && !IsMoving)) && 
+                            ActionReady(OgiNamikiri) && (((JustUsed(Higanbana, 5f) || GetDebuffRemainingTime(Debuffs.Higanbana) > 30) && 
+                                                            HasEffect(Buffs.OgiNamikiriReady)) || GetBuffRemainingTime(Buffs.OgiNamikiriReady) <= GCD) && (gauge.Kaeshi == Kaeshi.NAMIKIRI || HasEffect(Buffs.OgiNamikiriReady)))
                             return OriginalHook(OgiNamikiri);
-
+                        
                         // Iaijutsu Features
                         if (IsEnabled(CustomComboPreset.SAM_ST_CDs_Iaijutsu) && LevelChecked(Iaijutsu))
                         {
