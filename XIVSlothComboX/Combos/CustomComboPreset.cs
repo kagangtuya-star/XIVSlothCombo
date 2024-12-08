@@ -2917,7 +2917,7 @@ namespace XIVSlothComboX.Combos
 
         #region Single Target DPS Feature
 
-        [ReplaceSkill(SGE.Dosis, SGE.Dosis2, SGE.Dosis3)]
+        [ReplaceSkill(SGE.Dosis, SGE.Dosis2, SGE.注药Dosis3)]
         [CustomComboInfo("整合单体输出技能", "注药I/II/III 各种选项", SGE.JobID, 100)]
         SGE_ST_DPS = 14100,
 

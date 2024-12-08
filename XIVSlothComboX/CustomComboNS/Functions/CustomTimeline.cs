@@ -281,7 +281,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 {
                     if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                     {
-                        if (CanSpellWeave(All.飞斧,0.5d))
+                        if (CanSpellWeavePlus(All.飞斧,0.5d))
                         {
                             Useitem(customAction.ActionId);
                         }
@@ -292,7 +292,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 {
                     if (customAction.UseTimeStart < seconds && seconds < customAction.UseTimeEnd)
                     {
-                        if (CanSpellWeave(All.飞斧,0.5d))
+                        if (CanSpellWeavePlus(All.飞斧,0.5d))
                         {
                             Use地面技能(customAction);
                         }
@@ -307,7 +307,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                         {
                             case CustomTypeSub.默认:
                             {
-                                if (CanSpellWeave(All.飞斧,0.5d))
+                                if (CanSpellWeavePlus(All.飞斧,0.5d))
                                 {
                                     // Service.ChatGui.PrintError($"1 {customAction.ActionId} {HasEffect(All.Buffs.生还)}");
                                     {
@@ -330,7 +330,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
                             case CustomTypeSub.能力技窗口:
                             {
-                                if (CanSpellWeave(All.飞斧))
+                                if (CanSpellWeavePlus(All.飞斧))
                                 {
                                     customActionActionId = customAction.ActionId;
                                     return true;
@@ -374,7 +374,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
                         case CustomTypeSub.能力技窗口:
                         {
-                            if (CanSpellWeave(All.飞斧))
+                            if (CanSpellWeavePlus(All.飞斧))
                             {
                                 customActionActionId = newActionId;
                                 return true;

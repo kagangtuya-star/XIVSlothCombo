@@ -215,8 +215,8 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
             return false;
         }
-        
-   
+
+
 
         //添加只双插
         public static bool CanSpellWeavePlus(uint actionID, double weaveTime = 0.6)
@@ -231,7 +231,7 @@ namespace XIVSlothComboX.CustomComboNS.Functions
                 && // Prevent GCD delay
                 castTimeRemaining <= 0.5
                 && // Show in last 0.5sec of cast so game can queue ability
-                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime >= 0) 
+                GetCooldown(actionID).CooldownRemaining - castTimeRemaining - weaveTime >= 0)
                 // Don't show if spell is still casting in weave window
                 return true;
 
@@ -243,8 +243,6 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// <param name="start"> Time (in seconds) to start to check for the weave window. </param>
         /// <param name="end"> Time (in seconds) to end the check for the weave window. </param>
         /// <returns> True or false. </returns>
-       
-
         /// <summary>
         /// Returns the current combo timer.
         /// </summary>
@@ -255,8 +253,9 @@ namespace XIVSlothComboX.CustomComboNS.Functions
         /// </summary>
         public static unsafe uint ComboAction => ActionManager.Instance()->Combo.Action;
 
-        
+
         public static bool CanDelayedWeave(uint actionID, double start = 1.25, double end = 0.6) => GetCooldown(actionID).CooldownRemaining <= start && GetCooldown(actionID).CooldownRemaining >= end;
+
         public static bool CanDelayedWeavePlus(uint actionID, double start = 1.25, double end = 0.6)
         {
             if (!checkUseAbility())
@@ -355,7 +354,11 @@ namespace XIVSlothComboX.CustomComboNS.Functions
 
 
                 if (Last_2.RowId is
-                    DNC.双色标准舞步结束StandardFinish2
+                    SGE.Dosis
+                    or SGE.Dosis2
+                    or SGE.注药Dosis3
+                    or SGE.Pneuma
+                    or DNC.双色标准舞步结束StandardFinish2
                     or DNC.四色技巧舞步结束TechnicalFinish4
                     or MCH.热冲击HeatBlast
                     or MCH.BlazingShot

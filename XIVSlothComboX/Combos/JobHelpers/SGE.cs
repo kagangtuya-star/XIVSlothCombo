@@ -13,7 +13,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
     {
         public static SGEGauge Gauge = GetJobGauge<SGEGauge>();
 
-        public static int Dosis3Count => ActionWatching.CombatActions.Count(x => x == Dosis3);
+        public static int Dosis3Count => ActionWatching.CombatActions.Count(x => x == 注药Dosis3);
 
         public static int Toxikon2Count => ActionWatching.CombatActions.Count(x => x == Toxikon2);
 
@@ -117,14 +117,14 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (WasLastAction(EukrasianDosis3) && OpenerStep == 1) OpenerStep++;
                     else if (OpenerStep == 1) actionID = EukrasianDosis3;
 
-                    if (WasLastAction(Dosis3) && Dosis3Count == 1 && OpenerStep == 2) OpenerStep++;
-                    else if (OpenerStep == 2) actionID = Dosis3;
+                    if (WasLastAction(注药Dosis3) && Dosis3Count == 1 && OpenerStep == 2) OpenerStep++;
+                    else if (OpenerStep == 2) actionID = 注药Dosis3;
 
-                    if (WasLastAction(Dosis3) && Dosis3Count == 2 && OpenerStep == 3) OpenerStep++;
-                    else if (OpenerStep == 3) actionID = Dosis3;
+                    if (WasLastAction(注药Dosis3) && Dosis3Count == 2 && OpenerStep == 3) OpenerStep++;
+                    else if (OpenerStep == 3) actionID = 注药Dosis3;
 
-                    if (WasLastAction(Dosis3) && Dosis3Count == 3 && OpenerStep == 4) OpenerStep++;
-                    else if (OpenerStep == 4) actionID = Dosis3;
+                    if (WasLastAction(注药Dosis3) && Dosis3Count == 3 && OpenerStep == 4) OpenerStep++;
+                    else if (OpenerStep == 4) actionID = 注药Dosis3;
 
                     if (WasLastAction(发炎Phlegma3) && OpenerStep == 5) OpenerStep++;
                     else if (OpenerStep == 5) actionID = 发炎Phlegma3;

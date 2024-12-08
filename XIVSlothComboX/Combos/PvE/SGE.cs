@@ -37,7 +37,7 @@ namespace XIVSlothComboX.Combos.PvE
             // DPS
             Dosis = 24283,
             Dosis2 = 24306,
-            Dosis3 = 24312,
+            注药Dosis3 = 24312,
             EukrasianDosis = 24293,
             EukrasianDosis2 = 24308,
             EukrasianDosis3 = 24314,
@@ -97,7 +97,7 @@ namespace XIVSlothComboX.Combos.PvE
             {
                 { Dosis, Debuffs.EukrasianDosis },
                 { Dosis2, Debuffs.EukrasianDosis2 },
-                { Dosis3, Debuffs.EukrasianDosis3 }
+                { 注药Dosis3, Debuffs.EukrasianDosis3 }
             };
 
         // Sage Gauge & Extensions

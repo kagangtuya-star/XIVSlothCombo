@@ -2640,7 +2640,7 @@ namespace XIVSlothComboX.Window.Functions
                 UserConfig.DrawAdditionalBoolChoice
                 (
                     SGE.Config.SGE_ST_DPS_Adv, $"[有BUG不要用]将所有选定选项应用于 {SGE.Dosis2.ActionName()}",
-                    $"{SGE.Dosis.ActionName()} & {SGE.Dosis3.ActionName()} 将正常运行。"
+                    $"{SGE.Dosis.ActionName()} & {SGE.注药Dosis3.ActionName()} 将正常运行。"
                 );
 
             if (preset is CustomComboPreset.SGE_ST_DPS_EDosis)
