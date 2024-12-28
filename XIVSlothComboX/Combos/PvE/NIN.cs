@@ -21,12 +21,12 @@ namespace XIVSlothComboX.Combos.PvE
             Hide = 2245,
             Assassinate = 2246,
             ThrowingDaggers = 2247,
-            Mug = 2248,
+            夺取Mug = 2248,
             DeathBlossom = 2254,
-            AeolianEdge = 2255,
+            旋风刃AeolianEdge = 2255,
             TrickAttack = 2258,
             Kassatsu = 2264,
-            ArmorCrush = 3563,
+            强甲破点突ArmorCrush = 3563,
             DreamWithinADream = 3566,
             TenChiJin = 7403,
             Bhavacakra = 7402,
@@ -100,10 +100,10 @@ namespace XIVSlothComboX.Combos.PvE
         public static class Debuffs
         {
             public const ushort
-                Dokumori = 3849,
+                介毒之术Dokumori = 3849,
                 TrickAttack = 3254,
                 KunaisBane = 3906,
-                Mug = 638;
+                受伤加重Mug = 638;
         }
 
         public static class Traits
@@ -227,7 +227,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (OriginalHook(Jin) == TCJSuiton) return OriginalHook(Jin);
                     }
 
-                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Kassatsu_HyoshoRaynryu) && HasEffect(Buffs.Kassatsu) && NINHelper.TrickDebuff && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(Mug))))
+                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Kassatsu_HyoshoRaynryu) && HasEffect(Buffs.Kassatsu) && NINHelper.TrickDebuff && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(夺取Mug))))
                         mudraState.CurrentMudra = MudraCasting.MudraState.CastingHyoshoRanryu;
 
                     if (NINHelper.InMudra)
@@ -243,7 +243,7 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bunshin_Phantom)
                             && HasEffect(Buffs.PhantomReady)
-                            && ((GetCooldownRemainingTime(TrickAttack) > GetBuffRemainingTime(Buffs.PhantomReady) && GetBuffRemainingTime(Buffs.PhantomReady) < 5) || NINHelper.TrickDebuff || (HasEffect(Buffs.Bunshin) && TargetHasEffect(Debuffs.Mug)))
+                            && ((GetCooldownRemainingTime(TrickAttack) > GetBuffRemainingTime(Buffs.PhantomReady) && GetBuffRemainingTime(Buffs.PhantomReady) < 5) || NINHelper.TrickDebuff || (HasEffect(Buffs.Bunshin) && TargetHasEffect(Debuffs.受伤加重Mug)))
                             && PhantomKamaitachi.LevelChecked()
                             && phantomUptime)
                             return OriginalHook(PhantomKamaitachi);
@@ -265,8 +265,8 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.NIN_Variant_Rampart) && IsEnabled(Variant.VariantRampart) && IsOffCooldown(Variant.VariantRampart))
                             return Variant.VariantRampart;
 
-                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug_AlignBefore) && HasEffect(Buffs.ShadowWalker) && GetCooldownRemainingTime(TrickAttack) <= 3 && ((IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Delayed) && InCombat() && combatDuration.TotalSeconds > 6) || IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Delayed)) && IsOffCooldown(Mug) && Mug.LevelChecked())
-                            return OriginalHook(Mug);
+                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug_AlignBefore) && HasEffect(Buffs.ShadowWalker) && GetCooldownRemainingTime(TrickAttack) <= 3 && ((IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Delayed) && InCombat() && combatDuration.TotalSeconds > 6) || IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Delayed)) && IsOffCooldown(夺取Mug) && 夺取Mug.LevelChecked())
+                            return OriginalHook(夺取Mug);
 
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack) && HasEffect(Buffs.ShadowWalker) && IsOffCooldown(TrickAttack) && ((IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Delayed) && InCombat() && combatDuration.TotalSeconds > 8) || IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_TrickAttack_Delayed)))
                             return OriginalHook(TrickAttack);
@@ -290,18 +290,18 @@ namespace XIVSlothComboX.Combos.PvE
                         if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bloodbath) && All.Bloodbath.LevelChecked() && playerHP <= BloodbathThreshold && IsOffCooldown(All.Bloodbath))
                             return All.Bloodbath;
 
-                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bhavacakra) && ((NINHelper.TrickDebuff && gauge.Ninki >= 50) || (useBhakaBeforeTrickWindow && gauge.Ninki == 100)) && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(Mug))) && Bhavacakra.LevelChecked())
+                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bhavacakra) && ((NINHelper.TrickDebuff && gauge.Ninki >= 50) || (useBhakaBeforeTrickWindow && gauge.Ninki == 100)) && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(夺取Mug))) && Bhavacakra.LevelChecked())
                             return OriginalHook(Bhavacakra);
 
-                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bhavacakra) && ((NINHelper.TrickDebuff && gauge.Ninki >= 50) || (useBhakaBeforeTrickWindow && gauge.Ninki >= 60)) && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(Mug))) && !Bhavacakra.LevelChecked() && Hellfrog.LevelChecked())
+                        if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bhavacakra) && ((NINHelper.TrickDebuff && gauge.Ninki >= 50) || (useBhakaBeforeTrickWindow && gauge.Ninki >= 60)) && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(夺取Mug))) && !Bhavacakra.LevelChecked() && Hellfrog.LevelChecked())
                             return OriginalHook(Hellfrog);
 
                         if (!inTrickBurstSaveWindow)
                         {
-                            if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOffCooldown(Mug) && Mug.LevelChecked())
+                            if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOffCooldown(夺取Mug) && 夺取Mug.LevelChecked())
                             {
                                 if (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug_AlignAfter) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug_AlignAfter) && NINHelper.TrickDebuff))
-                                    return OriginalHook(Mug);
+                                    return OriginalHook(夺取Mug);
                             }
 
                             if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Meisui) && HasEffect(Buffs.ShadowWalker) && gauge.Ninki <= 50 && IsOffCooldown(Meisui) && Meisui.LevelChecked())
@@ -339,11 +339,11 @@ namespace XIVSlothComboX.Combos.PvE
                         return OriginalHook(FleetingRaiju);
                     }
 
-                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bunshin_Phantom) && HasEffect(Buffs.PhantomReady) && ((GetCooldownRemainingTime(TrickAttack) > GetBuffRemainingTime(Buffs.PhantomReady) && GetBuffRemainingTime(Buffs.PhantomReady) < 5) || NINHelper.TrickDebuff || (HasEffect(Buffs.Bunshin) && TargetHasEffect(Debuffs.Mug))) && PhantomKamaitachi.LevelChecked())
+                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Bunshin_Phantom) && HasEffect(Buffs.PhantomReady) && ((GetCooldownRemainingTime(TrickAttack) > GetBuffRemainingTime(Buffs.PhantomReady) && GetBuffRemainingTime(Buffs.PhantomReady) < 5) || NINHelper.TrickDebuff || (HasEffect(Buffs.Bunshin) && TargetHasEffect(Debuffs.受伤加重Mug))) && PhantomKamaitachi.LevelChecked())
                         return OriginalHook(PhantomKamaitachi);
 
 
-                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Kassatsu_HyoshoRaynryu) && !inTrickBurstSaveWindow && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(Mug))) && mudraState.CastHyoshoRanryu(ref actionID))
+                    if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Kassatsu_HyoshoRaynryu) && !inTrickBurstSaveWindow && (IsNotEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) || (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Mug) && IsOnCooldown(夺取Mug))) && mudraState.CastHyoshoRanryu(ref actionID))
                         return actionID;
 
                     if (IsEnabled(CustomComboPreset.NIN_ST_AdvancedMode_Ninjitsus))
@@ -363,7 +363,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (lastComboMove == SpinningEdge && GustSlash.LevelChecked())
                             return OriginalHook(GustSlash);
 
-                        if (lastComboMove == GustSlash && ArmorCrush.LevelChecked())
+                        if (lastComboMove == GustSlash && 强甲破点突ArmorCrush.LevelChecked())
                         {
                             if (dynamic)
                             {
@@ -372,7 +372,7 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (trueNorthEdge)
                                         return OriginalHook(All.TrueNorth);
                                     else
-                                        return OriginalHook(AeolianEdge);
+                                        return OriginalHook(旋风刃AeolianEdge);
                                 }
 
                                 if (gauge.Kazematoi == 0)
@@ -380,14 +380,15 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (trueNorthArmor)
                                         return OriginalHook(All.TrueNorth);
                                     else
-                                        return OriginalHook(ArmorCrush);
+                                        return OriginalHook(强甲破点突ArmorCrush);
                                 }
+                                
                                 if ((gauge.Kazematoi > 0) && (gauge.Kazematoi < 4))
                                 {
                                     if (OnTargetsFlank())
-                                        return OriginalHook(ArmorCrush);
+                                        return OriginalHook(强甲破点突ArmorCrush);
                                     else
-                                        return OriginalHook(AeolianEdge);
+                                        return OriginalHook(旋风刃AeolianEdge);
                                 }
 
 
@@ -401,41 +402,42 @@ namespace XIVSlothComboX.Combos.PvE
                                         if (trueNorthArmor)
                                             return OriginalHook(All.TrueNorth);
                                         else
-                                            return OriginalHook(ArmorCrush);
+                                            return OriginalHook(强甲破点突ArmorCrush);
                                     }
                                     else
                                     {
                                         if (trueNorthEdge)
                                             return OriginalHook(All.TrueNorth);
                                         else
-                                            return OriginalHook(AeolianEdge);
+                                            return OriginalHook(旋风刃AeolianEdge);
                                     }
                                 }
-                                if (NINHelper.MugDebuff || GetTargetHPPercent() <= burnKazematoi)
+                                
+                                if (NINHelper.MugDebuff || NINHelper.TrickDebuff || GetTargetHPPercent() <= burnKazematoi)
                                 {
                                     if (gauge.Kazematoi == 0)
                                     {
                                         if (trueNorthArmor)
                                             return OriginalHook(All.TrueNorth);
                                         else
-                                            return OriginalHook(ArmorCrush);
+                                            return OriginalHook(强甲破点突ArmorCrush);
                                     }
                                     else
                                     {
                                         if (trueNorthEdge)
                                             return OriginalHook(All.TrueNorth);
                                         else
-                                            return OriginalHook(AeolianEdge);
+                                            return OriginalHook(旋风刃AeolianEdge);
                                     }
                                 }
                             }
                         }
-                        if (lastComboMove == GustSlash && !ArmorCrush.LevelChecked() && AeolianEdge.LevelChecked())
+                        if (lastComboMove == GustSlash && !强甲破点突ArmorCrush.LevelChecked() && 旋风刃AeolianEdge.LevelChecked())
                         {
                             if (trueNorthEdge)
                                 return OriginalHook(All.TrueNorth);
                             else
-                                return OriginalHook(AeolianEdge);
+                                return OriginalHook(旋风刃AeolianEdge);
                         }
                     }
                     return OriginalHook(SpinningEdge);
@@ -677,8 +679,8 @@ namespace XIVSlothComboX.Combos.PvE
                             if (HasEffect(Buffs.ShadowWalker) && gauge.Ninki <= 50 && IsOffCooldown(Meisui) && Meisui.LevelChecked())
                                 return OriginalHook(Meisui);
 
-                            if (IsOffCooldown(Mug) && Mug.LevelChecked())
-                                return OriginalHook(Mug);
+                            if (IsOffCooldown(夺取Mug) && 夺取Mug.LevelChecked())
+                                return OriginalHook(夺取Mug);
 
                             if (gauge.Ninki >= 85 && Bhavacakra.LevelChecked())
                                 return OriginalHook(Bhavacakra);
@@ -707,7 +709,7 @@ namespace XIVSlothComboX.Combos.PvE
                         if (lastComboMove == SpinningEdge && GustSlash.LevelChecked())
                             return OriginalHook(GustSlash);
 
-                        if (lastComboMove == GustSlash && ArmorCrush.LevelChecked())
+                        if (lastComboMove == GustSlash && 强甲破点突ArmorCrush.LevelChecked())
                         {
                             if (!NINHelper.MugDebuff)
                             {
@@ -716,14 +718,14 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (trueNorthArmor)
                                         return OriginalHook(All.TrueNorth);
                                     else
-                                        return OriginalHook(ArmorCrush);
+                                        return OriginalHook(强甲破点突ArmorCrush);
                                 }
                                 else
                                 {
                                     if (trueNorthEdge)
                                         return OriginalHook(All.TrueNorth);
                                     else
-                                        return OriginalHook(AeolianEdge);
+                                        return OriginalHook(旋风刃AeolianEdge);
                                 }
                             }
                             if (NINHelper.MugDebuff)
@@ -733,23 +735,23 @@ namespace XIVSlothComboX.Combos.PvE
                                     if (trueNorthArmor)
                                         return OriginalHook(All.TrueNorth);
                                     else
-                                        return OriginalHook(ArmorCrush);
+                                        return OriginalHook(强甲破点突ArmorCrush);
                                 }
                                 else
                                 {
                                     if (trueNorthEdge)
                                         return OriginalHook(All.TrueNorth);
                                     else
-                                        return OriginalHook(AeolianEdge);
+                                        return OriginalHook(旋风刃AeolianEdge);
                                 }
                             }
                         }
-                        if (lastComboMove == GustSlash && !ArmorCrush.LevelChecked() && AeolianEdge.LevelChecked())
+                        if (lastComboMove == GustSlash && !强甲破点突ArmorCrush.LevelChecked() && 旋风刃AeolianEdge.LevelChecked())
                         {
                             if (trueNorthEdge)
                                 return OriginalHook(All.TrueNorth);
                             else
-                                return OriginalHook(AeolianEdge);
+                                return OriginalHook(旋风刃AeolianEdge);
                         }
                     }
                     return OriginalHook(SpinningEdge);
@@ -883,7 +885,7 @@ namespace XIVSlothComboX.Combos.PvE
 
             protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
             {
-                if (actionID == ArmorCrush)
+                if (actionID == 强甲破点突ArmorCrush)
                 {
                     if (comboTime > 0f)
                     {
@@ -892,9 +894,9 @@ namespace XIVSlothComboX.Combos.PvE
                             return GustSlash;
                         }
 
-                        if (lastComboMove == GustSlash && ArmorCrush.LevelChecked())
+                        if (lastComboMove == GustSlash && 强甲破点突ArmorCrush.LevelChecked())
                         {
-                            return ArmorCrush;
+                            return 强甲破点突ArmorCrush;
                         }
                     }
                     return SpinningEdge;
@@ -914,7 +916,7 @@ namespace XIVSlothComboX.Combos.PvE
                 {
                     if (HasCondition(Dalamud.Game.ClientState.Conditions.ConditionFlag.InCombat))
                     {
-                        return OriginalHook(Mug);
+                        return OriginalHook(夺取Mug);
                     }
 
                     if (HasEffect(Buffs.Hidden))

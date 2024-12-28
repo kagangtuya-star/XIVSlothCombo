@@ -2227,7 +2227,7 @@ namespace XIVSlothComboX.Combos
         [CustomComboInfo("浴血 选项", "将 浴血 加入一键循环", NIN.JobID)]
         NIN_AoE_AdvancedMode_Bloodbath = 10052,
 
-        [ReplaceSkill(NIN.ArmorCrush)]
+        [ReplaceSkill(NIN.强甲破点突ArmorCrush)]
         [ConflictingCombos(NIN_ST_SimpleMode)]
         [CustomComboInfo("强甲破点突连击 选项", "使用 强甲破点突 做为连击的起始技.", NIN.JobID)]
         NIN_ArmorCrushCombo = 10053,

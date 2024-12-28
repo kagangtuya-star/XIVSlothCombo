@@ -22,7 +22,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
 
             private static bool TargetHasMugDebuff()
             {
-                return CustomComboFunctions.TargetHasEffect(Debuffs.Mug) || CustomComboFunctions.TargetHasEffect(Debuffs.Dokumori);
+                return CustomComboFunctions.TargetHasEffect(Debuffs.受伤加重Mug) || CustomComboFunctions.TargetHasEffect(Debuffs.介毒之术Dokumori);
             }
 
             internal static bool InMudra = false;
@@ -441,7 +441,7 @@ namespace XIVSlothComboX.Combos.JobHelpers
             private static bool HasCooldowns()
             {
                 if (CustomComboFunctions.GetRemainingCharges(Ten) < 1) return false;
-                if (CustomComboFunctions.IsOnCooldown(Mug)) return false;
+                if (CustomComboFunctions.IsOnCooldown(夺取Mug)) return false;
                 if (CustomComboFunctions.IsOnCooldown(TenChiJin)) return false;
                 if (CustomComboFunctions.IsOnCooldown(PhantomKamaitachi)) return false;
                 if (CustomComboFunctions.IsOnCooldown(Bunshin)) return false;
@@ -534,8 +534,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(GustSlash) && OpenerStep == 3) OpenerStep++;
                     else if (OpenerStep == 3) actionID = CustomComboFunctions.OriginalHook(GustSlash);
 
-                    if (CustomComboFunctions.WasLastAction(CustomComboFunctions.OriginalHook(Mug)) && OpenerStep == 4) OpenerStep++;
-                    else if (OpenerStep == 4) actionID = CustomComboFunctions.OriginalHook(Mug);
+                    if (CustomComboFunctions.WasLastAction(CustomComboFunctions.OriginalHook(夺取Mug)) && OpenerStep == 4) OpenerStep++;
+                    else if (OpenerStep == 4) actionID = CustomComboFunctions.OriginalHook(夺取Mug);
 
                     if (CustomComboFunctions.WasLastAction(Bunshin) && OpenerStep == 5) OpenerStep++;
                     else if (OpenerStep == 5) actionID = CustomComboFunctions.OriginalHook(Bunshin);
@@ -543,8 +543,8 @@ namespace XIVSlothComboX.Combos.JobHelpers
                     if (CustomComboFunctions.WasLastAction(PhantomKamaitachi) && OpenerStep == 6) OpenerStep++;
                     else if (OpenerStep == 6) actionID = CustomComboFunctions.OriginalHook(PhantomKamaitachi);
 
-                    if (CustomComboFunctions.WasLastAction(ArmorCrush) && OpenerStep == 7) OpenerStep++;
-                    else if (OpenerStep == 7) actionID = CustomComboFunctions.OriginalHook(ArmorCrush);
+                    if (CustomComboFunctions.WasLastAction(强甲破点突ArmorCrush) && OpenerStep == 7) OpenerStep++;
+                    else if (OpenerStep == 7) actionID = CustomComboFunctions.OriginalHook(强甲破点突ArmorCrush);
 
                     if (CustomComboFunctions.WasLastAction(CustomComboFunctions.OriginalHook(TrickAttack)) && OpenerStep == 8) OpenerStep++;
                     else if (OpenerStep == 8 && inLateWeaveWindow) actionID = CustomComboFunctions.OriginalHook(TrickAttack);

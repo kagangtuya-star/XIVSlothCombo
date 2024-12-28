@@ -29,7 +29,7 @@ namespace XIVSlothComboX.Combos.PvE
             精雕怒斩CarveAndSpit = 3643,
             //血乱
             血乱Delirium = 7390,
-            释放Quietus = 7391,
+            寂灭Quietus = 7391,
             //Bloodspiller
             血溅Bloodspiller = 7392,
             血溅3 = 36930,
@@ -285,6 +285,14 @@ namespace XIVSlothComboX.Combos.PvE
 
                                             if (IsEnabled(CustomComboPreset.DRK_ShadowbringerBurst))
                                             {
+                                                if (CurrentTarget is IBattleChara battleChara)
+                                                {
+                                                    if (battleChara.CurrentHp < Burs_HP)
+                                                    {
+                                                        return Shadowbringer暗影使者;
+                                                    }
+                                                }
+                                                
                                                 if (gauge.ShadowTimeRemaining is > 0 and <= 10_000)
                                                 {
                                                     return Shadowbringer暗影使者;
@@ -437,9 +445,20 @@ namespace XIVSlothComboX.Combos.PvE
                         
                         if (IsEnabled(CustomComboPreset.DRK_蔑视厌恶))
                         {
-                            if (蔑视厌恶Disesteem.LevelChecked()  && RaidBuff.爆发期() && HasEffect(Buffs.Scorn))
+                            if (蔑视厌恶Disesteem.LevelChecked()  && HasEffect(Buffs.Scorn))
                             {
-                                return 蔑视厌恶Disesteem;
+                                if (RaidBuff.爆发期())
+                                {
+                                    return 蔑视厌恶Disesteem;
+                                }
+
+                                if (CurrentTarget is IBattleChara battleChara)
+                                {
+                                    if (battleChara.CurrentHp < Burs_HP)
+                                    {
+                                        return 蔑视厌恶Disesteem;
+                                    }
+                                }
                             }
                         }
 
@@ -526,7 +545,7 @@ namespace XIVSlothComboX.Combos.PvE
                     if (IsEnabled(CustomComboPreset.DRK_Delirium))
                     {
                         if (LevelChecked(血乱Delirium) && 血乱层数() > 0 && gauge.DarksideTimeRemaining > 0)
-                            return 释放Quietus.OriginalHook();
+                            return 寂灭Quietus.OriginalHook();
                     }
 
 
@@ -539,8 +558,8 @@ namespace XIVSlothComboX.Combos.PvE
                     {
                         if (lastComboMove == Unleash && LevelChecked(刚魂StalwartSoul))
                         {
-                            if (IsEnabled(CustomComboPreset.DRK_Overcap) && gauge.Blood >= 90 && LevelChecked(释放Quietus.OriginalHook()))
-                                return 释放Quietus.OriginalHook();
+                            if (IsEnabled(CustomComboPreset.DRK_Overcap) && gauge.Blood >= 90 && LevelChecked(寂灭Quietus.OriginalHook()))
+                                return 寂灭Quietus.OriginalHook();
 
                             return 刚魂StalwartSoul;
                         }
