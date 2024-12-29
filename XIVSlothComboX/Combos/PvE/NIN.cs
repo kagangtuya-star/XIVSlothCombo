@@ -393,26 +393,9 @@ namespace XIVSlothComboX.Combos.PvE
 
 
                             }
+                            
                             if (!dynamic)
                             {
-                                if (!NINHelper.MugDebuff && GetTargetHPPercent() > burnKazematoi)
-                                {
-                                    if (gauge.Kazematoi < 4)
-                                    {
-                                        if (trueNorthArmor)
-                                            return OriginalHook(All.TrueNorth);
-                                        else
-                                            return OriginalHook(强甲破点突ArmorCrush);
-                                    }
-                                    else
-                                    {
-                                        if (trueNorthEdge)
-                                            return OriginalHook(All.TrueNorth);
-                                        else
-                                            return OriginalHook(旋风刃AeolianEdge);
-                                    }
-                                }
-                                
                                 if (NINHelper.MugDebuff || NINHelper.TrickDebuff || GetTargetHPPercent() <= burnKazematoi)
                                 {
                                     if (gauge.Kazematoi == 0)
@@ -430,6 +413,25 @@ namespace XIVSlothComboX.Combos.PvE
                                             return OriginalHook(旋风刃AeolianEdge);
                                     }
                                 }
+                                
+                                if (!NINHelper.MugDebuff && GetTargetHPPercent() > burnKazematoi)
+                                {
+                                    if (gauge.Kazematoi < 4)
+                                    {
+                                        if (trueNorthArmor)
+                                            return OriginalHook(All.TrueNorth);
+                                        else
+                                            return OriginalHook(强甲破点突ArmorCrush);
+                                    }
+                                    else
+                                    {
+                                        if (trueNorthEdge)
+                                            return OriginalHook(All.TrueNorth);
+                                        else
+                                            return OriginalHook(旋风刃AeolianEdge);
+                                    }
+                                }
+                             
                             }
                         }
                         if (lastComboMove == GustSlash && !强甲破点突ArmorCrush.LevelChecked() && 旋风刃AeolianEdge.LevelChecked())
