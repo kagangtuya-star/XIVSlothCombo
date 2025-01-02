@@ -225,6 +225,12 @@ namespace XIVSlothComboX.Combos.PvE
                                 {
                                     return OriginalHook(烈牙GnashingFang);
                                 }
+                                
+                                if (是否使用音速破(ref actionID))
+                                {
+                                    return actionID;
+                                }
+
                             }
                             else if (LevelChecked(倍攻DoubleDown))
                             {
